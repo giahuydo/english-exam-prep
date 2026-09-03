@@ -13,7 +13,11 @@ export class LearningScopesService {
     return this.prisma.learningScope.findMany({
       where: { isActive: true },
       orderBy: [{ position: 'asc' }, { name: 'asc' }],
-      include: { progress: { where: { userId } }, parent: { select: { id: true, code: true, name: true } } },
+      include: {
+        progress: { where: { userId } },
+        parent: { select: { id: true, code: true, name: true } },
+        topic: { select: { id: true, code: true, name: true, category: true } },
+      },
     });
   }
 
