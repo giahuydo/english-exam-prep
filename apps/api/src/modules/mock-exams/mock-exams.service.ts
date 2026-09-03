@@ -63,9 +63,9 @@ export class MockExamsService {
         if (seen.has(row.id)) continue;
         seen.add(row.id);
         picked.push({ id: row.id });
-        if (picked.length >= total) break;
+        if (total !== undefined && picked.length >= total) break;
       }
-      if (picked.length >= total) break;
+      if (total !== undefined && picked.length >= total) break;
     }
 
     const session = await this.prisma.quizSession.create({
@@ -107,7 +107,7 @@ export class MockExamsService {
     return this.prisma.quizSession.findMany({
       where: { userId, type: 'MOCK_EXAM' },
       include: {
-        blueprint: { select: { id: true, name: true, version: true } },
+        blueprint: { select: { id: true, name: true, version: true, provenance: true, source: true } },
         examType: { select: { id: true, code: true, name: true } },
       },
       orderBy: { startedAt: 'desc' },

@@ -31,7 +31,7 @@ export async function seedCore(prisma: PrismaClient) {
     { code: 'HCMUS_MASTER_ENTRANCE', name: 'HCMUS Master Entrance', description: 'HCMUS graduate school English entrance exam (B1-B2 band)', levelFrom: 'B1' as const, levelTo: 'B2' as const },
     { code: 'B1', name: 'B1 (CEFR)', description: 'CEFR B1 general English target', levelFrom: 'B1' as const, levelTo: 'B1' as const },
     { code: 'B2', name: 'B2 (CEFR)', description: 'CEFR B2 general English target', levelFrom: 'B2' as const, levelTo: 'B2' as const },
-    { code: 'VSTEP', name: 'VSTEP 3-5', description: 'Vietnamese Standardized Test of English Proficiency format', levelFrom: 'B1' as const, levelTo: 'C1' as const },
+    { code: 'VSTEP', name: 'VSTEP 3-5', description: 'Vietnamese Standardized Test of English Proficiency format (B1-C1)', levelFrom: 'B1' as const, levelTo: 'C1' as const },
     { code: 'CUSTOM', name: 'Custom', description: 'Custom exam pattern', levelFrom: null, levelTo: null },
   ];
   for (const examType of examTypes) await prisma.examType.upsert({ where: { code: examType.code }, update: examType, create: examType });

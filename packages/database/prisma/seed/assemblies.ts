@@ -1,9 +1,11 @@
-import type { BlueprintPart, BlueprintSection, PrismaClient } from '../../src/generated/prisma/index';
-import type { ExamDataset, SeedDb } from './types';
+import type { PrismaClient } from '../../src/generated/prisma/index';
 
 export type AssemblyDefinition = {
   key: string;
   examTypeCode: 'HCMUS_MASTER_ENTRANCE' | 'VSTEP';
+  provenance: 'SYNTHETIC_MOCK' | 'RECONSTRUCTED' | 'OFFICIAL_SAMPLE' | 'REAL_EXAM';
+  durationMinutes?: number;
+  totalScore?: number;
   title: string;
   version: string;
   source: string;
@@ -38,6 +40,7 @@ export type AssemblyDefinition = {
         questionsPerGroup?: number;
         groupingSemantics?: string;
         sharedStimulus?: string;
+        groupSize?: number;
         selectionPolicy?: Record<string, unknown>;
       }>;
     }>;
@@ -45,10 +48,10 @@ export type AssemblyDefinition = {
 };
 
 const hcmusSections = (variant: number) => [
-  { code: 'VOCABULARY_READING', title: 'Vocabulary & Reading', position: 1, durationMinutes: 45, score: 25, parts: [{ code: 'VOCABULARY_READING', title: `Vocabulary & Reading — Mock ${variant}`, position: 1, questionCount: 40, blocks: [{ code: 'VOCAB', position: 1, questionTypeCode: 'VOCABULARY_MCQ', topicCodes: ['VOCABULARY'], level: 'B1_B2' as const, count: 20 }, { code: 'READING', position: 2, questionTypeCode: 'READING_COMPREHENSION', topicCodes: ['MAIN_IDEA'], level: 'B1_B2' as const, count: 20 }] }] },
-  { code: 'GRAMMAR_USE_OF_ENGLISH', title: 'Grammar & Use of English', position: 2, durationMinutes: 35, score: 25, parts: [{ code: 'GRAMMAR_USE_OF_ENGLISH', title: 'Grammar & Use of English', position: 1, questionCount: 30, blocks: [{ code: 'GRAMMAR', position: 1, questionTypeCode: 'MCQ_SINGLE_BLANK', topicCodes: ['TENSES'], level: 'B2' as const, count: 30 }] }] },
-  { code: 'LISTENING', title: 'Listening', position: 3, durationMinutes: 30, score: 25, parts: [{ code: 'LISTENING', title: 'Listening', position: 1, questionCount: 30, blocks: [{ code: 'LISTENING', position: 1, questionTypeCode: 'LISTENING_MCQ', topicCodes: ['LISTENING'], level: 'B1_B2' as const, count: 30 }] }] },
-  { code: 'SPEAKING', title: 'Speaking', position: 4, durationMinutes: 12, score: 25, parts: [{ code: 'SPEAKING', title: 'Speaking', position: 1, questionCount: 2, blocks: [{ code: 'SPEAKING', position: 1, questionTypeCode: 'TOPIC_DEVELOPMENT', topicCodes: ['TOPIC_DEVELOPMENT'], level: 'B1_B2' as const, count: 2 }] }] },
+  { code: 'VOCABULARY_READING', title: 'Paper 1: Vocabulary / Reading', position: 1, durationMinutes: 30, score: 20, parts: [{ code: 'PAPER_1', title: 'Vocabulary / Reading', position: 1, questionCount: 20, blocks: [{ code: 'VOCABULARY', position: 1, questionTypeCode: 'VOCABULARY_MCQ', topicCodes: ['VOCABULARY'], level: 'B1_B2' as const, count: 10 }, { code: 'READING', position: 2, questionTypeCode: 'READING_COMPREHENSION', topicCodes: ['MAIN_IDEA', 'DETAIL'], level: 'B1_B2' as const, count: 10 }] }] },
+  { code: 'GRAMMAR_USE_OF_ENGLISH_WRITING', title: 'Paper 2: Grammar / Use / Writing', position: 2, durationMinutes: 45, score: 40, parts: [{ code: 'PAPER_2', title: 'Grammar / Use / Writing', position: 1, questionCount: 30, blocks: [{ code: 'SENTENCE_COMPLETION', position: 1, questionTypeCode: 'SENTENCE_COMPLETION', topicCodes: ['GRAMMAR'], level: 'B1_B2' as const, count: 15 }, { code: 'CLOZE', position: 2, questionTypeCode: 'CLOZE_TEST', topicCodes: ['GRAMMAR'], level: 'B1_B2' as const, count: 10 }, { code: 'TRANSFORMATION', position: 3, questionTypeCode: 'SENTENCE_TRANSFORMATION', topicCodes: ['GRAMMAR'], level: 'B2' as const, count: 5 }] }] },
+  { code: 'LISTENING', title: 'Listening', position: 3, durationMinutes: 25, score: 20, parts: [{ code: 'LISTENING', title: 'Listening', position: 1, questionCount: 20, blocks: [{ code: 'SHORT_CONVERSATION', position: 1, questionTypeCode: 'SHORT_CONVERSATION', topicCodes: ['LISTENING_DETAIL'], level: 'B1_B2' as const, count: 10 }, { code: 'LONG_CONVERSATION', position: 2, questionTypeCode: 'LONG_CONVERSATION', topicCodes: ['LISTENING_DETAIL'], level: 'B1_B2' as const, count: 5 }, { code: 'TALK', position: 3, questionTypeCode: 'TALK', topicCodes: ['LISTENING_MAIN_IDEA'], level: 'B2' as const, count: 5 }] }] },
+  { code: 'SPEAKING', title: 'Speaking', position: 4, durationMinutes: 20, score: 20, parts: [{ code: 'SPEAKING', title: 'Speaking', position: 1, questionCount: 2, blocks: [{ code: 'INTRO', position: 1, questionTypeCode: 'SELF_INTRODUCTION', topicCodes: ['SOCIAL_INTERACTION'], level: 'B1' as const, count: 1 }, { code: 'GUIDED_CONVERSATION', position: 2, questionTypeCode: 'GUIDED_CONVERSATION', topicCodes: ['SOLUTION_DISCUSSION'], level: 'B1_B2' as const, count: 1 }] }] },
 ];
 
 const vstepSections = [
@@ -63,16 +66,34 @@ const vstepSections = [
 ];
 
 export const assemblies: AssemblyDefinition[] = [
-  ...[1, 2, 3].map((variant) => ({ key: `HCMUS_MASTER_MOCK_${String(variant).padStart(2, '0')}`, examTypeCode: 'HCMUS_MASTER_ENTRANCE' as const, title: `HCMUS Master Entrance Mock ${String(variant).padStart(2, '0')}`, version: '1.0.0', source: 'Synthetic MVP mock assembly; not an official exam paper', status: 'DRAFT' as const, sections: hcmusSections(variant) })),
-  ...[1, 2].map((variant) => ({ key: `VSTEP_3_5_MOCK_${String(variant).padStart(2, '0')}`, examTypeCode: 'VSTEP' as const, title: `VSTEP 3-5 Mock ${String(variant).padStart(2, '0')}`, version: '1.0.0', source: 'Synthetic MVP mock aligned to VSTEP 3-5 format; not an official exam paper', status: 'ACTIVE' as const, sections: vstepSections })),
+  ...[1, 2, 3].map((variant) => ({ key: `HCMUS_MASTER_MOCK_${String(variant).padStart(2, '0')}`, examTypeCode: 'HCMUS_MASTER_ENTRANCE' as const, title: `HCMUS Master Entrance Mock ${String(variant).padStart(2, '0')}`, version: '2026.1.0', source: 'Synthetic mock; structure informed by project source, not an official exam paper', provenance: 'SYNTHETIC_MOCK' as const, durationMinutes: 120, totalScore: 100, status: 'DRAFT' as const, sections: hcmusSections(variant) })),
+  ...[1, 2].map((variant) => ({ key: `VSTEP_3_5_MOCK_${String(variant).padStart(2, '0')}`, examTypeCode: 'VSTEP' as const, title: `VSTEP 3-5 Mock ${String(variant).padStart(2, '0')}`, version: '1.0.0', source: 'Synthetic mock aligned to VSTEP 3-5 format; not an official exam paper', provenance: 'SYNTHETIC_MOCK' as const, durationMinutes: 172, totalScore: 100, status: 'ACTIVE' as const, sections: vstepSections })),
 ];
 
+export function validateAssembly(assembly: AssemblyDefinition): void {
+  if (!assembly.key || !assembly.version) throw new Error('Assembly key and version are required');
+  const sectionPositions = new Set<number>();
+  let sectionScore = 0;
+  for (const section of assembly.sections) {
+    if (sectionPositions.has(section.position)) throw new Error(`${assembly.key}: duplicate section position ${section.position}`);
+    sectionPositions.add(section.position);
+    sectionScore += section.score ?? 0;
+    for (const part of section.parts) {
+      const slotCount = part.blocks.reduce((sum, block) => sum + block.count, 0);
+      if (slotCount !== part.questionCount) throw new Error(`${assembly.key}/${part.code}: slot count ${slotCount} does not equal part count ${part.questionCount}`);
+      if (part.groupCount && part.questionsPerGroup && part.groupCount * part.questionsPerGroup !== part.questionCount) throw new Error(`${assembly.key}/${part.code}: grouping does not equal question count`);
+    }
+  }
+  if (assembly.totalScore !== undefined && sectionScore !== assembly.totalScore) throw new Error(`${assembly.key}: section scores do not equal total score`);
+}
+
 export async function seedAssembly(prisma: PrismaClient, assembly: AssemblyDefinition) {
+  validateAssembly(assembly);
   const examType = await prisma.examType.findUniqueOrThrow({ where: { code: assembly.examTypeCode } });
   const blueprint = await prisma.examBlueprint.upsert({
     where: { externalKey: `assembly:${assembly.key}` },
-    update: { examTypeId: examType.id, name: assembly.title, version: assembly.version, status: assembly.status },
-    create: { externalKey: `assembly:${assembly.key}`, examTypeId: examType.id, name: assembly.title, version: assembly.version, status: assembly.status },
+    update: { examTypeId: examType.id, name: assembly.title, version: assembly.version, source: assembly.source, provenance: assembly.provenance, durationMinutes: assembly.durationMinutes, totalScore: assembly.totalScore, status: assembly.status },
+    create: { externalKey: `assembly:${assembly.key}`, examTypeId: examType.id, name: assembly.title, version: assembly.version, source: assembly.source, provenance: assembly.provenance, durationMinutes: assembly.durationMinutes, totalScore: assembly.totalScore, status: assembly.status },
   });
 
   for (const sectionDef of assembly.sections) {

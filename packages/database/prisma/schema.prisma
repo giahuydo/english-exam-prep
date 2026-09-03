@@ -74,6 +74,13 @@ enum ContentRole {
   AI_GENERATED
 }
 
+enum BlueprintProvenance {
+  REAL_EXAM
+  OFFICIAL_SAMPLE
+  RECONSTRUCTED
+  SYNTHETIC_MOCK
+}
+
 enum QuestionDifficulty {
   EASY
   MEDIUM
@@ -205,6 +212,8 @@ model ExamFile {
 
 model Exam {
   id                 String     @id @default(uuid())
+  externalKey        String?    @unique @map("external_key")
+  datasetKey         String?    @unique @map("dataset_key")
   examFileId         String?    @map("exam_file_id")
   examTypeId         String     @map("exam_type_id")
   title              String
@@ -276,6 +285,7 @@ model Topic {
   children        Topic[]             @relation("TopicHierarchy")
   questionTopics  QuestionTopic[]
   blueprintItems  ExamBlueprintItem[]
+  blueprintSlots   BlueprintSlot[]
   userStats       UserTopicStat[]
   studyPlanTopics StudyPlanTopic[]
 
@@ -297,6 +307,7 @@ model QuestionType {
 
   questions      Question[]
   blueprintItems ExamBlueprintItem[]
+  blueprintSlots BlueprintSlot[]
 
   @@map("question_types")
 }
@@ -313,6 +324,7 @@ model QuestionType {
 
 model Question {
   id                   String             @id @default(uuid())
+  datasetKey           String?            @unique @map("dataset_key")
   examId               String?            @map("exam_id")
   examSectionId        String?            @map("exam_section_id")
   questionTypeId       String             @map("question_type_id")
@@ -391,21 +403,93 @@ model QuestionTopic {
 // ---------------------------------------------------------------------------
 
 model ExamBlueprint {
-  id              String          @id @default(uuid())
-  examTypeId      String          @map("exam_type_id")
+  id              String             @id @default(uuid())
+  externalKey     String?            @unique @map("external_key")
+  examTypeId      String             @map("exam_type_id")
   name            String
   version         String
-  sourceExamCount Int             @default(0) @map("source_exam_count")
-  status          BlueprintStatus @default(DRAFT)
-  createdAt       DateTime        @default(now()) @map("created_at")
-  updatedAt       DateTime        @updatedAt @map("updated_at")
+  source          String?
+  provenance      BlueprintProvenance @default(RECONSTRUCTED)
+  durationMinutes Int?               @map("duration_minutes")
+  totalScore      Float?             @map("total_score")
+  sourceExamCount Int                @default(0) @map("source_exam_count")
+  status          BlueprintStatus    @default(DRAFT)
+  createdAt       DateTime           @default(now()) @map("created_at")
+  updatedAt       DateTime           @updatedAt @map("updated_at")
 
   examType     ExamType            @relation(fields: [examTypeId], references: [id])
   items        ExamBlueprintItem[]
+  sections     BlueprintSection[]
   quizSessions QuizSession[]
 
   @@index([examTypeId])
   @@map("exam_blueprints")
+}
+
+model BlueprintSection {
+  id              String   @id @default(uuid())
+  blueprintId     String   @map("blueprint_id")
+  code            String
+  title           String
+  position        Int
+  instructions    String?
+  durationMinutes Int?     @map("duration_minutes")
+  score           Float?
+
+  blueprint ExamBlueprint @relation(fields: [blueprintId], references: [id], onDelete: Cascade)
+  parts     BlueprintPart[]
+
+  @@unique([blueprintId, code])
+  @@map("blueprint_sections")
+}
+
+model BlueprintPart {
+  id                String   @id @default(uuid())
+  externalKey       String?  @unique @map("external_key")
+  sectionId         String   @map("section_id")
+  code              String
+  title             String
+  position          Int
+  instructions      String?
+  durationMinutes   Int?     @map("duration_minutes")
+  score             Float?
+  questionCount     Int      @map("question_count")
+  groupCount        Int?     @map("group_count")
+  questionsPerGroup Int?     @map("questions_per_group")
+  groupingSemantics String?  @map("grouping_semantics")
+
+  section BlueprintSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  slots   BlueprintSlot[]
+
+  @@unique([sectionId, code])
+  @@map("blueprint_parts")
+}
+
+model BlueprintSlot {
+  id                String             @id @default(uuid())
+  externalKey       String?            @unique @map("external_key")
+  partId            String             @map("part_id")
+  code              String
+  title             String
+  position          Int
+  questionTypeId    String             @map("question_type_id")
+  topicId           String?
+  count             Int
+  level             ExamLevel?
+  difficulty        QuestionDifficulty?
+  groupCount        Int?               @map("group_count")
+  questionsPerGroup Int?               @map("questions_per_group")
+  groupSize         Int?               @map("group_size")
+  groupingSemantics String?            @map("grouping_semantics")
+  sharedStimulus    String?            @map("shared_stimulus")
+  selectionPolicy   Json?              @map("selection_policy")
+
+  part        BlueprintPart @relation(fields: [partId], references: [id], onDelete: Cascade)
+  questionType QuestionType @relation(fields: [questionTypeId], references: [id])
+  topic       Topic?        @relation(fields: [topicId], references: [id])
+
+  @@unique([partId, code])
+  @@map("blueprint_slots")
 }
 
 model ExamBlueprintItem {

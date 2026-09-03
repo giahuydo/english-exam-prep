@@ -290,15 +290,19 @@ async function seedHcmusPattern(adminId: string) {
   const exam = await prisma.exam.upsert({
     where: { id: '00000000-0000-0000-0000-000000000001' },
     update: {
-      title: 'HCMUS Master Entrance - Canonical Pattern',
+      title: 'HCMUS Master Entrance - Structure Reference (2026)',
+      durationMinutes: 120,
+      totalScore: 100,
       status: 'REVIEWED',
     },
     create: {
       id: '00000000-0000-0000-0000-000000000001',
       examTypeId: examType.id,
       title: 'HCMUS Master Entrance - Canonical Pattern',
-      source: 'Official pattern',
+      source: 'Project-authoritative 2026 structure reference; not an official paper',
       detectedLevel: 'B1_B2',
+      durationMinutes: 120,
+      totalScore: 100,
       status: 'REVIEWED',
     },
   });
@@ -317,23 +321,31 @@ async function seedHcmusPattern(adminId: string) {
     });
   }
 
-  // Draft blueprint reflecting HCMUS pattern
+  // Reconstructed structure reference; no official paper is bundled.
   const blueprint = await prisma.examBlueprint.upsert({
     where: { id: '00000000-0000-0000-0000-000000000010' },
     update: {
-      name: 'HCMUS Master Entrance v1',
-      version: '1.0.0',
+      name: 'HCMUS Master Entrance 2026 Structure Reference',
+      version: '2026.1.0',
+      source: 'Project-authoritative structure reference; verify against the current university notice',
+      provenance: 'RECONSTRUCTED',
+      durationMinutes: 120,
+      totalScore: 100,
       status: 'DRAFT',
       sourceExamCount: 0,
     },
     create: {
       id: '00000000-0000-0000-0000-000000000010',
       examTypeId: examType.id,
-      name: 'HCMUS Master Entrance v1',
-      version: '1.0.0',
+      name: 'HCMUS Master Entrance 2026 Structure Reference',
+      version: '2026.1.0',
+      source: 'Project-authoritative structure reference; verify against the current university notice',
+      provenance: 'RECONSTRUCTED',
+      durationMinutes: 120,
+      totalScore: 100,
       status: 'DRAFT',
       sourceExamCount: 0,
-    },
+    }
   });
 
   // Blueprint items — grammar distribution (kept + level upgraded)
@@ -483,7 +495,7 @@ async function seedVstepPattern() {
   const exam = await prisma.exam.upsert({
     where: { id: '00000000-0000-0000-0000-000000000002' },
     update: { title: 'VSTEP 3-5 Canonical Format', status: 'REVIEWED' },
-    create: { id: '00000000-0000-0000-0000-000000000002', examTypeId: examType.id, title: 'VSTEP 3-5 Canonical Format', source: 'Source-derived VSTEP format', detectedLevel: 'B1_B2', status: 'REVIEWED' },
+    create: { id: '00000000-0000-0000-0000-000000000002', examTypeId: examType.id, title: 'VSTEP 3-5 Canonical Format', source: 'Source-derived VSTEP format', detectedLevel: 'B1_B2', durationMinutes: 172, totalScore: 100, status: 'REVIEWED' },
   });
   const sections = [
     { code: 'LISTENING', name: 'Listening', position: 1, questionCount: 35, partCount: 3, durationMinutes: 40 },
@@ -496,8 +508,8 @@ async function seedVstepPattern() {
   }
   const blueprint = await prisma.examBlueprint.upsert({
     where: { id: '00000000-0000-0000-0000-000000000020' },
-    update: { name: 'VSTEP 3-5 v1', status: 'ACTIVE', sourceExamCount: 1 },
-    create: { id: '00000000-0000-0000-0000-000000000020', examTypeId: examType.id, name: 'VSTEP 3-5 v1', version: '1.0.0', status: 'ACTIVE', sourceExamCount: 1 },
+    update: { name: 'VSTEP 3-5 v1', status: 'ACTIVE', source: 'Source-derived format; not an official paper', provenance: 'RECONSTRUCTED', durationMinutes: 172, totalScore: 100, sourceExamCount: 1 },
+    create: { id: '00000000-0000-0000-0000-000000000020', examTypeId: examType.id, name: 'VSTEP 3-5 v1', version: '1.0.0', source: 'Source-derived format; not an official paper', provenance: 'RECONSTRUCTED', durationMinutes: 172, totalScore: 100, status: 'ACTIVE', sourceExamCount: 1 },
   });
   await prisma.examBlueprintItem.deleteMany({ where: { blueprintId: blueprint.id } });
   const types = await prisma.questionType.findMany({ where: { code: { in: ['ANNOUNCEMENT_INSTRUCTION', 'CONVERSATION', 'TALK_LECTURE', 'READING_COMPREHENSION', 'LETTER_EMAIL', 'ESSAY', 'SOCIAL_INTERACTION', 'SOLUTION_DISCUSSION', 'TOPIC_DEVELOPMENT'] } } });
