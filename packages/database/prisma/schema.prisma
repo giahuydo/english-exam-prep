@@ -152,6 +152,7 @@ model User {
   reviewedQuestions Question[]        @relation("QuestionReviewedBy")
   quizSessions      QuizSession[]
   questionAttempts  QuestionAttempt[]
+  hintReveals       HintReveal[]
   userTopicStats    UserTopicStat[]
   studyPlans        StudyPlan[]
 
@@ -339,6 +340,9 @@ model Question {
   hint2                String?            @map("hint_2")
   hint3                String?            @map("hint_3")
   explanation          String?            @db.Text
+  ruleStructure        String?            @map("rule_structure") @db.Text
+  commonMistake        String?            @map("common_mistake") @db.Text
+  example              String?            @db.Text
   status               QuestionStatus     @default(DRAFT)
   aiModel              String?            @map("ai_model")
   aiGenerationMetadata Json?              @map("ai_generation_metadata")
@@ -355,6 +359,7 @@ model Question {
   options          QuestionOption[]
   topics           QuestionTopic[]
   attempts         QuestionAttempt[]
+  hintReveals      HintReveal[]
   sessionQuestions QuizSessionQuestion[]
 
   @@index([status])
@@ -532,8 +537,9 @@ model QuizSession {
   user      User                  @relation(fields: [userId], references: [id])
   examType  ExamType?             @relation(fields: [examTypeId], references: [id])
   blueprint ExamBlueprint?        @relation(fields: [blueprintId], references: [id])
-  attempts  QuestionAttempt[]
-  questions QuizSessionQuestion[]
+  attempts    QuestionAttempt[]
+  hintReveals HintReveal[]
+  questions   QuizSessionQuestion[]
 
   @@index([userId])
   @@index([status])
@@ -554,6 +560,24 @@ model QuizSessionQuestion {
   @@unique([quizSessionId, position])
   @@index([questionId])
   @@map("quiz_session_questions")
+}
+
+model HintReveal {
+  id             String   @id @default(uuid())
+  quizSessionId  String   @map("quiz_session_id")
+  userId         String   @map("user_id")
+  questionId     String   @map("question_id")
+  maxLevel       Int      @default(0) @map("max_level")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  quizSession QuizSession @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question    Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([quizSessionId, questionId])
+  @@index([userId])
+  @@map("hint_reveals")
 }
 
 model QuestionAttempt {

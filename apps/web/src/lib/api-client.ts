@@ -117,6 +117,9 @@ export const api = {
       correctOptionId?: string | null;
       correctOptionKey?: string | null;
       explanation: string | null;
+      ruleStructure: string | null;
+      commonMistake: string | null;
+      example: string | null;
       wrongOptionExplanations: Array<{
         optionId: string;
         optionKey: string;

@@ -27,6 +27,9 @@ interface AnswerResult {
   correctOptionId?: string | null;
   correctOptionKey?: string | null;
   explanation: string | null;
+  ruleStructure: string | null;
+  commonMistake: string | null;
+  example: string | null;
   wrongOptionExplanations: Array<{
     optionId: string;
     optionKey: string;
@@ -50,6 +53,7 @@ export default function PracticeSessionPage() {
   const [answers, setAnswers] = useState<Record<string, AnswerResult>>({});
   const [hintsShown, setHintsShown] = useState<Record<string, number>>({});
   const [hintText, setHintText] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState<Record<string, boolean>>({});
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -72,12 +76,18 @@ export default function PracticeSessionPage() {
   }, [params.sessionId]);
 
   async function pickOption(q: PracticeQuestion, optId: string) {
-    const res = await api.submitAnswer(params.sessionId, {
-      questionId: q.id,
-      selectedOptionId: optId,
-      hintLevelUsed: hintsShown[q.id] ?? 0,
-    });
-    setAnswers((a) => ({ ...a, [q.id]: res }));
+    if (answers[q.id] || submitting[q.id]) return;
+    setSubmitting((s) => ({ ...s, [q.id]: true }));
+    try {
+      const res = await api.submitAnswer(params.sessionId, {
+        questionId: q.id,
+        selectedOptionId: optId,
+        hintLevelUsed: hintsShown[q.id] ?? 0,
+      });
+      setAnswers((a) => ({ ...a, [q.id]: res }));
+    } finally {
+      setSubmitting((s) => ({ ...s, [q.id]: false }));
+    }
   }
 
   async function revealHint(q: PracticeQuestion, level: 1 | 2 | 3) {
@@ -127,7 +137,7 @@ export default function PracticeSessionPage() {
                 return (
                   <li key={o.id}>
                     <button
-                      disabled={!!result}
+                      disabled={!!result || submitting[q.id]}
                       onClick={() => pickOption(q, o.id)}
                       className={`w-full rounded border px-2 py-1 text-left text-sm ${
                         result
@@ -162,6 +172,9 @@ export default function PracticeSessionPage() {
                 {result.explanation ? (
                   <p className="mt-1 text-gray-700">{result.explanation}</p>
                 ) : null}
+                {result.ruleStructure ? <p className="mt-2"><strong>Rule:</strong> {result.ruleStructure}</p> : null}
+                {result.commonMistake ? <p className="mt-2"><strong>Common mistake:</strong> {result.commonMistake}</p> : null}
+                {result.example ? <p className="mt-2"><strong>Example:</strong> {result.example}</p> : null}
               </div>
             ) : (
               <div className="mt-3 flex gap-2 text-xs">
@@ -172,7 +185,7 @@ export default function PracticeSessionPage() {
                     <button
                       key={lv}
                       className="rounded border px-2 py-1 disabled:opacity-50"
-                      disabled={revealed >= lv}
+                      disabled={revealed < lv - 1 || revealed >= lv}
                       onClick={() => revealHint(q, lv as 1 | 2 | 3)}
                     >
                       {revealed >= lv ? `Hint ${lv} shown` : `Reveal hint ${lv}`}
