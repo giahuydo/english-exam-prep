@@ -53,7 +53,7 @@ export class MockExamsService {
     const picked: Array<{ id: string }> = [];
     const seen = new Set<string>();
     for (const { item, take } of perItem) {
-      const q = await this.selector.select({
+      const q = await this.selector.selectForUser(userId, {
         topicIds: item.topicId ? [item.topicId] : undefined,
         level: item.level ?? undefined,
         difficulty: item.difficulty ?? undefined,

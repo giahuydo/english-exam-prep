@@ -6,17 +6,20 @@ export class MasteryService {
   constructor(private readonly prisma: PrismaService) {}
 
   async recordAttempt(userId: string, questionId: string, correct: boolean, hintLevel: number, time?: number) {
+    const now = new Date();
     const topics = await this.prisma.questionTopic.findMany({ where: { questionId }, select: { topicId: true } });
     for (const { topicId } of topics) {
       const old = await this.prisma.userTopicStat.findUnique({ where: { userId_topicId: { userId, topicId } } });
       const attempts = (old?.attemptCount ?? 0) + 1;
       const correctCount = (old?.correctCount ?? 0) + (correct ? 1 : 0);
-      const avgTime = (((old?.avgTimeSeconds ?? 0) * (attempts - 1)) + (time ?? 0)) / attempts;
+      const hintCount = (old?.hintCount ?? 0) + (hintLevel > 0 ? 1 : 0);
       const accuracy = correctCount / attempts;
+      const masteryScore = Math.max(0, Math.min(1, accuracy - (hintCount / attempts) * 0.05));
+      const nextReviewAt = new Date(now.getTime() + Math.max(1, Math.round(1 + masteryScore * 13)) * 24 * 60 * 60 * 1000);
       await this.prisma.userTopicStat.upsert({
         where: { userId_topicId: { userId, topicId } },
-        update: { attemptCount: attempts, correctCount, accuracy, hintCount: (old?.hintCount ?? 0) + (hintLevel > 0 ? 1 : 0), avgTimeSeconds: avgTime, masteryScore: Math.max(0, Math.min(1, accuracy - (old?.hintCount ?? 0) / attempts * 0.05)), lastAttemptAt: new Date() },
-        create: { userId, topicId, attemptCount: 1, correctCount: correct ? 1 : 0, accuracy, hintCount: hintLevel > 0 ? 1 : 0, avgTimeSeconds: time ?? 0, masteryScore: correct ? 1 : 0, lastAttemptAt: new Date() },
+        update: { attemptCount: attempts, correctCount, accuracy, hintCount, avgTimeSeconds: (((old?.avgTimeSeconds ?? 0) * (attempts - 1)) + (time ?? 0)) / attempts, masteryScore, recentMistakeCount: correct ? Math.max(0, (old?.recentMistakeCount ?? 0) - 1) : (old?.recentMistakeCount ?? 0) + 1, lastAttemptAt: now, nextReviewAt },
+        create: { userId, topicId, attemptCount: 1, correctCount: correct ? 1 : 0, accuracy, hintCount: hintLevel > 0 ? 1 : 0, avgTimeSeconds: time ?? 0, masteryScore, recentMistakeCount: correct ? 0 : 1, lastAttemptAt: now, nextReviewAt },
       });
     }
   }

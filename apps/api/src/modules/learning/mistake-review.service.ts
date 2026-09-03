@@ -7,7 +7,7 @@ export class MistakeReviewService {
 
   list(userId: string, take = 100) {
     return this.prisma.questionAttempt.findMany({
-      where: { userId, isCorrect: false },
+      where: { userId, isCorrect: false, quizSession: { userId } },
       distinct: ['questionId'],
       include: {
         question: {
