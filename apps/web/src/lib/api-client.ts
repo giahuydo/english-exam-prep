@@ -115,6 +115,7 @@ export const api = {
       answerText?: string;
       hintLevelUsed?: number;
       timeSpentSeconds?: number;
+      language?: 'en' | 'vi';
     },
   ) =>
     apiFetch<{

@@ -145,6 +145,7 @@ export const SubmitAnswerDto = z.object({
   answerText: z.string().optional(),
   hintLevelUsed: z.number().int().min(0).max(3).default(0),
   timeSpentSeconds: z.number().int().min(0).optional(),
+  language: z.enum(['en', 'vi']).optional(),
 });
 export type SubmitAnswerDto = z.infer<typeof SubmitAnswerDto>;
 

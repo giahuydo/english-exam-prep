@@ -44,33 +44,12 @@ export interface AnswerResponse {
   hintLevelUsed: number;
 }
 
-// Never return Question/QuestionOption Prisma rows directly to a learner.
-// In particular, isCorrect and explanations are answer data, not question data.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function learnerQuestion(question: any) {
-  return {
-    id: question.id,
-    examId: question.examId,
-    examSectionId: question.examSectionId,
-    questionTypeId: question.questionTypeId,
-    contentRole: question.contentRole,
-    content: question.content,
-    instruction: question.instruction,
-    context: question.context,
-    level: question.level,
-    difficulty: question.difficulty,
-    status: question.status,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: (question.options ?? []).map((option: any) => ({
-      id: option.id,
-      questionId: option.questionId,
-      optionKey: option.optionKey,
-      content: option.content,
-      position: option.position,
-    })),
-    topics: question.topics,
-    questionType: question.questionType,
-  };
+interface TeachingContent {
+  explanation: string | null;
+  ruleStructure: string | null;
+  commonMistake: string | null;
+  example: string | null;
+  wrongOptionExplanations: Array<{ optionId: string; optionKey: string; explanation: string | null }>;
 }
 
 @Injectable()
@@ -187,7 +166,7 @@ export class PracticeService {
       where: { quizSessionId: sessionId, questionId: dto.questionId },
       orderBy: { createdAt: 'asc' },
     });
-    if (existingAttempt) return this.buildAnswerResponse(existingAttempt.id, existingAttempt.isCorrect, existingAttempt.selectedOptionId, existingAttempt.hintLevelUsed, dto.questionId);
+    if (existingAttempt) return this.buildAnswerResponse(existingAttempt.id, existingAttempt.isCorrect, existingAttempt.selectedOptionId, existingAttempt.hintLevelUsed, dto.questionId, dto.language);
 
     // Load question + all options so we can build the deterministic explanation
     // response without another round-trip.
@@ -228,10 +207,10 @@ export class PracticeService {
       );
     }
 
-    return this.buildAnswerResponse(attempt.id, isCorrect, dto.selectedOptionId ?? null, dto.hintLevelUsed, dto.questionId);
+    return this.buildAnswerResponse(attempt.id, isCorrect, dto.selectedOptionId ?? null, dto.hintLevelUsed, dto.questionId, dto.language);
   }
 
-  private async buildAnswerResponse(attemptId: string, isCorrect: boolean | null, selectedOptionId: string | null | undefined, hintLevelUsed: number, questionId: string): Promise<AnswerResponse> {
+  private async buildAnswerResponse(attemptId: string, isCorrect: boolean | null, selectedOptionId: string | null | undefined, hintLevelUsed: number, questionId: string, language: 'en' | 'vi' = 'en'): Promise<AnswerResponse> {
     const question = await this.prisma.question.findUnique({
       where: { id: questionId },
       include: { options: { orderBy: { position: 'asc' } } },
@@ -248,19 +227,43 @@ export class PracticeService {
         explanation: o.explanation ?? null,
       }));
 
+    const teaching: TeachingContent = {
+      explanation: question.explanation ?? null,
+      wrongOptionExplanations,
+      ruleStructure: question.ruleStructure ?? null,
+      commonMistake: question.commonMistake ?? null,
+      example: question.example ?? null,
+    };
+    const localized = language === 'vi' ? await this.translateTeachingContent(teaching) : teaching;
     return {
       attemptId,
       isCorrect,
       selectedOptionId: selectedOptionId ?? null,
       correctOptionId: correctOption?.id ?? null,
       correctOptionKey: correctOption?.optionKey ?? null,
-      explanation: question.explanation ?? null,
-      wrongOptionExplanations,
+      ...localized,
       hintLevelUsed,
-      ruleStructure: question.ruleStructure ?? null,
-      commonMistake: question.commonMistake ?? null,
-      example: question.example ?? null,
     };
+  }
+
+  private async translateTeachingContent(content: TeachingContent): Promise<TeachingContent> {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) return content;
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: `Translate the following English learner teaching feedback into natural Vietnamese. Preserve meaning, grammar examples, option keys, and null values. Return JSON with exactly these keys: explanation, ruleStructure, commonMistake, example, wrongOptionExplanations. wrongOptionExplanations must remain an array of objects with optionId, optionKey, explanation. Do not translate the English question or answer options. Input JSON: ${JSON.stringify(content)}` }] }] }),
+        signal: AbortSignal.timeout(6000),
+      });
+      if (!response.ok) return content;
+      const data = await response.json() as { candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }> };
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/^```json\s*/i, '').replace(/\s*```$/, '');
+      if (!text) return content;
+      const translated = JSON.parse(text) as TeachingContent;
+      return translated && Array.isArray(translated.wrongOptionExplanations) ? translated : content;
+    } catch {
+      return content;
+    }
   }
 
   async revealHint(
