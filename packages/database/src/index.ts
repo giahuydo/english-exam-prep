@@ -1,6 +1,6 @@
-import { PrismaClient } from './generated/prisma';
+import { PrismaClient } from './generated/prisma/index';
 
-export * from './generated/prisma';
+export * from './generated/prisma/index';
 
 declare global {
   // eslint-disable-next-line no-var
