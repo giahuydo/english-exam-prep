@@ -45,16 +45,17 @@ export default function LearnPage() {
 
   useEffect(() => {
     let active = true;
-    Promise.all([api.listLearningScopes(), api.me()])
-      .then(([scopeRows, profile]) => {
-        if (!active) return;
-        setScopes(scopeRows as Scope[]);
-        setMe(profile as Me);
+    api.listLearningScopes()
+      .then((scopeRows) => {
+        if (active) setScopes(scopeRows as Scope[]);
       })
       .catch((reason) => {
         if (active) setError(reason instanceof Error ? reason.message : 'Unable to load learning topics');
       })
       .finally(() => { if (active) setLoading(false); });
+    api.me()
+      .then((profile) => { if (active) setMe(profile as Me); })
+      .catch(() => undefined);
     return () => { active = false; };
   }, []);
 
@@ -68,6 +69,8 @@ export default function LearnPage() {
   const selectedTopic = topics.find((topic) => topic.id === selectedTopicId) ?? null;
   const selectedScopes = scopes.filter((scope) => scope.topicId === selectedTopicId).sort((a, b) => a.position - b.position || a.name.localeCompare(b.name));
   const target = me?.currentExamType;
+  const targetCategory = target?.code === 'VSTEP' ? 'READING' : target?.code === 'HCMUS_MASTER_ENTRANCE' ? 'GRAMMAR' : undefined;
+  const orderedTopics = targetCategory ? [...topics].sort((a, b) => Number(b.category === targetCategory) - Number(a.category === targetCategory)) : topics;
 
   return <StudentShell>
     <SectionTitle
@@ -81,7 +84,7 @@ export default function LearnPage() {
       : !topics.length ? <EmptyState title="No learning topics yet" description="Your learning library has not been published yet. Check back soon." />
       : <>
         <div id="topics" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label="Learning topics">
-          {topics.map((topic) => {
+          {orderedTopics.map((topic) => {
             const topicScopes = scopes.filter((scope) => scope.topicId === topic.id);
             const selected = selectedTopicId === topic.id;
             return <button key={topic.id} type="button" onClick={() => setSelectedTopicId(topic.id)} aria-pressed={selected} className={`rounded-2xl border bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md ${selected ? 'border-blue-600 ring-2 ring-blue-100' : 'border-slate-200'}`}>
