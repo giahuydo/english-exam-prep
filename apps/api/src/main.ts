@@ -5,8 +5,41 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  const allowedOrigins = new Set(
+    (process.env.CORS_ORIGIN ?? '')
+      .split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean),
+  );
+
   app.enableCors({
-    origin: process.env.CORS_ORIGIN ?? 'http://localhost:3000',
+    origin: (
+      requestOrigin: string | undefined,
+      callback: (error: Error | null, allow?: boolean) => void,
+    ) => {
+      if (!requestOrigin || allowedOrigins.has(requestOrigin)) {
+        callback(null, true);
+        return;
+      }
+
+      let parsedOrigin: URL;
+      try {
+        parsedOrigin = new URL(requestOrigin);
+      } catch {
+        callback(null, false);
+        return;
+      }
+
+      const isVercelOrigin =
+        parsedOrigin.protocol === 'https:' &&
+        /^english-exam-prep[^.]*\.vercel\.app$/.test(parsedOrigin.hostname);
+      const isLocalOrigin =
+        parsedOrigin.protocol === 'http:' &&
+        parsedOrigin.hostname === 'localhost' &&
+        parsedOrigin.port === '3000';
+
+      callback(null, isVercelOrigin || isLocalOrigin);
+    },
     credentials: true,
   });
 

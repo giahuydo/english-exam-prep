@@ -18,8 +18,10 @@ import { StudyPlansModule } from './modules/study-plans/study-plans.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { AiModule } from './ai/ai.module';
 import { LearningModule } from './modules/learning/learning.module';
+import { HealthController } from './health.controller';
 
 @Module({
+  controllers: [HealthController],
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
