@@ -30,17 +30,20 @@ interface QuestionDetail {
 }
 
 export default function AdminQuestionEditor() {
-  const params = useParams<{ id: string }>()!;
+  const params = useParams<{ id: string }>();
+  const id = params?.id ?? '';
   const [q, setQ] = useState<QuestionDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!id) return;
     api
-      .getQuestion(params.id)
+      .getQuestion(id)
       .then((data) => setQ(data as QuestionDetail))
       .catch((e) => setError(e instanceof Error ? e.message : 'load failed'));
-  }, [params.id]);
+  }, [id]);
 
+  if (!id) return <p className="text-red-600">Missing question route.</p>;
   if (error) return <p className="text-red-600">{error}</p>;
   if (!q) return <p>Loading...</p>;
 
