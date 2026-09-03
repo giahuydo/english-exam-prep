@@ -1,0 +1,47 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# build outputs
+dist/
+build/
+.next/
+out/
+.turbo/
+apps/*/.turbo/
+packages/*/.turbo/
+
+# prisma generated
+packages/database/src/generated/
+packages/database/node_modules/.prisma/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# test / coverage
+coverage/
+.nyc_output/
+
+# tsbuildinfo
+*.tsbuildinfo
+
+# runtime data
+pids/
+*.pid
+*.seed
+
+# postgres data volume (if bind-mounted)
+docker/data/

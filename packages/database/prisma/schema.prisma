@@ -1,0 +1,536 @@
+// English B1/B2 Exam Prep - Prisma schema
+// Domain-first: Exam Type, Exam, Exam Section, Question Type, Topic, Question Classification,
+// Exam Blueprint. See docs/database.md.
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  output        = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum ExamFileStatus {
+  UPLOADED
+  EXTRACTING
+  ANALYZING
+  READY
+  FAILED
+}
+
+enum ExamLevel {
+  B1
+  B2
+  B1_B2
+}
+
+enum ExamStatus {
+  DRAFT
+  ANALYZED
+  REVIEWED
+  PUBLISHED
+}
+
+enum TopicCategory {
+  GRAMMAR
+  VOCABULARY
+  READING
+  LISTENING
+  WRITING
+  SPEAKING
+}
+
+enum QuestionOrigin {
+  ORIGINAL
+  AI_GENERATED
+  MANUAL
+}
+
+enum QuestionDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum QuestionStatus {
+  DRAFT
+  REVIEWED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum QuestionTopicSource {
+  AI
+  ADMIN
+  SYSTEM
+}
+
+enum BlueprintStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum QuizSessionType {
+  TOPIC_PRACTICE
+  MIXED_PRACTICE
+  CUSTOM_PRACTICE
+  MOCK_EXAM
+}
+
+enum QuizSessionStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+enum StudyPlanStatus {
+  ACTIVE
+  COMPLETED
+}
+
+enum StudyPlanGeneratedBy {
+  AI
+  SYSTEM
+  ADMIN
+}
+
+// ---------------------------------------------------------------------------
+// Users
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String     @id @default(uuid())
+  email         String     @unique
+  passwordHash  String     @map("password_hash")
+  name          String
+  role          UserRole   @default(USER)
+  status        UserStatus @default(ACTIVE)
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  uploadedExamFiles ExamFile[]         @relation("UploaderExamFiles")
+  createdQuestions  Question[]         @relation("QuestionCreatedBy")
+  reviewedQuestions Question[]         @relation("QuestionReviewedBy")
+  quizSessions      QuizSession[]
+  questionAttempts  QuestionAttempt[]
+  userTopicStats    UserTopicStat[]
+  studyPlans        StudyPlan[]
+
+  @@map("users")
+}
+
+// ---------------------------------------------------------------------------
+// Exam type (blueprint container)
+// ---------------------------------------------------------------------------
+
+model ExamType {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  levelFrom   ExamLevel? @map("level_from")
+  levelTo     ExamLevel? @map("level_to")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  exams         Exam[]
+  blueprints    ExamBlueprint[]
+  quizSessions  QuizSession[]
+
+  @@map("exam_types")
+}
+
+// ---------------------------------------------------------------------------
+// Uploaded exam PDF metadata (no binary in Postgres)
+// ---------------------------------------------------------------------------
+
+model ExamFile {
+  id              String         @id @default(uuid())
+  originalName    String         @map("original_name")
+  mimeType        String         @map("mime_type")
+  sizeBytes       Int            @map("size_bytes")
+  gcsBucket       String?        @map("gcs_bucket")
+  gcsPath         String?        @map("gcs_path")
+  checksum        String?
+  status          ExamFileStatus @default(UPLOADED)
+  extractedText   String?        @map("extracted_text") @db.Text
+  processingError String?        @map("processing_error")
+  uploadedById    String         @map("uploaded_by")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  uploader User    @relation("UploaderExamFiles", fields: [uploadedById], references: [id])
+  exams    Exam[]
+
+  @@index([status])
+  @@map("exam_files")
+}
+
+// ---------------------------------------------------------------------------
+// Exam (parsed instance of one real exam paper OR a canonical pattern)
+// ---------------------------------------------------------------------------
+
+model Exam {
+  id                 String     @id @default(uuid())
+  examFileId         String?    @map("exam_file_id")
+  examTypeId         String     @map("exam_type_id")
+  title              String
+  source             String
+  examYear           Int?       @map("exam_year")
+  examRound          String?    @map("exam_round")
+  detectedLevel      ExamLevel  @map("detected_level")
+  durationMinutes    Int?       @map("duration_minutes")
+  totalScore         Float?     @map("total_score")
+  analysisConfidence Float?     @map("analysis_confidence")
+  status             ExamStatus @default(DRAFT)
+  createdAt          DateTime   @default(now()) @map("created_at")
+  updatedAt          DateTime   @updatedAt @map("updated_at")
+
+  examFile  ExamFile?     @relation(fields: [examFileId], references: [id])
+  examType  ExamType      @relation(fields: [examTypeId], references: [id])
+  sections  ExamSection[]
+  questions Question[]
+
+  @@index([examTypeId])
+  @@index([status])
+  @@map("exams")
+}
+
+// ---------------------------------------------------------------------------
+// Exam section (e.g. VOCABULARY_READING, GRAMMAR_USE_OF_ENGLISH, LISTENING, SPEAKING)
+// ---------------------------------------------------------------------------
+
+model ExamSection {
+  id              String   @id @default(uuid())
+  examId          String   @map("exam_id")
+  code            String
+  name            String
+  position        Int
+  questionCount   Int?     @map("question_count")
+  score           Float?
+  durationMinutes Int?     @map("duration_minutes")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  exam      Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
+  questions Question[]
+
+  @@unique([examId, code])
+  @@index([examId])
+  @@map("exam_sections")
+}
+
+// ---------------------------------------------------------------------------
+// Topic taxonomy (hierarchical)
+// ---------------------------------------------------------------------------
+
+model Topic {
+  id        String        @id @default(uuid())
+  code      String        @unique
+  name      String
+  parentId  String?       @map("parent_id")
+  category  TopicCategory
+  level     String?
+  sortOrder Int           @default(0) @map("sort_order")
+  isActive  Boolean       @default(true) @map("is_active")
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  parent           Topic?              @relation("TopicHierarchy", fields: [parentId], references: [id])
+  children         Topic[]             @relation("TopicHierarchy")
+  questionTopics   QuestionTopic[]
+  blueprintItems   ExamBlueprintItem[]
+  userStats        UserTopicStat[]
+  studyPlanTopics  StudyPlanTopic[]
+
+  @@index([category])
+  @@index([parentId])
+  @@map("topics")
+}
+
+// ---------------------------------------------------------------------------
+// Question type (e.g. MCQ_SINGLE_BLANK, CLOZE_TEST, SENTENCE_TRANSFORMATION, ESSAY)
+// ---------------------------------------------------------------------------
+
+model QuestionType {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  category  String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  questions      Question[]
+  blueprintItems ExamBlueprintItem[]
+
+  @@map("question_types")
+}
+
+// ---------------------------------------------------------------------------
+// Question
+// ---------------------------------------------------------------------------
+
+model Question {
+  id                    String             @id @default(uuid())
+  examId                String?            @map("exam_id")
+  examSectionId         String?            @map("exam_section_id")
+  questionTypeId        String             @map("question_type_id")
+  origin                QuestionOrigin     @default(ORIGINAL)
+  content               String             @db.Text
+  instruction           String?            @db.Text
+  context               String?            @db.Text
+  level                 ExamLevel
+  difficulty            QuestionDifficulty @default(MEDIUM)
+  hint1                 String?            @map("hint_1")
+  hint2                 String?            @map("hint_2")
+  hint3                 String?            @map("hint_3")
+  explanation           String?            @db.Text
+  status                QuestionStatus     @default(DRAFT)
+  aiModel               String?            @map("ai_model")
+  aiGenerationMetadata  Json?              @map("ai_generation_metadata")
+  createdById           String?            @map("created_by")
+  reviewedById          String?            @map("reviewed_by")
+  createdAt             DateTime           @default(now()) @map("created_at")
+  updatedAt             DateTime           @updatedAt @map("updated_at")
+
+  exam         Exam?             @relation(fields: [examId], references: [id])
+  examSection  ExamSection?      @relation(fields: [examSectionId], references: [id])
+  questionType QuestionType      @relation(fields: [questionTypeId], references: [id])
+  createdBy    User?             @relation("QuestionCreatedBy", fields: [createdById], references: [id])
+  reviewedBy   User?             @relation("QuestionReviewedBy", fields: [reviewedById], references: [id])
+  options      QuestionOption[]
+  topics       QuestionTopic[]
+  attempts     QuestionAttempt[]
+  sessionQuestions QuizSessionQuestion[]
+
+  @@index([status])
+  @@index([level])
+  @@index([difficulty])
+  @@index([questionTypeId])
+  @@map("questions")
+}
+
+model QuestionOption {
+  id          String  @id @default(uuid())
+  questionId  String  @map("question_id")
+  optionKey   String  @map("option_key")
+  content     String  @db.Text
+  isCorrect   Boolean @default(false) @map("is_correct")
+  explanation String?
+  position    Int     @default(0)
+
+  question Question          @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  attempts QuestionAttempt[] @relation("SelectedOption")
+
+  @@unique([questionId, optionKey])
+  @@index([questionId])
+  @@map("question_options")
+}
+
+// Question <-> Topic join (with metadata)
+model QuestionTopic {
+  questionId String              @map("question_id")
+  topicId    String              @map("topic_id")
+  isPrimary  Boolean             @default(false) @map("is_primary")
+  confidence Float?
+  source     QuestionTopicSource @default(ADMIN)
+  createdAt  DateTime            @default(now()) @map("created_at")
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  topic    Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([questionId, topicId])
+  @@index([topicId])
+  @@map("question_topics")
+}
+
+// ---------------------------------------------------------------------------
+// Exam blueprint (learned pattern for an exam type)
+// ---------------------------------------------------------------------------
+
+model ExamBlueprint {
+  id                String          @id @default(uuid())
+  examTypeId        String          @map("exam_type_id")
+  name              String
+  version           String
+  sourceExamCount   Int             @default(0) @map("source_exam_count")
+  status            BlueprintStatus @default(DRAFT)
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+
+  examType     ExamType            @relation(fields: [examTypeId], references: [id])
+  items        ExamBlueprintItem[]
+  quizSessions QuizSession[]
+
+  @@index([examTypeId])
+  @@map("exam_blueprints")
+}
+
+model ExamBlueprintItem {
+  id             String              @id @default(uuid())
+  blueprintId    String              @map("blueprint_id")
+  sectionCode    String              @map("section_code")
+  questionTypeId String?             @map("question_type_id")
+  topicId        String?             @map("topic_id")
+  questionCount  Int?                @map("question_count")
+  weight         Float?
+  difficulty     QuestionDifficulty?
+  level          ExamLevel?
+  createdAt      DateTime            @default(now()) @map("created_at")
+
+  blueprint    ExamBlueprint @relation(fields: [blueprintId], references: [id], onDelete: Cascade)
+  questionType QuestionType? @relation(fields: [questionTypeId], references: [id])
+  topic        Topic?        @relation(fields: [topicId], references: [id])
+
+  @@index([blueprintId])
+  @@map("exam_blueprint_items")
+}
+
+// ---------------------------------------------------------------------------
+// Practice
+// ---------------------------------------------------------------------------
+
+model QuizSession {
+  id             String            @id @default(uuid())
+  userId         String            @map("user_id")
+  type           QuizSessionType   @default(PRACTICE)
+  examTypeId     String?           @map("exam_type_id")
+  blueprintId    String?           @map("blueprint_id")
+  status         QuizSessionStatus @default(IN_PROGRESS)
+  totalQuestions Int               @default(0) @map("total_questions")
+  correctCount   Int               @default(0) @map("correct_count")
+  score          Float             @default(0)
+  startedAt      DateTime          @default(now()) @map("started_at")
+  completedAt    DateTime?         @map("completed_at")
+
+  user      User              @relation(fields: [userId], references: [id])
+  examType  ExamType?         @relation(fields: [examTypeId], references: [id])
+  blueprint ExamBlueprint?    @relation(fields: [blueprintId], references: [id])
+  attempts  QuestionAttempt[]
+  questions QuizSessionQuestion[]
+
+  @@index([userId])
+  @@index([status])
+  @@map("quiz_sessions")
+}
+
+model QuizSessionQuestion {
+  id            String   @id @default(uuid())
+  quizSessionId String   @map("quiz_session_id")
+  questionId    String   @map("question_id")
+  position      Int
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  quizSession QuizSession @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
+  question   Question    @relation(fields: [questionId], references: [id])
+
+  @@unique([quizSessionId, questionId])
+  @@unique([quizSessionId, position])
+  @@index([questionId])
+  @@map("quiz_session_questions")
+}
+
+model QuestionAttempt {
+  id                String   @id @default(uuid())
+  quizSessionId     String   @map("quiz_session_id")
+  userId            String   @map("user_id")
+  questionId        String   @map("question_id")
+  selectedOptionId  String?  @map("selected_option_id")
+  answerText        String?  @map("answer_text")
+  isCorrect         Boolean? @map("is_correct")
+  score             Float?
+  hintLevelUsed     Int      @default(0) @map("hint_level_used")
+  timeSpentSeconds  Int?     @map("time_spent_seconds")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  quizSession    QuizSession     @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
+  user           User            @relation(fields: [userId], references: [id])
+  question       Question        @relation(fields: [questionId], references: [id])
+  selectedOption QuestionOption? @relation("SelectedOption", fields: [selectedOptionId], references: [id])
+
+  @@index([quizSessionId])
+  @@index([userId])
+  @@index([questionId])
+  @@map("question_attempts")
+}
+
+// ---------------------------------------------------------------------------
+// Analytics
+// ---------------------------------------------------------------------------
+
+model UserTopicStat {
+  id              String    @id @default(uuid())
+  userId          String    @map("user_id")
+  topicId         String    @map("topic_id")
+  attemptCount    Int       @default(0) @map("attempt_count")
+  correctCount    Int       @default(0) @map("correct_count")
+  accuracy        Float     @default(0)
+  hintCount       Int       @default(0) @map("hint_count")
+  avgTimeSeconds  Float     @default(0) @map("avg_time_seconds")
+  masteryScore    Float     @default(0) @map("mastery_score")
+  lastAttemptAt   DateTime? @map("last_attempt_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  user  User  @relation(fields: [userId], references: [id])
+  topic Topic @relation(fields: [topicId], references: [id])
+
+  @@unique([userId, topicId])
+  @@index([userId])
+  @@map("user_topic_stats")
+}
+
+// ---------------------------------------------------------------------------
+// Study plans
+// ---------------------------------------------------------------------------
+
+model StudyPlan {
+  id          String               @id @default(uuid())
+  userId      String               @map("user_id")
+  title       String
+  status      StudyPlanStatus      @default(ACTIVE)
+  generatedBy StudyPlanGeneratedBy @default(SYSTEM) @map("generated_by")
+  summary     String?
+  createdAt   DateTime             @default(now()) @map("created_at")
+  updatedAt   DateTime             @updatedAt @map("updated_at")
+
+  user   User             @relation(fields: [userId], references: [id])
+  topics StudyPlanTopic[]
+
+  @@index([userId])
+  @@map("study_plans")
+}
+
+model StudyPlanTopic {
+  id                    String   @id @default(uuid())
+  studyPlanId           String   @map("study_plan_id")
+  topicId               String   @map("topic_id")
+  priority              Int      @default(0)
+  targetQuestionCount   Int      @default(0) @map("target_question_count")
+  reason                String?
+  status                String   @default("PENDING")
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  studyPlan StudyPlan @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
+  topic     Topic     @relation(fields: [topicId], references: [id])
+
+  @@index([studyPlanId])
+  @@map("study_plan_topics")
+}

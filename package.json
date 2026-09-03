@@ -1,0 +1,28 @@
+{
+  "name": "english-exam-prep",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "db:generate": "pnpm --filter @app/database db:generate",
+    "db:migrate": "pnpm --filter @app/database db:migrate",
+    "db:push": "pnpm --filter @app/database db:push",
+    "db:seed": "pnpm --filter @app/database db:seed",
+    "db:reset": "pnpm --filter @app/database db:reset",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "turbo": "^2.3.3",
+    "typescript": "^5.6.3"
+  }
+}
