@@ -4,11 +4,12 @@ import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { CurrentUser, AuthUser } from '../../auth/current-user.decorator';
 import { RevealHintDto, StartSessionDto, SubmitAnswerDto } from '@app/shared';
 import { ZodValidationPipe } from '../../common/zod-validation.pipe';
+import { WeakTopicService } from '../learning/weak-topic.service';
 
 @Controller('practice/sessions')
 @UseGuards(JwtAuthGuard)
 export class PracticeController {
-  constructor(private readonly svc: PracticeService) {}
+  constructor(private readonly svc: PracticeService, private readonly weakTopicService: WeakTopicService) {}
 
   @Post()
   start(
@@ -16,6 +17,18 @@ export class PracticeController {
     @Body(new ZodValidationPipe(StartSessionDto)) dto: StartSessionDto,
   ) {
     return this.svc.start(user.id, dto);
+  }
+
+  @Get('weak-topics')
+  weakTopics(@CurrentUser() user: AuthUser) {
+    return this.weakTopicService.list(user.id);
+  }
+
+  @Post('weak-topics/:topicId')
+  async practiceWeakTopic(@CurrentUser() user: AuthUser, @Param('topicId') topicId: string) {
+    const weakTopic = await this.weakTopicService.choose(user.id, topicId);
+    if (!weakTopic) return { error: 'Topic is not weak for this user' };
+    return this.svc.start(user.id, { type: 'TOPIC_PRACTICE', topicId, topicIds: [topicId], totalQuestions: 10 });
   }
 
   @Get(':id')

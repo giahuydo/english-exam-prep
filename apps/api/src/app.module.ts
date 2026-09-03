@@ -20,6 +20,7 @@ import { AiModule } from './ai/ai.module';
 import { LearningModule } from './modules/learning/learning.module';
 import { LearningScopesModule } from './modules/learning/learning-scopes.module';
 import { HealthController } from './health.controller';
+import { ResultsModule } from './modules/results/results.module';
 
 @Module({
   controllers: [HealthController],
@@ -44,6 +45,7 @@ import { HealthController } from './health.controller';
     StudyPlansModule,
     LearningModule,
     LearningScopesModule,
+    ResultsModule,
   ],
 })
 export class AppModule {}
