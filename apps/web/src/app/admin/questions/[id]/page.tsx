@@ -30,7 +30,7 @@ interface QuestionDetail {
 }
 
 export default function AdminQuestionEditor() {
-  const params = useParams<{ id: string }>();
+  const params = useParams<{ id: string }>()!;
   const [q, setQ] = useState<QuestionDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
