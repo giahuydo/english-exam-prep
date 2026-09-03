@@ -5,6 +5,17 @@ import { RolesGuard } from '../../auth/roles.guard';
 import { Roles } from '../../auth/roles.decorator';
 import { UserRole } from '@app/shared';
 
+@Controller('exam-types')
+@UseGuards(JwtAuthGuard)
+export class ExamTypesCatalogController {
+  constructor(private readonly svc: ExamTypesService) {}
+
+  @Get()
+  list() {
+    return this.svc.list();
+  }
+}
+
 @Controller('admin/exam-types')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(UserRole.ADMIN)

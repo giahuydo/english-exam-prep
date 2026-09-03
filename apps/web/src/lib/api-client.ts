@@ -137,6 +137,7 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({
         hintLevelUsed: 0,
+        language: 'en',
         ...payload,
       }),
     }),
