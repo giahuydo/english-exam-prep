@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
-import type { Request } from 'express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -13,25 +12,30 @@ async function bootstrap() {
       .filter(Boolean),
   );
 
+  const isOriginAllowed = (requestOrigin: string): boolean => {
+    if (requestOrigin === 'http://localhost:3000') return true;
+    if (configuredOrigins.has(requestOrigin)) return true;
+    try {
+      const url = new URL(requestOrigin);
+      return (
+        url.protocol === 'https:' &&
+        /^english-exam-prep[^.]*\.vercel\.app$/.test(url.hostname)
+      );
+    } catch {
+      return false;
+    }
+  };
+
   app.enableCors({
-    origin: (requestOrigin: string | undefined, _request: Request) => {
-      if (!requestOrigin || requestOrigin === 'http://localhost:3000') {
-        return true;
+    origin: (
+      requestOrigin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
+      if (!requestOrigin || isOriginAllowed(requestOrigin)) {
+        callback(null, true);
+        return;
       }
-
-      if (configuredOrigins.has(requestOrigin)) {
-        return true;
-      }
-
-      try {
-        const url = new URL(requestOrigin);
-        return (
-          url.protocol === 'https:' &&
-          /^english-exam-prep[^.]*\.vercel\.app$/.test(url.hostname)
-        );
-      } catch {
-        return false;
-      }
+      callback(null, false);
     },
     credentials: true,
   });
