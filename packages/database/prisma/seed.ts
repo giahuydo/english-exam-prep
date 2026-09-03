@@ -280,6 +280,33 @@ async function seedAdmin() {
   return admin;
 }
 
+async function seedDemoUsers() {
+  const passwordHash = await bcrypt.hash('123123', 10);
+  const users = [
+    { email: 'giahuykhtn@gmail.com', name: 'Gia Huy' },
+    { email: 'yoosunguyen@gmail.com', name: 'Yoo Sung Nguyen' },
+  ];
+
+  for (const user of users) {
+    await prisma.user.upsert({
+      where: { email: user.email },
+      update: {
+        passwordHash,
+        name: user.name,
+        role: 'USER',
+        status: 'ACTIVE',
+      },
+      create: {
+        email: user.email,
+        passwordHash,
+        name: user.name,
+        role: 'USER',
+        status: 'ACTIVE',
+      },
+    });
+  }
+}
+
 async function seedHcmusPattern(adminId: string) {
   const examType = await prisma.examType.findUnique({
     where: { code: 'HCMUS_MASTER_ENTRANCE' },
@@ -531,6 +558,7 @@ async function main() {
   await seedTopics();
   await seedQuestionTypes();
   const admin = await seedAdmin();
+  await seedDemoUsers();
   await seedHcmusPattern(admin.id);
   await seedVstepPattern();
   console.log('Seed complete.');
