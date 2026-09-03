@@ -17,7 +17,8 @@ export async function importDataset(prisma: SeedDb, dataset: ExamDataset): Promi
   const questionTypes = new Map((await prisma.questionType.findMany({ where: { code: { in: [...new Set(dataset.questions.map((q) => q.questionTypeCode))] } }, select: { id: true, code: true } })).map((row) => [row.code, row.id]));
   const groups = new Map<string, string>();
   for (const group of dataset.groups ?? []) {
-    const row = await prisma.questionGroup.upsert({ where: { stableKey: `dataset:${dataset.key}:${group.key}` }, update: group, create: { id: stableId(`dataset:group:${dataset.key}:${group.key}`), stableKey: `dataset:${dataset.key}:${group.key}`, ...group } });
+    const { key, ...groupData } = group;
+    const row = await prisma.questionGroup.upsert({ where: { stableKey: `dataset:${dataset.key}:${key}` }, update: groupData, create: { id: stableId(`dataset:group:${dataset.key}:${key}`), stableKey: `dataset:${dataset.key}:${key}`, ...groupData } });
     groups.set(group.key, row.id);
   }
   let optionCount = 0;
