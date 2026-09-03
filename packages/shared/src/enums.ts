@@ -24,7 +24,9 @@ export type ExamFileStatus = (typeof ExamFileStatus)[keyof typeof ExamFileStatus
 export const ExamLevel = {
   B1: 'B1',
   B2: 'B2',
+  C1: 'C1',
   B1_B2: 'B1_B2',
+  B1_C1: 'B1_C1',
 } as const;
 export type ExamLevel = (typeof ExamLevel)[keyof typeof ExamLevel];
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/lib/api-client';
 
@@ -42,7 +43,8 @@ interface SessionShape {
   totalQuestions: number;
 }
 
-export default function PracticeSessionPage({ params }: { params: { sessionId: string } }) {
+export default function PracticeSessionPage() {
+  const params = useParams<{ sessionId: string }>();
   const [session, setSession] = useState<SessionShape | null>(null);
   const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, AnswerResult>>({});

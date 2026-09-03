@@ -38,7 +38,9 @@ enum ExamFileStatus {
 enum ExamLevel {
   B1
   B2
+  C1
   B1_B2
+  B1_C1
 }
 
 enum ExamStatus {

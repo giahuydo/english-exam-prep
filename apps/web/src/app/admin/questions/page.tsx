@@ -26,9 +26,9 @@ export default function AdminQuestionsPage() {
 
   return (
     <section>
-      <h1 className="text-xl font-semibold">Questions</h1>
-      {error ? <p className="mt-2 text-red-600">{error}</p> : null}
-      <table className="mt-4 w-full text-sm">
+      <div className="mb-6 flex items-end justify-between"><div><p className="text-xs font-bold uppercase tracking-widest text-blue-600">Content library</p><h1 className="mt-1 text-3xl font-bold text-white">Questions</h1><p className="mt-2 text-sm text-slate-400">Browse, review and refine your question bank.</p></div><button className="min-h-10 rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white">+ New question</button></div>
+      {error ? <p className="mt-2 text-red-400">{error}</p> : null}
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white"><table className="w-full text-sm">
         <thead className="bg-gray-100 text-left">
           <tr>
             <th className="p-2">Content</th>
@@ -55,7 +55,7 @@ export default function AdminQuestionsPage() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table></div>
     </section>
   );
 }

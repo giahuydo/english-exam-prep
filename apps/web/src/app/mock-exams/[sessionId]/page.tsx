@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/lib/api-client';
 
@@ -41,7 +42,8 @@ interface MockSessionShape {
   questions?: Array<{ question: MockQuestion }>;
 }
 
-export default function MockExamSessionPage({ params }: { params: { sessionId: string } }) {
+export default function MockExamSessionPage() {
+  const params = useParams<{ sessionId: string }>();
   const [session, setSession] = useState<MockSessionShape | null>(null);
   const [questions, setQuestions] = useState<MockQuestion[]>([]);
   const [answers, setAnswers] = useState<Record<string, AnswerResult>>({});

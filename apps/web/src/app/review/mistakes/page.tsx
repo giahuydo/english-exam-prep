@@ -1,0 +1,2 @@
+import { StudentShell } from '@/components/shells'; import { EmptyState, SectionTitle } from '@/components/ui';
+export default function MistakesPage(){return <StudentShell><SectionTitle eyebrow="Review" title="Your mistake notebook" description="Revisit tricky questions and turn every wrong answer into a useful insight."/><EmptyState title="Your notebook is clear" description="Once you complete a practice session, questions you want to revisit will appear here." href="/practice" action="Start practicing"/></StudentShell>}

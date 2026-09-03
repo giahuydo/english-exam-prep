@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { api } from '@/lib/api-client';
 
 interface QuestionDetail {
@@ -28,7 +29,8 @@ interface QuestionDetail {
   }>;
 }
 
-export default function AdminQuestionEditor({ params }: { params: { id: string } }) {
+export default function AdminQuestionEditor() {
+  const params = useParams<{ id: string }>();
   const [q, setQ] = useState<QuestionDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
