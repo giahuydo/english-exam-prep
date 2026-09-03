@@ -15,6 +15,7 @@ import { PracticeModule } from './modules/practice/practice.module';
 import { StudyPlansModule } from './modules/study-plans/study-plans.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { AiModule } from './ai/ai.module';
+import { LearningModule } from './modules/learning/learning.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { AiModule } from './ai/ai.module';
     QuestionTypesModule,
     PracticeModule,
     StudyPlansModule,
+    LearningModule,
   ],
 })
 export class AppModule {}
