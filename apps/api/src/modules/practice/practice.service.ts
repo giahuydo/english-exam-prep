@@ -1,10 +1,16 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import type { StartSessionDto, SubmitAnswerDto } from '@app/shared';
+import { QuestionSelectorService } from '../learning/question-selector.service';
+import { MasteryService } from '../learning/mastery.service';
 
 @Injectable()
 export class PracticeService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly selector: QuestionSelectorService,
+    private readonly mastery: MasteryService,
+  ) {}
 
   async start(userId: string, dto: StartSessionDto) {
     const session = await this.prisma.quizSession.create({
@@ -17,12 +23,17 @@ export class PracticeService {
       },
     });
 
-    // Pull `totalQuestions` published questions of any type as a first pass.
-    // Later: sample per blueprint items.
-    const questions = await this.prisma.question.findMany({
-      where: { status: 'PUBLISHED' },
-      include: { options: { orderBy: { position: 'asc' } } },
+    const topicIds = dto.topicIds.length || dto.topicId
+      ? [...dto.topicIds, ...(dto.topicId ? [dto.topicId] : [])]
+      : undefined;
+    const questions = await this.selector.select({
+      topicIds,
+      level: dto.level,
+      difficulty: dto.difficulty,
       take: dto.totalQuestions,
+    });
+    await this.prisma.quizSessionQuestion.createMany({
+      data: questions.map((q, position) => ({ quizSessionId: session.id, questionId: q.id, position })),
     });
 
     return { session, questions };
@@ -54,7 +65,7 @@ export class PracticeService {
       }
     }
 
-    return this.prisma.questionAttempt.create({
+    const attempt = await this.prisma.questionAttempt.create({
       data: {
         quizSessionId: sessionId,
         userId,
@@ -67,6 +78,8 @@ export class PracticeService {
         timeSpentSeconds: dto.timeSpentSeconds,
       },
     });
+    if (isCorrect !== null) await this.mastery.recordAttempt(userId, dto.questionId, isCorrect, dto.hintLevelUsed, dto.timeSpentSeconds);
+    return attempt;
   }
 
   async complete(userId: string, sessionId: string) {

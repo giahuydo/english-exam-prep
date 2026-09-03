@@ -410,7 +410,7 @@ model ExamBlueprintItem {
 model QuizSession {
   id             String            @id @default(uuid())
   userId         String            @map("user_id")
-  type           QuizSessionType   @default(PRACTICE)
+  type           QuizSessionType   @default(MIXED_PRACTICE)
   examTypeId     String?           @map("exam_type_id")
   blueprintId    String?           @map("blueprint_id")
   status         QuizSessionStatus @default(IN_PROGRESS)
