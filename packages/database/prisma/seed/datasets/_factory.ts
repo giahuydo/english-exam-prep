@@ -30,6 +30,7 @@ export function mockQuestion(spec: QuestionSpec): DatasetQuestion {
     level: spec.level ?? 'B1_B2',
     difficulty: spec.difficulty ?? 'MEDIUM',
     explanation: spec.explanation ?? 'Review the context and the target skill before choosing the answer.',
+    hint1: spec.hint1 ?? 'Identify the key clue in the sentence before choosing an answer.',
     options,
   };
 }
