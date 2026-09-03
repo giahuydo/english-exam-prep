@@ -1,11 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
+import type { Request } from 'express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-  const allowedOrigins = new Set(
+  const configuredOrigins = new Set(
     (process.env.CORS_ORIGIN ?? '')
       .split(',')
       .map((origin) => origin.trim())
@@ -13,32 +14,24 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: (
-      requestOrigin: string | undefined,
-      callback: (error: Error | null, allow?: boolean) => void,
-    ) => {
-      if (!requestOrigin || allowedOrigins.has(requestOrigin)) {
-        callback(null, true);
-        return;
+    origin: (requestOrigin: string | undefined, _request: Request) => {
+      if (!requestOrigin || requestOrigin === 'http://localhost:3000') {
+        return true;
       }
 
-      let parsedOrigin: URL;
+      if (configuredOrigins.has(requestOrigin)) {
+        return true;
+      }
+
       try {
-        parsedOrigin = new URL(requestOrigin);
+        const url = new URL(requestOrigin);
+        return (
+          url.protocol === 'https:' &&
+          /^english-exam-prep[^.]*\.vercel\.app$/.test(url.hostname)
+        );
       } catch {
-        callback(null, false);
-        return;
+        return false;
       }
-
-      const isVercelOrigin =
-        parsedOrigin.protocol === 'https:' &&
-        /^english-exam-prep[^.]*\.vercel\.app$/.test(parsedOrigin.hostname);
-      const isLocalOrigin =
-        parsedOrigin.protocol === 'http:' &&
-        parsedOrigin.hostname === 'localhost' &&
-        parsedOrigin.port === '3000';
-
-      callback(null, isVercelOrigin || isLocalOrigin);
     },
     credentials: true,
   });
