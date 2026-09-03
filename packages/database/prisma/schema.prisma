@@ -118,6 +118,15 @@ enum QuizSessionStatus {
   IN_PROGRESS
   COMPLETED
   ABANDONED
+  EXPIRED
+}
+
+enum MockExamStatus {
+  NOT_STARTED
+  RUNNING
+  PAUSED
+  SUBMITTED
+  EXPIRED
 }
 
 enum LearningScopeProgressStatus {
@@ -157,6 +166,7 @@ model User {
   uploadedExamFiles ExamFile[]        @relation("UploaderExamFiles")
   createdQuestions  Question[]        @relation("QuestionCreatedBy")
   reviewedQuestions Question[]        @relation("QuestionReviewedBy")
+  hintReveals       HintReveal[]
   quizSessions      QuizSession[]
   questionAttempts  QuestionAttempt[]
   learningProgress  UserLearningScope[]
@@ -348,6 +358,9 @@ model Question {
   hint2                String?            @map("hint_2")
   hint3                String?            @map("hint_3")
   explanation          String?            @db.Text
+  ruleStructure        String?            @map("rule_structure") @db.Text
+  commonMistake        String?            @map("common_mistake") @db.Text
+  example              String?            @db.Text
   status               QuestionStatus     @default(DRAFT)
   aiModel              String?            @map("ai_model")
   aiGenerationMetadata Json?              @map("ai_generation_metadata")
@@ -363,6 +376,7 @@ model Question {
   reviewedBy       User?                 @relation("QuestionReviewedBy", fields: [reviewedById], references: [id])
   options          QuestionOption[]
   topics           QuestionTopic[]
+  hintReveals      HintReveal[]
   attempts         QuestionAttempt[]
   sessionQuestions QuizSessionQuestion[]
 
@@ -539,12 +553,19 @@ model QuizSession {
   correctCount   Int               @default(0) @map("correct_count")
   score          Float             @default(0)
   startedAt      DateTime          @default(now()) @map("started_at")
-  completedAt    DateTime?         @map("completed_at")
+  completedAt         DateTime?         @map("completed_at")
+  mockStatus          MockExamStatus?
+  durationSeconds     Int?              @map("duration_seconds")
+  pausedAt            DateTime?         @map("paused_at")
+  totalPausedSeconds  Int               @default(0) @map("total_paused_seconds")
+  submittedAt         DateTime?         @map("submitted_at")
+  currentQuestionIndex Int              @default(0) @map("current_question_index")
 
   user      User                  @relation(fields: [userId], references: [id])
   examType  ExamType?             @relation(fields: [examTypeId], references: [id])
   blueprint ExamBlueprint?        @relation(fields: [blueprintId], references: [id])
   learningScope LearningScope?     @relation(fields: [learningScopeId], references: [id])
+  hintReveals HintReveal[]
   attempts  QuestionAttempt[]
   questions QuizSessionQuestion[]
 
@@ -606,6 +627,24 @@ model QuizSessionQuestion {
   @@unique([quizSessionId, position])
   @@index([questionId])
   @@map("quiz_session_questions")
+}
+
+model HintReveal {
+  id             String   @id @default(uuid())
+  userId         String   @map("user_id")
+  quizSessionId  String   @map("quiz_session_id")
+  questionId     String   @map("question_id")
+  maxLevel      Int      @default(0) @map("max_level")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizSession QuizSession @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
+  question    Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([quizSessionId, questionId])
+  @@index([userId])
+  @@index([quizSessionId])
+  @@map("hint_reveals")
 }
 
 model QuestionAttempt {
