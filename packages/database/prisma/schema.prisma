@@ -74,6 +74,13 @@ enum ContentRole {
   AI_GENERATED
 }
 
+enum BlueprintProvenance {
+  REAL_EXAM
+  OFFICIAL_SAMPLE
+  RECONSTRUCTED
+  SYNTHETIC_MOCK
+}
+
 enum QuestionDifficulty {
   EASY
   MEDIUM
@@ -111,6 +118,22 @@ enum QuizSessionStatus {
   IN_PROGRESS
   COMPLETED
   ABANDONED
+  EXPIRED
+}
+
+enum MockExamStatus {
+  NOT_STARTED
+  RUNNING
+  PAUSED
+  SUBMITTED
+  EXPIRED
+}
+
+enum LearningScopeProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  PASSED
+  NEEDS_REVIEW
 }
 
 enum StudyPlanStatus {
@@ -143,8 +166,10 @@ model User {
   uploadedExamFiles ExamFile[]        @relation("UploaderExamFiles")
   createdQuestions  Question[]        @relation("QuestionCreatedBy")
   reviewedQuestions Question[]        @relation("QuestionReviewedBy")
+  hintReveals       HintReveal[]
   quizSessions      QuizSession[]
   questionAttempts  QuestionAttempt[]
+  learningProgress  UserLearningScope[]
   userTopicStats    UserTopicStat[]
   studyPlans        StudyPlan[]
 
@@ -205,6 +230,8 @@ model ExamFile {
 
 model Exam {
   id                 String     @id @default(uuid())
+  externalKey        String?    @unique @map("external_key")
+  datasetKey         String?    @unique @map("dataset_key")
   examFileId         String?    @map("exam_file_id")
   examTypeId         String     @map("exam_type_id")
   title              String
@@ -276,8 +303,10 @@ model Topic {
   children        Topic[]             @relation("TopicHierarchy")
   questionTopics  QuestionTopic[]
   blueprintItems  ExamBlueprintItem[]
+  blueprintSlots   BlueprintSlot[]
   userStats       UserTopicStat[]
   studyPlanTopics StudyPlanTopic[]
+  learningScopes  LearningScope[]
 
   @@index([category])
   @@index([parentId])
@@ -297,6 +326,7 @@ model QuestionType {
 
   questions      Question[]
   blueprintItems ExamBlueprintItem[]
+  blueprintSlots BlueprintSlot[]
 
   @@map("question_types")
 }
@@ -313,6 +343,7 @@ model QuestionType {
 
 model Question {
   id                   String             @id @default(uuid())
+  datasetKey           String?            @unique @map("dataset_key")
   examId               String?            @map("exam_id")
   examSectionId        String?            @map("exam_section_id")
   questionTypeId       String             @map("question_type_id")
@@ -327,6 +358,9 @@ model Question {
   hint2                String?            @map("hint_2")
   hint3                String?            @map("hint_3")
   explanation          String?            @db.Text
+  ruleStructure        String?            @map("rule_structure") @db.Text
+  commonMistake        String?            @map("common_mistake") @db.Text
+  example              String?            @db.Text
   status               QuestionStatus     @default(DRAFT)
   aiModel              String?            @map("ai_model")
   aiGenerationMetadata Json?              @map("ai_generation_metadata")
@@ -342,6 +376,7 @@ model Question {
   reviewedBy       User?                 @relation("QuestionReviewedBy", fields: [reviewedById], references: [id])
   options          QuestionOption[]
   topics           QuestionTopic[]
+  hintReveals      HintReveal[]
   attempts         QuestionAttempt[]
   sessionQuestions QuizSessionQuestion[]
 
@@ -391,21 +426,93 @@ model QuestionTopic {
 // ---------------------------------------------------------------------------
 
 model ExamBlueprint {
-  id              String          @id @default(uuid())
-  examTypeId      String          @map("exam_type_id")
+  id              String             @id @default(uuid())
+  externalKey     String?            @unique @map("external_key")
+  examTypeId      String             @map("exam_type_id")
   name            String
   version         String
-  sourceExamCount Int             @default(0) @map("source_exam_count")
-  status          BlueprintStatus @default(DRAFT)
-  createdAt       DateTime        @default(now()) @map("created_at")
-  updatedAt       DateTime        @updatedAt @map("updated_at")
+  source          String?
+  provenance      BlueprintProvenance @default(RECONSTRUCTED)
+  durationMinutes Int?               @map("duration_minutes")
+  totalScore      Float?             @map("total_score")
+  sourceExamCount Int                @default(0) @map("source_exam_count")
+  status          BlueprintStatus    @default(DRAFT)
+  createdAt       DateTime           @default(now()) @map("created_at")
+  updatedAt       DateTime           @updatedAt @map("updated_at")
 
   examType     ExamType            @relation(fields: [examTypeId], references: [id])
   items        ExamBlueprintItem[]
+  sections     BlueprintSection[]
   quizSessions QuizSession[]
 
   @@index([examTypeId])
   @@map("exam_blueprints")
+}
+
+model BlueprintSection {
+  id              String   @id @default(uuid())
+  blueprintId     String   @map("blueprint_id")
+  code            String
+  title           String
+  position        Int
+  instructions    String?
+  durationMinutes Int?     @map("duration_minutes")
+  score           Float?
+
+  blueprint ExamBlueprint @relation(fields: [blueprintId], references: [id], onDelete: Cascade)
+  parts     BlueprintPart[]
+
+  @@unique([blueprintId, code])
+  @@map("blueprint_sections")
+}
+
+model BlueprintPart {
+  id                String   @id @default(uuid())
+  externalKey       String?  @unique @map("external_key")
+  sectionId         String   @map("section_id")
+  code              String
+  title             String
+  position          Int
+  instructions      String?
+  durationMinutes   Int?     @map("duration_minutes")
+  score             Float?
+  questionCount     Int      @map("question_count")
+  groupCount        Int?     @map("group_count")
+  questionsPerGroup Int?     @map("questions_per_group")
+  groupingSemantics String?  @map("grouping_semantics")
+
+  section BlueprintSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  slots   BlueprintSlot[]
+
+  @@unique([sectionId, code])
+  @@map("blueprint_parts")
+}
+
+model BlueprintSlot {
+  id                String             @id @default(uuid())
+  externalKey       String?            @unique @map("external_key")
+  partId            String             @map("part_id")
+  code              String
+  title             String
+  position          Int
+  questionTypeId    String             @map("question_type_id")
+  topicId           String?
+  count             Int
+  level             ExamLevel?
+  difficulty        QuestionDifficulty?
+  groupCount        Int?               @map("group_count")
+  questionsPerGroup Int?               @map("questions_per_group")
+  groupSize         Int?               @map("group_size")
+  groupingSemantics String?            @map("grouping_semantics")
+  sharedStimulus    String?            @map("shared_stimulus")
+  selectionPolicy   Json?              @map("selection_policy")
+
+  part        BlueprintPart @relation(fields: [partId], references: [id], onDelete: Cascade)
+  questionType QuestionType @relation(fields: [questionTypeId], references: [id])
+  topic       Topic?        @relation(fields: [topicId], references: [id])
+
+  @@unique([partId, code])
+  @@map("blueprint_slots")
 }
 
 model ExamBlueprintItem {
@@ -438,22 +545,72 @@ model QuizSession {
   type           QuizSessionType   @default(MIXED_PRACTICE)
   examTypeId     String?           @map("exam_type_id")
   blueprintId    String?           @map("blueprint_id")
+  learningScopeId String?          @map("learning_scope_id")
+  checkpointSize Int?              @map("checkpoint_size")
+  passScore      Int?              @map("pass_score")
   status         QuizSessionStatus @default(IN_PROGRESS)
   totalQuestions Int               @default(0) @map("total_questions")
   correctCount   Int               @default(0) @map("correct_count")
   score          Float             @default(0)
   startedAt      DateTime          @default(now()) @map("started_at")
-  completedAt    DateTime?         @map("completed_at")
+  completedAt         DateTime?         @map("completed_at")
+  mockStatus          MockExamStatus?
+  durationSeconds     Int?              @map("duration_seconds")
+  pausedAt            DateTime?         @map("paused_at")
+  totalPausedSeconds  Int               @default(0) @map("total_paused_seconds")
+  submittedAt         DateTime?         @map("submitted_at")
+  currentQuestionIndex Int              @default(0) @map("current_question_index")
 
   user      User                  @relation(fields: [userId], references: [id])
   examType  ExamType?             @relation(fields: [examTypeId], references: [id])
   blueprint ExamBlueprint?        @relation(fields: [blueprintId], references: [id])
+  learningScope LearningScope?     @relation(fields: [learningScopeId], references: [id])
+  hintReveals HintReveal[]
   attempts  QuestionAttempt[]
   questions QuizSessionQuestion[]
 
   @@index([userId])
   @@index([status])
   @@map("quiz_sessions")
+}
+
+model LearningScope {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  topicId     String
+  parentId    String?
+  lesson      Json?
+  position    Int      @default(0)
+  isActive    Boolean  @default(true) @map("is_active")
+
+  topic       Topic    @relation(fields: [topicId], references: [id])
+  parent      LearningScope? @relation("LearningScopeTree", fields: [parentId], references: [id])
+  children    LearningScope[] @relation("LearningScopeTree")
+  progress    UserLearningScope[]
+  sessions    QuizSession[]
+
+  @@index([topicId])
+  @@index([parentId])
+  @@map("learning_scopes")
+}
+
+model UserLearningScope {
+  id          String                   @id @default(uuid())
+  userId      String                   @map("user_id")
+  scopeId     String                   @map("scope_id")
+  status      LearningScopeProgressStatus @default(NOT_STARTED)
+  lastScore   Int?                     @map("last_score")
+  attemptCount Int                    @default(0) @map("attempt_count")
+  updatedAt   DateTime                 @updatedAt @map("updated_at")
+
+  user  User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scope LearningScope @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, scopeId])
+  @@index([userId])
+  @@map("user_learning_scopes")
 }
 
 model QuizSessionQuestion {
@@ -470,6 +627,24 @@ model QuizSessionQuestion {
   @@unique([quizSessionId, position])
   @@index([questionId])
   @@map("quiz_session_questions")
+}
+
+model HintReveal {
+  id             String   @id @default(uuid())
+  userId         String   @map("user_id")
+  quizSessionId  String   @map("quiz_session_id")
+  questionId     String   @map("question_id")
+  maxLevel      Int      @default(0) @map("max_level")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizSession QuizSession @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
+  question    Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([quizSessionId, questionId])
+  @@index([userId])
+  @@index([quizSessionId])
+  @@map("hint_reveals")
 }
 
 model QuestionAttempt {
@@ -492,6 +667,7 @@ model QuestionAttempt {
 
   @@index([quizSessionId])
   @@index([userId])
+  @@unique([quizSessionId, questionId])
   @@index([questionId])
   @@map("question_attempts")
 }
@@ -509,9 +685,11 @@ model UserTopicStat {
   accuracy       Float     @default(0)
   hintCount      Int       @default(0) @map("hint_count")
   avgTimeSeconds Float     @default(0) @map("avg_time_seconds")
-  masteryScore   Float     @default(0) @map("mastery_score")
-  lastAttemptAt  DateTime? @map("last_attempt_at")
-  updatedAt      DateTime  @updatedAt @map("updated_at")
+  masteryScore       Float     @default(0) @map("mastery_score")
+  recentMistakeCount Int       @default(0) @map("recent_mistake_count")
+  lastAttemptAt      DateTime? @map("last_attempt_at")
+  nextReviewAt       DateTime? @map("next_review_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
 
   user  User  @relation(fields: [userId], references: [id])
   topic Topic @relation(fields: [topicId], references: [id])

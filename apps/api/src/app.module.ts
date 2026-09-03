@@ -18,7 +18,9 @@ import { StudyPlansModule } from './modules/study-plans/study-plans.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { AiModule } from './ai/ai.module';
 import { LearningModule } from './modules/learning/learning.module';
+import { LearningScopesModule } from './modules/learning/learning-scopes.module';
 import { HealthController } from './health.controller';
+import { ResultsModule } from './modules/results/results.module';
 
 @Module({
   controllers: [HealthController],
@@ -42,6 +44,8 @@ import { HealthController } from './health.controller';
     MockExamsModule,
     StudyPlansModule,
     LearningModule,
+    LearningScopesModule,
+    ResultsModule,
   ],
 })
 export class AppModule {}

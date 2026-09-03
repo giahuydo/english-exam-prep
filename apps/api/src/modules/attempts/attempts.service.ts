@@ -12,7 +12,7 @@ export class AttemptsService {
 
   listForSession(userId: string, sessionId: string) {
     return this.prisma.questionAttempt.findMany({
-      where: { userId, quizSessionId: sessionId },
+      where: { userId, quizSessionId: sessionId, quizSession: { userId } },
       include: {
         question: {
           include: {

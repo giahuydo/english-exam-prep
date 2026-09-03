@@ -5,6 +5,27 @@ import { QuestionSelectorService } from '../learning/question-selector.service';
 import { MasteryService } from '../learning/mastery.service';
 import { MistakeReviewService } from '../learning/mistake-review.service';
 
+interface PracticeQuestionOption {
+  id: string;
+  optionKey: string;
+  content: string;
+}
+
+interface PracticeQuestionRecord {
+  id: string;
+  content: string;
+  instruction: string | null;
+  context: string | null;
+  level: string;
+  difficulty: string;
+  questionType: unknown;
+  topics: unknown;
+  hint1: string | null;
+  hint2: string | null;
+  hint3: string | null;
+  options: PracticeQuestionOption[];
+}
+
 export interface AnswerResponse {
   attemptId: string;
   isCorrect: boolean | null;
@@ -12,6 +33,9 @@ export interface AnswerResponse {
   correctOptionId?: string | null;
   correctOptionKey?: string | null;
   explanation: string | null;
+  ruleStructure: string | null;
+  commonMistake: string | null;
+  example: string | null;
   wrongOptionExplanations: Array<{
     optionId: string;
     optionKey: string;
@@ -28,6 +52,26 @@ export class PracticeService {
     private readonly mastery: MasteryService,
     private readonly mistakes: MistakeReviewService,
   ) {}
+
+  private toPracticeQuestion(question: PracticeQuestionRecord) {
+    return {
+      id: question.id,
+      content: question.content,
+      instruction: question.instruction,
+      context: question.context,
+      level: question.level,
+      difficulty: question.difficulty,
+      questionType: question.questionType,
+      topics: question.topics,
+      options: question.options.map((option) => ({        id: option.id,
+        optionKey: option.optionKey,
+        content: option.content,
+      })),
+      hint1: question.hint1,
+      hint2: question.hint2,
+      hint3: question.hint3,
+    };
+  }
 
   async start(userId: string, dto: StartSessionDto) {
     const session = await this.prisma.quizSession.create({
@@ -74,16 +118,26 @@ export class PracticeService {
       });
     }
 
-    return { session, questions };
+    return { session, questions: questions.map((question) => this.toPracticeQuestion(question)) };
   }
 
   async getById(userId: string, sessionId: string) {
     const s = await this.prisma.quizSession.findUnique({
       where: { id: sessionId },
-      include: { attempts: true },
+      include: {
+        attempts: true,
+        questions: {
+          orderBy: { position: 'asc' },
+          include: {
+            question: {
+              include: { options: { orderBy: { position: 'asc' } }, topics: { include: { topic: true } }, questionType: true },
+            },
+          },
+        },
+      },
     });
     if (!s || s.userId !== userId) throw new NotFoundException('Session not found');
-    return s;
+    return { ...s, questions: s.questions.map((row) => ({ ...row, question: this.toPracticeQuestion(row.question) })) };
   }
 
   async submitAnswer(
@@ -94,6 +148,17 @@ export class PracticeService {
     const session = await this.prisma.quizSession.findUnique({ where: { id: sessionId } });
     if (!session || session.userId !== userId) throw new NotFoundException('Session not found');
     if (session.status !== 'IN_PROGRESS') throw new BadRequestException('Session not active');
+
+    const sessionQuestion = await this.prisma.quizSessionQuestion.findUnique({
+      where: { quizSessionId_questionId: { quizSessionId: sessionId, questionId: dto.questionId } },
+    });
+    if (!sessionQuestion) throw new BadRequestException('Question is not in this session');
+
+    const existingAttempt = await this.prisma.questionAttempt.findFirst({
+      where: { quizSessionId: sessionId, questionId: dto.questionId },
+      orderBy: { createdAt: 'asc' },
+    });
+    if (existingAttempt) return this.buildAnswerResponse(existingAttempt.id, existingAttempt.isCorrect, existingAttempt.selectedOptionId, existingAttempt.hintLevelUsed, dto.questionId);
 
     // Load question + all options so we can build the deterministic explanation
     // response without another round-trip.
@@ -133,6 +198,15 @@ export class PracticeService {
       );
     }
 
+    return this.buildAnswerResponse(attempt.id, isCorrect, dto.selectedOptionId ?? null, dto.hintLevelUsed, dto.questionId);
+  }
+
+  private async buildAnswerResponse(attemptId: string, isCorrect: boolean | null, selectedOptionId: string | null | undefined, hintLevelUsed: number, questionId: string): Promise<AnswerResponse> {
+    const question = await this.prisma.question.findUnique({
+      where: { id: questionId },
+      include: { options: { orderBy: { position: 'asc' } } },
+    });
+    if (!question) throw new NotFoundException('Question not found');
     const correctOption = question.options.find((o) => o.isCorrect);
     // Only surface explanations for INCORRECT options (i.e. the "why" for
     // wrong choices). Callers filter further by whether the user picked one.
@@ -145,14 +219,17 @@ export class PracticeService {
       }));
 
     return {
-      attemptId: attempt.id,
+      attemptId,
       isCorrect,
-      selectedOptionId: dto.selectedOptionId ?? null,
+      selectedOptionId: selectedOptionId ?? null,
       correctOptionId: correctOption?.id ?? null,
       correctOptionKey: correctOption?.optionKey ?? null,
       explanation: question.explanation ?? null,
       wrongOptionExplanations,
-      hintLevelUsed: dto.hintLevelUsed,
+      hintLevelUsed,
+      ruleStructure: question.ruleStructure ?? null,
+      commonMistake: question.commonMistake ?? null,
+      example: question.example ?? null,
     };
   }
 
@@ -166,14 +243,27 @@ export class PracticeService {
     if (!session || session.userId !== userId) throw new NotFoundException('Session not found');
     if (session.status !== 'IN_PROGRESS') throw new BadRequestException('Session not active');
 
-    const question = await this.prisma.question.findUnique({ where: { id: questionId } });
-    if (!question) throw new NotFoundException('Question not found');
+    const sessionQuestion = await this.prisma.quizSessionQuestion.findUnique({
+      where: { quizSessionId_questionId: { quizSessionId: sessionId, questionId } },
+      include: { question: true },
+    });
+    if (!sessionQuestion) throw new BadRequestException('Question is not in this session');
 
-    const hint = hintLevel === 1 ? question.hint1 : hintLevel === 2 ? question.hint2 : question.hint3;
-    // Hints are read-only reveals. The `hint_level_used` on QuestionAttempt is
-    // set when the user actually submits — this endpoint intentionally does
-    // NOT mutate any prior attempt (attempts are created ONLY on submit).
-    return { hintLevel, hint: hint ?? null };
+    const current = await this.prisma.hintReveal.findUnique({
+      where: { quizSessionId_questionId: { quizSessionId: sessionId, questionId } },
+    });
+    if (hintLevel > (current?.maxLevel ?? 0) + 1) {
+      throw new BadRequestException('Reveal hints in order');
+    }
+    const reveal = await this.prisma.hintReveal.upsert({
+      where: { quizSessionId_questionId: { quizSessionId: sessionId, questionId } },
+      create: { quizSessionId: sessionId, userId, questionId, maxLevel: hintLevel },
+      update: { maxLevel: { set: Math.max(hintLevel, current?.maxLevel ?? 0) } },
+    });
+    const question = sessionQuestion.question;
+    const effectiveLevel = reveal.maxLevel;
+    const hint = effectiveLevel === 1 ? question.hint1 : effectiveLevel === 2 ? question.hint2 : question.hint3;
+    return { hintLevel: effectiveLevel, hint: hint ?? null };
   }
 
   async complete(userId: string, sessionId: string) {

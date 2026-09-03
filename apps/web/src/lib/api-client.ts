@@ -83,11 +83,17 @@ export const api = {
     examTypeId: string;
     blueprintId?: string;
     totalQuestions?: number;
+    durationSeconds?: number;
   }) =>
     apiFetch<{ session: { id: string }; questions: unknown[]; blueprint: unknown }>(
       '/mock-exams',
       { method: 'POST', body: JSON.stringify(payload) },
     ),
+  getMockState: (id: string) => apiFetch<unknown>(`/mock-exams/${id}`),
+  saveMockAnswer: (id: string, payload: { questionId: string; selectedOptionId?: string; answerText?: string; currentQuestionIndex?: number }) => apiFetch<unknown>(`/mock-exams/${id}/answers`, { method: 'POST', body: JSON.stringify(payload) }),
+  pauseMock: (id: string) => apiFetch<unknown>(`/mock-exams/${id}/pause`, { method: 'POST' }),
+  resumeMock: (id: string) => apiFetch<unknown>(`/mock-exams/${id}/resume`, { method: 'POST' }),
+  submitMock: (id: string) => apiFetch<unknown>(`/mock-exams/${id}/submit`, { method: 'POST' }),
   startPractice: (payload: StartPracticePayload = {}) =>
     apiFetch<{ session: { id: string }; questions: unknown[] }>('/practice/sessions', {
       method: 'POST',
@@ -117,6 +123,9 @@ export const api = {
       correctOptionId?: string | null;
       correctOptionKey?: string | null;
       explanation: string | null;
+      ruleStructure: string | null;
+      commonMistake: string | null;
+      example: string | null;
       wrongOptionExplanations: Array<{
         optionId: string;
         optionKey: string;
