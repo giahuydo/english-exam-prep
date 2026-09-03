@@ -12,6 +12,8 @@ import { TopicsModule } from './modules/topics/topics.module';
 import { QuestionsModule } from './modules/questions/questions.module';
 import { QuestionTypesModule } from './modules/question-types/question-types.module';
 import { PracticeModule } from './modules/practice/practice.module';
+import { AttemptsModule } from './modules/attempts/attempts.module';
+import { MockExamsModule } from './modules/mock-exams/mock-exams.module';
 import { StudyPlansModule } from './modules/study-plans/study-plans.module';
 import { StorageModule } from './modules/storage/storage.module';
 import { AiModule } from './ai/ai.module';
@@ -34,6 +36,8 @@ import { LearningModule } from './modules/learning/learning.module';
     QuestionsModule,
     QuestionTypesModule,
     PracticeModule,
+    AttemptsModule,
+    MockExamsModule,
     StudyPlansModule,
     LearningModule,
   ],

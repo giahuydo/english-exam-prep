@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { PracticeService } from './practice.service';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { CurrentUser, AuthUser } from '../../auth/current-user.decorator';
-import { StartSessionDto, SubmitAnswerDto } from '@app/shared';
+import { RevealHintDto, StartSessionDto, SubmitAnswerDto } from '@app/shared';
 import { ZodValidationPipe } from '../../common/zod-validation.pipe';
 
 @Controller('practice/sessions')
@@ -30,6 +30,16 @@ export class PracticeController {
     @Body(new ZodValidationPipe(SubmitAnswerDto)) dto: SubmitAnswerDto,
   ) {
     return this.svc.submitAnswer(user.id, id, dto);
+  }
+
+  @Post(':id/questions/:questionId/hint')
+  hint(
+    @CurrentUser() user: AuthUser,
+    @Param('id') id: string,
+    @Param('questionId') questionId: string,
+    @Body(new ZodValidationPipe(RevealHintDto)) dto: RevealHintDto,
+  ) {
+    return this.svc.revealHint(user.id, id, questionId, dto.hintLevel as 1 | 2 | 3);
   }
 
   @Post(':id/complete')

@@ -20,6 +20,7 @@ export class AuthService {
         email: dto.email,
         passwordHash,
         name: dto.name,
+        currentExamTypeId: dto.examTypeId,
       },
     });
     return this.issueToken(user.id, user.email, user.role as UserRole);

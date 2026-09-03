@@ -63,6 +63,14 @@ enum QuestionOrigin {
   MANUAL
 }
 
+enum ContentRole {
+  EXAMPLE
+  PRACTICE
+  MOCK_EXAM
+  REAL_EXAM
+  AI_GENERATED
+}
+
 enum QuestionDifficulty {
   EASY
   MEDIUM
@@ -93,6 +101,7 @@ enum QuizSessionType {
   MIXED_PRACTICE
   CUSTOM_PRACTICE
   MOCK_EXAM
+  MISTAKE_REVIEW
 }
 
 enum QuizSessionStatus {
@@ -117,18 +126,20 @@ enum StudyPlanGeneratedBy {
 // ---------------------------------------------------------------------------
 
 model User {
-  id            String     @id @default(uuid())
-  email         String     @unique
-  passwordHash  String     @map("password_hash")
-  name          String
-  role          UserRole   @default(USER)
-  status        UserStatus @default(ACTIVE)
-  createdAt     DateTime   @default(now()) @map("created_at")
-  updatedAt     DateTime   @updatedAt @map("updated_at")
+  id                String     @id @default(uuid())
+  email             String     @unique
+  passwordHash      String     @map("password_hash")
+  name              String
+  role              UserRole   @default(USER)
+  status            UserStatus @default(ACTIVE)
+  currentExamTypeId String?    @map("current_exam_type_id")
+  createdAt         DateTime   @default(now()) @map("created_at")
+  updatedAt         DateTime   @updatedAt @map("updated_at")
 
-  uploadedExamFiles ExamFile[]         @relation("UploaderExamFiles")
-  createdQuestions  Question[]         @relation("QuestionCreatedBy")
-  reviewedQuestions Question[]         @relation("QuestionReviewedBy")
+  currentExamType   ExamType?         @relation("UserCurrentExamType", fields: [currentExamTypeId], references: [id])
+  uploadedExamFiles ExamFile[]        @relation("UploaderExamFiles")
+  createdQuestions  Question[]        @relation("QuestionCreatedBy")
+  reviewedQuestions Question[]        @relation("QuestionReviewedBy")
   quizSessions      QuizSession[]
   questionAttempts  QuestionAttempt[]
   userTopicStats    UserTopicStat[]
@@ -142,18 +153,19 @@ model User {
 // ---------------------------------------------------------------------------
 
 model ExamType {
-  id          String   @id @default(uuid())
-  code        String   @unique
+  id          String     @id @default(uuid())
+  code        String     @unique
   name        String
   description String?
   levelFrom   ExamLevel? @map("level_from")
   levelTo     ExamLevel? @map("level_to")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
 
-  exams         Exam[]
-  blueprints    ExamBlueprint[]
-  quizSessions  QuizSession[]
+  exams              Exam[]
+  blueprints         ExamBlueprint[]
+  quizSessions       QuizSession[]
+  currentTargetUsers User[]          @relation("UserCurrentExamType")
 
   @@map("exam_types")
 }
@@ -177,7 +189,7 @@ model ExamFile {
   createdAt       DateTime       @default(now()) @map("created_at")
   updatedAt       DateTime       @updatedAt @map("updated_at")
 
-  uploader User    @relation("UploaderExamFiles", fields: [uploadedById], references: [id])
+  uploader User   @relation("UploaderExamFiles", fields: [uploadedById], references: [id])
   exams    Exam[]
 
   @@index([status])
@@ -225,6 +237,9 @@ model ExamSection {
   name            String
   position        Int
   questionCount   Int?     @map("question_count")
+  partCount       Int?     @map("part_count")
+  passageCount    Int?     @map("passage_count")
+  taskCount       Int?     @map("task_count")
   score           Float?
   durationMinutes Int?     @map("duration_minutes")
   createdAt       DateTime @default(now()) @map("created_at")
@@ -254,12 +269,12 @@ model Topic {
   createdAt DateTime      @default(now()) @map("created_at")
   updatedAt DateTime      @updatedAt @map("updated_at")
 
-  parent           Topic?              @relation("TopicHierarchy", fields: [parentId], references: [id])
-  children         Topic[]             @relation("TopicHierarchy")
-  questionTopics   QuestionTopic[]
-  blueprintItems   ExamBlueprintItem[]
-  userStats        UserTopicStat[]
-  studyPlanTopics  StudyPlanTopic[]
+  parent          Topic?              @relation("TopicHierarchy", fields: [parentId], references: [id])
+  children        Topic[]             @relation("TopicHierarchy")
+  questionTopics  QuestionTopic[]
+  blueprintItems  ExamBlueprintItem[]
+  userStats       UserTopicStat[]
+  studyPlanTopics StudyPlanTopic[]
 
   @@index([category])
   @@index([parentId])
@@ -286,38 +301,45 @@ model QuestionType {
 // ---------------------------------------------------------------------------
 // Question
 // ---------------------------------------------------------------------------
+// INVARIANT: `questions` is ONE global question bank shared by all users. It
+// is intentionally NOT partitioned per-user, per-exam-type, or per-level.
+// The user's `current_exam_type_id` and the question's own `level` +
+// classification (`question_topics`, `question_type`) are separate axes that
+// the practice/mock-exam selectors combine at runtime to filter this shared
+// pool. Do NOT add a `user_id` FK here.
 
 model Question {
-  id                    String             @id @default(uuid())
-  examId                String?            @map("exam_id")
-  examSectionId         String?            @map("exam_section_id")
-  questionTypeId        String             @map("question_type_id")
-  origin                QuestionOrigin     @default(ORIGINAL)
-  content               String             @db.Text
-  instruction           String?            @db.Text
-  context               String?            @db.Text
-  level                 ExamLevel
-  difficulty            QuestionDifficulty @default(MEDIUM)
-  hint1                 String?            @map("hint_1")
-  hint2                 String?            @map("hint_2")
-  hint3                 String?            @map("hint_3")
-  explanation           String?            @db.Text
-  status                QuestionStatus     @default(DRAFT)
-  aiModel               String?            @map("ai_model")
-  aiGenerationMetadata  Json?              @map("ai_generation_metadata")
-  createdById           String?            @map("created_by")
-  reviewedById          String?            @map("reviewed_by")
-  createdAt             DateTime           @default(now()) @map("created_at")
-  updatedAt             DateTime           @updatedAt @map("updated_at")
+  id                   String             @id @default(uuid())
+  examId               String?            @map("exam_id")
+  examSectionId        String?            @map("exam_section_id")
+  questionTypeId       String             @map("question_type_id")
+  origin               QuestionOrigin     @default(ORIGINAL)
+  contentRole          ContentRole        @default(PRACTICE) @map("content_role")
+  content              String             @db.Text
+  instruction          String?            @db.Text
+  context              String?            @db.Text
+  level                ExamLevel
+  difficulty           QuestionDifficulty @default(MEDIUM)
+  hint1                String?            @map("hint_1")
+  hint2                String?            @map("hint_2")
+  hint3                String?            @map("hint_3")
+  explanation          String?            @db.Text
+  status               QuestionStatus     @default(DRAFT)
+  aiModel              String?            @map("ai_model")
+  aiGenerationMetadata Json?              @map("ai_generation_metadata")
+  createdById          String?            @map("created_by")
+  reviewedById         String?            @map("reviewed_by")
+  createdAt            DateTime           @default(now()) @map("created_at")
+  updatedAt            DateTime           @updatedAt @map("updated_at")
 
-  exam         Exam?             @relation(fields: [examId], references: [id])
-  examSection  ExamSection?      @relation(fields: [examSectionId], references: [id])
-  questionType QuestionType      @relation(fields: [questionTypeId], references: [id])
-  createdBy    User?             @relation("QuestionCreatedBy", fields: [createdById], references: [id])
-  reviewedBy   User?             @relation("QuestionReviewedBy", fields: [reviewedById], references: [id])
-  options      QuestionOption[]
-  topics       QuestionTopic[]
-  attempts     QuestionAttempt[]
+  exam             Exam?                 @relation(fields: [examId], references: [id])
+  examSection      ExamSection?          @relation(fields: [examSectionId], references: [id])
+  questionType     QuestionType          @relation(fields: [questionTypeId], references: [id])
+  createdBy        User?                 @relation("QuestionCreatedBy", fields: [createdById], references: [id])
+  reviewedBy       User?                 @relation("QuestionReviewedBy", fields: [reviewedById], references: [id])
+  options          QuestionOption[]
+  topics           QuestionTopic[]
+  attempts         QuestionAttempt[]
   sessionQuestions QuizSessionQuestion[]
 
   @@index([status])
@@ -366,14 +388,14 @@ model QuestionTopic {
 // ---------------------------------------------------------------------------
 
 model ExamBlueprint {
-  id                String          @id @default(uuid())
-  examTypeId        String          @map("exam_type_id")
-  name              String
-  version           String
-  sourceExamCount   Int             @default(0) @map("source_exam_count")
-  status            BlueprintStatus @default(DRAFT)
-  createdAt         DateTime        @default(now()) @map("created_at")
-  updatedAt         DateTime        @updatedAt @map("updated_at")
+  id              String          @id @default(uuid())
+  examTypeId      String          @map("exam_type_id")
+  name            String
+  version         String
+  sourceExamCount Int             @default(0) @map("source_exam_count")
+  status          BlueprintStatus @default(DRAFT)
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
 
   examType     ExamType            @relation(fields: [examTypeId], references: [id])
   items        ExamBlueprintItem[]
@@ -420,9 +442,9 @@ model QuizSession {
   startedAt      DateTime          @default(now()) @map("started_at")
   completedAt    DateTime?         @map("completed_at")
 
-  user      User              @relation(fields: [userId], references: [id])
-  examType  ExamType?         @relation(fields: [examTypeId], references: [id])
-  blueprint ExamBlueprint?    @relation(fields: [blueprintId], references: [id])
+  user      User                  @relation(fields: [userId], references: [id])
+  examType  ExamType?             @relation(fields: [examTypeId], references: [id])
+  blueprint ExamBlueprint?        @relation(fields: [blueprintId], references: [id])
   attempts  QuestionAttempt[]
   questions QuizSessionQuestion[]
 
@@ -439,7 +461,7 @@ model QuizSessionQuestion {
   createdAt     DateTime @default(now()) @map("created_at")
 
   quizSession QuizSession @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
-  question   Question    @relation(fields: [questionId], references: [id])
+  question    Question    @relation(fields: [questionId], references: [id])
 
   @@unique([quizSessionId, questionId])
   @@unique([quizSessionId, position])
@@ -448,17 +470,17 @@ model QuizSessionQuestion {
 }
 
 model QuestionAttempt {
-  id                String   @id @default(uuid())
-  quizSessionId     String   @map("quiz_session_id")
-  userId            String   @map("user_id")
-  questionId        String   @map("question_id")
-  selectedOptionId  String?  @map("selected_option_id")
-  answerText        String?  @map("answer_text")
-  isCorrect         Boolean? @map("is_correct")
-  score             Float?
-  hintLevelUsed     Int      @default(0) @map("hint_level_used")
-  timeSpentSeconds  Int?     @map("time_spent_seconds")
-  createdAt         DateTime @default(now()) @map("created_at")
+  id               String   @id @default(uuid())
+  quizSessionId    String   @map("quiz_session_id")
+  userId           String   @map("user_id")
+  questionId       String   @map("question_id")
+  selectedOptionId String?  @map("selected_option_id")
+  answerText       String?  @map("answer_text")
+  isCorrect        Boolean? @map("is_correct")
+  score            Float?
+  hintLevelUsed    Int      @default(0) @map("hint_level_used")
+  timeSpentSeconds Int?     @map("time_spent_seconds")
+  createdAt        DateTime @default(now()) @map("created_at")
 
   quizSession    QuizSession     @relation(fields: [quizSessionId], references: [id], onDelete: Cascade)
   user           User            @relation(fields: [userId], references: [id])
@@ -476,17 +498,17 @@ model QuestionAttempt {
 // ---------------------------------------------------------------------------
 
 model UserTopicStat {
-  id              String    @id @default(uuid())
-  userId          String    @map("user_id")
-  topicId         String    @map("topic_id")
-  attemptCount    Int       @default(0) @map("attempt_count")
-  correctCount    Int       @default(0) @map("correct_count")
-  accuracy        Float     @default(0)
-  hintCount       Int       @default(0) @map("hint_count")
-  avgTimeSeconds  Float     @default(0) @map("avg_time_seconds")
-  masteryScore    Float     @default(0) @map("mastery_score")
-  lastAttemptAt   DateTime? @map("last_attempt_at")
-  updatedAt       DateTime  @updatedAt @map("updated_at")
+  id             String    @id @default(uuid())
+  userId         String    @map("user_id")
+  topicId        String    @map("topic_id")
+  attemptCount   Int       @default(0) @map("attempt_count")
+  correctCount   Int       @default(0) @map("correct_count")
+  accuracy       Float     @default(0)
+  hintCount      Int       @default(0) @map("hint_count")
+  avgTimeSeconds Float     @default(0) @map("avg_time_seconds")
+  masteryScore   Float     @default(0) @map("mastery_score")
+  lastAttemptAt  DateTime? @map("last_attempt_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
 
   user  User  @relation(fields: [userId], references: [id])
   topic Topic @relation(fields: [topicId], references: [id])
@@ -518,15 +540,15 @@ model StudyPlan {
 }
 
 model StudyPlanTopic {
-  id                    String   @id @default(uuid())
-  studyPlanId           String   @map("study_plan_id")
-  topicId               String   @map("topic_id")
-  priority              Int      @default(0)
-  targetQuestionCount   Int      @default(0) @map("target_question_count")
-  reason                String?
-  status                String   @default("PENDING")
-  createdAt             DateTime @default(now()) @map("created_at")
-  updatedAt             DateTime @updatedAt @map("updated_at")
+  id                  String   @id @default(uuid())
+  studyPlanId         String   @map("study_plan_id")
+  topicId             String   @map("topic_id")
+  priority            Int      @default(0)
+  targetQuestionCount Int      @default(0) @map("target_question_count")
+  reason              String?
+  status              String   @default("PENDING")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
 
   studyPlan StudyPlan @relation(fields: [studyPlanId], references: [id], onDelete: Cascade)
   topic     Topic     @relation(fields: [topicId], references: [id])

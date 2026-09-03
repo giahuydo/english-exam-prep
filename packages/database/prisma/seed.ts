@@ -1,9 +1,10 @@
 /**
  * Seed baseline domain data:
- *  - exam types (HCMUS, VSTEP, CUSTOM)
- *  - topic taxonomy (Grammar / Vocabulary / Reading + hierarchies)
+ *  - exam types (HCMUS, B1, B2, CUSTOM)
+ *  - topic taxonomy (Grammar / Vocabulary / Reading / Listening / Speaking)
  *  - question types
- *  - HCMUS canonical exam pattern + sections + draft blueprint
+ *  - HCMUS canonical exam pattern + sections + draft blueprint (with items
+ *    across all four sections, not just Grammar)
  *  - one admin user
  */
 import bcrypt from 'bcryptjs';
@@ -75,21 +76,85 @@ const topicSeeds: TopicSeed[] = [
   { code: 'REFERENCE', name: 'Reference', category: 'READING', sortOrder: 4 },
   { code: 'VOCAB_IN_CONTEXT_READING', name: 'Vocabulary in Context (Reading)', category: 'READING', sortOrder: 5 },
   { code: 'PURPOSE', name: 'Purpose', category: 'READING', sortOrder: 6 },
+
+  // VSTEP listening forms and skills
+  { code: 'VSTEP_LISTENING_FORMS', name: 'VSTEP Listening Parts', category: 'LISTENING', sortOrder: 10 },
+  { code: 'ANNOUNCEMENT_INSTRUCTION', name: 'Announcement / Instruction', category: 'LISTENING', parentCode: 'VSTEP_LISTENING_FORMS', sortOrder: 1 },
+  { code: 'CONVERSATION', name: 'Conversation', category: 'LISTENING', parentCode: 'VSTEP_LISTENING_FORMS', sortOrder: 2 },
+  { code: 'TALK_LECTURE', name: 'Talk / Lecture', category: 'LISTENING', parentCode: 'VSTEP_LISTENING_FORMS', sortOrder: 3 },
+  { code: 'LISTENING_MAIN_IDEA', name: 'Main Idea (Listening)', category: 'LISTENING', sortOrder: 11 },
+  { code: 'DETAIL_INFORMATION', name: 'Detail Information', category: 'LISTENING', sortOrder: 12 },
+  { code: 'SPEAKER_INTENT_OR_PURPOSE', name: 'Speaker Intent or Purpose', category: 'LISTENING', sortOrder: 13 },
+  { code: 'ATTITUDE_OR_OPINION', name: 'Attitude or Opinion', category: 'LISTENING', sortOrder: 14 },
+  { code: 'LISTENING_INFERENCE', name: 'Inference (Listening)', category: 'LISTENING', sortOrder: 15 },
+
+  // VSTEP reading skills
+  { code: 'DETAIL_INFORMATION_READING', name: 'Detail Information (Reading)', category: 'READING', sortOrder: 7 },
+  { code: 'VOCABULARY_IN_CONTEXT', name: 'Vocabulary in Context', category: 'READING', sortOrder: 8 },
+  { code: 'READING_MAIN_IDEA', name: 'Main Idea (Reading)', category: 'READING', sortOrder: 9 },
+  { code: 'SENTENCE_INSERTION', name: 'Sentence Insertion', category: 'READING', sortOrder: 9 },
+  { code: 'SENTENCE_MEANING', name: 'Sentence Meaning', category: 'READING', sortOrder: 10 },
+  { code: 'AUTHOR_PURPOSE', name: 'Author Purpose', category: 'READING', sortOrder: 11 },
+
+  // VSTEP writing/speaking dimensions and topics
+  { code: 'LETTER_EMAIL', name: 'Letter / Email', category: 'WRITING', sortOrder: 1 },
+  { code: 'AGREE_DISAGREE', name: 'Agree / Disagree', category: 'WRITING', sortOrder: 2 },
+  { code: 'DISCUSS_BOTH_SIDES', name: 'Discuss Both Sides', category: 'WRITING', sortOrder: 3 },
+  { code: 'PROBLEM_SOLUTION', name: 'Problem / Solution', category: 'WRITING', sortOrder: 4 },
+  { code: 'SOCIAL_INTERACTION', name: 'Social Interaction', category: 'SPEAKING', sortOrder: 3 },
+  { code: 'SOLUTION_DISCUSSION', name: 'Solution Discussion', category: 'SPEAKING', sortOrder: 4 },
+  { code: 'TOPIC_DEVELOPMENT', name: 'Topic Development', category: 'SPEAKING', sortOrder: 5 },
+  { code: 'HOMETOWN', name: 'Hometown', category: 'SPEAKING', sortOrder: 6 },
+  { code: 'HOLIDAYS', name: 'Holidays', category: 'SPEAKING', sortOrder: 7 },
+  { code: 'JOB', name: 'Job', category: 'SPEAKING', sortOrder: 8 },
+  { code: 'TRANSPORT', name: 'Transport', category: 'SPEAKING', sortOrder: 9 },
+  { code: 'NEWS_NEWSPAPERS', name: 'News / Newspapers', category: 'SPEAKING', sortOrder: 10 },
+  { code: 'SOUND_NOISE', name: 'Sound / Noise', category: 'SPEAKING', sortOrder: 11 },
+
+  // Existing HCMUS-specific forms
+  // Listening
+  { code: 'LISTEN_SHORT_CONVERSATION', name: 'Short Conversation', category: 'LISTENING', sortOrder: 1 },
+  { code: 'LISTEN_LONG_CONVERSATION', name: 'Long Conversation', category: 'LISTENING', sortOrder: 2 },
+  { code: 'LISTEN_TALK', name: 'Talk / Monologue', category: 'LISTENING', sortOrder: 3 },
+
+  // Speaking
+  { code: 'SPEAK_SELF_INTRODUCTION', name: 'Self Introduction', category: 'SPEAKING', sortOrder: 1 },
+  { code: 'SPEAK_GUIDED_CONVERSATION', name: 'Guided Conversation', category: 'SPEAKING', sortOrder: 2 },
 ];
 
 const questionTypeSeeds = [
+  // Grammar
   { code: 'MCQ_SINGLE_BLANK', name: 'MCQ Single Blank', category: 'GRAMMAR' },
   { code: 'SENTENCE_COMPLETION', name: 'Sentence Completion', category: 'GRAMMAR' },
   { code: 'CLOZE_TEST', name: 'Cloze Test', category: 'GRAMMAR' },
   { code: 'SENTENCE_TRANSFORMATION', name: 'Sentence Transformation', category: 'GRAMMAR' },
+  // Vocabulary
   { code: 'VOCABULARY_MCQ', name: 'Vocabulary MCQ', category: 'VOCABULARY' },
+  { code: 'VOCABULARY', name: 'Vocabulary (general)', category: 'VOCABULARY' },
+  // Reading
   { code: 'READING_COMPREHENSION', name: 'Reading Comprehension', category: 'READING' },
   { code: 'READING_MAIN_IDEA', name: 'Reading - Main Idea', category: 'READING' },
   { code: 'READING_DETAIL', name: 'Reading - Detail', category: 'READING' },
   { code: 'READING_INFERENCE', name: 'Reading - Inference', category: 'READING' },
-  { code: 'LISTENING_MCQ', name: 'Listening MCQ', category: 'LISTENING' },
+  // Listening
+  { code: 'LISTENING_MCQ', name: 'Listening MCQ (generic)', category: 'LISTENING' },
+  { code: 'ANNOUNCEMENT_INSTRUCTION', name: 'Announcement / Instruction', category: 'LISTENING' },
+  { code: 'CONVERSATION', name: 'Conversation', category: 'LISTENING' },
+  { code: 'TALK_LECTURE', name: 'Talk / Lecture', category: 'LISTENING' },
+  { code: 'SHORT_CONVERSATION', name: 'Listening - Short Conversation', category: 'LISTENING' },
+  { code: 'LONG_CONVERSATION', name: 'Listening - Long Conversation', category: 'LISTENING' },
+  { code: 'TALK', name: 'Listening - Talk / Monologue', category: 'LISTENING' },
+  // Speaking
+  { code: 'SELF_INTRODUCTION', name: 'Speaking - Self Introduction', category: 'SPEAKING' },
+  { code: 'GUIDED_CONVERSATION', name: 'Speaking - Guided Conversation', category: 'SPEAKING' },
+  { code: 'SPEAKING', name: 'Speaking (general)', category: 'SPEAKING' },
+  // Writing
+  { code: 'LETTER_EMAIL', name: 'Letter / Email', category: 'WRITING' },
   { code: 'ESSAY', name: 'Essay', category: 'WRITING' },
-  { code: 'SPEAKING', name: 'Speaking', category: 'SPEAKING' },
+  // VSTEP speaking parts
+  { code: 'SOCIAL_INTERACTION', name: 'Social Interaction', category: 'SPEAKING' },
+  { code: 'SOLUTION_DISCUSSION', name: 'Solution Discussion', category: 'SPEAKING' },
+  { code: 'TOPIC_DEVELOPMENT', name: 'Topic Development', category: 'SPEAKING' },
 ];
 
 async function seedExamTypes() {
@@ -97,14 +162,28 @@ async function seedExamTypes() {
     {
       code: 'HCMUS_MASTER_ENTRANCE',
       name: 'HCMUS Master Entrance',
-      description: 'HCMUS graduate school English entrance exam',
+      description: 'HCMUS graduate school English entrance exam (B1-B2 band)',
       levelFrom: 'B1' as const,
       levelTo: 'B2' as const,
     },
     {
-      code: 'VSTEP_3_5',
+      code: 'B1',
+      name: 'B1 (CEFR)',
+      description: 'CEFR B1 general English target',
+      levelFrom: 'B1' as const,
+      levelTo: 'B1' as const,
+    },
+    {
+      code: 'B2',
+      name: 'B2 (CEFR)',
+      description: 'CEFR B2 general English target',
+      levelFrom: 'B2' as const,
+      levelTo: 'B2' as const,
+    },
+    {
+      code: 'VSTEP',
       name: 'VSTEP 3-5',
-      description: 'Vietnamese Standardized Test of English Proficiency, levels B1-C1',
+      description: 'Vietnamese Standardized Test of English Proficiency format',
       levelFrom: 'B1' as const,
       levelTo: 'B2' as const,
     },
@@ -116,6 +195,9 @@ async function seedExamTypes() {
       levelTo: null,
     },
   ];
+
+  // Remove obsolete VSTEP seed if it exists from an older seed run.
+  await prisma.examType.deleteMany({ where: { code: 'VSTEP_3_5' } });
 
   for (const t of types) {
     await prisma.examType.upsert({
@@ -235,7 +317,7 @@ async function seedHcmusPattern(adminId: string) {
     });
   }
 
-  // Draft blueprint reflecting HCMUS grammar distribution
+  // Draft blueprint reflecting HCMUS pattern
   const blueprint = await prisma.examBlueprint.upsert({
     where: { id: '00000000-0000-0000-0000-000000000010' },
     update: {
@@ -254,31 +336,46 @@ async function seedHcmusPattern(adminId: string) {
     },
   });
 
-  // Blueprint items — grammar distribution
+  // Blueprint items — grammar distribution (kept + level upgraded)
   // Clear existing items for a clean idempotent reseed
   await prisma.examBlueprintItem.deleteMany({ where: { blueprintId: blueprint.id } });
 
-  const codeToTopic = new Map<string, { id: string }>();
-  for (const t of await prisma.topic.findMany({
-    where: {
-      code: {
-        in: [
-          'TENSES',
-          'WORD_FORM',
-          'PREPOSITIONS',
-          'CONDITIONALS',
-          'RELATIVE_CLAUSES',
-          'WISH',
-          'PASSIVE_VOICE',
-        ],
-      },
-    },
+  const wantedTopics = [
+    'TENSES',
+    'WORD_FORM',
+    'PREPOSITIONS',
+    'CONDITIONALS',
+    'RELATIVE_CLAUSES',
+    'WISH',
+    'PASSIVE_VOICE',
+    'READ_MAIN_IDEA_TOPIC',
+    'MAIN_IDEA',
+    'DETAIL',
+    'INFERENCE',
+  ];
+  const topicRows = await prisma.topic.findMany({
+    where: { code: { in: wantedTopics } },
     select: { id: true, code: true },
-  })) {
-    codeToTopic.set(t.code, { id: t.id });
-  }
+  });
+  const codeToTopic = new Map(topicRows.map((r) => [r.code, { id: r.id }]));
 
-  const distribution: Array<{ topicCode: string; weight: number }> = [
+  const wantedQts = [
+    'VOCABULARY',
+    'READING_COMPREHENSION',
+    'SHORT_CONVERSATION',
+    'LONG_CONVERSATION',
+    'TALK',
+    'SELF_INTRODUCTION',
+    'GUIDED_CONVERSATION',
+  ];
+  const qtRows = await prisma.questionType.findMany({
+    where: { code: { in: wantedQts } },
+    select: { id: true, code: true },
+  });
+  const codeToQt = new Map(qtRows.map((r) => [r.code, { id: r.id }]));
+
+  // GRAMMAR & USE OF ENGLISH — same 7 grammar/vocab weights as before
+  const grammarDistribution: Array<{ topicCode: string; weight: number }> = [
     { topicCode: 'TENSES', weight: 0.2 },
     { topicCode: 'WORD_FORM', weight: 0.17 },
     { topicCode: 'PREPOSITIONS', weight: 0.15 },
@@ -288,7 +385,7 @@ async function seedHcmusPattern(adminId: string) {
     { topicCode: 'PASSIVE_VOICE', weight: 0.07 },
   ];
 
-  for (const d of distribution) {
+  for (const d of grammarDistribution) {
     const topic = codeToTopic.get(d.topicCode);
     if (!topic) continue;
     await prisma.examBlueprintItem.create({
@@ -301,8 +398,7 @@ async function seedHcmusPattern(adminId: string) {
       },
     });
   }
-
-  // "OTHER" catch-all item, no topic link
+  // Grammar "OTHER" catch-all
   await prisma.examBlueprintItem.create({
     data: {
       blueprintId: blueprint.id,
@@ -312,8 +408,109 @@ async function seedHcmusPattern(adminId: string) {
     },
   });
 
+  // VOCABULARY & READING — split 40% vocabulary MCQ, 60% reading comprehension
+  const vocabQt = codeToQt.get('VOCABULARY');
+  const readingQt = codeToQt.get('READING_COMPREHENSION');
+  if (vocabQt) {
+    await prisma.examBlueprintItem.create({
+      data: {
+        blueprintId: blueprint.id,
+        sectionCode: 'VOCABULARY_READING',
+        questionTypeId: vocabQt.id,
+        weight: 0.4,
+        level: 'B1_B2',
+      },
+    });
+  }
+  if (readingQt) {
+    await prisma.examBlueprintItem.create({
+      data: {
+        blueprintId: blueprint.id,
+        sectionCode: 'VOCABULARY_READING',
+        questionTypeId: readingQt.id,
+        weight: 0.6,
+        level: 'B1_B2',
+      },
+    });
+  }
+
+  // LISTENING — 3 sub-parts weighted evenly-ish
+  const listeningItems: Array<{ qtCode: string; weight: number }> = [
+    { qtCode: 'SHORT_CONVERSATION', weight: 0.35 },
+    { qtCode: 'LONG_CONVERSATION', weight: 0.35 },
+    { qtCode: 'TALK', weight: 0.3 },
+  ];
+  for (const it of listeningItems) {
+    const qt = codeToQt.get(it.qtCode);
+    if (!qt) continue;
+    await prisma.examBlueprintItem.create({
+      data: {
+        blueprintId: blueprint.id,
+        sectionCode: 'LISTENING',
+        questionTypeId: qt.id,
+        weight: it.weight,
+        level: 'B1_B2',
+      },
+    });
+  }
+
+  // SPEAKING — 2 tasks
+  const speakingItems: Array<{ qtCode: string; weight: number }> = [
+    { qtCode: 'SELF_INTRODUCTION', weight: 0.3 },
+    { qtCode: 'GUIDED_CONVERSATION', weight: 0.7 },
+  ];
+  for (const it of speakingItems) {
+    const qt = codeToQt.get(it.qtCode);
+    if (!qt) continue;
+    await prisma.examBlueprintItem.create({
+      data: {
+        blueprintId: blueprint.id,
+        sectionCode: 'SPEAKING',
+        questionTypeId: qt.id,
+        weight: it.weight,
+        level: 'B1_B2',
+      },
+    });
+  }
+
   // Reference admin so lint doesn't warn about unused; also proves link works
   void adminId;
+}
+
+async function seedVstepPattern() {
+  const examType = await prisma.examType.findUnique({ where: { code: 'VSTEP' } });
+  if (!examType) throw new Error('VSTEP exam type missing');
+  const exam = await prisma.exam.upsert({
+    where: { id: '00000000-0000-0000-0000-000000000002' },
+    update: { title: 'VSTEP 3-5 Canonical Format', status: 'REVIEWED' },
+    create: { id: '00000000-0000-0000-0000-000000000002', examTypeId: examType.id, title: 'VSTEP 3-5 Canonical Format', source: 'Source-derived VSTEP format', detectedLevel: 'B1_B2', status: 'REVIEWED' },
+  });
+  const sections = [
+    { code: 'LISTENING', name: 'Listening', position: 1, questionCount: 35, partCount: 3, durationMinutes: 40 },
+    { code: 'READING', name: 'Reading', position: 2, questionCount: 40, passageCount: 4, durationMinutes: 60 },
+    { code: 'WRITING', name: 'Writing', position: 3, taskCount: 2, durationMinutes: 60 },
+    { code: 'SPEAKING', name: 'Speaking', position: 4, partCount: 3, durationMinutes: 12 },
+  ];
+  for (const section of sections) {
+    await prisma.examSection.upsert({ where: { examId_code: { examId: exam.id, code: section.code } }, update: section, create: { ...section, examId: exam.id } });
+  }
+  const blueprint = await prisma.examBlueprint.upsert({
+    where: { id: '00000000-0000-0000-0000-000000000020' },
+    update: { name: 'VSTEP 3-5 v1', status: 'ACTIVE', sourceExamCount: 1 },
+    create: { id: '00000000-0000-0000-0000-000000000020', examTypeId: examType.id, name: 'VSTEP 3-5 v1', version: '1.0.0', status: 'ACTIVE', sourceExamCount: 1 },
+  });
+  await prisma.examBlueprintItem.deleteMany({ where: { blueprintId: blueprint.id } });
+  const types = await prisma.questionType.findMany({ where: { code: { in: ['ANNOUNCEMENT_INSTRUCTION', 'CONVERSATION', 'TALK_LECTURE', 'READING_COMPREHENSION', 'LETTER_EMAIL', 'ESSAY', 'SOCIAL_INTERACTION', 'SOLUTION_DISCUSSION', 'TOPIC_DEVELOPMENT'] } } });
+  const byCode = new Map(types.map((type) => [type.code, type.id]));
+  const items = [
+    ['LISTENING', 'ANNOUNCEMENT_INSTRUCTION', 8], ['LISTENING', 'CONVERSATION', 12], ['LISTENING', 'TALK_LECTURE', 15],
+    ['READING', 'READING_COMPREHENSION', 40], ['WRITING', 'LETTER_EMAIL', 1], ['WRITING', 'ESSAY', 1],
+    ['SPEAKING', 'SOCIAL_INTERACTION', 1], ['SPEAKING', 'SOLUTION_DISCUSSION', 1], ['SPEAKING', 'TOPIC_DEVELOPMENT', 1],
+  ] as const;
+  for (const [sectionCode, typeCode, questionCount] of items) {
+    const questionTypeId = byCode.get(typeCode);
+    if (questionTypeId) await prisma.examBlueprintItem.create({ data: { blueprintId: blueprint.id, sectionCode, questionTypeId, questionCount, level: 'B1_B2' } });
+  }
 }
 
 async function main() {
@@ -323,6 +520,7 @@ async function main() {
   await seedQuestionTypes();
   const admin = await seedAdmin();
   await seedHcmusPattern(admin.id);
+  await seedVstepPattern();
   console.log('Seed complete.');
 }
 

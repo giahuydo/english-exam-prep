@@ -53,6 +53,15 @@ export const QuestionOrigin = {
 } as const;
 export type QuestionOrigin = (typeof QuestionOrigin)[keyof typeof QuestionOrigin];
 
+export const ContentRole = {
+  EXAMPLE: 'EXAMPLE',
+  PRACTICE: 'PRACTICE',
+  MOCK_EXAM: 'MOCK_EXAM',
+  REAL_EXAM: 'REAL_EXAM',
+  AI_GENERATED: 'AI_GENERATED',
+} as const;
+export type ContentRole = (typeof ContentRole)[keyof typeof ContentRole];
+
 export const QuestionDifficulty = {
   EASY: 'EASY',
   MEDIUM: 'MEDIUM',
@@ -87,8 +96,20 @@ export const QuizSessionType = {
   MIXED_PRACTICE: 'MIXED_PRACTICE',
   CUSTOM_PRACTICE: 'CUSTOM_PRACTICE',
   MOCK_EXAM: 'MOCK_EXAM',
+  MISTAKE_REVIEW: 'MISTAKE_REVIEW',
 } as const;
 export type QuizSessionType = (typeof QuizSessionType)[keyof typeof QuizSessionType];
+
+// PracticeMode = the user-facing practice modes (a superset of QuizSessionType,
+// kept as its own enum so the API can evolve mode names without churning DB).
+export const PracticeMode = {
+  TOPIC_PRACTICE: 'TOPIC_PRACTICE',
+  MIXED_PRACTICE: 'MIXED_PRACTICE',
+  CUSTOM_PRACTICE: 'CUSTOM_PRACTICE',
+  MOCK_EXAM: 'MOCK_EXAM',
+  MISTAKE_REVIEW: 'MISTAKE_REVIEW',
+} as const;
+export type PracticeMode = (typeof PracticeMode)[keyof typeof PracticeMode];
 
 export const QuizSessionStatus = {
   IN_PROGRESS: 'IN_PROGRESS',

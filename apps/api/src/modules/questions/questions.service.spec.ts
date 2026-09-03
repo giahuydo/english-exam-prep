@@ -1,5 +1,12 @@
 import { QuestionsService } from './questions.service';
-import { QuestionOrigin, QuestionStatus, QuestionTopicSource, ExamLevel, QuestionDifficulty } from '@app/shared';
+import {
+  ContentRole,
+  ExamLevel,
+  QuestionDifficulty,
+  QuestionOrigin,
+  QuestionStatus,
+  QuestionTopicSource,
+} from '@app/shared';
 
 describe('QuestionsService.create', () => {
   const buildPrismaMock = () => {
@@ -21,6 +28,7 @@ describe('QuestionsService.create', () => {
       {
         questionTypeId: '00000000-0000-0000-0000-0000000000aa',
         origin: QuestionOrigin.AI_GENERATED,
+        contentRole: ContentRole.AI_GENERATED,
         content: 'Fill the blank: I ___ to school every day.',
         level: ExamLevel.B1,
         difficulty: QuestionDifficulty.MEDIUM,
@@ -44,6 +52,7 @@ describe('QuestionsService.create', () => {
     await svc.create({
       questionTypeId: '00000000-0000-0000-0000-0000000000aa',
       origin: QuestionOrigin.MANUAL,
+      contentRole: ContentRole.PRACTICE,
       content: 'x',
       level: ExamLevel.B2,
       difficulty: QuestionDifficulty.MEDIUM,

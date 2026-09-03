@@ -10,12 +10,22 @@ interface QuestionDetail {
   level: string;
   difficulty: string;
   status: string;
+  hint1?: string | null;
+  hint2?: string | null;
+  hint3?: string | null;
+  explanation?: string | null;
   questionType?: { id: string; code: string; name: string; category: string };
   topics?: Array<{
     isPrimary: boolean;
     topic: { id: string; code: string; name: string; category: string; parentId: string | null };
   }>;
-  options?: Array<{ id: string; optionKey: string; content: string; isCorrect: boolean }>;
+  options?: Array<{
+    id: string;
+    optionKey: string;
+    content: string;
+    isCorrect: boolean;
+    explanation?: string | null;
+  }>;
 }
 
 export default function AdminQuestionEditor({ params }: { params: { id: string } }) {
@@ -61,13 +71,50 @@ export default function AdminQuestionEditor({ params }: { params: { id: string }
 
       <div className="rounded border bg-white p-4">
         <h2 className="font-semibold">Options</h2>
-        <ul className="mt-2 space-y-1">
+        <ul className="mt-2 space-y-2">
           {(q.options ?? []).map((o) => (
-            <li key={o.id} className={o.isCorrect ? 'text-green-700' : ''}>
-              <strong>{o.optionKey}.</strong> {o.content} {o.isCorrect ? '(correct)' : ''}
+            <li key={o.id} className="rounded border px-2 py-1">
+              <div className={o.isCorrect ? 'text-green-700' : ''}>
+                <strong>{o.optionKey}.</strong> {o.content} {o.isCorrect ? '(correct)' : ''}
+              </div>
+              {!o.isCorrect && o.explanation ? (
+                <p className="mt-1 text-xs text-red-700">
+                  Wrong-option explanation: {o.explanation}
+                </p>
+              ) : null}
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="rounded border bg-white p-4">
+        <h2 className="font-semibold">Main explanation</h2>
+        {q.explanation ? (
+          <p className="mt-2 whitespace-pre-wrap text-sm text-gray-800">{q.explanation}</p>
+        ) : (
+          <p className="mt-2 text-sm text-gray-500">No explanation set.</p>
+        )}
+      </div>
+
+      <div className="rounded border bg-white p-4">
+        <h2 className="font-semibold">Hints (progressive)</h2>
+        <ol className="mt-2 space-y-2 text-sm">
+          {[1, 2, 3].map((lv) => {
+            const text = (q as unknown as Record<string, string | null>)[`hint${lv}`];
+            return (
+              <li key={lv} className="rounded border px-2 py-1">
+                <div className="text-xs uppercase tracking-wide text-gray-500">
+                  Hint {lv}
+                </div>
+                {text ? (
+                  <p className="mt-1 whitespace-pre-wrap">{text}</p>
+                ) : (
+                  <p className="mt-1 text-gray-400">Not set.</p>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

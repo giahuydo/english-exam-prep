@@ -1,8 +1,10 @@
 import { z } from 'zod';
 import {
   ExamLevel,
+  PracticeMode,
   QuestionDifficulty,
   QuestionOrigin,
+  ContentRole,
   QuestionStatus,
   QuestionTopicSource,
   TopicCategory,
@@ -22,8 +24,15 @@ export const RegisterDto = z.object({
   email: z.string().email(),
   password: z.string().min(8),
   name: z.string().min(1),
+  examTypeId: z.string().uuid().optional(),
 });
 export type RegisterDto = z.infer<typeof RegisterDto>;
+
+// ---- Me ----
+export const UpdateStudyTargetDto = z.object({
+  examTypeId: z.string().uuid(),
+});
+export type UpdateStudyTargetDto = z.infer<typeof UpdateStudyTargetDto>;
 
 // ---- Topic ----
 export const CreateTopicDto = z.object({
@@ -51,6 +60,7 @@ export const CreateQuestionDto = z.object({
   examSectionId: z.string().uuid().optional(),
   questionTypeId: z.string().uuid(),
   origin: enumFromConst(QuestionOrigin).default(QuestionOrigin.MANUAL),
+  contentRole: enumFromConst(ContentRole).default(ContentRole.PRACTICE),
   content: z.string().min(1),
   instruction: z.string().optional(),
   context: z.string().optional(),
@@ -74,10 +84,48 @@ export const UpdateQuestionDto = CreateQuestionDto.partial();
 export type UpdateQuestionDto = z.infer<typeof UpdateQuestionDto>;
 
 // ---- Practice ----
+// Base (common to every mode)
+const StartPracticeBase = {
+  totalQuestions: z.number().int().min(1).max(200).default(10),
+  level: enumFromConst(ExamLevel).optional(),
+  difficulty: enumFromConst(QuestionDifficulty).optional(),
+  examTypeId: z.string().uuid().optional(),
+  blueprintId: z.string().uuid().optional(),
+};
+
+export const StartPracticeDto = z.discriminatedUnion('mode', [
+  z.object({
+    ...StartPracticeBase,
+    mode: z.literal(PracticeMode.TOPIC_PRACTICE),
+    topicId: z.string().uuid(),
+  }),
+  z.object({
+    ...StartPracticeBase,
+    mode: z.literal(PracticeMode.MIXED_PRACTICE),
+  }),
+  z.object({
+    ...StartPracticeBase,
+    mode: z.literal(PracticeMode.CUSTOM_PRACTICE),
+    topicIds: z.array(z.string().uuid()).min(1),
+  }),
+  z.object({
+    ...StartPracticeBase,
+    mode: z.literal(PracticeMode.MOCK_EXAM),
+    examTypeId: z.string().uuid(),
+    blueprintId: z.string().uuid().optional(),
+  }),
+  z.object({
+    ...StartPracticeBase,
+    mode: z.literal(PracticeMode.MISTAKE_REVIEW),
+  }),
+]);
+export type StartPracticeDto = z.infer<typeof StartPracticeDto>;
+
+// StartSessionDto kept as a lenient legacy shape (still used by
+// PracticeController for backward compat); new callers should prefer
+// StartPracticeDto.
 export const StartSessionDto = z.object({
-  type: z
-    .enum(['TOPIC_PRACTICE', 'MIXED_PRACTICE', 'CUSTOM_PRACTICE', 'MOCK_EXAM'])
-    .default('MIXED_PRACTICE'),
+  type: enumFromConst(PracticeMode).default(PracticeMode.MIXED_PRACTICE),
   examTypeId: z.string().uuid().optional(),
   blueprintId: z.string().uuid().optional(),
   topicId: z.string().uuid().optional(),
@@ -96,3 +144,8 @@ export const SubmitAnswerDto = z.object({
   timeSpentSeconds: z.number().int().min(0).optional(),
 });
 export type SubmitAnswerDto = z.infer<typeof SubmitAnswerDto>;
+
+export const RevealHintDto = z.object({
+  hintLevel: z.number().int().min(1).max(3),
+});
+export type RevealHintDto = z.infer<typeof RevealHintDto>;

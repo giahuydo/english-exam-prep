@@ -1,63 +1,6 @@
 'use client';
-
 import { useState } from 'react';
+import Link from 'next/link';
 import { api } from '@/lib/api-client';
-
-export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-    try {
-      const res = await api.login(email, password);
-      // TODO: move JWT to httpOnly cookie server-side.
-      window.localStorage.setItem('accessToken', res.accessToken);
-      window.localStorage.setItem('role', res.user.role);
-      window.location.href = res.user.role === 'ADMIN' ? '/admin' : '/practice';
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <section className="max-w-sm">
-      <h1 className="text-xl font-semibold">Login</h1>
-      <form onSubmit={submit} className="mt-4 space-y-3">
-        <div>
-          <label className="block text-sm">Email</label>
-          <input
-            className="w-full rounded border px-2 py-1"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm">Password</label>
-          <input
-            className="w-full rounded border px-2 py-1"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          className="rounded bg-black px-3 py-1.5 text-sm text-white disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? 'Signing in...' : 'Sign in'}
-        </button>
-        {error ? <p className="text-sm text-red-600">{error}</p> : null}
-      </form>
-    </section>
-  );
-}
+import { Button, Card } from '@/components/ui';
+export default function LoginPage() { const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState<string | null>(null); const [loading, setLoading] = useState(false); async function submit(e: React.FormEvent) { e.preventDefault(); setLoading(true); setError(null); try { const res = await api.login(email, password); localStorage.setItem('accessToken', res.accessToken); localStorage.setItem('role', res.user.role); window.location.href = res.user.role === 'ADMIN' ? '/admin' : '/dashboard'; } catch (e) { setError(e instanceof Error ? e.message : 'Login failed'); } finally { setLoading(false); } } return <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4 py-10"><div className="w-full max-w-md"><Link href="/" className="mb-8 flex items-center justify-center gap-2 font-bold text-white"><span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500">E</span> Elevate English</Link><Card><p className="text-xs font-bold uppercase tracking-widest text-blue-600">Welcome back</p><h1 className="mt-2 text-2xl font-bold">Continue your progress</h1><p className="mt-2 text-sm text-slate-500">Sign in to pick up exactly where you left off.</p><form onSubmit={submit} className="mt-7 space-y-4"><label className="block text-sm font-semibold">Email<input className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100" type="email" value={email} onChange={e => setEmail(e.target.value)} required /></label><label className="block text-sm font-semibold">Password<input className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100" type="password" value={password} onChange={e => setPassword(e.target.value)} required /></label>{error && <p className="text-sm text-rose-600">{error}</p>}<Button className="w-full" disabled={loading}>{loading ? 'Signing in…' : 'Sign in'}</Button></form><p className="mt-6 text-center text-sm text-slate-500">New to Elevate? <Link href="/register" className="font-semibold text-blue-700">Create an account</Link></p></Card></div></main>; }

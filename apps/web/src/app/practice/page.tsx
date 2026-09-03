@@ -22,7 +22,7 @@ export default function PracticePage() {
 
   useEffect(() => {
     api
-      .startPractice(5)
+      .startPractice({ totalQuestions: 5 })
       .then((res) => setQuestions(res.questions as PracticeQuestion[]))
       .catch((e) => setError(e instanceof Error ? e.message : 'start failed'));
   }, []);

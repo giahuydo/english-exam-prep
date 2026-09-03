@@ -9,8 +9,8 @@ export class QuestionSelectorService {
     return this.prisma.question.findMany({
       where: {
         status: 'PUBLISHED',
-        level: filters.level as never,
-        difficulty: filters.difficulty as never,
+        ...(filters.level ? { level: filters.level as never } : {}),
+        ...(filters.difficulty ? { difficulty: filters.difficulty as never } : {}),
         ...(filters.topicIds?.length ? { topics: { some: { topicId: { in: filters.topicIds } } } } : {}),
       },
       include: { options: { orderBy: { position: 'asc' } }, topics: { include: { topic: true } }, questionType: true },
