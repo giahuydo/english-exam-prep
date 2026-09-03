@@ -628,6 +628,7 @@ model QuestionAttempt {
 
   @@index([quizSessionId])
   @@index([userId])
+  @@unique([quizSessionId, questionId])
   @@index([questionId])
   @@map("question_attempts")
 }
@@ -645,9 +646,11 @@ model UserTopicStat {
   accuracy       Float     @default(0)
   hintCount      Int       @default(0) @map("hint_count")
   avgTimeSeconds Float     @default(0) @map("avg_time_seconds")
-  masteryScore   Float     @default(0) @map("mastery_score")
-  lastAttemptAt  DateTime? @map("last_attempt_at")
-  updatedAt      DateTime  @updatedAt @map("updated_at")
+  masteryScore       Float     @default(0) @map("mastery_score")
+  recentMistakeCount Int       @default(0) @map("recent_mistake_count")
+  lastAttemptAt      DateTime? @map("last_attempt_at")
+  nextReviewAt       DateTime? @map("next_review_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
 
   user  User  @relation(fields: [userId], references: [id])
   topic Topic @relation(fields: [topicId], references: [id])
