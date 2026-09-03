@@ -132,8 +132,16 @@ export class MockExamsService {
           },
         })
       : [];
+    const questionById = new Map(questions.map((question) => [question.id, question]));
+    const orderedQuestions = picked
+      .map(({ id }) => questionById.get(id))
+      .filter((question): question is (typeof questions)[number] => Boolean(question))
+      .map(({ options, hint1: _hint1, hint2: _hint2, hint3: _hint3, explanation: _explanation, ...question }) => ({
+        ...question,
+        options: options.map(({ isCorrect: _isCorrect, explanation: _explanation, ...option }) => option),
+      }));
 
-    return { session: { ...session, remainingSeconds: this.remainingSeconds(session) }, blueprint, questions: questions.map((q) => this.sanitizeQuestion(q)) };
+    return { session: { ...session, remainingSeconds: this.remainingSeconds(session) }, blueprint, questions: orderedQuestions.map((q) => this.sanitizeQuestion(q as never)) };
   }
 
   async state(userId: string, id: string) {
@@ -226,7 +234,7 @@ export class MockExamsService {
       include: {
         blueprint: true,
         attempts: true,
-        questions: { include: { question: { include: { options: { orderBy: { position: 'asc' } }, topics: { include: { topic: true } }, questionType: true } } } },
+        questions: { orderBy: { position: 'asc' }, include: { question: { include: { options: { orderBy: { position: 'asc' } }, topics: { include: { topic: true } }, questionType: true } } } },
       },
     });
     if (!session || session.userId !== userId) throw new NotFoundException('Mock exam not found');

@@ -2,6 +2,18 @@ import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/c
 import { StudyPlansService } from './study-plans.service';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { CurrentUser, AuthUser } from '../../auth/current-user.decorator';
+import { z } from 'zod';
+import { ZodValidationPipe } from '../../common/zod-validation.pipe';
+
+const StudyPlanDto = z.object({
+  title: z.string().min(1),
+  summary: z.string().optional(),
+  generatedBy: z.enum(['AI', 'SYSTEM', 'ADMIN']).optional(),
+  topics: z.array(z.object({
+    topicId: z.string().uuid(), priority: z.number().int().optional(),
+    targetQuestionCount: z.number().int().min(0).optional(), reason: z.string().optional(),
+  })).optional(),
+});
 
 @Controller('study-plans')
 @UseGuards(JwtAuthGuard)
@@ -19,7 +31,7 @@ export class StudyPlansController {
   }
 
   @Post()
-  create(@CurrentUser() user: AuthUser, @Body() dto: Parameters<StudyPlansService['create']>[1]) {
+  create(@CurrentUser() user: AuthUser, @Body(new ZodValidationPipe(StudyPlanDto)) dto: Parameters<StudyPlansService['create']>[1]) {
     return this.svc.create(user.id, dto);
   }
 

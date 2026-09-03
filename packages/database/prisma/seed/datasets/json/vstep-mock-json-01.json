@@ -1,0 +1,55 @@
+{
+  "key": "VSTEP_MOCK_JSON_01",
+  "examTypeCode": "VSTEP",
+  "title": "VSTEP 3-5 Mock Exam JSON 01",
+  "source": "Synthetic MVP mock loaded from JSON; not an official exam paper",
+  "detectedLevel": "B1_C1",
+  "blueprintKey": "VSTEP_3_5",
+  "sections": [
+    { "code": "LISTENING", "name": "Listening", "position": 1, "questionCount": 2, "durationMinutes": 40 },
+    { "code": "READING", "name": "Reading", "position": 2, "questionCount": 1, "durationMinutes": 60 },
+    { "code": "WRITING", "name": "Writing", "position": 3, "questionCount": 1, "durationMinutes": 60 }
+  ],
+  "questions": [
+    {
+      "key": "Q01",
+      "sectionCode": "LISTENING",
+      "questionTypeCode": "ANNOUNCEMENT_INSTRUCTION",
+      "topicCodes": ["LISTENING_DETAIL"],
+      "content": "The announcement asks candidates to leave bags at the front desk. Where do they leave bags?",
+      "level": "B1",
+      "answer": "At the front desk",
+      "distractors": ["In the exam room", "In the parking lot", "At the entrance gate"]
+    },
+    {
+      "key": "Q02",
+      "sectionCode": "LISTENING",
+      "questionTypeCode": "CONVERSATION",
+      "topicCodes": ["LISTENING_INFERENCE"],
+      "content": "A tutor says the deadline was moved to next Monday. When is the deadline now?",
+      "level": "B1",
+      "answer": "Next Monday",
+      "distractors": ["This Friday", "Two weeks from now", "Yesterday"]
+    },
+    {
+      "key": "Q03",
+      "sectionCode": "READING",
+      "questionTypeCode": "READING_COMPREHENSION",
+      "topicCodes": ["MAIN_IDEA"],
+      "content": "A short article describes benefits of reading before sleep. What is the main idea?",
+      "level": "B1_B2",
+      "answer": "Reading before sleep may improve rest.",
+      "distractors": ["Reading is only for children.", "Sleep is unnecessary.", "Books cause insomnia."]
+    },
+    {
+      "key": "Q04",
+      "sectionCode": "WRITING",
+      "questionTypeCode": "LETTER_EMAIL",
+      "topicCodes": ["LETTER_EMAIL"],
+      "content": "Choose the most polite closing for a formal email.",
+      "level": "B1",
+      "answer": "Best regards, Nam",
+      "distractors": ["cya later", "bye bye!!!", "no thanks"]
+    }
+  ]
+}

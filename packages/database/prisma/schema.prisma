@@ -246,9 +246,11 @@ model Exam {
   createdAt          DateTime   @default(now()) @map("created_at")
   updatedAt          DateTime   @updatedAt @map("updated_at")
 
-  examFile  ExamFile?     @relation(fields: [examFileId], references: [id])
-  examType  ExamType      @relation(fields: [examTypeId], references: [id])
+  examFile  ExamFile?       @relation(fields: [examFileId], references: [id])
+  examType  ExamType        @relation(fields: [examTypeId], references: [id])
   sections  ExamSection[]
+  parts     ExamPart[]
+  groups    QuestionGroup[]
   questions Question[]
 
   @@index([examTypeId])
@@ -261,22 +263,25 @@ model Exam {
 // ---------------------------------------------------------------------------
 
 model ExamSection {
-  id              String   @id @default(uuid())
-  examId          String   @map("exam_id")
-  code            String
-  name            String
-  position        Int
-  questionCount   Int?     @map("question_count")
-  partCount       Int?     @map("part_count")
-  passageCount    Int?     @map("passage_count")
-  taskCount       Int?     @map("task_count")
-  score           Float?
-  durationMinutes Int?     @map("duration_minutes")
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
+  id                String   @id @default(uuid())
+  examId            String   @map("exam_id")
+  code              String
+  name              String
+  position          Int
+  questionCount     Int?     @map("question_count")
+  partCount         Int?     @map("part_count")
+  groupCount        Int?     @map("group_count")
+  questionsPerGroup Int?     @map("questions_per_group")
+  passageCount      Int?     @map("passage_count")
+  taskCount         Int?     @map("task_count")
+  score             Float?
+  durationMinutes   Int?     @map("duration_minutes")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
 
   exam      Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
   questions Question[]
+  parts     ExamPart[]
 
   @@unique([examId, code])
   @@index([examId])
@@ -346,6 +351,8 @@ model Question {
   datasetKey           String?            @unique @map("dataset_key")
   examId               String?            @map("exam_id")
   examSectionId        String?            @map("exam_section_id")
+  examPartId           String?            @map("exam_part_id")
+  questionGroupId      String?            @map("question_group_id")
   questionTypeId       String             @map("question_type_id")
   origin               QuestionOrigin     @default(ORIGINAL)
   contentRole          ContentRole        @default(PRACTICE) @map("content_role")
@@ -371,6 +378,8 @@ model Question {
 
   exam             Exam?                 @relation(fields: [examId], references: [id])
   examSection      ExamSection?          @relation(fields: [examSectionId], references: [id])
+  examPart         ExamPart?             @relation(fields: [examPartId], references: [id])
+  questionGroup    QuestionGroup?        @relation(fields: [questionGroupId], references: [id])
   questionType     QuestionType          @relation(fields: [questionTypeId], references: [id])
   createdBy        User?                 @relation("QuestionCreatedBy", fields: [createdById], references: [id])
   reviewedBy       User?                 @relation("QuestionReviewedBy", fields: [reviewedById], references: [id])
@@ -384,6 +393,9 @@ model Question {
   @@index([level])
   @@index([difficulty])
   @@index([questionTypeId])
+  @@index([examPartId])
+  @@index([questionGroupId])
+  @@index([datasetKey])
   @@map("questions")
 }
 
@@ -481,8 +493,9 @@ model BlueprintPart {
   questionsPerGroup Int?     @map("questions_per_group")
   groupingSemantics String?  @map("grouping_semantics")
 
-  section BlueprintSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-  slots   BlueprintSlot[]
+  section    BlueprintSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  slots      BlueprintSlot[]
+  examParts  ExamPart[]
 
   @@unique([sectionId, code])
   @@map("blueprint_parts")
@@ -513,6 +526,56 @@ model BlueprintSlot {
 
   @@unique([partId, code])
   @@map("blueprint_slots")
+}
+
+model ExamPart {
+  id                String  @id @default(uuid())
+  externalKey       String? @unique @map("external_key")
+  examId            String  @map("exam_id")
+  examSectionId     String  @map("exam_section_id")
+  blueprintPartId   String? @map("blueprint_part_id")
+  code              String
+  title             String
+  position          Int
+  instructions      String? @db.Text
+  durationMinutes   Int?    @map("duration_minutes")
+  score             Float?
+  questionCount     Int?    @map("question_count")
+  groupCount        Int?    @map("group_count")
+  questionsPerGroup Int?    @map("questions_per_group")
+  groupingSemantics String? @map("grouping_semantics")
+
+  exam          Exam            @relation(fields: [examId], references: [id], onDelete: Cascade)
+  section       ExamSection     @relation(fields: [examSectionId], references: [id], onDelete: Cascade)
+  blueprintPart BlueprintPart?  @relation(fields: [blueprintPartId], references: [id])
+  groups        QuestionGroup[]
+  questions     Question[]
+
+  @@unique([examId, code])
+  @@unique([examSectionId, code])
+  @@index([examSectionId])
+  @@map("exam_parts")
+}
+
+model QuestionGroup {
+  id                String  @id @default(uuid())
+  externalKey       String? @unique @map("external_key")
+  examId            String  @map("exam_id")
+  examPartId        String? @map("exam_part_id")
+  code              String
+  position          Int
+  stimulus          String? @db.Text
+  groupSize         Int?
+  questionsPerGroup Int?   @map("questions_per_group")
+  selectionPolicy   Json?   @map("selection_policy")
+
+  exam      Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
+  examPart  ExamPart?  @relation(fields: [examPartId], references: [id], onDelete: Cascade)
+  questions Question[]
+
+  @@unique([examId, code])
+  @@index([examPartId])
+  @@map("question_groups")
 }
 
 model ExamBlueprintItem {

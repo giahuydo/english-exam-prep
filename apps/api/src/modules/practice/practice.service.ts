@@ -44,6 +44,35 @@ export interface AnswerResponse {
   hintLevelUsed: number;
 }
 
+// Never return Question/QuestionOption Prisma rows directly to a learner.
+// In particular, isCorrect and explanations are answer data, not question data.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function learnerQuestion(question: any) {
+  return {
+    id: question.id,
+    examId: question.examId,
+    examSectionId: question.examSectionId,
+    questionTypeId: question.questionTypeId,
+    contentRole: question.contentRole,
+    content: question.content,
+    instruction: question.instruction,
+    context: question.context,
+    level: question.level,
+    difficulty: question.difficulty,
+    status: question.status,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    options: (question.options ?? []).map((option: any) => ({
+      id: option.id,
+      questionId: option.questionId,
+      optionKey: option.optionKey,
+      content: option.content,
+      position: option.position,
+    })),
+    topics: question.topics,
+    questionType: question.questionType,
+  };
+}
+
 @Injectable()
 export class PracticeService {
   constructor(
@@ -170,8 +199,9 @@ export class PracticeService {
 
     let isCorrect: boolean | null = null;
     if (dto.selectedOptionId) {
-      const opt = question.options.find((o) => o.id === dto.selectedOptionId);
-      isCorrect = !!opt && opt.isCorrect;
+      const opt = question.options.find((o) => o.id === dto.selectedOptionId && (!o.questionId || o.questionId === question.id));
+      if (!opt) throw new BadRequestException('Selected option does not belong to question');
+      isCorrect = opt.isCorrect;
     }
 
     const attempt = await this.prisma.questionAttempt.create({
@@ -272,8 +302,15 @@ export class PracticeService {
       include: { attempts: true },
     });
     if (!session || session.userId !== userId) throw new NotFoundException('Session not found');
-    const correctCount = session.attempts.filter((a) => a.isCorrect === true).length;
-    const total = session.totalQuestions || session.attempts.length || 1;
+    const assignedQuestionIds = new Set((await this.prisma.quizSessionQuestion.findMany({
+      where: { quizSessionId: sessionId },
+      select: { questionId: true },
+    })).map((q) => q.questionId));
+    const uniqueAttempts = new Map(session.attempts
+      .filter((a) => assignedQuestionIds.has(a.questionId))
+      .map((a) => [a.questionId, a]));
+    const correctCount = [...uniqueAttempts.values()].filter((a) => a.isCorrect === true).length;
+    const total = assignedQuestionIds.size || session.totalQuestions || 1;
     const score = correctCount / total;
     return this.prisma.quizSession.update({
       where: { id: sessionId },

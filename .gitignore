@@ -45,3 +45,10 @@ pids/
 
 # postgres data volume (if bind-mounted)
 docker/data/
+
+.agents/
+.claude/
+/docs/
+/graphify-out/
+.codegraph
+.serena
