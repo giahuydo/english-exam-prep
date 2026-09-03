@@ -9,7 +9,9 @@ const StartMockExamDto = z.object({
   examTypeId: z.string().uuid(),
   blueprintId: z.string().uuid().optional(),
   totalQuestions: z.number().int().min(1).max(200).optional(),
+  durationSeconds: z.number().int().min(60).max(24 * 60 * 60).optional(),
 });
+const SaveAnswerDto = z.object({ questionId: z.string().uuid(), selectedOptionId: z.string().uuid().optional(), answerText: z.string().optional(), currentQuestionIndex: z.number().int().min(0).optional() });
 type StartMockExamDto = z.infer<typeof StartMockExamDto>;
 
 @Controller('mock-exams')
@@ -37,6 +39,20 @@ export class MockExamsController {
 
   @Get(':id')
   detail(@CurrentUser() user: AuthUser, @Param('id') id: string) {
-    return this.svc.findById(user.id, id);
+    return this.svc.state(user.id, id);
   }
+
+  @Post(':id/answers')
+  saveAnswer(@CurrentUser() user: AuthUser, @Param('id') id: string, @Body(new ZodValidationPipe(SaveAnswerDto)) dto: z.infer<typeof SaveAnswerDto>) {
+    return this.svc.saveAnswer(user.id, id, dto);
+  }
+
+  @Post(':id/pause')
+  pause(@CurrentUser() user: AuthUser, @Param('id') id: string) { return this.svc.pause(user.id, id); }
+
+  @Post(':id/resume')
+  resume(@CurrentUser() user: AuthUser, @Param('id') id: string) { return this.svc.resume(user.id, id); }
+
+  @Post(':id/submit')
+  submit(@CurrentUser() user: AuthUser, @Param('id') id: string) { return this.svc.submit(user.id, id); }
 }
