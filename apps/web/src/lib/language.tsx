@@ -556,7 +556,8 @@ const vi: Partial<LearnerCopy> = {
   practiceWeak: 'Luyện chủ đề yếu →',
   practiceAnother: 'Làm bộ khác',
   formatMemory: 'Bản đồ cấu trúc đề',
-  formatMemoryDescription: 'Ghi nhớ trình tự, thời lượng và dạng bài lặp lại — không chỉ từng câu hỏi.'
+  formatMemoryDescription: 'Ghi nhớ trình tự, thời lượng và dạng bài lặp lại — không chỉ từng câu hỏi.',
+  progressBySection: 'Tiến độ theo phần'
 };
 
 export const learnerCopy = { en, vi: { ...en, ...vi } } as const;
