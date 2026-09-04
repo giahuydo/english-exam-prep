@@ -6,6 +6,8 @@ import { api } from '@/lib/api-client';
 import { Badge, Button, Card, SectionTitle } from '@/components/ui';
 import { StatusBadge, StudyCard } from '@/components/study';
 import { StudentShell } from '@/components/shells';
+import { AdaptiveReviewPanel } from '@/components/adaptive-review';
+import { readAnswerSignals, type AnswerSignal } from '@/lib/adaptive-review';
 
 interface DashboardData {
   profile: { name: string; currentExamType?: { name: string } | null };
@@ -17,7 +19,8 @@ interface DashboardData {
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => { api.dashboard().then((x) => setData(x as unknown as DashboardData)).catch((e) => setError(e instanceof Error ? e.message : 'Unable to load today')); }, []);
+  const [signals, setSignals] = useState<AnswerSignal[]>([]);
+  useEffect(() => { setSignals(readAnswerSignals()); api.dashboard().then((x) => setData(x as unknown as DashboardData)).catch((e) => setError(e instanceof Error ? e.message : 'Unable to load today')); }, []);
   if (error) return <StudentShell><Card><p role="alert" className="text-rose-700">{error}</p><Button className="mt-4" onClick={() => window.location.reload()}>Try again</Button></Card></StudentShell>;
   if (!data) return <StudentShell><p className="text-slate-500">Loading today’s study plan…</p></StudentShell>;
   const firstName = data.profile.name.split(' ')[0];
@@ -25,6 +28,7 @@ export default function DashboardPage() {
   const last = data.recentSessions.find((s) => s.status !== 'IN_PROGRESS');
   return <StudentShell><SectionTitle eyebrow="Today" title={`Good morning, ${firstName}.`} description="Choose one focused next step. You do not need to do everything today." action={<Badge tone="blue">{data.profile.currentExamType?.name ?? 'English exam prep'}</Badge>} />
     <div className="grid gap-4 lg:grid-cols-2">
+      <AdaptiveReviewPanel signals={signals} />
       <StudyCard eyebrow="Continue learning" title={resume ? 'Pick up your unfinished session' : 'Build your next win'} description={resume ? `You have ${resume.totalQuestions - resume.correctCount} questions left in this session.` : 'Start a short focused set and get teaching feedback after every answer.'} action={<Link className="inline-flex min-h-11 items-center rounded-xl bg-blue-600 px-5 text-sm font-semibold text-white hover:bg-blue-700" href={resume ? `/practice/${resume.id}` : '/practice'}>{resume ? 'Resume practice →' : 'Start 5 questions →'}</Link>} />
       <StudyCard eyebrow="Needs review" title={data.mistakeCount ? `${data.mistakeCount} question${data.mistakeCount === 1 ? '' : 's'} to revisit` : 'You are all caught up'} description={data.mistakeCount ? 'Review mistakes while the reasoning is still fresh.' : 'Complete a practice set and this space will guide your next review.'} action={<Link className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 px-5 text-sm font-semibold text-slate-800 hover:bg-slate-50" href={data.mistakeCount ? '/mistakes' : '/practice'}>{data.mistakeCount ? 'Practice mistakes →' : 'Practice now →'}</Link>} />
     </div>
