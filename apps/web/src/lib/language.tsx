@@ -33,7 +33,7 @@ export function useLanguage() {
 
 export const learnerCopy = {
   en: {
-    today: 'Today', learn: 'Learn', practice: 'Practice', mocks: 'Mock exams', mistakes: 'Mistakes',
+    today: 'Today', learn: 'Learn', practice: 'Practice', vocabulary: 'Vocabulary', mocks: 'Mock exams', mistakes: 'Mistakes',
     workspace: 'Workspace', streak: 'Study streak', logout: 'Log out',
     questionProgress: 'Question progress', passage: 'Passage', question: 'Question',
     needHint: 'Need a hint?', revealHint: (n: number) => `Reveal hint ${n}`, hint: (n: number) => `Hint ${n}`,
@@ -43,7 +43,7 @@ export const learnerCopy = {
     correctAnswer: 'Correct answer', next: 'Next question →', result: 'See result →',
   },
   vi: {
-    today: 'Hôm nay', learn: 'Học', practice: 'Luyện tập', mocks: 'Đề thi thử', mistakes: 'Cần ôn lại',
+    today: 'Hôm nay', learn: 'Học', practice: 'Luyện tập', vocabulary: 'Từ vựng', mocks: 'Đề thi thử', mistakes: 'Cần ôn lại',
     workspace: 'Khu học tập', streak: 'Chuỗi ngày học', logout: 'Đăng xuất',
     questionProgress: 'Tiến độ câu hỏi', passage: 'Đoạn văn', question: 'Câu hỏi',
     needHint: 'Cần gợi ý?', revealHint: (n: number) => `Xem gợi ý ${n}`, hint: (n: number) => `Gợi ý ${n}`,
