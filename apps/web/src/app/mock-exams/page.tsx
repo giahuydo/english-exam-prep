@@ -32,7 +32,7 @@ export default function MockExamsPage() {
         setExamTypes(e as ExamType[]);
       })
       .catch((x) => setError(x instanceof Error ? x.message : copy.unablePractice));
-  }, []);
+  }, [copy.unablePractice]);
   async function start(b: Blueprint) {
     setLoading(b.id);
     try {

@@ -83,8 +83,8 @@ export default function MockExamSessionPage() {
 
   useEffect(() => {
     if (!sessionId) return;
-    load().catch((e) => setError(e instanceof Error ? e.message : 'Unable to load mock exam'));
-  }, [load, sessionId]);
+    load().catch((e) => setError(e instanceof Error ? e.message : copy.unablePractice));
+  }, [copy.unablePractice, load, sessionId]);
 
   const lifecycle =
     session?.mockStatus ?? (session?.status === 'COMPLETED' ? 'SUBMITTED' : session?.status);
@@ -99,16 +99,14 @@ export default function MockExamSessionPage() {
       setSeconds((current) => {
         if (current === null || current <= 1) {
           window.clearInterval(timer);
-          void load().catch((e) =>
-            setError(e instanceof Error ? e.message : 'Unable to refresh mock exam state'),
-          );
+          void load().catch((e) => setError(e instanceof Error ? e.message : copy.unablePractice));
           return 0;
         }
         return current - 1;
       });
     }, 1000);
     return () => window.clearInterval(timer);
-  }, [lifecycle, load, seconds, sessionId]);
+  }, [copy.unablePractice, lifecycle, load, seconds, sessionId]);
 
   const saveAnswer = useCallback(
     async (questionId: string, selectedOptionId: string) => {
@@ -121,7 +119,7 @@ export default function MockExamSessionPage() {
           currentQuestionIndex: index,
         });
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Unable to save answer');
+        setError(e instanceof Error ? e.message : copy.saving);
         setAnswers((current) => {
           const next = { ...current };
           delete next[questionId];
@@ -131,7 +129,7 @@ export default function MockExamSessionPage() {
         setSavingQuestionId(null);
       }
     },
-    [index, isActive, sessionId],
+    [copy.saving, index, isActive, sessionId],
   );
 
   function choose(questionId: string, optionId: string) {
@@ -150,7 +148,7 @@ export default function MockExamSessionPage() {
           currentQuestionIndex: nextIndex,
         });
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Unable to save question position');
+        setError(e instanceof Error ? e.message : copy.saving);
         return;
       }
     }
@@ -174,7 +172,7 @@ export default function MockExamSessionPage() {
       await api.pauseMock(sessionId);
       router.push('/mock-exams');
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Unable to pause mock exam');
+      setError(e instanceof Error ? e.message : copy.saving);
       setBusy(false);
     }
   }
@@ -190,7 +188,7 @@ export default function MockExamSessionPage() {
       );
       setSeconds(resumed.remainingSeconds ?? seconds);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Unable to resume mock exam');
+      setError(e instanceof Error ? e.message : copy.resuming);
     } finally {
       setBusy(false);
     }
@@ -203,7 +201,7 @@ export default function MockExamSessionPage() {
       await api.submitMock(sessionId);
       router.push(`/review?sessionId=${sessionId}`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Unable to submit mock exam');
+      setError(e instanceof Error ? e.message : copy.submitting);
       setBusy(false);
     }
   }
@@ -211,16 +209,22 @@ export default function MockExamSessionPage() {
   const terminalCopy = useMemo(() => {
     if (lifecycle === 'EXPIRED')
       return {
-        title: 'Mock exam expired',
-        description: 'The server timer reached zero. Your saved answers are available for review.',
+        title: copy.mockExpired,
+        description: copy.expiredDescription,
       };
     if (lifecycle === 'SUBMITTED')
       return {
-        title: 'Mock exam submitted',
-        description: 'Your mock exam has already been submitted. Review the score and answers.',
+        title: copy.mockSubmitted,
+        description: copy.submittedDescription,
       };
     return null;
-  }, [lifecycle]);
+  }, [
+    copy.expiredDescription,
+    copy.mockExpired,
+    copy.mockSubmitted,
+    copy.submittedDescription,
+    lifecycle,
+  ]);
 
   if (!sessionId)
     return (
@@ -246,7 +250,7 @@ export default function MockExamSessionPage() {
               void load();
             }}
           >
-            Retry
+            {copy.retry}
           </Button>
         </Card>
       </StudentShell>
@@ -254,7 +258,7 @@ export default function MockExamSessionPage() {
   if (!session)
     return (
       <StudentShell>
-        <p className="text-slate-500">Loading mock exam…</p>
+        <p className="text-slate-500">{copy.loading}</p>
       </StudentShell>
     );
 
@@ -264,12 +268,12 @@ export default function MockExamSessionPage() {
         <Card>
           <Badge tone={lifecycle === 'EXPIRED' ? 'amber' : 'green'}>{lifecycle}</Badge>
           <SectionTitle
-            eyebrow="Mock exam complete"
+            eyebrow={copy.mockComplete}
             title={terminalCopy.title}
             description={terminalCopy.description}
           />
           <Button onClick={() => router.push(`/review?sessionId=${sessionId}`)}>
-            Review result →
+            {copy.reviewAnswers}
           </Button>
         </Card>
       </StudentShell>
@@ -280,21 +284,21 @@ export default function MockExamSessionPage() {
     return (
       <StudentShell>
         <Card>
-          <Badge tone="amber">PAUSED</Badge>
+          <Badge tone="amber">{copy.paused}</Badge>
           <SectionTitle
-            eyebrow="Mock exam saved"
-            title="Ready to resume?"
-            description="Your answers, position, and server-authoritative time are saved."
+            eyebrow={copy.mockComplete}
+            title={copy.readyResume}
+            description={copy.savedDescription}
           />
           <div className="flex flex-wrap gap-3">
             <Button onClick={resume} disabled={busy}>
-              {busy ? 'Resuming…' : 'Resume mock exam →'}
+              {busy ? copy.resuming : copy.resumeMock}
             </Button>
             <Button
               className="bg-white text-slate-700 shadow-none hover:bg-slate-50"
               onClick={() => router.push('/mock-exams')}
             >
-              Back to mock exams
+              {copy.backMocks}
             </Button>
           </div>
         </Card>
@@ -307,11 +311,11 @@ export default function MockExamSessionPage() {
       <StudentShell>
         <Card>
           <SectionTitle
-            eyebrow="Mock exam"
-            title="No questions available"
-            description="This mock exam has no questions to display."
+            eyebrow={copy.mockExams}
+            title={copy.noQuestions}
+            description={copy.noQuestionsDescription}
           />
-          <Button onClick={() => router.push('/mock-exams')}>Back to mock exams</Button>
+          <Button onClick={() => router.push('/mock-exams')}>{copy.backMocks}</Button>
         </Card>
       </StudentShell>
     );
@@ -322,19 +326,15 @@ export default function MockExamSessionPage() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[.16em] text-blue-300">
-              Mock exam mode
+              {copy.mockMode}
             </p>
             <h1 className="mt-2 text-2xl font-bold">
-              {session.blueprint?.name ?? 'Exam simulation'}
+              {session.blueprint?.name ?? copy.examSimulation}
             </h1>
-            <p className="mt-1 text-sm text-slate-300">
-              No hints or explanations until final submission.
-            </p>
+            <p className="mt-1 text-sm text-slate-300">{copy.noHints}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs uppercase tracking-widest text-slate-400">
-              Server time remaining
-            </p>
+            <p className="text-xs uppercase tracking-widest text-slate-400">{copy.timeRemaining}</p>
             <p className="mt-1 font-mono text-2xl font-bold" aria-live="polite">
               {formatTime(seconds)}
             </p>
@@ -345,7 +345,7 @@ export default function MockExamSessionPage() {
           <ProgressHeader
             current={index + 1}
             total={questions.length}
-            label={`Answered ${answered} of ${questions.length}`}
+            label={copy.answered(answered, questions.length)}
           />
         </div>
       </div>
@@ -353,7 +353,7 @@ export default function MockExamSessionPage() {
       <div className="mx-auto mt-5 grid max-w-5xl gap-5 lg:grid-cols-[1fr_220px]">
         <Card className="p-6 sm:p-9">
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
-            Question {index + 1}
+            {copy.questionNumber(index + 1)}
           </p>
           {question.instruction && (
             <p className="mt-4 text-sm italic text-slate-500">{question.instruction}</p>
@@ -378,10 +378,10 @@ export default function MockExamSessionPage() {
           </div>
           <p className="mt-3 min-h-5 text-xs text-slate-500" aria-live="polite">
             {savingQuestionId === question.id
-              ? 'Saving answer…'
+              ? copy.savingAnswer
               : answers[question.id]
-                ? 'Answer saved'
-                : 'Choose an answer to save it.'}
+                ? copy.answerSaved
+                : copy.chooseAnswer}
           </p>
           <div className="mt-5 flex flex-wrap justify-between gap-3 border-t border-slate-100 pt-5">
             <Button
@@ -389,22 +389,22 @@ export default function MockExamSessionPage() {
               onClick={() => void goToQuestion(index - 1)}
               disabled={index === 0 || busy}
             >
-              ← Previous
+              {copy.previous}
             </Button>
             {index < questions.length - 1 ? (
               <Button onClick={() => void goToQuestion(index + 1)} disabled={busy}>
-                Next →
+                {copy.nextShort}
               </Button>
             ) : (
               <Button className="bg-slate-950 hover:bg-slate-800" onClick={submit} disabled={busy}>
-                {busy ? 'Submitting…' : 'Submit mock exam'}
+                {busy ? copy.submitting : copy.submitMock}
               </Button>
             )}
           </div>
         </Card>
 
         <Card>
-          <p className="text-sm font-bold">Question navigator</p>
+          <p className="text-sm font-bold">{copy.navigator}</p>
           <div className="mt-4 grid grid-cols-5 gap-2">
             {questions.map((item, questionIndex) => (
               <button
@@ -418,22 +418,20 @@ export default function MockExamSessionPage() {
               </button>
             ))}
           </div>
-          <p className="mt-4 text-xs leading-5 text-slate-500">
-            Green numbers have an answer. You can change answers before submitting.
-          </p>
+          <p className="mt-4 text-xs leading-5 text-slate-500">{copy.answeredHelp}</p>
           <div className="mt-6 grid gap-2">
             <Button
               className="bg-amber-600 hover:bg-amber-700"
               onClick={pauseAndExit}
               disabled={busy}
             >
-              {busy ? 'Saving…' : 'Pause & exit'}
+              {busy ? copy.saving : copy.pauseExit}
             </Button>
             <Link
               className="text-center text-sm font-semibold text-slate-600 hover:text-slate-950"
               href="/mock-exams"
             >
-              Cancel
+              {copy.cancel}
             </Link>
           </div>
         </Card>
