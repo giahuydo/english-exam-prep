@@ -13,6 +13,7 @@ const en = {
   speakingWriting: 'Speaking + Writing',
   formatMemory: 'Exam Map',
   formatMemoryDescription: 'Remember the route, timing, and recurring task patterns — not just one question.',
+  progressBySection: 'Progress by section',
   mocks: 'Mock exams',
   mistakes: 'Mistakes',
   progress: 'Progress',
@@ -557,6 +558,7 @@ const vi: Partial<LearnerCopy> = {
   practiceAnother: 'Làm bộ khác',
   formatMemory: 'Bản đồ cấu trúc đề',
   formatMemoryDescription: 'Ghi nhớ trình tự, thời lượng và dạng bài lặp lại — không chỉ từng câu hỏi.',
+  progressBySection: 'Tiến độ theo phần',
 };
 
 export const learnerCopy = { en, vi: { ...en, ...vi } } as const;
