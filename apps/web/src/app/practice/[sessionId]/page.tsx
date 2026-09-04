@@ -205,7 +205,7 @@ export default function PracticeSessionPage() {
             </Button>
           </div>
         )}
-        <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4"><p className="text-sm font-bold text-slate-800">{language === 'vi' ? 'Mức độ chắc chắn' : 'Confidence'}</p><div className="mt-3 flex flex-wrap gap-2">{(['KNOW', 'UNSURE', 'GUESS'] as const).map((item) => <button key={item} type="button" onClick={() => setConfidence(item)} className={`rounded-xl border px-3 py-2 text-sm font-semibold ${confidence === item ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-700'}`}>{item === 'KNOW' ? 'Know' : item === 'UNSURE' ? 'Unsure' : 'Guess'}</button>)}</div></div>
+        <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4"><p className="text-sm font-bold text-slate-800">{copy.confidenceLabel}</p><div className="mt-3 flex flex-wrap gap-2">{(['KNOW', 'UNSURE', 'GUESS'] as const).map((item) => <button key={item} type="button" onClick={() => setConfidence(item)} className={`rounded-xl border px-3 py-2 text-sm font-semibold ${confidence === item ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-700'}`}>{item === 'KNOW' ? copy.confidenceKnow : item === 'UNSURE' ? copy.confidenceUnsure : copy.confidenceGuess}</button>)}</div></div>
         <div className={`mt-6 grid gap-5 ${q.context ? 'lg:grid-cols-[3fr_2fr]' : ''}`}>
           <Card className={`p-6 sm:p-9 ${q.context && !showPassage ? 'hidden md:block' : ''}`}>
             {q.context && (
