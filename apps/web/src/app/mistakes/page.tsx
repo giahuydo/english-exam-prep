@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api-client';
+import { learnerCopy, useLanguage } from '@/lib/language';
+import { StudentShell } from '@/components/shells';
 
 interface MistakeRow {
   id: string;
@@ -21,6 +23,7 @@ interface MistakeRow {
 }
 
 export default function MistakesPage() {
+  const copy = learnerCopy[useLanguage().language];
   const [rows, setRows] = useState<MistakeRow[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [starting, setStarting] = useState(false);
@@ -47,15 +50,15 @@ export default function MistakesPage() {
     }
   }
 
-  if (error) return <p className="text-red-600">{error}</p>;
+  if (error) return <StudentShell><p className="text-red-600">{error}</p></StudentShell>;
 
   return (
-    <section className="grid gap-4">
+    <StudentShell><section className="grid gap-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold">Your mistakes</h1>
+          <h1 className="text-xl font-semibold">{copy.mistakesTitle}</h1>
           <p className="mt-1 text-sm text-gray-600">
-            {rows.length} distinct question{rows.length === 1 ? '' : 's'} answered incorrectly.
+            {copy.mistakesDescription(rows.length)}
           </p>
         </div>
         <button
@@ -63,12 +66,12 @@ export default function MistakesPage() {
           disabled={starting || rows.length === 0}
           className="rounded bg-black px-3 py-1.5 text-sm text-white disabled:opacity-50"
         >
-          {starting ? 'Starting...' : 'Start mistake review'}
+          {starting ? copy.starting : copy.startMistakeReview}
         </button>
       </div>
 
       {rows.length === 0 ? (
-        <p className="text-sm text-gray-500">No mistakes yet — take some practice runs.</p>
+        <p className="text-sm text-gray-500">{copy.noMistakes}</p>
       ) : null}
 
       {rows.map((r) => {
@@ -82,7 +85,7 @@ export default function MistakesPage() {
             </p>
             {correct ? (
               <p className="mt-2 text-sm text-green-700">
-                Answer: {correct.optionKey}. {correct.content}
+                {copy.answer} {correct.optionKey}. {correct.content}
               </p>
             ) : null}
             {r.question.explanation ? (
@@ -94,9 +97,9 @@ export default function MistakesPage() {
 
       <div>
         <Link className="text-sm text-blue-600 underline" href="/dashboard">
-          Back to dashboard
+          {copy.backDashboardLong}
         </Link>
       </div>
-    </section>
+    </section></StudentShell>
   );
 }

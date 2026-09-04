@@ -5,51 +5,52 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 export type LearnerLanguage = 'en' | 'vi';
 const STORAGE_KEY = 'learner-language';
 
-const LanguageContext = createContext<{
-  language: LearnerLanguage;
-  setLanguage: (language: LearnerLanguage) => void;
-}>({ language: 'en', setLanguage: () => undefined });
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<LearnerLanguage>('en');
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved === 'en' || saved === 'vi') setLanguageState(saved);
-  }, []);
-
-  function setLanguage(next: LearnerLanguage) {
-    setLanguageState(next);
-    window.localStorage.setItem(STORAGE_KEY, next);
-  }
-
-  const value = useMemo(() => ({ language, setLanguage }), [language]);
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
-}
-
-export function useLanguage() {
-  return useContext(LanguageContext);
-}
-
-export const learnerCopy = {
-  en: {
-    today: 'Today', learn: 'Learn', practice: 'Practice', vocabulary: 'Vocabulary', mocks: 'Mock exams', mistakes: 'Mistakes',
-    workspace: 'Workspace', streak: 'Study streak', logout: 'Log out',
-    questionProgress: 'Question progress', passage: 'Passage', question: 'Question',
-    needHint: 'Need a hint?', revealHint: (n: number) => `Reveal hint ${n}`, hint: (n: number) => `Hint ${n}`,
-    submitAnswer: 'Submit answer', checking: 'Checking…', correct: 'Correct', incorrect: 'Incorrect',
-    niceWork: 'Nice work — your answer is correct.', review: 'Let’s learn from this answer.', why: 'Why',
-    rule: 'Rule / structure', example: 'Example', commonMistake: 'Common mistake', otherAnswers: 'Why the other answers do not work',
-    correctAnswer: 'Correct answer', next: 'Next question →', result: 'See result →', formatMemory: 'Exam memory', formatMemoryDescription: 'Recall the exam shape before you practise it.', recall: 'Active recall', reveal: 'Reveal answer', hide: 'Hide answer', progressBySection: 'Progress by section', verified: 'Verified structure', conservative: 'Current conservative view',
-  },
-  vi: {
-    today: 'Hôm nay', learn: 'Học', practice: 'Luyện tập', vocabulary: 'Từ vựng', mocks: 'Đề thi thử', mistakes: 'Cần ôn lại',
-    workspace: 'Khu học tập', streak: 'Chuỗi ngày học', logout: 'Đăng xuất',
-    questionProgress: 'Tiến độ câu hỏi', passage: 'Đoạn văn', question: 'Câu hỏi',
-    needHint: 'Cần gợi ý?', revealHint: (n: number) => `Xem gợi ý ${n}`, hint: (n: number) => `Gợi ý ${n}`,
-    submitAnswer: 'Nộp câu trả lời', checking: 'Đang kiểm tra…', correct: 'Đúng', incorrect: 'Chưa đúng',
-    niceWork: 'Tốt lắm — câu trả lời của bạn chính xác.', review: 'Hãy cùng rút kinh nghiệm từ câu này.', why: 'Vì sao',
-    rule: 'Quy tắc / cấu trúc', example: 'Ví dụ', commonMistake: 'Lỗi thường gặp', otherAnswers: 'Vì sao các đáp án khác chưa phù hợp',
-    correctAnswer: 'Đáp án đúng', next: 'Câu tiếp theo →', result: 'Xem kết quả →', formatMemory: 'Ghi nhớ đề thi', formatMemoryDescription: 'Tự truy hồi cấu trúc đề trước khi luyện tập.', recall: 'Nhớ chủ động', reveal: 'Xem đáp án', hide: 'Ẩn đáp án', progressBySection: 'Tiến độ theo phần', verified: 'Cấu trúc đã xác minh', conservative: 'Thông tin hiện tại thận trọng',
-  },
+const en = {
+  today: 'Today', learn: 'Learn', practice: 'Practice', mocks: 'Mock exams', mistakes: 'Mistakes', progress: 'Progress',
+  workspace: 'Workspace', streak: 'Study streak', logout: 'Log out', language: 'Language',
+  questionProgress: 'Question progress', passage: 'Passage', question: 'Question',
+  needHint: 'Need a hint?', nudge: 'Need a nudge?', revealHint: (n: number) => `Reveal hint ${n}`, hint: (n: number) => `Hint ${n}`, shown: 'shown',
+  submitAnswer: 'Submit answer', checking: 'Checking…', correct: 'Correct', incorrect: 'Incorrect',
+  niceWork: 'Nice work — your answer is correct.', review: 'Let’s learn from this answer.', why: 'Why',
+  rule: 'Rule / structure', example: 'Example', commonMistake: 'Common mistake', otherAnswers: 'Why the other answers do not work', correctAnswer: 'Correct answer',
+  next: 'Next question →', result: 'See result →', retry: 'Retry', loading: 'Loading…', preparing: 'Preparing…', saving: 'Saving…',
+  backDashboard: 'Back to Today', backMocks: 'Back to mock exams', cancel: 'Cancel', getStarted: 'Get started',
+  focusedPractice: 'Focused practice', practiceComplete: 'Practice complete', learnAsAnswer: 'Learn as you answer', exitPractice: 'Exit practice',
+  reviewAnswers: 'Review answers →', startQuestions: 'Start 5 questions →', startPractice: 'Start 5-question set →',
+  learningPath: 'Learning path', chooseTopic: 'Choose a topic to begin', chooseTopicDescription: 'Start with the area you want to improve. Then choose a focused skill, read the lesson, and take its checkpoint.',
+  noTopics: 'No learning topics yet', noTopicsDescription: 'Your learning library has not been published yet. Check back soon.', selected: 'Selected ✓', viewSkills: 'View skills →',
+  learningSkill: (n: number) => `${n} learning skill${n === 1 ? '' : 's'} available`, skills: 'skills', changeTopic: 'Change topic',
+  noSkills: 'No skills in this topic yet', noSkillsDescription: 'This topic is ready for content, but no learning scopes have been published.',
+  focusedSkill: 'Focused learning skill', partOf: (name: string) => `Part of ${name}`, checkpoint: (n: number) => `${n} checkpoint${n === 1 ? '' : 's'}`,
+  learnAction: 'Learn →', reviewAction: 'Review →', continueAction: 'Continue →',
+  lessonFallback: (name: string) => `Study ${name}: notice the signal words and read the whole sentence before choosing an answer.`,
+  learningScope: 'Learning scope', focusedLesson: 'Focused lesson', learnStep: '1 · Learn', checkStep: '2 · Check', mentalModel: 'Build a clear mental model', remember: 'Remember',
+  signalSentence: 'Look for the signal in the sentence.', agreementMeaning: 'Check agreement and meaning together.', completeSentence: 'Read the complete sentence again.', fiveCheckpoint: 'Five-question checkpoint', checkpointDescription: 'Your result will tell you whether to continue or review this lesson.', checkQuestions: 'Check 5 questions →',
+  unablePractice: 'Unable to load practice', missingPractice: 'Missing practice route.', unableSubmit: 'Unable to submit answer', unableHint: 'Unable to reveal hint',
+  unableToday: 'Unable to load today', loadingToday: 'Loading today’s study plan…', tryAgain: 'Try again', goodMorning: (name: string) => `Good morning, ${name}.`, todayDescription: 'Choose one focused next step. You do not need to do everything today.',
+  continueLearning: 'Continue learning', pickUp: 'Pick up your unfinished session', buildWin: 'Build your next win', questionsLeft: (n: number) => `You have ${n} questions left in this session.`, feedbackDescription: 'Start a short focused set and get teaching feedback after every answer.',
+  needsReview: 'Needs review', questionsRevisit: (n: number) => `${n} question${n === 1 ? '' : 's'} to revisit`, caughtUp: 'You are all caught up', reviewFresh: 'Review mistakes while the reasoning is still fresh.', caughtUpDescription: 'Complete a practice set and this space will guide your next review.', practiceMistakes: 'Practice mistakes →', practiceNow: 'Practice now →',
+  examMode: 'Exam mode', startResumeMock: 'Start or resume a mock exam', mockDescription: 'A timed, distraction-free simulation. No hints or explanations until you submit.', chooseMock: 'Choose a mock exam →', resumeMock: 'Resume mock exam →',
+  recentProgress: 'Recent progress', noCompleted: 'No completed sessions yet. Your first result will appear here.', reviewSession: 'Review this session →', focusAreas: 'Focus areas', workNext: 'What to work on next', seeTopics: 'See all topics →', focusEmpty: 'Your focus areas will appear after you answer some questions.', attempts: (n: number) => `${n} attempt${n === 1 ? '' : 's'}`,
+  mockMode: 'Mock exam mode', examSimulation: 'Exam simulation', noHints: 'No hints or explanations until final submission.', timeRemaining: 'Server time remaining', answered: (a: number, t: number) => `Answered ${a} of ${t}`, questionNumber: (n: number) => `Question ${n}`, savingAnswer: 'Saving answer…', answerSaved: 'Answer saved', chooseAnswer: 'Choose an answer to save it.', previous: '← Previous', nextShort: 'Next →', submitting: 'Submitting…', submitMock: 'Submit mock exam', navigator: 'Question navigator', answeredHelp: 'Green numbers have an answer. You can change answers before submitting.', pauseExit: 'Pause & exit', paused: 'PAUSED', readyResume: 'Ready to resume?', savedDescription: 'Your answers, position, and server-authoritative time are saved.', resuming: 'Resuming…', mockExpired: 'Mock exam expired', expiredDescription: 'The server timer reached zero. Your saved answers are available for review.', mockSubmitted: 'Mock exam submitted', submittedDescription: 'Your mock exam has already been submitted. Review the score and answers.', mockComplete: 'Mock exam complete', noQuestions: 'No questions available', noQuestionsDescription: 'This mock exam has no questions to display.',
+  assessmentMode: 'Assessment mode', mockExams: 'Mock exams', mockListDescription: 'A timed simulation with no hints or explanations until you submit.', noBlueprints: 'No mock exam blueprints are available yet.', publishBlueprint: 'Your exam types are ready; an administrator needs to publish a blueprint.', versionTiming: (v: string) => `Version ${v} · Exam-style timing and navigation.`, questions: (n: number) => `${n} questions`, timed: 'Timed', beginMock: 'Begin mock exam →',
+  progressTitle: 'See your momentum', progressDescription: 'Small improvements compound. Keep your practice consistent and your weak areas visible.', overallAccuracy: 'Overall accuracy', studyTime: 'Study time', sessions: 'Sessions', skillBreakdown: 'Skill breakdown', thisMonth: 'This month', thisWeek: 'this week',
+  loginWelcome: 'Welcome back', continueProgress: 'Continue your progress', signInDescription: 'Sign in to pick up exactly where you left off.', email: 'Email', password: 'Password', signingIn: 'Signing in…', signIn: 'Sign in', newTo: 'New to Elevate?', createAccount: 'Create an account', loginFailed: 'Login failed',
+  register: 'Register', name: 'Name', studyTarget: 'Study Target (optional)', pickLater: '-- pick later --', creating: 'Creating...', createAccountButton: 'Create account', registerFailed: 'Register failed',
+  mistakesTitle: 'Your mistakes', mistakesDescription: (n: number) => `${n} distinct question${n === 1 ? '' : 's'} answered incorrectly.`, startMistakeReview: 'Start mistake review', starting: 'Starting...', noMistakes: 'No mistakes yet — take some practice runs.', answer: 'Answer:', backDashboardLong: 'Back to dashboard',
+  score: 'Score', questionsLabel: 'Questions', answerReview: 'Answer review', reviewMistakes: 'Review mistakes →', practiceWeak: 'Practice weak topics →', practiceAnother: 'Practice another set',
 } as const;
+
+type LearnerCopy = { [K in keyof typeof en]: (typeof en)[K] extends (...args: infer A) => infer R ? (...args: A) => R : string };
+const vi: Partial<LearnerCopy> = {
+  today: 'Hôm nay', learn: 'Học', practice: 'Luyện tập', mocks: 'Đề thi thử', mistakes: 'Cần ôn lại', progress: 'Tiến độ', workspace: 'Khu học tập', streak: 'Chuỗi ngày học', logout: 'Đăng xuất', language: 'Ngôn ngữ',
+  questionProgress: 'Tiến độ câu hỏi', passage: 'Đoạn văn', question: 'Câu hỏi', needHint: 'Cần gợi ý?', nudge: 'Cần một gợi ý nhỏ?', revealHint: (n: number) => `Xem gợi ý ${n}`, hint: (n: number) => `Gợi ý ${n}`, shown: 'đã xem', submitAnswer: 'Nộp câu trả lời', checking: 'Đang kiểm tra…', correct: 'Đúng', incorrect: 'Chưa đúng', niceWork: 'Tốt lắm — câu trả lời của bạn chính xác.', review: 'Hãy cùng rút kinh nghiệm từ câu này.', why: 'Vì sao', rule: 'Quy tắc / cấu trúc', example: 'Ví dụ', commonMistake: 'Lỗi thường gặp', otherAnswers: 'Vì sao các đáp án khác chưa phù hợp', correctAnswer: 'Đáp án đúng', next: 'Câu tiếp theo →', retry: 'Thử lại', loading: 'Đang tải…', preparing: 'Đang chuẩn bị…', saving: 'Đang lưu…', backDashboard: 'Quay lại Hôm nay', backMocks: 'Quay lại đề thi thử', cancel: 'Hủy', getStarted: 'Bắt đầu', focusedPractice: 'Luyện tập có trọng tâm', practiceComplete: 'Hoàn thành luyện tập', learnAsAnswer: 'Học qua từng câu trả lời', exitPractice: 'Thoát luyện tập', reviewAnswers: 'Xem lại câu trả lời →', startQuestions: 'Làm 5 câu hỏi →', startPractice: 'Bắt đầu bộ 5 câu →', learningPath: 'Lộ trình học', chooseTopic: 'Chọn chủ đề để bắt đầu', chooseTopicDescription: 'Bắt đầu với phần bạn muốn cải thiện. Sau đó chọn kỹ năng, đọc bài học và làm bài kiểm tra.', noTopics: 'Chưa có chủ đề học tập', noTopicsDescription: 'Thư viện học tập chưa được xuất bản. Hãy quay lại sau.', selected: 'Đã chọn ✓', viewSkills: 'Xem kỹ năng →', learningSkill: (n: number) => `${n} kỹ năng học tập có sẵn`, skills: 'kỹ năng', changeTopic: 'Đổi chủ đề', noSkills: 'Chưa có kỹ năng trong chủ đề này', noSkillsDescription: 'Chủ đề đã sẵn sàng nhưng chưa có phạm vi học tập được xuất bản.', focusedSkill: 'Kỹ năng học tập trọng tâm', partOf: (name: string) => `Thuộc ${name}`, checkpoint: (n: number) => `${n} lần kiểm tra`, learnAction: 'Học →', reviewAction: 'Ôn lại →', continueAction: 'Tiếp tục →', learningScope: 'Phạm vi học tập', focusedLesson: 'Bài học trọng tâm', learnStep: '1 · Học', checkStep: '2 · Kiểm tra', mentalModel: 'Xây dựng mô hình tư duy rõ ràng', remember: 'Ghi nhớ', signalSentence: 'Tìm dấu hiệu trong câu.', agreementMeaning: 'Kiểm tra cả sự hòa hợp và ý nghĩa.', completeSentence: 'Đọc lại toàn bộ câu.', fiveCheckpoint: 'Bài kiểm tra 5 câu', checkpointDescription: 'Kết quả sẽ cho biết bạn nên tiếp tục hay ôn lại bài học.', checkQuestions: 'Làm 5 câu kiểm tra →',
+  unablePractice: 'Không thể tải bài luyện tập', missingPractice: 'Thiếu đường dẫn luyện tập.', unableSubmit: 'Không thể nộp câu trả lời', unableHint: 'Không thể hiển thị gợi ý', unableToday: 'Không thể tải nội dung hôm nay', loadingToday: 'Đang tải kế hoạch học hôm nay…', tryAgain: 'Thử lại', goodMorning: (name: string) => `Chào buổi sáng, ${name}.`, todayDescription: 'Chọn một bước tiếp theo có trọng tâm. Bạn không cần làm mọi thứ hôm nay.', continueLearning: 'Tiếp tục học', pickUp: 'Tiếp tục phiên học dang dở', buildWin: 'Tạo tiến bộ tiếp theo', questionsLeft: (n: number) => `Bạn còn ${n} câu hỏi trong phiên này.`, feedbackDescription: 'Bắt đầu một bộ câu hỏi ngắn và nhận phản hồi sau mỗi câu.', needsReview: 'Cần ôn lại', questionsRevisit: (n: number) => `${n} câu hỏi cần xem lại`, caughtUp: 'Bạn đã hoàn tất mọi việc', reviewFresh: 'Ôn lại lỗi khi cách suy luận còn rõ ràng.', caughtUpDescription: 'Hoàn thành một bộ luyện tập để nhận hướng dẫn ôn tiếp theo.', practiceMistakes: 'Luyện câu sai →', practiceNow: 'Luyện tập ngay →', examMode: 'Chế độ thi', startResumeMock: 'Bắt đầu hoặc tiếp tục đề thi thử', mockDescription: 'Mô phỏng có giới hạn thời gian, không bị xao nhãng. Không có gợi ý hay giải thích trước khi nộp bài.', chooseMock: 'Chọn đề thi thử →', resumeMock: 'Tiếp tục đề thi thử →', recentProgress: 'Tiến độ gần đây', noCompleted: 'Chưa có phiên nào hoàn thành. Kết quả đầu tiên sẽ xuất hiện ở đây.', reviewSession: 'Xem lại phiên này →', focusAreas: 'Khu vực trọng tâm', workNext: 'Nên học gì tiếp theo', seeTopics: 'Xem tất cả chủ đề →', focusEmpty: 'Khu vực trọng tâm sẽ xuất hiện sau khi bạn trả lời một số câu hỏi.', attempts: (n: number) => `${n} lần làm`, mockMode: 'Chế độ thi thử', examSimulation: 'Mô phỏng kỳ thi', noHints: 'Không có gợi ý hay giải thích cho đến khi nộp bài.', timeRemaining: 'Thời gian còn lại trên máy chủ', answered: (a: number, t: number) => `Đã trả lời ${a}/${t}`, questionNumber: (n: number) => `Câu hỏi ${n}`, savingAnswer: 'Đang lưu câu trả lời…', answerSaved: 'Đã lưu câu trả lời', chooseAnswer: 'Chọn câu trả lời để lưu.', previous: '← Trước', nextShort: 'Tiếp →', submitting: 'Đang nộp…', submitMock: 'Nộp bài thi thử', navigator: 'Danh sách câu hỏi', answeredHelp: 'Các số màu xanh đã có câu trả lời. Bạn có thể đổi đáp án trước khi nộp.', pauseExit: 'Tạm dừng & thoát', paused: 'ĐÃ TẠM DỪNG', readyResume: 'Sẵn sàng tiếp tục?', savedDescription: 'Câu trả lời, vị trí và thời gian theo máy chủ đã được lưu.', resuming: 'Đang tiếp tục…', mockExpired: 'Đề thi thử đã hết giờ', expiredDescription: 'Đồng hồ máy chủ đã về 0. Các câu trả lời đã lưu sẵn sàng để xem lại.', mockSubmitted: 'Đã nộp đề thi thử', submittedDescription: 'Đề thi thử đã được nộp. Hãy xem điểm và câu trả lời.', mockComplete: 'Hoàn thành đề thi thử', noQuestions: 'Không có câu hỏi', noQuestionsDescription: 'Đề thi thử này không có câu hỏi để hiển thị.', assessmentMode: 'Chế độ đánh giá', mockExams: 'Đề thi thử', mockListDescription: 'Mô phỏng có giới hạn thời gian, không có gợi ý hay giải thích trước khi nộp.', noBlueprints: 'Chưa có đề thi thử nào.', publishBlueprint: 'Loại kỳ thi của bạn đã sẵn sàng; quản trị viên cần xuất bản đề.', versionTiming: (v: string) => `Phiên bản ${v} · Thời gian và điều hướng theo kiểu đề thi.`, questions: (n: number) => `${n} câu hỏi`, timed: 'Có giờ', beginMock: 'Bắt đầu đề thi thử →', progressTitle: 'Xem đà tiến bộ', progressDescription: 'Những tiến bộ nhỏ sẽ tích lũy. Hãy luyện tập đều đặn và theo dõi điểm yếu.', overallAccuracy: 'Độ chính xác tổng thể', studyTime: 'Thời gian học', sessions: 'Phiên học', skillBreakdown: 'Phân tích kỹ năng', thisMonth: 'Tháng này', thisWeek: 'tuần này', loginWelcome: 'Chào mừng trở lại', continueProgress: 'Tiếp tục tiến độ', signInDescription: 'Đăng nhập để tiếp tục đúng nơi bạn đã dừng.', email: 'Email', password: 'Mật khẩu', signingIn: 'Đang đăng nhập…', signIn: 'Đăng nhập', newTo: 'Mới dùng Elevate?', createAccount: 'Tạo tài khoản', loginFailed: 'Đăng nhập thất bại', register: 'Đăng ký', name: 'Tên', studyTarget: 'Mục tiêu học (không bắt buộc)', pickLater: '-- chọn sau --', creating: 'Đang tạo...', createAccountButton: 'Tạo tài khoản', registerFailed: 'Đăng ký thất bại', mistakesTitle: 'Các câu sai', mistakesDescription: (n: number) => `${n} câu hỏi riêng biệt đã trả lời sai.`, startMistakeReview: 'Bắt đầu ôn câu sai', starting: 'Đang bắt đầu...', noMistakes: 'Chưa có câu sai — hãy làm một vài lượt luyện tập.', answer: 'Đáp án:', backDashboardLong: 'Quay lại bảng điều khiển', result: 'Kết quả', score: 'Điểm', questionsLabel: 'Câu hỏi', answerReview: 'Xem lại câu trả lời', reviewMistakes: 'Ôn câu sai →', practiceWeak: 'Luyện chủ đề yếu →', practiceAnother: 'Làm bộ khác',
+};
+
+export const learnerCopy = { en, vi: { ...en, ...vi } } as const;
+export function getLearnerCopy(language: LearnerLanguage) { return learnerCopy[language] ?? learnerCopy.en; }
+
+const LanguageContext = createContext<{ language: LearnerLanguage; setLanguage: (language: LearnerLanguage) => void }>({ language: 'en', setLanguage: () => undefined });
+export function LanguageProvider({ children }: { children: ReactNode }) { const [language, setLanguageState] = useState<LearnerLanguage>('en'); useEffect(() => { const saved = window.localStorage.getItem(STORAGE_KEY); if (saved === 'en' || saved === 'vi') setLanguageState(saved); }, []); useEffect(() => { document.documentElement.lang = language; }, [language]); function setLanguage(next: LearnerLanguage) { setLanguageState(next); window.localStorage.setItem(STORAGE_KEY, next); } const value = useMemo(() => ({ language, setLanguage }), [language]); return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>; }
+export function useLanguage() { return useContext(LanguageContext); }
