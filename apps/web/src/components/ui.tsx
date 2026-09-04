@@ -1,15 +1,139 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { learnerCopy, useLanguage } from '@/lib/language';
 
-export function Badge({ children, tone = 'slate' }: { children: ReactNode; tone?: 'slate' | 'blue' | 'green' | 'amber' | 'rose' }) {
-  const tones = { slate: 'bg-slate-100 text-slate-600', blue: 'bg-blue-50 text-blue-700', green: 'bg-emerald-50 text-emerald-700', amber: 'bg-amber-50 text-amber-700', rose: 'bg-rose-50 text-rose-700' };
-  return <span className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold ${tones[tone]}`}>{children}</span>;
+export function Badge({
+  children,
+  tone = 'slate',
+}: {
+  children: ReactNode;
+  tone?: 'slate' | 'blue' | 'green' | 'amber' | 'rose';
+}) {
+  const tones = {
+    slate: 'bg-slate-100 text-slate-600',
+    blue: 'bg-blue-50 text-blue-700',
+    green: 'bg-emerald-50 text-emerald-700',
+    amber: 'bg-amber-50 text-amber-700',
+    rose: 'bg-rose-50 text-rose-700',
+  };
+  return (
+    <span
+      className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold ${tones[tone]}`}
+    >
+      {children}
+    </span>
+  );
 }
-export function Button({ children, className = '', ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button className={`min-h-10 rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${className}`} {...props}>{children}</button>;
+export function Button({
+  children,
+  className = '',
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      className={`min-h-10 rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 }
-export function Card({ children, className = '' }: { children: ReactNode; className?: string }) { return <div className={`rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ${className}`}>{children}</div>; }
-export function SectionTitle({ eyebrow, title, description, action }: { eyebrow?: string; title: string; description?: string; action?: ReactNode }) { return <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div>{eyebrow && <p className="mb-1 text-xs font-bold uppercase tracking-[.16em] text-blue-600">{eyebrow}</p>}<h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">{title}</h1>{description && <p className="mt-2 max-w-2xl text-sm text-slate-500">{description}</p>}</div>{action}</div>; }
-export function ProgressBar({ value, color = 'bg-blue-600' }: { value: number; color?: string }) { return <div className="h-2 overflow-hidden rounded-full bg-slate-100"><div className={`h-full rounded-full ${color}`} style={{ width: `${Math.min(100, value)}%` }} /></div>; }
-export function EmptyState({ title, description, href, action }: { title: string; description: string; href?: string; action?: string }) { return <Card className="py-12 text-center"><div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">✦</div><h2 className="font-bold text-slate-900">{title}</h2><p className="mx-auto mt-2 max-w-sm text-sm text-slate-500">{description}</p>{href && <Link href={href} className="mt-5 inline-flex min-h-10 items-center rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white">{action ?? 'Get started'}</Link>}</Card>; }
-export function Stat({ label, value, detail, icon }: { label: string; value: string; detail?: string; icon: string }) { return <Card><div className="flex items-start justify-between"><div><p className="text-sm text-slate-500">{label}</p><p className="mt-2 text-2xl font-bold text-slate-950">{value}</p>{detail && <p className="mt-1 text-xs text-emerald-600">{detail}</p>}</div><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-lg">{icon}</span></div></Card>; }
+export function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={`rounded-2xl border border-slate-200 bg-white p-5 shadow-sm ${className}`}>
+      {children}
+    </div>
+  );
+}
+export function SectionTitle({
+  eyebrow,
+  title,
+  description,
+  action,
+}: {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  action?: ReactNode;
+}) {
+  return (
+    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        {eyebrow && (
+          <p className="mb-1 text-xs font-bold uppercase tracking-[.16em] text-blue-600">
+            {eyebrow}
+          </p>
+        )}
+        <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">{title}</h1>
+        {description && <p className="mt-2 max-w-2xl text-sm text-slate-500">{description}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+export function ProgressBar({ value, color = 'bg-blue-600' }: { value: number; color?: string }) {
+  return (
+    <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+      <div
+        className={`h-full rounded-full ${color}`}
+        style={{ width: `${Math.min(100, value)}%` }}
+      />
+    </div>
+  );
+}
+export function EmptyState({
+  title,
+  description,
+  href,
+  action,
+}: {
+  title: string;
+  description: string;
+  href?: string;
+  action?: string;
+}) {
+  const copy = learnerCopy[useLanguage().language];
+  return (
+    <Card className="py-12 text-center">
+      <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
+        ✦
+      </div>
+      <h2 className="font-bold text-slate-900">{title}</h2>
+      <p className="mx-auto mt-2 max-w-sm text-sm text-slate-500">{description}</p>
+      {href && (
+        <Link
+          href={href}
+          className="mt-5 inline-flex min-h-10 items-center rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white"
+        >
+          {action ?? copy.getStarted}
+        </Link>
+      )}
+    </Card>
+  );
+}
+export function Stat({
+  label,
+  value,
+  detail,
+  icon,
+}: {
+  label: string;
+  value: string;
+  detail?: string;
+  icon: string;
+}) {
+  return (
+    <Card>
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-sm text-slate-500">{label}</p>
+          <p className="mt-2 text-2xl font-bold text-slate-950">{value}</p>
+          {detail && <p className="mt-1 text-xs text-emerald-600">{detail}</p>}
+        </div>
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-lg">
+          {icon}
+        </span>
+      </div>
+    </Card>
+  );
+}

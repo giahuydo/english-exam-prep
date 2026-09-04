@@ -2,16 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api-client';
-import { learnerExamLabel, isHcmusContext } from '@app/shared';
+import { learnerCopy, useLanguage } from '@/lib/language';
+import { LanguageToggle } from '@/components/shells';
 
 interface ExamTypeRow {
   id: string;
   code: string;
   name: string;
-  description?: string | null;
 }
 
 export default function RegisterPage() {
+  const copy = learnerCopy[useLanguage().language];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -42,7 +43,7 @@ export default function RegisterPage() {
       window.localStorage.setItem('role', res.user.role);
       window.location.href = '/dashboard';
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Register failed');
+      setError(err instanceof Error ? err.message : copy.registerFailed);
     } finally {
       setLoading(false);
     }
@@ -50,10 +51,13 @@ export default function RegisterPage() {
 
   return (
     <section className="max-w-sm">
-      <h1 className="text-xl font-semibold">Register</h1>
+      <div className="mb-3 flex justify-end">
+        <LanguageToggle />
+      </div>
+      <h1 className="text-xl font-semibold">{copy.register}</h1>
       <form onSubmit={submit} className="mt-4 space-y-3">
         <div>
-          <label className="block text-sm">Name</label>
+          <label className="block text-sm">{copy.name}</label>
           <input
             className="w-full rounded border px-2 py-1"
             value={name}
@@ -62,7 +66,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="block text-sm">Email</label>
+          <label className="block text-sm">{copy.email}</label>
           <input
             className="w-full rounded border px-2 py-1"
             type="email"
@@ -72,7 +76,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="block text-sm">Password</label>
+          <label className="block text-sm">{copy.password}</label>
           <input
             className="w-full rounded border px-2 py-1"
             type="password"
@@ -83,17 +87,16 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="block text-sm">Study target (optional)</label>
-          <p className="mb-1 text-xs text-gray-500">Choose a VSTEP proficiency target. HCMUS is available only as an orientation context.</p>
+          <label className="block text-sm">{copy.studyTarget}</label>
           <select
             className="w-full rounded border px-2 py-1"
             value={examTypeId}
             onChange={(e) => setExamTypeId(e.target.value)}
           >
-            <option value="">-- pick later --</option>
+            <option value="">{copy.pickLater}</option>
             {examTypes.map((t) => (
               <option key={t.id} value={t.id}>
-                {learnerExamLabel(t.code, t.name)}{isHcmusContext(t.code) ? ' · orientation context' : ''}
+                {t.name} ({t.code})
               </option>
             ))}
           </select>
@@ -102,7 +105,7 @@ export default function RegisterPage() {
           className="rounded bg-black px-3 py-1.5 text-sm text-white disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? 'Creating...' : 'Create account'}
+          {loading ? copy.creating : copy.createAccountButton}
         </button>
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
       </form>

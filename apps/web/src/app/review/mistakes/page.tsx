@@ -1,2 +1,22 @@
-import { StudentShell } from '@/components/shells'; import { EmptyState, SectionTitle } from '@/components/ui';
-export default function MistakesPage(){return <StudentShell><SectionTitle eyebrow="Review" title="Your mistake notebook" description="Revisit tricky questions and turn every wrong answer into a useful insight."/><EmptyState title="Your notebook is clear" description="Once you complete a practice session, questions you want to revisit will appear here." href="/practice" action="Start practicing"/></StudentShell>}
+'use client';
+import { learnerCopy, useLanguage } from '@/lib/language';
+import { StudentShell } from '@/components/shells';
+import { EmptyState, SectionTitle } from '@/components/ui';
+export default function ReviewMistakesPage() {
+  const copy = learnerCopy[useLanguage().language];
+  return (
+    <StudentShell>
+      <SectionTitle
+        eyebrow={copy.reviewLabel}
+        title={copy.notebookTitle}
+        description={copy.notebookDescription}
+      />
+      <EmptyState
+        title={copy.notebookClear}
+        description={copy.notebookClearDescription}
+        href="/practice"
+        action={copy.startPracticeLabel}
+      />
+    </StudentShell>
+  );
+}
