@@ -5,6 +5,7 @@ import { CurrentUser, AuthUser } from '../auth/current-user.decorator';
 import { UpdateStudyTargetDto } from '@app/shared';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
 import { MistakeReviewService } from '../modules/learning/mistake-review.service';
+import { LearningMemoryService } from '../modules/learning/learning-memory.service';
 
 @Controller('me')
 @UseGuards(JwtAuthGuard)
@@ -12,6 +13,7 @@ export class MeStatsController {
   constructor(
     private readonly prisma: PrismaService,
     private readonly mistakes: MistakeReviewService,
+    private readonly memory: LearningMemoryService,
   ) {}
 
   @Get('stats')
@@ -46,6 +48,9 @@ export class MeStatsController {
       },
     });
   }
+
+  @Get('learning-memory/due')
+  dueMemory(@CurrentUser() user: AuthUser) { return this.memory.due(user.id); }
 
   @Get('dashboard')
   async dashboard(@CurrentUser() user: AuthUser) {

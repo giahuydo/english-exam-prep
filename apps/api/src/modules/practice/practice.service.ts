@@ -4,6 +4,7 @@ import type { StartSessionDto, SubmitAnswerDto } from '@app/shared';
 import { QuestionSelectorService } from '../learning/question-selector.service';
 import { MasteryService } from '../learning/mastery.service';
 import { MistakeReviewService } from '../learning/mistake-review.service';
+import { LearningMemoryService } from '../learning/learning-memory.service';
 
 interface PracticeQuestionOption {
   id: string;
@@ -59,6 +60,7 @@ export class PracticeService {
     private readonly selector: QuestionSelectorService,
     private readonly mastery: MasteryService,
     private readonly mistakes: MistakeReviewService,
+    private readonly memory: LearningMemoryService,
   ) {}
 
   private toPracticeQuestion(question: PracticeQuestionRecord) {
@@ -198,13 +200,10 @@ export class PracticeService {
     });
 
     if (isCorrect !== null) {
-      await this.mastery.recordAttempt(
-        userId,
-        dto.questionId,
-        isCorrect,
-        dto.hintLevelUsed,
-        dto.timeSpentSeconds,
-      );
+      await Promise.all([
+        this.mastery.recordAttempt(userId, dto.questionId, isCorrect, dto.hintLevelUsed, dto.timeSpentSeconds),
+        this.memory.recordQuestion(userId, dto.questionId, { correct: isCorrect, confidence: isCorrect ? 'UNSURE' : 'GUESS', errorTag: isCorrect ? null : 'answer-error' }),
+      ]);
     }
 
     return this.buildAnswerResponse(attempt.id, isCorrect, dto.selectedOptionId ?? null, dto.hintLevelUsed, dto.questionId, dto.language);

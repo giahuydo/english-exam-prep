@@ -147,6 +147,24 @@ enum StudyPlanGeneratedBy {
   ADMIN
 }
 
+enum LearningMemoryConfidence {
+  KNOW
+  UNSURE
+  GUESS
+}
+
+enum LearningMemoryState {
+  NEW
+  LEARNING
+  STRONG
+}
+
+enum LearningMemoryAction {
+  ANSWERED
+  AGAIN
+  ADVANCE
+}
+
 // ---------------------------------------------------------------------------
 // Users
 // ---------------------------------------------------------------------------
@@ -172,6 +190,7 @@ model User {
   learningProgress  UserLearningScope[]
   userTopicStats    UserTopicStat[]
   studyPlans        StudyPlan[]
+  learningMemories  LearningMemory[]
 
   @@map("users")
 }
@@ -388,6 +407,7 @@ model Question {
   hintReveals      HintReveal[]
   attempts         QuestionAttempt[]
   sessionQuestions QuizSessionQuestion[]
+  learningMemories LearningMemory[]
 
   @@index([status])
   @@index([level])
@@ -760,6 +780,33 @@ model UserTopicStat {
   @@unique([userId, topicId])
   @@index([userId])
   @@map("user_topic_stats")
+}
+
+model LearningMemory {
+  id             String                  @id @default(uuid())
+  userId         String                  @map("user_id")
+  questionId     String?                 @map("question_id")
+  vocabularyKey  String?                 @map("vocabulary_key")
+  confidence     LearningMemoryConfidence @default(UNSURE)
+  state          LearningMemoryState     @default(NEW)
+  lastReviewedAt DateTime?               @map("last_reviewed_at")
+  nextReviewAt   DateTime?               @map("next_review_at")
+  reviewCount    Int                     @default(0) @map("review_count")
+  streak         Int                     @default(0)
+  ease           Float                   @default(2.5)
+  errorTag       String?                 @map("error_tag")
+  source         String                  @default("PRACTICE")
+  createdAt      DateTime                @default(now()) @map("created_at")
+  updatedAt      DateTime                @updatedAt @map("updated_at")
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@unique([userId, vocabularyKey])
+  @@index([userId, nextReviewAt])
+  @@index([questionId])
+  @@map("learning_memories")
 }
 
 // ---------------------------------------------------------------------------

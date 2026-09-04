@@ -25,6 +25,8 @@ interface Question {
   instruction?: string | null;
   context?: string | null;
   options: QuestionOption[];
+  level?: string | null;
+  topics?: Array<{ topic: { id: string; name: string; code?: string; category?: string } }>;
   hint1?: string | null;
   hint2?: string | null;
   hint3?: string | null;
@@ -67,6 +69,7 @@ export default function PracticeSessionPage() {
   const [result, setResult] = useState<Result | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
   const [hintText, setHintText] = useState<string[]>([]);
+  const [confidence, setConfidence] = useState<'KNOW' | 'UNSURE' | 'GUESS'>('UNSURE');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   useEffect(() => {
@@ -90,14 +93,14 @@ export default function PracticeSessionPage() {
     if (!q || !selected || !sessionId) return;
     setBusy(true);
     try {
-      setResult(
-        await api.submitAnswer(sessionId, {
+      const answer = await api.submitAnswer(sessionId, {
           questionId: q.id,
           selectedOptionId: selected,
           hintLevelUsed: hintLevel,
           language,
-        }),
-      );
+        });
+      setResult(answer);
+      await api.recordLearningMemory(q.id, { correct: answer.isCorrect === true, confidence, errorTag: answer.isCorrect ? null : 'answer-error' });
     } catch (e) {
       setError(e instanceof Error ? e.message : copy.unableSubmit);
     } finally {
@@ -202,6 +205,7 @@ export default function PracticeSessionPage() {
             </Button>
           </div>
         )}
+        <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4"><p className="text-sm font-bold text-slate-800">{language === 'vi' ? 'Mức độ chắc chắn' : 'Confidence'}</p><div className="mt-3 flex flex-wrap gap-2">{(['KNOW', 'UNSURE', 'GUESS'] as const).map((item) => <button key={item} type="button" onClick={() => setConfidence(item)} className={`rounded-xl border px-3 py-2 text-sm font-semibold ${confidence === item ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-700'}`}>{item === 'KNOW' ? 'Know' : item === 'UNSURE' ? 'Unsure' : 'Guess'}</button>)}</div></div>
         <div className={`mt-6 grid gap-5 ${q.context ? 'lg:grid-cols-[3fr_2fr]' : ''}`}>
           <Card className={`p-6 sm:p-9 ${q.context && !showPassage ? 'hidden md:block' : ''}`}>
             {q.context && (

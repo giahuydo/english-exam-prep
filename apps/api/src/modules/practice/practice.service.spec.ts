@@ -26,7 +26,8 @@ describe('PracticeService learning flow', () => {
     const mastery = { recordAttempt: jest.fn() };
     const selector = { select: jest.fn() };
     const mistakes = { list: jest.fn() };
-    return { service: new PracticeService(prisma as never, selector as never, mastery as never, mistakes as never), prisma, mastery };
+    const memory = { recordQuestion: jest.fn() };
+    return { service: new PracticeService(prisma as never, selector as never, mastery as never, mistakes as never, memory as never), prisma, mastery, memory };
   }
 
   it('returns sanitized questions without answer or explanation fields', async () => {

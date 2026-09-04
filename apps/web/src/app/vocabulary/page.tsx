@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Badge, Button, Card, SectionTitle } from '@/components/ui';
 import { StudentShell } from '@/components/shells';
 import { learnerCopy, useLanguage } from '@/lib/language';
+import { api } from '@/lib/api-client';
 
 type Word = {
   word: string;
@@ -79,6 +80,7 @@ export default function VocabularyPage() {
   const [selected, setSelected] = useState('maintain');
   const [revealed, setRevealed] = useState(false);
   const [confidence, setConfidence] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
   const word = useMemo(() => words.find((item) => item.word === selected) ?? words[0], [selected]);
   function open(next: string) {
     if (words.some((item) => item.word === next)) {
@@ -152,7 +154,7 @@ export default function VocabularyPage() {
               <button
                 key={item}
                 type="button"
-                onClick={() => setConfidence(item)}
+                onClick={async () => { setConfidence(item); setSaving(true); try { await api.recordVocabularyMemory(word.word, item.toUpperCase() as 'KNOW' | 'UNSURE' | 'GUESS'); } finally { setSaving(false); } }}
                 className={`rounded-xl border px-3 py-2 text-sm font-semibold ${confidence === item ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-200 bg-white text-slate-700'}`}
               >
                 {item}
@@ -181,7 +183,7 @@ export default function VocabularyPage() {
           {revealed && (
             <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
               <span className="text-sm text-slate-500">
-                {confidence ? copy.marked(confidence) : copy.markConfidence}
+                {saving ? 'Saving…' : confidence ? copy.marked(confidence) : copy.markConfidence}
               </span>
               <div className="flex gap-2">
                 <Link
