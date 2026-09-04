@@ -277,7 +277,6 @@ const en = {
   backDashboardLong: 'Back to dashboard',
   score: 'Score',
   questionsLabel: 'Questions',
-  progressBySection: 'Progress by section',
   reviewMistakes: 'Review mistakes →',
   practiceWeak: 'Practice weak topics →',
   practiceAnother: 'Practice another set',
