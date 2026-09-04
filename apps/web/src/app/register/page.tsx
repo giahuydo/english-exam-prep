@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api-client';
+import { learnerExamLabel, isHcmusContext } from '@app/shared';
 
 interface ExamTypeRow {
   id: string;
   code: string;
   name: string;
+  description?: string | null;
 }
 
 export default function RegisterPage() {
@@ -81,7 +83,8 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <label className="block text-sm">Study Target (optional)</label>
+          <label className="block text-sm">Study target (optional)</label>
+          <p className="mb-1 text-xs text-gray-500">Choose a VSTEP proficiency target. HCMUS is available only as an orientation context.</p>
           <select
             className="w-full rounded border px-2 py-1"
             value={examTypeId}
@@ -90,7 +93,7 @@ export default function RegisterPage() {
             <option value="">-- pick later --</option>
             {examTypes.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name} ({t.code})
+                {learnerExamLabel(t.code, t.name)}{isHcmusContext(t.code) ? ' · orientation context' : ''}
               </option>
             ))}
           </select>
