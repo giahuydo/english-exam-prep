@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { api } from '@/lib/api-client';
 import { Badge, Button, Card, SectionTitle } from '@/components/ui';
 import { StudentShell } from '@/components/shells';

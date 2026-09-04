@@ -4,7 +4,14 @@ import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { useLanguage, learnerCopy } from '@/lib/language';
 
-const studentLinks = ['/dashboard', '/learn', '/practice', '/mock-exams', '/mistakes'];
+const studentLinks = [
+  '/dashboard',
+  '/learn',
+  '/vocabulary',
+  '/practice',
+  '/mock-exams',
+  '/mistakes',
+];
 const adminLinks = [
   ['/admin', 'Overview'],
   ['/admin/exams', 'Exams'],
@@ -14,10 +21,11 @@ const adminLinks = [
 ];
 function Nav({ admin = false }: { admin?: boolean }) {
   const path = usePathname() ?? '';
-  const copy = learnerCopy[useLanguage().language];
+  const { language } = useLanguage();
+  const copy = learnerCopy[language];
   const labels = admin
     ? adminLinks.map(([, label]) => label)
-    : [copy.today, copy.learn, copy.practice, copy.mocks, copy.mistakes];
+    : [copy.today, copy.learn, copy.vocabulary, copy.practice, copy.mocks, copy.mistakes];
   const links = admin ? adminLinks.map(([href]) => href) : studentLinks;
   return (
     <nav className="flex gap-1 overflow-x-auto lg:grid lg:gap-2">
@@ -35,15 +43,13 @@ function Nav({ admin = false }: { admin?: boolean }) {
 }
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage();
-  const copy = learnerCopy[language];
   return (
     <div
       className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-0.5"
-      aria-label={copy.language}
+      aria-label={learnerCopy[useLanguage().language].language}
     >
       <button
         type="button"
-        aria-pressed={language === 'en'}
         onClick={() => setLanguage('en')}
         className={`rounded-md px-2 py-1 text-[11px] font-bold ${language === 'en' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-400'}`}
       >
@@ -51,7 +57,6 @@ export function LanguageToggle() {
       </button>
       <button
         type="button"
-        aria-pressed={language === 'vi'}
         onClick={() => setLanguage('vi')}
         className={`rounded-md px-2 py-1 text-[11px] font-bold ${language === 'vi' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-400'}`}
       >
@@ -61,7 +66,8 @@ export function LanguageToggle() {
   );
 }
 export function StudentShell({ children }: { children: ReactNode }) {
-  const copy = learnerCopy[useLanguage().language];
+  const { language } = useLanguage();
+  const copy = learnerCopy[language];
   return (
     <div className="min-h-screen bg-[#f7f9fc]">
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
@@ -76,7 +82,7 @@ export function StudentShell({ children }: { children: ReactNode }) {
             <LanguageToggle />
             <div className="hidden items-center gap-4 sm:flex">
               <span className="text-sm text-slate-500">
-                {copy.streak} <b className="text-slate-900">7 days</b>
+                {copy.streak} <b className="text-slate-900">7</b>
               </span>
               <Link href="/login" className="text-sm font-semibold text-slate-600">
                 {copy.logout}

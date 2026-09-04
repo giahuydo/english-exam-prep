@@ -1,10 +1,12 @@
 'use client';
-import type { ReactNode } from 'react';
+
+import { useState, type ReactNode } from 'react';
+import { Badge, Card, ProgressBar } from './ui';
 import { learnerCopy, useLanguage } from '@/lib/language';
-import { Badge, Button, Card, ProgressBar } from './ui';
+
 export type LearningStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'PASSED' | 'NEEDS_REVIEW';
+
 export function StatusBadge({ status }: { status: LearningStatus }) {
-  const copy = learnerCopy[useLanguage().language];
   const tone =
     status === 'PASSED'
       ? 'green'
@@ -13,16 +15,9 @@ export function StatusBadge({ status }: { status: LearningStatus }) {
         : status === 'IN_PROGRESS'
           ? 'blue'
           : 'slate';
-  const label =
-    status === 'PASSED'
-      ? copy.correct
-      : status === 'NEEDS_REVIEW'
-        ? copy.needsReview
-        : status === 'IN_PROGRESS'
-          ? copy.continueLearning
-          : copy.getStarted;
-  return <Badge tone={tone}>{label}</Badge>;
+  return <Badge tone={tone}>{status.replaceAll('_', ' ')}</Badge>;
 }
+
 export function StudyCard({
   title,
   description,
@@ -50,6 +45,7 @@ export function StudyCard({
     </Card>
   );
 }
+
 export function AnswerOption({
   optionKey,
   content,
@@ -80,6 +76,128 @@ export function AnswerOption({
     </button>
   );
 }
+
+export function LearningAnswerTiles({
+  options,
+  selected,
+  disabled,
+  onSelect,
+  kind = 'grammar',
+}: {
+  options: Array<{ id: string; optionKey: string; content: string }>;
+  selected?: string;
+  disabled?: boolean;
+  onSelect: (id: string) => void;
+  kind?: 'grammar' | 'vocabulary' | 'reading' | 'speaking';
+}) {
+  const copy = learnerCopy[useLanguage().language];
+  const labels =
+    kind === 'vocabulary'
+      ? [copy.meaning, copy.bestFit, copy.contextLabel]
+      : kind === 'reading'
+        ? [copy.evidence, copy.mainIdea, copy.detail]
+        : kind === 'speaking'
+          ? [copy.naturalSound, copy.meaning, copy.grammar]
+          : [copy.structure, copy.signal, copy.meaning];
+  return (
+    <div className="grid gap-3 sm:grid-cols-2" aria-label={copy.answerChoices}>
+      {options.map((option, index) => (
+        <button
+          key={option.id}
+          type="button"
+          aria-pressed={selected === option.id}
+          disabled={disabled}
+          onClick={() => onSelect(option.id)}
+          className={`group rounded-2xl border-2 p-4 text-left transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${selected === option.id ? 'border-blue-600 bg-blue-50 shadow-sm' : 'border-slate-200 bg-white hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-sm'} disabled:cursor-default`}
+        >
+          <div className="flex items-center justify-between">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-sm font-bold text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-700">
+              {option.optionKey}
+            </span>
+            <span className="rounded-full bg-slate-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-400">
+              {labels[index % labels.length]}
+            </span>
+          </div>
+          <p className="mt-4 text-base font-semibold leading-6 text-slate-900">{option.content}</p>
+          <p className="mt-2 text-xs text-slate-500">{copy.tileHelper}</p>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function SignalBadges({
+  kind = 'grammar',
+}: {
+  kind?: 'grammar' | 'vocabulary' | 'reading' | 'speaking';
+}) {
+  const copy = learnerCopy[useLanguage().language];
+  const badges =
+    kind === 'vocabulary'
+      ? [copy.collocation, copy.wordFamily, copy.contrast]
+      : kind === 'reading'
+        ? [copy.evidence, copy.keySentence, copy.inference]
+        : kind === 'speaking'
+          ? [copy.stress, copy.chunk, copy.shadow]
+          : [copy.signalWord, copy.structure, copy.agreement];
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {badges.map((badge) => (
+        <span
+          key={badge}
+          className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-[11px] font-semibold text-blue-700"
+        >
+          {badge}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function ShadowingMode({ text }: { text: string }) {
+  const copy = learnerCopy[useLanguage().language];
+  const [active, setActive] = useState(false);
+  const chunks = text.split(/(?<=[,.!?])\\s+|\\s+(?=to\\b)/i).filter(Boolean);
+  function play() {
+    setActive(true);
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.onend = () => setActive(false);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      setTimeout(() => setActive(false), Math.max(1200, chunks.length * 700));
+    }
+  }
+  return (
+    <div className="mt-5 rounded-2xl border border-violet-100 bg-violet-50/50 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-sm font-bold text-violet-950">{copy.shadowingMode}</p>
+          <p className="mt-1 text-xs text-violet-700">{copy.shadowingHelper}</p>
+        </div>
+        <button
+          type="button"
+          onClick={play}
+          className="rounded-xl bg-violet-600 px-3 py-2 text-xs font-bold text-white"
+        >
+          {active ? copy.playing : copy.readAloud}
+        </button>
+      </div>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {chunks.map((chunk, index) => (
+          <span
+            key={`${chunk}-${index}`}
+            className={`rounded-lg px-2 py-1 text-sm ${active ? 'bg-white text-violet-900' : 'bg-violet-100 text-violet-800'}`}
+          >
+            {chunk}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ProgressHeader({
   current,
   total,
@@ -89,12 +207,10 @@ export function ProgressHeader({
   total: number;
   label?: string;
 }) {
-  const { language } = useLanguage();
-  const text = label ?? learnerCopy[language].questionProgress;
   return (
-    <div aria-label={`${text}: ${current} of ${total}`}>
+    <div aria-label={`${label}: ${current} of ${total}`}>
       <div className="mb-2 flex justify-between text-sm">
-        <span className="font-semibold text-slate-700">{text}</span>
+        <span className="font-semibold text-slate-700">{label}</span>
         <span className="text-slate-500">
           {current} / {total}
         </span>
@@ -103,6 +219,7 @@ export function ProgressHeader({
     </div>
   );
 }
+
 export function FeedbackPanel({
   correct,
   explanation,

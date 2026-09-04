@@ -1,16 +1,133 @@
 'use client';
-
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api-client';
-import { AdaptiveReviewPanel } from '@/components/adaptive-review';
-import { readAnswerSignals, type AnswerSignal } from '@/lib/adaptive-review';
-import { Card, SectionTitle } from '@/components/ui';
+import { learnerCopy, useLanguage } from '@/lib/language';
+import { Badge, Button, Card, SectionTitle } from '@/components/ui';
 import { StudentShell } from '@/components/shells';
-
-interface Mistake { id: string; createdAt: string; question: { content: string; level?: string; questionType?: { name: string } | null; topics?: Array<{ topic: { name: string } }> } }
+interface Attempt {
+  id: string;
+  isCorrect: boolean | null;
+  question: {
+    content: string;
+    explanation?: string | null;
+    questionType?: { name: string } | null;
+  };
+}
+interface Session {
+  type: string;
+  status: string;
+  score: number;
+  correctCount: number;
+  totalQuestions: number;
+}
+function Inner() {
+  const copy = learnerCopy[useLanguage().language];
+  const params = useSearchParams();
+  const id = params.get('sessionId') ?? '';
+  const [session, setSession] = useState<Session | null>(null);
+  const [attempts, setAttempts] = useState<Attempt[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    if (!id) return;
+    Promise.all([api.getPracticeSession(id), api.listAttempts(id)])
+      .then(([s, a]) => {
+        setSession(s as Session);
+        setAttempts(a as Attempt[]);
+      })
+      .catch((e) => setError(e instanceof Error ? e.message : copy.unableResult));
+  }, [copy.unableResult, id]);
+  if (!id)
+    return (
+      <StudentShell>
+        <Card>
+          <p>{copy.missingSession}</p>
+        </Card>
+      </StudentShell>
+    );
+  if (error)
+    return (
+      <StudentShell>
+        <Card>
+          <p role="alert" className="text-rose-700">
+            {error}
+          </p>
+        </Card>
+      </StudentShell>
+    );
+  if (!session)
+    return (
+      <StudentShell>
+        <p className="text-slate-500">{copy.loading}</p>
+      </StudentShell>
+    );
+  const weak = attempts.filter((a) => !a.isCorrect);
+  return (
+    <StudentShell>
+      <SectionTitle
+        eyebrow={session.type === 'MOCK_EXAM' ? copy.mockResult : copy.practiceResult}
+        title={`${Math.round(session.score * 100)}%`}
+        description={copy.resultSummary(session.correctCount, session.totalQuestions)}
+        action={<Badge tone={session.score >= 0.7 ? 'green' : 'amber'}>{session.status}</Badge>}
+      />
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Card>
+          <p className="text-sm text-slate-500">{copy.score}</p>
+          <p className="mt-2 text-3xl font-bold">{Math.round(session.score * 100)}%</p>
+        </Card>
+        <Card>
+          <p className="text-sm text-slate-500">{copy.questionsLabel}</p>
+          <p className="mt-2 text-3xl font-bold">
+            {session.correctCount}/{session.totalQuestions}
+          </p>
+        </Card>
+        <Card>
+          <p className="text-sm text-slate-500">{copy.needsReview}</p>
+          <p className="mt-2 text-3xl font-bold">{weak.length}</p>
+        </Card>
+      </div>
+      <div className="mt-5 flex flex-wrap gap-3">
+        <Link
+          className="inline-flex min-h-11 items-center rounded-xl bg-blue-600 px-5 text-sm font-semibold text-white"
+          href={weak.length ? '/mistakes' : '/learn'}
+        >
+          {weak.length ? copy.reviewMistakes : copy.practiceWeak}
+        </Link>
+        <Link
+          className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 px-5 text-sm font-semibold text-slate-800"
+          href="/dashboard"
+        >
+          {copy.backDashboard}
+        </Link>
+      </div>
+      <Card className="mt-5">
+        <h2 className="text-lg font-bold">{copy.answerReview}</h2>
+        <div className="mt-4 space-y-3">
+          {attempts.map((a, i) => (
+            <details key={a.id} className="rounded-xl border border-slate-200 p-4">
+              <summary className="cursor-pointer font-semibold">
+                {i + 1}. {a.isCorrect ? copy.correct : copy.needsReview} ·{' '}
+                {a.question.questionType?.name ?? copy.question}
+              </summary>
+              <p className="mt-3 text-sm leading-6 text-slate-700">{a.question.content}</p>
+              {a.question.explanation && (
+                <p className="mt-2 text-sm text-slate-500">{a.question.explanation}</p>
+              )}
+            </details>
+          ))}
+        </div>
+      </Card>
+      <Button className="mt-5" onClick={() => (window.location.href = '/practice')}>
+        {copy.practiceAnother}
+      </Button>
+    </StudentShell>
+  );
+}
 export default function ReviewPage() {
-  const [mistakes, setMistakes] = useState<Mistake[]>([]); const [signals, setSignals] = useState<AnswerSignal[]>([]); const [error, setError] = useState<string | null>(null);
-  useEffect(() => { setSignals(readAnswerSignals()); api.myMistakes().then((rows) => setMistakes((rows as Mistake[]).slice(0, 8))).catch((e) => setError(e instanceof Error ? e.message : 'Unable to load review')); }, []);
-  return <StudentShell><SectionTitle eyebrow="VSTEP B1/B2 review" title="Review what matters next" description="Prioritize recent mistakes, low-confidence correct answers, and recurring skill patterns — not random practice." />{error && <Card><p role="alert" className="text-rose-700">{error}</p></Card>}<div className="grid gap-5 lg:grid-cols-[1.2fr_.8fr]"><AdaptiveReviewPanel signals={signals} /><Card><p className="text-xs font-bold uppercase tracking-widest text-blue-600">Mistake patterns</p><h2 className="mt-2 text-lg font-bold">Recent VSTEP B1/B2 gaps</h2>{mistakes.length ? <div className="mt-4 space-y-3">{mistakes.map((mistake) => <div key={mistake.id} className="rounded-xl border border-slate-100 p-3"><p className="text-sm font-semibold">{mistake.question.content}</p><p className="mt-1 text-xs text-slate-500">{mistake.question.level ?? 'B1/B2'} · {mistake.question.questionType?.name ?? 'Question'}{mistake.question.topics?.[0]?.topic ? ` · ${mistake.question.topics[0].topic.name}` : ''}</p></div>)}</div> : <p className="mt-4 text-sm text-slate-500">No mistakes yet. Complete a practice set to create a focused queue.</p>}<Link className="mt-4 inline-block text-sm font-semibold text-blue-700" href="/mistakes">See mistake notebook →</Link></Card></div><Card className="mt-5"><p className="text-xs font-bold uppercase tracking-widest text-slate-400">Review rhythm</p><div className="mt-4 grid gap-3 sm:grid-cols-4">{[['Today', 'Mistakes + guesses'], ['1d', 'Unsure answers'], ['3d', 'Correct, reinforced'], ['7d', 'Strong recall check']].map(([when, label]) => <div key={when} className="rounded-xl bg-slate-50 p-4"><p className="font-bold text-slate-900">{when}</p><p className="mt-1 text-xs leading-5 text-slate-500">{label}</p></div>)}</div><p className="mt-4 text-xs text-slate-400">Suggested intervals are a lightweight planning aid, not a guarantee of retention.</p></Card></StudentShell>;
+  return (
+    <Suspense fallback={<p>Loading…</p>}>
+      <Inner />
+    </Suspense>
+  );
 }
