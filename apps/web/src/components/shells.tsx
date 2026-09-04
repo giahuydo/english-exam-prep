@@ -5,8 +5,125 @@ import type { ReactNode } from 'react';
 import { useLanguage, learnerCopy } from '@/lib/language';
 
 const studentLinks = ['/dashboard', '/learn', '/practice', '/mock-exams', '/mistakes'];
-const adminLinks = [['/admin', 'Overview'], ['/admin/exams', 'Exams'], ['/admin/questions', 'Questions'], ['/admin/topics', 'Topics'], ['/admin/blueprints', 'Blueprints']];
-function Nav({ admin = false }: { admin?: boolean }) { const path = usePathname() ?? ''; const copy = learnerCopy[useLanguage().language]; const labels = admin ? adminLinks.map(([, label]) => label) : [copy.today, copy.learn, copy.practice, copy.mocks, copy.mistakes]; const links = admin ? adminLinks.map(([href]) => href) : studentLinks; return <nav className="flex gap-1 overflow-x-auto lg:grid lg:gap-2">{links.map((href, index) => <Link key={href} href={href} className={`whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-medium transition ${path === href || (href !== '/dashboard' && path.startsWith(href)) ? 'bg-blue-50 text-blue-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}>{labels[index]}</Link>)}</nav>; }
-export function LanguageToggle() { const { language, setLanguage } = useLanguage(); const copy = learnerCopy[language]; return <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-0.5" aria-label={copy.language}><button type="button" aria-pressed={language === 'en'} onClick={() => setLanguage('en')} className={`rounded-md px-2 py-1 text-[11px] font-bold ${language === 'en' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-400'}`}>EN</button><button type="button" aria-pressed={language === 'vi'} onClick={() => setLanguage('vi')} className={`rounded-md px-2 py-1 text-[11px] font-bold ${language === 'vi' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-400'}`}>VI</button></div>; }
-export function StudentShell({ children }: { children: ReactNode }) { const copy = learnerCopy[useLanguage().language]; return <div className="min-h-screen bg-[#f7f9fc]"><header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur"><div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6"><Link href="/dashboard" className="flex items-center gap-2 font-bold text-slate-950"><span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white">E</span> Elevate English</Link><div className="flex items-center gap-3"><LanguageToggle /><div className="hidden items-center gap-4 sm:flex"><span className="text-sm text-slate-500">{copy.streak} <b className="text-slate-900">7 days</b></span><Link href="/login" className="text-sm font-semibold text-slate-600">{copy.logout}</Link></div></div></div></header><div className="mx-auto grid max-w-7xl lg:grid-cols-[220px_1fr]"><aside className="hidden border-r border-slate-200 bg-white p-4 lg:block"><p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-widest text-slate-400">{copy.workspace}</p><Nav /></aside><main className="min-w-0 px-4 py-6 pb-24 sm:px-6 lg:px-10 lg:py-10">{children}</main></div><div className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-200 bg-white p-2 lg:hidden"><Nav /></div></div>; }
-export function AdminShell({ children }: { children: ReactNode }) { return <div className="min-h-screen bg-slate-950"><header className="border-b border-slate-800 bg-slate-900"><div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6"><Link href="/admin" className="font-bold text-white">Elevate <span className="text-blue-400">/ Admin</span></Link><Link href="/dashboard" className="text-sm text-slate-400 hover:text-white">Student view →</Link></div></header><div className="mx-auto grid max-w-7xl lg:grid-cols-[220px_1fr]"><aside className="hidden border-r border-slate-800 p-4 lg:block"><Nav admin /></aside><main className="min-w-0 px-4 py-6 text-slate-900 sm:px-6 lg:px-10 lg:py-10">{children}</main></div><div className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-800 bg-slate-900 p-2 lg:hidden"><Nav admin /></div></div>; }
+const adminLinks = [
+  ['/admin', 'Overview'],
+  ['/admin/exams', 'Exams'],
+  ['/admin/questions', 'Questions'],
+  ['/admin/topics', 'Topics'],
+  ['/admin/blueprints', 'Blueprints'],
+];
+function Nav({ admin = false }: { admin?: boolean }) {
+  const path = usePathname() ?? '';
+  const copy = learnerCopy[useLanguage().language];
+  const labels = admin
+    ? adminLinks.map(([, label]) => label)
+    : [copy.today, copy.learn, copy.practice, copy.mocks, copy.mistakes];
+  const links = admin ? adminLinks.map(([href]) => href) : studentLinks;
+  return (
+    <nav className="flex gap-1 overflow-x-auto lg:grid lg:gap-2">
+      {links.map((href, index) => (
+        <Link
+          key={href}
+          href={href}
+          className={`whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-medium transition ${path === href || (href !== '/dashboard' && path.startsWith(href)) ? 'bg-blue-50 text-blue-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
+        >
+          {labels[index]}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+export function LanguageToggle() {
+  const { language, setLanguage } = useLanguage();
+  const copy = learnerCopy[language];
+  return (
+    <div
+      className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-0.5"
+      aria-label={copy.language}
+    >
+      <button
+        type="button"
+        aria-pressed={language === 'en'}
+        onClick={() => setLanguage('en')}
+        className={`rounded-md px-2 py-1 text-[11px] font-bold ${language === 'en' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-400'}`}
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        aria-pressed={language === 'vi'}
+        onClick={() => setLanguage('vi')}
+        className={`rounded-md px-2 py-1 text-[11px] font-bold ${language === 'vi' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-400'}`}
+      >
+        VI
+      </button>
+    </div>
+  );
+}
+export function StudentShell({ children }: { children: ReactNode }) {
+  const copy = learnerCopy[useLanguage().language];
+  return (
+    <div className="min-h-screen bg-[#f7f9fc]">
+      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+          <Link href="/dashboard" className="flex items-center gap-2 font-bold text-slate-950">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white">
+              E
+            </span>{' '}
+            Elevate English
+          </Link>
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <div className="hidden items-center gap-4 sm:flex">
+              <span className="text-sm text-slate-500">
+                {copy.streak} <b className="text-slate-900">7 days</b>
+              </span>
+              <Link href="/login" className="text-sm font-semibold text-slate-600">
+                {copy.logout}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div className="mx-auto grid max-w-7xl lg:grid-cols-[220px_1fr]">
+        <aside className="hidden border-r border-slate-200 bg-white p-4 lg:block">
+          <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+            {copy.workspace}
+          </p>
+          <Nav />
+        </aside>
+        <main className="min-w-0 px-4 py-6 pb-24 sm:px-6 lg:px-10 lg:py-10">{children}</main>
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-200 bg-white p-2 lg:hidden">
+        <Nav />
+      </div>
+    </div>
+  );
+}
+export function AdminShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="min-h-screen bg-slate-950">
+      <header className="border-b border-slate-800 bg-slate-900">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+          <Link href="/admin" className="font-bold text-white">
+            Elevate <span className="text-blue-400">/ Admin</span>
+          </Link>
+          <Link href="/dashboard" className="text-sm text-slate-400 hover:text-white">
+            Student view →
+          </Link>
+        </div>
+      </header>
+      <div className="mx-auto grid max-w-7xl lg:grid-cols-[220px_1fr]">
+        <aside className="hidden border-r border-slate-800 p-4 lg:block">
+          <Nav admin />
+        </aside>
+        <main className="min-w-0 px-4 py-6 text-slate-900 sm:px-6 lg:px-10 lg:py-10">
+          {children}
+        </main>
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-800 bg-slate-900 p-2 lg:hidden">
+        <Nav admin />
+      </div>
+    </div>
+  );
+}
