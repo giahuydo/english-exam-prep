@@ -280,8 +280,6 @@ const en = {
   practiceAnother: 'Practice another set',
   formatMemory: 'Exam Map',
   formatMemoryDescription: 'Remember the route, timing, and recurring task patterns — not just one question.',
-  strategyDrills: 'Strategy drills',
-  speakingWriting: 'Speaking + Writing',
   progressBySection: 'Progress by section',
 } as const;
 
