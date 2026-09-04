@@ -6,7 +6,7 @@ import { api } from '@/lib/api-client';
 import { Badge, Card, EmptyState, SectionTitle } from '@/components/ui';
 import { StatusBadge, type LearningStatus } from '@/components/study';
 import { StudentShell } from '@/components/shells';
-import { learnerExamLabel, isHcmusContext } from '@app/shared';
+import { useLanguage, learnerCopy } from '@/lib/language';
 
 interface Topic {
   id: string;
@@ -38,6 +38,8 @@ function statusFor(scopes: Scope[]): LearningStatus {
 }
 
 export default function LearnPage() {
+  const { language } = useLanguage();
+  const copy = learnerCopy[language];
   const [scopes, setScopes] = useState<Scope[]>([]);
   const [me, setMe] = useState<Me | null>(null);
   const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
@@ -70,7 +72,7 @@ export default function LearnPage() {
   const selectedTopic = topics.find((topic) => topic.id === selectedTopicId) ?? null;
   const selectedScopes = scopes.filter((scope) => scope.topicId === selectedTopicId).sort((a, b) => a.position - b.position || a.name.localeCompare(b.name));
   const target = me?.currentExamType;
-  const targetCategory = target?.code === 'VSTEP' || isHcmusContext(target?.code) ? 'READING' : undefined;
+  const targetCategory = target?.code === 'VSTEP' ? 'READING' : target?.code === 'HCMUS_MASTER_ENTRANCE' ? 'GRAMMAR' : undefined;
   const orderedTopics = targetCategory ? [...topics].sort((a, b) => Number(b.category === targetCategory) - Number(a.category === targetCategory)) : topics;
 
   return <StudentShell>
@@ -78,7 +80,7 @@ export default function LearnPage() {
       eyebrow="Learning path"
       title="Choose a topic to begin"
       description="Start with the area you want to improve. Then choose a focused skill, read the lesson, and take its checkpoint."
-      action={target ? <Badge tone="blue">Target: {learnerExamLabel(target.code, target.name)}</Badge> : undefined}
+      action={<div className="flex flex-wrap items-center gap-3">{target && <Badge tone="blue">Target: {target.name}</Badge>}<Link className="text-sm font-semibold text-blue-700" href="/exam-map">Remember exam shape →</Link></div>}
     />
     {loading ? <div className="grid gap-4 sm:grid-cols-2"><Card><div className="h-5 w-2/3 animate-pulse rounded bg-slate-100" /><div className="mt-3 h-4 w-full animate-pulse rounded bg-slate-100" /></Card><Card><div className="h-5 w-1/2 animate-pulse rounded bg-slate-100" /><div className="mt-3 h-4 w-full animate-pulse rounded bg-slate-100" /></Card></div>
       : error ? <Card><p role="alert" className="text-rose-700">{error}</p><p className="mt-2 text-sm text-slate-500">Please refresh and try again.</p></Card>
@@ -97,7 +99,7 @@ export default function LearnPage() {
         </div>
         {selectedTopic && <section className="mt-8" aria-labelledby="skills-heading">
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[.16em] text-blue-600">{selectedTopic.category}</p><h2 id="skills-heading" className="mt-1 text-xl font-bold text-slate-950">{selectedTopic.name} skills</h2><p className="mt-1 text-sm text-slate-500">Choose one focused scope. Each lesson ends with a five-question checkpoint.</p></div><Link href="#topics" className="text-sm font-semibold text-slate-500 hover:text-blue-700">Change topic</Link></div>
-          {!selectedScopes.length ? <EmptyState title="No skills in this topic yet" description="This topic is ready for content, but no learning scopes have been published." /> : <div className="grid gap-3">{selectedScopes.map((scope, index) => { const progress = scope.progress?.[0]; const status = progress?.status ?? 'NOT_STARTED'; return <Card key={scope.id} className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-start gap-4"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-700">{index + 1}</span><div><h3 className="font-bold text-slate-950">{scope.name}</h3><p className="mt-1 text-sm text-slate-500">{scope.parent ? `Part of ${scope.parent.name}` : 'Shared VSTEP skill'}{progress?.attemptCount ? ` · ${progress.attemptCount} checkpoint${progress.attemptCount === 1 ? '' : 's'}` : ''}</p></div></div><div className="flex items-center gap-3"><StatusBadge status={status} /><Link href={`/learn/${scope.id}`} className="inline-flex min-h-10 items-center rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white hover:bg-blue-700">{status === 'NOT_STARTED' ? 'Learn →' : status === 'NEEDS_REVIEW' ? 'Review →' : 'Continue →'}</Link></div></Card>; })}</div>}
+          {!selectedScopes.length ? <EmptyState title="No skills in this topic yet" description="This topic is ready for content, but no learning scopes have been published." /> : <div className="grid gap-3">{selectedScopes.map((scope, index) => { const progress = scope.progress?.[0]; const status = progress?.status ?? 'NOT_STARTED'; return <Card key={scope.id} className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><div className="flex items-start gap-4"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-700">{index + 1}</span><div><h3 className="font-bold text-slate-950">{scope.name}</h3><p className="mt-1 text-sm text-slate-500">{scope.parent ? `Part of ${scope.parent.name}` : 'Focused learning skill'}{progress?.attemptCount ? ` · ${progress.attemptCount} checkpoint${progress.attemptCount === 1 ? '' : 's'}` : ''}</p></div></div><div className="flex items-center gap-3"><StatusBadge status={status} /><Link href={`/learn/${scope.id}`} className="inline-flex min-h-10 items-center rounded-xl bg-blue-600 px-4 text-sm font-semibold text-white hover:bg-blue-700">{status === 'NOT_STARTED' ? 'Learn →' : status === 'NEEDS_REVIEW' ? 'Review →' : 'Continue →'}</Link></div></Card>; })}</div>}
         </section>}
       </>}
   </StudentShell>;

@@ -40,7 +40,7 @@ export const learnerCopy = {
     submitAnswer: 'Submit answer', checking: 'Checking…', correct: 'Correct', incorrect: 'Incorrect',
     niceWork: 'Nice work — your answer is correct.', review: 'Let’s learn from this answer.', why: 'Why',
     rule: 'Rule / structure', example: 'Example', commonMistake: 'Common mistake', otherAnswers: 'Why the other answers do not work',
-    correctAnswer: 'Correct answer', next: 'Next question →', result: 'See result →',
+    correctAnswer: 'Correct answer', next: 'Next question →', result: 'See result →', formatMemory: 'Exam memory', formatMemoryDescription: 'Recall the exam shape before you practise it.', recall: 'Active recall', reveal: 'Reveal answer', hide: 'Hide answer', progressBySection: 'Progress by section', verified: 'Verified structure', conservative: 'Current conservative view',
   },
   vi: {
     today: 'Hôm nay', learn: 'Học', practice: 'Luyện tập', vocabulary: 'Từ vựng', mocks: 'Đề thi thử', mistakes: 'Cần ôn lại',
@@ -50,6 +50,6 @@ export const learnerCopy = {
     submitAnswer: 'Nộp câu trả lời', checking: 'Đang kiểm tra…', correct: 'Đúng', incorrect: 'Chưa đúng',
     niceWork: 'Tốt lắm — câu trả lời của bạn chính xác.', review: 'Hãy cùng rút kinh nghiệm từ câu này.', why: 'Vì sao',
     rule: 'Quy tắc / cấu trúc', example: 'Ví dụ', commonMistake: 'Lỗi thường gặp', otherAnswers: 'Vì sao các đáp án khác chưa phù hợp',
-    correctAnswer: 'Đáp án đúng', next: 'Câu tiếp theo →', result: 'Xem kết quả →',
+    correctAnswer: 'Đáp án đúng', next: 'Câu tiếp theo →', result: 'Xem kết quả →', formatMemory: 'Ghi nhớ đề thi', formatMemoryDescription: 'Tự truy hồi cấu trúc đề trước khi luyện tập.', recall: 'Nhớ chủ động', reveal: 'Xem đáp án', hide: 'Ẩn đáp án', progressBySection: 'Tiến độ theo phần', verified: 'Cấu trúc đã xác minh', conservative: 'Thông tin hiện tại thận trọng',
   },
 } as const;
