@@ -9,8 +9,6 @@ const en = {
   today: 'Today',
   learn: 'Learn',
   practice: 'Practice',
-  strategyDrills: 'Strategy drills',
-  speakingWriting: 'Speaking + Writing',
   mocks: 'Mock exams',
   mistakes: 'Mistakes',
   progress: 'Progress',
@@ -278,9 +276,6 @@ const en = {
   reviewMistakes: 'Review mistakes →',
   practiceWeak: 'Practice weak topics →',
   practiceAnother: 'Practice another set',
-  formatMemory: 'Exam Map',
-  formatMemoryDescription: 'Remember the route, timing, and recurring task patterns — not just one question.',
-  progressBySection: 'Progress by section',
 } as const;
 
 type LearnerCopy = {
