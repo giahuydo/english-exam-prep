@@ -7,6 +7,8 @@ import { learnerCopy, useLanguage } from '@/lib/language';
 import { Badge, Button, Card, SectionTitle } from '@/components/ui';
 import { StatusBadge, StudyCard } from '@/components/study';
 import { StudentShell } from '@/components/shells';
+import { AdaptiveReviewPanel } from '@/components/adaptive-review';
+import { readAnswerSignals, type AnswerSignal } from '@/lib/adaptive-review';
 interface DashboardData {
   profile: { name: string; currentExamType?: { name: string } | null };
   recentSessions: Array<{
@@ -28,7 +30,9 @@ export default function DashboardPage() {
   const copy = learnerCopy[useLanguage().language];
   const [data, setData] = useState<DashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [signals, setSignals] = useState<AnswerSignal[]>([]);
   useEffect(() => {
+    setSignals(readAnswerSignals());
     api
       .dashboard()
       .then((x) => setData(x as unknown as DashboardData))
@@ -69,6 +73,7 @@ export default function DashboardPage() {
         }
       />
       <div className="grid gap-4 lg:grid-cols-2">
+        <AdaptiveReviewPanel signals={signals} />
         <StudyCard
           eyebrow={copy.continueLearning}
           title={resume ? copy.pickUp : copy.buildWin}
