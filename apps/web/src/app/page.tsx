@@ -1,23 +1,23 @@
 import Link from 'next/link';
-
 export default function HomePage() {
   return (
-    <section>
-      <h1 className="text-2xl font-semibold">VSTEP English Prep</h1>
+    <main className="p-8">
+      <h1 className="text-2xl font-semibold">VSTEP Exam Preparation · B1/B2 Target Levels</h1>
       <p className="mt-2 text-gray-700">
-        Build VSTEP skills with B1 and B2 proficiency targets. Add HCMUS-oriented practice as an optional preparation context — not a separate skill framework.
+        Practice English questions built around VSTEP skills and B1/B2 target levels, with
+        HCMUS-oriented preparation contexts where relevant.
       </p>
-      <ul className="mt-4 list-disc pl-6">
-        <li>
-          <Link className="text-blue-600 underline" href="/login">Login</Link>
-        </li>
-        <li>
-          <Link className="text-blue-600 underline" href="/practice">Practice</Link>
-        </li>
-        <li>
-          <Link className="text-blue-600 underline" href="/admin">Admin dashboard</Link>
-        </li>
-      </ul>
-    </section>
+      <div className="mt-4 flex gap-4">
+        <Link className="text-blue-600 underline" href="/login">
+          Login
+        </Link>
+        <Link className="text-blue-600 underline" href="/practice">
+          Practice
+        </Link>
+        <Link className="text-blue-600 underline" href="/admin">
+          Admin dashboard
+        </Link>
+      </div>
+    </main>
   );
 }

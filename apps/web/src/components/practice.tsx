@@ -53,7 +53,7 @@ export function QuestionCard({
           <Badge tone="blue">
             {question.questionType?.name ?? question.questionType?.code ?? copy.questionsLabel}
           </Badge>
-          <Badge>{question.level ?? 'B1/B2'}</Badge>
+          <Badge>{question.level ?? copy.targetLevels}</Badge>
           <Badge
             tone={
               question.difficulty === 'HARD'

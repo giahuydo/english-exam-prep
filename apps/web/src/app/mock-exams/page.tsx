@@ -50,7 +50,7 @@ export default function MockExamsPage() {
   return (
     <StudentShell>
       <SectionTitle
-        eyebrow="{copy.assessmentMode}"
+        eyebrow={copy.assessmentMode}
         title={copy.mockExams}
         description={copy.mockListDescription}
       />
@@ -72,7 +72,9 @@ export default function MockExamsPage() {
         <div className="grid gap-4 md:grid-cols-2">
           {blueprints.map((b) => (
             <Card key={b.id} className="border-slate-300">
-              <Badge tone="blue">{b.examType.name}</Badge>
+              <Badge tone="blue">
+                {copy.examFramework} · {copy.targetLevels}
+              </Badge>
               <h2 className="mt-4 text-xl font-bold">{b.name}</h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">
                 {copy.versionTiming(b.version)}
