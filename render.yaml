@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: english-exam-prep-api
+    name: english-exam-prep
     runtime: node
     region: singapore
     branch: main
