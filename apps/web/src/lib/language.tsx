@@ -11,6 +11,8 @@ const en = {
   practice: 'Practice',
   strategyDrills: 'Strategy drills',
   speakingWriting: 'Speaking + Writing',
+  formatMemory: 'Exam Map',
+  formatMemoryDescription: 'Remember the route, timing, and recurring task patterns — not just one question.',
   mocks: 'Mock exams',
   mistakes: 'Mistakes',
   progress: 'Progress',
@@ -276,8 +278,6 @@ const en = {
   score: 'Score',
   questionsLabel: 'Questions',
   progressBySection: 'Progress by section',
-  strategyDrills: 'Strategy drills',
-  speakingWriting: 'Speaking + Writing',
   reviewMistakes: 'Review mistakes →',
   practiceWeak: 'Practice weak topics →',
   practiceAnother: 'Practice another set',
@@ -553,14 +553,11 @@ const vi: Partial<LearnerCopy> = {
   score: 'Điểm',
   questionsLabel: 'Câu hỏi',
   progressBySection: 'Tiến độ theo phần',
-  strategyDrills: 'Luyện chiến lược',
-  speakingWriting: 'Nói + Viết',
   reviewMistakes: 'Ôn câu sai →',
   practiceWeak: 'Luyện chủ đề yếu →',
   practiceAnother: 'Làm bộ khác',
   formatMemory: 'Bản đồ cấu trúc đề',
   formatMemoryDescription: 'Ghi nhớ trình tự, thời lượng và dạng bài lặp lại — không chỉ từng câu hỏi.',
-  progressBySection: 'Tiến độ theo phần',
 };
 
 export const learnerCopy = { en, vi: { ...en, ...vi } } as const;
