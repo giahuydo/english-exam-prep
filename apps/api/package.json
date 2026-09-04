@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm --filter @app/database build && pnpm --filter @app/shared build && nest build",
+    "build": "pnpm --filter @app/database build && pnpm --filter @app/shared build && tsc -p tsconfig.build.json",
     "dev": "nest start --watch",
-    "start": "node dist/main.js",
+    "start": "node dist/apps/api/src/main.js",
     "lint": "eslint \"src/**/*.ts\" --max-warnings 0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "jest"
