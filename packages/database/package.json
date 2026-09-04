@@ -12,6 +12,7 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:seed:core": "tsx prisma/seed-core.ts",
     "db:seed:exams": "tsx prisma/seed-exams.ts",
+    "db:import-manifest": "tsx prisma/import-manifest.ts",
     "db:studio": "prisma studio",
     "build": "tsc -p tsconfig.json && cp -r src/generated dist/",
     "typecheck": "tsc -p tsconfig.json --noEmit",

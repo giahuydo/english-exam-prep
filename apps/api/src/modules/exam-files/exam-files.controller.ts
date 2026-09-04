@@ -1,11 +1,13 @@
 import {
   Controller,
   Get,
+  Param,
   Post,
   UploadedFile,
   UseGuards,
   UseInterceptors,
   BadRequestException,
+  Body,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ExamFilesService } from './exam-files.service';
@@ -39,4 +41,16 @@ export class ExamFilesController {
     if (!file) throw new BadRequestException('file required');
     return this.svc.upload(file, user.id);
   }
+
+  @Get(':id/review')
+  review(@Param('id') id: string) { return this.svc.getReview(id); }
+
+  @Post(':id/draft')
+  saveDraft(@Param('id') id: string, @Body() draft: Record<string, unknown>) { return this.svc.saveDraft(id, draft as never); }
+
+  @Post(':id/validate')
+  validate(@Param('id') id: string) { return this.svc.validate(id); }
+
+  @Post(':id/approve-seed')
+  approveAndSeed(@Param('id') id: string) { return this.svc.approveAndSeed(id); }
 }

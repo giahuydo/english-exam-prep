@@ -13,7 +13,7 @@ export async function apiFetch<T = unknown>(
   const res = await fetch(`${BASE}${path}`, {
     ...init,
     headers: {
-      'content-type': 'application/json',
+      ...(init.body instanceof FormData ? {} : { 'content-type': 'application/json' }),
       ...authHeader(),
       ...(init.headers ?? {}),
     },
@@ -70,6 +70,11 @@ export const api = {
     }),
   myMistakes: () => apiFetch<unknown[]>('/me/mistakes'),
   listExams: () => apiFetch<unknown[]>('/admin/exams'),
+  listExamFiles: () => apiFetch<unknown[]>('/admin/exam-files'),
+  uploadExamFile: (file: File) => { const body = new FormData(); body.append('file', file); return apiFetch<unknown>('/admin/exam-files/upload', { method: 'POST', body }); },
+  getExamFileReview: (id: string) => apiFetch<unknown>(`/admin/exam-files/${id}/review`),
+  validateExamFile: (id: string) => apiFetch<unknown>(`/admin/exam-files/${id}/validate`, { method: 'POST' }),
+  approveAndSeedExamFile: (id: string) => apiFetch<unknown>(`/admin/exam-files/${id}/approve-seed`, { method: 'POST' }),
   listQuestions: () => apiFetch<unknown[]>('/admin/questions'),
   getQuestion: (id: string) => apiFetch<unknown>(`/admin/questions/${id}`),
   topicsTree: () => apiFetch<unknown[]>('/admin/topics/tree'),
