@@ -552,13 +552,11 @@ const vi: Partial<LearnerCopy> = {
   backDashboardLong: 'Quay lại bảng điều khiển',
   score: 'Điểm',
   questionsLabel: 'Câu hỏi',
-  progressBySection: 'Tiến độ theo phần',
   reviewMistakes: 'Ôn câu sai →',
   practiceWeak: 'Luyện chủ đề yếu →',
   practiceAnother: 'Làm bộ khác',
   formatMemory: 'Bản đồ cấu trúc đề',
-  formatMemoryDescription: 'Ghi nhớ trình tự, thời lượng và dạng bài lặp lại — không chỉ từng câu hỏi.',
-  progressBySection: 'Tiến độ theo phần',
+  formatMemoryDescription: 'Ghi nhớ trình tự, thời lượng và dạng bài lặp lại — không chỉ từng câu hỏi.'
 };
 
 export const learnerCopy = { en, vi: { ...en, ...vi } } as const;
