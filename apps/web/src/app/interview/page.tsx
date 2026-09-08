@@ -182,7 +182,7 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, audi
     return <AnswerSectionView key={paragraph.id} paragraph={paragraph} questionId={q.id} src={q.audio?.sections?.[paragraph.id]} showVi={showVi} cloze={cloze} active={activeSection === paragraph.id} audio={audio} trackedRange={trackedRange} rangeOffset={rangeOffset} />;
   })}</div></div>;
 }
-function AudioControls({ audio, request, label }: { audio: ReturnType<typeof useInterviewAudio>; request: { text: string; src?: string; key: string }; label: string }) {
+function AudioControls({ audio, request, label }: { audio: ReturnType<typeof useInterviewAudio>; request: { text: string; src?: string; alignment?: string; key: string }; label: string }) {
   const active = audio.activeKey === request.key;
   const playing = active && audio.state === 'playing';
   const paused = active && audio.state === 'paused';

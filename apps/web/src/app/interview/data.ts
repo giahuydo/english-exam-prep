@@ -905,6 +905,61 @@ const rawInterviewQuestions = [
       { id: 'match', label: 'EVERFIT MATCH', triggers: ['experience', 'career direction'], answerSectionId: 'close' },
     ] },
   },
+  {
+    id: 21,
+    question: {
+      en: 'Why do you want to join Everfit?',
+      vi: '',
+    },
+    answer: { sections: [
+      {
+        id: 'direction',
+        en: '*For me,* / I want to keep growing in **backend development**, / but I also want to work more with **data and AI**.',
+        vi: '',
+      },
+      {
+        id: 'reason',
+        en: '*The main reason is that* / this position combines **backend work with AI**, / so it matches what I want to do next.',
+        vi: '',
+      },
+      {
+        id: 'recent',
+        en: '*For example,* / recently I’ve had some chances to work on **AI-related features in real products**, / and I found that I really enjoy this direction.',
+        vi: '',
+      },
+      {
+        id: 'everfit',
+        en: '*I also like Everfit because* / it is a **global product** in the **health and fitness** area, / and it has **real users and real impact**.',
+        vi: '',
+      },
+      {
+        id: 'challenge',
+        en: '*Because of that,* / I feel this is a good place for me to **learn more**, / take on a **new challenge**, / and **step out of my comfort zone**.',
+        vi: '',
+      },
+      {
+        id: 'contribution',
+        en: '*At the same time,* / I believe my **backend experience** can help me **contribute from the beginning**.',
+        vi: '',
+      },
+      {
+        id: 'close',
+        en: '*So overall,* / I think this position is a **good match** / for both my **experience** and my **career direction**.',
+        vi: '',
+      },
+    ] },
+    contextIds: ['A'],
+    clusterIds: ['production-ai'],
+    memory: { nodes: [
+      { id: 'career-direction', label: 'CAREER DIRECTION', triggers: ['backend development', 'data and AI'], answerSectionId: 'direction' },
+      { id: 'position-fit', label: 'POSITION FIT', triggers: ['backend work with AI', 'what I want to do next'], answerSectionId: 'reason' },
+      { id: 'ai-recently', label: 'AI RECENTLY', triggers: ['AI-related features', 'real products', 'enjoy this direction'], answerSectionId: 'recent' },
+      { id: 'everfit-reason', label: 'WHY EVERFIT', triggers: ['global product', 'health and fitness', 'real users', 'real impact'], answerSectionId: 'everfit' },
+      { id: 'new-challenge', label: 'NEW CHALLENGE', triggers: ['learn more', 'step out of my comfort zone'], answerSectionId: 'challenge' },
+      { id: 'contribution', label: 'CONTRIBUTE EARLY', triggers: ['backend experience', 'from the beginning'], answerSectionId: 'contribution' },
+      { id: 'match', label: 'GOOD MATCH', triggers: ['experience', 'career direction'], answerSectionId: 'close' },
+    ] },
+  },
 ];
 
 export type StrategyRow = {
@@ -915,7 +970,7 @@ export type StrategyRow = {
 };
 
 export const strategyRows: StrategyRow[] = [
-  { code: 'A', context: 'Backend → Applied AI → Production', triggers: 'AI experience, fit, backend-heavy background', questions: '1, 9, 11, 20' },
+  { code: 'A', context: 'Backend → Applied AI → Production', triggers: 'AI experience, fit, backend-heavy background', questions: '1, 9, 11, 20, 21' },
   { code: 'B', context: 'RAG / Hybrid Retrieval', triggers: 'RAG, retrieval, search, vector, ranking', questions: '2, 15' },
   { code: 'C', context: 'AI Reliability', triggers: 'error, retry, timeout, latency, cost, hallucination', questions: '3, 13, 14' },
   { code: 'D', context: 'OCR CPU → GPU', triggers: 'challenge, incident, OOM, performance, ownership', questions: '4, 17' },
@@ -953,4 +1008,10 @@ export const finalMindset: { label: string; body: string }[] = [
 ];
 
 
-export const interviewQuestions: InterviewQuestion[] = rawInterviewQuestions as InterviewQuestion[];
+export const interviewQuestions: InterviewQuestion[] = (rawInterviewQuestions as InterviewQuestion[]).map((question) => ({
+  ...question,
+  audio: {
+    full: `/audio/interview/q${String(question.id).padStart(2, '0')}/full.mp3`,
+    alignment: `/audio/interview/q${String(question.id).padStart(2, '0')}/alignment.json`,
+  },
+}));

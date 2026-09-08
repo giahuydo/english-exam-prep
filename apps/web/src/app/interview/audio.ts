@@ -1,27 +1,16 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { buildSpeechMapping, type SpeechMapping } from './audio-mapping';
+export { buildSpeechMapping } from './audio-mapping';
+export type { SpeechMapping } from './audio-mapping';
 
 export type AudioSpeed = 0.8 | 1 | 1.2;
 export type InterviewAudioState = 'idle' | 'playing' | 'paused';
 export type AudioRange = { start: number; end: number };
-export type SpeechMapping = { text: string; speechToCanonical: number[] };
-
+export type StaticAlignment = { version: 1; questionId: string; speechText: string; words: { text: string; canonicalStart: number; canonicalEnd: number; startMs: number; endMs: number }[] };
 const SPEED_KEY = 'ee.interview.audio-speed.v1';
 const speeds: AudioSpeed[] = [0.8, 1, 1.2];
-
-export function buildSpeechMapping(canonical: string): SpeechMapping {
-  const text: string[] = [];
-  const speechToCanonical: number[] = [];
-  let markup = false;
-  for (let index = 0; index < canonical.length; index += 1) {
-    if (canonical[index] === '*') { markup = !markup; continue; }
-    if (markup) continue;
-    text.push(canonical[index] === '/' ? ' ' : canonical[index]);
-    speechToCanonical.push(index);
-  }
-  return { text: text.join('').replace(/\s+$/g, ''), speechToCanonical };
-}
 
 function readSpeed(): AudioSpeed {
   const value = Number(window.localStorage.getItem(SPEED_KEY));
@@ -34,7 +23,7 @@ function preferredVoice(voices: SpeechSynthesisVoice[]) {
     ?? voices.find((voice) => voice.lang.toLowerCase().startsWith('en'));
 }
 
-type PlayRequest = { text: string; src?: string; key: string; mapping?: SpeechMapping };
+type PlayRequest = { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping };
 
 export function useInterviewAudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -49,6 +38,9 @@ export function useInterviewAudio() {
   const [activeRange, setActiveRange] = useState<AudioRange | null>(null);
   const [speechAvailable, setSpeechAvailable] = useState(false);
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
+  const alignmentRef = useRef<StaticAlignment | null>(null);
+  const frameRef = useRef<number | null>(null);
+  const frameCallbackRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     setSpeedState(readSpeed());
@@ -63,6 +55,9 @@ export function useInterviewAudio() {
 
   const stop = useCallback(() => {
     playbackIdRef.current += 1;
+    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+    frameRef.current = null;
+    alignmentRef.current = null;
     audioRef.current?.pause();
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
@@ -116,7 +111,23 @@ export function useInterviewAudio() {
       audio.src = request.src;
       audio.preload = 'auto';
       audio.playbackRate = speed;
-      audio.onended = () => { if (playbackIdRef.current !== playbackId) return; sourceRef.current = null; setState('idle'); setActiveKey(null); setActiveRange(null); };
+      const updateRange = () => {
+        if (playbackIdRef.current !== playbackId || sourceRef.current !== 'audio') return;
+        const words = alignmentRef.current?.words ?? [];
+        const currentMs = audio.currentTime * 1000;
+        let low = 0;
+        let high = words.length - 1;
+        let found = -1;
+        while (low <= high) {
+          const middle = Math.floor((low + high) / 2);
+          if (words[middle].startMs <= currentMs) { found = middle; low = middle + 1; } else high = middle - 1;
+        }
+        const word = found >= 0 && currentMs <= words[found].endMs ? words[found] : undefined;
+        setActiveRange(word ? { start: word.canonicalStart, end: word.canonicalEnd } : null);
+            frameCallbackRef.current = updateRange;
+        frameRef.current = requestAnimationFrame(updateRange);
+      };
+      audio.onended = () => { if (playbackIdRef.current !== playbackId) return; if (frameRef.current !== null) cancelAnimationFrame(frameRef.current); frameRef.current = null; alignmentRef.current = null; sourceRef.current = null; setState('idle'); setActiveKey(null); setActiveRange(null); };
       audio.onerror = () => {
         if (playbackIdRef.current !== playbackId) return;
         if (fallbackRef.current?.key === request.key && speechAvailable) {
@@ -131,9 +142,16 @@ export function useInterviewAudio() {
         }
       };
       fallbackRef.current = { ...request, mapping: request.mapping ?? buildSpeechMapping(request.text) };
+      if (request.alignment) {
+        void fetch(request.alignment).then((response) => response.ok ? response.json() as Promise<StaticAlignment> : null).then((alignment) => {
+          if (playbackIdRef.current === playbackId && sourceRef.current === 'audio') alignmentRef.current = alignment;
+        }).catch(() => undefined);
+      }
       setActiveKey(request.key);
       setActiveRange(null);
       setState('playing');
+      frameCallbackRef.current = updateRange;
+      frameRef.current = requestAnimationFrame(updateRange);
       void audio.play().catch(() => {
         if (playbackIdRef.current !== playbackId) return;
         if (fallbackRef.current?.key === request.key && speechAvailable) {
@@ -153,12 +171,12 @@ export function useInterviewAudio() {
   }, [speak, speed, speechAvailable, stop]);
 
   const pause = useCallback(() => {
-    if (sourceRef.current === 'audio' && audioRef.current && !audioRef.current.paused) { audioRef.current.pause(); setState('paused'); }
+    if (sourceRef.current === 'audio' && audioRef.current && !audioRef.current.paused) { audioRef.current.pause(); if (frameRef.current !== null) cancelAnimationFrame(frameRef.current); frameRef.current = null; setState('paused'); }
     else if (sourceRef.current === 'speech' && speechAvailable && window.speechSynthesis.speaking) { window.speechSynthesis.pause(); setState('paused'); }
   }, [speechAvailable]);
 
   const resume = useCallback(() => {
-    if (sourceRef.current === 'audio' && audioRef.current?.paused && audioRef.current.currentTime > 0) { void audioRef.current.play(); setState('playing'); }
+    if (sourceRef.current === 'audio' && audioRef.current?.paused && audioRef.current.currentTime > 0) { if (frameCallbackRef.current) frameRef.current = requestAnimationFrame(frameCallbackRef.current); void audioRef.current.play(); setState('playing'); }
     else if (sourceRef.current === 'speech' && speechAvailable && window.speechSynthesis.paused) { window.speechSynthesis.resume(); setState('playing'); }
   }, [speechAvailable]);
 

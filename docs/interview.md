@@ -6,7 +6,7 @@ The public `/interview` route is a frontend-only learning tool for the Everfit A
 
 - Route: `apps/web/src/app/interview/page.tsx`
 - No login required.
-- No API, database, audio, video, recording, or runtime AI generation.
+- Audio is optional static frontend content; there is no runtime AI generation or ElevenLabs API call.
 - Progress is stored in browser `localStorage`.
 - Canonical source content is hard-coded in `apps/web/src/app/interview/data.ts`.
 
@@ -98,6 +98,26 @@ getMemoryNodes(questionId)
 ```
 
 `page.tsx` consumes these selectors for Connections, context labels, question lists, stories, triggers, and memory paths.
+
+## One-time ElevenLabs audio generation
+
+The local generator uses the canonical English answers and ElevenLabs' timestamp endpoint to create optional static assets. It never runs in the website.
+
+```bash
+# Preview all questions without an API call
+pnpm generate:interview-audio -- all --dry-run
+
+# Generate one or selected questions
+export ELEVENLABS_API_KEY="..."
+export ELEVENLABS_VOICE_ID="..."
+pnpm generate:interview-audio -- 1
+pnpm generate:interview-audio -- 1 3 10
+
+# Regenerate existing assets explicitly
+pnpm generate:interview-audio -- 1 --force
+```
+
+`ELEVENLABS_MODEL_ID` is optional and defaults to `eleven_multilingual_v2`. Outputs are written to `apps/web/public/audio/interview/qNN/full.mp3` and `alignment.json`. Existing complete pairs are skipped unless `--force` is supplied. The UI uses static full-answer audio and timestamp karaoke when both files exist; section and chunk playback retain browser SpeechSynthesis fallback. Keep API keys in the shell only; do not add them to source or `.env` files.
 
 ## Adding or editing a question
 

@@ -52,3 +52,4 @@ docker/data/
 /graphify-out/
 .codegraph
 .serena
+.vercel
