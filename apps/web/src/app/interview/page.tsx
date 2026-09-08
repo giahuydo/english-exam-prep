@@ -14,7 +14,7 @@ import {
   type InterviewQuestion,
 } from './data';
 import { RichText } from './rich-text';
-import { clozeText, parseInlineRanges, questionStarters, stripFormatting, type InlineToken } from './utils';
+import { clozeText, parseInlineRanges, questionStarters, stripFormatting } from './utils';
 import { getContextsForQuestion } from './connections';
 import { useProgress, type LearningLevel, type ReviewDifficulty } from './storage';
 import { contexts, phraseClusters, heroStories, triggers, getQuestionsForContext, getQuestionsForCluster, getQuestionsForStory, getContextsForTrigger, getMemoryNodes, questionLabel, type Context, type MemoryNode } from './connections';
@@ -209,8 +209,10 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
             const chunkStart = parts.slice(0, index).reduce((total, value) => total + value.length + 1, 0);
             const chunkEnd = chunkStart + part.length;
             const chunkActive = audio.activeKey === chunkKey;
+            const phraseRange = chunkActive ? audio.activeRange : trackedRange;
+            const phraseHighlighted = Boolean(phraseRange && chunkStart < phraseRange.end - rangeOffset && chunkEnd > phraseRange.start - rangeOffset);
             const speechText = stripFormatting(part);
-            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" disabled={!audio.speechAvailable} onClick={() => audio.play({ text: speechText, key: chunkKey, mapping: buildSpeechMapping(part) })} aria-label={`Play phrase: ${speechText.trim()}`} className={`rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100 ${chunkActive ? 'bg-blue-100 text-blue-900' : ''}`}>{renderTrackedText(part, chunkStart, chunkActive ? audio.activeRange : trackedRange, rangeOffset)}</button></span>;
+            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" disabled={!audio.speechAvailable} onClick={() => audio.play({ text: speechText, key: chunkKey, mapping: buildSpeechMapping(part) })} aria-label={`Play phrase: ${speechText.trim()}`} className={`rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100 ${phraseHighlighted ? 'bg-blue-100 text-blue-950' : ''}`}>{renderTrackedText(part)}</button></span>;
           })}
         </p>
         {canPlaySection && <button type="button" onClick={() => audio.play(request)} aria-label={`Play answer section ${paragraph.id}`} className={`min-h-10 min-w-10 shrink-0 rounded-lg text-xs font-semibold transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${sectionPlaying ? 'bg-blue-50 text-blue-700' : 'text-slate-400'}`}>Listen</button>}
@@ -220,21 +222,13 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
   );
 }
 
-function renderTrackedText(text: string, start: number, range: AudioRange | null, rangeOffset = 0) {
-  return parseInlineRanges(text).flatMap((token, tokenIndex) => renderTrackedToken(token, start, range, rangeOffset, tokenIndex));
-}
-
-function renderTrackedToken(token: InlineToken, start: number, range: AudioRange | null, rangeOffset: number, tokenIndex: number) {
-  let offset = 0;
-  const content = token.value.split(/(\s+)/).map((part, index) => {
-    const wordStart = start + token.sourceStart + offset;
-    offset += part.length;
-    const highlighted = Boolean(range && wordStart < range.end - rangeOffset && wordStart + part.length > range.start - rangeOffset && part.trim());
-    return <span key={`${start}-${tokenIndex}-${index}`} className={highlighted ? 'rounded bg-blue-100 text-blue-950' : undefined}>{part}</span>;
+function renderTrackedText(text: string) {
+  return parseInlineRanges(text).map((token, tokenIndex) => {
+    const content = token.value;
+    if (token.kind === 'bold') return <strong key={`${tokenIndex}`} className="font-semibold text-slate-900">{content}</strong>;
+    if (token.kind === 'italic') return <em key={`${tokenIndex}`} className="font-medium not-italic text-blue-700">{content}</em>;
+    return <span key={`${tokenIndex}`}>{content}</span>;
   });
-  if (token.kind === 'bold') return <strong key={`${start}-${tokenIndex}`} className="font-semibold text-slate-900">{content}</strong>;
-  if (token.kind === 'italic') return <em key={`${start}-${tokenIndex}`} className="font-medium not-italic text-blue-700">{content}</em>;
-  return content;
 }
 
 function ClozeText({ text }: { text: string }) { const [visible, setVisible] = useState(false); const item = clozeText(text); if (!item) return <RichText text={text} />; return <><RichText text={item.before} /><button type="button" onClick={() => setVisible(true)} className="mx-1 min-h-8 rounded border border-dashed border-blue-300 px-2 font-semibold text-blue-700">{visible ? item.hidden : '______'}</button><RichText text={item.after} /></>; }
