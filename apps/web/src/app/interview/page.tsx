@@ -216,9 +216,9 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
             const chunkEnd = chunkStart + part.length;
             const chunkActive = audio.activeKey === chunkKey;
             const phraseRange = chunkActive ? audio.activeRange : trackedRange;
-            const phraseHighlighted = Boolean(phraseRange && chunkStart < phraseRange.end - rangeOffset && chunkEnd > phraseRange.start - rangeOffset);
+            const localRange = phraseRange ? { start: phraseRange.start - rangeOffset - chunkStart, end: phraseRange.end - rangeOffset - chunkStart } : null;
             const speechText = stripFormatting(part);
-            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" disabled={!audio.speechAvailable} onClick={() => audio.play({ text: speechText, key: chunkKey, mapping: buildSpeechMapping(part) })} aria-label={`Play phrase: ${speechText.trim()}`} className={`rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100 ${phraseHighlighted ? 'bg-blue-100 text-blue-950' : ''}`}>{renderTrackedText(part)}</button></span>;
+            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" disabled={!audio.speechAvailable} onClick={() => audio.play({ text: speechText, key: chunkKey, mapping: buildSpeechMapping(part) })} aria-label={`Play phrase: ${speechText.trim()}`} className="rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100">{renderTrackedText(part, localRange)}</button></span>;
           })}
         </p>
         {canPlaySection && <button type="button" onClick={() => audio.play(request)} aria-label={`Play answer section ${paragraph.id}`} className={`min-h-10 min-w-10 shrink-0 rounded-lg text-xs font-semibold transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${sectionPlaying ? 'bg-blue-50 text-blue-700' : 'text-slate-400'}`}>Listen</button>}
@@ -228,12 +228,22 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
   );
 }
 
-function renderTrackedText(text: string) {
-  return parseInlineRanges(text).map((token, tokenIndex) => {
-    const content = token.value;
-    if (token.kind === 'bold') return <strong key={`${tokenIndex}`} className="font-semibold text-slate-900">{content}</strong>;
-    if (token.kind === 'italic') return <em key={`${tokenIndex}`} className="font-medium not-italic text-blue-700">{content}</em>;
-    return <span key={`${tokenIndex}`}>{content}</span>;
+function renderTrackedText(text: string, range: AudioRange | null = null) {
+  let offset = 0;
+  return parseInlineRanges(text).flatMap((token, tokenIndex) => {
+    const tokenStart = offset;
+    offset += token.value.length;
+    let wordOffset = 0;
+    const content = token.value.split(/(\s+)/).map((part, partIndex) => {
+      const start = tokenStart + wordOffset;
+      wordOffset += part.length;
+      const highlighted = Boolean(range && part.trim() && start < range.end && start + part.length > range.start);
+      const value = highlighted ? <span className="rounded bg-blue-100 text-blue-950">{part}</span> : part;
+      if (token.kind === 'bold') return <strong key={`${tokenIndex}-${partIndex}`} className="font-semibold text-slate-900">{value}</strong>;
+      if (token.kind === 'italic') return <em key={`${tokenIndex}-${partIndex}`} className="font-medium not-italic text-blue-700">{value}</em>;
+      return <span key={`${tokenIndex}-${partIndex}`}>{value}</span>;
+    });
+    return content;
   });
 }
 
