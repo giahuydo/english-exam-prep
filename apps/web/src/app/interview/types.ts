@@ -6,6 +6,7 @@ export type TriggerId = 'reliability' | 'agent-tools' | 'workflow' | 'quality' |
 
 export type Bilingual = { en: string; vi: string };
 export type AnswerSection = Bilingual & { id: string };
+export type InterviewAudio = { full?: string; sections?: Partial<Record<string, string>> };
 export type Context = { id: ContextId; title: string; path: string[] };
 export type PhraseCluster = { id: ClusterId; title: string; path: string[] };
 export type HeroStory = { id: StoryId; title: string; path: string[] };
@@ -15,6 +16,7 @@ export type InterviewQuestion = {
   id: QuestionId;
   question: Bilingual;
   answer: { sections: AnswerSection[] };
+  audio?: InterviewAudio;
   contextIds: ContextId[];
   clusterIds: ClusterId[];
   storyIds?: StoryId[];

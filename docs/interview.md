@@ -157,6 +157,19 @@ Questions without custom memory nodes currently return an empty memory path thro
 
 Do not add question-specific JSX. New question behavior should come from the question config and existing generic rendering.
 
+## Interview audio
+
+Audio is optional and frontend-only. Add externally generated MP3 files under `apps/web/public/audio/interview/qXX/`, then configure their paths in the question's `audio` field in `data.ts`:
+
+```ts
+audio: {
+  full: '/audio/interview/q01/full.mp3',
+  sections: { point: '/audio/interview/q01/point.mp3' },
+}
+```
+
+Full answers and sections prefer configured static MP3 files; when no path is configured, the browser Web Speech API is used. Phrase chunks are derived at runtime from `/` pause markers and always use browser speech. No placeholder MP3 files are required. Playback speed is stored in `localStorage` under `ee.interview.audio-speed.v1`.
+
 ## Local progress
 
 `storage.ts` uses localStorage key:
