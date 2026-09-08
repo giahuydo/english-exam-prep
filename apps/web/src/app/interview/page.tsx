@@ -249,12 +249,12 @@ function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze
 }
 
 function renderTrackedText(text: string, range: AudioRange | null = null) {
+  const highlighted = Boolean(range && range.start < text.length && range.end > 0);
   const content = parseInlineRanges(text).map((token, tokenIndex) => {
-    if (token.kind === 'bold') return <strong key={`${tokenIndex}`} className="font-semibold text-slate-900">{token.value}</strong>;
-    if (token.kind === 'italic') return <em key={`${tokenIndex}`} className="font-medium not-italic text-blue-700">{token.value}</em>;
+    if (token.kind === 'bold') return <strong key={`${tokenIndex}`} className={`font-semibold ${highlighted ? 'text-amber-300' : 'text-slate-900'}`}>{token.value}</strong>;
+    if (token.kind === 'italic') return <em key={`${tokenIndex}`} className={`font-medium not-italic ${highlighted ? 'text-blue-100' : 'text-blue-700'}`}>{token.value}</em>;
     return <span key={`${tokenIndex}`}>{token.value}</span>;
   });
-  const highlighted = Boolean(range && range.start < text.length && range.end > 0);
   return highlighted ? <span className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span> : content;
 }
 
