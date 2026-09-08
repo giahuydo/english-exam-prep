@@ -9,6 +9,33 @@ export type AudioSpeed = 0.8 | 1 | 1.2;
 export type InterviewAudioState = 'idle' | 'playing' | 'paused';
 export type AudioRange = { start: number; end: number };
 export type StaticAlignment = { version: 1; questionId: string; speechText: string; words: { text: string; canonicalStart: number; canonicalEnd: number; startMs: number; endMs: number }[] };
+export type AudioSegment = { canonicalStart: number; canonicalEnd: number };
+type AlignmentWord = StaticAlignment['words'][number];
+
+type SpeakingBeat = { first: number; last: number; startMs: number; endMs: number };
+
+function buildSpeakingBeats(words: AlignmentWord[]): SpeakingBeat[] {
+  const beats: SpeakingBeat[] = [];
+  let first = 0;
+  for (let index = 0; index < words.length - 1; index += 1) {
+    const current = words[index];
+    const next = words[index + 1];
+    const gap = next.startMs - current.endMs;
+    const duration = next.startMs - words[first].startMs;
+    const boundary = gap >= 70 || /[.!?,;:]$/.test(current.text) || duration >= 1200 || index - first >= 6;
+    if (!boundary) continue;
+    beats.push({ first, last: index, startMs: words[first].startMs, endMs: current.endMs });
+    first = index + 1;
+  }
+  if (first < words.length) beats.push({ first, last: words.length - 1, startMs: words[first].startMs, endMs: words[words.length - 1].endMs });
+  return beats;
+}
+
+function speakingBeat(words: AlignmentWord[], beats: SpeakingBeat[], index: number): AudioRange {
+  const beat = beats.find((candidate) => index >= candidate.first && index <= candidate.last) ?? beats[beats.length - 1];
+  return beat ? { start: words[beat.first].canonicalStart, end: words[beat.last].canonicalEnd } : { start: 0, end: 0 };
+}
+
 const SPEED_KEY = 'ee.interview.audio-speed.v1';
 const speeds: AudioSpeed[] = [0.8, 1, 1.2];
 
@@ -23,7 +50,7 @@ function preferredVoice(voices: SpeechSynthesisVoice[]) {
     ?? voices.find((voice) => voice.lang.toLowerCase().startsWith('en'));
 }
 
-type PlayRequest = { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping };
+type PlayRequest = { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping; segment?: AudioSegment };
 
 export function useInterviewAudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -111,8 +138,16 @@ export function useInterviewAudio() {
       audio.src = request.src;
       audio.preload = 'auto';
       audio.playbackRate = speed;
+      let segmentStartMs = 0;
+      let segmentEndMs: number | null = null;
+      let speakingBeats: SpeakingBeat[] = [];
       const updateRange = () => {
         if (playbackIdRef.current !== playbackId || sourceRef.current !== 'audio') return;
+        if (segmentEndMs !== null && audio.currentTime * 1000 >= segmentEndMs) {
+          audio.pause();
+          audio.onended?.(new Event('ended'));
+          return;
+        }
         const words = alignmentRef.current?.words ?? [];
         const currentMs = audio.currentTime * 1000;
         let low = 0;
@@ -123,52 +158,53 @@ export function useInterviewAudio() {
           if (words[middle].startMs <= currentMs) { found = middle; low = middle + 1; } else high = middle - 1;
         }
         const word = found >= 0 && currentMs <= words[found].endMs ? words[found] : undefined;
-        setActiveRange(word ? { start: word.canonicalStart, end: word.canonicalEnd } : null);
+        setActiveRange(word ? speakingBeat(words, speakingBeats, found) : null);
             frameCallbackRef.current = updateRange;
         frameRef.current = requestAnimationFrame(updateRange);
       };
       audio.onended = () => { if (playbackIdRef.current !== playbackId) return; if (frameRef.current !== null) cancelAnimationFrame(frameRef.current); frameRef.current = null; alignmentRef.current = null; sourceRef.current = null; setState('idle'); setActiveKey(null); setActiveRange(null); };
       audio.onerror = () => {
         if (playbackIdRef.current !== playbackId) return;
-        if (fallbackRef.current?.key === request.key && speechAvailable) {
-          const fallback = fallbackRef.current;
-          fallbackRef.current = null;
-          speak(fallback);
-        } else {
-          sourceRef.current = null;
-          setState('idle');
-          setActiveKey(null);
-          setActiveRange(null);
-        }
+        sourceRef.current = null;
+        setState('idle');
+        setActiveKey(null);
+        setActiveRange(null);
       };
-      fallbackRef.current = { ...request, mapping: request.mapping ?? buildSpeechMapping(request.text) };
-      if (request.alignment) {
-        void fetch(request.alignment).then((response) => response.ok ? response.json() as Promise<StaticAlignment> : null).then((alignment) => {
-          if (playbackIdRef.current === playbackId && sourceRef.current === 'audio') alignmentRef.current = alignment;
-        }).catch(() => undefined);
-      }
-      setActiveKey(request.key);
-      setActiveRange(null);
-      setState('playing');
-      frameCallbackRef.current = updateRange;
-      frameRef.current = requestAnimationFrame(updateRange);
-      void audio.play().catch(() => {
-        if (playbackIdRef.current !== playbackId) return;
-        if (fallbackRef.current?.key === request.key && speechAvailable) {
-          const fallback = fallbackRef.current;
-          fallbackRef.current = null;
-          speak(fallback);
-        } else {
+      fallbackRef.current = null;
+      const startPlayback = (alignment: StaticAlignment | null) => {
+        if (playbackIdRef.current !== playbackId || sourceRef.current !== 'audio') return;
+        alignmentRef.current = alignment;
+        speakingBeats = alignment ? buildSpeakingBeats(alignment.words) : [];
+        if (request.segment && alignment) {
+          const segmentWords = alignment.words.filter((word) => word.canonicalEnd > request.segment!.canonicalStart && word.canonicalStart < request.segment!.canonicalEnd);
+          if (segmentWords.length) {
+            segmentStartMs = segmentWords[0].startMs;
+            segmentEndMs = segmentWords[segmentWords.length - 1].endMs;
+            audio.currentTime = segmentStartMs / 1000;
+          }
+        }
+        setActiveKey(request.key);
+        setActiveRange(null);
+        setState('playing');
+        frameCallbackRef.current = updateRange;
+        frameRef.current = requestAnimationFrame(updateRange);
+        void audio.play().catch(() => {
+          if (playbackIdRef.current !== playbackId) return;
           sourceRef.current = null;
           setState('idle');
           setActiveKey(null);
           setActiveRange(null);
-        }
-      });
+        });
+      };
+      if (request.alignment) {
+        void fetch(request.alignment).then((response) => response.ok ? response.json() as Promise<StaticAlignment> : null).then(startPlayback).catch(() => startPlayback(null));
+      } else {
+        startPlayback(null);
+      }
       return;
     }
     speak(request);
-  }, [speak, speed, speechAvailable, stop]);
+  }, [speak, speed, stop]);
 
   const pause = useCallback(() => {
     if (sourceRef.current === 'audio' && audioRef.current && !audioRef.current.paused) { audioRef.current.pause(); if (frameRef.current !== null) cancelAnimationFrame(frameRef.current); frameRef.current = null; setState('paused'); }
