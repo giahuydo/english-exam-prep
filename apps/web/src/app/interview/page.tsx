@@ -258,7 +258,7 @@ function renderTrackedText(text: string, range: AudioRange | null = null) {
       const start = tokenStart + wordOffset;
       wordOffset += part.length;
       const highlighted = Boolean(range && part.trim() && start < range.end && start + part.length > range.start);
-      const value = highlighted ? <span className="rounded bg-blue-100 text-blue-950">{part}</span> : part;
+      const value = highlighted ? <span className="rounded bg-blue-700 px-0.5 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{part}</span> : part;
       if (token.kind === 'bold') return <strong key={`${tokenIndex}-${partIndex}`} className="font-semibold text-slate-900">{value}</strong>;
       if (token.kind === 'italic') return <em key={`${tokenIndex}-${partIndex}`} className="font-medium not-italic text-blue-700">{value}</em>;
       return <span key={`${tokenIndex}-${partIndex}`}>{value}</span>;
