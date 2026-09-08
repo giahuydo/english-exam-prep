@@ -31,9 +31,22 @@ function buildSpeakingBeats(words: AlignmentWord[]): SpeakingBeat[] {
   return beats;
 }
 
-function speakingBeat(words: AlignmentWord[], beats: SpeakingBeat[], index: number): AudioRange {
-  const beat = beats.find((candidate) => index >= candidate.first && index <= candidate.last) ?? beats[beats.length - 1];
-  return beat ? { start: words[beat.first].canonicalStart, end: words[beat.last].canonicalEnd } : { start: 0, end: 0 };
+function speakingBeatAtTime(words: AlignmentWord[], beats: SpeakingBeat[], currentMs: number): AudioRange | null {
+  let low = 0;
+  let high = beats.length - 1;
+  let found = -1;
+  while (low <= high) {
+    const middle = Math.floor((low + high) / 2);
+    if (beats[middle].startMs <= currentMs) {
+      found = middle;
+      low = middle + 1;
+    } else {
+      high = middle - 1;
+    }
+  }
+  if (found < 0) return null;
+  const beat = beats[found];
+  return { start: words[beat.first].canonicalStart, end: words[beat.last].canonicalEnd };
 }
 
 const SPEED_KEY = 'ee.interview.audio-speed.v1';
@@ -150,15 +163,7 @@ export function useInterviewAudio() {
         }
         const words = alignmentRef.current?.words ?? [];
         const currentMs = audio.currentTime * 1000;
-        let low = 0;
-        let high = words.length - 1;
-        let found = -1;
-        while (low <= high) {
-          const middle = Math.floor((low + high) / 2);
-          if (words[middle].startMs <= currentMs) { found = middle; low = middle + 1; } else high = middle - 1;
-        }
-        const word = found >= 0 && currentMs <= words[found].endMs ? words[found] : undefined;
-        setActiveRange(word ? speakingBeat(words, speakingBeats, found) : null);
+        setActiveRange(speakingBeatAtTime(words, speakingBeats, currentMs));
             frameCallbackRef.current = updateRange;
         frameRef.current = requestAnimationFrame(updateRange);
       };
