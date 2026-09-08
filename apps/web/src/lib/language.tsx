@@ -7,6 +7,7 @@ const STORAGE_KEY = 'learner-language';
 
 const en = {
   today: 'Today',
+  interview: 'Interview',
   learn: 'Learn',
   practice: 'Practice',
   strategyDrills: 'Strategy drills',
@@ -290,6 +291,7 @@ type LearnerCopy = {
 };
 const vi: Partial<LearnerCopy> = {
   today: 'Hôm nay',
+  interview: 'Phỏng vấn',
   learn: 'Học',
   practice: 'Luyện tập',
   strategyDrills: 'Luyện chiến lược',

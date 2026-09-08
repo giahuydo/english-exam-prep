@@ -14,6 +14,9 @@ export default function HomePage() {
         <Link className="text-blue-600 underline" href="/practice">
           Practice
         </Link>
+        <Link className="text-blue-600 underline" href="/interview">
+          Interview practice
+        </Link>
         <Link className="text-blue-600 underline" href="/admin">
           Admin dashboard
         </Link>
