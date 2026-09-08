@@ -203,8 +203,8 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, audi
   return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
-    const trackedRange = audio.activeKey === fullKey || audio.activeKey === ideaKey ? audio.activeRange : audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
-    const rangeOffset = audio.activeKey === fullKey ? offset : audio.activeKey === ideaKey ? ideaStart : 0;
+    const trackedRange = audio.activeKey === fullKey || (audio.activeKey === ideaKey && paragraph.id === idea?.id) || audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
+    const rangeOffset = audio.activeKey === fullKey || audio.activeKey === ideaKey || audio.activeKey === `q${q.id}-${paragraph.id}` ? offset : 0;
     return <div key={paragraph.id} ref={(element) => { ideaRefs.current[paragraph.id] = element; }}><AnswerSectionView paragraph={paragraph} questionId={q.id} sectionOffset={offset} showVi={showVi} cloze={cloze} active={activeSection === paragraph.id} audio={audio} trackedRange={trackedRange} rangeOffset={rangeOffset} /></div>;
   })}</div></div>;
 }
@@ -249,22 +249,13 @@ function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze
 }
 
 function renderTrackedText(text: string, range: AudioRange | null = null) {
-  let offset = 0;
-  return parseInlineRanges(text).flatMap((token, tokenIndex) => {
-    const tokenStart = offset;
-    offset += token.value.length;
-    let wordOffset = 0;
-    const content = token.value.split(/(\s+)/).map((part, partIndex) => {
-      const start = tokenStart + wordOffset;
-      wordOffset += part.length;
-      const highlighted = Boolean(range && part.trim() && start < range.end && start + part.length > range.start);
-      const value = highlighted ? <span className="rounded bg-blue-700 px-0.5 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{part}</span> : part;
-      if (token.kind === 'bold') return <strong key={`${tokenIndex}-${partIndex}`} className="font-semibold text-slate-900">{value}</strong>;
-      if (token.kind === 'italic') return <em key={`${tokenIndex}-${partIndex}`} className="font-medium not-italic text-blue-700">{value}</em>;
-      return <span key={`${tokenIndex}-${partIndex}`}>{value}</span>;
-    });
-    return content;
+  const content = parseInlineRanges(text).map((token, tokenIndex) => {
+    if (token.kind === 'bold') return <strong key={`${tokenIndex}`} className="font-semibold text-slate-900">{token.value}</strong>;
+    if (token.kind === 'italic') return <em key={`${tokenIndex}`} className="font-medium not-italic text-blue-700">{token.value}</em>;
+    return <span key={`${tokenIndex}`}>{token.value}</span>;
   });
+  const highlighted = Boolean(range && range.start < text.length && range.end > 0);
+  return highlighted ? <span className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span> : content;
 }
 
 function ClozeText({ text }: { text: string }) { const [visible, setVisible] = useState(false); const item = clozeText(text); if (!item) return <RichText text={text} />; return <><RichText text={item.before} /><button type="button" onClick={() => setVisible(true)} className="mx-1 min-h-8 rounded border border-dashed border-blue-300 px-2 font-semibold text-blue-700">{visible ? item.hidden : '______'}</button><RichText text={item.after} /></>; }
