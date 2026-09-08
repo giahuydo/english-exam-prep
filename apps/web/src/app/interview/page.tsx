@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { useInterviewAudio, type AudioRange, type AudioSpeed } from './audio';
+import { buildSpeechMapping, useInterviewAudio, type AudioRange, type AudioSpeed, type SpeechMapping } from './audio';
 import {
   finalMindset,
   gapFormula,
@@ -14,7 +14,7 @@ import {
   type InterviewQuestion,
 } from './data';
 import { RichText } from './rich-text';
-import { clozeText, questionStarters } from './utils';
+import { clozeText, parseInlineRanges, questionStarters, stripFormatting, type InlineToken } from './utils';
 import { getContextsForQuestion } from './connections';
 import { useProgress, type LearningLevel, type ReviewDifficulty } from './storage';
 import { contexts, phraseClusters, heroStories, triggers, getQuestionsForContext, getQuestionsForCluster, getQuestionsForStory, getContextsForTrigger, getMemoryNodes, questionLabel, type Context, type MemoryNode } from './connections';
@@ -170,11 +170,12 @@ function MemoryPath({ nodes, openNode, onOpen, showAllHints = false }: { nodes: 
 function LevelControl({ level, onChange }: { level: LearningLevel; onChange: (level: LearningLevel) => void }) { return <div className="border-t border-slate-100 pt-5"><div className="flex items-center justify-between gap-3"><Label>Less help → more recall</Label><span className="text-xs font-semibold text-slate-500">{level} · {levelLabels[level]}</span></div><p className="mt-2 text-xs text-slate-400">Intentionally remove support until you can answer independently.</p><div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-slate-400"><span>More support</span><span className="h-px flex-1 bg-slate-200" /><span>More recall</span></div><div className="mt-2 grid grid-cols-5 gap-1">{([1, 2, 3, 4, 5] as LearningLevel[]).map((value) => <button key={value} type="button" onClick={() => onChange(value)} className={`min-h-10 rounded-lg text-[10px] font-bold uppercase ${value === level ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-700'}`}>{levelLabels[value]}</button>)}</div></div>; }
 function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, audio }: { q: InterviewQuestion; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; audio: ReturnType<typeof useInterviewAudio> }) {
   if (!show && shownIdeas === 0) return null;
-  const fullText = q.answer.sections.map((section) => section.en).join(' ');
+  const fullSource = q.answer.sections.map((section) => section.en).join(' ');
+  const fullText = stripFormatting(fullSource);
   const fullKey = `q${q.id}-full`;
   const canPlayFull = Boolean(q.audio?.full) || audio.speechAvailable;
   let sectionOffset = 0;
-  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayFull && <AudioControls audio={audio} request={{ text: fullText, src: q.audio?.full, alignment: q.audio?.alignment, key: fullKey }} label="Listen answer" />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
+  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayFull && <AudioControls audio={audio} request={{ text: fullText, src: q.audio?.full, alignment: q.audio?.alignment, key: fullKey, mapping: buildSpeechMapping(fullSource) }} label="Listen answer" />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
     const trackedRange = audio.activeKey === fullKey ? audio.activeRange : audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
@@ -182,7 +183,7 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, audi
     return <AnswerSectionView key={paragraph.id} paragraph={paragraph} questionId={q.id} src={q.audio?.sections?.[paragraph.id]} showVi={showVi} cloze={cloze} active={activeSection === paragraph.id} audio={audio} trackedRange={trackedRange} rangeOffset={rangeOffset} />;
   })}</div></div>;
 }
-function AudioControls({ audio, request, label }: { audio: ReturnType<typeof useInterviewAudio>; request: { text: string; src?: string; alignment?: string; key: string }; label: string }) {
+function AudioControls({ audio, request, label }: { audio: ReturnType<typeof useInterviewAudio>; request: { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping }; label: string }) {
   const active = audio.activeKey === request.key;
   const playing = active && audio.state === 'playing';
   const paused = active && audio.state === 'paused';
@@ -198,7 +199,7 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
   const sectionKey = `q${questionId}-${paragraph.id}`;
   const sectionPlaying = audio.activeKey === sectionKey;
   const canPlaySection = Boolean(src) || audio.speechAvailable;
-  const request = { text: paragraph.en, src, key: sectionKey };
+  const request = { text: stripFormatting(paragraph.en), src, key: sectionKey, mapping: buildSpeechMapping(paragraph.en) };
   return (
     <div className={`border-l-2 pl-4 transition-colors ${active || sectionPlaying ? 'border-blue-400 bg-blue-50/40' : 'border-blue-100'}`}>
       <div className="flex items-start justify-between gap-2">
@@ -208,7 +209,8 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
             const chunkStart = parts.slice(0, index).reduce((total, value) => total + value.length + 1, 0);
             const chunkEnd = chunkStart + part.length;
             const chunkActive = audio.activeKey === chunkKey;
-            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" disabled={!audio.speechAvailable} onClick={() => audio.play({ text: part, key: chunkKey })} aria-label={`Play phrase: ${part.trim()}`} className={`rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100 ${chunkActive ? 'bg-blue-100 text-blue-900' : ''}`}>{renderTrackedText(part, chunkStart, chunkEnd, chunkActive ? audio.activeRange : trackedRange, rangeOffset)}</button></span>;
+            const speechText = stripFormatting(part);
+            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" disabled={!audio.speechAvailable} onClick={() => audio.play({ text: speechText, key: chunkKey, mapping: buildSpeechMapping(part) })} aria-label={`Play phrase: ${speechText.trim()}`} className={`rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100 ${chunkActive ? 'bg-blue-100 text-blue-900' : ''}`}>{renderTrackedText(part, chunkStart, chunkActive ? audio.activeRange : trackedRange, rangeOffset)}</button></span>;
           })}
         </p>
         {canPlaySection && <button type="button" onClick={() => audio.play(request)} aria-label={`Play answer section ${paragraph.id}`} className={`min-h-10 min-w-10 shrink-0 rounded-lg text-xs font-semibold transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${sectionPlaying ? 'bg-blue-50 text-blue-700' : 'text-slate-400'}`}>Listen</button>}
@@ -218,14 +220,21 @@ function AnswerSectionView({ paragraph, questionId, src, showVi, cloze, active, 
   );
 }
 
-function renderTrackedText(text: string, start: number, end: number, range: AudioRange | null, rangeOffset = 0) {
+function renderTrackedText(text: string, start: number, range: AudioRange | null, rangeOffset = 0) {
+  return parseInlineRanges(text).flatMap((token, tokenIndex) => renderTrackedToken(token, start, range, rangeOffset, tokenIndex));
+}
+
+function renderTrackedToken(token: InlineToken, start: number, range: AudioRange | null, rangeOffset: number, tokenIndex: number) {
   let offset = 0;
-  return text.split(/(\s+)/).map((part, index) => {
-    const wordStart = start + offset;
+  const content = token.value.split(/(\s+)/).map((part, index) => {
+    const wordStart = start + token.sourceStart + offset;
     offset += part.length;
     const highlighted = Boolean(range && wordStart < range.end - rangeOffset && wordStart + part.length > range.start - rangeOffset && part.trim());
-    return <span key={`${start}-${index}`} className={highlighted ? 'rounded bg-blue-100 text-blue-950' : undefined}>{part}</span>;
+    return <span key={`${start}-${tokenIndex}-${index}`} className={highlighted ? 'rounded bg-blue-100 text-blue-950' : undefined}>{part}</span>;
   });
+  if (token.kind === 'bold') return <strong key={`${start}-${tokenIndex}`} className="font-semibold text-slate-900">{content}</strong>;
+  if (token.kind === 'italic') return <em key={`${start}-${tokenIndex}`} className="font-medium not-italic text-blue-700">{content}</em>;
+  return content;
 }
 
 function ClozeText({ text }: { text: string }) { const [visible, setVisible] = useState(false); const item = clozeText(text); if (!item) return <RichText text={text} />; return <><RichText text={item.before} /><button type="button" onClick={() => setVisible(true)} className="mx-1 min-h-8 rounded border border-dashed border-blue-300 px-2 font-semibold text-blue-700">{visible ? item.hidden : '______'}</button><RichText text={item.after} /></>; }
