@@ -1,0 +1,1064 @@
+{
+  "version": 1,
+  "questionId": "q14",
+  "speechText": "For me, the first step is to give the model the right and limited context. The main reason is that if the context is wrong, even a strong model can give a very confident wrong answer. For example, for knowledge-based questions, I prefer good retrieval and relevant evidence instead of asking the model to depend only on general memory. Because of that, for machine-consumed output, I prefer structured formats and backend validation. If the model suggests an action that affects data, the backend should still enforce the business rules. At the same time, I would use eval cases for common and risky scenarios. For high-risk actions, I would rather ask for clarification, require confirmation, or use a deterministic fallback than let the model guess. So overall, I do not think hallucination can be completely removed, but we can reduce and control the risk with better context, validation, evals, and safe fallback.",
+  "words": [
+    {
+      "text": "For",
+      "canonicalStart": 1,
+      "canonicalEnd": 4,
+      "startMs": 0,
+      "endMs": 151
+    },
+    {
+      "text": "me,",
+      "canonicalStart": 5,
+      "canonicalEnd": 8,
+      "startMs": 186,
+      "endMs": 406
+    },
+    {
+      "text": "the",
+      "canonicalStart": 12,
+      "canonicalEnd": 15,
+      "startMs": 430,
+      "endMs": 522
+    },
+    {
+      "text": "first",
+      "canonicalStart": 16,
+      "canonicalEnd": 21,
+      "startMs": 546,
+      "endMs": 778
+    },
+    {
+      "text": "step",
+      "canonicalStart": 22,
+      "canonicalEnd": 26,
+      "startMs": 801,
+      "endMs": 964
+    },
+    {
+      "text": "is",
+      "canonicalStart": 27,
+      "canonicalEnd": 29,
+      "startMs": 1022,
+      "endMs": 1115
+    },
+    {
+      "text": "to",
+      "canonicalStart": 30,
+      "canonicalEnd": 32,
+      "startMs": 1149,
+      "endMs": 1231
+    },
+    {
+      "text": "give",
+      "canonicalStart": 33,
+      "canonicalEnd": 37,
+      "startMs": 1265,
+      "endMs": 1451
+    },
+    {
+      "text": "the",
+      "canonicalStart": 38,
+      "canonicalEnd": 41,
+      "startMs": 1498,
+      "endMs": 1567
+    },
+    {
+      "text": "model",
+      "canonicalStart": 42,
+      "canonicalEnd": 47,
+      "startMs": 1591,
+      "endMs": 1881
+    },
+    {
+      "text": "the",
+      "canonicalStart": 48,
+      "canonicalEnd": 51,
+      "startMs": 1927,
+      "endMs": 2032
+    },
+    {
+      "text": "right",
+      "canonicalStart": 54,
+      "canonicalEnd": 59,
+      "startMs": 2067,
+      "endMs": 2334
+    },
+    {
+      "text": "and",
+      "canonicalStart": 60,
+      "canonicalEnd": 63,
+      "startMs": 2368,
+      "endMs": 2450
+    },
+    {
+      "text": "limited",
+      "canonicalStart": 64,
+      "canonicalEnd": 71,
+      "startMs": 2473,
+      "endMs": 2786
+    },
+    {
+      "text": "context.",
+      "canonicalStart": 72,
+      "canonicalEnd": 82,
+      "startMs": 2810,
+      "endMs": 3529
+    },
+    {
+      "text": "The",
+      "canonicalStart": 84,
+      "canonicalEnd": 87,
+      "startMs": 3680,
+      "endMs": 4470
+    },
+    {
+      "text": "main",
+      "canonicalStart": 88,
+      "canonicalEnd": 92,
+      "startMs": 4493,
+      "endMs": 4679
+    },
+    {
+      "text": "reason",
+      "canonicalStart": 93,
+      "canonicalEnd": 99,
+      "startMs": 4702,
+      "endMs": 5039
+    },
+    {
+      "text": "is",
+      "canonicalStart": 100,
+      "canonicalEnd": 102,
+      "startMs": 5074,
+      "endMs": 5178
+    },
+    {
+      "text": "that",
+      "canonicalStart": 103,
+      "canonicalEnd": 107,
+      "startMs": 5213,
+      "endMs": 5364
+    },
+    {
+      "text": "if",
+      "canonicalStart": 111,
+      "canonicalEnd": 113,
+      "startMs": 5399,
+      "endMs": 5468
+    },
+    {
+      "text": "the",
+      "canonicalStart": 114,
+      "canonicalEnd": 117,
+      "startMs": 5503,
+      "endMs": 5596
+    },
+    {
+      "text": "context",
+      "canonicalStart": 118,
+      "canonicalEnd": 125,
+      "startMs": 5619,
+      "endMs": 6118
+    },
+    {
+      "text": "is",
+      "canonicalStart": 126,
+      "canonicalEnd": 128,
+      "startMs": 6165,
+      "endMs": 6269
+    },
+    {
+      "text": "wrong,",
+      "canonicalStart": 129,
+      "canonicalEnd": 135,
+      "startMs": 6316,
+      "endMs": 6827
+    },
+    {
+      "text": "even",
+      "canonicalStart": 138,
+      "canonicalEnd": 142,
+      "startMs": 6896,
+      "endMs": 7152
+    },
+    {
+      "text": "a",
+      "canonicalStart": 143,
+      "canonicalEnd": 144,
+      "startMs": 7187,
+      "endMs": 7221
+    },
+    {
+      "text": "strong",
+      "canonicalStart": 145,
+      "canonicalEnd": 151,
+      "startMs": 7245,
+      "endMs": 7581
+    },
+    {
+      "text": "model",
+      "canonicalStart": 152,
+      "canonicalEnd": 157,
+      "startMs": 7616,
+      "endMs": 7918
+    },
+    {
+      "text": "can",
+      "canonicalStart": 158,
+      "canonicalEnd": 161,
+      "startMs": 7964,
+      "endMs": 8127
+    },
+    {
+      "text": "give",
+      "canonicalStart": 162,
+      "canonicalEnd": 166,
+      "startMs": 8162,
+      "endMs": 8324
+    },
+    {
+      "text": "a",
+      "canonicalStart": 167,
+      "canonicalEnd": 168,
+      "startMs": 8359,
+      "endMs": 8394
+    },
+    {
+      "text": "very",
+      "canonicalStart": 169,
+      "canonicalEnd": 173,
+      "startMs": 8429,
+      "endMs": 8707
+    },
+    {
+      "text": "confident",
+      "canonicalStart": 174,
+      "canonicalEnd": 183,
+      "startMs": 8766,
+      "endMs": 9358
+    },
+    {
+      "text": "wrong",
+      "canonicalStart": 186,
+      "canonicalEnd": 191,
+      "startMs": 9392,
+      "endMs": 9613
+    },
+    {
+      "text": "answer.",
+      "canonicalStart": 192,
+      "canonicalEnd": 201,
+      "startMs": 9636,
+      "endMs": 10112
+    },
+    {
+      "text": "For",
+      "canonicalStart": 203,
+      "canonicalEnd": 206,
+      "startMs": 10286,
+      "endMs": 11215
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 207,
+      "canonicalEnd": 215,
+      "startMs": 11250,
+      "endMs": 11796
+    },
+    {
+      "text": "for",
+      "canonicalStart": 219,
+      "canonicalEnd": 222,
+      "startMs": 11819,
+      "endMs": 11981
+    },
+    {
+      "text": "knowledge-based",
+      "canonicalStart": 223,
+      "canonicalEnd": 238,
+      "startMs": 12016,
+      "endMs": 12690
+    },
+    {
+      "text": "questions,",
+      "canonicalStart": 239,
+      "canonicalEnd": 249,
+      "startMs": 12713,
+      "endMs": 13305
+    },
+    {
+      "text": "I",
+      "canonicalStart": 250,
+      "canonicalEnd": 251,
+      "startMs": 13375,
+      "endMs": 13491
+    },
+    {
+      "text": "prefer",
+      "canonicalStart": 252,
+      "canonicalEnd": 258,
+      "startMs": 13549,
+      "endMs": 13897
+    },
+    {
+      "text": "good",
+      "canonicalStart": 259,
+      "canonicalEnd": 263,
+      "startMs": 13944,
+      "endMs": 14211
+    },
+    {
+      "text": "retrieval",
+      "canonicalStart": 266,
+      "canonicalEnd": 275,
+      "startMs": 14246,
+      "endMs": 14733
+    },
+    {
+      "text": "and",
+      "canonicalStart": 278,
+      "canonicalEnd": 281,
+      "startMs": 14768,
+      "endMs": 14884
+    },
+    {
+      "text": "relevant",
+      "canonicalStart": 282,
+      "canonicalEnd": 290,
+      "startMs": 14908,
+      "endMs": 15302
+    },
+    {
+      "text": "evidence",
+      "canonicalStart": 291,
+      "canonicalEnd": 299,
+      "startMs": 15325,
+      "endMs": 15697
+    },
+    {
+      "text": "instead",
+      "canonicalStart": 302,
+      "canonicalEnd": 309,
+      "startMs": 15743,
+      "endMs": 16045
+    },
+    {
+      "text": "of",
+      "canonicalStart": 310,
+      "canonicalEnd": 312,
+      "startMs": 16080,
+      "endMs": 16127
+    },
+    {
+      "text": "asking",
+      "canonicalStart": 313,
+      "canonicalEnd": 319,
+      "startMs": 16150,
+      "endMs": 16475
+    },
+    {
+      "text": "the",
+      "canonicalStart": 320,
+      "canonicalEnd": 323,
+      "startMs": 16510,
+      "endMs": 16603
+    },
+    {
+      "text": "model",
+      "canonicalStart": 324,
+      "canonicalEnd": 329,
+      "startMs": 16626,
+      "endMs": 16986
+    },
+    {
+      "text": "to",
+      "canonicalStart": 330,
+      "canonicalEnd": 332,
+      "startMs": 17044,
+      "endMs": 17148
+    },
+    {
+      "text": "depend",
+      "canonicalStart": 333,
+      "canonicalEnd": 339,
+      "startMs": 17183,
+      "endMs": 17531
+    },
+    {
+      "text": "only",
+      "canonicalStart": 340,
+      "canonicalEnd": 344,
+      "startMs": 17566,
+      "endMs": 17891
+    },
+    {
+      "text": "on",
+      "canonicalStart": 345,
+      "canonicalEnd": 347,
+      "startMs": 17926,
+      "endMs": 18042
+    },
+    {
+      "text": "general",
+      "canonicalStart": 348,
+      "canonicalEnd": 355,
+      "startMs": 18100,
+      "endMs": 18483
+    },
+    {
+      "text": "memory.",
+      "canonicalStart": 356,
+      "canonicalEnd": 363,
+      "startMs": 18530,
+      "endMs": 19006
+    },
+    {
+      "text": "Because",
+      "canonicalStart": 365,
+      "canonicalEnd": 372,
+      "startMs": 19180,
+      "endMs": 20295
+    },
+    {
+      "text": "of",
+      "canonicalStart": 373,
+      "canonicalEnd": 375,
+      "startMs": 20329,
+      "endMs": 20387
+    },
+    {
+      "text": "that,",
+      "canonicalStart": 376,
+      "canonicalEnd": 381,
+      "startMs": 20422,
+      "endMs": 20666
+    },
+    {
+      "text": "for",
+      "canonicalStart": 385,
+      "canonicalEnd": 388,
+      "startMs": 20701,
+      "endMs": 20887
+    },
+    {
+      "text": "machine-consumed",
+      "canonicalStart": 389,
+      "canonicalEnd": 405,
+      "startMs": 20956,
+      "endMs": 21815
+    },
+    {
+      "text": "output,",
+      "canonicalStart": 406,
+      "canonicalEnd": 413,
+      "startMs": 21850,
+      "endMs": 22361
+    },
+    {
+      "text": "I",
+      "canonicalStart": 414,
+      "canonicalEnd": 415,
+      "startMs": 22396,
+      "endMs": 22431
+    },
+    {
+      "text": "prefer",
+      "canonicalStart": 416,
+      "canonicalEnd": 422,
+      "startMs": 22466,
+      "endMs": 22779
+    },
+    {
+      "text": "structured",
+      "canonicalStart": 425,
+      "canonicalEnd": 435,
+      "startMs": 22814,
+      "endMs": 23371
+    },
+    {
+      "text": "formats",
+      "canonicalStart": 436,
+      "canonicalEnd": 443,
+      "startMs": 23394,
+      "endMs": 23905
+    },
+    {
+      "text": "and",
+      "canonicalStart": 444,
+      "canonicalEnd": 447,
+      "startMs": 23963,
+      "endMs": 24068
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 448,
+      "canonicalEnd": 455,
+      "startMs": 24103,
+      "endMs": 24555
+    },
+    {
+      "text": "validation.",
+      "canonicalStart": 456,
+      "canonicalEnd": 469,
+      "startMs": 24590,
+      "endMs": 25415
+    },
+    {
+      "text": "If",
+      "canonicalStart": 472,
+      "canonicalEnd": 474,
+      "startMs": 25589,
+      "endMs": 26517
+    },
+    {
+      "text": "the",
+      "canonicalStart": 475,
+      "canonicalEnd": 478,
+      "startMs": 26587,
+      "endMs": 26692
+    },
+    {
+      "text": "model",
+      "canonicalStart": 479,
+      "canonicalEnd": 484,
+      "startMs": 26715,
+      "endMs": 26959
+    },
+    {
+      "text": "suggests",
+      "canonicalStart": 485,
+      "canonicalEnd": 493,
+      "startMs": 26993,
+      "endMs": 27423
+    },
+    {
+      "text": "an",
+      "canonicalStart": 494,
+      "canonicalEnd": 496,
+      "startMs": 27458,
+      "endMs": 27527
+    },
+    {
+      "text": "action",
+      "canonicalStart": 497,
+      "canonicalEnd": 503,
+      "startMs": 27562,
+      "endMs": 27876
+    },
+    {
+      "text": "that",
+      "canonicalStart": 504,
+      "canonicalEnd": 508,
+      "startMs": 27911,
+      "endMs": 28050
+    },
+    {
+      "text": "affects",
+      "canonicalStart": 509,
+      "canonicalEnd": 516,
+      "startMs": 28073,
+      "endMs": 28387
+    },
+    {
+      "text": "data,",
+      "canonicalStart": 517,
+      "canonicalEnd": 522,
+      "startMs": 28421,
+      "endMs": 28897
+    },
+    {
+      "text": "the",
+      "canonicalStart": 525,
+      "canonicalEnd": 528,
+      "startMs": 28956,
+      "endMs": 29037
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 529,
+      "canonicalEnd": 536,
+      "startMs": 29072,
+      "endMs": 29513
+    },
+    {
+      "text": "should",
+      "canonicalStart": 537,
+      "canonicalEnd": 543,
+      "startMs": 29548,
+      "endMs": 29757
+    },
+    {
+      "text": "still",
+      "canonicalStart": 544,
+      "canonicalEnd": 549,
+      "startMs": 29791,
+      "endMs": 30012
+    },
+    {
+      "text": "enforce",
+      "canonicalStart": 550,
+      "canonicalEnd": 557,
+      "startMs": 30047,
+      "endMs": 30430
+    },
+    {
+      "text": "the",
+      "canonicalStart": 558,
+      "canonicalEnd": 561,
+      "startMs": 30465,
+      "endMs": 30546
+    },
+    {
+      "text": "business",
+      "canonicalStart": 562,
+      "canonicalEnd": 570,
+      "startMs": 30569,
+      "endMs": 30918
+    },
+    {
+      "text": "rules.",
+      "canonicalStart": 571,
+      "canonicalEnd": 577,
+      "startMs": 30964,
+      "endMs": 31359
+    },
+    {
+      "text": "At",
+      "canonicalStart": 579,
+      "canonicalEnd": 581,
+      "startMs": 31486,
+      "endMs": 32531
+    },
+    {
+      "text": "the",
+      "canonicalStart": 582,
+      "canonicalEnd": 585,
+      "startMs": 32578,
+      "endMs": 32671
+    },
+    {
+      "text": "same",
+      "canonicalStart": 586,
+      "canonicalEnd": 590,
+      "startMs": 32694,
+      "endMs": 32938
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 591,
+      "canonicalEnd": 596,
+      "startMs": 32973,
+      "endMs": 33286
+    },
+    {
+      "text": "I",
+      "canonicalStart": 600,
+      "canonicalEnd": 601,
+      "startMs": 33309,
+      "endMs": 33332
+    },
+    {
+      "text": "would",
+      "canonicalStart": 602,
+      "canonicalEnd": 607,
+      "startMs": 33356,
+      "endMs": 33518
+    },
+    {
+      "text": "use",
+      "canonicalStart": 608,
+      "canonicalEnd": 611,
+      "startMs": 33541,
+      "endMs": 33704
+    },
+    {
+      "text": "eval",
+      "canonicalStart": 614,
+      "canonicalEnd": 618,
+      "startMs": 33750,
+      "endMs": 34087
+    },
+    {
+      "text": "cases",
+      "canonicalStart": 619,
+      "canonicalEnd": 624,
+      "startMs": 34134,
+      "endMs": 34540
+    },
+    {
+      "text": "for",
+      "canonicalStart": 627,
+      "canonicalEnd": 630,
+      "startMs": 34575,
+      "endMs": 34737
+    },
+    {
+      "text": "common",
+      "canonicalStart": 631,
+      "canonicalEnd": 637,
+      "startMs": 34807,
+      "endMs": 35271
+    },
+    {
+      "text": "and",
+      "canonicalStart": 638,
+      "canonicalEnd": 641,
+      "startMs": 35295,
+      "endMs": 35399
+    },
+    {
+      "text": "risky",
+      "canonicalStart": 642,
+      "canonicalEnd": 647,
+      "startMs": 35434,
+      "endMs": 35771
+    },
+    {
+      "text": "scenarios.",
+      "canonicalStart": 648,
+      "canonicalEnd": 658,
+      "startMs": 35840,
+      "endMs": 36641
+    },
+    {
+      "text": "For",
+      "canonicalStart": 661,
+      "canonicalEnd": 664,
+      "startMs": 36792,
+      "endMs": 37547
+    },
+    {
+      "text": "high-risk",
+      "canonicalStart": 665,
+      "canonicalEnd": 674,
+      "startMs": 37617,
+      "endMs": 38151
+    },
+    {
+      "text": "actions,",
+      "canonicalStart": 675,
+      "canonicalEnd": 683,
+      "startMs": 38209,
+      "endMs": 38708
+    },
+    {
+      "text": "I",
+      "canonicalStart": 684,
+      "canonicalEnd": 685,
+      "startMs": 38743,
+      "endMs": 38778
+    },
+    {
+      "text": "would",
+      "canonicalStart": 686,
+      "canonicalEnd": 691,
+      "startMs": 38801,
+      "endMs": 38987
+    },
+    {
+      "text": "rather",
+      "canonicalStart": 692,
+      "canonicalEnd": 698,
+      "startMs": 39021,
+      "endMs": 39254
+    },
+    {
+      "text": "ask",
+      "canonicalStart": 699,
+      "canonicalEnd": 702,
+      "startMs": 39277,
+      "endMs": 39451
+    },
+    {
+      "text": "for",
+      "canonicalStart": 703,
+      "canonicalEnd": 706,
+      "startMs": 39497,
+      "endMs": 39637
+    },
+    {
+      "text": "clarification,",
+      "canonicalStart": 707,
+      "canonicalEnd": 721,
+      "startMs": 39683,
+      "endMs": 40751
+    },
+    {
+      "text": "require",
+      "canonicalStart": 722,
+      "canonicalEnd": 729,
+      "startMs": 40786,
+      "endMs": 41192
+    },
+    {
+      "text": "confirmation,",
+      "canonicalStart": 730,
+      "canonicalEnd": 743,
+      "startMs": 41227,
+      "endMs": 42121
+    },
+    {
+      "text": "or",
+      "canonicalStart": 746,
+      "canonicalEnd": 748,
+      "startMs": 42295,
+      "endMs": 42736
+    },
+    {
+      "text": "use",
+      "canonicalStart": 749,
+      "canonicalEnd": 752,
+      "startMs": 42794,
+      "endMs": 43003
+    },
+    {
+      "text": "a",
+      "canonicalStart": 753,
+      "canonicalEnd": 754,
+      "startMs": 43050,
+      "endMs": 43084
+    },
+    {
+      "text": "deterministic",
+      "canonicalStart": 755,
+      "canonicalEnd": 768,
+      "startMs": 43108,
+      "endMs": 43793
+    },
+    {
+      "text": "fallback",
+      "canonicalStart": 769,
+      "canonicalEnd": 777,
+      "startMs": 43827,
+      "endMs": 44315
+    },
+    {
+      "text": "than",
+      "canonicalStart": 780,
+      "canonicalEnd": 784,
+      "startMs": 44362,
+      "endMs": 44501
+    },
+    {
+      "text": "let",
+      "canonicalStart": 785,
+      "canonicalEnd": 788,
+      "startMs": 44536,
+      "endMs": 44687
+    },
+    {
+      "text": "the",
+      "canonicalStart": 789,
+      "canonicalEnd": 792,
+      "startMs": 44721,
+      "endMs": 44803
+    },
+    {
+      "text": "model",
+      "canonicalStart": 793,
+      "canonicalEnd": 798,
+      "startMs": 44826,
+      "endMs": 45093
+    },
+    {
+      "text": "guess.",
+      "canonicalStart": 799,
+      "canonicalEnd": 805,
+      "startMs": 45128,
+      "endMs": 45546
+    },
+    {
+      "text": "So",
+      "canonicalStart": 807,
+      "canonicalEnd": 809,
+      "startMs": 45697,
+      "endMs": 46602
+    },
+    {
+      "text": "overall,",
+      "canonicalStart": 810,
+      "canonicalEnd": 818,
+      "startMs": 46695,
+      "endMs": 47276
+    },
+    {
+      "text": "I",
+      "canonicalStart": 822,
+      "canonicalEnd": 823,
+      "startMs": 47322,
+      "endMs": 47369
+    },
+    {
+      "text": "do",
+      "canonicalStart": 824,
+      "canonicalEnd": 826,
+      "startMs": 47415,
+      "endMs": 47543
+    },
+    {
+      "text": "not",
+      "canonicalStart": 827,
+      "canonicalEnd": 830,
+      "startMs": 47577,
+      "endMs": 47752
+    },
+    {
+      "text": "think",
+      "canonicalStart": 831,
+      "canonicalEnd": 836,
+      "startMs": 47786,
+      "endMs": 47949
+    },
+    {
+      "text": "hallucination",
+      "canonicalStart": 837,
+      "canonicalEnd": 850,
+      "startMs": 47984,
+      "endMs": 48634
+    },
+    {
+      "text": "can",
+      "canonicalStart": 851,
+      "canonicalEnd": 854,
+      "startMs": 48669,
+      "endMs": 48797
+    },
+    {
+      "text": "be",
+      "canonicalStart": 855,
+      "canonicalEnd": 857,
+      "startMs": 48831,
+      "endMs": 48913
+    },
+    {
+      "text": "completely",
+      "canonicalStart": 858,
+      "canonicalEnd": 868,
+      "startMs": 48971,
+      "endMs": 49493
+    },
+    {
+      "text": "removed,",
+      "canonicalStart": 869,
+      "canonicalEnd": 877,
+      "startMs": 49528,
+      "endMs": 50062
+    },
+    {
+      "text": "but",
+      "canonicalStart": 880,
+      "canonicalEnd": 883,
+      "startMs": 50178,
+      "endMs": 50712
+    },
+    {
+      "text": "we",
+      "canonicalStart": 884,
+      "canonicalEnd": 886,
+      "startMs": 50747,
+      "endMs": 50840
+    },
+    {
+      "text": "can",
+      "canonicalStart": 887,
+      "canonicalEnd": 890,
+      "startMs": 50886,
+      "endMs": 51014
+    },
+    {
+      "text": "reduce",
+      "canonicalStart": 893,
+      "canonicalEnd": 899,
+      "startMs": 51049,
+      "endMs": 51386
+    },
+    {
+      "text": "and",
+      "canonicalStart": 900,
+      "canonicalEnd": 903,
+      "startMs": 51432,
+      "endMs": 51525
+    },
+    {
+      "text": "control",
+      "canonicalStart": 904,
+      "canonicalEnd": 911,
+      "startMs": 51548,
+      "endMs": 51954
+    },
+    {
+      "text": "the",
+      "canonicalStart": 912,
+      "canonicalEnd": 915,
+      "startMs": 52012,
+      "endMs": 52117
+    },
+    {
+      "text": "risk",
+      "canonicalStart": 916,
+      "canonicalEnd": 920,
+      "startMs": 52140,
+      "endMs": 52349
+    },
+    {
+      "text": "with",
+      "canonicalStart": 923,
+      "canonicalEnd": 927,
+      "startMs": 52407,
+      "endMs": 52593
+    },
+    {
+      "text": "better",
+      "canonicalStart": 928,
+      "canonicalEnd": 934,
+      "startMs": 52639,
+      "endMs": 52988
+    },
+    {
+      "text": "context,",
+      "canonicalStart": 935,
+      "canonicalEnd": 943,
+      "startMs": 53011,
+      "endMs": 53626
+    },
+    {
+      "text": "validation,",
+      "canonicalStart": 944,
+      "canonicalEnd": 955,
+      "startMs": 53673,
+      "endMs": 54451
+    },
+    {
+      "text": "evals,",
+      "canonicalStart": 956,
+      "canonicalEnd": 962,
+      "startMs": 54509,
+      "endMs": 55043
+    },
+    {
+      "text": "and",
+      "canonicalStart": 963,
+      "canonicalEnd": 966,
+      "startMs": 55066,
+      "endMs": 55159
+    },
+    {
+      "text": "safe",
+      "canonicalStart": 967,
+      "canonicalEnd": 971,
+      "startMs": 55194,
+      "endMs": 55542
+    },
+    {
+      "text": "fallback.",
+      "canonicalStart": 972,
+      "canonicalEnd": 981,
+      "startMs": 55577,
+      "endMs": 56122
+    }
+  ]
+}

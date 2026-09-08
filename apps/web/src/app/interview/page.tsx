@@ -174,7 +174,7 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, audi
   const fullKey = `q${q.id}-full`;
   const canPlayFull = Boolean(q.audio?.full) || audio.speechAvailable;
   let sectionOffset = 0;
-  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayFull && <AudioControls audio={audio} request={{ text: fullText, src: q.audio?.full, key: fullKey }} label="Listen answer" />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
+  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayFull && <AudioControls audio={audio} request={{ text: fullText, src: q.audio?.full, alignment: q.audio?.alignment, key: fullKey }} label="Listen answer" />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
     const trackedRange = audio.activeKey === fullKey ? audio.activeRange : audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;

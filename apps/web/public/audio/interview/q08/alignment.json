@@ -1,0 +1,1015 @@
+{
+  "version": 1,
+  "questionId": "q08",
+  "speechText": "For me, I have not owned a large LLM evaluation platform in production yet. The main reason is that it follows a testing mindset I already use: define the expected behavior, build test cases, run them repeatedly, and check for regressions when the system changes. For example, in retrieval, I care about whether the correct documents are returned and how the ranking changes when we update the retrieval strategy. Because of that, for LLM evals, I would build a representative dataset, define what good behavior looks like, and measure correctness, groundedness, retrieval quality, tool-call success, latency, and cost. At the same time, for more subjective outputs, I would combine automatic evaluation with human review instead of depending on only one metric. So overall, my experience with formal LLM eval platforms is still growing, but the evaluation and regression mindset is already familiar to me.",
+  "words": [
+    {
+      "text": "For",
+      "canonicalStart": 1,
+      "canonicalEnd": 4,
+      "startMs": 0,
+      "endMs": 151
+    },
+    {
+      "text": "me,",
+      "canonicalStart": 5,
+      "canonicalEnd": 8,
+      "startMs": 197,
+      "endMs": 488
+    },
+    {
+      "text": "I",
+      "canonicalStart": 12,
+      "canonicalEnd": 13,
+      "startMs": 511,
+      "endMs": 569
+    },
+    {
+      "text": "have",
+      "canonicalStart": 14,
+      "canonicalEnd": 18,
+      "startMs": 604,
+      "endMs": 789
+    },
+    {
+      "text": "not",
+      "canonicalStart": 19,
+      "canonicalEnd": 22,
+      "startMs": 824,
+      "endMs": 964
+    },
+    {
+      "text": "owned",
+      "canonicalStart": 23,
+      "canonicalEnd": 28,
+      "startMs": 1010,
+      "endMs": 1196
+    },
+    {
+      "text": "a",
+      "canonicalStart": 29,
+      "canonicalEnd": 30,
+      "startMs": 1219,
+      "endMs": 1254
+    },
+    {
+      "text": "large",
+      "canonicalStart": 31,
+      "canonicalEnd": 36,
+      "startMs": 1277,
+      "endMs": 1637
+    },
+    {
+      "text": "LLM",
+      "canonicalStart": 39,
+      "canonicalEnd": 42,
+      "startMs": 1707,
+      "endMs": 2101
+    },
+    {
+      "text": "evaluation",
+      "canonicalStart": 43,
+      "canonicalEnd": 53,
+      "startMs": 2218,
+      "endMs": 2902
+    },
+    {
+      "text": "platform",
+      "canonicalStart": 54,
+      "canonicalEnd": 62,
+      "startMs": 2937,
+      "endMs": 3402
+    },
+    {
+      "text": "in",
+      "canonicalStart": 65,
+      "canonicalEnd": 67,
+      "startMs": 3460,
+      "endMs": 3529
+    },
+    {
+      "text": "production",
+      "canonicalStart": 68,
+      "canonicalEnd": 78,
+      "startMs": 3564,
+      "endMs": 4052
+    },
+    {
+      "text": "yet.",
+      "canonicalStart": 79,
+      "canonicalEnd": 83,
+      "startMs": 4087,
+      "endMs": 4377
+    },
+    {
+      "text": "The",
+      "canonicalStart": 85,
+      "canonicalEnd": 88,
+      "startMs": 4551,
+      "endMs": 5457
+    },
+    {
+      "text": "main",
+      "canonicalStart": 89,
+      "canonicalEnd": 93,
+      "startMs": 5480,
+      "endMs": 5677
+    },
+    {
+      "text": "reason",
+      "canonicalStart": 94,
+      "canonicalEnd": 100,
+      "startMs": 5712,
+      "endMs": 6014
+    },
+    {
+      "text": "is",
+      "canonicalStart": 101,
+      "canonicalEnd": 103,
+      "startMs": 6049,
+      "endMs": 6142
+    },
+    {
+      "text": "that",
+      "canonicalStart": 104,
+      "canonicalEnd": 108,
+      "startMs": 6177,
+      "endMs": 6316
+    },
+    {
+      "text": "it",
+      "canonicalStart": 112,
+      "canonicalEnd": 114,
+      "startMs": 6351,
+      "endMs": 6420
+    },
+    {
+      "text": "follows",
+      "canonicalStart": 115,
+      "canonicalEnd": 122,
+      "startMs": 6444,
+      "endMs": 6745
+    },
+    {
+      "text": "a",
+      "canonicalStart": 123,
+      "canonicalEnd": 124,
+      "startMs": 6792,
+      "endMs": 6838
+    },
+    {
+      "text": "testing",
+      "canonicalStart": 125,
+      "canonicalEnd": 132,
+      "startMs": 6873,
+      "endMs": 7303
+    },
+    {
+      "text": "mindset",
+      "canonicalStart": 133,
+      "canonicalEnd": 140,
+      "startMs": 7326,
+      "endMs": 7814
+    },
+    {
+      "text": "I",
+      "canonicalStart": 141,
+      "canonicalEnd": 142,
+      "startMs": 7860,
+      "endMs": 7918
+    },
+    {
+      "text": "already",
+      "canonicalStart": 143,
+      "canonicalEnd": 150,
+      "startMs": 7953,
+      "endMs": 8348
+    },
+    {
+      "text": "use:",
+      "canonicalStart": 151,
+      "canonicalEnd": 155,
+      "startMs": 8406,
+      "endMs": 8916
+    },
+    {
+      "text": "define",
+      "canonicalStart": 156,
+      "canonicalEnd": 162,
+      "startMs": 9033,
+      "endMs": 10019
+    },
+    {
+      "text": "the",
+      "canonicalStart": 163,
+      "canonicalEnd": 166,
+      "startMs": 10054,
+      "endMs": 10124
+    },
+    {
+      "text": "expected",
+      "canonicalStart": 167,
+      "canonicalEnd": 175,
+      "startMs": 10147,
+      "endMs": 10623
+    },
+    {
+      "text": "behavior,",
+      "canonicalStart": 176,
+      "canonicalEnd": 185,
+      "startMs": 10646,
+      "endMs": 11297
+    },
+    {
+      "text": "build",
+      "canonicalStart": 186,
+      "canonicalEnd": 191,
+      "startMs": 11378,
+      "endMs": 11680
+    },
+    {
+      "text": "test",
+      "canonicalStart": 192,
+      "canonicalEnd": 196,
+      "startMs": 11749,
+      "endMs": 12051
+    },
+    {
+      "text": "cases,",
+      "canonicalStart": 197,
+      "canonicalEnd": 203,
+      "startMs": 12086,
+      "endMs": 12597
+    },
+    {
+      "text": "run",
+      "canonicalStart": 204,
+      "canonicalEnd": 207,
+      "startMs": 12643,
+      "endMs": 12817
+    },
+    {
+      "text": "them",
+      "canonicalStart": 208,
+      "canonicalEnd": 212,
+      "startMs": 12864,
+      "endMs": 12980
+    },
+    {
+      "text": "repeatedly,",
+      "canonicalStart": 213,
+      "canonicalEnd": 224,
+      "startMs": 13003,
+      "endMs": 13804
+    },
+    {
+      "text": "and",
+      "canonicalStart": 227,
+      "canonicalEnd": 230,
+      "startMs": 14013,
+      "endMs": 14373
+    },
+    {
+      "text": "check",
+      "canonicalStart": 231,
+      "canonicalEnd": 236,
+      "startMs": 14408,
+      "endMs": 14640
+    },
+    {
+      "text": "for",
+      "canonicalStart": 237,
+      "canonicalEnd": 240,
+      "startMs": 14675,
+      "endMs": 14791
+    },
+    {
+      "text": "regressions",
+      "canonicalStart": 243,
+      "canonicalEnd": 254,
+      "startMs": 14826,
+      "endMs": 15383
+    },
+    {
+      "text": "when",
+      "canonicalStart": 257,
+      "canonicalEnd": 261,
+      "startMs": 15430,
+      "endMs": 15580
+    },
+    {
+      "text": "the",
+      "canonicalStart": 262,
+      "canonicalEnd": 265,
+      "startMs": 15615,
+      "endMs": 15697
+    },
+    {
+      "text": "system",
+      "canonicalStart": 266,
+      "canonicalEnd": 272,
+      "startMs": 15720,
+      "endMs": 16068
+    },
+    {
+      "text": "changes.",
+      "canonicalStart": 273,
+      "canonicalEnd": 281,
+      "startMs": 16115,
+      "endMs": 16707
+    },
+    {
+      "text": "For",
+      "canonicalStart": 283,
+      "canonicalEnd": 286,
+      "startMs": 16881,
+      "endMs": 17693
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 287,
+      "canonicalEnd": 295,
+      "startMs": 17728,
+      "endMs": 18286
+    },
+    {
+      "text": "in",
+      "canonicalStart": 299,
+      "canonicalEnd": 301,
+      "startMs": 18309,
+      "endMs": 18413
+    },
+    {
+      "text": "retrieval,",
+      "canonicalStart": 302,
+      "canonicalEnd": 312,
+      "startMs": 18460,
+      "endMs": 19052
+    },
+    {
+      "text": "I",
+      "canonicalStart": 313,
+      "canonicalEnd": 314,
+      "startMs": 19087,
+      "endMs": 19145
+    },
+    {
+      "text": "care",
+      "canonicalStart": 315,
+      "canonicalEnd": 319,
+      "startMs": 19191,
+      "endMs": 19493
+    },
+    {
+      "text": "about",
+      "canonicalStart": 320,
+      "canonicalEnd": 325,
+      "startMs": 19528,
+      "endMs": 19737
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 326,
+      "canonicalEnd": 333,
+      "startMs": 19772,
+      "endMs": 20004
+    },
+    {
+      "text": "the",
+      "canonicalStart": 334,
+      "canonicalEnd": 337,
+      "startMs": 20039,
+      "endMs": 20155
+    },
+    {
+      "text": "correct",
+      "canonicalStart": 340,
+      "canonicalEnd": 347,
+      "startMs": 20201,
+      "endMs": 20515
+    },
+    {
+      "text": "documents",
+      "canonicalStart": 348,
+      "canonicalEnd": 357,
+      "startMs": 20561,
+      "endMs": 21014
+    },
+    {
+      "text": "are",
+      "canonicalStart": 360,
+      "canonicalEnd": 363,
+      "startMs": 21049,
+      "endMs": 21153
+    },
+    {
+      "text": "returned",
+      "canonicalStart": 364,
+      "canonicalEnd": 372,
+      "startMs": 21176,
+      "endMs": 21652
+    },
+    {
+      "text": "and",
+      "canonicalStart": 375,
+      "canonicalEnd": 378,
+      "startMs": 21676,
+      "endMs": 21780
+    },
+    {
+      "text": "how",
+      "canonicalStart": 379,
+      "canonicalEnd": 382,
+      "startMs": 21815,
+      "endMs": 21966
+    },
+    {
+      "text": "the",
+      "canonicalStart": 383,
+      "canonicalEnd": 386,
+      "startMs": 22001,
+      "endMs": 22105
+    },
+    {
+      "text": "ranking",
+      "canonicalStart": 389,
+      "canonicalEnd": 396,
+      "startMs": 22129,
+      "endMs": 22500
+    },
+    {
+      "text": "changes",
+      "canonicalStart": 399,
+      "canonicalEnd": 406,
+      "startMs": 22523,
+      "endMs": 22953
+    },
+    {
+      "text": "when",
+      "canonicalStart": 407,
+      "canonicalEnd": 411,
+      "startMs": 22999,
+      "endMs": 23150
+    },
+    {
+      "text": "we",
+      "canonicalStart": 412,
+      "canonicalEnd": 414,
+      "startMs": 23173,
+      "endMs": 23243
+    },
+    {
+      "text": "update",
+      "canonicalStart": 415,
+      "canonicalEnd": 421,
+      "startMs": 23301,
+      "endMs": 23638
+    },
+    {
+      "text": "the",
+      "canonicalStart": 422,
+      "canonicalEnd": 425,
+      "startMs": 23673,
+      "endMs": 23742
+    },
+    {
+      "text": "retrieval",
+      "canonicalStart": 426,
+      "canonicalEnd": 435,
+      "startMs": 23766,
+      "endMs": 24207
+    },
+    {
+      "text": "strategy.",
+      "canonicalStart": 436,
+      "canonicalEnd": 445,
+      "startMs": 24242,
+      "endMs": 24892
+    },
+    {
+      "text": "Because",
+      "canonicalStart": 447,
+      "canonicalEnd": 454,
+      "startMs": 25066,
+      "endMs": 26204
+    },
+    {
+      "text": "of",
+      "canonicalStart": 455,
+      "canonicalEnd": 457,
+      "startMs": 26250,
+      "endMs": 26308
+    },
+    {
+      "text": "that,",
+      "canonicalStart": 458,
+      "canonicalEnd": 463,
+      "startMs": 26331,
+      "endMs": 26587
+    },
+    {
+      "text": "for",
+      "canonicalStart": 467,
+      "canonicalEnd": 470,
+      "startMs": 26610,
+      "endMs": 26761
+    },
+    {
+      "text": "LLM",
+      "canonicalStart": 471,
+      "canonicalEnd": 474,
+      "startMs": 26831,
+      "endMs": 27225
+    },
+    {
+      "text": "evals,",
+      "canonicalStart": 475,
+      "canonicalEnd": 481,
+      "startMs": 27341,
+      "endMs": 27922
+    },
+    {
+      "text": "I",
+      "canonicalStart": 482,
+      "canonicalEnd": 483,
+      "startMs": 27945,
+      "endMs": 27980
+    },
+    {
+      "text": "would",
+      "canonicalStart": 484,
+      "canonicalEnd": 489,
+      "startMs": 28003,
+      "endMs": 28166
+    },
+    {
+      "text": "build",
+      "canonicalStart": 490,
+      "canonicalEnd": 495,
+      "startMs": 28189,
+      "endMs": 28363
+    },
+    {
+      "text": "a",
+      "canonicalStart": 496,
+      "canonicalEnd": 497,
+      "startMs": 28410,
+      "endMs": 28468
+    },
+    {
+      "text": "representative",
+      "canonicalStart": 500,
+      "canonicalEnd": 514,
+      "startMs": 28491,
+      "endMs": 29211
+    },
+    {
+      "text": "dataset,",
+      "canonicalStart": 515,
+      "canonicalEnd": 525,
+      "startMs": 29257,
+      "endMs": 29977
+    },
+    {
+      "text": "define",
+      "canonicalStart": 528,
+      "canonicalEnd": 534,
+      "startMs": 30186,
+      "endMs": 30824
+    },
+    {
+      "text": "what",
+      "canonicalStart": 535,
+      "canonicalEnd": 539,
+      "startMs": 30859,
+      "endMs": 30999
+    },
+    {
+      "text": "good",
+      "canonicalStart": 540,
+      "canonicalEnd": 544,
+      "startMs": 31033,
+      "endMs": 31300
+    },
+    {
+      "text": "behavior",
+      "canonicalStart": 545,
+      "canonicalEnd": 553,
+      "startMs": 31335,
+      "endMs": 31765
+    },
+    {
+      "text": "looks",
+      "canonicalStart": 554,
+      "canonicalEnd": 559,
+      "startMs": 31800,
+      "endMs": 32055
+    },
+    {
+      "text": "like,",
+      "canonicalStart": 560,
+      "canonicalEnd": 565,
+      "startMs": 32102,
+      "endMs": 32554
+    },
+    {
+      "text": "and",
+      "canonicalStart": 568,
+      "canonicalEnd": 571,
+      "startMs": 32624,
+      "endMs": 33019
+    },
+    {
+      "text": "measure",
+      "canonicalStart": 572,
+      "canonicalEnd": 579,
+      "startMs": 33054,
+      "endMs": 33413
+    },
+    {
+      "text": "correctness,",
+      "canonicalStart": 580,
+      "canonicalEnd": 592,
+      "startMs": 33448,
+      "endMs": 34203
+    },
+    {
+      "text": "groundedness,",
+      "canonicalStart": 593,
+      "canonicalEnd": 606,
+      "startMs": 34284,
+      "endMs": 35097
+    },
+    {
+      "text": "retrieval",
+      "canonicalStart": 607,
+      "canonicalEnd": 616,
+      "startMs": 35190,
+      "endMs": 35759
+    },
+    {
+      "text": "quality,",
+      "canonicalStart": 617,
+      "canonicalEnd": 625,
+      "startMs": 35805,
+      "endMs": 36339
+    },
+    {
+      "text": "tool-call",
+      "canonicalStart": 626,
+      "canonicalEnd": 635,
+      "startMs": 36490,
+      "endMs": 37256
+    },
+    {
+      "text": "success,",
+      "canonicalStart": 636,
+      "canonicalEnd": 644,
+      "startMs": 37303,
+      "endMs": 37895
+    },
+    {
+      "text": "latency,",
+      "canonicalStart": 645,
+      "canonicalEnd": 653,
+      "startMs": 38011,
+      "endMs": 38650
+    },
+    {
+      "text": "and",
+      "canonicalStart": 654,
+      "canonicalEnd": 657,
+      "startMs": 38684,
+      "endMs": 38754
+    },
+    {
+      "text": "cost.",
+      "canonicalStart": 658,
+      "canonicalEnd": 663,
+      "startMs": 38789,
+      "endMs": 39346
+    },
+    {
+      "text": "At",
+      "canonicalStart": 665,
+      "canonicalEnd": 667,
+      "startMs": 39497,
+      "endMs": 40403
+    },
+    {
+      "text": "the",
+      "canonicalStart": 668,
+      "canonicalEnd": 671,
+      "startMs": 40449,
+      "endMs": 40530
+    },
+    {
+      "text": "same",
+      "canonicalStart": 672,
+      "canonicalEnd": 676,
+      "startMs": 40554,
+      "endMs": 40774
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 677,
+      "canonicalEnd": 682,
+      "startMs": 40809,
+      "endMs": 41227
+    },
+    {
+      "text": "for",
+      "canonicalStart": 686,
+      "canonicalEnd": 689,
+      "startMs": 41250,
+      "endMs": 41401
+    },
+    {
+      "text": "more",
+      "canonicalStart": 690,
+      "canonicalEnd": 694,
+      "startMs": 41448,
+      "endMs": 41680
+    },
+    {
+      "text": "subjective",
+      "canonicalStart": 695,
+      "canonicalEnd": 705,
+      "startMs": 41715,
+      "endMs": 42295
+    },
+    {
+      "text": "outputs,",
+      "canonicalStart": 706,
+      "canonicalEnd": 714,
+      "startMs": 42330,
+      "endMs": 42876
+    },
+    {
+      "text": "I",
+      "canonicalStart": 717,
+      "canonicalEnd": 718,
+      "startMs": 43050,
+      "endMs": 43375
+    },
+    {
+      "text": "would",
+      "canonicalStart": 719,
+      "canonicalEnd": 724,
+      "startMs": 43421,
+      "endMs": 43619
+    },
+    {
+      "text": "combine",
+      "canonicalStart": 725,
+      "canonicalEnd": 732,
+      "startMs": 43642,
+      "endMs": 44048
+    },
+    {
+      "text": "automatic",
+      "canonicalStart": 735,
+      "canonicalEnd": 744,
+      "startMs": 44118,
+      "endMs": 44664
+    },
+    {
+      "text": "evaluation",
+      "canonicalStart": 745,
+      "canonicalEnd": 755,
+      "startMs": 44710,
+      "endMs": 45442
+    },
+    {
+      "text": "with",
+      "canonicalStart": 756,
+      "canonicalEnd": 760,
+      "startMs": 45476,
+      "endMs": 45662
+    },
+    {
+      "text": "human",
+      "canonicalStart": 761,
+      "canonicalEnd": 766,
+      "startMs": 45697,
+      "endMs": 46068
+    },
+    {
+      "text": "review",
+      "canonicalStart": 767,
+      "canonicalEnd": 773,
+      "startMs": 46103,
+      "endMs": 46498
+    },
+    {
+      "text": "instead",
+      "canonicalStart": 778,
+      "canonicalEnd": 785,
+      "startMs": 46568,
+      "endMs": 46916
+    },
+    {
+      "text": "of",
+      "canonicalStart": 786,
+      "canonicalEnd": 788,
+      "startMs": 46951,
+      "endMs": 47020
+    },
+    {
+      "text": "depending",
+      "canonicalStart": 789,
+      "canonicalEnd": 798,
+      "startMs": 47055,
+      "endMs": 47485
+    },
+    {
+      "text": "on",
+      "canonicalStart": 799,
+      "canonicalEnd": 801,
+      "startMs": 47508,
+      "endMs": 47613
+    },
+    {
+      "text": "only",
+      "canonicalStart": 802,
+      "canonicalEnd": 806,
+      "startMs": 47647,
+      "endMs": 47880
+    },
+    {
+      "text": "one",
+      "canonicalStart": 807,
+      "canonicalEnd": 810,
+      "startMs": 47949,
+      "endMs": 48251
+    },
+    {
+      "text": "metric.",
+      "canonicalStart": 811,
+      "canonicalEnd": 818,
+      "startMs": 48298,
+      "endMs": 48762
+    },
+    {
+      "text": "So",
+      "canonicalStart": 820,
+      "canonicalEnd": 822,
+      "startMs": 48913,
+      "endMs": 49958
+    },
+    {
+      "text": "overall,",
+      "canonicalStart": 823,
+      "canonicalEnd": 831,
+      "startMs": 50074,
+      "endMs": 50631
+    },
+    {
+      "text": "my",
+      "canonicalStart": 835,
+      "canonicalEnd": 837,
+      "startMs": 50666,
+      "endMs": 50747
+    },
+    {
+      "text": "experience",
+      "canonicalStart": 838,
+      "canonicalEnd": 848,
+      "startMs": 50794,
+      "endMs": 51281
+    },
+    {
+      "text": "with",
+      "canonicalStart": 849,
+      "canonicalEnd": 853,
+      "startMs": 51316,
+      "endMs": 51456
+    },
+    {
+      "text": "formal",
+      "canonicalStart": 854,
+      "canonicalEnd": 860,
+      "startMs": 51490,
+      "endMs": 51943
+    },
+    {
+      "text": "LLM",
+      "canonicalStart": 861,
+      "canonicalEnd": 864,
+      "startMs": 51990,
+      "endMs": 52408
+    },
+    {
+      "text": "eval",
+      "canonicalStart": 865,
+      "canonicalEnd": 869,
+      "startMs": 52524,
+      "endMs": 52802
+    },
+    {
+      "text": "platforms",
+      "canonicalStart": 870,
+      "canonicalEnd": 879,
+      "startMs": 52849,
+      "endMs": 53383
+    },
+    {
+      "text": "is",
+      "canonicalStart": 880,
+      "canonicalEnd": 882,
+      "startMs": 53429,
+      "endMs": 53545
+    },
+    {
+      "text": "still",
+      "canonicalStart": 883,
+      "canonicalEnd": 888,
+      "startMs": 53580,
+      "endMs": 53836
+    },
+    {
+      "text": "growing,",
+      "canonicalStart": 889,
+      "canonicalEnd": 897,
+      "startMs": 53870,
+      "endMs": 54288
+    },
+    {
+      "text": "but",
+      "canonicalStart": 900,
+      "canonicalEnd": 903,
+      "startMs": 54404,
+      "endMs": 54927
+    },
+    {
+      "text": "the",
+      "canonicalStart": 904,
+      "canonicalEnd": 907,
+      "startMs": 54962,
+      "endMs": 55043
+    },
+    {
+      "text": "evaluation",
+      "canonicalStart": 910,
+      "canonicalEnd": 920,
+      "startMs": 55066,
+      "endMs": 55774
+    },
+    {
+      "text": "and",
+      "canonicalStart": 921,
+      "canonicalEnd": 924,
+      "startMs": 55809,
+      "endMs": 55902
+    },
+    {
+      "text": "regression",
+      "canonicalStart": 925,
+      "canonicalEnd": 935,
+      "startMs": 55925,
+      "endMs": 56459
+    },
+    {
+      "text": "mindset",
+      "canonicalStart": 936,
+      "canonicalEnd": 943,
+      "startMs": 56494,
+      "endMs": 56959
+    },
+    {
+      "text": "is",
+      "canonicalStart": 946,
+      "canonicalEnd": 948,
+      "startMs": 56993,
+      "endMs": 57086
+    },
+    {
+      "text": "already",
+      "canonicalStart": 949,
+      "canonicalEnd": 956,
+      "startMs": 57133,
+      "endMs": 57551
+    },
+    {
+      "text": "familiar",
+      "canonicalStart": 957,
+      "canonicalEnd": 965,
+      "startMs": 57597,
+      "endMs": 58004
+    },
+    {
+      "text": "to",
+      "canonicalStart": 966,
+      "canonicalEnd": 968,
+      "startMs": 58038,
+      "endMs": 58108
+    },
+    {
+      "text": "me.",
+      "canonicalStart": 969,
+      "canonicalEnd": 972,
+      "startMs": 58131,
+      "endMs": 58375
+    }
+  ]
+}

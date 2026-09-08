@@ -1,0 +1,854 @@
+{
+  "version": 1,
+  "questionId": "q09",
+  "speechText": "For me, that is true. My strongest foundation is backend engineering. The main reason is that in production, an AI feature is not only the model. It still needs data pipelines, retrieval, APIs, queues, state management, retries, monitoring, security, and infrastructure. For example, those are areas where I already have strong hands-on experience from building and operating production backend systems. Because of that, I can focus on growing deeper in AI without starting again from zero on the production engineering side. At the same time, recently I have been working more with OCR, embeddings, hybrid retrieval, LLM integration, model reliability, and GPU inference. So overall, I see myself as building stronger AI capability on top of a solid production backend foundation.",
+  "words": [
+    {
+      "text": "For",
+      "canonicalStart": 1,
+      "canonicalEnd": 4,
+      "startMs": 0,
+      "endMs": 163
+    },
+    {
+      "text": "me,",
+      "canonicalStart": 5,
+      "canonicalEnd": 8,
+      "startMs": 197,
+      "endMs": 418
+    },
+    {
+      "text": "that",
+      "canonicalStart": 12,
+      "canonicalEnd": 16,
+      "startMs": 441,
+      "endMs": 592
+    },
+    {
+      "text": "is",
+      "canonicalStart": 17,
+      "canonicalEnd": 19,
+      "startMs": 627,
+      "endMs": 755
+    },
+    {
+      "text": "true.",
+      "canonicalStart": 20,
+      "canonicalEnd": 25,
+      "startMs": 801,
+      "endMs": 1219
+    },
+    {
+      "text": "My",
+      "canonicalStart": 28,
+      "canonicalEnd": 30,
+      "startMs": 1289,
+      "endMs": 1753
+    },
+    {
+      "text": "strongest",
+      "canonicalStart": 31,
+      "canonicalEnd": 40,
+      "startMs": 1823,
+      "endMs": 2299
+    },
+    {
+      "text": "foundation",
+      "canonicalStart": 41,
+      "canonicalEnd": 51,
+      "startMs": 2334,
+      "endMs": 2868
+    },
+    {
+      "text": "is",
+      "canonicalStart": 52,
+      "canonicalEnd": 54,
+      "startMs": 2902,
+      "endMs": 3030
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 57,
+      "canonicalEnd": 64,
+      "startMs": 3077,
+      "endMs": 3634
+    },
+    {
+      "text": "engineering.",
+      "canonicalStart": 65,
+      "canonicalEnd": 79,
+      "startMs": 3680,
+      "endMs": 4331
+    },
+    {
+      "text": "The",
+      "canonicalStart": 81,
+      "canonicalEnd": 84,
+      "startMs": 4505,
+      "endMs": 5410
+    },
+    {
+      "text": "main",
+      "canonicalStart": 85,
+      "canonicalEnd": 89,
+      "startMs": 5433,
+      "endMs": 5619
+    },
+    {
+      "text": "reason",
+      "canonicalStart": 90,
+      "canonicalEnd": 96,
+      "startMs": 5642,
+      "endMs": 5956
+    },
+    {
+      "text": "is",
+      "canonicalStart": 97,
+      "canonicalEnd": 99,
+      "startMs": 5991,
+      "endMs": 6095
+    },
+    {
+      "text": "that",
+      "canonicalStart": 100,
+      "canonicalEnd": 104,
+      "startMs": 6142,
+      "endMs": 6316
+    },
+    {
+      "text": "in",
+      "canonicalStart": 108,
+      "canonicalEnd": 110,
+      "startMs": 6351,
+      "endMs": 6432
+    },
+    {
+      "text": "production,",
+      "canonicalStart": 111,
+      "canonicalEnd": 122,
+      "startMs": 6455,
+      "endMs": 7001
+    },
+    {
+      "text": "an",
+      "canonicalStart": 123,
+      "canonicalEnd": 125,
+      "startMs": 7036,
+      "endMs": 7094
+    },
+    {
+      "text": "AI",
+      "canonicalStart": 126,
+      "canonicalEnd": 128,
+      "startMs": 7129,
+      "endMs": 7256
+    },
+    {
+      "text": "feature",
+      "canonicalStart": 129,
+      "canonicalEnd": 136,
+      "startMs": 7465,
+      "endMs": 7883
+    },
+    {
+      "text": "is",
+      "canonicalStart": 137,
+      "canonicalEnd": 139,
+      "startMs": 7906,
+      "endMs": 8022
+    },
+    {
+      "text": "not",
+      "canonicalStart": 140,
+      "canonicalEnd": 143,
+      "startMs": 8081,
+      "endMs": 8324
+    },
+    {
+      "text": "only",
+      "canonicalStart": 144,
+      "canonicalEnd": 148,
+      "startMs": 8371,
+      "endMs": 8557
+    },
+    {
+      "text": "the",
+      "canonicalStart": 149,
+      "canonicalEnd": 152,
+      "startMs": 8603,
+      "endMs": 8696
+    },
+    {
+      "text": "model.",
+      "canonicalStart": 153,
+      "canonicalEnd": 159,
+      "startMs": 8719,
+      "endMs": 9253
+    },
+    {
+      "text": "It",
+      "canonicalStart": 162,
+      "canonicalEnd": 164,
+      "startMs": 9427,
+      "endMs": 9892
+    },
+    {
+      "text": "still",
+      "canonicalStart": 165,
+      "canonicalEnd": 170,
+      "startMs": 9938,
+      "endMs": 10182
+    },
+    {
+      "text": "needs",
+      "canonicalStart": 171,
+      "canonicalEnd": 176,
+      "startMs": 10217,
+      "endMs": 10472
+    },
+    {
+      "text": "data",
+      "canonicalStart": 179,
+      "canonicalEnd": 183,
+      "startMs": 10530,
+      "endMs": 10809
+    },
+    {
+      "text": "pipelines,",
+      "canonicalStart": 184,
+      "canonicalEnd": 194,
+      "startMs": 10855,
+      "endMs": 11575
+    },
+    {
+      "text": "retrieval,",
+      "canonicalStart": 195,
+      "canonicalEnd": 205,
+      "startMs": 11656,
+      "endMs": 12307
+    },
+    {
+      "text": "APIs,",
+      "canonicalStart": 206,
+      "canonicalEnd": 211,
+      "startMs": 12376,
+      "endMs": 13084
+    },
+    {
+      "text": "queues,",
+      "canonicalStart": 212,
+      "canonicalEnd": 219,
+      "startMs": 13131,
+      "endMs": 13723
+    },
+    {
+      "text": "state",
+      "canonicalStart": 220,
+      "canonicalEnd": 225,
+      "startMs": 13769,
+      "endMs": 14095
+    },
+    {
+      "text": "management,",
+      "canonicalStart": 226,
+      "canonicalEnd": 237,
+      "startMs": 14141,
+      "endMs": 14698
+    },
+    {
+      "text": "retries,",
+      "canonicalStart": 238,
+      "canonicalEnd": 246,
+      "startMs": 14756,
+      "endMs": 15523
+    },
+    {
+      "text": "monitoring,",
+      "canonicalStart": 247,
+      "canonicalEnd": 258,
+      "startMs": 15674,
+      "endMs": 16545
+    },
+    {
+      "text": "security,",
+      "canonicalStart": 259,
+      "canonicalEnd": 270,
+      "startMs": 16580,
+      "endMs": 17160
+    },
+    {
+      "text": "and",
+      "canonicalStart": 273,
+      "canonicalEnd": 276,
+      "startMs": 17206,
+      "endMs": 17288
+    },
+    {
+      "text": "infrastructure.",
+      "canonicalStart": 277,
+      "canonicalEnd": 292,
+      "startMs": 17323,
+      "endMs": 18205
+    },
+    {
+      "text": "For",
+      "canonicalStart": 294,
+      "canonicalEnd": 297,
+      "startMs": 18286,
+      "endMs": 19238
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 298,
+      "canonicalEnd": 306,
+      "startMs": 19273,
+      "endMs": 19807
+    },
+    {
+      "text": "those",
+      "canonicalStart": 310,
+      "canonicalEnd": 315,
+      "startMs": 19830,
+      "endMs": 20063
+    },
+    {
+      "text": "are",
+      "canonicalStart": 316,
+      "canonicalEnd": 319,
+      "startMs": 20097,
+      "endMs": 20190
+    },
+    {
+      "text": "areas",
+      "canonicalStart": 320,
+      "canonicalEnd": 325,
+      "startMs": 20213,
+      "endMs": 20527
+    },
+    {
+      "text": "where",
+      "canonicalStart": 326,
+      "canonicalEnd": 331,
+      "startMs": 20573,
+      "endMs": 20747
+    },
+    {
+      "text": "I",
+      "canonicalStart": 332,
+      "canonicalEnd": 333,
+      "startMs": 20782,
+      "endMs": 20829
+    },
+    {
+      "text": "already",
+      "canonicalStart": 334,
+      "canonicalEnd": 341,
+      "startMs": 20864,
+      "endMs": 21328
+    },
+    {
+      "text": "have",
+      "canonicalStart": 342,
+      "canonicalEnd": 346,
+      "startMs": 21374,
+      "endMs": 21549
+    },
+    {
+      "text": "strong",
+      "canonicalStart": 347,
+      "canonicalEnd": 353,
+      "startMs": 21583,
+      "endMs": 21897
+    },
+    {
+      "text": "hands-on",
+      "canonicalStart": 354,
+      "canonicalEnd": 362,
+      "startMs": 21932,
+      "endMs": 22326
+    },
+    {
+      "text": "experience",
+      "canonicalStart": 363,
+      "canonicalEnd": 373,
+      "startMs": 22361,
+      "endMs": 22907
+    },
+    {
+      "text": "from",
+      "canonicalStart": 376,
+      "canonicalEnd": 380,
+      "startMs": 22942,
+      "endMs": 23081
+    },
+    {
+      "text": "building",
+      "canonicalStart": 381,
+      "canonicalEnd": 389,
+      "startMs": 23128,
+      "endMs": 23580
+    },
+    {
+      "text": "and",
+      "canonicalStart": 390,
+      "canonicalEnd": 393,
+      "startMs": 23604,
+      "endMs": 23685
+    },
+    {
+      "text": "operating",
+      "canonicalStart": 394,
+      "canonicalEnd": 403,
+      "startMs": 23708,
+      "endMs": 24196
+    },
+    {
+      "text": "production",
+      "canonicalStart": 404,
+      "canonicalEnd": 414,
+      "startMs": 24219,
+      "endMs": 24648
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 415,
+      "canonicalEnd": 422,
+      "startMs": 24683,
+      "endMs": 25078
+    },
+    {
+      "text": "systems.",
+      "canonicalStart": 423,
+      "canonicalEnd": 431,
+      "startMs": 25113,
+      "endMs": 25647
+    },
+    {
+      "text": "Because",
+      "canonicalStart": 433,
+      "canonicalEnd": 440,
+      "startMs": 25763,
+      "endMs": 27017
+    },
+    {
+      "text": "of",
+      "canonicalStart": 441,
+      "canonicalEnd": 443,
+      "startMs": 27052,
+      "endMs": 27110
+    },
+    {
+      "text": "that,",
+      "canonicalStart": 444,
+      "canonicalEnd": 449,
+      "startMs": 27145,
+      "endMs": 27365
+    },
+    {
+      "text": "I",
+      "canonicalStart": 453,
+      "canonicalEnd": 454,
+      "startMs": 27388,
+      "endMs": 27423
+    },
+    {
+      "text": "can",
+      "canonicalStart": 455,
+      "canonicalEnd": 458,
+      "startMs": 27446,
+      "endMs": 27586
+    },
+    {
+      "text": "focus",
+      "canonicalStart": 459,
+      "canonicalEnd": 464,
+      "startMs": 27621,
+      "endMs": 27957
+    },
+    {
+      "text": "on",
+      "canonicalStart": 465,
+      "canonicalEnd": 467,
+      "startMs": 28015,
+      "endMs": 28131
+    },
+    {
+      "text": "growing",
+      "canonicalStart": 468,
+      "canonicalEnd": 475,
+      "startMs": 28166,
+      "endMs": 28549
+    },
+    {
+      "text": "deeper",
+      "canonicalStart": 476,
+      "canonicalEnd": 482,
+      "startMs": 28573,
+      "endMs": 28967
+    },
+    {
+      "text": "in",
+      "canonicalStart": 483,
+      "canonicalEnd": 485,
+      "startMs": 29002,
+      "endMs": 29095
+    },
+    {
+      "text": "AI",
+      "canonicalStart": 486,
+      "canonicalEnd": 488,
+      "startMs": 29130,
+      "endMs": 29223
+    },
+    {
+      "text": "without",
+      "canonicalStart": 491,
+      "canonicalEnd": 498,
+      "startMs": 29548,
+      "endMs": 29862
+    },
+    {
+      "text": "starting",
+      "canonicalStart": 499,
+      "canonicalEnd": 507,
+      "startMs": 29896,
+      "endMs": 30245
+    },
+    {
+      "text": "again",
+      "canonicalStart": 508,
+      "canonicalEnd": 513,
+      "startMs": 30280,
+      "endMs": 30570
+    },
+    {
+      "text": "from",
+      "canonicalStart": 514,
+      "canonicalEnd": 518,
+      "startMs": 30616,
+      "endMs": 30779
+    },
+    {
+      "text": "zero",
+      "canonicalStart": 519,
+      "canonicalEnd": 523,
+      "startMs": 30814,
+      "endMs": 31139
+    },
+    {
+      "text": "on",
+      "canonicalStart": 524,
+      "canonicalEnd": 526,
+      "startMs": 31208,
+      "endMs": 31324
+    },
+    {
+      "text": "the",
+      "canonicalStart": 527,
+      "canonicalEnd": 530,
+      "startMs": 31359,
+      "endMs": 31441
+    },
+    {
+      "text": "production",
+      "canonicalStart": 531,
+      "canonicalEnd": 541,
+      "startMs": 31464,
+      "endMs": 31917
+    },
+    {
+      "text": "engineering",
+      "canonicalStart": 542,
+      "canonicalEnd": 553,
+      "startMs": 31951,
+      "endMs": 32485
+    },
+    {
+      "text": "side.",
+      "canonicalStart": 554,
+      "canonicalEnd": 559,
+      "startMs": 32509,
+      "endMs": 33008
+    },
+    {
+      "text": "At",
+      "canonicalStart": 561,
+      "canonicalEnd": 563,
+      "startMs": 33101,
+      "endMs": 34006
+    },
+    {
+      "text": "the",
+      "canonicalStart": 564,
+      "canonicalEnd": 567,
+      "startMs": 34053,
+      "endMs": 34134
+    },
+    {
+      "text": "same",
+      "canonicalStart": 568,
+      "canonicalEnd": 572,
+      "startMs": 34157,
+      "endMs": 34366
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 573,
+      "canonicalEnd": 578,
+      "startMs": 34413,
+      "endMs": 34796
+    },
+    {
+      "text": "recently",
+      "canonicalStart": 582,
+      "canonicalEnd": 590,
+      "startMs": 34819,
+      "endMs": 35260
+    },
+    {
+      "text": "I",
+      "canonicalStart": 591,
+      "canonicalEnd": 592,
+      "startMs": 35307,
+      "endMs": 35376
+    },
+    {
+      "text": "have",
+      "canonicalStart": 593,
+      "canonicalEnd": 597,
+      "startMs": 35400,
+      "endMs": 35527
+    },
+    {
+      "text": "been",
+      "canonicalStart": 598,
+      "canonicalEnd": 602,
+      "startMs": 35550,
+      "endMs": 35667
+    },
+    {
+      "text": "working",
+      "canonicalStart": 603,
+      "canonicalEnd": 610,
+      "startMs": 35690,
+      "endMs": 35980
+    },
+    {
+      "text": "more",
+      "canonicalStart": 611,
+      "canonicalEnd": 615,
+      "startMs": 36003,
+      "endMs": 36201
+    },
+    {
+      "text": "with",
+      "canonicalStart": 616,
+      "canonicalEnd": 620,
+      "startMs": 36235,
+      "endMs": 36386
+    },
+    {
+      "text": "OCR,",
+      "canonicalStart": 623,
+      "canonicalEnd": 627,
+      "startMs": 36421,
+      "endMs": 37222
+    },
+    {
+      "text": "embeddings,",
+      "canonicalStart": 628,
+      "canonicalEnd": 639,
+      "startMs": 37257,
+      "endMs": 37907
+    },
+    {
+      "text": "hybrid",
+      "canonicalStart": 640,
+      "canonicalEnd": 646,
+      "startMs": 38081,
+      "endMs": 38604
+    },
+    {
+      "text": "retrieval,",
+      "canonicalStart": 647,
+      "canonicalEnd": 657,
+      "startMs": 38639,
+      "endMs": 39277
+    },
+    {
+      "text": "LLM",
+      "canonicalStart": 658,
+      "canonicalEnd": 661,
+      "startMs": 39486,
+      "endMs": 39974
+    },
+    {
+      "text": "integration,",
+      "canonicalStart": 662,
+      "canonicalEnd": 674,
+      "startMs": 40090,
+      "endMs": 40856
+    },
+    {
+      "text": "model",
+      "canonicalStart": 675,
+      "canonicalEnd": 680,
+      "startMs": 40903,
+      "endMs": 41286
+    },
+    {
+      "text": "reliability,",
+      "canonicalStart": 681,
+      "canonicalEnd": 695,
+      "startMs": 41321,
+      "endMs": 42180
+    },
+    {
+      "text": "and",
+      "canonicalStart": 698,
+      "canonicalEnd": 701,
+      "startMs": 42354,
+      "endMs": 42725
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 704,
+      "canonicalEnd": 707,
+      "startMs": 42772,
+      "endMs": 43097
+    },
+    {
+      "text": "inference.",
+      "canonicalStart": 708,
+      "canonicalEnd": 720,
+      "startMs": 43341,
+      "endMs": 44258
+    },
+    {
+      "text": "So",
+      "canonicalStart": 722,
+      "canonicalEnd": 724,
+      "startMs": 44339,
+      "endMs": 45233
+    },
+    {
+      "text": "overall,",
+      "canonicalStart": 725,
+      "canonicalEnd": 733,
+      "startMs": 45326,
+      "endMs": 45872
+    },
+    {
+      "text": "I",
+      "canonicalStart": 737,
+      "canonicalEnd": 738,
+      "startMs": 45918,
+      "endMs": 45942
+    },
+    {
+      "text": "see",
+      "canonicalStart": 739,
+      "canonicalEnd": 742,
+      "startMs": 45965,
+      "endMs": 46127
+    },
+    {
+      "text": "myself",
+      "canonicalStart": 743,
+      "canonicalEnd": 749,
+      "startMs": 46174,
+      "endMs": 46511
+    },
+    {
+      "text": "as",
+      "canonicalStart": 750,
+      "canonicalEnd": 752,
+      "startMs": 46557,
+      "endMs": 46661
+    },
+    {
+      "text": "building",
+      "canonicalStart": 753,
+      "canonicalEnd": 761,
+      "startMs": 46708,
+      "endMs": 47091
+    },
+    {
+      "text": "stronger",
+      "canonicalStart": 762,
+      "canonicalEnd": 770,
+      "startMs": 47114,
+      "endMs": 47567
+    },
+    {
+      "text": "AI",
+      "canonicalStart": 773,
+      "canonicalEnd": 775,
+      "startMs": 47602,
+      "endMs": 47764
+    },
+    {
+      "text": "capability",
+      "canonicalStart": 776,
+      "canonicalEnd": 786,
+      "startMs": 47973,
+      "endMs": 48624
+    },
+    {
+      "text": "on",
+      "canonicalStart": 791,
+      "canonicalEnd": 793,
+      "startMs": 48682,
+      "endMs": 48798
+    },
+    {
+      "text": "top",
+      "canonicalStart": 794,
+      "canonicalEnd": 797,
+      "startMs": 48844,
+      "endMs": 49111
+    },
+    {
+      "text": "of",
+      "canonicalStart": 798,
+      "canonicalEnd": 800,
+      "startMs": 49169,
+      "endMs": 49262
+    },
+    {
+      "text": "a",
+      "canonicalStart": 801,
+      "canonicalEnd": 802,
+      "startMs": 49285,
+      "endMs": 49343
+    },
+    {
+      "text": "solid",
+      "canonicalStart": 803,
+      "canonicalEnd": 808,
+      "startMs": 49378,
+      "endMs": 49703
+    },
+    {
+      "text": "production",
+      "canonicalStart": 811,
+      "canonicalEnd": 821,
+      "startMs": 49750,
+      "endMs": 50144
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 822,
+      "canonicalEnd": 829,
+      "startMs": 50179,
+      "endMs": 50574
+    },
+    {
+      "text": "foundation.",
+      "canonicalStart": 830,
+      "canonicalEnd": 843,
+      "startMs": 50609,
+      "endMs": 51247
+    }
+  ]
+}

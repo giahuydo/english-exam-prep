@@ -1,0 +1,1281 @@
+{
+  "version": 1,
+  "questionId": "q17",
+  "speechText": "One example was a production issue with large PDF processing jobs. During OCR, the memory usage kept increasing, and eventually the worker crashed. The main reason is that I did not want to assume the worker itself was the real problem. I wanted to find the root cause first. For example, I traced the processing flow, added targeted logging, checked the memory usage at important steps, and tested different batch sizes. From that, I found that the main bottleneck was the OCR CPU inference. Because of that, I first made the current flow more stable by using smaller batches and adding checkpoint and recovery logic, so if one step failed, we did not need to restart the whole job. At the same time, I handled the backend and workflow side and worked with DevOps to move the heavy OCR inference to a remote GPU service. So overall, I did not only focus on stopping the crash. I also checked worker stability, memory usage, job completion, and processing time to make sure the new solution was stable, observable, and safe to roll out.",
+  "words": [
+    {
+      "text": "One",
+      "canonicalStart": 1,
+      "canonicalEnd": 4,
+      "startMs": 0,
+      "endMs": 139
+    },
+    {
+      "text": "example",
+      "canonicalStart": 5,
+      "canonicalEnd": 12,
+      "startMs": 174,
+      "endMs": 546
+    },
+    {
+      "text": "was",
+      "canonicalStart": 13,
+      "canonicalEnd": 16,
+      "startMs": 592,
+      "endMs": 720
+    },
+    {
+      "text": "a",
+      "canonicalStart": 20,
+      "canonicalEnd": 21,
+      "startMs": 766,
+      "endMs": 824
+    },
+    {
+      "text": "production",
+      "canonicalStart": 22,
+      "canonicalEnd": 32,
+      "startMs": 859,
+      "endMs": 1347
+    },
+    {
+      "text": "issue",
+      "canonicalStart": 33,
+      "canonicalEnd": 38,
+      "startMs": 1370,
+      "endMs": 1649
+    },
+    {
+      "text": "with",
+      "canonicalStart": 39,
+      "canonicalEnd": 43,
+      "startMs": 1695,
+      "endMs": 1811
+    },
+    {
+      "text": "large",
+      "canonicalStart": 46,
+      "canonicalEnd": 51,
+      "startMs": 1858,
+      "endMs": 2241
+    },
+    {
+      "text": "PDF",
+      "canonicalStart": 52,
+      "canonicalEnd": 55,
+      "startMs": 2287,
+      "endMs": 2566
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 56,
+      "canonicalEnd": 66,
+      "startMs": 2740,
+      "endMs": 3320
+    },
+    {
+      "text": "jobs.",
+      "canonicalStart": 67,
+      "canonicalEnd": 74,
+      "startMs": 3344,
+      "endMs": 3808
+    },
+    {
+      "text": "During",
+      "canonicalStart": 77,
+      "canonicalEnd": 83,
+      "startMs": 3924,
+      "endMs": 4981
+    },
+    {
+      "text": "OCR,",
+      "canonicalStart": 86,
+      "canonicalEnd": 92,
+      "startMs": 5004,
+      "endMs": 5666
+    },
+    {
+      "text": "the",
+      "canonicalStart": 95,
+      "canonicalEnd": 98,
+      "startMs": 5712,
+      "endMs": 5782
+    },
+    {
+      "text": "memory",
+      "canonicalStart": 101,
+      "canonicalEnd": 107,
+      "startMs": 5805,
+      "endMs": 6107
+    },
+    {
+      "text": "usage",
+      "canonicalStart": 108,
+      "canonicalEnd": 113,
+      "startMs": 6153,
+      "endMs": 6513
+    },
+    {
+      "text": "kept",
+      "canonicalStart": 116,
+      "canonicalEnd": 120,
+      "startMs": 6548,
+      "endMs": 6745
+    },
+    {
+      "text": "increasing,",
+      "canonicalStart": 121,
+      "canonicalEnd": 132,
+      "startMs": 6792,
+      "endMs": 7430
+    },
+    {
+      "text": "and",
+      "canonicalStart": 135,
+      "canonicalEnd": 138,
+      "startMs": 7546,
+      "endMs": 7697
+    },
+    {
+      "text": "eventually",
+      "canonicalStart": 139,
+      "canonicalEnd": 149,
+      "startMs": 7721,
+      "endMs": 8150
+    },
+    {
+      "text": "the",
+      "canonicalStart": 150,
+      "canonicalEnd": 153,
+      "startMs": 8197,
+      "endMs": 8290
+    },
+    {
+      "text": "worker",
+      "canonicalStart": 154,
+      "canonicalEnd": 160,
+      "startMs": 8313,
+      "endMs": 8626
+    },
+    {
+      "text": "crashed.",
+      "canonicalStart": 161,
+      "canonicalEnd": 169,
+      "startMs": 8649,
+      "endMs": 9195
+    },
+    {
+      "text": "The",
+      "canonicalStart": 171,
+      "canonicalEnd": 174,
+      "startMs": 9311,
+      "endMs": 10217
+    },
+    {
+      "text": "main",
+      "canonicalStart": 175,
+      "canonicalEnd": 179,
+      "startMs": 10240,
+      "endMs": 10426
+    },
+    {
+      "text": "reason",
+      "canonicalStart": 180,
+      "canonicalEnd": 186,
+      "startMs": 10461,
+      "endMs": 10762
+    },
+    {
+      "text": "is",
+      "canonicalStart": 187,
+      "canonicalEnd": 189,
+      "startMs": 10797,
+      "endMs": 10902
+    },
+    {
+      "text": "that",
+      "canonicalStart": 190,
+      "canonicalEnd": 194,
+      "startMs": 10948,
+      "endMs": 11111
+    },
+    {
+      "text": "I",
+      "canonicalStart": 198,
+      "canonicalEnd": 199,
+      "startMs": 11146,
+      "endMs": 11204
+    },
+    {
+      "text": "did",
+      "canonicalStart": 200,
+      "canonicalEnd": 203,
+      "startMs": 11227,
+      "endMs": 11389
+    },
+    {
+      "text": "not",
+      "canonicalStart": 204,
+      "canonicalEnd": 207,
+      "startMs": 11436,
+      "endMs": 11622
+    },
+    {
+      "text": "want",
+      "canonicalStart": 208,
+      "canonicalEnd": 212,
+      "startMs": 11668,
+      "endMs": 11831
+    },
+    {
+      "text": "to",
+      "canonicalStart": 213,
+      "canonicalEnd": 215,
+      "startMs": 11865,
+      "endMs": 11923
+    },
+    {
+      "text": "assume",
+      "canonicalStart": 216,
+      "canonicalEnd": 222,
+      "startMs": 11947,
+      "endMs": 12272
+    },
+    {
+      "text": "the",
+      "canonicalStart": 223,
+      "canonicalEnd": 226,
+      "startMs": 12307,
+      "endMs": 12388
+    },
+    {
+      "text": "worker",
+      "canonicalStart": 229,
+      "canonicalEnd": 235,
+      "startMs": 12411,
+      "endMs": 12690
+    },
+    {
+      "text": "itself",
+      "canonicalStart": 236,
+      "canonicalEnd": 242,
+      "startMs": 12713,
+      "endMs": 13131
+    },
+    {
+      "text": "was",
+      "canonicalStart": 245,
+      "canonicalEnd": 248,
+      "startMs": 13201,
+      "endMs": 13340
+    },
+    {
+      "text": "the",
+      "canonicalStart": 249,
+      "canonicalEnd": 252,
+      "startMs": 13386,
+      "endMs": 13491
+    },
+    {
+      "text": "real",
+      "canonicalStart": 253,
+      "canonicalEnd": 257,
+      "startMs": 13514,
+      "endMs": 13711
+    },
+    {
+      "text": "problem.",
+      "canonicalStart": 258,
+      "canonicalEnd": 266,
+      "startMs": 13746,
+      "endMs": 14245
+    },
+    {
+      "text": "I",
+      "canonicalStart": 269,
+      "canonicalEnd": 270,
+      "startMs": 14396,
+      "endMs": 14837
+    },
+    {
+      "text": "wanted",
+      "canonicalStart": 271,
+      "canonicalEnd": 277,
+      "startMs": 14895,
+      "endMs": 15197
+    },
+    {
+      "text": "to",
+      "canonicalStart": 278,
+      "canonicalEnd": 280,
+      "startMs": 15220,
+      "endMs": 15267
+    },
+    {
+      "text": "find",
+      "canonicalStart": 281,
+      "canonicalEnd": 285,
+      "startMs": 15290,
+      "endMs": 15511
+    },
+    {
+      "text": "the",
+      "canonicalStart": 286,
+      "canonicalEnd": 289,
+      "startMs": 15534,
+      "endMs": 15615
+    },
+    {
+      "text": "root",
+      "canonicalStart": 292,
+      "canonicalEnd": 296,
+      "startMs": 15638,
+      "endMs": 15859
+    },
+    {
+      "text": "cause",
+      "canonicalStart": 297,
+      "canonicalEnd": 302,
+      "startMs": 15894,
+      "endMs": 16219
+    },
+    {
+      "text": "first.",
+      "canonicalStart": 305,
+      "canonicalEnd": 311,
+      "startMs": 16265,
+      "endMs": 16707
+    },
+    {
+      "text": "For",
+      "canonicalStart": 313,
+      "canonicalEnd": 316,
+      "startMs": 16823,
+      "endMs": 17751
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 317,
+      "canonicalEnd": 325,
+      "startMs": 17786,
+      "endMs": 18274
+    },
+    {
+      "text": "I",
+      "canonicalStart": 329,
+      "canonicalEnd": 330,
+      "startMs": 18309,
+      "endMs": 18344
+    },
+    {
+      "text": "traced",
+      "canonicalStart": 331,
+      "canonicalEnd": 337,
+      "startMs": 18378,
+      "endMs": 18750
+    },
+    {
+      "text": "the",
+      "canonicalStart": 338,
+      "canonicalEnd": 341,
+      "startMs": 18773,
+      "endMs": 18843
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 344,
+      "canonicalEnd": 354,
+      "startMs": 18866,
+      "endMs": 19446
+    },
+    {
+      "text": "flow,",
+      "canonicalStart": 355,
+      "canonicalEnd": 362,
+      "startMs": 19470,
+      "endMs": 19795
+    },
+    {
+      "text": "added",
+      "canonicalStart": 365,
+      "canonicalEnd": 370,
+      "startMs": 19969,
+      "endMs": 20515
+    },
+    {
+      "text": "targeted",
+      "canonicalStart": 373,
+      "canonicalEnd": 381,
+      "startMs": 20538,
+      "endMs": 20991
+    },
+    {
+      "text": "logging,",
+      "canonicalStart": 382,
+      "canonicalEnd": 392,
+      "startMs": 21014,
+      "endMs": 21560
+    },
+    {
+      "text": "checked",
+      "canonicalStart": 395,
+      "canonicalEnd": 402,
+      "startMs": 21641,
+      "endMs": 21977
+    },
+    {
+      "text": "the",
+      "canonicalStart": 403,
+      "canonicalEnd": 406,
+      "startMs": 22001,
+      "endMs": 22070
+    },
+    {
+      "text": "memory",
+      "canonicalStart": 407,
+      "canonicalEnd": 413,
+      "startMs": 22094,
+      "endMs": 22477
+    },
+    {
+      "text": "usage",
+      "canonicalStart": 414,
+      "canonicalEnd": 419,
+      "startMs": 22523,
+      "endMs": 22883
+    },
+    {
+      "text": "at",
+      "canonicalStart": 420,
+      "canonicalEnd": 422,
+      "startMs": 22918,
+      "endMs": 22999
+    },
+    {
+      "text": "important",
+      "canonicalStart": 423,
+      "canonicalEnd": 432,
+      "startMs": 23034,
+      "endMs": 23475
+    },
+    {
+      "text": "steps,",
+      "canonicalStart": 433,
+      "canonicalEnd": 439,
+      "startMs": 23510,
+      "endMs": 23882
+    },
+    {
+      "text": "and",
+      "canonicalStart": 442,
+      "canonicalEnd": 445,
+      "startMs": 23998,
+      "endMs": 24508
+    },
+    {
+      "text": "tested",
+      "canonicalStart": 446,
+      "canonicalEnd": 452,
+      "startMs": 24555,
+      "endMs": 24996
+    },
+    {
+      "text": "different",
+      "canonicalStart": 453,
+      "canonicalEnd": 462,
+      "startMs": 25031,
+      "endMs": 25402
+    },
+    {
+      "text": "batch",
+      "canonicalStart": 465,
+      "canonicalEnd": 470,
+      "startMs": 25437,
+      "endMs": 25762
+    },
+    {
+      "text": "sizes.",
+      "canonicalStart": 471,
+      "canonicalEnd": 479,
+      "startMs": 25797,
+      "endMs": 26320
+    },
+    {
+      "text": "From",
+      "canonicalStart": 482,
+      "canonicalEnd": 486,
+      "startMs": 26471,
+      "endMs": 27423
+    },
+    {
+      "text": "that,",
+      "canonicalStart": 487,
+      "canonicalEnd": 492,
+      "startMs": 27469,
+      "endMs": 27678
+    },
+    {
+      "text": "I",
+      "canonicalStart": 495,
+      "canonicalEnd": 496,
+      "startMs": 27701,
+      "endMs": 27724
+    },
+    {
+      "text": "found",
+      "canonicalStart": 497,
+      "canonicalEnd": 502,
+      "startMs": 27748,
+      "endMs": 28003
+    },
+    {
+      "text": "that",
+      "canonicalStart": 503,
+      "canonicalEnd": 507,
+      "startMs": 28026,
+      "endMs": 28142
+    },
+    {
+      "text": "the",
+      "canonicalStart": 508,
+      "canonicalEnd": 511,
+      "startMs": 28166,
+      "endMs": 28247
+    },
+    {
+      "text": "main",
+      "canonicalStart": 512,
+      "canonicalEnd": 516,
+      "startMs": 28270,
+      "endMs": 28467
+    },
+    {
+      "text": "bottleneck",
+      "canonicalStart": 517,
+      "canonicalEnd": 527,
+      "startMs": 28502,
+      "endMs": 29082
+    },
+    {
+      "text": "was",
+      "canonicalStart": 528,
+      "canonicalEnd": 531,
+      "startMs": 29117,
+      "endMs": 29268
+    },
+    {
+      "text": "the",
+      "canonicalStart": 532,
+      "canonicalEnd": 535,
+      "startMs": 29315,
+      "endMs": 29431
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 538,
+      "canonicalEnd": 541,
+      "startMs": 29547,
+      "endMs": 29930
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 542,
+      "canonicalEnd": 545,
+      "startMs": 30255,
+      "endMs": 30615
+    },
+    {
+      "text": "inference.",
+      "canonicalStart": 546,
+      "canonicalEnd": 558,
+      "startMs": 30893,
+      "endMs": 31590
+    },
+    {
+      "text": "Because",
+      "canonicalStart": 560,
+      "canonicalEnd": 567,
+      "startMs": 31637,
+      "endMs": 32670
+    },
+    {
+      "text": "of",
+      "canonicalStart": 568,
+      "canonicalEnd": 570,
+      "startMs": 32705,
+      "endMs": 32751
+    },
+    {
+      "text": "that,",
+      "canonicalStart": 571,
+      "canonicalEnd": 576,
+      "startMs": 32786,
+      "endMs": 33088
+    },
+    {
+      "text": "I",
+      "canonicalStart": 580,
+      "canonicalEnd": 581,
+      "startMs": 33123,
+      "endMs": 33169
+    },
+    {
+      "text": "first",
+      "canonicalStart": 582,
+      "canonicalEnd": 587,
+      "startMs": 33215,
+      "endMs": 33575
+    },
+    {
+      "text": "made",
+      "canonicalStart": 588,
+      "canonicalEnd": 592,
+      "startMs": 33610,
+      "endMs": 33773
+    },
+    {
+      "text": "the",
+      "canonicalStart": 593,
+      "canonicalEnd": 596,
+      "startMs": 33808,
+      "endMs": 33877
+    },
+    {
+      "text": "current",
+      "canonicalStart": 597,
+      "canonicalEnd": 604,
+      "startMs": 33900,
+      "endMs": 34249
+    },
+    {
+      "text": "flow",
+      "canonicalStart": 605,
+      "canonicalEnd": 609,
+      "startMs": 34284,
+      "endMs": 34504
+    },
+    {
+      "text": "more",
+      "canonicalStart": 610,
+      "canonicalEnd": 614,
+      "startMs": 34539,
+      "endMs": 34760
+    },
+    {
+      "text": "stable",
+      "canonicalStart": 615,
+      "canonicalEnd": 621,
+      "startMs": 34794,
+      "endMs": 35201
+    },
+    {
+      "text": "by",
+      "canonicalStart": 624,
+      "canonicalEnd": 626,
+      "startMs": 35247,
+      "endMs": 35340
+    },
+    {
+      "text": "using",
+      "canonicalStart": 627,
+      "canonicalEnd": 632,
+      "startMs": 35398,
+      "endMs": 35688
+    },
+    {
+      "text": "smaller",
+      "canonicalStart": 635,
+      "canonicalEnd": 642,
+      "startMs": 35723,
+      "endMs": 36176
+    },
+    {
+      "text": "batches",
+      "canonicalStart": 643,
+      "canonicalEnd": 650,
+      "startMs": 36199,
+      "endMs": 36594
+    },
+    {
+      "text": "and",
+      "canonicalStart": 653,
+      "canonicalEnd": 656,
+      "startMs": 36640,
+      "endMs": 36745
+    },
+    {
+      "text": "adding",
+      "canonicalStart": 657,
+      "canonicalEnd": 663,
+      "startMs": 36780,
+      "endMs": 37082
+    },
+    {
+      "text": "checkpoint",
+      "canonicalStart": 666,
+      "canonicalEnd": 676,
+      "startMs": 37105,
+      "endMs": 37650
+    },
+    {
+      "text": "and",
+      "canonicalStart": 677,
+      "canonicalEnd": 680,
+      "startMs": 37685,
+      "endMs": 37790
+    },
+    {
+      "text": "recovery",
+      "canonicalStart": 681,
+      "canonicalEnd": 689,
+      "startMs": 37813,
+      "endMs": 38289
+    },
+    {
+      "text": "logic,",
+      "canonicalStart": 690,
+      "canonicalEnd": 698,
+      "startMs": 38347,
+      "endMs": 38788
+    },
+    {
+      "text": "so",
+      "canonicalStart": 701,
+      "canonicalEnd": 703,
+      "startMs": 38939,
+      "endMs": 39404
+    },
+    {
+      "text": "if",
+      "canonicalStart": 704,
+      "canonicalEnd": 706,
+      "startMs": 39496,
+      "endMs": 39601
+    },
+    {
+      "text": "one",
+      "canonicalStart": 707,
+      "canonicalEnd": 710,
+      "startMs": 39647,
+      "endMs": 39891
+    },
+    {
+      "text": "step",
+      "canonicalStart": 711,
+      "canonicalEnd": 715,
+      "startMs": 39938,
+      "endMs": 40135
+    },
+    {
+      "text": "failed,",
+      "canonicalStart": 716,
+      "canonicalEnd": 723,
+      "startMs": 40193,
+      "endMs": 40657
+    },
+    {
+      "text": "we",
+      "canonicalStart": 726,
+      "canonicalEnd": 728,
+      "startMs": 40692,
+      "endMs": 40762
+    },
+    {
+      "text": "did",
+      "canonicalStart": 729,
+      "canonicalEnd": 732,
+      "startMs": 40808,
+      "endMs": 40948
+    },
+    {
+      "text": "not",
+      "canonicalStart": 733,
+      "canonicalEnd": 736,
+      "startMs": 40983,
+      "endMs": 41145
+    },
+    {
+      "text": "need",
+      "canonicalStart": 737,
+      "canonicalEnd": 741,
+      "startMs": 41192,
+      "endMs": 41366
+    },
+    {
+      "text": "to",
+      "canonicalStart": 742,
+      "canonicalEnd": 744,
+      "startMs": 41389,
+      "endMs": 41459
+    },
+    {
+      "text": "restart",
+      "canonicalStart": 745,
+      "canonicalEnd": 752,
+      "startMs": 41482,
+      "endMs": 42027
+    },
+    {
+      "text": "the",
+      "canonicalStart": 753,
+      "canonicalEnd": 756,
+      "startMs": 42074,
+      "endMs": 42167
+    },
+    {
+      "text": "whole",
+      "canonicalStart": 757,
+      "canonicalEnd": 762,
+      "startMs": 42190,
+      "endMs": 42387
+    },
+    {
+      "text": "job.",
+      "canonicalStart": 763,
+      "canonicalEnd": 767,
+      "startMs": 42422,
+      "endMs": 42817
+    },
+    {
+      "text": "At",
+      "canonicalStart": 769,
+      "canonicalEnd": 771,
+      "startMs": 42968,
+      "endMs": 43897
+    },
+    {
+      "text": "the",
+      "canonicalStart": 772,
+      "canonicalEnd": 775,
+      "startMs": 43943,
+      "endMs": 44024
+    },
+    {
+      "text": "same",
+      "canonicalStart": 776,
+      "canonicalEnd": 780,
+      "startMs": 44048,
+      "endMs": 44257
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 781,
+      "canonicalEnd": 786,
+      "startMs": 44303,
+      "endMs": 44628
+    },
+    {
+      "text": "I",
+      "canonicalStart": 790,
+      "canonicalEnd": 791,
+      "startMs": 44651,
+      "endMs": 44686
+    },
+    {
+      "text": "handled",
+      "canonicalStart": 792,
+      "canonicalEnd": 799,
+      "startMs": 44721,
+      "endMs": 45185
+    },
+    {
+      "text": "the",
+      "canonicalStart": 800,
+      "canonicalEnd": 803,
+      "startMs": 45209,
+      "endMs": 45278
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 806,
+      "canonicalEnd": 813,
+      "startMs": 45302,
+      "endMs": 45801
+    },
+    {
+      "text": "and",
+      "canonicalStart": 814,
+      "canonicalEnd": 817,
+      "startMs": 45836,
+      "endMs": 45940
+    },
+    {
+      "text": "workflow",
+      "canonicalStart": 818,
+      "canonicalEnd": 826,
+      "startMs": 45963,
+      "endMs": 46439
+    },
+    {
+      "text": "side",
+      "canonicalStart": 827,
+      "canonicalEnd": 831,
+      "startMs": 46474,
+      "endMs": 46822
+    },
+    {
+      "text": "and",
+      "canonicalStart": 836,
+      "canonicalEnd": 839,
+      "startMs": 46869,
+      "endMs": 46962
+    },
+    {
+      "text": "worked",
+      "canonicalStart": 840,
+      "canonicalEnd": 846,
+      "startMs": 46985,
+      "endMs": 47252
+    },
+    {
+      "text": "with",
+      "canonicalStart": 847,
+      "canonicalEnd": 851,
+      "startMs": 47275,
+      "endMs": 47391
+    },
+    {
+      "text": "DevOps",
+      "canonicalStart": 854,
+      "canonicalEnd": 860,
+      "startMs": 47438,
+      "endMs": 48007
+    },
+    {
+      "text": "to",
+      "canonicalStart": 863,
+      "canonicalEnd": 865,
+      "startMs": 48065,
+      "endMs": 48134
+    },
+    {
+      "text": "move",
+      "canonicalStart": 866,
+      "canonicalEnd": 870,
+      "startMs": 48158,
+      "endMs": 48367
+    },
+    {
+      "text": "the",
+      "canonicalStart": 871,
+      "canonicalEnd": 874,
+      "startMs": 48401,
+      "endMs": 48483
+    },
+    {
+      "text": "heavy",
+      "canonicalStart": 875,
+      "canonicalEnd": 880,
+      "startMs": 48506,
+      "endMs": 48726
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 881,
+      "canonicalEnd": 884,
+      "startMs": 48773,
+      "endMs": 49040
+    },
+    {
+      "text": "inference",
+      "canonicalStart": 885,
+      "canonicalEnd": 894,
+      "startMs": 49284,
+      "endMs": 49806
+    },
+    {
+      "text": "to",
+      "canonicalStart": 897,
+      "canonicalEnd": 899,
+      "startMs": 49841,
+      "endMs": 49911
+    },
+    {
+      "text": "a",
+      "canonicalStart": 900,
+      "canonicalEnd": 901,
+      "startMs": 49957,
+      "endMs": 50050
+    },
+    {
+      "text": "remote",
+      "canonicalStart": 904,
+      "canonicalEnd": 910,
+      "startMs": 50085,
+      "endMs": 50422
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 911,
+      "canonicalEnd": 914,
+      "startMs": 50456,
+      "endMs": 50770
+    },
+    {
+      "text": "service.",
+      "canonicalStart": 915,
+      "canonicalEnd": 925,
+      "startMs": 51014,
+      "endMs": 51583
+    },
+    {
+      "text": "So",
+      "canonicalStart": 927,
+      "canonicalEnd": 929,
+      "startMs": 51699,
+      "endMs": 52465
+    },
+    {
+      "text": "overall,",
+      "canonicalStart": 930,
+      "canonicalEnd": 938,
+      "startMs": 52546,
+      "endMs": 53069
+    },
+    {
+      "text": "I",
+      "canonicalStart": 942,
+      "canonicalEnd": 943,
+      "startMs": 53115,
+      "endMs": 53138
+    },
+    {
+      "text": "did",
+      "canonicalStart": 944,
+      "canonicalEnd": 947,
+      "startMs": 53161,
+      "endMs": 53324
+    },
+    {
+      "text": "not",
+      "canonicalStart": 948,
+      "canonicalEnd": 951,
+      "startMs": 53359,
+      "endMs": 53487
+    },
+    {
+      "text": "only",
+      "canonicalStart": 952,
+      "canonicalEnd": 956,
+      "startMs": 53533,
+      "endMs": 53754
+    },
+    {
+      "text": "focus",
+      "canonicalStart": 957,
+      "canonicalEnd": 962,
+      "startMs": 53800,
+      "endMs": 54160
+    },
+    {
+      "text": "on",
+      "canonicalStart": 963,
+      "canonicalEnd": 965,
+      "startMs": 54218,
+      "endMs": 54334
+    },
+    {
+      "text": "stopping",
+      "canonicalStart": 966,
+      "canonicalEnd": 974,
+      "startMs": 54392,
+      "endMs": 54822
+    },
+    {
+      "text": "the",
+      "canonicalStart": 975,
+      "canonicalEnd": 978,
+      "startMs": 54845,
+      "endMs": 54938
+    },
+    {
+      "text": "crash.",
+      "canonicalStart": 979,
+      "canonicalEnd": 985,
+      "startMs": 54961,
+      "endMs": 55588
+    },
+    {
+      "text": "I",
+      "canonicalStart": 988,
+      "canonicalEnd": 989,
+      "startMs": 55762,
+      "endMs": 56203
+    },
+    {
+      "text": "also",
+      "canonicalStart": 990,
+      "canonicalEnd": 994,
+      "startMs": 56250,
+      "endMs": 56517
+    },
+    {
+      "text": "checked",
+      "canonicalStart": 995,
+      "canonicalEnd": 1002,
+      "startMs": 56575,
+      "endMs": 56865
+    },
+    {
+      "text": "worker",
+      "canonicalStart": 1005,
+      "canonicalEnd": 1011,
+      "startMs": 56888,
+      "endMs": 57225
+    },
+    {
+      "text": "stability,",
+      "canonicalStart": 1012,
+      "canonicalEnd": 1022,
+      "startMs": 57248,
+      "endMs": 57933
+    },
+    {
+      "text": "memory",
+      "canonicalStart": 1023,
+      "canonicalEnd": 1029,
+      "startMs": 57991,
+      "endMs": 58397
+    },
+    {
+      "text": "usage,",
+      "canonicalStart": 1030,
+      "canonicalEnd": 1036,
+      "startMs": 58444,
+      "endMs": 58920
+    },
+    {
+      "text": "job",
+      "canonicalStart": 1037,
+      "canonicalEnd": 1040,
+      "startMs": 58943,
+      "endMs": 59164
+    },
+    {
+      "text": "completion,",
+      "canonicalStart": 1041,
+      "canonicalEnd": 1052,
+      "startMs": 59210,
+      "endMs": 59825
+    },
+    {
+      "text": "and",
+      "canonicalStart": 1053,
+      "canonicalEnd": 1056,
+      "startMs": 59849,
+      "endMs": 59942
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 1057,
+      "canonicalEnd": 1067,
+      "startMs": 59976,
+      "endMs": 60615
+    },
+    {
+      "text": "time",
+      "canonicalStart": 1068,
+      "canonicalEnd": 1072,
+      "startMs": 60638,
+      "endMs": 60882
+    },
+    {
+      "text": "to",
+      "canonicalStart": 1077,
+      "canonicalEnd": 1079,
+      "startMs": 60917,
+      "endMs": 60975
+    },
+    {
+      "text": "make",
+      "canonicalStart": 1080,
+      "canonicalEnd": 1084,
+      "startMs": 60998,
+      "endMs": 61161
+    },
+    {
+      "text": "sure",
+      "canonicalStart": 1085,
+      "canonicalEnd": 1089,
+      "startMs": 61195,
+      "endMs": 61370
+    },
+    {
+      "text": "the",
+      "canonicalStart": 1090,
+      "canonicalEnd": 1093,
+      "startMs": 61404,
+      "endMs": 61497
+    },
+    {
+      "text": "new",
+      "canonicalStart": 1094,
+      "canonicalEnd": 1097,
+      "startMs": 61520,
+      "endMs": 61660
+    },
+    {
+      "text": "solution",
+      "canonicalStart": 1098,
+      "canonicalEnd": 1106,
+      "startMs": 61695,
+      "endMs": 62113
+    },
+    {
+      "text": "was",
+      "canonicalStart": 1107,
+      "canonicalEnd": 1110,
+      "startMs": 62147,
+      "endMs": 62287
+    },
+    {
+      "text": "stable,",
+      "canonicalStart": 1113,
+      "canonicalEnd": 1120,
+      "startMs": 62322,
+      "endMs": 62949
+    },
+    {
+      "text": "observable,",
+      "canonicalStart": 1121,
+      "canonicalEnd": 1132,
+      "startMs": 62983,
+      "endMs": 63645
+    },
+    {
+      "text": "and",
+      "canonicalStart": 1133,
+      "canonicalEnd": 1136,
+      "startMs": 63668,
+      "endMs": 63761
+    },
+    {
+      "text": "safe",
+      "canonicalStart": 1137,
+      "canonicalEnd": 1141,
+      "startMs": 63796,
+      "endMs": 64098
+    },
+    {
+      "text": "to",
+      "canonicalStart": 1142,
+      "canonicalEnd": 1144,
+      "startMs": 64144,
+      "endMs": 64202
+    },
+    {
+      "text": "roll",
+      "canonicalStart": 1145,
+      "canonicalEnd": 1149,
+      "startMs": 64226,
+      "endMs": 64423
+    },
+    {
+      "text": "out.",
+      "canonicalStart": 1150,
+      "canonicalEnd": 1156,
+      "startMs": 64469,
+      "endMs": 64713
+    }
+  ]
+}

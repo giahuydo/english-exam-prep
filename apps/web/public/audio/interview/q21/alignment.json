@@ -1,0 +1,1064 @@
+{
+  "version": 1,
+  "questionId": "q21",
+  "speechText": "For me, I want to keep growing in backend development, but I also want to work more with data and AI. The main reason is that this position combines backend work with AI, so it matches what I want to do next. For example, recently I’ve had some chances to work on AI-related features in real products, and I found that I really enjoy this direction. I also like Everfit because it is a global product in the health and fitness area, and it has real users and real impact. Because of that, I feel this is a good place for me to learn more, take on a new challenge, and step out of my comfort zone. At the same time, I believe my backend experience can help me contribute from the beginning. So overall, I think this position is a good match for both my experience and my career direction.",
+  "words": [
+    {
+      "text": "For",
+      "canonicalStart": 1,
+      "canonicalEnd": 4,
+      "startMs": 0,
+      "endMs": 163
+    },
+    {
+      "text": "me,",
+      "canonicalStart": 5,
+      "canonicalEnd": 8,
+      "startMs": 197,
+      "endMs": 476
+    },
+    {
+      "text": "I",
+      "canonicalStart": 12,
+      "canonicalEnd": 13,
+      "startMs": 511,
+      "endMs": 557
+    },
+    {
+      "text": "want",
+      "canonicalStart": 14,
+      "canonicalEnd": 18,
+      "startMs": 604,
+      "endMs": 940
+    },
+    {
+      "text": "to",
+      "canonicalStart": 19,
+      "canonicalEnd": 21,
+      "startMs": 975,
+      "endMs": 1033
+    },
+    {
+      "text": "keep",
+      "canonicalStart": 22,
+      "canonicalEnd": 26,
+      "startMs": 1057,
+      "endMs": 1231
+    },
+    {
+      "text": "growing",
+      "canonicalStart": 27,
+      "canonicalEnd": 34,
+      "startMs": 1265,
+      "endMs": 1591
+    },
+    {
+      "text": "in",
+      "canonicalStart": 35,
+      "canonicalEnd": 37,
+      "startMs": 1614,
+      "endMs": 1695
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 40,
+      "canonicalEnd": 47,
+      "startMs": 1730,
+      "endMs": 2125
+    },
+    {
+      "text": "development,",
+      "canonicalStart": 48,
+      "canonicalEnd": 62,
+      "startMs": 2148,
+      "endMs": 2728
+    },
+    {
+      "text": "but",
+      "canonicalStart": 65,
+      "canonicalEnd": 68,
+      "startMs": 2856,
+      "endMs": 3251
+    },
+    {
+      "text": "I",
+      "canonicalStart": 69,
+      "canonicalEnd": 70,
+      "startMs": 3286,
+      "endMs": 3332
+    },
+    {
+      "text": "also",
+      "canonicalStart": 71,
+      "canonicalEnd": 75,
+      "startMs": 3367,
+      "endMs": 3634
+    },
+    {
+      "text": "want",
+      "canonicalStart": 76,
+      "canonicalEnd": 80,
+      "startMs": 3680,
+      "endMs": 3855
+    },
+    {
+      "text": "to",
+      "canonicalStart": 81,
+      "canonicalEnd": 83,
+      "startMs": 3889,
+      "endMs": 3947
+    },
+    {
+      "text": "work",
+      "canonicalStart": 84,
+      "canonicalEnd": 88,
+      "startMs": 3982,
+      "endMs": 4180
+    },
+    {
+      "text": "more",
+      "canonicalStart": 89,
+      "canonicalEnd": 93,
+      "startMs": 4238,
+      "endMs": 4458
+    },
+    {
+      "text": "with",
+      "canonicalStart": 94,
+      "canonicalEnd": 98,
+      "startMs": 4493,
+      "endMs": 4644
+    },
+    {
+      "text": "data",
+      "canonicalStart": 101,
+      "canonicalEnd": 105,
+      "startMs": 4690,
+      "endMs": 4992
+    },
+    {
+      "text": "and",
+      "canonicalStart": 106,
+      "canonicalEnd": 109,
+      "startMs": 5062,
+      "endMs": 5201
+    },
+    {
+      "text": "AI.",
+      "canonicalStart": 110,
+      "canonicalEnd": 115,
+      "startMs": 5236,
+      "endMs": 5828
+    },
+    {
+      "text": "The",
+      "canonicalStart": 117,
+      "canonicalEnd": 120,
+      "startMs": 6002,
+      "endMs": 6920
+    },
+    {
+      "text": "main",
+      "canonicalStart": 121,
+      "canonicalEnd": 125,
+      "startMs": 6943,
+      "endMs": 7140
+    },
+    {
+      "text": "reason",
+      "canonicalStart": 126,
+      "canonicalEnd": 132,
+      "startMs": 7175,
+      "endMs": 7488
+    },
+    {
+      "text": "is",
+      "canonicalStart": 133,
+      "canonicalEnd": 135,
+      "startMs": 7523,
+      "endMs": 7616
+    },
+    {
+      "text": "that",
+      "canonicalStart": 136,
+      "canonicalEnd": 140,
+      "startMs": 7663,
+      "endMs": 7802
+    },
+    {
+      "text": "this",
+      "canonicalStart": 144,
+      "canonicalEnd": 148,
+      "startMs": 7837,
+      "endMs": 8011
+    },
+    {
+      "text": "position",
+      "canonicalStart": 149,
+      "canonicalEnd": 157,
+      "startMs": 8046,
+      "endMs": 8499
+    },
+    {
+      "text": "combines",
+      "canonicalStart": 158,
+      "canonicalEnd": 166,
+      "startMs": 8533,
+      "endMs": 9114
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 169,
+      "canonicalEnd": 176,
+      "startMs": 9149,
+      "endMs": 9601
+    },
+    {
+      "text": "work",
+      "canonicalStart": 177,
+      "canonicalEnd": 181,
+      "startMs": 9625,
+      "endMs": 9810
+    },
+    {
+      "text": "with",
+      "canonicalStart": 182,
+      "canonicalEnd": 186,
+      "startMs": 9857,
+      "endMs": 9996
+    },
+    {
+      "text": "AI,",
+      "canonicalStart": 187,
+      "canonicalEnd": 192,
+      "startMs": 10043,
+      "endMs": 10507
+    },
+    {
+      "text": "so",
+      "canonicalStart": 195,
+      "canonicalEnd": 197,
+      "startMs": 10542,
+      "endMs": 10646
+    },
+    {
+      "text": "it",
+      "canonicalStart": 198,
+      "canonicalEnd": 200,
+      "startMs": 10728,
+      "endMs": 10844
+    },
+    {
+      "text": "matches",
+      "canonicalStart": 201,
+      "canonicalEnd": 208,
+      "startMs": 10879,
+      "endMs": 11308
+    },
+    {
+      "text": "what",
+      "canonicalStart": 209,
+      "canonicalEnd": 213,
+      "startMs": 11355,
+      "endMs": 11540
+    },
+    {
+      "text": "I",
+      "canonicalStart": 214,
+      "canonicalEnd": 215,
+      "startMs": 11564,
+      "endMs": 11622
+    },
+    {
+      "text": "want",
+      "canonicalStart": 216,
+      "canonicalEnd": 220,
+      "startMs": 11656,
+      "endMs": 11912
+    },
+    {
+      "text": "to",
+      "canonicalStart": 221,
+      "canonicalEnd": 223,
+      "startMs": 11947,
+      "endMs": 12005
+    },
+    {
+      "text": "do",
+      "canonicalStart": 224,
+      "canonicalEnd": 226,
+      "startMs": 12028,
+      "endMs": 12121
+    },
+    {
+      "text": "next.",
+      "canonicalStart": 227,
+      "canonicalEnd": 232,
+      "startMs": 12202,
+      "endMs": 12655
+    },
+    {
+      "text": "For",
+      "canonicalStart": 234,
+      "canonicalEnd": 237,
+      "startMs": 12806,
+      "endMs": 13746
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 238,
+      "canonicalEnd": 246,
+      "startMs": 13781,
+      "endMs": 14350
+    },
+    {
+      "text": "recently",
+      "canonicalStart": 250,
+      "canonicalEnd": 258,
+      "startMs": 14373,
+      "endMs": 14826
+    },
+    {
+      "text": "I’ve",
+      "canonicalStart": 259,
+      "canonicalEnd": 263,
+      "startMs": 14861,
+      "endMs": 15058
+    },
+    {
+      "text": "had",
+      "canonicalStart": 264,
+      "canonicalEnd": 267,
+      "startMs": 15093,
+      "endMs": 15174
+    },
+    {
+      "text": "some",
+      "canonicalStart": 268,
+      "canonicalEnd": 272,
+      "startMs": 15209,
+      "endMs": 15360
+    },
+    {
+      "text": "chances",
+      "canonicalStart": 273,
+      "canonicalEnd": 280,
+      "startMs": 15395,
+      "endMs": 15766
+    },
+    {
+      "text": "to",
+      "canonicalStart": 281,
+      "canonicalEnd": 283,
+      "startMs": 15801,
+      "endMs": 15883
+    },
+    {
+      "text": "work",
+      "canonicalStart": 284,
+      "canonicalEnd": 288,
+      "startMs": 15906,
+      "endMs": 16091
+    },
+    {
+      "text": "on",
+      "canonicalStart": 289,
+      "canonicalEnd": 291,
+      "startMs": 16138,
+      "endMs": 16242
+    },
+    {
+      "text": "AI-related",
+      "canonicalStart": 294,
+      "canonicalEnd": 304,
+      "startMs": 16300,
+      "endMs": 17055
+    },
+    {
+      "text": "features",
+      "canonicalStart": 305,
+      "canonicalEnd": 313,
+      "startMs": 17078,
+      "endMs": 17520
+    },
+    {
+      "text": "in",
+      "canonicalStart": 314,
+      "canonicalEnd": 316,
+      "startMs": 17554,
+      "endMs": 17647
+    },
+    {
+      "text": "real",
+      "canonicalStart": 317,
+      "canonicalEnd": 321,
+      "startMs": 17694,
+      "endMs": 17984
+    },
+    {
+      "text": "products,",
+      "canonicalStart": 322,
+      "canonicalEnd": 333,
+      "startMs": 18019,
+      "endMs": 18588
+    },
+    {
+      "text": "and",
+      "canonicalStart": 336,
+      "canonicalEnd": 339,
+      "startMs": 18704,
+      "endMs": 19249
+    },
+    {
+      "text": "I",
+      "canonicalStart": 340,
+      "canonicalEnd": 341,
+      "startMs": 19284,
+      "endMs": 19366
+    },
+    {
+      "text": "found",
+      "canonicalStart": 342,
+      "canonicalEnd": 347,
+      "startMs": 19389,
+      "endMs": 19667
+    },
+    {
+      "text": "that",
+      "canonicalStart": 348,
+      "canonicalEnd": 352,
+      "startMs": 19691,
+      "endMs": 19807
+    },
+    {
+      "text": "I",
+      "canonicalStart": 353,
+      "canonicalEnd": 354,
+      "startMs": 19830,
+      "endMs": 19876
+    },
+    {
+      "text": "really",
+      "canonicalStart": 355,
+      "canonicalEnd": 361,
+      "startMs": 19911,
+      "endMs": 20306
+    },
+    {
+      "text": "enjoy",
+      "canonicalStart": 362,
+      "canonicalEnd": 367,
+      "startMs": 20341,
+      "endMs": 20747
+    },
+    {
+      "text": "this",
+      "canonicalStart": 368,
+      "canonicalEnd": 372,
+      "startMs": 20805,
+      "endMs": 20979
+    },
+    {
+      "text": "direction.",
+      "canonicalStart": 373,
+      "canonicalEnd": 383,
+      "startMs": 21014,
+      "endMs": 21571
+    },
+    {
+      "text": "I",
+      "canonicalStart": 385,
+      "canonicalEnd": 386,
+      "startMs": 21746,
+      "endMs": 22558
+    },
+    {
+      "text": "also",
+      "canonicalStart": 387,
+      "canonicalEnd": 391,
+      "startMs": 22628,
+      "endMs": 22895
+    },
+    {
+      "text": "like",
+      "canonicalStart": 392,
+      "canonicalEnd": 396,
+      "startMs": 22953,
+      "endMs": 23150
+    },
+    {
+      "text": "Everfit",
+      "canonicalStart": 397,
+      "canonicalEnd": 404,
+      "startMs": 23185,
+      "endMs": 23592
+    },
+    {
+      "text": "because",
+      "canonicalStart": 405,
+      "canonicalEnd": 412,
+      "startMs": 23638,
+      "endMs": 23940
+    },
+    {
+      "text": "it",
+      "canonicalStart": 416,
+      "canonicalEnd": 418,
+      "startMs": 23975,
+      "endMs": 24044
+    },
+    {
+      "text": "is",
+      "canonicalStart": 419,
+      "canonicalEnd": 421,
+      "startMs": 24079,
+      "endMs": 24160
+    },
+    {
+      "text": "a",
+      "canonicalStart": 422,
+      "canonicalEnd": 423,
+      "startMs": 24195,
+      "endMs": 24253
+    },
+    {
+      "text": "global",
+      "canonicalStart": 426,
+      "canonicalEnd": 432,
+      "startMs": 24277,
+      "endMs": 24683
+    },
+    {
+      "text": "product",
+      "canonicalStart": 433,
+      "canonicalEnd": 440,
+      "startMs": 24718,
+      "endMs": 25112
+    },
+    {
+      "text": "in",
+      "canonicalStart": 443,
+      "canonicalEnd": 445,
+      "startMs": 25159,
+      "endMs": 25240
+    },
+    {
+      "text": "the",
+      "canonicalStart": 446,
+      "canonicalEnd": 449,
+      "startMs": 25275,
+      "endMs": 25368
+    },
+    {
+      "text": "health",
+      "canonicalStart": 452,
+      "canonicalEnd": 458,
+      "startMs": 25403,
+      "endMs": 25716
+    },
+    {
+      "text": "and",
+      "canonicalStart": 459,
+      "canonicalEnd": 462,
+      "startMs": 25751,
+      "endMs": 25855
+    },
+    {
+      "text": "fitness",
+      "canonicalStart": 463,
+      "canonicalEnd": 470,
+      "startMs": 25879,
+      "endMs": 26250
+    },
+    {
+      "text": "area,",
+      "canonicalStart": 473,
+      "canonicalEnd": 478,
+      "startMs": 26285,
+      "endMs": 26668
+    },
+    {
+      "text": "and",
+      "canonicalStart": 481,
+      "canonicalEnd": 484,
+      "startMs": 26819,
+      "endMs": 27272
+    },
+    {
+      "text": "it",
+      "canonicalStart": 485,
+      "canonicalEnd": 487,
+      "startMs": 27307,
+      "endMs": 27400
+    },
+    {
+      "text": "has",
+      "canonicalStart": 488,
+      "canonicalEnd": 491,
+      "startMs": 27423,
+      "endMs": 27574
+    },
+    {
+      "text": "real",
+      "canonicalStart": 494,
+      "canonicalEnd": 498,
+      "startMs": 27643,
+      "endMs": 27968
+    },
+    {
+      "text": "users",
+      "canonicalStart": 499,
+      "canonicalEnd": 504,
+      "startMs": 28014,
+      "endMs": 28421
+    },
+    {
+      "text": "and",
+      "canonicalStart": 505,
+      "canonicalEnd": 508,
+      "startMs": 28479,
+      "endMs": 28607
+    },
+    {
+      "text": "real",
+      "canonicalStart": 509,
+      "canonicalEnd": 513,
+      "startMs": 28630,
+      "endMs": 28850
+    },
+    {
+      "text": "impact.",
+      "canonicalStart": 514,
+      "canonicalEnd": 523,
+      "startMs": 28885,
+      "endMs": 29442
+    },
+    {
+      "text": "Because",
+      "canonicalStart": 525,
+      "canonicalEnd": 532,
+      "startMs": 29559,
+      "endMs": 30673
+    },
+    {
+      "text": "of",
+      "canonicalStart": 533,
+      "canonicalEnd": 535,
+      "startMs": 30708,
+      "endMs": 30766
+    },
+    {
+      "text": "that,",
+      "canonicalStart": 536,
+      "canonicalEnd": 541,
+      "startMs": 30789,
+      "endMs": 31010
+    },
+    {
+      "text": "I",
+      "canonicalStart": 545,
+      "canonicalEnd": 546,
+      "startMs": 31033,
+      "endMs": 31068
+    },
+    {
+      "text": "feel",
+      "canonicalStart": 547,
+      "canonicalEnd": 551,
+      "startMs": 31091,
+      "endMs": 31323
+    },
+    {
+      "text": "this",
+      "canonicalStart": 552,
+      "canonicalEnd": 556,
+      "startMs": 31358,
+      "endMs": 31532
+    },
+    {
+      "text": "is",
+      "canonicalStart": 557,
+      "canonicalEnd": 559,
+      "startMs": 31567,
+      "endMs": 31672
+    },
+    {
+      "text": "a",
+      "canonicalStart": 560,
+      "canonicalEnd": 561,
+      "startMs": 31718,
+      "endMs": 31776
+    },
+    {
+      "text": "good",
+      "canonicalStart": 562,
+      "canonicalEnd": 566,
+      "startMs": 31799,
+      "endMs": 31985
+    },
+    {
+      "text": "place",
+      "canonicalStart": 567,
+      "canonicalEnd": 572,
+      "startMs": 32020,
+      "endMs": 32275
+    },
+    {
+      "text": "for",
+      "canonicalStart": 573,
+      "canonicalEnd": 576,
+      "startMs": 32310,
+      "endMs": 32403
+    },
+    {
+      "text": "me",
+      "canonicalStart": 577,
+      "canonicalEnd": 579,
+      "startMs": 32438,
+      "endMs": 32519
+    },
+    {
+      "text": "to",
+      "canonicalStart": 580,
+      "canonicalEnd": 582,
+      "startMs": 32577,
+      "endMs": 32647
+    },
+    {
+      "text": "learn",
+      "canonicalStart": 585,
+      "canonicalEnd": 590,
+      "startMs": 32670,
+      "endMs": 32902
+    },
+    {
+      "text": "more,",
+      "canonicalStart": 591,
+      "canonicalEnd": 598,
+      "startMs": 32960,
+      "endMs": 33529
+    },
+    {
+      "text": "take",
+      "canonicalStart": 601,
+      "canonicalEnd": 605,
+      "startMs": 33552,
+      "endMs": 33843
+    },
+    {
+      "text": "on",
+      "canonicalStart": 606,
+      "canonicalEnd": 608,
+      "startMs": 33877,
+      "endMs": 33959
+    },
+    {
+      "text": "a",
+      "canonicalStart": 609,
+      "canonicalEnd": 610,
+      "startMs": 33994,
+      "endMs": 34052
+    },
+    {
+      "text": "new",
+      "canonicalStart": 613,
+      "canonicalEnd": 616,
+      "startMs": 34075,
+      "endMs": 34214
+    },
+    {
+      "text": "challenge,",
+      "canonicalStart": 617,
+      "canonicalEnd": 629,
+      "startMs": 34249,
+      "endMs": 34980
+    },
+    {
+      "text": "and",
+      "canonicalStart": 632,
+      "canonicalEnd": 635,
+      "startMs": 35004,
+      "endMs": 35189
+    },
+    {
+      "text": "step",
+      "canonicalStart": 638,
+      "canonicalEnd": 642,
+      "startMs": 35224,
+      "endMs": 35468
+    },
+    {
+      "text": "out",
+      "canonicalStart": 643,
+      "canonicalEnd": 646,
+      "startMs": 35526,
+      "endMs": 35642
+    },
+    {
+      "text": "of",
+      "canonicalStart": 647,
+      "canonicalEnd": 649,
+      "startMs": 35677,
+      "endMs": 35735
+    },
+    {
+      "text": "my",
+      "canonicalStart": 650,
+      "canonicalEnd": 652,
+      "startMs": 35758,
+      "endMs": 35851
+    },
+    {
+      "text": "comfort",
+      "canonicalStart": 653,
+      "canonicalEnd": 660,
+      "startMs": 35886,
+      "endMs": 36234
+    },
+    {
+      "text": "zone.",
+      "canonicalStart": 661,
+      "canonicalEnd": 668,
+      "startMs": 36281,
+      "endMs": 36687
+    },
+    {
+      "text": "At",
+      "canonicalStart": 670,
+      "canonicalEnd": 672,
+      "startMs": 36803,
+      "endMs": 37709
+    },
+    {
+      "text": "the",
+      "canonicalStart": 673,
+      "canonicalEnd": 676,
+      "startMs": 37755,
+      "endMs": 37836
+    },
+    {
+      "text": "same",
+      "canonicalStart": 677,
+      "canonicalEnd": 681,
+      "startMs": 37860,
+      "endMs": 38092
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 682,
+      "canonicalEnd": 687,
+      "startMs": 38138,
+      "endMs": 38452
+    },
+    {
+      "text": "I",
+      "canonicalStart": 691,
+      "canonicalEnd": 692,
+      "startMs": 38475,
+      "endMs": 38510
+    },
+    {
+      "text": "believe",
+      "canonicalStart": 693,
+      "canonicalEnd": 700,
+      "startMs": 38533,
+      "endMs": 38835
+    },
+    {
+      "text": "my",
+      "canonicalStart": 701,
+      "canonicalEnd": 703,
+      "startMs": 38881,
+      "endMs": 38974
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 706,
+      "canonicalEnd": 713,
+      "startMs": 39032,
+      "endMs": 39532
+    },
+    {
+      "text": "experience",
+      "canonicalStart": 714,
+      "canonicalEnd": 724,
+      "startMs": 39566,
+      "endMs": 40147
+    },
+    {
+      "text": "can",
+      "canonicalStart": 727,
+      "canonicalEnd": 730,
+      "startMs": 40182,
+      "endMs": 40298
+    },
+    {
+      "text": "help",
+      "canonicalStart": 731,
+      "canonicalEnd": 735,
+      "startMs": 40333,
+      "endMs": 40484
+    },
+    {
+      "text": "me",
+      "canonicalStart": 736,
+      "canonicalEnd": 738,
+      "startMs": 40530,
+      "endMs": 40611
+    },
+    {
+      "text": "contribute",
+      "canonicalStart": 741,
+      "canonicalEnd": 751,
+      "startMs": 40658,
+      "endMs": 41203
+    },
+    {
+      "text": "from",
+      "canonicalStart": 752,
+      "canonicalEnd": 756,
+      "startMs": 41238,
+      "endMs": 41366
+    },
+    {
+      "text": "the",
+      "canonicalStart": 757,
+      "canonicalEnd": 760,
+      "startMs": 41401,
+      "endMs": 41494
+    },
+    {
+      "text": "beginning.",
+      "canonicalStart": 761,
+      "canonicalEnd": 773,
+      "startMs": 41517,
+      "endMs": 42016
+    },
+    {
+      "text": "So",
+      "canonicalStart": 775,
+      "canonicalEnd": 777,
+      "startMs": 42225,
+      "endMs": 42631
+    },
+    {
+      "text": "overall,",
+      "canonicalStart": 778,
+      "canonicalEnd": 786,
+      "startMs": 42713,
+      "endMs": 43270
+    },
+    {
+      "text": "I",
+      "canonicalStart": 790,
+      "canonicalEnd": 791,
+      "startMs": 43305,
+      "endMs": 43328
+    },
+    {
+      "text": "think",
+      "canonicalStart": 792,
+      "canonicalEnd": 797,
+      "startMs": 43363,
+      "endMs": 43549
+    },
+    {
+      "text": "this",
+      "canonicalStart": 798,
+      "canonicalEnd": 802,
+      "startMs": 43595,
+      "endMs": 43746
+    },
+    {
+      "text": "position",
+      "canonicalStart": 803,
+      "canonicalEnd": 811,
+      "startMs": 43781,
+      "endMs": 44210
+    },
+    {
+      "text": "is",
+      "canonicalStart": 812,
+      "canonicalEnd": 814,
+      "startMs": 44234,
+      "endMs": 44327
+    },
+    {
+      "text": "a",
+      "canonicalStart": 815,
+      "canonicalEnd": 816,
+      "startMs": 44361,
+      "endMs": 44408
+    },
+    {
+      "text": "good",
+      "canonicalStart": 819,
+      "canonicalEnd": 823,
+      "startMs": 44443,
+      "endMs": 44617
+    },
+    {
+      "text": "match",
+      "canonicalStart": 824,
+      "canonicalEnd": 829,
+      "startMs": 44663,
+      "endMs": 44930
+    },
+    {
+      "text": "for",
+      "canonicalStart": 834,
+      "canonicalEnd": 837,
+      "startMs": 44965,
+      "endMs": 45093
+    },
+    {
+      "text": "both",
+      "canonicalStart": 838,
+      "canonicalEnd": 842,
+      "startMs": 45139,
+      "endMs": 45383
+    },
+    {
+      "text": "my",
+      "canonicalStart": 843,
+      "canonicalEnd": 845,
+      "startMs": 45429,
+      "endMs": 45673
+    },
+    {
+      "text": "experience",
+      "canonicalStart": 848,
+      "canonicalEnd": 858,
+      "startMs": 45755,
+      "endMs": 46335
+    },
+    {
+      "text": "and",
+      "canonicalStart": 861,
+      "canonicalEnd": 864,
+      "startMs": 46370,
+      "endMs": 46451
+    },
+    {
+      "text": "my",
+      "canonicalStart": 865,
+      "canonicalEnd": 867,
+      "startMs": 46474,
+      "endMs": 46579
+    },
+    {
+      "text": "career",
+      "canonicalStart": 870,
+      "canonicalEnd": 876,
+      "startMs": 46637,
+      "endMs": 46997
+    },
+    {
+      "text": "direction.",
+      "canonicalStart": 877,
+      "canonicalEnd": 889,
+      "startMs": 47032,
+      "endMs": 47635
+    }
+  ]
+}
