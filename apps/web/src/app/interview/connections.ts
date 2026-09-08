@@ -1,32 +1,6 @@
 import { interviewQuestions } from './data';
-
-export type QuestionId = number;
-export type ContextId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J';
-export type ClusterId =
-  | 'error-handling'
-  | 'observability'
-  | 'rag'
-  | 'workflow'
-  | 'tool-calling'
-  | 'tool-safety'
-  | 'quality'
-  | 'production-ai'
-  | 'ocr'
-  | 'gap';
-export type StoryId = 'hybrid-rag' | 'llm-reliability' | 'ocr-cpu-gpu';
-export type TriggerId = 'reliability' | 'agent-tools' | 'workflow' | 'quality' | 'security' | 'retrieval';
-
-export type Context = { id: ContextId; title: string; path: string[] };
-export type PhraseCluster = { id: ClusterId; title: string; path: string[] };
-export type HeroStory = { id: StoryId; title: string; path: string[] };
-export type Trigger = { id: TriggerId; phrases: string; contextIds: ContextId[] };
-
-type QuestionRelations = {
-  questionId: QuestionId;
-  contextIds: ContextId[];
-  clusterIds: ClusterId[];
-  storyIds?: StoryId[];
-};
+import type { ClusterId, ContextId, HeroStory, PhraseCluster, QuestionId, StoryId, Trigger, TriggerId, Context, MemoryNode } from './types';
+export type { Context, MemoryNode } from './types';
 
 export const contexts: Context[] = [
   { id: 'A', title: 'Backend → Applied AI → Production', path: ['Backend foundation', 'Applied AI', 'Production reliability'] },
@@ -69,41 +43,25 @@ export const triggers: Trigger[] = [
   { id: 'retrieval', phrases: 'RAG · vector · ranking · retrieval', contextIds: ['B', 'G'] },
 ];
 
-// This is the one editable relationship table. Labels and learning paths above are display metadata.
-export const questionRelations: QuestionRelations[] = [
-  { questionId: 1, contextIds: ['A'], clusterIds: ['observability', 'production-ai'] },
-  { questionId: 2, contextIds: ['B'], clusterIds: ['rag'], storyIds: ['hybrid-rag'] },
-  { questionId: 3, contextIds: ['C'], clusterIds: ['error-handling', 'observability', 'production-ai'], storyIds: ['llm-reliability'] },
-  { questionId: 4, contextIds: ['D'], clusterIds: ['workflow', 'ocr'], storyIds: ['ocr-cpu-gpu'] },
-  { questionId: 5, contextIds: ['E'], clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'production-ai'], storyIds: ['llm-reliability'] },
-  { questionId: 6, contextIds: ['F'], clusterIds: ['error-handling', 'workflow', 'gap'] },
-  { questionId: 7, contextIds: ['E'], clusterIds: ['tool-calling', 'gap'] },
-  { questionId: 8, contextIds: ['G'], clusterIds: ['observability', 'quality', 'production-ai', 'gap'] },
-  { questionId: 9, contextIds: ['A'], clusterIds: [] },
-  { questionId: 10, contextIds: ['E', 'H'], clusterIds: ['tool-calling', 'tool-safety'] },
-  { questionId: 11, contextIds: ['A', 'I'], clusterIds: ['workflow', 'gap'] },
-  { questionId: 12, contextIds: ['E'], clusterIds: ['tool-calling'] },
-  { questionId: 13, contextIds: ['C'], clusterIds: ['error-handling', 'observability', 'production-ai'], storyIds: ['llm-reliability'] },
-  { questionId: 14, contextIds: ['C', 'G'], clusterIds: ['observability', 'quality', 'production-ai'], storyIds: ['llm-reliability'] },
-  { questionId: 15, contextIds: ['B', 'G'], clusterIds: ['rag', 'quality', 'production-ai'], storyIds: ['hybrid-rag'] },
-  { questionId: 16, contextIds: ['H'], clusterIds: ['tool-calling', 'tool-safety'] },
-  { questionId: 17, contextIds: ['D'], clusterIds: ['ocr'] },
-  { questionId: 18, contextIds: ['F'], clusterIds: ['error-handling', 'workflow', 'observability'] },
-  { questionId: 19, contextIds: ['J'], clusterIds: [] },
-];
-
-export function getQuestionRelations(questionId: QuestionId) { return questionRelations.find((item) => item.questionId === questionId); }
+export function getQuestionRelations(questionId: QuestionId) { return interviewQuestions.find((item) => item.id === questionId); }
 export function getContextsForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.contextIds ?? []; return contexts.filter((item) => ids.includes(item.id)); }
 export function getClustersForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.clusterIds ?? []; return phraseClusters.filter((item) => ids.includes(item.id)); }
 export function getStoriesForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.storyIds ?? []; return heroStories.filter((item) => ids.includes(item.id)); }
-export function getQuestionsForContext(contextId: ContextId) { return questionRelations.filter((item) => item.contextIds.includes(contextId)).map((item) => item.questionId); }
-export function getQuestionsForCluster(clusterId: ClusterId) { return questionRelations.filter((item) => item.clusterIds.includes(clusterId)).map((item) => item.questionId); }
-export function getQuestionsForStory(storyId: StoryId) { return questionRelations.filter((item) => item.storyIds?.includes(storyId)).map((item) => item.questionId); }
+export function getQuestionsForContext(contextId: ContextId) { return interviewQuestions.filter((item) => item.contextIds.includes(contextId)).map((item) => item.id); }
+export function getQuestionsForCluster(clusterId: ClusterId) { return interviewQuestions.filter((item) => item.clusterIds.includes(clusterId)).map((item) => item.id); }
+export function getQuestionsForStory(storyId: StoryId) { return interviewQuestions.filter((item) => item.storyIds?.includes(storyId)).map((item) => item.id); }
 export function getContextsForTrigger(triggerId: TriggerId) { const item = triggers.find((trigger) => trigger.id === triggerId); return contexts.filter((context) => item?.contextIds.includes(context.id)); }
 export function getRelatedQuestions(questionId: QuestionId) {
-  const relation = getQuestionRelations(questionId);
-  if (!relation) return [];
-  const ids = new Set(questionRelations.filter((item) => item.questionId !== questionId && [...relation.contextIds, ...relation.clusterIds, ...(relation.storyIds ?? [])].some((id) => item.contextIds.includes(id as ContextId) || item.clusterIds.includes(id as ClusterId) || item.storyIds?.includes(id as StoryId))).map((item) => item.questionId));
-  return [...ids];
+  const question = getQuestionRelations(questionId);
+  if (!question) return [];
+  return interviewQuestions.filter((item) => item.id !== questionId && (
+    item.contextIds.some((id) => question.contextIds.includes(id)) ||
+    item.clusterIds.some((id) => question.clusterIds.includes(id)) ||
+    item.storyIds?.some((id) => question.storyIds?.includes(id))
+  )).map((item) => item.id);
+}
+export function getMemoryNodes(questionId: QuestionId): MemoryNode[] {
+  const question = getQuestionRelations(questionId);
+  return question?.memory.nodes ?? [];
 }
 export function questionLabel(id: QuestionId) { return interviewQuestions.find((q) => q.id === id)?.question.en ?? `Question ${id}`; }

@@ -40,7 +40,7 @@ export function extractStarter(text: string): string | null {
 export function questionKeywords(q: InterviewQuestion): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const p of q.paragraphs) {
+  for (const p of q.answer.sections) {
     for (const k of extractKeywords(p.en)) {
       const key = k.toLowerCase();
       if (!seen.has(key)) {
@@ -53,7 +53,7 @@ export function questionKeywords(q: InterviewQuestion): string[] {
 }
 
 export function questionStarters(q: InterviewQuestion): string[] {
-  return q.paragraphs
+  return q.answer.sections
     .map((p) => extractStarter(p.en))
     .filter((s): s is string => Boolean(s));
 }
