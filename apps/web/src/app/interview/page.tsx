@@ -173,12 +173,18 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, audi
   const fullSource = q.answer.sections.map((section) => section.en).join(' ');
   const fullText = stripFormatting(fullSource);
   const fullKey = `q${q.id}-full`;
-  const canPlayFull = Boolean(q.audio?.full) || audio.speechAvailable;
+  const ideaIndex = Math.max(0, Math.min(shownIdeas - 1, q.answer.sections.length - 1));
+  const idea = q.answer.sections[ideaIndex];
+  const ideaKey = `q${q.id}-idea-${idea?.id ?? 'current'}`;
+  const listeningToIdea = !show && shownIdeas > 0;
+  const listenSource = listeningToIdea && idea ? idea.en : fullSource;
+  const listenText = stripFormatting(listenSource);
+  const canPlayListen = Boolean(listeningToIdea ? audio.speechAvailable : q.audio?.full || audio.speechAvailable);
   let sectionOffset = 0;
-  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayFull && <AudioControls audio={audio} request={{ text: fullText, src: q.audio?.full, alignment: q.audio?.alignment, key: fullKey, mapping: buildSpeechMapping(fullSource) }} label="Listen answer" />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
+  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: listeningToIdea ? undefined : q.audio?.full, alignment: listeningToIdea ? undefined : q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource) }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
-    const trackedRange = audio.activeKey === fullKey ? audio.activeRange : audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
+    const trackedRange = audio.activeKey === fullKey || audio.activeKey === ideaKey ? audio.activeRange : audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
     const rangeOffset = audio.activeKey === fullKey ? offset : 0;
     return <AnswerSectionView key={paragraph.id} paragraph={paragraph} questionId={q.id} src={q.audio?.sections?.[paragraph.id]} showVi={showVi} cloze={cloze} active={activeSection === paragraph.id} audio={audio} trackedRange={trackedRange} rangeOffset={rangeOffset} />;
   })}</div></div>;
