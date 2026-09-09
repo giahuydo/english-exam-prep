@@ -127,6 +127,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const [ideaIndex, setIdeaIndex] = useState(0);
   const [rated, setRated] = useState<ReviewDifficulty | null>(null);
   const [selectionMode, setSelectionMode] = useState(false);
+  const [showMemoryOverlay, setShowMemoryOverlay] = useState(false);
   const ideaRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const level = progress.levels[q.id] ?? 1;
   const contextsForQuestion = useMemo(() => getContextsForQuestion(q.id), [q.id]);
@@ -136,7 +137,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const shownIdeas = mode === 'learn' || revealed ? q.answer.sections.length : Math.min(ideaIndex, q.answer.sections.length);
 
   const { stop: stopAudio } = audio;
-  useEffect(() => { setRevealed(mode === 'learn'); setHint(false); setMapRequested(false); setShowVi(false); setCloze(false); setOpenNode(null); setIdeaIndex(0); setRated(null); setSelectionMode(false); stopAudio(); }, [q.id, mode, stopAudio]);
+  useEffect(() => { setRevealed(mode === 'learn'); setHint(false); setMapRequested(false); setShowVi(false); setCloze(false); setOpenNode(null); setIdeaIndex(0); setRated(null); setSelectionMode(false); setShowMemoryOverlay(false); stopAudio(); }, [q.id, mode, stopAudio]);
 
   const reveal = () => { setRevealed(true); setIdeaIndex(q.answer.sections.length); setHint(false); };
   const jumpToIdea = (nextIndex: number) => {
@@ -149,6 +150,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const activeIdea = q.answer.sections[ideaIndex - 1];
   useEffect(() => {
     const sectionId = activeIdea?.id;
+    setShowMemoryOverlay(false);
     if (!sectionId) {
       setOpenNode(null);
       return;
@@ -156,6 +158,11 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
     setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null);
     ideaRefs.current[sectionId]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, [activeIdea?.id, memoryNodes]);
+  const playbackMemory = getPlaybackMemory(q, memoryNodes, audio.activeKey, audio.activeRange, activeIdea?.id);
+  useEffect(() => {
+    if (audio.state === 'idle') setShowMemoryOverlay(false);
+    else setShowMemoryOverlay(true);
+  }, [audio.activeKey, audio.state]);
   const rate = (value: ReviewDifficulty) => { progress.review(q.id, value); setRated(value); };
 
   return <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.05)]">
@@ -177,12 +184,16 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
       {mode !== 'learn' && <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-5 sm:flex sm:flex-wrap sm:items-center"><button type="button" onClick={previousIdea} disabled={ideaIndex <= 0} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-slate-600 disabled:opacity-40">Previous idea</button><button type="button" onClick={nextIdea} disabled={ideaIndex >= q.answer.sections.length} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white disabled:opacity-40">Next idea</button><button type="button" onClick={() => setHint(true)} disabled={hint || ideaIndex >= q.answer.sections.length} className="min-h-10 rounded-lg px-2 text-xs font-semibold text-slate-500 hover:text-slate-800 disabled:opacity-40">Show hint</button><button type="button" onClick={reveal} disabled={revealed} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-slate-600 disabled:opacity-40">Reveal answer</button><button type="button" onClick={() => { setIdeaIndex(0); setHint(false); setRevealed(false); setRated(null); }} className="min-h-10 px-2 text-xs font-semibold text-slate-400 hover:text-slate-700">Reset</button></div>}
       {hint && !revealed && starters[ideaIndex] && <p className="rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-800">Try starting with <b>{starters[ideaIndex]}</b></p>}
 
-      {mode === 'quick' && !revealed && ideaIndex === 0 ? null : <AnswerContent q={q} show={revealed || mode === 'learn'} showVi={showVi} cloze={cloze} shownIdeas={shownIdeas} activeSection={openNode ? memoryNodes.find((node) => node.id === openNode)?.answerSectionId : undefined} onSectionActivate={(sectionId) => setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null)} audio={audio} ideaRefs={ideaRefs} selectionMode={selectionMode} onSelectionModeChange={setSelectionMode} />}
+      {mode === 'quick' && !revealed && ideaIndex === 0 ? null : <AnswerContent q={q} show={revealed || mode === 'learn'} showVi={showVi} cloze={cloze} shownIdeas={shownIdeas} activeSection={openNode ? memoryNodes.find((node) => node.id === openNode)?.answerSectionId : undefined} activeIdeaId={activeIdea?.id} memoryNodes={memoryNodes} showMemoryOverlay={showMemoryOverlay} onSectionActivate={(sectionId) => setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null)} audio={audio} ideaRefs={ideaRefs} selectionMode={selectionMode} onSelectionModeChange={setSelectionMode} />}
       {(revealed || mode === 'learn') && <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-5"><button type="button" onClick={() => setShowVi((v) => !v)} className="min-h-10 px-2 text-xs font-semibold text-slate-400 hover:text-slate-700">{showVi ? 'Hide Vietnamese' : 'Show Vietnamese'}</button><button type="button" onClick={() => setCloze((v) => !v)} className={`min-h-10 rounded-lg border px-3 text-xs font-semibold ${cloze ? 'border-blue-300 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-600'}`}>Cloze</button></div>}
       {(revealed || mode === 'learn') && <FollowUpPanel followUps={q.followUps} />}
       {(revealed || mode === 'learn') && <ReviewPanel rated={rated} onRate={rate} onNext={mode === 'quick' ? onNextQuick : undefined} />}
     </div>
   </article>;
+}
+
+function MemoryPlaybackOverlay({ node, sectionLabel }: { node: MemoryNode; sectionLabel: string }) {
+  return <div className="mb-3 rounded-xl border border-blue-200 bg-gradient-to-r from-slate-950 to-blue-950 px-4 py-3 text-white shadow-[0_8px_24px_rgba(30,64,175,0.16)]"><div><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-300">Now speaking · {sectionLabel}</p><div className="mt-1 flex flex-wrap items-center gap-2"><span className="rounded-full bg-blue-400/20 px-2.5 py-1 text-xs font-black tracking-wide text-blue-50">{node.label}</span><span className="text-xs text-slate-300">Keep this idea in mind</span></div></div><div className="mt-2 flex flex-wrap gap-1.5">{node.triggers.slice(0, 4).map((trigger) => <span key={trigger} className="rounded-full bg-white/10 px-2 py-1 text-[11px] font-medium text-blue-100">{trigger}</span>)}</div></div>;
 }
 
 function FollowUpPanel({ followUps }: { followUps?: InterviewQuestion['followUps'] }) {
@@ -191,9 +202,32 @@ function FollowUpPanel({ followUps }: { followUps?: InterviewQuestion['followUps
   return <section className="border-t border-slate-100 pt-5"><div className="flex items-center justify-between gap-3"><Label>Possible follow-ups</Label><span className="text-[11px] text-slate-400">Go deeper only if asked</span></div><div className="mt-3 space-y-2">{followUps.map((followUp) => { const open = openId === followUp.id; return <div key={followUp.id} className="rounded-xl border border-slate-200 bg-slate-50/70"><button type="button" onClick={() => setOpenId(open ? null : followUp.id)} aria-expanded={open} className="flex min-h-12 w-full items-center justify-between gap-3 px-4 text-left text-sm font-semibold text-slate-700"><span>{followUp.question.en}</span><span className="text-xs text-blue-600">{open ? 'Hide' : 'Open'}</span></button>{open && <div className="border-t border-slate-200 px-4 py-3"><p className="text-sm leading-6 text-slate-500">{followUp.question.vi}</p>{followUp.answer?.sections.length ? <div className="mt-3 space-y-3">{followUp.answer.sections.map((section) => <div key={section.id}><p className="text-sm leading-7 text-slate-800">{section.en}</p><p className="mt-1 text-xs leading-5 text-slate-400">{section.vi}</p></div>)}</div> : <p className="mt-3 text-sm italic text-slate-500">Practice this as a short follow-up. Keep the answer focused on one point, one example, and one trade-off.</p>}</div>}</div>; })}</div></section>;
 }
 
+function getPlaybackMemory(q: InterviewQuestion, nodes: MemoryNode[], activeKey: string | null, activeRange: AudioRange | null, currentIdeaId?: string) {
+  if (!activeKey) return null;
+  const prefix = `q${q.id}-`;
+  let sectionId = activeKey.startsWith(`${prefix}idea-`) ? activeKey.slice(`${prefix}idea-`.length) : undefined;
+  if (!sectionId && activeKey.startsWith(prefix)) {
+    const remainder = activeKey.slice(prefix.length);
+    sectionId = q.answer.sections.find((section) => remainder === section.id || remainder.startsWith(`${section.id}-`))?.id;
+  }
+  if (!sectionId && activeKey === `${prefix}full` && activeRange) {
+    let offset = 0;
+    sectionId = q.answer.sections.find((section) => {
+      const start = offset;
+      offset += section.en.length + 1;
+      return activeRange.start >= start && activeRange.start < offset;
+    })?.id;
+  }
+  sectionId ??= currentIdeaId;
+  if (!sectionId) return null;
+  const node = nodes.find((item) => item.answerSectionId === sectionId);
+  if (!node) return null;
+  return { node, sectionLabel: sectionId.replace(/[-_]/g, ' ') };
+}
+
 function MemoryPath({ nodes, activeSectionId, openNode, onOpen, showAllHints = false }: { nodes: MemoryNode[]; activeSectionId?: string; openNode: string | null; onOpen: (id: string | null) => void; showAllHints?: boolean }) { return <div><div className="flex items-center justify-between"><Label>Memory path</Label><span className="text-[11px] text-slate-400">{showAllHints ? 'Compact cues' : 'Try to speak · tap a node if stuck'}</span></div><div className="mt-3 flex flex-col items-start gap-1 sm:flex-row sm:items-start sm:gap-0">{nodes.map((node, index) => { const expanded = showAllHints || openNode === node.id; const active = node.answerSectionId === activeSectionId; return <div key={node.id} className="flex w-full flex-col items-start sm:w-auto sm:flex-row sm:items-start"><div className="w-full sm:w-auto"><button type="button" aria-expanded={expanded} onClick={() => onOpen(openNode === node.id ? null : node.id)} className={`min-h-11 w-full rounded-lg border px-3 text-left text-sm font-bold uppercase tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:w-auto ${active ? 'border-blue-500 bg-blue-100 text-blue-900' : expanded ? 'border-blue-400 bg-blue-50 text-blue-800' : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-300'}`}>{node.label}<span className="ml-2 text-[10px] font-medium normal-case tracking-normal text-blue-500">{expanded ? 'Hide hint' : '+ Hint'}</span></button>{expanded && <div className="mt-2 max-w-xs border-l-2 border-blue-100 pl-3 text-sm leading-7 text-slate-600">{node.triggers.map((trigger) => <div key={trigger}>{trigger}</div>)}</div>}</div>{index < nodes.length - 1 && <span aria-hidden="true" className="px-2 py-1 text-lg font-light text-blue-300 sm:pt-2">→</span>}</div>; })}</div></div>; }
 function LevelControl({ level, onChange }: { level: LearningLevel; onChange: (level: LearningLevel) => void }) { return <div className="border-t border-slate-100 pt-5"><div className="flex items-center justify-between gap-3"><Label>Less help → more recall</Label><span className="text-xs font-semibold text-slate-500">{level} · {levelLabels[level]}</span></div><p className="mt-2 text-xs text-slate-400">Intentionally remove support until you can answer independently.</p><div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-slate-400"><span>More support</span><span className="h-px flex-1 bg-slate-200" /><span>More recall</span></div><div className="mt-2 grid grid-cols-5 gap-1">{([1, 2, 3, 4, 5] as LearningLevel[]).map((value) => <button key={value} type="button" onClick={() => onChange(value)} className={`min-h-10 rounded-lg text-[10px] font-bold uppercase ${value === level ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-700'}`}>{levelLabels[value]}</button>)}</div></div>; }
-function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, onSectionActivate, audio, ideaRefs, selectionMode, onSelectionModeChange }: { q: InterviewQuestion; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; onSectionActivate: (sectionId: string) => void; audio: ReturnType<typeof useInterviewAudio>; ideaRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>; selectionMode: boolean; onSelectionModeChange: (value: boolean) => void }) {
+function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, activeIdeaId, memoryNodes, showMemoryOverlay, onSectionActivate, audio, ideaRefs, selectionMode, onSelectionModeChange }: { q: InterviewQuestion; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; activeIdeaId?: string; memoryNodes: MemoryNode[]; showMemoryOverlay: boolean; onSectionActivate: (sectionId: string) => void; audio: ReturnType<typeof useInterviewAudio>; ideaRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>; selectionMode: boolean; onSelectionModeChange: (value: boolean) => void }) {
   const [selectedRange, setSelectedRange] = useState<{ sectionId: string; range: AudioRange } | null>(null);
   if (!show && shownIdeas === 0) return null;
   const fullSource = q.answer.sections.map((section) => section.en).join(' ');
@@ -210,7 +244,8 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, onSe
   const canPlayListen = Boolean(q.audio?.full || audio.speechAvailable);
   let sectionOffset = 0;
   const selectionKey = `q${q.id}-selection`;
-  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label><div className="flex items-center gap-2">{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}<button type="button" onClick={() => { onSelectionModeChange(!selectionMode); setSelectedRange(null); }} className={`min-h-9 rounded-lg border px-2.5 text-xs font-semibold ${selectionMode ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500'}`}>{selectionMode ? 'Exit select & listen' : 'Select & listen'}</button></div></div><p className="mt-2 text-xs text-slate-400">{selectionMode ? 'Drag over any phrase to hear and highlight it.' : 'Tap a phrase to hear it. Listen → repeat → continue.'}</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
+  const playbackMemory = getPlaybackMemory(q, memoryNodes, audio.activeKey, audio.activeRange, activeIdeaId);
+  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label><div className="flex items-center gap-2">{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}<button type="button" onClick={() => { onSelectionModeChange(!selectionMode); setSelectedRange(null); }} className={`min-h-9 rounded-lg border px-2.5 text-xs font-semibold ${selectionMode ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500'}`}>{selectionMode ? 'Exit select & listen' : 'Select & listen'}</button></div></div>{showMemoryOverlay && playbackMemory && <MemoryPlaybackOverlay node={playbackMemory.node} sectionLabel={playbackMemory.sectionLabel} />}<p className="mt-2 text-xs text-slate-400">{selectionMode ? 'Drag over any phrase to hear and highlight it.' : 'Tap a phrase to hear it. Listen → repeat → continue.'}</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
     const isSelection = audio.activeKey === selectionKey && selectedRange?.sectionId === paragraph.id;
