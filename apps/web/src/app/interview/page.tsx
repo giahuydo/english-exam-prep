@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { buildSpeechMapping, useInterviewAudio, type AudioRange, type AudioSegment, type AudioSpeed, type SpeechMapping } from './audio';
 import {
   finalMindset,
@@ -97,6 +97,7 @@ export default function InterviewPage() {
           <button type="button" onClick={() => setShowStrategy((v) => !v)} className="text-sm font-semibold text-slate-600 hover:text-blue-700">{showStrategy ? '− Hide' : '+ Show'} Context A–J · 10-second selection · interview mindset</button>
           {showStrategy && <StrategySection />}
         </section>
+        <PageJumpButtons />
       </main>
     </div>
   );
@@ -116,6 +117,11 @@ function ConnectionsView({ selected, setSelected, onQuestion }: { selected: Cont
 function Path({ steps, compact = false }: { steps: string[]; compact?: boolean }) { return <div className={`mt-3 flex flex-col items-start ${compact ? 'gap-0.5' : 'gap-1.5'}`}>{steps.map((step, index) => <div key={`${step}-${index}`} className="flex items-center gap-2"><span className={`${compact ? 'py-0.5 text-[11px]' : 'px-3 py-2 text-sm'} font-semibold text-slate-700`}>{step}</span>{index < steps.length - 1 && <span className="text-blue-300">↓</span>}</div>)}</div>; }
 function TriggerDrill() { const [index, setIndex] = useState(0); const [show, setShow] = useState(false); const item = triggers[index]; return <section className="rounded-xl border border-slate-200 bg-white p-4"><p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">10-second reaction drill</p><p className="mt-2 text-sm text-slate-500">Interviewer says:</p><p className="mt-1 text-lg font-bold text-slate-950">“{item.phrases}”</p><button type="button" onClick={() => setShow(true)} className="mt-3 min-h-10 rounded-lg bg-slate-900 px-3 text-xs font-bold text-white">Reveal context</button>{show && <p className="mt-3 text-sm text-slate-700">Think context <b className="text-blue-700">{getContextsForTrigger(item.id).map((context) => context.id).join(' + ')}</b></p>}<button type="button" onClick={() => { setIndex((value) => (value + 1) % triggers.length); setShow(false); }} className="ml-3 min-h-10 px-2 text-xs font-semibold text-slate-500">Next trigger</button></section>; }
 
+function PageJumpButtons() {
+  const jump = (top: boolean) => window.scrollTo({ top: top ? 0 : document.documentElement.scrollHeight, behavior: 'smooth' });
+  return <div className="fixed bottom-4 right-3 z-20 flex flex-col gap-2 sm:bottom-6 sm:right-6"><button type="button" onClick={() => jump(true)} aria-label="Scroll to top" className="min-h-10 rounded-full border border-slate-200 bg-white/95 px-3 text-xs font-bold text-slate-600 shadow-lg backdrop-blur hover:border-blue-300 hover:text-blue-700">↑ Top</button><button type="button" onClick={() => jump(false)} aria-label="Scroll to bottom" className="min-h-10 rounded-full border border-slate-200 bg-white/95 px-3 text-xs font-bold text-slate-600 shadow-lg backdrop-blur hover:border-blue-300 hover:text-blue-700">↓ End</button></div>;
+}
+
 function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQuick }: { q: InterviewQuestion; mode: Mode; progress: ReturnType<typeof useProgress>; quickPosition?: number; quickTotal?: number; onNextQuick: () => void }) {
   const audio = useInterviewAudio();
   const [revealed, setRevealed] = useState(mode === 'learn');
@@ -130,6 +136,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const [showMemoryOverlay, setShowMemoryOverlay] = useState(false);
   const [followVoice, setFollowVoice] = useState(true);
   const ideaRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const answerRef = useRef<HTMLDivElement | null>(null);
   const userScrolledRef = useRef(false);
   const level = progress.levels[q.id] ?? 1;
   const contextsForQuestion = useMemo(() => getContextsForQuestion(q.id), [q.id]);
@@ -166,6 +173,11 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
     else setShowMemoryOverlay(true);
   }, [audio.activeKey, audio.activeRange?.start, audio.state, playbackMemory?.node.id]);
   useEffect(() => {
+    if (!followVoice || audio.state !== 'playing' || !audio.activeRange) return;
+    const activeHighlight = answerRef.current?.querySelector<HTMLElement>('[data-karaoke-active="true"]');
+    activeHighlight?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+  }, [audio.activeKey, audio.activeRange, audio.state, followVoice]);
+  useEffect(() => {
     if (!followVoice || audio.state === 'idle') return;
     const pauseFollowing = () => { userScrolledRef.current = true; setFollowVoice(false); };
     window.addEventListener('wheel', pauseFollowing, { passive: true });
@@ -193,7 +205,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
       {mode !== 'learn' && <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-5 sm:flex sm:flex-wrap sm:items-center"><button type="button" onClick={previousIdea} disabled={ideaIndex <= 0} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-slate-600 disabled:opacity-40">Previous idea</button><button type="button" onClick={nextIdea} disabled={ideaIndex >= q.answer.sections.length} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white disabled:opacity-40">Next idea</button><button type="button" onClick={() => setHint(true)} disabled={hint || ideaIndex >= q.answer.sections.length} className="min-h-10 rounded-lg px-2 text-xs font-semibold text-slate-500 hover:text-slate-800 disabled:opacity-40">Show hint</button><button type="button" onClick={reveal} disabled={revealed} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-slate-600 disabled:opacity-40">Reveal answer</button><button type="button" onClick={() => { setIdeaIndex(0); setHint(false); setRevealed(false); setRated(null); }} className="min-h-10 px-2 text-xs font-semibold text-slate-400 hover:text-slate-700">Reset</button></div>}
       {hint && !revealed && starters[ideaIndex] && <p className="rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-800">Try starting with <b>{starters[ideaIndex]}</b></p>}
 
-      {mode === 'quick' && !revealed && ideaIndex === 0 ? null : <AnswerContent q={q} show={revealed || mode === 'learn'} showVi={showVi} cloze={cloze} shownIdeas={shownIdeas} activeSection={openNode ? memoryNodes.find((node) => node.id === openNode)?.answerSectionId : undefined} activeIdeaId={activeIdea?.id} memoryNodes={memoryNodes} showMemoryOverlay={showMemoryOverlay} followVoice={followVoice} onResumeFollow={() => { userScrolledRef.current = false; setFollowVoice(true); if (activeIdea?.id) ideaRefs.current[activeIdea.id]?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }} onSectionActivate={(sectionId) => setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null)} audio={audio} ideaRefs={ideaRefs} selectionMode={selectionMode} onSelectionModeChange={setSelectionMode} />}
+      {mode === 'quick' && !revealed && ideaIndex === 0 ? null : <AnswerContent q={q} answerRef={answerRef} show={revealed || mode === 'learn'} showVi={showVi} cloze={cloze} shownIdeas={shownIdeas} activeSection={openNode ? memoryNodes.find((node) => node.id === openNode)?.answerSectionId : undefined} activeIdeaId={activeIdea?.id} memoryNodes={memoryNodes} showMemoryOverlay={showMemoryOverlay} followVoice={followVoice} onResumeFollow={() => { userScrolledRef.current = false; setFollowVoice(true); if (activeIdea?.id) ideaRefs.current[activeIdea.id]?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }} onSectionActivate={(sectionId) => setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null)} audio={audio} ideaRefs={ideaRefs} selectionMode={selectionMode} onSelectionModeChange={setSelectionMode} />}
       {(revealed || mode === 'learn') && <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-5"><button type="button" onClick={() => setShowVi((v) => !v)} className="min-h-10 px-2 text-xs font-semibold text-slate-400 hover:text-slate-700">{showVi ? 'Hide Vietnamese' : 'Show Vietnamese'}</button><button type="button" onClick={() => setCloze((v) => !v)} className={`min-h-10 rounded-lg border px-3 text-xs font-semibold ${cloze ? 'border-blue-300 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-600'}`}>Cloze</button></div>}
       {(revealed || mode === 'learn') && <FollowUpPanel followUps={q.followUps} />}
       {(revealed || mode === 'learn') && <ReviewPanel rated={rated} onRate={rate} onNext={mode === 'quick' ? onNextQuick : undefined} />}
@@ -247,7 +259,7 @@ function getSpeakingCue(text: string) {
 
 function MemoryPath({ nodes, activeSectionId, openNode, onOpen, showAllHints = false }: { nodes: MemoryNode[]; activeSectionId?: string; openNode: string | null; onOpen: (id: string | null) => void; showAllHints?: boolean }) { return <div><div className="flex items-center justify-between"><Label>Memory path</Label><span className="text-[11px] text-slate-400">{showAllHints ? 'Compact cues' : 'Try to speak · tap a node if stuck'}</span></div><div className="mt-3 flex flex-col items-start gap-1 sm:flex-row sm:items-start sm:gap-0">{nodes.map((node, index) => { const expanded = showAllHints || openNode === node.id; const active = node.answerSectionId === activeSectionId; return <div key={node.id} className="flex w-full flex-col items-start sm:w-auto sm:flex-row sm:items-start"><div className="w-full sm:w-auto"><button type="button" aria-expanded={expanded} onClick={() => onOpen(openNode === node.id ? null : node.id)} className={`min-h-11 w-full rounded-lg border px-3 text-left text-sm font-bold uppercase tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:w-auto ${active ? 'border-blue-500 bg-blue-100 text-blue-900' : expanded ? 'border-blue-400 bg-blue-50 text-blue-800' : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-300'}`}>{node.label}<span className="ml-2 text-[10px] font-medium normal-case tracking-normal text-blue-500">{expanded ? 'Hide hint' : '+ Hint'}</span></button>{expanded && <div className="mt-2 max-w-xs border-l-2 border-blue-100 pl-3 text-sm leading-7 text-slate-600">{node.triggers.map((trigger) => <div key={trigger}>{trigger}</div>)}</div>}</div>{index < nodes.length - 1 && <span aria-hidden="true" className="px-2 py-1 text-lg font-light text-blue-300 sm:pt-2">→</span>}</div>; })}</div></div>; }
 function LevelControl({ level, onChange }: { level: LearningLevel; onChange: (level: LearningLevel) => void }) { return <div className="border-t border-slate-100 pt-5"><div className="flex items-center justify-between gap-3"><Label>Less help → more recall</Label><span className="text-xs font-semibold text-slate-500">{level} · {levelLabels[level]}</span></div><p className="mt-2 text-xs text-slate-400">Intentionally remove support until you can answer independently.</p><div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-slate-400"><span>More support</span><span className="h-px flex-1 bg-slate-200" /><span>More recall</span></div><div className="mt-2 grid grid-cols-5 gap-1">{([1, 2, 3, 4, 5] as LearningLevel[]).map((value) => <button key={value} type="button" onClick={() => onChange(value)} className={`min-h-10 rounded-lg text-[10px] font-bold uppercase ${value === level ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-700'}`}>{levelLabels[value]}</button>)}</div></div>; }
-function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, activeIdeaId, memoryNodes, showMemoryOverlay, followVoice, onResumeFollow, onSectionActivate, audio, ideaRefs, selectionMode, onSelectionModeChange }: { q: InterviewQuestion; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; activeIdeaId?: string; memoryNodes: MemoryNode[]; showMemoryOverlay: boolean; followVoice: boolean; onResumeFollow: () => void; onSectionActivate: (sectionId: string) => void; audio: ReturnType<typeof useInterviewAudio>; ideaRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>; selectionMode: boolean; onSelectionModeChange: (value: boolean) => void }) {
+function AnswerContent({ q, answerRef, show, showVi, cloze, shownIdeas, activeSection, activeIdeaId, memoryNodes, showMemoryOverlay, followVoice, onResumeFollow, onSectionActivate, audio, ideaRefs, selectionMode, onSelectionModeChange }: { q: InterviewQuestion; answerRef: React.MutableRefObject<HTMLDivElement | null>; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; activeIdeaId?: string; memoryNodes: MemoryNode[]; showMemoryOverlay: boolean; followVoice: boolean; onResumeFollow: () => void; onSectionActivate: (sectionId: string) => void; audio: ReturnType<typeof useInterviewAudio>; ideaRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>; selectionMode: boolean; onSelectionModeChange: (value: boolean) => void }) {
   const [selectedRange, setSelectedRange] = useState<{ sectionId: string; range: AudioRange } | null>(null);
   if (!show && shownIdeas === 0) return null;
   const fullSource = q.answer.sections.map((section) => section.en).join(' ');
@@ -265,7 +277,7 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, acti
   let sectionOffset = 0;
   const selectionKey = `q${q.id}-selection`;
   const playbackMemory = getPlaybackMemory(q, memoryNodes, audio.activeKey, audio.activeRange, activeIdeaId);
-  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label><div className="flex items-center gap-2">{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}<button type="button" onClick={() => { onSelectionModeChange(!selectionMode); setSelectedRange(null); }} className={`min-h-9 rounded-lg border px-2.5 text-xs font-semibold ${selectionMode ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500'}`}>{selectionMode ? 'Exit select & listen' : 'Select & listen'}</button></div></div><div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xs text-slate-400">{selectionMode ? 'Drag over any phrase to hear and highlight it.' : 'Tap a phrase to hear it. Listen → repeat → continue.'}</p>{audio.state !== 'idle' && !followVoice && <button type="button" onClick={onResumeFollow} className="rounded-md bg-blue-50 px-2 py-1 text-[11px] font-semibold text-blue-700 hover:bg-blue-100">Resume follow voice</button>}</div><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
+  return <div ref={answerRef}><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label><div className="flex items-center gap-2">{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}<button type="button" onClick={() => { onSelectionModeChange(!selectionMode); setSelectedRange(null); }} className={`min-h-9 rounded-lg border px-2.5 text-xs font-semibold ${selectionMode ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500'}`}>{selectionMode ? 'Exit select & listen' : 'Select & listen'}</button></div></div><div className="mt-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xs text-slate-400">{selectionMode ? 'Drag over any phrase to hear and highlight it.' : 'Tap a phrase to hear it. Listen → repeat → continue.'}</p>{audio.state !== 'idle' && !followVoice && <button type="button" onClick={onResumeFollow} className="rounded-md bg-blue-50 px-2 py-1 text-[11px] font-semibold text-blue-700 hover:bg-blue-100">Resume follow voice</button>}</div><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
     const isSelection = audio.activeKey === selectionKey && selectedRange?.sectionId === paragraph.id;
@@ -287,7 +299,7 @@ function AudioControls({ audio, request, label }: { audio: ReturnType<typeof use
   </div>;
 }
 
-function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze, active, onActivate, audio, trackedRange, rangeOffset, selectionMode, onSelect }: { paragraph: { id: string; en: string; vi: string }; questionId: number; sectionOffset: number; showVi: boolean; cloze: boolean; active: boolean; onActivate: () => void; audio: ReturnType<typeof useInterviewAudio>; trackedRange: AudioRange | null; rangeOffset: number; selectionMode: boolean; onSelect: (range: AudioRange) => void }) {
+const AnswerSectionView = memo(function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze, active, onActivate, audio, trackedRange, rangeOffset, selectionMode, onSelect }: { paragraph: { id: string; en: string; vi: string }; questionId: number; sectionOffset: number; showVi: boolean; cloze: boolean; active: boolean; onActivate: () => void; audio: ReturnType<typeof useInterviewAudio>; trackedRange: AudioRange | null; rangeOffset: number; selectionMode: boolean; onSelect: (range: AudioRange) => void }) {
   const parts = paragraph.en.split('/');
   const sectionKey = `q${questionId}-${paragraph.id}`;
   const sectionPlaying = audio.activeKey === sectionKey;
@@ -313,7 +325,7 @@ function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze
     selection.removeAllRanges();
   };
   return (
-    <div className={`border-l-2 pl-4 transition-colors ${active || sectionPlaying ? 'border-blue-400 bg-blue-50/40' : 'border-blue-100'}`}>
+    <div style={{ contentVisibility: 'auto', containIntrinsicSize: '0 180px' }} className={`border-l-2 pl-4 transition-colors ${active || sectionPlaying ? 'border-blue-400 bg-blue-50/40' : 'border-blue-100'}`}>
       <div className="flex items-start justify-between gap-2">
         <p onMouseUp={handleSelection} className={`min-w-0 flex-1 text-[15px] leading-8 text-slate-800 sm:text-base ${selectionMode ? 'cursor-text select-text' : ''}`}>
           {cloze ? <ClozeText text={paragraph.en} /> : parts.map((part, index) => {
@@ -332,7 +344,20 @@ function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze
       {showVi && <p className={`mt-1 rounded-md px-2 py-1 text-sm leading-6 transition-colors ${trackedRange ? 'bg-blue-50/80 text-slate-600 ring-1 ring-blue-100' : 'text-slate-400'}`}>{stripFormatting(paragraph.vi)}</p>}
     </div>
   );
-}
+}, (previous, next) => previous.paragraph === next.paragraph
+  && previous.questionId === next.questionId
+  && previous.sectionOffset === next.sectionOffset
+  && previous.showVi === next.showVi
+  && previous.cloze === next.cloze
+  && previous.active === next.active
+  && previous.trackedRange?.start === next.trackedRange?.start
+  && previous.trackedRange?.end === next.trackedRange?.end
+  && previous.rangeOffset === next.rangeOffset
+  && previous.selectionMode === next.selectionMode
+  && previous.audio.activeKey === next.audio.activeKey
+  && previous.audio.state === next.audio.state
+  && previous.audio.activeRange?.start === next.audio.activeRange?.start
+  && previous.audio.activeRange?.end === next.audio.activeRange?.end);
 
 function renderTrackedText(text: string, range: AudioRange | null = null) {
   const highlighted = Boolean(range && range.start < text.length && range.end > 0);
@@ -341,7 +366,7 @@ function renderTrackedText(text: string, range: AudioRange | null = null) {
     if (token.kind === 'italic') return <em key={`${tokenIndex}`} className={`font-medium not-italic ${highlighted ? 'text-cyan-200 underline decoration-cyan-300/60 decoration-2 underline-offset-4' : 'text-blue-700'}`}>{token.value}</em>;
     return <span key={`${tokenIndex}`}>{token.value}</span>;
   });
-  return highlighted ? <span className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span> : content;
+  return highlighted ? <span data-karaoke-active="true" className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span> : content;
 }
 
 function ClozeText({ text }: { text: string }) { const [visible, setVisible] = useState(false); const item = clozeText(text); if (!item) return <RichText text={text} />; return <><RichText text={item.before} /><button type="button" onClick={() => setVisible(true)} className="mx-1 min-h-8 rounded border border-dashed border-blue-300 px-2 font-semibold text-blue-700">{visible ? item.hidden : '______'}</button><RichText text={item.after} /></>; }

@@ -19,22 +19,22 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / my main background is **backend development**. / I have worked with **Node.js, NestJS, PostgreSQL, REST APIs, background workers, message queues**, / and third-party integrations.",
+        en: "*For me,* / my main background is **backend development**. / I have worked with **Node.js, NestJS, PostgreSQL**, **REST APIs**, **background workers**, **message queues**, / and third-party integrations.",
         vi: "Nền tảng chính của mình là **backend**. Mình đã làm với Node.js, NestJS, PostgreSQL, REST API, background worker, message queue và tích hợp bên thứ ba.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / in production, an AI feature is not only about calling a model. / The backend still needs to be **reliable, fast, observable**, / and able to recover when something fails.",
+        en: "*The main reason is that* / in production, an AI feature is not only about calling a model. / The backend still needs to be **reliable**, **fast**, **observable**, / and able to recover when something fails.",
         vi: "Lý do là trong production, một tính năng AI không chỉ là gọi model. Backend vẫn phải đáng tin cậy, nhanh, quan sát được và có khả năng phục hồi khi lỗi.",
       },
       {
         id: 'example',
-        en: "*For example,* / in my recent project, I have worked more with **OCR, document processing, embeddings, hybrid search, and LLM integration**. / We process documents, create structured content and embeddings, / and use them later for semantic and hybrid retrieval.",
+        en: "*For example,* / in my recent project, I have worked more with **OCR**, **document processing**, **embeddings**, **hybrid search**, and **LLM integration**. / We process documents, create structured content and embeddings, / and use them later for semantic and hybrid retrieval.",
         vi: "Ví dụ, ở dự án gần nhất mình làm nhiều với OCR, xử lý tài liệu, embeddings, hybrid search và tích hợp LLM. Nhóm xử lý tài liệu, tạo nội dung có cấu trúc và embedding rồi dùng cho tìm kiếm ngữ nghĩa/hybrid.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / I have experience with both the **AI part** / and the **backend workflow around it**, / including timeout, retry, fallback, data access, latency, and cost.",
+        en: "*Because of that,* / I have experience with both the **AI part** / and the **backend workflow around it**, / including **timeout**, **retry**, **fallback**, **data access**, **latency**, and **cost**.",
         vi: "Vì vậy mình có kinh nghiệm cả phần AI lẫn workflow backend xung quanh: timeout, retry, fallback, truy cập dữ liệu, latency và chi phí.",
       },
       {
@@ -60,7 +60,7 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I prefer not to rely on only one type of search. / In our system, we combine **lexical search** and **semantic search**.",
+        en: "*For me,* / I prefer not to rely on only one type of search. / In our system, we combine **lexical search** / and **semantic search**.",
         vi: "Mình không thích chỉ dựa vào một loại tìm kiếm. Hệ thống của tụi mình kết hợp lexical search và semantic search.",
       },
       {
@@ -75,7 +75,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'result',
-        en: "*Because of that,* / we combine the two rankings with **Reciprocal Rank Fusion, or RRF**, / so a result that performs well across both searches can move higher in the final ranking.",
+        en: "*Because of that,* / we combine the two rankings with **Reciprocal Rank Fusion**, / or **RRF**, / so a result that performs well across both searches can move higher in the final ranking.",
         vi: "Vì vậy tụi mình gộp hai bảng xếp hạng bằng Reciprocal Rank Fusion (RRF), kết quả nào tốt ở cả hai sẽ được đẩy lên cao hơn.",
       },
       {
@@ -85,7 +85,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'extra',
-        en: "*So overall,* / the goal is to make retrieval more **balanced, reliable, and safe** / instead of depending on vector search alone.",
+        en: "*So overall,* / the goal is to make retrieval more **balanced**, **reliable**, and **safe** / instead of depending on vector search alone.",
         vi: "Tóm lại, mục tiêu là retrieval cân bằng, đáng tin cậy và an toàn hơn — thay vì chỉ dựa vào vector.",
       },
     ] },
@@ -103,27 +103,27 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I do not just blame the **LLM** when something goes wrong. / I check the **whole workflow** to find the real root cause.",
+        en: "*For me,* / I do not just blame the **LLM** / when something goes wrong. / I check the **whole workflow** to find the real root cause.",
         vi: "Mình không đổ lỗi ngay cho LLM khi có sự cố. Mình soi toàn bộ workflow để tìm nguyên nhân gốc.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / a bad result can come from **bad input, wrong retrieval, backend logic, prompt construction, the AI provider**, / or the model itself.",
+        en: "*The main reason is that* / a bad result can come from **bad input**, **wrong retrieval**, **backend logic**, **prompt construction**, **the AI provider**, / or **the model itself**.",
         vi: "Vì kết quả xấu có thể do input sai, retrieval sai, logic backend, cách dựng prompt, provider AI hoặc chính model.",
       },
       {
         id: 'example',
-        en: "*For example,* / for **temporary failures** like network errors, timeouts, or some 5xx errors, / I can use a bounded **retry**. / If one model is unavailable, / I may use a **fallback model**. / But for invalid credentials or malformed requests, / I prefer to **fail fast**.",
+        en: "*For example,* / for **temporary failures** / like **network errors**, **timeouts**, / or some **5xx errors**, / I can use a bounded **retry**. / If one model is unavailable, / I may use a **fallback model**. / But for invalid credentials or malformed requests, / I prefer to **fail fast**.",
         vi: "Ví dụ, với lỗi tạm thời (network, timeout, một số 5xx) mình dùng retry có giới hạn. Nếu một model không khả dụng thì fallback sang model khác. Nhưng credential sai hoặc request hỏng thì fail fast luôn.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / I first separate **temporary errors from permanent errors** / before deciding whether to retry, fail, or fall back.",
+        en: "*Because of that,* / I first separate **temporary errors** / from **permanent errors** / before deciding whether to retry, fail, or fall back.",
         vi: "Vì vậy mình luôn phân loại lỗi tạm thời vs vĩnh viễn trước khi quyết định retry, fail hay fallback.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I normally track the **request or job ID, model used, latency, retry count, error type, token usage**, / and which workflow step failed.",
+        en: "*At the same time,* / I normally track the **request or job ID**, **model used**, **latency**, **retry count**, **error type**, **token usage**, / and which workflow step failed.",
         vi: "Đồng thời mình luôn log request/job ID, model, latency, số lần retry, loại lỗi, token và bước nào của workflow đã fail.",
       },
       {
@@ -146,27 +146,27 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*One example was* / a document **OCR workflow** that processed large PDF files in background workers. / With bigger documents, / the **memory usage** became very high / and the worker sometimes crashed.",
+        en: "*One example was* / a document **OCR workflow** that processed **large PDF files** / in background workers. / With bigger documents, / the **memory usage** became very high / and the worker sometimes crashed.",
         vi: "Ví dụ là workflow OCR xử lý PDF lớn trong background worker. Với tài liệu lớn, memory tăng cao và worker đôi khi crash.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / reducing the batch size helped for a while, / but it did not explain the real bottleneck. / The heavy **OCR inference was still running on CPU inside the worker**.",
+        en: "*The main reason is that* / reducing the batch size helped for a while, / but it did not explain the real bottleneck. / The heavy **OCR inference** / was still running on **CPU** / inside the worker.",
         vi: "Giảm batch size giúp một thời gian nhưng không giải thích được bottleneck thực sự. Vì OCR inference nặng vẫn chạy CPU ngay trong worker.",
       },
       {
         id: 'example',
-        en: "*For example,* / I traced the **processing flow** step by step, / added targeted logging, / checked memory before and after expensive OCR stages, / and compared different **batch sizes**.",
+        en: "*For example,* / I traced the **processing flow** step by step, / added **targeted logging**, / checked memory before and after expensive **OCR stages**, / and compared different **batch sizes**.",
         vi: "Mình trace luồng xử lý từng bước, log có mục tiêu, đo memory trước/sau các bước OCR nặng, so sánh nhiều batch size khác nhau.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / I confirmed that the main bottleneck was the **OCR CPU inference**. / I first made the CPU path safer with **smaller batches, checkpoints, and recovery logic**.",
+        en: "*Because of that,* / I confirmed that the main bottleneck was the **OCR CPU inference**. / I first made the CPU path safer with **smaller batches**, **checkpoints**, / and **recovery logic**.",
         vi: "Nhờ đó xác nhận bottleneck chính là OCR CPU inference. Mình làm cho CPU path an toàn hơn trước bằng batch nhỏ hơn, checkpoint và recovery logic.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I worked with **DevOps** to move the heavy OCR inference / to a separate **GPU-backed service**, / while the worker focused more on orchestration.",
+        en: "*At the same time,* / I worked with **DevOps** / to move the heavy **OCR inference** / to a separate **GPU-backed service**, / while the worker focused more on orchestration.",
         vi: "Đồng thời mình làm việc với DevOps để tách OCR nặng ra một service chạy GPU riêng, worker chỉ tập trung điều phối.",
       },
       {
@@ -194,17 +194,17 @@ const rawInterviewQuestions = [
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / clear step boundaries make the system easier to **debug, retry, monitor, and recover** when something fails.",
+        en: "*The main reason is that* / clear step boundaries make the system easier to **debug**, **retry**, **monitor**, and **recover** when something fails.",
         vi: "Vì ranh giới bước rõ giúp hệ thống dễ debug, retry, monitor và phục hồi khi có lỗi.",
       },
       {
         id: 'example',
-        en: "*For example,* / the flow can be: **understand intent -> retrieve context -> decide whether a tool is needed -> call the tool -> validate the result -> generate the final response**.",
+        en: "*For example,* / the flow can be: **understand intent** -> **retrieve context** -> **decide whether a tool is needed** -> **call the tool** -> **validate the result** -> **generate the final response**.",
         vi: "Ví dụ luồng có thể là: hiểu ý định → lấy ngữ cảnh → quyết định có cần tool → gọi tool → kiểm tra kết quả → tạo phản hồi cuối.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / the **backend** should control tool execution. / It defines the tool contract, validates arguments, checks permissions, / executes the action, / and returns a structured result.",
+        en: "*Because of that,* / the **backend** should control **tool execution**. / It defines the **tool contract**, validates **arguments**, checks **permissions**, / executes the action, / and returns a **structured result**.",
         vi: "Vì vậy backend nên kiểm soát việc thực thi tool: định nghĩa contract, validate tham số, check permission, thực thi và trả kết quả có cấu trúc.",
       },
       {
@@ -273,7 +273,7 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I have not spent several years building fully **autonomous AI agents**. / My recent experience is more focused on **AI-powered backend workflows, retrieval, LLM integration**, / and production reliability.",
+        en: "*For me,* / I have not spent several years building fully **autonomous AI agents**. / My recent experience is more focused on **AI-powered backend workflows**, **retrieval**, **LLM integration**, / and **production reliability**.",
         vi: "Mình chưa có nhiều năm xây agent hoàn toàn tự động. Kinh nghiệm gần đây tập trung vào workflow backend có AI, retrieval, tích hợp LLM và độ tin cậy production.",
       },
       {
@@ -283,12 +283,12 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*For example,* / I have worked with **retrieval, structured LLM input and output, workflow state, tool contracts, retries, logging**, / and failure handling.",
+        en: "*For example,* / I have worked with **retrieval**, **structured LLM input and output**, **workflow state**, **tool contracts**, **retries**, **logging**, / and **failure handling**.",
         vi: "Ví dụ, mình đã làm với retrieval, input/output có cấu trúc cho LLM, state workflow, tool contract, retry, log và xử lý lỗi.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / I think of an agent as a **controlled workflow**: understand the intent, get the right context, decide whether a tool is needed, / execute it through backend controls, / validate the result, / and then generate the response.",
+        en: "*Because of that,* / I think of an agent as a **controlled workflow**: **understand the intent**, **get the right context**, **decide whether a tool is needed**, / **execute it through backend controls**, / **validate the result**, / and then **generate the response**.",
         vi: "Vì vậy mình xem agent như một workflow có kiểm soát: hiểu ý định → lấy ngữ cảnh đúng → quyết định có cần tool → chạy qua backend có kiểm soát → validate → tạo phản hồi.",
       },
       {
@@ -325,17 +325,17 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*For example,* / in our document AI work, / we used **offline benchmarks** to compare OCR and document-processing approaches / using quality and performance signals. / The benchmark helped us find problems such as **PHI leakage** / and improve the pipeline.",
+        en: "*For example,* / in our document AI work, / we used **offline benchmarks** to compare **OCR** / and **document-processing approaches** / using **quality** and **performance signals**. / The benchmark helped us find problems such as **PHI leakage** / and improve the pipeline.",
         vi: "**Ví dụ,** / trong phần document AI, / chúng tôi dùng **offline benchmark** để so sánh các hướng OCR và document-processing khác nhau / dựa trên các tín hiệu về chất lượng và hiệu năng. / Benchmark giúp phát hiện các vấn đề như **rò rỉ PHI** / và từ đó cải thiện pipeline.",
       },
       {
         id: 'result',
-        en: "*At the same time,* / my direct work was more on **retrieval and grounding quality**. / I worked on hybrid retrieval using **BM25, vector search, and RRF**, / with regression tests for **ranking, fallback behavior, and permission isolation**.",
+        en: "*At the same time,* / my direct work was more on **retrieval and grounding quality**. / I worked on hybrid retrieval using **BM25**, **vector search**, / and **RRF**, / with regression tests for **ranking**, **fallback behavior**, / and **permission isolation**.",
         vi: "**Đồng thời,** / phần tôi trực tiếp làm nhiều hơn là **chất lượng retrieval và grounding**. / Tôi làm hybrid retrieval bằng **BM25, vector search và RRF**, / cùng với các regression test cho **ranking, fallback behavior và permission isolation**.",
       },
       {
         id: 'close',
-        en: "*I also worked on* **citation and provenance correctness**, / including the document, page, text span, and bounding-box information, / so the answer can be traced back to the real source.",
+        en: "*I also worked on* **citation and provenance correctness**, / including the **document**, **page**, **text span**, / and **bounding-box information**, / so the answer can be traced back to the real source.",
         vi: "**Tôi cũng làm về** **độ chính xác của citation và provenance**, / bao gồm document, page, text span và bounding-box information, / để câu trả lời có thể truy ngược về đúng nguồn thật.",
       },
       {
@@ -345,7 +345,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'final',
-        en: "*So overall,* / I would say I have practical experience with **AI evaluation and regression**, / especially around **retrieval, grounding, and document AI**, / and I am also familiar with formal **LLM and agent eval systems**.",
+        en: "*So overall,* / I would say I have practical experience with **AI evaluation and regression**, / especially around **retrieval**, **grounding**, and **document AI**, / and I am also familiar with formal **LLM** / and **agent eval systems**.",
         vi: "**Tóm lại,** / tôi có kinh nghiệm thực tế với **AI evaluation và regression**, / đặc biệt ở **retrieval, grounding và document AI**, / và tôi cũng quen với các hệ thống **LLM/agent eval** chính thức.",
       },
     ] },
@@ -373,7 +373,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / in production, an AI feature is not only the model. / It still needs **data pipelines, retrieval, APIs, queues, state management, retries, monitoring, security**, / and infrastructure.",
+        en: "*The main reason is that* / in production, an AI feature is not only the model. / It still needs **data pipelines**, **retrieval**, **APIs**, **queues**, **state management**, **retries**, **monitoring**, **security**, / and **infrastructure**.",
         vi: "Nhưng trong production, tính năng AI không chỉ là model. Nó cần pipeline dữ liệu, retrieval, API, queue, state, retry, monitoring, bảo mật và hạ tầng.",
       },
       {
@@ -388,7 +388,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*At the same time,* / recently I have been working more with **OCR, embeddings, hybrid retrieval, LLM integration, model reliability**, / and **GPU inference**.",
+        en: "*At the same time,* / recently I have been working more with **OCR**, **embeddings**, **hybrid retrieval**, **LLM integration**, **model reliability**, / and **GPU inference**.",
         vi: "Gần đây mình đã làm nhiều hơn với OCR, embeddings, hybrid retrieval, tích hợp LLM, độ tin cậy model và GPU inference.",
       },
       {
@@ -415,7 +415,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'reason',
-        en: "*For example,* / in Clincove, / the model can use read-only tools like **search and document read**.",
+        en: "*For example,* / in **Clincove**, / the model can use read-only tools like **search** / and **document read**.",
         vi: "**Ví dụ,** / trong Clincove, / model có thể dùng các tool read-only như **search và document read**.",
       },
       {
@@ -425,12 +425,12 @@ const rawInterviewQuestions = [
       },
       {
         id: 'result',
-        en: "*Another important point is that* / we design the tool interface in a **familiar way for the LLM**, / like a **file system with search and read**, / because this usually helps the model perform better.",
+        en: "*Another important point is that* / we design the **tool interface** / in a familiar way for the LLM, / like a **file system** / with **search and read**, / because this usually helps the model perform better.",
         vi: "**Một điểm quan trọng khác là** / chúng tôi thiết kế tool interface theo cách **quen thuộc với LLM**, / giống như **file system có search và read**, / vì cách này thường giúp model hoạt động tốt hơn.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I also worked on **tool safety and tracking**, / such as **audit logs, tracing, citations**, / and final-response validation.",
+        en: "*At the same time,* / I also worked on **tool safety and tracking**, / such as **audit logs**, **tracing**, **citations**, / and **final-response validation**.",
         vi: "**Đồng thời,** / tôi cũng làm về **tool safety và tracking**, / như **audit logs, tracing, citations**, / và kiểm tra final response.",
       },
       {
