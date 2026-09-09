@@ -14,7 +14,7 @@ import {
   type InterviewQuestion,
 } from './data';
 import { RichText } from './rich-text';
-import { clozeText, parseInlineRanges, questionStarters, stripFormatting } from './utils';
+import { clozeText, extractKeywords, parseInlineRanges, questionStarters, stripFormatting } from './utils';
 import { getContextsForQuestion } from './connections';
 import { useProgress, type LearningLevel, type ReviewDifficulty } from './storage';
 import { contexts, phraseClusters, heroStories, triggers, getQuestionsForContext, getQuestionsForCluster, getQuestionsForStory, getContextsForTrigger, getMemoryNodes, questionLabel, type Context, type MemoryNode } from './connections';
@@ -181,7 +181,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
       {mode === 'learn' && <p className="mt-4 text-xs font-semibold text-slate-400">Learn · Understand the structure, then the speech</p>}
       {mode === 'quick' && <p className="mt-4 text-xs font-semibold text-slate-400">Quick practice · Think first</p>}
       <h2 className="mt-2 max-w-3xl text-[1.35rem] font-bold leading-[1.35] tracking-tight text-slate-950 sm:text-[2rem]">{q.question.en}</h2>
-      {(mode === 'learn' || revealed || showVi) && <p className="mt-3 text-sm leading-6 text-slate-500">{q.question.vi}</p>}
+      {(mode === 'learn' || revealed || showVi) && <p className="mt-3 text-sm leading-6 text-slate-500">{stripFormatting(q.question.vi)}</p>}
       <div className="mt-5 flex flex-wrap items-center gap-2"><button type="button" onClick={() => progress.togglePracticed(q.id)} className={`min-h-9 rounded-lg px-2 text-xs font-semibold ${progress.practiced.has(q.id) ? 'bg-emerald-50 text-emerald-700' : 'text-slate-400 hover:text-slate-700'}`}>{progress.practiced.has(q.id) ? '✓ Practiced' : 'Mark practiced'}</button><button type="button" onClick={() => progress.toggleDifficult(q.id)} className={`min-h-9 rounded-lg px-2 text-xs font-semibold ${progress.difficult.has(q.id) ? 'bg-amber-50 text-amber-700' : 'text-slate-400 hover:text-slate-700'}`}>{progress.difficult.has(q.id) ? '★ Difficult' : 'Mark difficult'}</button></div>
     </div>
 
@@ -229,9 +229,15 @@ function getPlaybackMemory(q: InterviewQuestion, nodes: MemoryNode[], activeKey:
   }
   sectionId ??= currentIdeaId;
   if (!sectionId) return null;
-  const node = nodes.find((item) => item.answerSectionId === sectionId);
-  if (!node) return null;
-  return { node, sectionLabel: sectionId.replace(/[-_]/g, ' ') };
+  const section = q.answer.sections.find((item) => item.id === sectionId);
+  if (!section) return null;
+  const node = nodes.find((item) => item.answerSectionId === sectionId) ?? {
+    id: `fallback-${section.id}`,
+    label: 'CURRENT IDEA',
+    triggers: extractKeywords(section.en).slice(0, 4),
+    answerSectionId: section.id,
+  };
+  return { node, sectionLabel: section.id.replace(/[-_]/g, ' ') };
 }
 
 function getSpeakingCue(text: string) {
@@ -321,7 +327,7 @@ function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze
         </p>
         {canPlaySection && <button type="button" onClick={() => { if (sectionPlaying && audio.state === 'playing') audio.pause(); else if (sectionPlaying && audio.state === 'paused') audio.resume(); else { onActivate(); audio.play(request); } }} aria-label={`${sectionPlaying && audio.state === 'playing' ? 'Pause' : sectionPlaying && audio.state === 'paused' ? 'Resume' : 'Play'} answer section ${paragraph.id}`} className={`min-h-10 min-w-10 shrink-0 rounded-lg text-xs font-semibold transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${sectionPlaying ? 'bg-blue-50 text-blue-700' : 'text-slate-400'}`}>{sectionPlaying && audio.state === 'playing' ? 'Pause' : sectionPlaying && audio.state === 'paused' ? 'Resume' : 'Listen'}</button>}
       </div>
-      {showVi && <p className="mt-1 text-sm leading-6 text-slate-400">{paragraph.vi}</p>}
+      {showVi && <p className={`mt-1 rounded-md px-2 py-1 text-sm leading-6 transition-colors ${trackedRange ? 'bg-blue-50/80 text-slate-600 ring-1 ring-blue-100' : 'text-slate-400'}`}>{stripFormatting(paragraph.vi)}</p>}
     </div>
   );
 }
