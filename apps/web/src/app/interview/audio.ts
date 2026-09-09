@@ -76,6 +76,8 @@ export function useInterviewAudio() {
   const [state, setState] = useState<InterviewAudioState>('idle');
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [activeRange, setActiveRange] = useState<AudioRange | null>(null);
+  const [repeat, setRepeatState] = useState(false);
+  const repeatRef = useRef(false);
   const [speechAvailable, setSpeechAvailable] = useState(false);
   const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
   const alignmentRef = useRef<StaticAlignment | null>(null);
@@ -131,7 +133,19 @@ export function useInterviewAudio() {
       const endSpeech = Math.min(mapping.speechToCanonical.length - 1, event.charIndex + length - 1);
       setActiveRange({ start, end: mapping.speechToCanonical[endSpeech] ?? start });
     };
-    utterance.onend = () => { if (utteranceRef.current !== utterance) return; utteranceRef.current = null; speechRequestRef.current = null; sourceRef.current = null; setState('idle'); setActiveKey(null); setActiveRange(null); };
+    utterance.onend = () => {
+      if (utteranceRef.current !== utterance) return;
+      utteranceRef.current = null;
+      if (repeatRef.current) {
+        speak(request);
+        return;
+      }
+      speechRequestRef.current = null;
+      sourceRef.current = null;
+      setState('idle');
+      setActiveKey(null);
+      setActiveRange(null);
+    };
     utterance.onerror = () => { if (utteranceRef.current !== utterance) return; utteranceRef.current = null; speechRequestRef.current = null; sourceRef.current = null; setState('idle'); setActiveKey(null); setActiveRange(null); };
     utteranceRef.current = utterance;
     speechRequestRef.current = request;
@@ -167,7 +181,29 @@ export function useInterviewAudio() {
             frameCallbackRef.current = updateRange;
         frameRef.current = requestAnimationFrame(updateRange);
       };
-      audio.onended = () => { if (playbackIdRef.current !== playbackId) return; if (frameRef.current !== null) cancelAnimationFrame(frameRef.current); frameRef.current = null; alignmentRef.current = null; sourceRef.current = null; setState('idle'); setActiveKey(null); setActiveRange(null); };
+      const startSegmentPlayback = () => {
+        audio.currentTime = segmentStartMs / 1000;
+        setActiveKey(request.key);
+        setActiveRange(null);
+        setState('playing');
+        frameCallbackRef.current = updateRange;
+        frameRef.current = requestAnimationFrame(updateRange);
+        void audio.play();
+      };
+      audio.onended = () => {
+        if (playbackIdRef.current !== playbackId) return;
+        if (repeatRef.current) {
+          startSegmentPlayback();
+          return;
+        }
+        if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+        alignmentRef.current = null;
+        sourceRef.current = null;
+        setState('idle');
+        setActiveKey(null);
+        setActiveRange(null);
+      };
       audio.onerror = () => {
         if (playbackIdRef.current !== playbackId) return;
         sourceRef.current = null;
@@ -222,6 +258,10 @@ export function useInterviewAudio() {
   }, [speechAvailable]);
 
   const restart = useCallback((request: PlayRequest) => play(request), [play]);
+  const setRepeat = useCallback((value: boolean) => {
+    repeatRef.current = value;
+    setRepeatState(value);
+  }, []);
 
   const setSpeed = useCallback((value: AudioSpeed) => {
     window.localStorage.setItem(SPEED_KEY, String(value));
@@ -237,5 +277,5 @@ export function useInterviewAudio() {
 
   useEffect(() => stop, [stop]);
 
-  return { speed, setSpeed, state, activeKey, activeRange, speechAvailable, play, pause, resume, stop, restart };
+  return { speed, setSpeed, repeat, setRepeat, state, activeKey, activeRange, speechAvailable, play, pause, resume, stop, restart };
 }
