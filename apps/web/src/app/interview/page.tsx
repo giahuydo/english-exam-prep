@@ -164,7 +164,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   useEffect(() => {
     if (audio.state === 'idle') setShowMemoryOverlay(false);
     else setShowMemoryOverlay(true);
-  }, [audio.activeKey, audio.state]);
+  }, [audio.activeKey, audio.activeRange?.start, audio.state, playbackMemory?.node.id]);
   useEffect(() => {
     if (!followVoice || audio.state === 'idle') return;
     const pauseFollowing = () => { userScrolledRef.current = true; setFollowVoice(false); };
@@ -219,12 +219,13 @@ function getPlaybackMemory(q: InterviewQuestion, nodes: MemoryNode[], activeKey:
     const remainder = activeKey.slice(prefix.length);
     sectionId = q.answer.sections.find((section) => remainder === section.id || remainder.startsWith(`${section.id}-`))?.id;
   }
-  if (!sectionId && activeKey === `${prefix}full` && activeRange) {
+  if (!sectionId && activeKey === `${prefix}full`) {
     let offset = 0;
     sectionId = q.answer.sections.find((section) => {
       const start = offset;
-      offset += section.en.length + 1;
-      return activeRange.start >= start && activeRange.start < offset;
+      const end = start + section.en.length;
+      offset = end + 1;
+      return activeRange ? activeRange.start < end && activeRange.end > start : start === 0;
     })?.id;
   }
   sectionId ??= currentIdeaId;
