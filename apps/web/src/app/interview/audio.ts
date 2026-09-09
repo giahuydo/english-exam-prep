@@ -5,7 +5,7 @@ import { buildSpeechMapping, type SpeechMapping } from './audio-mapping';
 export { buildSpeechMapping } from './audio-mapping';
 export type { SpeechMapping } from './audio-mapping';
 
-export type AudioSpeed = 0.8 | 1 | 1.2;
+export type AudioSpeed = 0.5 | 0.8 | 1 | 1.2;
 export type InterviewAudioState = 'idle' | 'playing' | 'paused';
 export type AudioRange = { start: number; end: number };
 export type StaticAlignment = { version: 1; questionId: string; speechText: string; words: { text: string; canonicalStart: number; canonicalEnd: number; startMs: number; endMs: number }[] };
@@ -50,7 +50,7 @@ function speakingBeatAtTime(words: AlignmentWord[], beats: SpeakingBeat[], curre
 }
 
 const SPEED_KEY = 'ee.interview.audio-speed.v1';
-const speeds: AudioSpeed[] = [0.8, 1, 1.2];
+const speeds: AudioSpeed[] = [0.5, 0.8, 1, 1.2];
 
 function readSpeed(): AudioSpeed {
   const value = Number(window.localStorage.getItem(SPEED_KEY));
@@ -63,7 +63,7 @@ function preferredVoice(voices: SpeechSynthesisVoice[]) {
     ?? voices.find((voice) => voice.lang.toLowerCase().startsWith('en'));
 }
 
-type PlayRequest = { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping; segment?: AudioSegment };
+type PlayRequest = { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping; segment?: AudioSegment; speed?: AudioSpeed };
 
 export function useInterviewAudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -75,6 +75,7 @@ export function useInterviewAudio() {
   const [speed, setSpeedState] = useState<AudioSpeed>(1);
   const [state, setState] = useState<InterviewAudioState>('idle');
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  const [activeSpeed, setActiveSpeed] = useState<AudioSpeed | null>(null);
   const [activeRange, setActiveRange] = useState<AudioRange | null>(null);
   const [repeat, setRepeatState] = useState(false);
   const repeatRef = useRef(false);
@@ -113,6 +114,7 @@ export function useInterviewAudio() {
     sourceRef.current = null;
     setState('idle');
     setActiveKey(null);
+    setActiveSpeed(null);
     setActiveRange(null);
   }, []);
 
@@ -120,7 +122,7 @@ export function useInterviewAudio() {
     if (!speechAvailable || !request.text.trim()) return;
     const mapping = request.mapping ?? buildSpeechMapping(request.text);
     const utterance = new SpeechSynthesisUtterance(mapping.text);
-    utterance.rate = speed;
+    utterance.rate = request.speed ?? speed;
     const voice = preferredVoice(voicesRef.current.length ? voicesRef.current : window.speechSynthesis.getVoices());
     if (voice) utterance.voice = voice;
     sourceRef.current = 'speech';
@@ -164,7 +166,7 @@ export function useInterviewAudio() {
       sourceRef.current = 'audio';
       audio.src = request.src;
       audio.preload = 'auto';
-      audio.playbackRate = speed;
+      audio.playbackRate = request.speed ?? speed;
       let segmentStartMs = 0;
       let segmentEndMs: number | null = null;
       let speakingBeats: SpeakingBeat[] = [];
@@ -184,6 +186,7 @@ export function useInterviewAudio() {
       const startSegmentPlayback = () => {
         audio.currentTime = segmentStartMs / 1000;
         setActiveKey(request.key);
+        setActiveSpeed(request.speed ?? speed);
         setActiveRange(null);
         setState('playing');
         frameCallbackRef.current = updateRange;
@@ -225,6 +228,7 @@ export function useInterviewAudio() {
           }
         }
         setActiveKey(request.key);
+        setActiveSpeed(request.speed ?? speed);
         setActiveRange(null);
         setState('playing');
         frameCallbackRef.current = updateRange;
@@ -277,5 +281,5 @@ export function useInterviewAudio() {
 
   useEffect(() => stop, [stop]);
 
-  return { speed, setSpeed, repeat, setRepeat, state, activeKey, activeRange, speechAvailable, play, pause, resume, stop, restart };
+  return { speed, setSpeed, repeat, setRepeat, state, activeKey, activeSpeed, activeRange, speechAvailable, play, pause, resume, stop, restart };
 }
