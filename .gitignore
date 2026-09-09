@@ -48,7 +48,6 @@ docker/data/
 
 .agents/
 .claude/
-/docs/
 /graphify-out/
 .codegraph
 .serena

@@ -29,6 +29,10 @@ pnpm db:seed
 
 `pnpm db:reset` is destructive and local-only. Run package-specific checks when narrowing a change.
 
+## Documentation index
+
+Start with [docs/README.md](docs/README.md) for the documentation map and trace rules.
+
 ## Deeper handbook
 
 - [Project structure, paths, ownership, deployment](docs/agents/PROJECT_STRUCTURE.md)

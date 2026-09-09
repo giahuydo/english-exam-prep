@@ -67,8 +67,11 @@ english-exam-prep/
     database/       # Prisma schema, migrations, seed
     shared/         # zod schemas, enums
   docs/
+    README.md       # documentation index
     architecture.md
     database.md
+    interview.md    # Interview Practice feature trace
+    agents/          # project structure, workflows, deployment, invariants
 ```
 
-See `docs/architecture.md` and `docs/database.md` for domain concepts.
+See `docs/README.md` for the documentation index. Start with `docs/architecture.md` and `docs/database.md` for core domain concepts, and `docs/interview.md` for the Interview Practice feature.

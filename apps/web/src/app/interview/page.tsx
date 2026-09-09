@@ -126,6 +126,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const [openNode, setOpenNode] = useState<string | null>(null);
   const [ideaIndex, setIdeaIndex] = useState(0);
   const [rated, setRated] = useState<ReviewDifficulty | null>(null);
+  const [selectionMode, setSelectionMode] = useState(false);
   const ideaRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const level = progress.levels[q.id] ?? 1;
   const contextsForQuestion = useMemo(() => getContextsForQuestion(q.id), [q.id]);
@@ -135,7 +136,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const shownIdeas = mode === 'learn' || revealed ? q.answer.sections.length : Math.min(ideaIndex, q.answer.sections.length);
 
   const { stop: stopAudio } = audio;
-  useEffect(() => { setRevealed(mode === 'learn'); setHint(false); setMapRequested(false); setShowVi(false); setCloze(false); setOpenNode(null); setIdeaIndex(0); setRated(null); stopAudio(); }, [q.id, mode, stopAudio]);
+  useEffect(() => { setRevealed(mode === 'learn'); setHint(false); setMapRequested(false); setShowVi(false); setCloze(false); setOpenNode(null); setIdeaIndex(0); setRated(null); setSelectionMode(false); stopAudio(); }, [q.id, mode, stopAudio]);
 
   const reveal = () => { setRevealed(true); setIdeaIndex(q.answer.sections.length); setHint(false); };
   const jumpToIdea = (nextIndex: number) => {
@@ -176,7 +177,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
       {mode !== 'learn' && <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-5 sm:flex sm:flex-wrap sm:items-center"><button type="button" onClick={previousIdea} disabled={ideaIndex <= 0} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-slate-600 disabled:opacity-40">Previous idea</button><button type="button" onClick={nextIdea} disabled={ideaIndex >= q.answer.sections.length} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white disabled:opacity-40">Next idea</button><button type="button" onClick={() => setHint(true)} disabled={hint || ideaIndex >= q.answer.sections.length} className="min-h-10 rounded-lg px-2 text-xs font-semibold text-slate-500 hover:text-slate-800 disabled:opacity-40">Show hint</button><button type="button" onClick={reveal} disabled={revealed} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-slate-600 disabled:opacity-40">Reveal answer</button><button type="button" onClick={() => { setIdeaIndex(0); setHint(false); setRevealed(false); setRated(null); }} className="min-h-10 px-2 text-xs font-semibold text-slate-400 hover:text-slate-700">Reset</button></div>}
       {hint && !revealed && starters[ideaIndex] && <p className="rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-800">Try starting with <b>{starters[ideaIndex]}</b></p>}
 
-      {mode === 'quick' && !revealed && ideaIndex === 0 ? null : <AnswerContent q={q} show={revealed || mode === 'learn'} showVi={showVi} cloze={cloze} shownIdeas={shownIdeas} activeSection={openNode ? memoryNodes.find((node) => node.id === openNode)?.answerSectionId : undefined} onSectionActivate={(sectionId) => setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null)} audio={audio} ideaRefs={ideaRefs} />}
+      {mode === 'quick' && !revealed && ideaIndex === 0 ? null : <AnswerContent q={q} show={revealed || mode === 'learn'} showVi={showVi} cloze={cloze} shownIdeas={shownIdeas} activeSection={openNode ? memoryNodes.find((node) => node.id === openNode)?.answerSectionId : undefined} onSectionActivate={(sectionId) => setOpenNode(memoryNodes.find((node) => node.answerSectionId === sectionId)?.id ?? null)} audio={audio} ideaRefs={ideaRefs} selectionMode={selectionMode} onSelectionModeChange={setSelectionMode} />}
       {(revealed || mode === 'learn') && <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-5"><button type="button" onClick={() => setShowVi((v) => !v)} className="min-h-10 px-2 text-xs font-semibold text-slate-400 hover:text-slate-700">{showVi ? 'Hide Vietnamese' : 'Show Vietnamese'}</button><button type="button" onClick={() => setCloze((v) => !v)} className={`min-h-10 rounded-lg border px-3 text-xs font-semibold ${cloze ? 'border-blue-300 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-600'}`}>Cloze</button></div>}
       {(revealed || mode === 'learn') && <ReviewPanel rated={rated} onRate={rate} onNext={mode === 'quick' ? onNextQuick : undefined} />}
     </div>
@@ -185,7 +186,8 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
 
 function MemoryPath({ nodes, activeSectionId, openNode, onOpen, showAllHints = false }: { nodes: MemoryNode[]; activeSectionId?: string; openNode: string | null; onOpen: (id: string | null) => void; showAllHints?: boolean }) { return <div><div className="flex items-center justify-between"><Label>Memory path</Label><span className="text-[11px] text-slate-400">{showAllHints ? 'Compact cues' : 'Try to speak · tap a node if stuck'}</span></div><div className="mt-3 flex flex-col items-start gap-1 sm:flex-row sm:items-start sm:gap-0">{nodes.map((node, index) => { const expanded = showAllHints || openNode === node.id; const active = node.answerSectionId === activeSectionId; return <div key={node.id} className="flex w-full flex-col items-start sm:w-auto sm:flex-row sm:items-start"><div className="w-full sm:w-auto"><button type="button" aria-expanded={expanded} onClick={() => onOpen(openNode === node.id ? null : node.id)} className={`min-h-11 w-full rounded-lg border px-3 text-left text-sm font-bold uppercase tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 sm:w-auto ${active ? 'border-blue-500 bg-blue-100 text-blue-900' : expanded ? 'border-blue-400 bg-blue-50 text-blue-800' : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-300'}`}>{node.label}<span className="ml-2 text-[10px] font-medium normal-case tracking-normal text-blue-500">{expanded ? 'Hide hint' : '+ Hint'}</span></button>{expanded && <div className="mt-2 max-w-xs border-l-2 border-blue-100 pl-3 text-sm leading-7 text-slate-600">{node.triggers.map((trigger) => <div key={trigger}>{trigger}</div>)}</div>}</div>{index < nodes.length - 1 && <span aria-hidden="true" className="px-2 py-1 text-lg font-light text-blue-300 sm:pt-2">→</span>}</div>; })}</div></div>; }
 function LevelControl({ level, onChange }: { level: LearningLevel; onChange: (level: LearningLevel) => void }) { return <div className="border-t border-slate-100 pt-5"><div className="flex items-center justify-between gap-3"><Label>Less help → more recall</Label><span className="text-xs font-semibold text-slate-500">{level} · {levelLabels[level]}</span></div><p className="mt-2 text-xs text-slate-400">Intentionally remove support until you can answer independently.</p><div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-slate-400"><span>More support</span><span className="h-px flex-1 bg-slate-200" /><span>More recall</span></div><div className="mt-2 grid grid-cols-5 gap-1">{([1, 2, 3, 4, 5] as LearningLevel[]).map((value) => <button key={value} type="button" onClick={() => onChange(value)} className={`min-h-10 rounded-lg text-[10px] font-bold uppercase ${value === level ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-400 hover:text-slate-700'}`}>{levelLabels[value]}</button>)}</div></div>; }
-function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, onSectionActivate, audio, ideaRefs }: { q: InterviewQuestion; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; onSectionActivate: (sectionId: string) => void; audio: ReturnType<typeof useInterviewAudio>; ideaRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>> }) {
+function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, onSectionActivate, audio, ideaRefs, selectionMode, onSelectionModeChange }: { q: InterviewQuestion; show: boolean; showVi: boolean; cloze: boolean; shownIdeas: number; activeSection?: string; onSectionActivate: (sectionId: string) => void; audio: ReturnType<typeof useInterviewAudio>; ideaRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>; selectionMode: boolean; onSelectionModeChange: (value: boolean) => void }) {
+  const [selectedRange, setSelectedRange] = useState<{ sectionId: string; range: AudioRange } | null>(null);
   if (!show && shownIdeas === 0) return null;
   const fullSource = q.answer.sections.map((section) => section.en).join(' ');
   const fullText = stripFormatting(fullSource);
@@ -200,12 +202,14 @@ function AnswerContent({ q, show, showVi, cloze, shownIdeas, activeSection, onSe
   const ideaSegment: AudioSegment | undefined = listeningToIdea && idea ? { canonicalStart: ideaStart, canonicalEnd: ideaStart + idea.en.length } : undefined;
   const canPlayListen = Boolean(q.audio?.full || audio.speechAvailable);
   let sectionOffset = 0;
-  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label>{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}</div><p className="mt-2 text-xs text-slate-400">Tap a phrase to hear it. Listen → repeat → continue.</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
+  const selectionKey = `q${q.id}-selection`;
+  return <div><div className="flex flex-wrap items-center justify-between gap-2"><Label>Canonical answer</Label><div className="flex items-center gap-2">{canPlayListen && <AudioControls audio={audio} request={{ text: listenText, src: q.audio?.full, alignment: q.audio?.alignment, key: listeningToIdea ? ideaKey : fullKey, mapping: buildSpeechMapping(listenSource), segment: ideaSegment }} label={listeningToIdea ? 'Listen idea' : 'Listen answer'} />}<button type="button" onClick={() => { onSelectionModeChange(!selectionMode); setSelectedRange(null); }} className={`min-h-9 rounded-lg border px-2.5 text-xs font-semibold ${selectionMode ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500'}`}>{selectionMode ? 'Exit select & listen' : 'Select & listen'}</button></div></div><p className="mt-2 text-xs text-slate-400">{selectionMode ? 'Drag over any phrase to hear and highlight it.' : 'Tap a phrase to hear it. Listen → repeat → continue.'}</p><div className="mt-3 max-w-2xl space-y-5">{q.answer.sections.slice(0, shownIdeas).map((paragraph) => {
     const offset = sectionOffset;
     sectionOffset += paragraph.en.length + 1;
-    const trackedRange = audio.activeKey === fullKey || (audio.activeKey === ideaKey && paragraph.id === idea?.id) || audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
-    const rangeOffset = audio.activeKey === fullKey || audio.activeKey === ideaKey || audio.activeKey === `q${q.id}-${paragraph.id}` ? offset : 0;
-    return <div key={paragraph.id} ref={(element) => { ideaRefs.current[paragraph.id] = element; }}><AnswerSectionView paragraph={paragraph} questionId={q.id} sectionOffset={offset} showVi={showVi} cloze={cloze} active={activeSection === paragraph.id} onActivate={() => onSectionActivate(paragraph.id)} audio={audio} trackedRange={trackedRange} rangeOffset={rangeOffset} /></div>;
+    const isSelection = audio.activeKey === selectionKey && selectedRange?.sectionId === paragraph.id;
+    const trackedRange = isSelection ? selectedRange.range : audio.activeKey === fullKey || (audio.activeKey === ideaKey && paragraph.id === idea?.id) || audio.activeKey === `q${q.id}-${paragraph.id}` ? audio.activeRange : null;
+    const rangeOffset = isSelection || audio.activeKey === fullKey || audio.activeKey === ideaKey || audio.activeKey === `q${q.id}-${paragraph.id}` ? offset : 0;
+    return <div key={paragraph.id} ref={(element) => { ideaRefs.current[paragraph.id] = element; }}><AnswerSectionView paragraph={paragraph} questionId={q.id} sectionOffset={offset} showVi={showVi} cloze={cloze} active={activeSection === paragraph.id} onActivate={() => onSectionActivate(paragraph.id)} audio={audio} trackedRange={trackedRange} rangeOffset={rangeOffset} selectionMode={selectionMode} onSelect={(range) => { setSelectedRange({ sectionId: paragraph.id, range }); onSectionActivate(paragraph.id); }} /></div>;
   })}</div></div>;
 }
 function AudioControls({ audio, request, label }: { audio: ReturnType<typeof useInterviewAudio>; request: { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping; segment?: AudioSegment }; label: string }) {
@@ -219,26 +223,43 @@ function AudioControls({ audio, request, label }: { audio: ReturnType<typeof use
   </div>;
 }
 
-function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze, active, onActivate, audio, trackedRange, rangeOffset }: { paragraph: { id: string; en: string; vi: string }; questionId: number; sectionOffset: number; showVi: boolean; cloze: boolean; active: boolean; onActivate: () => void; audio: ReturnType<typeof useInterviewAudio>; trackedRange: AudioRange | null; rangeOffset: number }) {
+function AnswerSectionView({ paragraph, questionId, sectionOffset, showVi, cloze, active, onActivate, audio, trackedRange, rangeOffset, selectionMode, onSelect }: { paragraph: { id: string; en: string; vi: string }; questionId: number; sectionOffset: number; showVi: boolean; cloze: boolean; active: boolean; onActivate: () => void; audio: ReturnType<typeof useInterviewAudio>; trackedRange: AudioRange | null; rangeOffset: number; selectionMode: boolean; onSelect: (range: AudioRange) => void }) {
   const parts = paragraph.en.split('/');
   const sectionKey = `q${questionId}-${paragraph.id}`;
   const sectionPlaying = audio.activeKey === sectionKey;
   const canPlaySection = true;
   const audioPath = `/audio/interview/q${String(questionId).padStart(2, '0')}`;
   const request = { text: stripFormatting(paragraph.en), src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: sectionKey, mapping: buildSpeechMapping(paragraph.en), segment: { canonicalStart: sectionOffset, canonicalEnd: sectionOffset + paragraph.en.length } };
+  const handleSelection = (event: React.MouseEvent<HTMLParagraphElement>) => {
+    if (!selectionMode) return;
+    const selection = window.getSelection();
+    const selectedText = selection ? stripFormatting(selection.toString()) : '';
+    if (!selection || selection.isCollapsed || !selectedText) return;
+    const speechText = stripFormatting(paragraph.en);
+    const speechStart = speechText.indexOf(selectedText);
+    if (speechStart < 0) return;
+    const mapping = buildSpeechMapping(paragraph.en);
+    const canonicalStart = mapping.speechToCanonical[speechStart];
+    const canonicalEnd = mapping.speechToCanonical[speechStart + selectedText.length - 1];
+    if (canonicalStart === undefined || canonicalEnd === undefined) return;
+    const range = { start: canonicalStart, end: canonicalEnd + 1 };
+    onSelect(range);
+    audio.play({ text: selectedText, src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: `q${questionId}-selection`, mapping: buildSpeechMapping(paragraph.en.slice(canonicalStart, canonicalEnd + 1)), segment: { canonicalStart: sectionOffset + canonicalStart, canonicalEnd: sectionOffset + canonicalEnd + 1 } });
+    selection.removeAllRanges();
+  };
   return (
     <div className={`border-l-2 pl-4 transition-colors ${active || sectionPlaying ? 'border-blue-400 bg-blue-50/40' : 'border-blue-100'}`}>
       <div className="flex items-start justify-between gap-2">
-        <p className="min-w-0 flex-1 text-[15px] leading-8 text-slate-800 sm:text-base">
+        <p onMouseUp={handleSelection} className={`min-w-0 flex-1 text-[15px] leading-8 text-slate-800 sm:text-base ${selectionMode ? 'cursor-text select-text' : ''}`}>
           {cloze ? <ClozeText text={paragraph.en} /> : parts.map((part, index) => {
             const chunkKey = `q${questionId}-${paragraph.id}-chunk-${index}`;
             const chunkStart = parts.slice(0, index).reduce((total, value) => total + value.length + 1, 0);
             const chunkEnd = chunkStart + part.length;
             const chunkActive = audio.activeKey === chunkKey;
-            const phraseRange = chunkActive ? audio.activeRange : trackedRange;
-            const localRange = phraseRange ? { start: phraseRange.start - rangeOffset - chunkStart, end: phraseRange.end - rangeOffset - chunkStart } : null;
+            const phraseRange = chunkActive ? { start: 0, end: part.length } : trackedRange;
+            const localRange = phraseRange ? (chunkActive ? phraseRange : { start: phraseRange.start - rangeOffset - chunkStart, end: phraseRange.end - rangeOffset - chunkStart }) : null;
             const speechText = stripFormatting(part);
-            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" onClick={() => { onActivate(); audio.play({ text: speechText, src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: chunkKey, mapping: buildSpeechMapping(part), segment: { canonicalStart: sectionOffset + chunkStart, canonicalEnd: sectionOffset + chunkEnd } }); }} aria-label={`Play phrase: ${speechText.trim()}`} className="rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100">{renderTrackedText(part, localRange)}</button></span>;
+            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" onClick={() => { if (selectionMode) return; onActivate(); audio.play({ text: speechText, src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: chunkKey, mapping: buildSpeechMapping(part), segment: { canonicalStart: sectionOffset + chunkStart, canonicalEnd: sectionOffset + chunkEnd } }); }} aria-label={`Play phrase: ${speechText.trim()}`} className="rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100">{renderTrackedText(part, localRange)}</button></span>;
           })}
         </p>
         {canPlaySection && <button type="button" onClick={() => { onActivate(); audio.play(request); }} aria-label={`Play answer section ${paragraph.id}`} className={`min-h-10 min-w-10 shrink-0 rounded-lg text-xs font-semibold transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${sectionPlaying ? 'bg-blue-50 text-blue-700' : 'text-slate-400'}`}>Listen</button>}
