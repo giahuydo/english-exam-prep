@@ -459,32 +459,32 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I normally learn a new technology by connecting it to **engineering problems I already understand**.",
+        en: "*For me,* / I normally learn a **new technology** / by connecting it to **engineering problems** / I already understand.",
         vi: "Mình học công nghệ mới bằng cách kết nối nó với các vấn đề engineering mình đã hiểu.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / the framework may change, / but many of the underlying problems stay the same.",
+        en: "*The main reason is that* / the **framework may change**, / but many of the **underlying problems stay the same**.",
         vi: "Vì framework có thể thay đổi nhưng nhiều vấn đề nền tảng bên dưới thì không đổi.",
       },
       {
         id: 'example',
-        en: "*For example,* / when I study **Temporal**, I connect it to retries, checkpoints, durable state, / and long-running workflows that I have already worked with.",
+        en: "*For example,* / when I study **Temporal**, / I connect it to **retries**, **checkpoints**, **durable state**, / and **long-running workflows** that I have already worked with.",
         vi: "Ví dụ khi học Temporal, mình liên hệ với retry, checkpoint, state bền vững và workflow chạy lâu mà mình đã làm.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / this is also how I moved from traditional backend work into **OCR, embeddings, retrieval, LLM integration**, / and GPU-based inference.",
+        en: "*Because of that,* / this is also how I moved from traditional backend work / into **OCR**, **embeddings**, **retrieval**, **LLM integration**, / and **GPU-based inference**.",
         vi: "Đây cũng là cách mình chuyển từ backend truyền thống sang OCR, embeddings, retrieval, tích hợp LLM và GPU inference.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I know every new stack still has its own **abstractions, APIs, and best practices** / that I need to learn.",
+        en: "*At the same time,* / I know every new stack still has its own **abstractions**, **APIs**, and **best practices** / that I need to learn.",
         vi: "Đồng thời mỗi stack mới vẫn có abstraction, API và best practice riêng mình cần học.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / I usually do not need to relearn the engineering fundamentals. / I mainly need to learn the new tool, / so I am confident I can adapt relatively quickly.",
+        en: "*So overall,* / I usually do not need to relearn the **engineering fundamentals**. / I mainly need to learn the **new tool**, / so I am confident I can adapt relatively quickly.",
         vi: "Tóm lại, mình không phải học lại kiến thức engineering nền tảng, chỉ cần học tool mới, nên tự tin thích nghi khá nhanh.",
       },
     ] },
