@@ -267,7 +267,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['F'],
     clusterIds: ['error-handling', 'workflow', 'gap'],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'gap', label: 'TOOL GAP', triggers: ['not Temporal directly', 'tool itself'], answerSectionId: 'point' }, { id: 'shared-problems', label: 'SHARED PROBLEMS', triggers: ['long-running jobs', 'retry / checkpoint', 'idempotency'], answerSectionId: 'reason' }, { id: 'durable-workflow', label: 'DURABLE WORKFLOW', triggers: ['workflow state', 'activities', 'recovery'], answerSectionId: 'result' }, { id: 'honest-summary', label: 'HONEST SUMMARY', triggers: ['learn APIs', 'distributed workflow concepts'], answerSectionId: 'extra' }] }
   },
   {
     id: 7,
@@ -309,7 +309,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['E'],
     clusterIds: ['tool-calling', 'gap'],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'agent-gap', label: 'HONEST GAP', triggers: ['not fully autonomous agents', 'AI backend workflows'], answerSectionId: 'point' }, { id: 'building-blocks', label: 'BUILDING BLOCKS', triggers: ['retrieval', 'tool contracts', 'workflow state'], answerSectionId: 'example' }, { id: 'controlled-workflow', label: 'CONTROLLED WORKFLOW', triggers: ['intent / context', 'backend controls', 'validate'], answerSectionId: 'result' }, { id: 'foundation', label: 'PRODUCTION FOUNDATION', triggers: ['direct experience growing', 'production engineering'], answerSectionId: 'close' }] }
   },
   {
     id: 8,
@@ -320,38 +320,49 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I have not owned a large **LLM evaluation platform** in production yet.",
-        vi: "Mình chưa từng sở hữu một platform đánh giá LLM lớn trong production.",
+        en: "*For me,* / yes, I have **hands-on experience with AI evaluation and quality regression**, / although I did not build the whole **LLM eval platform** from scratch.",
+        vi: "**Với tôi,** / có, tôi có **kinh nghiệm thực tế với việc đánh giá AI và kiểm tra chất lượng hồi quy**, / mặc dù tôi không xây toàn bộ **nền tảng LLM eval** từ đầu.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / it follows a testing mindset I already use: define the expected behavior, build test cases, run them repeatedly, / and check for **regressions** when the system changes.",
-        vi: "Nhưng eval theo tư duy testing mình đã dùng: định nghĩa hành vi mong đợi, xây test case, chạy lặp lại và kiểm regression khi hệ thống thay đổi.",
+        en: "*The main reason is that* / in production AI, / I want to know whether a change actually makes the system **better or worse**, / not just whether the code still runs.",
+        vi: "**Lý do chính là** / trong hệ thống AI chạy thật, / tôi muốn biết một thay đổi có thực sự làm hệ thống **tốt hơn hay tệ đi**, / chứ không chỉ kiểm tra xem code còn chạy hay không.",
       },
       {
         id: 'example',
-        en: "*For example,* / in retrieval, I care about whether the **correct documents** are returned / and how the **ranking** changes when we update the retrieval strategy.",
-        vi: "Ví dụ với retrieval, mình quan tâm document đúng có được trả về không và ranking thay đổi ra sao khi cập nhật chiến lược retrieval.",
+        en: "*For example,* / in our document AI work, / we used **offline benchmarks** to compare OCR and document-processing approaches / using quality and performance signals. / The benchmark helped us find problems such as **PHI leakage** / and improve the pipeline.",
+        vi: "**Ví dụ,** / trong phần document AI, / chúng tôi dùng **offline benchmark** để so sánh các hướng OCR và document-processing khác nhau / dựa trên các tín hiệu về chất lượng và hiệu năng. / Benchmark giúp phát hiện các vấn đề như **rò rỉ PHI** / và từ đó cải thiện pipeline.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / for LLM evals, I would build a **representative dataset**, / define what good behavior looks like, / and measure correctness, groundedness, retrieval quality, tool-call success, latency, and cost.",
-        vi: "Với LLM eval, mình sẽ xây dataset đại diện, định nghĩa thế nào là hành vi tốt, và đo correctness, groundedness, chất lượng retrieval, tỉ lệ tool-call thành công, latency và chi phí.",
+        en: "*At the same time,* / my direct work was more on **retrieval and grounding quality**. / I worked on hybrid retrieval using **BM25, vector search, and RRF**, / with regression tests for **ranking, fallback behavior, and permission isolation**.",
+        vi: "**Đồng thời,** / phần tôi trực tiếp làm nhiều hơn là **chất lượng retrieval và grounding**. / Tôi làm hybrid retrieval bằng **BM25, vector search và RRF**, / cùng với các regression test cho **ranking, fallback behavior và permission isolation**.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / for more subjective outputs, / I would combine **automatic evaluation with human review** / instead of depending on only one metric.",
-        vi: "Với output mang tính chủ quan hơn, mình kết hợp eval tự động với review của người thay vì phụ thuộc một chỉ số.",
+        en: "*I also worked on* **citation and provenance correctness**, / including the document, page, text span, and bounding-box information, / so the answer can be traced back to the real source.",
+        vi: "**Tôi cũng làm về** **độ chính xác của citation và provenance**, / bao gồm document, page, text span và bounding-box information, / để câu trả lời có thể truy ngược về đúng nguồn thật.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / my experience with formal LLM eval platforms is still growing, / but the **evaluation and regression mindset** is already familiar to me.",
-        vi: "Tóm lại, kinh nghiệm với platform eval chính thức còn đang phát triển, nhưng tư duy đánh giá và regression thì đã quen.",
+        en: "*The wider StrangeLoop platform also has* a formal **Test Bench**, / where agent test cases can be evaluated using **expected outputs or an LLM judge with a rubric**. / I understand how that system works from the source, / although I did not build the Test Bench itself.",
+        vi: "**Ngoài ra, StrangeLoop cũng có** một **Test Bench** chính thức, / nơi các agent test case có thể được đánh giá bằng **expected output hoặc LLM judge với rubric**. / Tôi hiểu cách hệ thống này hoạt động ở mức source code, / nhưng tôi không phải người xây Test Bench từ đầu.",
+      },
+      {
+        id: 'final',
+        en: "*So overall,* / I would say I have practical experience with **AI evaluation and regression**, / especially around **retrieval, grounding, and document AI**, / and I am also familiar with formal **LLM and agent eval systems**.",
+        vi: "**Tóm lại,** / tôi có kinh nghiệm thực tế với **AI evaluation và regression**, / đặc biệt ở **retrieval, grounding và document AI**, / và tôi cũng quen với các hệ thống **LLM/agent eval** chính thức.",
       },
     ] },
     contextIds: ['G'],
     clusterIds: ['observability', 'quality', 'production-ai', 'gap'],
-    memory: { nodes: [] }
+    memory: { nodes: [
+      { id: 'hands-on-eval', label: 'AI EVAL HANDS-ON', triggers: ['hands-on experience', 'quality regression', 'not platform owner'], answerSectionId: 'point' },
+      { id: 'benchmark-phi', label: 'BENCHMARK + PHI', triggers: ['offline benchmark', 'OCR / document AI', 'PHI leakage'], answerSectionId: 'example' },
+      { id: 'retrieval-grounding', label: 'RETRIEVAL + GROUNDING', triggers: ['BM25 / vector / RRF', 'ranking / fallback', 'citation / provenance'], answerSectionId: 'result' },
+      { id: 'test-bench', label: 'TEST BENCH', triggers: ['expected outputs', 'LLM judge', 'rubric', 'not built from scratch'], answerSectionId: 'extra' },
+      { id: 'eval-summary', label: 'HONEST SUMMARY', triggers: ['AI evaluation', 'retrieval / grounding', 'formal LLM and agent eval'], answerSectionId: 'final' },
+    ] }
   },
   {
     id: 9,
@@ -393,7 +404,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['A'],
     clusterIds: [],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'backend-foundation', label: 'BACKEND FOUNDATION', triggers: ['backend engineering', 'production systems'], answerSectionId: 'point' }, { id: 'production-ai', label: 'PRODUCTION AI', triggers: ['data pipelines', 'retrieval / APIs', 'security'], answerSectionId: 'reason' }, { id: 'ai-growth', label: 'AI GROWTH', triggers: ['OCR', 'embeddings', 'LLM integration', 'GPU inference'], answerSectionId: 'close' }, { id: 'stronger-ai', label: 'STRONGER AI', triggers: ['AI capability', 'backend foundation'], answerSectionId: 'extra' }] }
   },
   {
     id: 10,
@@ -404,43 +415,45 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "For me, / yes, I have hands-on experience with tool calling, / especially on the backend integration and control side.",
-        vi: "Mình hiểu tool calling và các contract backend quanh AI workflow, nhưng chưa xây một hệ sinh thái production rất lớn với hàng chục tool.",
+        en: "*For me,* / yes, I have **hands-on experience with tool calling**, / especially on the **backend control side**.",
+        vi: "**Với tôi,** / có, tôi có **kinh nghiệm thực tế với tool calling**, / đặc biệt ở phần **backend control**.",
       },
       {
         id: 'reason',
-        en: "The main reason is that / I do not let the LLM directly execute actions. / The backend stays in control.",
-        vi: "Vì mình không nghĩ LLM nên trực tiếp thực thi hành động tuỳ ý. Backend phải giữ quyền kiểm soát.",
+        en: "*For example,* / in Clincove, / the model can use read-only tools like **search and document read**.",
+        vi: "**Ví dụ,** / trong Clincove, / model có thể dùng các tool read-only như **search và document read**.",
       },
       {
         id: 'example',
-        en: "For example, / in Clincove, / the model can select tools like document search and document read. / The backend validates the arguments, / checks the user's permission and scope, / executes the tool, / and returns a structured result to the agent.",
-        vi: "Ví dụ, backend định nghĩa tool schema, validate tham số, check permission, thực thi và trả kết quả có cấu trúc về cho model.",
+        en: "*The key point is that* / the model can choose the tool, / but the **backend checks permission and scope** / before executing anything.",
+        vi: "**Điểm quan trọng là** / model có thể chọn tool, / nhưng **backend sẽ kiểm tra permission và scope** / trước khi thực thi bất kỳ thứ gì.",
       },
       {
         id: 'result',
-        en: "Because of that, / we have a clear boundary between LLM reasoning / and deterministic backend behavior.",
-        vi: "Vì vậy có ranh giới rõ giữa suy luận xác suất của LLM và hành vi xác định của backend.",
+        en: "*Another important point is that* / we design the tool interface in a **familiar way for the LLM**, / like a **file system with search and read**, / because this usually helps the model perform better.",
+        vi: "**Một điểm quan trọng khác là** / chúng tôi thiết kế tool interface theo cách **quen thuộc với LLM**, / giống như **file system có search và read**, / vì cách này thường giúp model hoạt động tốt hơn.",
       },
       {
         id: 'close',
-        en: "At the same time, / I also worked on delegated authorization, audit logging, tool tracing, latency and error tracking, / and citation provenance.",
-        vi: "Đồng thời mình sẽ trace mỗi tool call với call ID, input, kết quả, latency và error. Với hành động ghi, mình dùng idempotency và retry cẩn thận.",
+        en: "*At the same time,* / I also worked on **tool safety and tracking**, / such as **audit logs, tracing, citations**, / and final-response validation.",
+        vi: "**Đồng thời,** / tôi cũng làm về **tool safety và tracking**, / như **audit logs, tracing, citations**, / và kiểm tra final response.",
       },
       {
         id: 'extra',
-        en: "So overall, / I did not build the whole agent engine from scratch, / but I work directly with its source code, / I can modify and update it when needed, / and I understand how the tool-calling flow works internally.",
-        vi: "Tóm lại, nguyên tắc là: LLM đề xuất, backend quyết định và thực thi.",
-      },
-      {
-        id: 'section-7',
-        en: "At the same time, / I directly implemented and hardened the Clincove side of that workflow.",
-        vi: "",
+        en: "*So overall,* / I directly worked on the **Clincove tool-calling flow**, / and I also understand and can modify parts of the **StrangeLoop engine** when needed.",
+        vi: "**Tóm lại,** / tôi trực tiếp làm trên **Clincove tool-calling flow**, / và tôi cũng hiểu, có thể sửa một số phần của **StrangeLoop engine** khi cần.",
       },
     ] },
     contextIds: ['E', 'H'],
     clusterIds: ['tool-calling', 'tool-safety'],
-    memory: { nodes: [{'id': 'propose', 'label': 'LLM PROPOSES', 'triggers': ['intent', 'tool schema'], 'answerSectionId': 'point'}, {'id': 'control', 'label': 'BACKEND CONTROLS', 'triggers': ['validate arguments', 'permission check', 'execute'], 'answerSectionId': 'example'}, {'id': 'result', 'label': 'VALIDATE RESULT', 'triggers': ['structured result', 'audit'], 'answerSectionId': 'result'}] }
+    memory: { nodes: [
+      { id: 'hands-on', label: 'HANDS-ON TOOLING', triggers: ['tool calling', 'backend control'], answerSectionId: 'point' },
+        { id: 'search-read', label: 'SEARCH + READ', triggers: ['Clincove', 'read-only tools', 'search / document read'], answerSectionId: 'reason' },
+        { id: 'BACKEND-CONTROL', label: 'BACKEND CONTROL', triggers: ['choose tool', 'permission and scope', 'before execution'], answerSectionId: 'example' },
+        { id: 'FAMILIAR-INTERFACE', label: 'FAMILIAR INTERFACE', triggers: ['LLM-friendly', 'file system', 'search and read'], answerSectionId: 'result' },
+        { id: 'SAFETY-TRACKING', label: 'SAFETY + TRACKING', triggers: ['audit logs', 'tracing', 'citations', 'final validation'], answerSectionId: 'close' },
+        { id: 'ENGINE', label: 'UNDERSTAND ENGINE', triggers: ['Clincove flow', 'StrangeLoop engine', 'modify when needed'], answerSectionId: 'extra' },
+    ] }
   },
   {
     id: 11,
@@ -482,7 +495,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['A', 'I'],
     clusterIds: ['workflow', 'gap'],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'learn-by-problems', label: 'LEARN BY PROBLEMS', triggers: ['engineering problems', 'underlying problems'], answerSectionId: 'point' }, { id: 'temporal-bridge', label: 'TEMPORAL BRIDGE', triggers: ['retries', 'checkpoints', 'durable state'], answerSectionId: 'example' }, { id: 'ai-transition', label: 'AI TRANSITION', triggers: ['OCR', 'retrieval', 'LLM integration'], answerSectionId: 'result' }, { id: 'adapt', label: 'ADAPT QUICKLY', triggers: ['new abstractions', 'learn the tool'], answerSectionId: 'extra' }] }
   },
   {
     id: 12,
@@ -529,7 +542,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['E'],
     clusterIds: ['tool-calling'],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'goal-context', label: 'GOAL → CONTEXT', triggers: ['user goal', 'authorized context'], answerSectionId: 'point' }, { id: 'backend-tools', label: 'BACKEND TOOLS', triggers: ['tool contract', 'permission', 'structured result'], answerSectionId: 'result' }, { id: 'reliability', label: 'RELIABILITY', triggers: ['run IDs', 'retry / recovery', 'regression'], answerSectionId: 'extra' }, { id: 'backend-control', label: 'BACKEND CONTROL', triggers: ['data', 'permissions', 'execution'], answerSectionId: 'section-7' }] }
   },
   {
     id: 13,
@@ -654,39 +667,46 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I would evaluate **retrieval** and the **final answer** separately.",
-        vi: "Mình đánh giá retrieval và câu trả lời cuối tách biệt.",
+        en: "*For me,* / I separate **retrieval behavior**, **answer grounding**, / and **runtime behavior**.",
+        vi: "**Với tôi,** / tôi tách việc đánh giá thành **retrieval behavior**, **answer grounding**, / và **runtime behavior**.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / if retrieval gives the wrong evidence, / the final LLM answer cannot be reliable even if it sounds good.",
-        vi: "Vì nếu retrieval trả evidence sai, câu trả lời cuối của LLM không đáng tin dù nghe hay.",
+        en: "*The main reason is that* / a good final answer depends on getting the **right evidence** first.",
+        vi: "**Lý do chính là** / một câu trả lời tốt phụ thuộc trước hết vào việc lấy được **đúng evidence**.",
       },
       {
         id: 'example',
-        en: "*For example,* / with a labeled test set, I can check whether the **relevant document or chunk** appears in the top results / and compare ranking quality when the retrieval strategy changes.",
-        vi: "Ví dụ với test set có label, mình kiểm document/chunk liên quan có trong top không và so sánh chất lượng ranking khi đổi chiến lược retrieval.",
+        en: "*For example,* / in Clincove, I implemented and tested **hybrid retrieval** with PostgreSQL full-text search, **pgvector**, and **RRF**. / I tested things like **ranking, scope isolation, fallback behavior**, / and whether the nearest vector result was returned correctly.",
+        vi: "**Ví dụ,** / trong Clincove, tôi trực tiếp implement và test **hybrid retrieval** với PostgreSQL full-text search, **pgvector**, và **RRF**. / Tôi test các phần như **ranking, scope isolation, fallback behavior**, / và kiểm tra liệu kết quả vector gần nhất có được trả về đúng hay không.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / after retrieval, I check whether the final answer is **correct, grounded in the evidence**, / and avoids unsupported claims.",
-        vi: "Sau retrieval mình kiểm câu trả lời cuối có đúng, có bám vào evidence và tránh khẳng định không có căn cứ.",
+        en: "*After that,* / I also check the **provenance and citations**. / The citation should point to a real **document, page, text span, or bounding box**, / and unresolved citations should not be invented.",
+        vi: "**Sau đó,** / tôi cũng kiểm tra **provenance và citation**. / Citation phải trỏ về đúng **document, page, text span hoặc bounding box**, / và nếu citation không resolve được thì hệ thống không được tự bịa ra.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I also track **latency, embedding failures, empty retrieval, token cost, and fallback rate**. / I keep a stable eval dataset / and rerun it when embeddings, ranking, prompts, or models change.",
-        vi: "Đồng thời theo dõi latency, lỗi embedding, retrieval rỗng, chi phí token và tỉ lệ fallback. Giữ eval dataset ổn định và rerun mỗi khi thay embeddings, ranking, prompt hay model.",
+        en: "*At the same time,* / I also look at runtime signals such as **search latency, empty results, embedding failures**, / and whether the system falls back to lexical search when needed.",
+        vi: "**Đồng thời,** / tôi cũng xem các tín hiệu runtime như **search latency, empty results, embedding failures**, / và liệu hệ thống có fallback sang lexical search khi cần hay không.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / I evaluate the system at three levels: **retrieval quality, answer quality, and production metrics** / so I can detect regressions clearly.",
-        vi: "Tóm lại, mình đánh giá 3 mức: chất lượng retrieval, chất lượng trả lời và metric production — để phát hiện regression rõ ràng.",
+        en: "*So overall,* / my direct experience is mainly with **retrieval regression, grounding, and runtime behavior**. / For a more formal RAG evaluation, / I would add a **stable labeled dataset** and metrics like **Recall@K or MRR**.",
+        vi: "**Tóm lại,** / kinh nghiệm trực tiếp của tôi mạnh nhất ở **retrieval regression, grounding và runtime behavior**. / Nếu làm formal RAG evaluation đầy đủ hơn, / tôi sẽ thêm một **stable labeled dataset** và các metric như **Recall@K hoặc MRR**.",
       },
     ] },
     contextIds: ['B', 'G'],
     clusterIds: ['rag', 'quality', 'production-ai'],
     storyIds: ['hybrid-rag'],
-    memory: { nodes: [] }
+    memory: { nodes: [
+      { id: 'rag-layers', label: 'RAG LAYERS', triggers: ['retrieval behavior', 'answer grounding', 'runtime behavior'], answerSectionId: 'point' },
+      { id: 'RIGHT-EVIDENCE', label: 'RIGHT EVIDENCE', triggers: ['good final answer', 'correct evidence first'], answerSectionId: 'reason' },
+      { id: 'RETRIEVAL-REGRESSION', label: 'RETRIEVAL REGRESSION', triggers: ['Clincove', 'BM25 / pgvector / RRF', 'ranking / scope / fallback'], answerSectionId: 'example' },
+      { id: 'CITATION', label: 'CITATION + PROVENANCE', triggers: ['document / page', 'text span / bounding box', 'no invented citations'], answerSectionId: 'result' },
+      { id: 'RUNTIME', label: 'RUNTIME SIGNALS', triggers: ['search latency', 'empty results', 'embedding failures', 'lexical fallback'], answerSectionId: 'close' },
+      { id: 'FORMAL-EVAL', label: 'FORMAL EVAL', triggers: ['stable labeled dataset', 'Recall@K', 'MRR'], answerSectionId: 'extra' },
+    ] }
   },
   {
     id: 16,
@@ -728,7 +748,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['H'],
     clusterIds: ['tool-calling', 'tool-safety'],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'least-privilege', label: 'LEAST PRIVILEGE', triggers: ['only needed tools', 'limited access'], answerSectionId: 'point' }, { id: 'validate-authorize', label: 'VALIDATE + AUTHORIZE', triggers: ['schema', 'arguments', 'permission'], answerSectionId: 'example' }, { id: 'confirm-sensitive', label: 'CONFIRM SENSITIVE', triggers: ['sensitive data', 'destructive actions', 'confirmation'], answerSectionId: 'result' }, { id: 'audit-idempotency', label: 'AUDIT + IDEMPOTENCY', triggers: ['correlation IDs', 'avoid sensitive logs', 'idempotency'], answerSectionId: 'close' }, { id: 'backend-controls', label: 'BACKEND CONTROLS', triggers: ['access', 'validation', 'execution', 'audit'], answerSectionId: 'extra' }] }
   },
   {
     id: 17,
@@ -770,7 +790,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['D'],
     clusterIds: ['ocr'],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'incident', label: 'OCR INCIDENT', triggers: ['large PDFs', 'memory growth', 'worker crash'], answerSectionId: 'point' }, { id: 'root-cause', label: 'ROOT CAUSE', triggers: ['trace flow', 'targeted logging', 'batch sizes'], answerSectionId: 'example' }, { id: 'stabilize', label: 'STABILIZE', triggers: ['smaller batches', 'checkpoint', 'recovery'], answerSectionId: 'result' }, { id: 'gpu-service', label: 'GPU SERVICE', triggers: ['DevOps', 'remote GPU', 'backend workflow'], answerSectionId: 'close' }, { id: 'safe-rollout', label: 'SAFE ROLLOUT', triggers: ['worker stability', 'job completion', 'processing time'], answerSectionId: 'extra' }] }
   },
   {
     id: 18,
@@ -854,7 +874,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['J'],
     clusterIds: [],
-    memory: { nodes: [] }
+    memory: { nodes: [{ id: 'understand-first', label: 'UNDERSTAND FIRST', triggers: ['technical decision', 'why the team chose it'], answerSectionId: 'point' }, { id: 'tradeoffs', label: 'TRADE-OFFS', triggers: ['delivery time', 'risk', 'architecture', 'business priority'], answerSectionId: 'reason' }, { id: 'evidence', label: 'BRING EVIDENCE', triggers: ['logs', 'performance data', 'failure cases'], answerSectionId: 'example' }, { id: 'options', label: 'OPTIONS', triggers: ['trade-offs', 'more than one option'], answerSectionId: 'result' }, { id: 'execute', label: 'EXECUTE', triggers: ['support decision', 'small test', 'controlled rollout'], answerSectionId: 'close' }, { id: 'better-result', label: 'BETTER RESULT', triggers: ['clearer decision', 'better system result'], answerSectionId: 'extra' }] }
   },
   {
     id: 20,
@@ -1008,8 +1028,33 @@ export const finalMindset: { label: string; body: string }[] = [
 ];
 
 
+const followUpPrompts: Record<number, { id: string; question: { en: string; vi: string } }[]> = {
+  1: [{ id: 'production-example', question: { en: 'What was the most difficult production issue in that system?', vi: 'Vấn đề production khó nhất trong hệ thống đó là gì?' } }],
+  2: [{ id: 'ranking-tradeoff', question: { en: 'What trade-off did you make between retrieval quality and latency?', vi: 'Bạn đã cân bằng chất lượng retrieval và latency như thế nào?' } }],
+  3: [{ id: 'retry-boundary', question: { en: 'How do you decide when to retry and when to fail fast?', vi: 'Bạn quyết định retry hay fail fast dựa trên điều gì?' } }],
+  4: [{ id: 'incident-result', question: { en: 'How did you verify that the production fix actually worked?', vi: 'Bạn xác minh bản fix production thực sự hiệu quả như thế nào?' } }],
+  5: [{ id: 'agent-safety', question: { en: 'What happens if an agent chooses the wrong tool?', vi: 'Điều gì xảy ra nếu agent chọn sai tool?' } }],
+  6: [{ id: 'workflow-recovery', question: { en: 'How would the workflow recover after a worker failure?', vi: 'Workflow phục hồi thế nào sau khi worker bị lỗi?' } }],
+  7: [{ id: 'agent-boundary', question: { en: 'Which parts should an agent decide, and which parts must stay deterministic?', vi: 'Phần nào để agent quyết định, phần nào phải deterministic?' } }],
+  8: [{ id: 'eval-signal', question: { en: 'Which evaluation signal would you trust most and why?', vi: 'Bạn tin evaluation signal nào nhất và vì sao?' } }],
+  9: [{ id: 'backend-transfer', question: { en: 'Which backend skill transfers most directly to an AI role?', vi: 'Kỹ năng backend nào chuyển sang vai trò AI trực tiếp nhất?' } }],
+  10: [{ id: 'tool-permission', question: { en: 'How would you prevent an unsafe tool call?', vi: 'Bạn ngăn một tool call không an toàn như thế nào?' } }],
+  11: [{ id: 'learning-plan', question: { en: 'How would you learn an unfamiliar AI stack quickly?', vi: 'Bạn sẽ học một AI stack chưa quen thật nhanh như thế nào?' } }],
+  12: [{ id: 'everfit-tradeoff', question: { en: 'What would you build first for this system and why?', vi: 'Bạn sẽ xây phần nào trước cho hệ thống này và vì sao?' } }],
+  13: [{ id: 'cost-latency', question: { en: 'If latency and cost conflict, how would you choose?', vi: 'Nếu latency và chi phí mâu thuẫn, bạn sẽ chọn thế nào?' } }],
+  14: [{ id: 'hallucination-fallback', question: { en: 'What would you do when retrieval is incomplete?', vi: 'Bạn sẽ làm gì khi retrieval không đầy đủ?' } }],
+  15: [{ id: 'rag-metric', question: { en: 'Which metric would you check first when RAG quality drops?', vi: 'Bạn kiểm tra metric nào đầu tiên khi chất lượng RAG giảm?' } }],
+  16: [{ id: 'security-boundary', question: { en: 'Where would you enforce the permission check?', vi: 'Bạn sẽ enforce permission check ở đâu?' } }],
+  17: [{ id: 'ocr-bottleneck', question: { en: 'How would you confirm the real OCR bottleneck?', vi: 'Bạn xác nhận bottleneck thật sự của OCR như thế nào?' } }],
+  18: [{ id: 'background-jobs', question: { en: 'How would you make the background job safe to retry?', vi: 'Bạn làm background job an toàn khi retry như thế nào?' } }],
+  19: [{ id: 'disagreement-evidence', question: { en: 'How do you handle disagreement when the team has different priorities?', vi: 'Bạn xử lý bất đồng khi team có ưu tiên khác nhau thế nào?' } }],
+  20: [{ id: 'gap-example', question: { en: 'Can you give a concrete example of a similar problem you have solved?', vi: 'Bạn có thể đưa ví dụ cụ thể về vấn đề tương tự đã giải quyết không?' } }],
+  21: [{ id: 'follow-up-example', question: { en: 'What was the main trade-off in that example?', vi: 'Trade-off chính trong ví dụ đó là gì?' } }],
+};
+
 export const interviewQuestions: InterviewQuestion[] = (rawInterviewQuestions as InterviewQuestion[]).map((question) => ({
   ...question,
+  followUps: followUpPrompts[question.id],
   audio: {
     full: `/audio/interview/q${String(question.id).padStart(2, '0')}/full.mp3`,
     alignment: `/audio/interview/q${String(question.id).padStart(2, '0')}/alignment.json`,

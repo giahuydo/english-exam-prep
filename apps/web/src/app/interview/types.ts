@@ -12,6 +12,12 @@ export type PhraseCluster = { id: ClusterId; title: string; path: string[] };
 export type HeroStory = { id: StoryId; title: string; path: string[] };
 export type Trigger = { id: TriggerId; phrases: string; contextIds: ContextId[] };
 export type MemoryNode = { id: string; label: string; triggers: string[]; phrase?: string; answerSectionId?: string };
+export type InterviewFollowUp = {
+  id: string;
+  question: Bilingual;
+  answer?: { sections: AnswerSection[] };
+  memory?: { nodes: MemoryNode[] };
+};
 export type InterviewQuestion = {
   id: QuestionId;
   question: Bilingual;
@@ -21,4 +27,5 @@ export type InterviewQuestion = {
   clusterIds: ClusterId[];
   storyIds?: StoryId[];
   memory: { nodes: MemoryNode[] };
+  followUps?: InterviewFollowUp[];
 };
