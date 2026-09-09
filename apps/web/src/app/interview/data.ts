@@ -1,4 +1,4 @@
-import type { InterviewQuestion } from './types';
+import type { InterviewFollowUp, InterviewQuestion } from './types';
 
 export type { Bilingual, InterviewQuestion } from './types';
 
@@ -236,38 +236,33 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I have not used **Temporal directly in production** yet.",
-        vi: "Mình chưa dùng Temporal trực tiếp trong production.",
+        en: "*No,* / I have not used **Temporal in production**. / But at my company, / we built two systems that solve the same problems. / So I understand the **ideas** well.",
+        vi: "Chưa, mình chưa dùng Temporal trong production. Nhưng ở công ty, tụi mình đã xây hai hệ thống giải quyết những vấn đề tương tự. Vì vậy mình hiểu khá rõ các ý tưởng phía sau.",
       },
       {
-        id: 'reason',
-        en: "*The main reason is that* / I have already worked with many of the same problems: **long-running jobs, retries, checkpoints, idempotency, failure recovery**, / and multi-step processing.",
-        vi: "Nhưng mình đã xử lý nhiều vấn đề tương tự: job chạy lâu, retry, checkpoint, idempotency, phục hồi lỗi và xử lý nhiều bước.",
+        id: 'pipeline',
+        en: "*The first one is* a **document pipeline**. / It has three steps: / **build, publish, and ingest**. / We save the **job state** in Postgres. / Each job has a status, / like pending, processing, ready, or failed. / The worker sends a **heartbeat** every few seconds. / If a job is stuck, / a cron job marks it as failed. / If it fails for a small reason, / we can **retry** it. / We also use an **outbox pattern**. / This means we save the event in the database first, / then send it later. / So we never lose an event, / even when the worker crashes. / We also have an admin page. / The admin can see all jobs, / filter by step, / and retry any failed job.",
+        vi: "Hệ thống đầu tiên là document pipeline. Nó có ba bước: build, publish và ingest. Tụi mình lưu trạng thái job trong Postgres. Mỗi job có trạng thái như pending, processing, ready hoặc failed. Worker gửi heartbeat vài giây một lần. Nếu job bị kẹt, cron job đánh dấu nó là failed. Nếu lỗi nhỏ, tụi mình có thể retry. Tụi mình cũng dùng outbox pattern: lưu event vào database trước rồi gửi sau. Vì vậy event không bị mất kể cả khi worker crash. Tụi mình còn có trang admin để xem tất cả job, lọc theo step và retry job failed.",
       },
       {
-        id: 'example',
-        en: "*For example,* / in our document pipeline, / if a job fails in the middle, / we do not want to restart the **whole workflow from the beginning**.",
-        vi: "Ví dụ trong pipeline tài liệu, nếu job fail giữa chừng, tụi mình không muốn phải chạy lại toàn bộ từ đầu.",
+        id: 'agent-engine',
+        en: "*The second one is* an **AI agent engine**. / This one is more like Temporal. / We write the **workflow in JSON**. / Each run is one process. / We set limits — / max steps, max tool calls, max cost. / So a run cannot loop forever. / We have two **timeouts**: / a soft one, / and a hard one that kills the process. / We support outside events, / like a webhook or a human approval. / We support **sub-jobs** — / one workflow can start another. / Every step is saved as an event. / We have a UI to **replay** / and check what happened.",
+        vi: "Hệ thống thứ hai là AI agent engine. Hệ thống này giống Temporal hơn. Tụi mình viết workflow bằng JSON. Mỗi lần chạy là một process. Tụi mình đặt giới hạn về số step, số lần gọi tool và chi phí tối đa, nên process không thể loop vô hạn. Tụi mình có hai timeout: một timeout mềm và một timeout cứng để kill process. Tụi mình hỗ trợ event bên ngoài như webhook hoặc người dùng phê duyệt. Tụi mình hỗ trợ sub-job, nghĩa là một workflow có thể khởi chạy workflow khác. Mỗi step được lưu thành event. Tụi mình có UI để replay và kiểm tra chuyện gì đã xảy ra.",
       },
       {
-        id: 'result',
-        en: "*Because of that,* / I understand why a durable workflow system is useful. / From what I understand, Temporal persists **workflow state** / and separates external work into **activities**, / which makes retry and recovery easier to manage.",
-        vi: "Vì vậy mình hiểu tại sao workflow bền vững là quan trọng. Theo mình hiểu, Temporal lưu state workflow và tách công việc bên ngoài thành activity, giúp retry/recovery dễ hơn.",
+        id: 'concepts',
+        en: "*So I know the main ideas:* / how to **save state**, / how to **retry safely**, / how to handle **timeouts**, / how to add **heartbeats**, / how to receive signals from outside, / and how to run **sub-workflows**.",
+        vi: "Vì vậy mình hiểu các ý tưởng chính: lưu state, retry an toàn, xử lý timeout, thêm heartbeat, nhận signal từ bên ngoài và chạy sub-workflow.",
       },
       {
-        id: 'close',
-        en: "*At the same time,* / I know I still need to learn Temporal's specific **programming model, APIs, and best practices**.",
-        vi: "Đồng thời mình biết vẫn cần học programming model, API và best practice cụ thể của Temporal.",
-      },
-      {
-        id: 'extra',
-        en: "*So overall,* / my main gap is the **tool itself**, / not the underlying distributed workflow concepts.",
-        vi: "Tóm lại, gap chính của mình là bản thân tool, không phải khái niệm workflow phân tán bên dưới.",
+        id: 'gap',
+        en: "*What I need to learn* / is the **Temporal library itself**. / The specific API, / the rules to write a workflow, / and how the **replay** works. / I think one or two weeks is enough. / Because I already know why Temporal is designed this way.",
+        vi: "Điều mình cần học là chính thư viện Temporal: API cụ thể, các quy tắc để viết workflow và cách replay hoạt động. Mình nghĩ một hoặc hai tuần là đủ, vì mình đã hiểu tại sao Temporal được thiết kế như vậy.",
       },
     ] },
     contextIds: ['F'],
     clusterIds: ['error-handling', 'workflow', 'gap'],
-    memory: { nodes: [{ id: 'gap', label: 'TOOL GAP', triggers: ['not Temporal directly', 'tool itself'], answerSectionId: 'point' }, { id: 'shared-problems', label: 'SHARED PROBLEMS', triggers: ['long-running jobs', 'retry / checkpoint', 'idempotency'], answerSectionId: 'reason' }, { id: 'durable-workflow', label: 'DURABLE WORKFLOW', triggers: ['workflow state', 'activities', 'recovery'], answerSectionId: 'result' }, { id: 'honest-summary', label: 'HONEST SUMMARY', triggers: ['learn APIs', 'distributed workflow concepts'], answerSectionId: 'extra' }] }
+    memory: { nodes: [{ id: 'tool-gap', label: 'TOOL GAP', triggers: ['not used in production', 'Temporal library', 'specific API'], answerSectionId: 'point' }, { id: 'document-pipeline', label: 'DOCUMENT PIPELINE', triggers: ['build / publish / ingest', 'job state', 'heartbeat', 'outbox pattern'], answerSectionId: 'pipeline' }, { id: 'agent-engine', label: 'AI AGENT ENGINE', triggers: ['workflow in JSON', 'limits / timeouts', 'outside events', 'sub-jobs'], answerSectionId: 'agent-engine' }, { id: 'CORE IDEAS', label: 'CORE IDEAS', triggers: ['save state', 'safe retry', 'heartbeats', 'sub-workflows'], answerSectionId: 'concepts' }, { id: 'LEARNING GAP', label: 'LEARNING GAP', triggers: ['Temporal API', 'workflow rules', 'replay'], answerSectionId: 'gap' }] }
   },
   {
     id: 7,
@@ -1030,13 +1025,29 @@ export const finalMindset: { label: string; body: string }[] = [
 ];
 
 
-const followUpPrompts: Record<number, { id: string; question: { en: string; vi: string } }[]> = {
+const followUpPrompts: Record<number, InterviewFollowUp[]> = {
   1: [{ id: 'production-example', question: { en: 'What was the most difficult production issue in that system?', vi: 'Vấn đề production khó nhất trong hệ thống đó là gì?' } }],
   2: [{ id: 'ranking-tradeoff', question: { en: 'What trade-off did you make between retrieval quality and latency?', vi: 'Bạn đã cân bằng chất lượng retrieval và latency như thế nào?' } }],
   3: [{ id: 'retry-boundary', question: { en: 'How do you decide when to retry and when to fail fast?', vi: 'Bạn quyết định retry hay fail fast dựa trên điều gì?' } }],
   4: [{ id: 'incident-result', question: { en: 'How did you verify that the production fix actually worked?', vi: 'Bạn xác minh bản fix production thực sự hiệu quả như thế nào?' } }],
   5: [{ id: 'agent-safety', question: { en: 'What happens if an agent chooses the wrong tool?', vi: 'Điều gì xảy ra nếu agent chọn sai tool?' } }],
-  6: [{ id: 'workflow-recovery', question: { en: 'How would the workflow recover after a worker failure?', vi: 'Workflow phục hồi thế nào sau khi worker bị lỗi?' } }],
+  6: [
+    {
+      id: 'why-not-temporal',
+      question: { en: 'Why did you not use Temporal from the start?', vi: 'Tại sao ngay từ đầu bạn không dùng Temporal?' },
+      answer: { sections: [{ id: 'reason', en: "*For our pipeline,* / we needed to use **Postgres transactions** for safety. / It was easier to build our own. / For the AI engine, / we use **Elixir**. / Elixir has these features built in.", vi: 'Với pipeline, tụi mình cần dùng transaction của Postgres để đảm bảo an toàn nên tự xây sẽ dễ hơn. Với AI engine, tụi mình dùng Elixir vì Elixir có sẵn các tính năng này.' }] },
+    },
+    {
+      id: 'outbox-pattern',
+      question: { en: 'Can you explain the outbox pattern?', vi: 'Bạn có thể giải thích outbox pattern không?' },
+      answer: { sections: [{ id: 'explain', en: "*Sure.* / When the job finishes, / we save the event in the same **database transaction** as the job status. / Then a separate worker reads the event table and sends the event. / So even if we crash, / the event is safe in the database.", vi: 'Khi job hoàn thành, tụi mình lưu event trong cùng transaction database với trạng thái job. Sau đó worker riêng đọc bảng event và gửi event. Vì vậy kể cả khi hệ thống crash, event vẫn an toàn trong database.' }] },
+    },
+    {
+      id: 'replay',
+      question: { en: 'How does the replay work in your system?', vi: 'Replay hoạt động thế nào trong hệ thống của bạn?' },
+      answer: { sections: [{ id: 'explain', en: "*We save every step as an event in the database.* / In the UI, / we can open any past run / and see all the events in order. / But it is **not the same as Temporal** — / we do not re-run the code, / we just show the history.", vi: 'Tụi mình lưu mỗi step thành một event trong database. Trên UI, có thể mở bất kỳ lần chạy nào trong quá khứ và xem các event theo thứ tự. Nhưng nó không giống Temporal: tụi mình không chạy lại code, chỉ hiển thị lịch sử.' }] },
+    },
+  ],
   7: [{ id: 'agent-boundary', question: { en: 'Which parts should an agent decide, and which parts must stay deterministic?', vi: 'Phần nào để agent quyết định, phần nào phải deterministic?' } }],
   8: [{ id: 'eval-signal', question: { en: 'Which evaluation signal would you trust most and why?', vi: 'Bạn tin evaluation signal nào nhất và vì sao?' } }],
   9: [{ id: 'backend-transfer', question: { en: 'Which backend skill transfers most directly to an AI role?', vi: 'Kỹ năng backend nào chuyển sang vai trò AI trực tiếp nhất?' } }],
@@ -1060,7 +1071,7 @@ const speakingCueOverrides: Record<number, Record<string, string>> = {
   3: { point: 'I check the whole workflow to find', reason: 'A bad result can come from', example: 'For temporary failures like', result: 'I first separate temporary errors from', close: 'I normally track the' },
   4: { point: 'One example was a document OCR workflow', reason: 'Reducing the batch size helped for a while', example: 'I traced the processing flow', result: 'I confirmed that the main bottleneck was', close: 'I worked with DevOps to move' },
   5: { point: 'I would not put everything into one large LLM call', reason: 'Clear step boundaries make the system easier to', example: 'The flow can be', result: 'The backend should control tool execution', close: 'For longer workflows, I would persist' },
-  6: { point: 'I have not used Temporal directly in production yet', reason: 'I have already worked with many of the same problems', example: 'In our document pipeline, if a job fails', result: 'I understand why a durable workflow system is useful', close: 'I still need to learn Temporal’s specific' },
+  6: { point: 'I have not used Temporal in production', pipeline: 'The first one is a document pipeline', 'agent-engine': 'The second one is an AI agent engine', concepts: 'So I know the main ideas', gap: 'What I need to learn is the Temporal library itself' },
   7: { point: 'I have not spent several years building fully autonomous AI agents', reason: 'Many important agent building blocks are already familiar', example: 'I have worked with', result: 'I think of an agent as a controlled workflow', close: 'My direct agent experience is still growing' },
   8: { point: 'I have hands-on experience with AI evaluation', reason: 'In production AI, I want to know whether', example: 'In our document AI work, we used', result: 'My direct work was more on', close: 'I also worked on citation and provenance', extra: 'The wider StrangeLoop platform also has' },
   9: { point: 'My strongest foundation is backend engineering', reason: 'In production, an AI feature is not only the model', example: 'Those are areas where I already have', result: 'I can focus on growing deeper in AI', close: 'Recently I have been working more with' },
