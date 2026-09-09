@@ -5,7 +5,7 @@ export type StoryId = 'hybrid-rag' | 'llm-reliability' | 'ocr-cpu-gpu';
 export type TriggerId = 'reliability' | 'agent-tools' | 'workflow' | 'quality' | 'security' | 'retrieval';
 
 export type Bilingual = { en: string; vi: string };
-export type AnswerSection = Bilingual & { id: string };
+export type AnswerSection = Bilingual & { id: string; speakingCue?: string };
 export type InterviewAudio = { full?: string; alignment?: string; sections?: Partial<Record<string, string>> };
 export type Context = { id: ContextId; title: string; path: string[] };
 export type PhraseCluster = { id: ClusterId; title: string; path: string[] };

@@ -905,6 +905,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'direction',
+        speakingCue: 'I want to keep growing in',
         en: '*For my next step,* / I want to keep growing in backend engineering, / but also work more deeply with **data and AI in real products**.',
         vi: '',
       },
@@ -959,6 +960,7 @@ const rawInterviewQuestions = [
       },
       {
         id: 'contribution',
+        speakingCue: 'I believe my backend experience can help me',
         en: '*At the same time,* / I believe my **backend experience** can help me **contribute from the beginning**.',
         vi: '',
       },
@@ -1052,8 +1054,33 @@ const followUpPrompts: Record<number, { id: string; question: { en: string; vi: 
   21: [{ id: 'follow-up-example', question: { en: 'What was the main trade-off in that example?', vi: 'Trade-off chính trong ví dụ đó là gì?' } }],
 };
 
+const speakingCueOverrides: Record<number, Record<string, string>> = {
+  1: { point: 'My main background is', reason: 'In production, an AI feature is not only about', example: 'In my recent project, I have worked more with', result: 'I have experience with both', close: 'I would describe my strength as' },
+  2: { point: 'I prefer not to rely on only one type of search', reason: 'Lexical search is good for', example: 'The lexical side uses', result: 'We combine the two rankings with', close: 'We also think about failure and security', extra: 'The goal is to make retrieval more' },
+  3: { point: 'I check the whole workflow to find', reason: 'A bad result can come from', example: 'For temporary failures like', result: 'I first separate temporary errors from', close: 'I normally track the' },
+  4: { point: 'One example was a document OCR workflow', reason: 'Reducing the batch size helped for a while', example: 'I traced the processing flow', result: 'I confirmed that the main bottleneck was', close: 'I worked with DevOps to move' },
+  5: { point: 'I would not put everything into one large LLM call', reason: 'Clear step boundaries make the system easier to', example: 'The flow can be', result: 'The backend should control tool execution', close: 'For longer workflows, I would persist' },
+  6: { point: 'I have not used Temporal directly in production yet', reason: 'I have already worked with many of the same problems', example: 'In our document pipeline, if a job fails', result: 'I understand why a durable workflow system is useful', close: 'I still need to learn Temporal’s specific' },
+  7: { point: 'I have not spent several years building fully autonomous AI agents', reason: 'Many important agent building blocks are already familiar', example: 'I have worked with', result: 'I think of an agent as a controlled workflow', close: 'My direct agent experience is still growing' },
+  8: { point: 'I have hands-on experience with AI evaluation', reason: 'In production AI, I want to know whether', example: 'In our document AI work, we used', result: 'My direct work was more on', close: 'I also worked on citation and provenance', extra: 'The wider StrangeLoop platform also has' },
+  9: { point: 'My strongest foundation is backend engineering', reason: 'In production, an AI feature is not only the model', example: 'Those are areas where I already have', result: 'I can focus on growing deeper in AI', close: 'Recently I have been working more with' },
+  10: { point: 'I have hands-on experience with tool calling', reason: 'In Clincove, the model can use', example: 'The backend checks permission and scope', result: 'We design the tool interface in a familiar way', close: 'I also worked on tool safety and tracking' },
+  11: { point: 'I normally learn a new technology by connecting it to', reason: 'Many of the underlying problems stay the same', example: 'When I study Temporal, I connect it to', result: 'This is also how I moved from traditional backend work into', close: 'Every new stack still has its own' },
+  12: { point: 'I would start with the user goal', reason: 'I would not send the whole database to the model', example: 'If a user asks about training progress', result: 'I would expose a small set of backend tools', close: 'This is similar to what I worked with in Clincove', extra: 'I would track run IDs, tool calls, latency, and errors' },
+  13: { point: 'I try to control latency and cost in several layers', reason: 'Every extra model call or extra token can', example: 'I use normal backend logic, filtering, and retrieval', result: 'I try to keep the context small', close: 'I use timeouts and bounded retries', extra: 'I also use checkpoint and recovery' },
+  14: { point: 'The first step is to give the model', reason: 'If the context is wrong', example: 'For knowledge-based questions, I prefer', result: 'For machine-consumed output, I prefer', close: 'I would use eval cases for', extra: 'We can reduce and control the risk' },
+  15: { point: 'I separate retrieval behavior, answer grounding, and runtime behavior', reason: 'A good final answer depends on getting', example: 'In Clincove, I implemented and tested', result: 'I also check the provenance and citations', close: 'I also look at runtime signals such as', extra: 'For a more formal RAG evaluation, I would add' },
+  16: { point: 'I would start with least privilege', reason: 'The model should never have unlimited access to', example: 'Each tool should have a clear schema', result: 'Sensitive data should be minimized', close: 'I would log tool calls and results with' },
+  17: { point: 'One example was a production issue with', reason: 'I did not want to assume the worker itself was', example: 'I traced the processing flow', result: 'I first made the current flow more stable', close: 'I handled the backend and workflow side' },
+  18: { point: 'I would not keep an HTTP request open', reason: 'Long-running work can take time or fail', example: 'A worker can process the job in the background', result: 'I can clearly separate temporary errors from', close: 'I also keep the job status clear' },
+  19: { point: 'When I disagree with a technical decision', reason: 'Sometimes the decision is not only about technology', example: 'I bring evidence like', result: 'I can explain the trade-offs more clearly', close: 'Once the team makes a decision', extra: 'A good technical disagreement is not about' },
+  20: { point: 'My name is Huy', foundation: 'My main background is', recent: 'Recently, I’ve been working more with', ownership: 'In my current project, I mainly work on', direction: 'I want to keep growing in', close: 'I think this position at Everfit is' },
+  21: { direction: 'I want to keep growing in', reason: 'This position combines backend work with AI', recent: 'Recently I’ve had some chances to work on', everfit: 'I also like Everfit because', challenge: 'I feel this is a good place for me to', contribution: 'I believe my backend experience can help me', close: 'I think this position is a good match' },
+};
+
 export const interviewQuestions: InterviewQuestion[] = (rawInterviewQuestions as InterviewQuestion[]).map((question) => ({
   ...question,
+  answer: { sections: question.answer.sections.map((section) => ({ ...section, speakingCue: section.speakingCue ?? speakingCueOverrides[question.id]?.[section.id] })) },
   followUps: followUpPrompts[question.id],
   audio: {
     full: `/audio/interview/q${String(question.id).padStart(2, '0')}/full.mp3`,
