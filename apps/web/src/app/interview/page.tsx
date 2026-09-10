@@ -175,7 +175,13 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   useEffect(() => {
     if (!followVoice || audio.state !== 'playing' || !audio.activeRange) return;
     const activeHighlight = answerRef.current?.querySelector<HTMLElement>('[data-karaoke-active="true"]');
-    activeHighlight?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+    if (!activeHighlight) return;
+    const frame = window.requestAnimationFrame(() => {
+      const rect = activeHighlight.getBoundingClientRect();
+      const targetTop = Math.max(0, window.scrollY + rect.top - window.innerHeight * 0.4);
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [audio.activeKey, audio.activeRange, audio.state, followVoice]);
   useEffect(() => {
     if (!followVoice || audio.state === 'idle') return;
