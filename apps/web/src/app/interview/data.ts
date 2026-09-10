@@ -712,38 +712,38 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I would start with **least privilege** / and only expose the tools the agent actually needs.",
-        vi: "Mình bắt đầu bằng least privilege — chỉ expose các tool agent thực sự cần.",
+        en: "*For me,* / I start with **least privilege**. / The agent should only have the **tools it really needs**.",
+        vi: "*Với tôi,* / tôi bắt đầu với **least privilege**. / Agent chỉ nên có **những tool mà nó thực sự cần**.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / the model should never have unlimited access to **internal services or databases**.",
-        vi: "Vì model không nên có quyền truy cập không giới hạn vào service nội bộ hay database.",
+        en: "*The main reason is that* / the model should not have direct access to **internal services** / or **databases**.",
+        vi: "*Lý do chính là* / model không nên được truy cập trực tiếp vào **internal services hoặc database**.",
       },
       {
         id: 'example',
-        en: "*For example,* / each tool should have a clear **schema and limited responsibility**. / Before execution, the backend validates the arguments / and checks the user's **permission** through the normal authorization layer.",
-        vi: "Ví dụ, mỗi tool có schema rõ và trách nhiệm giới hạn. Trước khi chạy, backend validate tham số và check permission của user qua lớp authorization thông thường.",
+        en: "*For example,* / before a tool runs, / the backend checks the **arguments**, **permission**, / and **access scope**. / The model can **suggest an action**, / but the **backend makes the final decision**.",
+        vi: "*Ví dụ,* / trước khi một tool chạy, / backend sẽ kiểm tra **arguments, permission và access scope**. / Model có thể đề xuất một action, / nhưng **backend mới là bên quyết định cuối cùng**.",
       },
       {
         id: 'result',
-        en: "*Because of that,* / sensitive data should be minimized, / and important or destructive actions may need **explicit user confirmation**.",
-        vi: "Vì vậy phải giảm thiểu dữ liệu nhạy cảm, và các hành động quan trọng/phá huỷ có thể cần user xác nhận rõ ràng.",
+        en: "*For sensitive actions,* / I would also require **user confirmation** / when needed.",
+        vi: "*Với các action nhạy cảm,* / tôi cũng sẽ yêu cầu **user confirmation** / khi cần.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I would log tool calls and results with **correlation IDs** while avoiding sensitive data in logs. / For write operations, I would use **idempotency** / so retries cannot accidentally duplicate an action.",
-        vi: "Đồng thời log tool call và kết quả kèm correlation ID nhưng tránh log dữ liệu nhạy cảm. Với operation ghi, dùng idempotency để retry không vô tình lặp hành động.",
+        en: "*At the same time,* / I keep **safe logs** with **IDs** / and avoid **sensitive data**. / For write actions, / I use **idempotency** / so retries do not create **duplicates**.",
+        vi: "*Đồng thời,* / tôi giữ **log an toàn** với các **ID để theo dõi**, / và tránh ghi dữ liệu nhạy cảm. / Với các thao tác ghi dữ liệu, / tôi dùng **idempotency** / để retry không tạo ra dữ liệu trùng.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / the model can suggest an action, / but the **backend controls access, validation, execution, and audit**.",
-        vi: "Tóm lại, model có thể đề xuất hành động nhưng backend kiểm soát truy cập, validate, thực thi và audit.",
+        en: "*So overall,* / the **LLM can suggest**, / but the **backend controls** **access**, **execution**, / and **safety**.",
+        vi: "*Tóm lại,* / **LLM có thể đề xuất**, / nhưng **backend kiểm soát quyền truy cập, việc thực thi và độ an toàn**.",
       },
     ] },
     contextIds: ['H'],
     clusterIds: ['tool-calling', 'tool-safety'],
-    memory: { nodes: [{ id: 'least-privilege', label: 'LEAST PRIVILEGE', triggers: ['only needed tools', 'limited access'], answerSectionId: 'point' }, { id: 'validate-authorize', label: 'VALIDATE + AUTHORIZE', triggers: ['schema', 'arguments', 'permission'], answerSectionId: 'example' }, { id: 'confirm-sensitive', label: 'CONFIRM SENSITIVE', triggers: ['sensitive data', 'destructive actions', 'confirmation'], answerSectionId: 'result' }, { id: 'audit-idempotency', label: 'AUDIT + IDEMPOTENCY', triggers: ['correlation IDs', 'avoid sensitive logs', 'idempotency'], answerSectionId: 'close' }, { id: 'backend-controls', label: 'BACKEND CONTROLS', triggers: ['access', 'validation', 'execution', 'audit'], answerSectionId: 'extra' }] }
+    memory: { nodes: [{ id: 'least-privilege', label: 'LEAST PRIVILEGE', triggers: ['only needed tools', 'limited access'], answerSectionId: 'point' }, { id: 'backend-check', label: 'BACKEND CHECK', triggers: ['arguments', 'permission', 'access scope', 'final decision'], answerSectionId: 'example' }, { id: 'confirm-sensitive', label: 'USER CONFIRMATION', triggers: ['sensitive actions', 'user confirmation'], answerSectionId: 'result' }, { id: 'safe-logs', label: 'SAFE LOGS', triggers: ['safe logs', 'IDs', 'avoid sensitive data'], answerSectionId: 'close' }, { id: 'idempotency', label: 'IDEMPOTENCY', triggers: ['write actions', 'safe retry', 'no duplicates'], answerSectionId: 'close' }, { id: 'backend-controls', label: 'LLM SUGGESTS', triggers: ['LLM can suggest', 'backend controls', 'access / execution / safety'], answerSectionId: 'extra' }] }
   },
   {
     id: 17,
@@ -1081,7 +1081,7 @@ const speakingCueOverrides: Record<number, Record<string, string>> = {
   13: { point: 'I try to control latency and cost in several layers', reason: 'Every extra model call or extra token can', example: 'I use normal backend logic, filtering, and retrieval', result: 'I try to keep the context small', close: 'I use timeouts and bounded retries', extra: 'I also use checkpoint and recovery' },
   14: { point: 'The first step is to give the model', reason: 'If the context is wrong', example: 'For knowledge-based questions, I prefer', result: 'For machine-consumed output, I prefer', close: 'I would use eval cases for', extra: 'We can reduce and control the risk' },
   15: { point: 'I separate retrieval behavior, answer grounding, and runtime behavior', reason: 'A good final answer depends on getting', example: 'In Clincove, I implemented and tested', result: 'I also check the provenance and citations', close: 'I also look at runtime signals such as', extra: 'For a more formal RAG evaluation, I would add' },
-  16: { point: 'I would start with least privilege', reason: 'The model should never have unlimited access to', example: 'Each tool should have a clear schema', result: 'Sensitive data should be minimized', close: 'I would log tool calls and results with' },
+  16: { point: 'I start with least privilege', reason: 'The model should not have direct access to', example: 'Before a tool runs, the backend checks', result: 'For sensitive actions, I would also require', close: 'I keep safe logs with IDs', extra: 'The LLM can suggest, but the backend controls' },
   17: { point: 'One example was a production issue with', reason: 'I did not want to assume the worker itself was', example: 'I traced the processing flow', result: 'I first made the current flow more stable', close: 'I handled the backend and workflow side' },
   18: { point: 'I would not keep an HTTP request open', reason: 'Long-running work can take time or fail', example: 'A worker can process the job in the background', result: 'I can clearly separate temporary errors from', close: 'I also keep the job status clear' },
   19: { point: 'When I disagree with a technical decision', reason: 'Sometimes the decision is not only about technology', example: 'I bring evidence like', result: 'I can explain the trade-offs more clearly', close: 'Once the team makes a decision', extra: 'A good technical disagreement is not about' },
