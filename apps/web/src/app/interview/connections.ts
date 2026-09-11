@@ -65,3 +65,24 @@ export function getMemoryNodes(questionId: QuestionId): MemoryNode[] {
   return question?.memory.nodes ?? [];
 }
 export function questionLabel(id: QuestionId) { return interviewQuestions.find((q) => q.id === id)?.question.en ?? `Question ${id}`; }
+
+export function searchQuestions(query: string) {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) return interviewQuestions.map((question) => ({ question, score: 0 }));
+  return interviewQuestions.map((question) => {
+    const questionContexts = contexts.filter((context) => question.contextIds.includes(context.id));
+    const questionClusters = phraseClusters.filter((cluster) => question.clusterIds.includes(cluster.id));
+    const questionStories = heroStories.filter((story) => question.storyIds?.includes(story.id));
+    const searchable = [
+      question.question.en,
+      question.question.vi,
+      ...question.answer.sections.flatMap((section) => [section.en, section.vi]),
+      ...questionContexts.flatMap((context) => [context.title, ...context.path]),
+      ...questionClusters.flatMap((cluster) => [cluster.title, ...cluster.path]),
+      ...questionStories.flatMap((story) => [story.title, ...story.path]),
+      ...question.memory.nodes.flatMap((node) => [node.label, ...node.triggers]),
+    ].join(' ').toLowerCase();
+    const score = terms.reduce((total, term) => total + (searchable.includes(term) ? 1 : 0), 0);
+    return { question, score };
+  }).filter((result) => result.score > 0).sort((a, b) => b.score - a.score || a.question.id - b.question.id);
+}

@@ -5,7 +5,7 @@ export type { Bilingual, InterviewQuestion } from './types';
 export const interviewIntro = {
   company: 'Everfit',
   role: 'Applied AI Backend Engineer',
-  subtitle: '20 Interview Questions — Speaking & Reaction Format',
+  subtitle: '22 Interview Questions — Speaking & Reaction Format',
   note: 'Natural B1–B2 speaking version. " / " là chỗ ngắt hơi khi nói. **In đậm** = từ khóa cần nhớ. *In nghiêng* = câu mở đầu chuyển ý.',
 };
 
@@ -218,9 +218,8 @@ const rawInterviewQuestions = [
         vi: "Tóm lại, dùng LLM để suy luận linh hoạt nhưng giữ các hành động backend quan trọng ở trạng thái xác định và có kiểm soát.",
       },
     ] },
-    contextIds: ['E'],
-    clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'production-ai'],
-    storyIds: ['llm-reliability'],
+    contextIds: ['E', 'H'],
+    clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'tool-safety', 'production-ai'],
     memory: { nodes: [
       { id: 'agent-context', label: 'INTENT → CONTEXT', triggers: ['user goal', 'authorized context', 'relevant data'], answerSectionId: 'point' },
       { id: 'tool-control', label: 'TOOL CONTROL', triggers: ['tool contract', 'validate arguments', 'permission check', 'execute'], answerSectionId: 'result' },
@@ -260,8 +259,8 @@ const rawInterviewQuestions = [
         vi: "Điều mình cần học là chính thư viện Temporal: API cụ thể, các quy tắc để viết workflow và cách replay hoạt động. Mình nghĩ một hoặc hai tuần là đủ, vì mình đã hiểu tại sao Temporal được thiết kế như vậy.",
       },
     ] },
-    contextIds: ['F'],
-    clusterIds: ['error-handling', 'workflow', 'gap'],
+    contextIds: ['F', 'I'],
+    clusterIds: ['error-handling', 'observability', 'workflow', 'gap'],
     memory: { nodes: [{ id: 'tool-gap', label: 'TOOL GAP', triggers: ['not used in production', 'Temporal library', 'specific API'], answerSectionId: 'point' }, { id: 'document-pipeline', label: 'DOCUMENT PIPELINE', triggers: ['build / publish / ingest', 'job state', 'heartbeat', 'outbox pattern'], answerSectionId: 'pipeline' }, { id: 'agent-engine', label: 'AI AGENT ENGINE', triggers: ['workflow in JSON', 'limits / timeouts', 'outside events', 'sub-jobs'], answerSectionId: 'agent-engine' }, { id: 'CORE IDEAS', label: 'CORE IDEAS', triggers: ['save state', 'safe retry', 'heartbeats', 'sub-workflows'], answerSectionId: 'concepts' }, { id: 'LEARNING GAP', label: 'LEARNING GAP', triggers: ['Temporal API', 'workflow rules', 'replay'], answerSectionId: 'gap' }] }
   },
   {
@@ -302,8 +301,8 @@ const rawInterviewQuestions = [
         vi: "Tóm lại, mình thẳng thắn về gap nhưng tự tin có thể phát triển tiếp trên nền backend và AI workflow đã có.",
       },
     ] },
-    contextIds: ['E'],
-    clusterIds: ['tool-calling', 'gap'],
+    contextIds: ['E', 'I'],
+    clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'rag', 'production-ai', 'gap'],
     memory: { nodes: [{ id: 'agent-gap', label: 'HONEST GAP', triggers: ['not fully autonomous agents', 'AI backend workflows'], answerSectionId: 'point' }, { id: 'building-blocks', label: 'BUILDING BLOCKS', triggers: ['retrieval', 'tool contracts', 'workflow state'], answerSectionId: 'example' }, { id: 'controlled-workflow', label: 'CONTROLLED WORKFLOW', triggers: ['intent / context', 'backend controls', 'validate'], answerSectionId: 'result' }, { id: 'foundation', label: 'PRODUCTION FOUNDATION', triggers: ['direct experience growing', 'production engineering'], answerSectionId: 'close' }] }
   },
   {
@@ -349,8 +348,9 @@ const rawInterviewQuestions = [
         vi: "**Tóm lại,** / tôi có kinh nghiệm thực tế với **AI evaluation và regression**, / đặc biệt ở **retrieval, grounding và document AI**, / và tôi cũng quen với các hệ thống **LLM/agent eval** chính thức.",
       },
     ] },
-    contextIds: ['G'],
-    clusterIds: ['observability', 'quality', 'production-ai', 'gap'],
+    contextIds: ['B', 'G'],
+    clusterIds: ['rag', 'quality', 'gap'],
+    storyIds: ['hybrid-rag'],
     memory: { nodes: [
       { id: 'hands-on-eval', label: 'AI EVAL HANDS-ON', triggers: ['hands-on experience', 'quality regression', 'not platform owner'], answerSectionId: 'point' },
       { id: 'benchmark-phi', label: 'BENCHMARK + PHI', triggers: ['offline benchmark', 'OCR / document AI', 'PHI leakage'], answerSectionId: 'example' },
@@ -397,8 +397,8 @@ const rawInterviewQuestions = [
         vi: "Tóm lại, mình đang xây dựng năng lực AI mạnh hơn trên nền backend production vững chắc.",
       },
     ] },
-    contextIds: ['A'],
-    clusterIds: [],
+    contextIds: ['A', 'B', 'D'],
+    clusterIds: ['rag', 'ocr', 'production-ai'],
     memory: { nodes: [{ id: 'backend-foundation', label: 'BACKEND FOUNDATION', triggers: ['backend engineering', 'production systems'], answerSectionId: 'point' }, { id: 'production-ai', label: 'PRODUCTION AI', triggers: ['data pipelines', 'retrieval / APIs', 'security'], answerSectionId: 'reason' }, { id: 'ai-growth', label: 'AI GROWTH', triggers: ['OCR', 'embeddings', 'LLM integration', 'GPU inference'], answerSectionId: 'close' }, { id: 'stronger-ai', label: 'STRONGER AI', triggers: ['AI capability', 'backend foundation'], answerSectionId: 'extra' }] }
   },
   {
@@ -488,7 +488,7 @@ const rawInterviewQuestions = [
         vi: "Tóm lại, mình không phải học lại kiến thức engineering nền tảng, chỉ cần học tool mới, nên tự tin thích nghi khá nhanh.",
       },
     ] },
-    contextIds: ['A', 'I'],
+    contextIds: ['A', 'F', 'I'],
     clusterIds: ['workflow', 'gap'],
     memory: { nodes: [{ id: 'learn-by-problems', label: 'LEARN BY PROBLEMS', triggers: ['engineering problems', 'underlying problems'], answerSectionId: 'point' }, { id: 'temporal-bridge', label: 'TEMPORAL BRIDGE', triggers: ['retries', 'checkpoints', 'durable state'], answerSectionId: 'example' }, { id: 'ai-transition', label: 'AI TRANSITION', triggers: ['OCR', 'retrieval', 'LLM integration'], answerSectionId: 'result' }, { id: 'adapt', label: 'ADAPT QUICKLY', triggers: ['new abstractions', 'learn the tool'], answerSectionId: 'extra' }] }
   },
@@ -535,8 +535,8 @@ const rawInterviewQuestions = [
         vi: "",
       },
     ] },
-    contextIds: ['E'],
-    clusterIds: ['tool-calling'],
+    contextIds: ['C', 'E', 'F', 'G', 'H'],
+    clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'tool-safety', 'quality'],
     memory: { nodes: [{ id: 'goal-context', label: 'GOAL → CONTEXT', triggers: ['user goal', 'authorized context'], answerSectionId: 'point' }, { id: 'backend-tools', label: 'BACKEND TOOLS', triggers: ['tool contract', 'permission', 'structured result'], answerSectionId: 'result' }, { id: 'reliability', label: 'RELIABILITY', triggers: ['run IDs', 'retry / recovery', 'regression'], answerSectionId: 'extra' }, { id: 'backend-control', label: 'BACKEND CONTROL', triggers: ['data', 'permissions', 'execution'], answerSectionId: 'section-7' }] }
   },
   {
@@ -597,8 +597,8 @@ const rawInterviewQuestions = [
         vi: "",
       },
     ] },
-    contextIds: ['C'],
-    clusterIds: ['error-handling', 'observability', 'production-ai'],
+    contextIds: ['C', 'F'],
+    clusterIds: ['error-handling', 'observability', 'production-ai', 'workflow'],
     storyIds: ['llm-reliability'],
     memory: { nodes: [
       { id: 'reduce-work', label: 'REDUCE AI WORK', triggers: ['backend logic', 'filtering', 'retrieval'], answerSectionId: 'point' },
@@ -649,9 +649,8 @@ const rawInterviewQuestions = [
         vi: "*Tóm lại,* / hallucination không thể loại bỏ hoàn toàn, / nhưng chúng ta có thể **giảm rủi ro** / bằng context tốt hơn, retrieval, validation, model setting phù hợp, eval và safe fallback.",
       },
     ] },
-    contextIds: ['C', 'G'],
-    clusterIds: ['observability', 'quality', 'production-ai'],
-    storyIds: ['llm-reliability'],
+    contextIds: ['B', 'C', 'G', 'H'],
+    clusterIds: ['rag', 'quality', 'tool-safety'],
     memory: { nodes: [
       { id: 'right-context', label: 'RIGHT CONTEXT', triggers: ['right and limited context', 'wrong answer'], answerSectionId: 'point' },
       { id: 'retrieval-evidence', label: 'RETRIEVAL + EVIDENCE', triggers: ['knowledge-based questions', 'good retrieval', 'relevant evidence'], answerSectionId: 'example' },
@@ -699,8 +698,8 @@ const rawInterviewQuestions = [
         vi: "*Tóm lại,* / tôi nhìn vào **retrieval, answer quality và runtime**. / Nếu đánh giá formal hơn, / tôi sẽ dùng thêm một **labeled dataset** và các metric như **Recall@K hoặc MRR**.",
       },
     ] },
-    contextIds: ['B', 'G'],
-    clusterIds: ['rag', 'quality', 'production-ai'],
+    contextIds: ['B', 'C', 'G'],
+    clusterIds: ['rag', 'quality', 'observability', 'production-ai'],
     storyIds: ['hybrid-rag'],
     memory: { nodes: [
       { id: 'three-levels', label: 'THREE LEVELS', triggers: ['retrieval', 'answer quality', 'runtime'], answerSectionId: 'point' },
@@ -792,7 +791,7 @@ const rawInterviewQuestions = [
       },
     ] },
     contextIds: ['D'],
-    clusterIds: ['ocr'],
+    clusterIds: ['ocr', 'workflow', 'observability'],
     memory: { nodes: [{ id: 'incident', label: 'OCR INCIDENT', triggers: ['large PDFs', 'memory growth', 'worker crash'], answerSectionId: 'point' }, { id: 'root-cause', label: 'ROOT CAUSE', triggers: ['trace flow', 'targeted logging', 'batch sizes'], answerSectionId: 'example' }, { id: 'stabilize', label: 'STABILIZE', triggers: ['smaller batches', 'checkpoint', 'recovery'], answerSectionId: 'result' }, { id: 'gpu-service', label: 'GPU SERVICE', triggers: ['DevOps', 'remote GPU', 'backend workflow'], answerSectionId: 'close' }, { id: 'safe-rollout', label: 'SAFE ROLLOUT', triggers: ['worker stability', 'job completion', 'processing time'], answerSectionId: 'extra' }] }
   },
   {
@@ -919,7 +918,7 @@ const rawInterviewQuestions = [
       },
     ] },
     contextIds: ['A'],
-    clusterIds: ['production-ai'],
+    clusterIds: [],
     memory: { nodes: [
       { id: 'experience', label: '8 YEARS', triggers: ['backend engineer', 'software development'], answerSectionId: 'point' },
       { id: 'foundation', label: 'BACKEND', triggers: ['APIs', 'databases', 'background jobs', 'integrations'], answerSectionId: 'foundation' },
@@ -985,6 +984,42 @@ const rawInterviewQuestions = [
       { id: 'match', label: 'GOOD MATCH', triggers: ['experience', 'career direction'], answerSectionId: 'close' },
     ] },
   },
+  {
+    id: 22,
+    question: {
+      en: 'Can you describe your recent project?',
+      vi: 'Bạn có thể mô tả dự án gần đây của mình không?',
+    },
+    answer: { sections: [
+      { id: 'point', en: '*Recently,* / I have been working on a **clinical trial management system** / for a US-based company.', vi: '**Gần đây,** / tôi đang làm việc trên một **hệ thống quản lý thử nghiệm lâm sàng** / cho một công ty tại Mỹ.' },
+      { id: 'reason', en: '*My main role is* **backend development**. / I work mainly with **NestJS** and **PostgreSQL**, / and recently I also worked a lot with **AI document processing**.', vi: '**Vai trò chính của tôi là** phát triển **backend**. / Tôi chủ yếu làm việc với **NestJS** và **PostgreSQL**, / và gần đây tôi cũng làm khá nhiều về **xử lý tài liệu bằng AI**.' },
+      { id: 'example', en: '*One important part was* the **OCR pipeline**. / When users upload a document, / the system needs to process it, run OCR, / and prepare the content for the next AI steps.', vi: '**Một phần quan trọng là** **OCR pipeline**. / Khi người dùng upload một tài liệu, / hệ thống cần xử lý nó, chạy OCR, / và chuẩn bị nội dung cho các bước AI tiếp theo.' },
+      { id: 'problem', en: '*We had a problem because* / OCR was running on the CPU worker. / For large documents, / it was very slow / and sometimes caused **memory problems**.', vi: '**Chúng tôi gặp một vấn đề vì** / OCR đang chạy trực tiếp trên CPU worker. / Với những tài liệu lớn, / nó rất chậm / và đôi khi gây ra **vấn đề về memory**.' },
+      { id: 'investigation', en: '*So first,* / I traced the whole processing flow / and checked the logs, memory usage, / and processing time.', vi: '**Vì vậy đầu tiên,** / tôi trace toàn bộ luồng xử lý / và kiểm tra log, mức sử dụng memory, / và thời gian xử lý.' },
+      { id: 'cpu-fix', en: 'Then I improved the CPU flow / with **smaller batches**, **checkpoint**, and **recovery logic**.', vi: 'Sau đó tôi cải thiện luồng CPU / bằng cách dùng **batch nhỏ hơn**, **checkpoint**, và **recovery logic**.' },
+      { id: 'gpu', en: '*After that,* / I worked with DevOps / to move the OCR inference / to a separate **GPU service**.', vi: '**Sau đó,** / tôi phối hợp với DevOps / để chuyển phần OCR inference / sang một **GPU service** riêng.' },
+      { id: 'performance', en: 'This gave us a very good result. / The processing time improved / from around **46 seconds per page** / to around **2 seconds per page**.', vi: 'Điều này mang lại kết quả rất tốt. / Thời gian xử lý được cải thiện / từ khoảng **46 giây mỗi trang** / xuống còn khoảng **2 giây mỗi trang**.' },
+      { id: 'strangeloop', en: '*Another part I am working on* / is an **agent workflow system** called **StrangeLoop**.', vi: '**Một phần khác mà tôi đang làm** / là một **hệ thống agent workflow** có tên là **StrangeLoop**.' },
+      { id: 'tools', en: 'The main idea is that / instead of only asking the LLM to answer directly, / the workflow can use different **tools** / to search or read data from our system.', vi: 'Ý chính là / thay vì chỉ yêu cầu LLM trả lời trực tiếp, / workflow có thể sử dụng các **tool** khác nhau / để tìm kiếm hoặc đọc dữ liệu từ hệ thống của chúng tôi.' },
+      { id: 'control', en: 'The backend still controls the important parts, / such as **validation**, **permission**, and **tool execution**.', vi: 'Backend vẫn kiểm soát những phần quan trọng, / như **validation**, **permission**, và **thực thi tool**.' },
+      { id: 'devops', en: '*For this part,* / I also work with DevOps / to set up the infrastructure, / service connection, environment, / and authentication.', vi: 'Với phần này, / tôi cũng phối hợp với DevOps / để thiết lập hạ tầng, / kết nối giữa các service, environment, / và authentication.' },
+      { id: 'overall', en: '*So overall,* / this project gives me experience / not only in normal backend development, / but also in **AI production systems**, / **GPU inference**, / **agent workflows**, / and **system reliability**.', vi: '**Nhìn chung,** / dự án này giúp tôi có kinh nghiệm / không chỉ về phát triển backend thông thường, / mà còn về **AI production system**, / **GPU inference**, / **agent workflow**, / và **độ ổn định của hệ thống**.' },
+    ] },
+    contextIds: ['A', 'D', 'E'],
+    clusterIds: ['production-ai', 'ocr', 'workflow', 'tool-calling'],
+    storyIds: ['ocr-cpu-gpu'],
+    memory: { nodes: [
+      { id: 'clinical-system', label: 'CLINICAL SYSTEM', triggers: ['clinical trial management', 'US-based company'], answerSectionId: 'point' },
+      { id: 'backend-role', label: 'BACKEND ROLE', triggers: ['NestJS', 'PostgreSQL', 'AI document processing'], answerSectionId: 'reason' },
+      { id: 'ocr-pipeline', label: 'OCR PIPELINE', triggers: ['document upload', 'OCR', 'AI steps'], answerSectionId: 'example' },
+      { id: 'cpu-problem', label: 'CPU PROBLEM', triggers: ['slow processing', 'memory problems', 'large documents'], answerSectionId: 'problem' },
+      { id: 'gpu-solution', label: 'GPU SOLUTION', triggers: ['smaller batches', 'checkpoint / recovery', 'GPU service'], answerSectionId: 'gpu' },
+      { id: 'performance', label: '2 SECONDS / PAGE', triggers: ['46 seconds → 2 seconds', 'processing time'], answerSectionId: 'performance' },
+      { id: 'strangeloop', label: 'STRANGELOOP', triggers: ['agent workflow', 'tools', 'search / read data'], answerSectionId: 'strangeloop' },
+      { id: 'backend-control', label: 'BACKEND CONTROL', triggers: ['validation', 'permission', 'tool execution'], answerSectionId: 'control' },
+      { id: 'production-experience', label: 'PRODUCTION EXPERIENCE', triggers: ['GPU inference', 'agent workflows', 'system reliability'], answerSectionId: 'overall' },
+    ] },
+  },
 ];
 
 export type StrategyRow = {
@@ -995,15 +1030,15 @@ export type StrategyRow = {
 };
 
 export const strategyRows: StrategyRow[] = [
-  { code: 'A', context: 'Backend → Applied AI → Production', triggers: 'AI experience, fit, backend-heavy background', questions: '1, 9, 11, 20, 21' },
-  { code: 'B', context: 'RAG / Hybrid Retrieval', triggers: 'RAG, retrieval, search, vector, ranking', questions: '2, 15' },
-  { code: 'C', context: 'AI Reliability', triggers: 'error, retry, timeout, latency, cost, hallucination', questions: '3, 13, 14' },
-  { code: 'D', context: 'OCR CPU → GPU', triggers: 'challenge, incident, OOM, performance, ownership', questions: '4, 17' },
-  { code: 'E', context: 'Agent Architecture', triggers: 'agent, tool calling, function calling, design', questions: '5, 7, 10, 12' },
-  { code: 'F', context: 'Workflow / Temporal', triggers: 'Temporal, async, durable workflow, checkpoint, retry', questions: '6, 18' },
-  { code: 'G', context: 'Evals / Quality', triggers: 'eval, quality, regression, groundedness', questions: '8, 14, 15' },
-  { code: 'H', context: 'Tool Security', triggers: 'permissions, tool safety, write actions, audit', questions: '10, 16' },
-  { code: 'I', context: 'Learning / Adaptation', triggers: 'new stack, technology not used, learning speed', questions: '11' },
+  { code: 'A', context: 'Backend → Applied AI → Production', triggers: 'AI experience, fit, backend-heavy background', questions: '1, 9, 11, 20, 21, 22' },
+  { code: 'B', context: 'RAG / Hybrid Retrieval', triggers: 'RAG, retrieval, search, vector, ranking', questions: '2, 8, 9, 14, 15' },
+  { code: 'C', context: 'AI Reliability', triggers: 'error, retry, timeout, latency, cost, hallucination', questions: '3, 12, 13, 14, 15' },
+  { code: 'D', context: 'OCR CPU → GPU', triggers: 'challenge, incident, OOM, performance, ownership', questions: '4, 9, 17, 22' },
+  { code: 'E', context: 'Agent Architecture', triggers: 'agent, tool calling, function calling, design', questions: '5, 7, 10, 12, 22' },
+  { code: 'F', context: 'Workflow / Temporal', triggers: 'Temporal, async, durable workflow, checkpoint, retry', questions: '6, 11, 12, 13, 18' },
+  { code: 'G', context: 'Evals / Quality', triggers: 'eval, quality, regression, groundedness', questions: '8, 12, 14, 15' },
+  { code: 'H', context: 'Tool Security', triggers: 'permissions, tool safety, write actions, audit', questions: '5, 10, 12, 14, 16' },
+  { code: 'I', context: 'Learning / Adaptation', triggers: 'new stack, technology not used, learning speed', questions: '6, 7, 11' },
   { code: 'J', context: 'Ownership / Disagreement', triggers: 'conflict, decision, ownership, trade-off', questions: '19' },
 ];
 
@@ -1071,6 +1106,7 @@ const followUpPrompts: Record<number, InterviewFollowUp[]> = {
   19: [{ id: 'disagreement-evidence', question: { en: 'How do you handle disagreement when the team has different priorities?', vi: 'Bạn xử lý bất đồng khi team có ưu tiên khác nhau thế nào?' } }],
   20: [{ id: 'gap-example', question: { en: 'Can you give a concrete example of a similar problem you have solved?', vi: 'Bạn có thể đưa ví dụ cụ thể về vấn đề tương tự đã giải quyết không?' } }],
   21: [{ id: 'follow-up-example', question: { en: 'What was the main trade-off in that example?', vi: 'Trade-off chính trong ví dụ đó là gì?' } }],
+  22: [{ id: 'project-tradeoff', question: { en: 'What was the main trade-off when you moved OCR to a GPU service?', vi: 'Trade-off chính khi bạn chuyển OCR sang GPU service là gì?' } }],
 };
 
 const speakingCueOverrides: Record<number, Record<string, string>> = {
@@ -1095,6 +1131,7 @@ const speakingCueOverrides: Record<number, Record<string, string>> = {
   19: { point: 'When I disagree with a technical decision', reason: 'Sometimes the decision is not only about technology', example: 'I bring evidence like', result: 'I can explain the trade-offs more clearly', close: 'Once the team makes a decision', extra: 'A good technical disagreement is not about' },
   20: { point: 'My name is Huy', foundation: 'My main background is', recent: 'Recently, I’ve been working more with', ownership: 'In my current project, I mainly work on', direction: 'I want to keep growing in', close: 'I think this position at Everfit is' },
   21: { direction: 'I want to keep growing in', reason: 'This position combines backend work with AI', recent: 'Recently I’ve had some chances to work on', everfit: 'I also like Everfit because', challenge: 'I feel this is a good place for me to', contribution: 'I believe my backend experience can help me', close: 'I think this position is a good match' },
+  22: { point: 'I have been working on a clinical trial management system', reason: 'My main role is backend development', example: 'One important part was the OCR pipeline', problem: 'OCR was running on the CPU worker', investigation: 'I traced the whole processing flow', 'cpu-fix': 'I improved the CPU flow with smaller batches', gpu: 'I worked with DevOps to move the OCR inference', performance: 'The processing time improved from around', strangeloop: 'Another part I am working on is an agent workflow system', tools: 'The workflow can use different tools', control: 'The backend still controls the important parts', devops: 'I also work with DevOps to set up the infrastructure', overall: 'This project gives me experience' },
 };
 
 export const interviewQuestions: InterviewQuestion[] = (rawInterviewQuestions as InterviewQuestion[]).map((question) => ({
