@@ -38,6 +38,9 @@ coverage/
 # tsbuildinfo
 *.tsbuildinfo
 
+# generated exports
+/exports/
+
 # runtime data
 pids/
 *.pid

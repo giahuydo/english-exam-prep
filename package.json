@@ -19,6 +19,7 @@
     "db:seed": "pnpm --filter @app/database db:seed",
     "db:reset": "pnpm --filter @app/database db:reset",
     "generate:interview-audio": "apps/web/node_modules/.bin/tsx scripts/generate-interview-audio.ts",
+    "export:interview-ai": "apps/web/node_modules/.bin/tsx scripts/export-interview-ai.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "devDependencies": {

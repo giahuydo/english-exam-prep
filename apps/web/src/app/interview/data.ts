@@ -538,7 +538,7 @@ const rawInterviewQuestions = [
       {
         id: 'point',
         en: "For me, / I try to control latency and cost in several layers.",
-        vi: "Đầu tiên mình cố giảm công việc LLM không cần thiết.",
+        vi: "Với tôi, mình cố kiểm soát latency và chi phí ở nhiều lớp khác nhau.",
       },
       {
         id: 'reason',
@@ -548,42 +548,42 @@ const rawInterviewQuestions = [
       {
         id: 'example',
         en: "For example, / I use normal backend logic, filtering, and retrieval / instead of asking the model to do everything. / In Clincove, / I also worked with prompt caching / so we could reuse stable context / instead of processing the same context again.",
-        vi: "Ví dụ, một số quyết định có thể dùng logic backend, caching hoặc data đã tính sẵn thay vì gọi model. Mình cũng kiểm soát kích thước context.",
+        vi: "Ví dụ, mình dùng logic backend thông thường, filtering và retrieval thay vì yêu cầu model làm mọi việc. Ở Clincove, mình cũng làm với prompt caching để tái sử dụng context ổn định thay vì xử lý lại cùng một context.",
       },
       {
         id: 'result',
         en: "Because of that, / I also try to keep the context small / and retrieve only the relevant and authorized data / instead of sending everything to the model.",
-        vi: "Vì vậy mình chọn model theo task chứ không luôn dùng cái đắt nhất. Các call độc lập chạy song song khi an toàn, có timeout và retry giới hạn.",
+        vi: "Vì vậy mình cố giữ context nhỏ và chỉ lấy dữ liệu liên quan, được phép truy cập, thay vì gửi tất cả cho model.",
       },
       {
         id: 'close',
         en: "At the same time, / I use timeouts and bounded retries. / I only retry temporary errors like timeouts, rate limits, or provider overload, / and I avoid retrying permanent errors.",
-        vi: "Đồng thời theo dõi latency, token, số retry, model dùng và error rate theo từng workflow/operation.",
+        vi: "Đồng thời, mình dùng timeout và retry có giới hạn. Mình chỉ retry các lỗi tạm thời như timeout, rate limit hoặc provider quá tải, và tránh retry các lỗi vĩnh viễn.",
       },
       {
         id: 'extra',
         en: "For longer workflows, / I also use checkpoint and recovery, / so if one part fails, / we can continue from the completed part / instead of running the whole job again.",
-        vi: "Tóm lại, mình tối ưu dựa trên dữ liệu production thật thay vì đoán phần nào chậm/tốn.",
+        vi: "Với các workflow dài hơn, mình cũng dùng checkpoint và recovery. Nếu một phần bị lỗi, chúng ta có thể tiếp tục từ phần đã hoàn thành thay vì chạy lại toàn bộ job.",
       },
       {
         id: 'section-7',
         en: "So overall, / I track the model used, token usage, retry attempts, latency, and estimated cost, / and use that real data / to decide what to optimize next.",
-        vi: "",
+        vi: "Tóm lại, mình theo dõi model được sử dụng, số token, số lần retry, latency và chi phí ước tính, rồi dùng dữ liệu thực tế đó để quyết định nên tối ưu phần nào tiếp theo.",
       },
       {
         id: 'section-8',
-        en: "Flow nhớ nhanh:",
-        vi: "",
+        en: "Quick memory flow:",
+        vi: "Flow nhớ nhanh:",
       },
       {
         id: 'section-9',
         en: "reduce AI work → cache → smaller context → timeout/retry → checkpoint → measure",
-        vi: "",
+        vi: "giảm việc cho AI → cache → context nhỏ hơn → timeout/retry → checkpoint → đo lường",
       },
       {
         id: 'section-10',
-        en: "Điểm mạnh nhất của bản này là gần như mọi ý chính đều có hands-on evidence thật của anh, chứ không chỉ là best practice chung.",
-        vi: "",
+        en: "The strongest part is that / almost every main idea has real hands-on evidence, / not only general best practices.",
+        vi: "Điểm mạnh nhất là gần như mọi ý chính đều có bằng chứng thực tế từ kinh nghiệm làm việc, chứ không chỉ là best practice chung.",
       },
     ] },
     contextIds: ['C', 'F'],
@@ -593,6 +593,7 @@ const rawInterviewQuestions = [
       { id: 'reduce-work', label: 'REDUCE AI WORK', triggers: ['backend logic', 'filtering', 'retrieval'], answerSectionId: 'point' },
       { id: 'cache-context', label: 'CACHE + CONTEXT', triggers: ['prompt cache', 'smaller context', 'authorized data'], answerSectionId: 'example' },
       { id: 'measure-recover', label: 'RECOVER + MEASURE', triggers: ['timeout / retry', 'checkpoint', 'latency / cost'], answerSectionId: 'close' },
+      { id: 'measure', label: 'MEASURE', triggers: ['model used', 'token usage', 'retry attempts', 'estimated cost'], answerSectionId: 'section-7' },
     ] }
   },
   {
