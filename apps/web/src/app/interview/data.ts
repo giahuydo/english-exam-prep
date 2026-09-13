@@ -409,8 +409,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*The key point is that* / the model can choose the tool, / but the **backend checks permission and scope** / before executing anything.",
-        vi: "**Điểm quan trọng là** / model có thể chọn tool, / nhưng **backend sẽ kiểm tra permission và scope** / trước khi thực thi bất kỳ thứ gì.",
+        en: "Because of that, / I would expose a small set of backend tools. / The model can decide which tool it needs, / but the backend still defines the tool contract, validates the arguments, checks permission, executes the action, / and returns a structured result.",
+        vi: "Vì vậy, mình sẽ expose một tập nhỏ các backend tool. Model có thể quyết định tool nào cần dùng, nhưng backend vẫn định nghĩa tool contract, validate arguments, kiểm tra permission, thực thi action và trả về structured result.",
       },
       {
         id: 'result',
@@ -506,7 +506,7 @@ const rawInterviewQuestions = [
       {
         id: 'result',
         en: "Because of that, / I would expose a small set of backend tools. / The model can decide which tool it needs, / but the backend still defines the tool contract, validates the arguments, checks permission, executes the action, / and returns a structured result.",
-        vi: "Vì vậy mình sẽ expose các backend tool rõ ràng để lấy lịch sử tập, đọc metric, tạo draft plan… Backend vẫn validate tham số và permission trước khi thực thi.",
+        vi: "Vì vậy, mình sẽ expose một tập nhỏ các backend tool. Model có thể quyết định tool nào cần dùng, nhưng backend vẫn định nghĩa tool contract, validate arguments, kiểm tra permission, thực thi action và trả về structured result.",
       },
       {
         id: 'close',
@@ -609,8 +609,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / if the context is wrong, / even a strong model can give a very confident **wrong answer**.",
-        vi: "*Lý do chính là* / nếu context sai, / ngay cả một model mạnh cũng có thể đưa ra một **câu trả lời sai nhưng rất tự tin**.",
+        en: "*The main reason is that* / a good answer depends on getting the **right information** first. / If retrieval is wrong, / the final answer may also be wrong.",
+        vi: "*Lý do chính là* / một câu trả lời tốt trước hết phải lấy được **đúng thông tin**. / Nếu retrieval sai, / câu trả lời cuối cùng cũng có thể sai.",
       },
       {
         id: 'example',
@@ -641,7 +641,7 @@ const rawInterviewQuestions = [
     contextIds: ['B', 'C', 'G', 'H'],
     clusterIds: ['rag', 'quality', 'tool-safety'],
     memory: { nodes: [
-      { id: 'right-context', label: 'RIGHT CONTEXT', triggers: ['right and limited context', 'wrong answer'], answerSectionId: 'point' },
+      { id: 'right-context', label: 'RIGHT CONTEXT', triggers: ['right and limited context'], answerSectionId: 'point' },
       { id: 'retrieval-evidence', label: 'RETRIEVAL + EVIDENCE', triggers: ['knowledge-based questions', 'good retrieval', 'relevant evidence'], answerSectionId: 'example' },
       { id: 'backend-validation', label: 'BACKEND VALIDATION', triggers: ['structured output', 'business rules', 'permissions'], answerSectionId: 'result' },
       { id: 'model-settings', label: 'MODEL SETTINGS', triggers: ['factual tasks', 'lower temperature', 'less random'], answerSectionId: 'settings' },
@@ -718,8 +718,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*For example,* / before a tool runs, / the backend checks the **arguments**, **permission**, / and **access scope**. / The model can **suggest an action**, / but the **backend makes the final decision**.",
-        vi: "*Ví dụ,* / trước khi một tool chạy, / backend sẽ kiểm tra **arguments, permission và access scope**. / Model có thể đề xuất một action, / nhưng **backend mới là bên quyết định cuối cùng**.",
+        en: "Because of that, / I would expose a small set of backend tools. / The model can decide which tool it needs, / but the backend still defines the tool contract, validates the arguments, checks permission, executes the action, / and returns a structured result.",
+        vi: "Vì vậy, mình sẽ expose một tập nhỏ các backend tool. Model có thể quyết định tool nào cần dùng, nhưng backend vẫn định nghĩa tool contract, validate arguments, kiểm tra permission, thực thi action và trả về structured result.",
       },
       {
         id: 'result',
