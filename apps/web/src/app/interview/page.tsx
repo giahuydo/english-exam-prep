@@ -341,7 +341,9 @@ const AnswerSectionView = memo(function AnswerSectionView({ paragraph, questionI
             const chunkStart = parts.slice(0, index).reduce((total, value) => total + value.length + 1, 0);
             const chunkEnd = chunkStart + part.length;
             const chunkActive = audio.activeKey === chunkKey;
-            const phraseRange = chunkActive ? { start: 0, end: part.length } : trackedRange;
+            const phraseRange = chunkActive && audio.activeRange
+              ? { start: audio.activeRange.start - sectionOffset - chunkStart, end: audio.activeRange.end - sectionOffset - chunkStart }
+              : chunkActive ? { start: 0, end: part.length } : trackedRange;
             const localRange = phraseRange ? (chunkActive ? phraseRange : { start: phraseRange.start - rangeOffset - chunkStart, end: phraseRange.end - rangeOffset - chunkStart }) : null;
             const speechText = stripFormatting(part);
             return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" onClick={() => { if (selectionMode) return; onActivate(); audio.play({ text: speechText, src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: chunkKey, mapping: buildSpeechMapping(part), segment: { canonicalStart: sectionOffset + chunkStart, canonicalEnd: sectionOffset + chunkEnd } }); }} aria-label={`Play phrase: ${speechText.trim()}`} className="rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100">{renderTrackedText(part, localRange)}</button></span>;
@@ -368,13 +370,34 @@ const AnswerSectionView = memo(function AnswerSectionView({ paragraph, questionI
   && previous.audio.activeRange?.end === next.audio.activeRange?.end);
 
 function renderTrackedText(text: string, range: AudioRange | null = null) {
-  const highlighted = Boolean(range && range.start < text.length && range.end > 0);
-  const content = parseInlineRanges(text).map((token, tokenIndex) => {
-    if (token.kind === 'bold') return <strong key={`${tokenIndex}`} className={`font-semibold ${highlighted ? 'text-amber-300' : 'text-slate-900'}`}>{token.value}</strong>;
-    if (token.kind === 'italic') return <em key={`${tokenIndex}`} className={`font-medium not-italic ${highlighted ? 'text-cyan-200 underline decoration-cyan-300/60 decoration-2 underline-offset-4' : 'text-blue-700'}`}>{token.value}</em>;
-    return <span key={`${tokenIndex}`}>{token.value}</span>;
+  const tokens = parseInlineRanges(text);
+  return tokens.map((token, tokenIndex) => {
+    const activeStart = range ? Math.max(token.sourceStart, range.start) : token.sourceStart;
+    const activeEnd = range ? Math.min(token.sourceEnd, range.end) : token.sourceStart;
+    const highlighted = Boolean(range && activeStart < activeEnd);
+    const pieces = highlighted
+      ? [
+          { value: text.slice(token.sourceStart, activeStart), active: false },
+          { value: text.slice(activeStart, activeEnd), active: true },
+          { value: text.slice(activeEnd, token.sourceEnd), active: false },
+        ].filter((piece) => piece.value)
+      : [{ value: token.value, active: false }];
+    return pieces.map((piece, pieceIndex) => {
+      const className = token.kind === 'bold'
+        ? `font-semibold ${piece.active ? 'text-amber-300' : 'text-slate-900'}`
+        : token.kind === 'italic'
+          ? `font-medium not-italic ${piece.active ? 'text-cyan-200 underline decoration-cyan-300/60 decoration-2 underline-offset-4' : 'text-blue-700'}`
+          : '';
+      const content = token.kind === 'bold'
+        ? <strong className={className}>{piece.value}</strong>
+        : token.kind === 'italic'
+          ? <em className={className}>{piece.value}</em>
+          : <span className={className}>{piece.value}</span>;
+      return piece.active
+        ? <span key={`${tokenIndex}-${pieceIndex}`} data-karaoke-active="true" className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span>
+        : <span key={`${tokenIndex}-${pieceIndex}`}>{content}</span>;
+    });
   });
-  return highlighted ? <span data-karaoke-active="true" className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span> : content;
 }
 
 function ClozeText({ text }: { text: string }) { const [visible, setVisible] = useState(false); const item = clozeText(text); if (!item) return <RichText text={text} />; return <><RichText text={item.before} /><button type="button" onClick={() => setVisible(true)} className="mx-1 min-h-8 rounded border border-dashed border-blue-300 px-2 font-semibold text-blue-700">{visible ? item.hidden : '______'}</button><RichText text={item.after} /></>; }
