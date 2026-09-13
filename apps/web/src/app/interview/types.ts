@@ -1,8 +1,16 @@
 export type QuestionId = number;
-export type ContextId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J';
+export type ContextId = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K';
+export type MacroTopic = {
+  id: 'ai-quality' | 'reliability-production' | 'agent-security' | 'ai-agent-workflow' | 'backend-workflow' | 'behavior-ownership';
+  title: string;
+  sourceContextIds: ContextId[];
+  questionIds?: QuestionId[];
+  summary: string;
+  keywords: string[];
+};
 export type ClusterId = 'error-handling' | 'observability' | 'rag' | 'workflow' | 'tool-calling' | 'tool-safety' | 'quality' | 'production-ai' | 'ocr' | 'gap';
 export type StoryId = 'hybrid-rag' | 'llm-reliability' | 'ocr-cpu-gpu';
-export type TriggerId = 'reliability' | 'agent-tools' | 'workflow' | 'quality' | 'security' | 'retrieval';
+export type TriggerId = 'reliability' | 'agent-tools' | 'ai-agent-workflow' | 'workflow' | 'quality' | 'security' | 'retrieval';
 
 export type Bilingual = { en: string; vi: string };
 export type AnswerSection = Bilingual & { id: string; speakingCue?: string };

@@ -1,0 +1,539 @@
+{
+  "version": 1,
+  "questionId": "q23",
+  "speechText": "At a high level, LangChain gives higher-level building blocks for models, prompts, tools, and middleware. LangGraph is more about lower-level, stateful orchestration for long-running workflows, with durable execution and human-in-the-loop support. StrangeLoop is broader. It includes Studio for configuration and control, an Engine for execution, and a clear boundary between the app and its domain tools. So my simple summary is: LangGraph is more an orchestration framework, while StrangeLoop is closer to a production agent platform.",
+  "words": [
+    {
+      "text": "At",
+      "canonicalStart": 1,
+      "canonicalEnd": 3,
+      "startMs": 0,
+      "endMs": 116
+    },
+    {
+      "text": "a",
+      "canonicalStart": 4,
+      "canonicalEnd": 5,
+      "startMs": 151,
+      "endMs": 197
+    },
+    {
+      "text": "high",
+      "canonicalStart": 6,
+      "canonicalEnd": 10,
+      "startMs": 221,
+      "endMs": 430
+    },
+    {
+      "text": "level,",
+      "canonicalStart": 11,
+      "canonicalEnd": 17,
+      "startMs": 464,
+      "endMs": 813
+    },
+    {
+      "text": "LangChain",
+      "canonicalStart": 23,
+      "canonicalEnd": 32,
+      "startMs": 964,
+      "endMs": 1660
+    },
+    {
+      "text": "gives",
+      "canonicalStart": 35,
+      "canonicalEnd": 40,
+      "startMs": 1707,
+      "endMs": 1974
+    },
+    {
+      "text": "higher-level",
+      "canonicalStart": 41,
+      "canonicalEnd": 53,
+      "startMs": 2009,
+      "endMs": 2589
+    },
+    {
+      "text": "building",
+      "canonicalStart": 54,
+      "canonicalEnd": 62,
+      "startMs": 2635,
+      "endMs": 2995
+    },
+    {
+      "text": "blocks",
+      "canonicalStart": 63,
+      "canonicalEnd": 69,
+      "startMs": 3019,
+      "endMs": 3355
+    },
+    {
+      "text": "for",
+      "canonicalStart": 70,
+      "canonicalEnd": 73,
+      "startMs": 3402,
+      "endMs": 3553
+    },
+    {
+      "text": "models,",
+      "canonicalStart": 74,
+      "canonicalEnd": 81,
+      "startMs": 3587,
+      "endMs": 4087
+    },
+    {
+      "text": "prompts,",
+      "canonicalStart": 82,
+      "canonicalEnd": 90,
+      "startMs": 4238,
+      "endMs": 4957
+    },
+    {
+      "text": "tools,",
+      "canonicalStart": 91,
+      "canonicalEnd": 97,
+      "startMs": 5132,
+      "endMs": 5921
+    },
+    {
+      "text": "and",
+      "canonicalStart": 98,
+      "canonicalEnd": 101,
+      "startMs": 6037,
+      "endMs": 6304
+    },
+    {
+      "text": "middleware.",
+      "canonicalStart": 102,
+      "canonicalEnd": 113,
+      "startMs": 6339,
+      "endMs": 7094
+    },
+    {
+      "text": "LangGraph",
+      "canonicalStart": 115,
+      "canonicalEnd": 124,
+      "startMs": 7152,
+      "endMs": 8348
+    },
+    {
+      "text": "is",
+      "canonicalStart": 125,
+      "canonicalEnd": 127,
+      "startMs": 8417,
+      "endMs": 8545
+    },
+    {
+      "text": "more",
+      "canonicalStart": 128,
+      "canonicalEnd": 132,
+      "startMs": 8591,
+      "endMs": 8858
+    },
+    {
+      "text": "about",
+      "canonicalStart": 133,
+      "canonicalEnd": 138,
+      "startMs": 8893,
+      "endMs": 9172
+    },
+    {
+      "text": "lower-level,",
+      "canonicalStart": 140,
+      "canonicalEnd": 152,
+      "startMs": 9218,
+      "endMs": 9903
+    },
+    {
+      "text": "stateful",
+      "canonicalStart": 153,
+      "canonicalEnd": 161,
+      "startMs": 9950,
+      "endMs": 10414
+    },
+    {
+      "text": "orchestration",
+      "canonicalStart": 162,
+      "canonicalEnd": 175,
+      "startMs": 10461,
+      "endMs": 11192
+    },
+    {
+      "text": "for",
+      "canonicalStart": 178,
+      "canonicalEnd": 181,
+      "startMs": 11343,
+      "endMs": 11738
+    },
+    {
+      "text": "long-running",
+      "canonicalStart": 182,
+      "canonicalEnd": 194,
+      "startMs": 11784,
+      "endMs": 12341
+    },
+    {
+      "text": "workflows,",
+      "canonicalStart": 195,
+      "canonicalEnd": 205,
+      "startMs": 12365,
+      "endMs": 13224
+    },
+    {
+      "text": "with",
+      "canonicalStart": 208,
+      "canonicalEnd": 212,
+      "startMs": 13398,
+      "endMs": 13862
+    },
+    {
+      "text": "durable",
+      "canonicalStart": 213,
+      "canonicalEnd": 220,
+      "startMs": 13897,
+      "endMs": 14385
+    },
+    {
+      "text": "execution",
+      "canonicalStart": 221,
+      "canonicalEnd": 230,
+      "startMs": 14431,
+      "endMs": 15128
+    },
+    {
+      "text": "and",
+      "canonicalStart": 231,
+      "canonicalEnd": 234,
+      "startMs": 15244,
+      "endMs": 15732
+    },
+    {
+      "text": "human-in-the-loop",
+      "canonicalStart": 235,
+      "canonicalEnd": 252,
+      "startMs": 15778,
+      "endMs": 16603
+    },
+    {
+      "text": "support.",
+      "canonicalStart": 253,
+      "canonicalEnd": 261,
+      "startMs": 16672,
+      "endMs": 17299
+    },
+    {
+      "text": "StrangeLoop",
+      "canonicalStart": 263,
+      "canonicalEnd": 274,
+      "startMs": 17450,
+      "endMs": 18843
+    },
+    {
+      "text": "is",
+      "canonicalStart": 275,
+      "canonicalEnd": 277,
+      "startMs": 18925,
+      "endMs": 19354
+    },
+    {
+      "text": "broader.",
+      "canonicalStart": 278,
+      "canonicalEnd": 286,
+      "startMs": 19401,
+      "endMs": 19923
+    },
+    {
+      "text": "It",
+      "canonicalStart": 290,
+      "canonicalEnd": 292,
+      "startMs": 20074,
+      "endMs": 20550
+    },
+    {
+      "text": "includes",
+      "canonicalStart": 293,
+      "canonicalEnd": 301,
+      "startMs": 20608,
+      "endMs": 21154
+    },
+    {
+      "text": "Studio",
+      "canonicalStart": 304,
+      "canonicalEnd": 310,
+      "startMs": 21224,
+      "endMs": 21874
+    },
+    {
+      "text": "for",
+      "canonicalStart": 313,
+      "canonicalEnd": 316,
+      "startMs": 22048,
+      "endMs": 22210
+    },
+    {
+      "text": "configuration",
+      "canonicalStart": 317,
+      "canonicalEnd": 330,
+      "startMs": 22245,
+      "endMs": 23011
+    },
+    {
+      "text": "and",
+      "canonicalStart": 331,
+      "canonicalEnd": 334,
+      "startMs": 23104,
+      "endMs": 23546
+    },
+    {
+      "text": "control,",
+      "canonicalStart": 335,
+      "canonicalEnd": 343,
+      "startMs": 23580,
+      "endMs": 24184
+    },
+    {
+      "text": "an",
+      "canonicalStart": 346,
+      "canonicalEnd": 348,
+      "startMs": 24393,
+      "endMs": 24799
+    },
+    {
+      "text": "Engine",
+      "canonicalStart": 351,
+      "canonicalEnd": 357,
+      "startMs": 24834,
+      "endMs": 25136
+    },
+    {
+      "text": "for",
+      "canonicalStart": 360,
+      "canonicalEnd": 363,
+      "startMs": 25171,
+      "endMs": 25287
+    },
+    {
+      "text": "execution,",
+      "canonicalStart": 364,
+      "canonicalEnd": 374,
+      "startMs": 25322,
+      "endMs": 26100
+    },
+    {
+      "text": "and",
+      "canonicalStart": 377,
+      "canonicalEnd": 380,
+      "startMs": 26251,
+      "endMs": 26738
+    },
+    {
+      "text": "a",
+      "canonicalStart": 381,
+      "canonicalEnd": 382,
+      "startMs": 26773,
+      "endMs": 26831
+    },
+    {
+      "text": "clear",
+      "canonicalStart": 383,
+      "canonicalEnd": 388,
+      "startMs": 26854,
+      "endMs": 27145
+    },
+    {
+      "text": "boundary",
+      "canonicalStart": 389,
+      "canonicalEnd": 397,
+      "startMs": 27191,
+      "endMs": 27644
+    },
+    {
+      "text": "between",
+      "canonicalStart": 398,
+      "canonicalEnd": 405,
+      "startMs": 27725,
+      "endMs": 28120
+    },
+    {
+      "text": "the",
+      "canonicalStart": 406,
+      "canonicalEnd": 409,
+      "startMs": 28155,
+      "endMs": 28248
+    },
+    {
+      "text": "app",
+      "canonicalStart": 410,
+      "canonicalEnd": 413,
+      "startMs": 28271,
+      "endMs": 28457
+    },
+    {
+      "text": "and",
+      "canonicalStart": 414,
+      "canonicalEnd": 417,
+      "startMs": 28549,
+      "endMs": 29037
+    },
+    {
+      "text": "its",
+      "canonicalStart": 418,
+      "canonicalEnd": 421,
+      "startMs": 29072,
+      "endMs": 29223
+    },
+    {
+      "text": "domain",
+      "canonicalStart": 422,
+      "canonicalEnd": 428,
+      "startMs": 29258,
+      "endMs": 29699
+    },
+    {
+      "text": "tools.",
+      "canonicalStart": 429,
+      "canonicalEnd": 435,
+      "startMs": 29745,
+      "endMs": 30349
+    },
+    {
+      "text": "So",
+      "canonicalStart": 437,
+      "canonicalEnd": 439,
+      "startMs": 30523,
+      "endMs": 31289
+    },
+    {
+      "text": "my",
+      "canonicalStart": 440,
+      "canonicalEnd": 442,
+      "startMs": 31405,
+      "endMs": 31533
+    },
+    {
+      "text": "simple",
+      "canonicalStart": 443,
+      "canonicalEnd": 449,
+      "startMs": 31661,
+      "endMs": 32056
+    },
+    {
+      "text": "summary",
+      "canonicalStart": 450,
+      "canonicalEnd": 457,
+      "startMs": 32102,
+      "endMs": 32462
+    },
+    {
+      "text": "is:",
+      "canonicalStart": 458,
+      "canonicalEnd": 461,
+      "startMs": 32520,
+      "endMs": 32868
+    },
+    {
+      "text": "LangGraph",
+      "canonicalStart": 467,
+      "canonicalEnd": 476,
+      "startMs": 33042,
+      "endMs": 34053
+    },
+    {
+      "text": "is",
+      "canonicalStart": 477,
+      "canonicalEnd": 479,
+      "startMs": 34145,
+      "endMs": 34552
+    },
+    {
+      "text": "more",
+      "canonicalStart": 480,
+      "canonicalEnd": 484,
+      "startMs": 34587,
+      "endMs": 34784
+    },
+    {
+      "text": "an",
+      "canonicalStart": 485,
+      "canonicalEnd": 487,
+      "startMs": 34819,
+      "endMs": 34877
+    },
+    {
+      "text": "orchestration",
+      "canonicalStart": 488,
+      "canonicalEnd": 501,
+      "startMs": 34912,
+      "endMs": 35643
+    },
+    {
+      "text": "framework,",
+      "canonicalStart": 502,
+      "canonicalEnd": 514,
+      "startMs": 35690,
+      "endMs": 36398
+    },
+    {
+      "text": "while",
+      "canonicalStart": 517,
+      "canonicalEnd": 522,
+      "startMs": 36525,
+      "endMs": 37002
+    },
+    {
+      "text": "StrangeLoop",
+      "canonicalStart": 525,
+      "canonicalEnd": 536,
+      "startMs": 37036,
+      "endMs": 37779
+    },
+    {
+      "text": "is",
+      "canonicalStart": 537,
+      "canonicalEnd": 539,
+      "startMs": 37861,
+      "endMs": 38302
+    },
+    {
+      "text": "closer",
+      "canonicalStart": 540,
+      "canonicalEnd": 546,
+      "startMs": 38348,
+      "endMs": 38778
+    },
+    {
+      "text": "to",
+      "canonicalStart": 547,
+      "canonicalEnd": 549,
+      "startMs": 38859,
+      "endMs": 39149
+    },
+    {
+      "text": "a",
+      "canonicalStart": 550,
+      "canonicalEnd": 551,
+      "startMs": 39196,
+      "endMs": 39277
+    },
+    {
+      "text": "production",
+      "canonicalStart": 552,
+      "canonicalEnd": 562,
+      "startMs": 39300,
+      "endMs": 39800
+    },
+    {
+      "text": "agent",
+      "canonicalStart": 563,
+      "canonicalEnd": 568,
+      "startMs": 39858,
+      "endMs": 40276
+    },
+    {
+      "text": "platform.",
+      "canonicalStart": 569,
+      "canonicalEnd": 580,
+      "startMs": 40322,
+      "endMs": 40961
+    }
+  ]
+}

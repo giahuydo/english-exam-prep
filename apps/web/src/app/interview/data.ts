@@ -140,45 +140,34 @@ const rawInterviewQuestions = [
   {
     id: 4,
     question: {
-      en: "Tell me about a difficult AI-related production problem you solved.",
-      vi: 'Kể về một vấn đề production liên quan AI khó mà bạn đã giải quyết.',
+      en: "Can you explain a recent project involving an agent platform or workflow engine?",
+      vi: 'Bạn có thể giải thích một dự án gần đây có liên quan đến nền tảng agent hoặc workflow engine không?',
     },
     answer: { sections: [
       {
         id: 'point',
-        en: "*One example was* / a document **OCR workflow** that processed **large PDF files** / in background workers. / With bigger documents, / the **memory usage** became very high / and the worker sometimes crashed.",
-        vi: "Ví dụ là workflow OCR xử lý PDF lớn trong background worker. Với tài liệu lớn, memory tăng cao và worker đôi khi crash.",
+        en: "*For me,* / StrangeLoop is a platform for building and running **AI agents**. / It has a **Studio** for configuration / and an **Engine** for execution.",
+        vi: "Với mình, StrangeLoop là một nền tảng để xây dựng và chạy AI agent. Nó có Studio để cấu hình và Engine để thực thi.",
       },
       {
         id: 'reason',
-        en: "*The main reason is that* / reducing the batch size helped for a while, / but it did not explain the real bottleneck. / The heavy **OCR inference** / was still running on **CPU** / inside the worker.",
-        vi: "Giảm batch size giúp một thời gian nhưng không giải thích được bottleneck thực sự. Vì OCR inference nặng vẫn chạy CPU ngay trong worker.",
+        en: "*The main idea is that* the Engine runs one clear workflow / with steps such as **LLM calls**, **tool calls**, and decisions. / This makes the agent easier to control and debug.",
+        vi: "Ý tưởng chính là Engine chạy một workflow rõ ràng với các bước như gọi LLM, gọi tool và ra quyết định. Nhờ vậy agent dễ kiểm soát và debug hơn.",
       },
       {
         id: 'example',
-        en: "*For example,* / I traced the **processing flow** step by step, / added **targeted logging**, / checked memory before and after expensive **OCR stages**, / and compared different **batch sizes**.",
-        vi: "Mình trace luồng xử lý từng bước, log có mục tiêu, đo memory trước/sau các bước OCR nặng, so sánh nhiều batch size khác nhau.",
-      },
-      {
-        id: 'result',
-        en: "*Because of that,* / I confirmed that the main bottleneck was the **OCR CPU inference**. / I first made the CPU path safer with **smaller batches**, **checkpoints**, / and **recovery logic**.",
-        vi: "Nhờ đó xác nhận bottleneck chính là OCR CPU inference. Mình làm cho CPU path an toàn hơn trước bằng batch nhỏ hơn, checkpoint và recovery logic.",
+        en: "*For example,* the agent can understand a request, / choose a tool, / and send that tool call to the application's backend. / The Engine orchestrates the flow, / but the application keeps its own domain data.",
+        vi: "Ví dụ, agent có thể hiểu yêu cầu, chọn một tool và gửi lời gọi tool đó đến backend của ứng dụng. Engine điều phối workflow, nhưng ứng dụng vẫn giữ dữ liệu domain của mình.",
       },
       {
         id: 'close',
-        en: "*At the same time,* / I worked with **DevOps** / to move the heavy **OCR inference** / to a separate **GPU-backed service**, / while the worker focused more on orchestration.",
-        vi: "Đồng thời mình làm việc với DevOps để tách OCR nặng ra một service chạy GPU riêng, worker chỉ tập trung điều phối.",
-      },
-      {
-        id: 'extra',
-        en: "*So overall,* / we reduced **memory pressure**, / made failures easier to recover from, / and created a better architecture for scaling the OCR workload.",
-        vi: "Tóm lại, tụi mình giảm áp lực memory, dễ phục hồi khi lỗi và có kiến trúc tốt hơn để scale OCR.",
+        en: "*So overall,* / I learned that a good agent system needs clear boundaries: / the platform controls the rules and orchestration, / while the application controls its data and business actions.",
+        vi: "Tóm lại, mình học được rằng một hệ thống agent tốt cần ranh giới rõ ràng: nền tảng kiểm soát rule và orchestration, còn ứng dụng kiểm soát dữ liệu và các hành động nghiệp vụ.",
       },
     ] },
-    contextIds: ['D'],
-    clusterIds: ['workflow', 'ocr'],
-    storyIds: ['ocr-cpu-gpu'],
-    memory: { nodes: [{'id': 'incident', 'label': 'INCIDENT', 'triggers': ['large PDF', 'memory pressure', 'worker crash'], 'answerSectionId': 'point'}, {'id': 'bottleneck', 'label': 'BOTTLENECK', 'triggers': ['processing flow', 'CPU OCR inference', 'batch sizes'], 'answerSectionId': 'reason'}, {'id': 'architecture', 'label': 'RECOVERY → GPU', 'triggers': ['smaller batches', 'checkpoints', 'recovery logic', 'GPU-backed service'], 'answerSectionId': 'result'}] }
+    contextIds: ['K'],
+    clusterIds: ['tool-calling', 'workflow'],
+    memory: { nodes: [{'id': 'strangeloop-platform', 'label': 'AGENT PLATFORM', 'triggers': ['Studio control plane', 'Engine runtime', 'AI agents'], 'answerSectionId': 'point'}, {'id': 'unified-flow', 'label': 'UNIFIED FLOW', 'triggers': ['LLM calls', 'tool calls', 'decisions', 'debuggable steps'], 'answerSectionId': 'reason'}, {'id': 'boundary', 'label': 'SYSTEM BOUNDARY', 'triggers': ['Engine orchestrates', 'application backend', 'domain data stays outside'], 'answerSectionId': 'example'}] }
   },
   {
     id: 5,
@@ -1020,6 +1009,27 @@ const rawInterviewQuestions = [
       { id: 'production-experience', label: 'PRODUCTION EXPERIENCE', triggers: ['GPU inference', 'agent workflows', 'system reliability'], answerSectionId: 'overall' },
     ] },
   },
+  {
+    id: 23,
+    question: {
+      en: 'How is StrangeLoop different from LangChain or LangGraph?',
+      vi: 'StrangeLoop khác LangChain hoặc LangGraph như thế nào?',
+    },
+    answer: { sections: [
+      { id: 'point', en: '*At a high level,* / **LangChain** gives higher-level building blocks for models, prompts, tools, and middleware.', vi: 'Ở mức khái quát, **LangChain** cung cấp các building block cấp cao hơn cho model, prompt, tool và middleware.' },
+      { id: 'reason', en: '*LangGraph is more about* lower-level, stateful orchestration / for long-running workflows, / with durable execution and human-in-the-loop support.', vi: '**LangGraph** tập trung hơn vào orchestration cấp thấp, có state cho workflow dài, với durable execution và human-in-the-loop.' },
+      { id: 'example', en: '*StrangeLoop is broader.* / It includes **Studio** for configuration and control, / an **Engine** for execution, / and a clear boundary between the app and its domain tools.', vi: '**StrangeLoop rộng hơn.** Nó gồm **Studio** để cấu hình và control, **Engine** để thực thi, và ranh giới rõ giữa app với domain tool.' },
+      { id: 'close', en: '*So my simple summary is:* / **LangGraph is more an orchestration framework**, / while **StrangeLoop is closer to a production agent platform**.', vi: 'Tóm lại đơn giản là: **LangGraph giống một orchestration framework hơn**, còn **StrangeLoop gần với một production agent platform hơn**.' },
+    ] },
+    contextIds: ['K'],
+    clusterIds: ['workflow'],
+    memory: { nodes: [
+      { id: 'langchain', label: 'LANGCHAIN', triggers: ['models', 'prompts', 'tools', 'middleware'], answerSectionId: 'point' },
+      { id: 'langgraph', label: 'LANGGRAPH', triggers: ['stateful orchestration', 'durable execution', 'human-in-the-loop'], answerSectionId: 'reason' },
+      { id: 'strangeloop-scope', label: 'STRANGELOOP SCOPE', triggers: ['Studio control plane', 'Engine execution', 'app / domain-tool boundary'], answerSectionId: 'example' },
+      { id: 'simple-close', label: 'SIMPLE CLOSE', triggers: ['orchestration framework', 'production agent platform'], answerSectionId: 'close' },
+    ] },
+  },
 ];
 
 export type StrategyRow = {
@@ -1033,8 +1043,9 @@ export const strategyRows: StrategyRow[] = [
   { code: 'A', context: 'Backend → Applied AI → Production', triggers: 'AI experience, fit, backend-heavy background', questions: '1, 9, 11, 20, 21, 22' },
   { code: 'B', context: 'RAG / Hybrid Retrieval', triggers: 'RAG, retrieval, search, vector, ranking', questions: '2, 8, 9, 14, 15' },
   { code: 'C', context: 'AI Reliability', triggers: 'error, retry, timeout, latency, cost, hallucination', questions: '3, 12, 13, 14, 15' },
-  { code: 'D', context: 'OCR CPU → GPU', triggers: 'challenge, incident, OOM, performance, ownership', questions: '4, 9, 17, 22' },
+  { code: 'D', context: 'OCR CPU → GPU', triggers: 'challenge, incident, OOM, performance, ownership', questions: '9, 17, 22' },
   { code: 'E', context: 'Agent Architecture', triggers: 'agent, tool calling, function calling, design', questions: '5, 7, 10, 12, 22' },
+  { code: 'K', context: 'AI Agent Workflow', triggers: 'StrangeLoop, LangChain, LangGraph, agent workflow, orchestration, workflow engine', questions: '4, 23' },
   { code: 'F', context: 'Workflow / Temporal', triggers: 'Temporal, async, durable workflow, checkpoint, retry', questions: '6, 11, 12, 13, 18' },
   { code: 'G', context: 'Evals / Quality', triggers: 'eval, quality, regression, groundedness', questions: '8, 12, 14, 15' },
   { code: 'H', context: 'Tool Security', triggers: 'permissions, tool safety, write actions, audit', questions: '5, 10, 12, 14, 16' },
@@ -1107,6 +1118,7 @@ const followUpPrompts: Record<number, InterviewFollowUp[]> = {
   20: [{ id: 'gap-example', question: { en: 'Can you give a concrete example of a similar problem you have solved?', vi: 'Bạn có thể đưa ví dụ cụ thể về vấn đề tương tự đã giải quyết không?' } }],
   21: [{ id: 'follow-up-example', question: { en: 'What was the main trade-off in that example?', vi: 'Trade-off chính trong ví dụ đó là gì?' } }],
   22: [{ id: 'project-tradeoff', question: { en: 'What was the main trade-off when you moved OCR to a GPU service?', vi: 'Trade-off chính khi bạn chuyển OCR sang GPU service là gì?' } }],
+  23: [],
 };
 
 const speakingCueOverrides: Record<number, Record<string, string>> = {
@@ -1132,6 +1144,7 @@ const speakingCueOverrides: Record<number, Record<string, string>> = {
   20: { point: 'My name is Huy', foundation: 'My main background is', recent: 'Recently, I’ve been working more with', ownership: 'In my current project, I mainly work on', direction: 'I want to keep growing in', close: 'I think this position at Everfit is' },
   21: { direction: 'I want to keep growing in', reason: 'This position combines backend work with AI', recent: 'Recently I’ve had some chances to work on', everfit: 'I also like Everfit because', challenge: 'I feel this is a good place for me to', contribution: 'I believe my backend experience can help me', close: 'I think this position is a good match' },
   22: { point: 'I have been working on a clinical trial management system', reason: 'My main role is backend development', example: 'One important part was the OCR pipeline', problem: 'OCR was running on the CPU worker', investigation: 'I traced the whole processing flow', 'cpu-fix': 'I improved the CPU flow with smaller batches', gpu: 'I worked with DevOps to move the OCR inference', performance: 'The processing time improved from around', strangeloop: 'Another part I am working on is an agent workflow system', tools: 'The workflow can use different tools', control: 'The backend still controls the important parts', devops: 'I also work with DevOps to set up the infrastructure', overall: 'This project gives me experience' },
+  23: { point: 'LangChain gives higher-level building blocks', reason: 'LangGraph is more about lower-level, stateful orchestration', example: 'StrangeLoop is broader', close: 'LangGraph is more an orchestration framework' },
 };
 
 export const interviewQuestions: InterviewQuestion[] = (rawInterviewQuestions as InterviewQuestion[]).map((question) => ({

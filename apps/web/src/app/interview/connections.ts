@@ -1,8 +1,9 @@
 import { interviewQuestions } from './data';
-import type { ClusterId, ContextId, HeroStory, PhraseCluster, QuestionId, StoryId, Trigger, TriggerId, Context, MemoryNode } from './types';
-export type { Context, MemoryNode } from './types';
+import type { ClusterId, ContextId, HeroStory, PhraseCluster, QuestionId, StoryId, Trigger, TriggerId, Context, MemoryNode, MacroTopic } from './types';
+export type { Context, MacroTopic, MemoryNode } from './types';
 
 export const contexts: Context[] = [
+  { id: 'K', title: 'AI Agent Workflow', path: ['Agent platform', 'Orchestration', 'Application / domain-tool boundary'] },
   { id: 'A', title: 'Backend → Applied AI → Production', path: ['Backend foundation', 'Applied AI', 'Production reliability'] },
   { id: 'B', title: 'RAG / Hybrid Retrieval', path: ['Lexical search + semantic search', 'RRF', 'Fallback + access scope'] },
   { id: 'C', title: 'AI Reliability', path: ['Root cause', 'Error strategy', 'Observability'] },
@@ -13,6 +14,15 @@ export const contexts: Context[] = [
   { id: 'H', title: 'Tool Security', path: ['Least privilege', 'Validate + permission check', 'Execute + audit'] },
   { id: 'I', title: 'Learning / Adaptation', path: ['Honest gap', 'Transferable foundation', 'Learn the abstraction'] },
   { id: 'J', title: 'Ownership / Disagreement', path: ['Understand', 'Evidence + trade-offs', 'Align + verify'] },
+];
+
+export const macroTopics: MacroTopic[] = [
+  { id: 'ai-quality', title: 'AI / RAG / Quality', sourceContextIds: ['B', 'G'], summary: 'Retrieval → ranking → groundedness → evals', keywords: ['RAG', 'retrieval', 'vector', 'ranking', 'hallucination', 'groundedness', 'eval'] },
+  { id: 'reliability-production', title: 'Reliability / Production / OCR', sourceContextIds: ['C', 'D'], summary: 'Root cause → stabilize → observe → scale', keywords: ['error', 'retry', 'timeout', 'latency', 'cost', 'incident', 'OOM', 'performance'] },
+  { id: 'agent-security', title: 'Agent / Tool Calling / Security', sourceContextIds: ['E', 'H'], summary: 'Intent → tools → permission → audit', keywords: ['agent', 'tool calling', 'function calling', 'permission', 'audit', 'tool safety'] },
+  { id: 'ai-agent-workflow', title: 'AI Agent Workflow', sourceContextIds: ['K'], summary: 'Agent platform → orchestration → application boundary', keywords: ['StrangeLoop', 'LangChain', 'LangGraph', 'agent workflow', 'orchestration', 'workflow engine'] },
+  { id: 'backend-workflow', title: 'Backend / Workflow / Temporal', sourceContextIds: ['A', 'F'], summary: 'Backend foundation → async workflow → recovery', keywords: ['backend experience', 'production AI', 'async', 'workflow', 'Temporal', 'checkpoint', 'idempotency'] },
+  { id: 'behavior-ownership', title: 'Behavior / Gap / Ownership', sourceContextIds: ['I', 'J'], summary: 'Learn honestly → weigh trade-offs → own the result', keywords: ["haven't used", 'new stack', 'learning', 'disagreement', 'ownership', 'trade-off'] },
 ];
 
 export const phraseClusters: PhraseCluster[] = [
@@ -37,6 +47,7 @@ export const heroStories: HeroStory[] = [
 export const triggers: Trigger[] = [
   { id: 'reliability', phrases: 'timeout · retry · latency · cost', contextIds: ['C'] },
   { id: 'agent-tools', phrases: 'agent · tool calling · function calling', contextIds: ['E'] },
+  { id: 'ai-agent-workflow', phrases: 'StrangeLoop · LangChain · LangGraph · orchestration', contextIds: ['E'] },
   { id: 'workflow', phrases: 'Temporal · long-running · recover', contextIds: ['F'] },
   { id: 'quality', phrases: 'groundedness · regression · eval', contextIds: ['G', 'C'] },
   { id: 'security', phrases: 'permission · audit · least privilege', contextIds: ['H'] },
@@ -48,9 +59,22 @@ export function getContextsForQuestion(questionId: QuestionId) { const ids = get
 export function getClustersForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.clusterIds ?? []; return phraseClusters.filter((item) => ids.includes(item.id)); }
 export function getStoriesForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.storyIds ?? []; return heroStories.filter((item) => ids.includes(item.id)); }
 export function getQuestionsForContext(contextId: ContextId) { return interviewQuestions.filter((item) => item.contextIds.includes(contextId)).map((item) => item.id); }
+export function getQuestionsForMacroTopic(topicId: MacroTopic['id']) {
+  const topic = macroTopics.find((item) => item.id === topicId);
+  if (!topic) return [];
+  return Array.from(new Set(interviewQuestions.filter((item) => item.contextIds.some((id) => topic.sourceContextIds.includes(id))).map((item) => item.id)));
+}
+export function getMacroTopicsForQuestion(questionId: QuestionId) {
+  const ids = getQuestionRelations(questionId)?.contextIds ?? [];
+  return macroTopics.filter((topic) => topic.sourceContextIds.some((id) => ids.includes(id)));
+}
 export function getQuestionsForCluster(clusterId: ClusterId) { return interviewQuestions.filter((item) => item.clusterIds.includes(clusterId)).map((item) => item.id); }
 export function getQuestionsForStory(storyId: StoryId) { return interviewQuestions.filter((item) => item.storyIds?.includes(storyId)).map((item) => item.id); }
 export function getContextsForTrigger(triggerId: TriggerId) { const item = triggers.find((trigger) => trigger.id === triggerId); return contexts.filter((context) => item?.contextIds.includes(context.id)); }
+export function getMacroTopicsForTrigger(triggerId: TriggerId) {
+  const contextIds = getContextsForTrigger(triggerId).map((context) => context.id);
+  return macroTopics.filter((topic) => topic.sourceContextIds.some((id) => contextIds.includes(id)));
+}
 export function getRelatedQuestions(questionId: QuestionId) {
   const question = getQuestionRelations(questionId);
   if (!question) return [];
@@ -78,6 +102,7 @@ export function searchQuestions(query: string) {
       question.question.vi,
       ...question.answer.sections.flatMap((section) => [section.en, section.vi]),
       ...questionContexts.flatMap((context) => [context.title, ...context.path]),
+      ...macroTopics.filter((topic) => topic.sourceContextIds.some((id) => question.contextIds.includes(id))).flatMap((topic) => [topic.title, topic.summary, ...topic.keywords]),
       ...questionClusters.flatMap((cluster) => [cluster.title, ...cluster.path]),
       ...questionStories.flatMap((story) => [story.title, ...story.path]),
       ...question.memory.nodes.flatMap((node) => [node.label, ...node.triggers]),
