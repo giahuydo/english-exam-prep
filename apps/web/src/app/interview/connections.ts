@@ -47,7 +47,7 @@ export const heroStories: HeroStory[] = [
 export const triggers: Trigger[] = [
   { id: 'reliability', phrases: 'timeout · retry · latency · cost', contextIds: ['C'] },
   { id: 'agent-tools', phrases: 'agent · tool calling · function calling', contextIds: ['E'] },
-  { id: 'ai-agent-workflow', phrases: 'StrangeLoop · LangChain · LangGraph · orchestration', contextIds: ['E'] },
+  { id: 'ai-agent-workflow', phrases: 'StrangeLoop · LangChain · LangGraph · orchestration', contextIds: ['K'] },
   { id: 'workflow', phrases: 'Temporal · long-running · recover', contextIds: ['F'] },
   { id: 'quality', phrases: 'groundedness · regression · eval', contextIds: ['G', 'C'] },
   { id: 'security', phrases: 'permission · audit · least privilege', contextIds: ['H'] },
