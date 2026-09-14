@@ -28,7 +28,7 @@ const reviewLabels: Record<ReviewDifficulty, string> = { again: 'Again', hard: '
 export default function InterviewPage() {
   const progress = useProgress();
   const { practiced, difficult, isDue } = progress;
-  const [mode, setMode] = useState<Mode>('recall');
+  const [mode, setMode] = useState<Mode>('learn');
   const [filter, setFilter] = useState<Filter>('all');
   const [activeId, setActiveId] = useState(20);
   const [quickOrder, setQuickOrder] = useState<number[]>(() => shuffle(interviewQuestions.map((q) => q.id)));
@@ -89,7 +89,7 @@ export default function InterviewPage() {
               {(['connections', 'learn', 'recall', 'quick'] as const).map((value) => <button key={value} type="button" onClick={() => setMode(value)} className={`min-h-10 flex-1 rounded-lg px-2 text-xs font-bold sm:flex-none sm:px-3 ${mode === value ? 'bg-slate-900 text-white' : 'bg-white text-slate-500 hover:text-slate-900'}`}>{value === 'quick' ? 'Quick practice' : value === 'connections' ? 'Connections' : value[0].toUpperCase() + value.slice(1)}</button>)}
               {mode !== 'connections' && <select aria-label="Question filter" value={filter} onChange={(e) => setFilter(e.target.value as Filter)} className="min-h-10 w-full rounded-lg border border-slate-200 bg-white px-2 text-xs font-semibold text-slate-600 sm:ml-auto sm:w-auto"><option value="all">All questions</option><option value="practiced">Practiced</option><option value="difficult">Difficult</option><option value="due">Due today ({dueCount})</option></select>}
             </div>
-            {mode === 'connections' ? <ConnectionsView selected={selectedTopic} setSelected={setSelectedTopic} onQuestion={(id) => { setActiveId(id); setMode('recall'); }} /> : filter !== 'all' && available.length === 0 ? <div className="rounded-2xl bg-white p-8 text-center text-sm text-slate-500">No questions match this filter.</div> : <PracticeSurface q={active} mode={mode} progress={progress} quickPosition={mode === 'quick' ? quickIndex + 1 : undefined} quickTotal={mode === 'quick' ? quickOrder.length : undefined} onNextQuick={nextQuick} />}
+            {mode === 'connections' ? <ConnectionsView selected={selectedTopic} setSelected={setSelectedTopic} onQuestion={(id) => { setActiveId(id); setMode('learn'); }} /> : filter !== 'all' && available.length === 0 ? <div className="rounded-2xl bg-white p-8 text-center text-sm text-slate-500">No questions match this filter.</div> : <PracticeSurface q={active} mode={mode} progress={progress} quickPosition={mode === 'quick' ? quickIndex + 1 : undefined} quickTotal={mode === 'quick' ? quickOrder.length : undefined} onNextQuick={nextQuick} />}
           </section>
         </div>
 
