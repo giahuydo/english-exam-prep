@@ -146,23 +146,23 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / StrangeLoop is a platform for building and running **AI agents**. / It has a **Studio** for configuration / and an **Engine** for execution.",
-        vi: "Với mình, StrangeLoop là một nền tảng để xây dựng và chạy AI agent. Nó có Studio để cấu hình và Engine để thực thi.",
+        en: "*Recently,* I worked with an **AI agent workflow system** called **StrangeLoop**. / It has a **Studio** for configuration / and an **Engine** for execution.",
+        vi: "Gần đây, mình có làm với một **hệ thống AI agent workflow** có tên là **StrangeLoop**. Nó có **Studio** để cấu hình và **Engine** để thực thi.",
       },
       {
         id: 'reason',
-        en: "*The main idea is that* the Engine runs one clear workflow / with steps such as **LLM calls**, **tool calls**, and decisions. / This makes the agent easier to control and debug.",
-        vi: "Ý tưởng chính là Engine chạy một workflow rõ ràng với các bước như gọi LLM, gọi tool và ra quyết định. Nhờ vậy agent dễ kiểm soát và debug hơn.",
+        en: "*Basically,* the Engine runs the workflow step by step. / It can call the **LLM**, call different **tools**, / and make decisions along the way, / and that makes the agent easier to control and debug.",
+        vi: "Về cơ bản, Engine chạy workflow theo từng bước. Nó có thể gọi **LLM**, gọi các **tool** khác nhau và đưa ra quyết định trong quá trình chạy, và điều đó giúp agent dễ kiểm soát và debug hơn.",
       },
       {
         id: 'example',
-        en: "*For example,* the agent can understand a request, / choose a tool, / and send that tool call to the application's backend. / The Engine orchestrates the flow, / but the application keeps its own domain data.",
-        vi: "Ví dụ, agent có thể hiểu yêu cầu, chọn một tool và gửi lời gọi tool đó đến backend của ứng dụng. Engine điều phối workflow, nhưng ứng dụng vẫn giữ dữ liệu domain của mình.",
+        en: "*For example,* the agent can understand the request, / choose the right tool, / and send it to the backend. / The Engine manages the flow, / and the application keeps its own data.",
+        vi: "Ví dụ, agent có thể hiểu yêu cầu, chọn đúng tool và gửi nó đến backend. Engine quản lý luồng xử lý, còn ứng dụng vẫn giữ dữ liệu của riêng mình.",
       },
       {
         id: 'close',
-        en: "*So overall,* / I learned that a good agent system needs clear boundaries: / the platform controls the rules and orchestration, / while the application controls its data and business actions.",
-        vi: "Tóm lại, mình học được rằng một hệ thống agent tốt cần ranh giới rõ ràng: nền tảng kiểm soát rule và orchestration, còn ứng dụng kiểm soát dữ liệu và các hành động nghiệp vụ.",
+        en: "*So overall, through this project,* / I learned that a good agent system needs **clear boundaries**. / The platform controls the **rules and orchestration**, / and the application controls its own **data and business actions**.",
+        vi: "Tóm lại, thông qua dự án này, mình học được rằng một hệ thống agent tốt cần có **ranh giới rõ ràng**. Nền tảng kiểm soát **các quy tắc và việc điều phối**, còn ứng dụng kiểm soát **dữ liệu và các hành động nghiệp vụ của riêng mình**.",
       },
     ] },
     contextIds: ['K'],
