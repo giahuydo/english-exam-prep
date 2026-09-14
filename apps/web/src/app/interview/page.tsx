@@ -24,6 +24,14 @@ type Filter = 'all' | 'practiced' | 'difficult' | 'due';
 
 const levelLabels: Record<LearningLevel, string> = { 1: 'Full', 2: 'Guided', 3: 'Keywords', 4: 'Map', 5: 'Interview' };
 const reviewLabels: Record<ReviewDifficulty, string> = { again: 'Again', hard: 'Hard', good: 'Good', easy: 'Easy' };
+const chunkColors = ['text-blue-700', 'text-emerald-700', 'text-teal-700', 'text-amber-700', 'text-rose-700', 'text-sky-800'];
+/** Karaoke highlight must beat phrase chunk colors (esp. blue/teal) for readable contrast. */
+const karaokeActiveShell = 'rounded bg-slate-900 px-1 font-semibold text-white shadow-sm ring-2 ring-slate-300/70';
+const karaokeActiveText = {
+  bold: 'font-semibold text-amber-300',
+  italic: 'font-medium not-italic text-cyan-200 underline decoration-cyan-300/60 decoration-2 underline-offset-4',
+  plain: 'text-white',
+} as const;
 
 export default function InterviewPage() {
   const progress = useProgress();
@@ -110,7 +118,7 @@ function ConnectionsView({ selected, setSelected, onQuestion }: { selected: Macr
   const searchResults = useMemo(() => searchQuestions(query), [query]);
   return <div className="space-y-5">
     <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Fast interview routing</p><h2 className="mt-1 text-2xl font-bold text-slate-950">{interviewQuestions.length} questions · {macroTopics.length} macro topics</h2><p className="mt-2 text-sm leading-6 text-slate-500">Hear the question, pick one route, then open the prepared answer.</p></div>
-    <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-4"><label htmlFor="connection-search" className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Find by keywords</label><div className="mt-2 flex gap-2"><input id="connection-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try: OCR GPU, agent permission, RAG ranking" className="min-h-11 min-w-0 flex-1 rounded-xl border border-blue-200 bg-white px-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />{query && <button type="button" onClick={() => setQuery('')} className="min-h-11 rounded-xl border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-500">Clear</button>}</div><div className="mt-3 flex flex-wrap gap-2">{['OCR GPU', 'agent permission', 'RAG ranking', 'Temporal retry'].map((suggestion) => <button key={suggestion} type="button" onClick={() => setQuery(suggestion)} className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-xs font-semibold text-blue-700">{suggestion}</button>)}</div></section>
+    <section className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-4"><label htmlFor="connection-search" className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Find by keywords</label><div className="mt-2 flex gap-2"><input id="connection-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try: OCR GPU, agent permission, retrieval ranking" className="min-h-11 min-w-0 flex-1 rounded-xl border border-blue-200 bg-white px-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />{query && <button type="button" onClick={() => setQuery('')} className="min-h-11 rounded-xl border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-500">Clear</button>}</div><div className="mt-3 flex flex-wrap gap-2">{['OCR GPU', 'agent permission', 'retrieval ranking', 'Temporal retry'].map((suggestion) => <button key={suggestion} type="button" onClick={() => setQuery(suggestion)} className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-xs font-semibold text-blue-700">{suggestion}</button>)}</div></section>
     {query && <section className="rounded-2xl border border-slate-200 bg-white p-4"><p className="text-xs font-bold uppercase tracking-widest text-slate-400">{searchResults.length} related questions</p>{searchResults.length ? <div className="mt-3 grid gap-2">{searchResults.slice(0, 8).map(({ question }) => <button key={question.id} type="button" onClick={() => onQuestion(question.id)} className="rounded-xl border border-slate-100 bg-slate-50 p-3 text-left hover:border-blue-300"><span className="block text-[11px] font-bold uppercase tracking-widest text-blue-700">Q{question.id} · {question.contextIds.join(' · ')}</span><span className="mt-1 block text-sm font-semibold text-slate-800">{question.question.en}</span></button>)}</div> : <p className="mt-3 text-sm text-slate-500">No matching question yet. Try a technical keyword or a macro topic.</p>}</section>}
     {selected ? <MacroTopicPanel topic={selected} onClose={() => setSelected(null)} onQuestion={onQuestion} /> : <div className="grid gap-2">{macroTopics.map((topic, index) => <button key={topic.id} type="button" onClick={() => setSelected(topic)} className="rounded-xl border border-slate-200 bg-white p-3 text-left shadow-sm hover:border-blue-300"><div className="flex items-center justify-between gap-3"><span className="text-[11px] font-bold uppercase tracking-widest text-blue-700">{String(index + 1).padStart(2, '0')}</span><span className="text-xs text-slate-400">{getQuestionsForMacroTopic(topic.id).length} questions</span></div><h3 className="mt-1 font-bold text-slate-900">{topic.title}</h3><p className="mt-1 text-xs text-slate-500">Tap to view path, keywords, and questions</p></button>)}</div>}
     <section className="rounded-xl border border-slate-200 bg-white"><button type="button" onClick={() => setPracticeOpen((value) => !value)} className="flex min-h-12 w-full items-center justify-between px-4 text-left text-sm font-bold text-slate-700"><span>Practice connections</span><span className="text-xs text-blue-700">{practiceOpen ? 'Hide' : 'Show'}</span></button>{practiceOpen && <div className="space-y-5 border-t border-slate-100 p-4"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Phrase help</p><div className="mt-3 grid gap-2 sm:grid-cols-2">{phraseClusters.map((item) => <button key={item.id} type="button" onClick={() => setClusterId(clusterId === item.id ? null : item.id)} className={`rounded-xl border bg-white p-3 text-left ${clusterId === item.id ? 'border-blue-400' : 'border-slate-200'}`}><h3 className="text-sm font-bold text-slate-900">{item.title}</h3><p className="mt-1 text-xs text-slate-500">{item.path.join(' → ')}</p>{clusterId === item.id && <p className="mt-2 text-xs font-semibold text-blue-700">Used in: Q{getQuestionsForCluster(item.id).join(' · Q')}</p>}</button>)}</div></div><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Hero stories</p><div className="mt-3 grid gap-2 sm:grid-cols-3">{heroStories.map((story) => <div key={story.title} className="rounded-xl bg-slate-50 p-3"><h3 className="text-sm font-bold text-slate-900">{story.title}</h3><p className="mt-1 text-xs text-slate-500">{story.path.join(' → ')}</p><p className="mt-2 text-xs text-slate-500">Q{getQuestionsForStory(story.id).join(' · Q')}</p></div>)}</div></div><TriggerDrill /></div>}</section>
@@ -346,7 +354,7 @@ const AnswerSectionView = memo(function AnswerSectionView({ paragraph, questionI
               : chunkActive ? { start: 0, end: part.length } : trackedRange;
             const localRange = phraseRange ? (chunkActive ? phraseRange : { start: phraseRange.start - rangeOffset - chunkStart, end: phraseRange.end - rangeOffset - chunkStart }) : null;
             const speechText = stripFormatting(part);
-            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" onClick={() => { if (selectionMode) return; onActivate(); audio.play({ text: speechText, src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: chunkKey, mapping: buildSpeechMapping(part), segment: { canonicalStart: sectionOffset + chunkStart, canonicalEnd: sectionOffset + chunkEnd } }); }} aria-label={`Play phrase: ${speechText.trim()}`} className="rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100">{renderTrackedText(part, localRange)}</button></span>;
+            return <span key={`${paragraph.id}-${index}`}>{index > 0 && ' '}<button type="button" onClick={() => { if (selectionMode) return; onActivate(); audio.play({ text: speechText, src: `${audioPath}/full.mp3`, alignment: `${audioPath}/alignment.json`, key: chunkKey, mapping: buildSpeechMapping(part), segment: { canonicalStart: sectionOffset + chunkStart, canonicalEnd: sectionOffset + chunkEnd } }); }} aria-label={`Play phrase: ${speechText.trim()}`} className="rounded px-0.5 text-left transition-colors hover:bg-blue-50 focus-visible:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 disabled:cursor-default disabled:opacity-100">{renderTrackedText(part, localRange, chunkColors[index % chunkColors.length])}</button></span>;
           })}
         </p>
         {canPlaySection && <div className="flex shrink-0 items-center gap-1"><div className="flex rounded-lg border border-slate-200 bg-white p-0.5" aria-label={`${paragraph.id} playback speed`}>{([0.5, 0.8] as AudioSpeed[]).map((value) => <button key={value} type="button" onClick={() => { setSectionSpeed(value); if (sectionPlaying) audio.restart({ ...request, speed: value }); }} className={`min-h-9 rounded-md px-2 text-[11px] font-bold ${sectionSpeed === value ? 'bg-slate-900 text-white' : 'text-slate-500'}`}>{value}×</button>)}</div><button type="button" onClick={() => { if (sectionPlaying && audio.state === 'playing') audio.pause(); else if (sectionPlaying && audio.state === 'paused') audio.resume(); else { onActivate(); audio.play(request); } }} aria-label={`${sectionPlaying && audio.state === 'playing' ? 'Pause' : sectionPlaying && audio.state === 'paused' ? 'Resume' : 'Play'} answer section ${paragraph.id}`} className={`min-h-10 min-w-10 rounded-lg text-xs font-semibold transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${sectionPlaying ? 'bg-blue-50 text-blue-700' : 'text-slate-400'}`}>{sectionPlaying && audio.state === 'playing' ? 'Pause' : sectionPlaying && audio.state === 'paused' ? 'Resume' : 'Listen'}</button></div>}
@@ -369,7 +377,7 @@ const AnswerSectionView = memo(function AnswerSectionView({ paragraph, questionI
   && previous.audio.activeRange?.start === next.audio.activeRange?.start
   && previous.audio.activeRange?.end === next.audio.activeRange?.end);
 
-function renderTrackedText(text: string, range: AudioRange | null = null) {
+function renderTrackedText(text: string, range: AudioRange | null = null, colorClass = '') {
   const tokens = parseInlineRanges(text);
   return tokens.map((token, tokenIndex) => {
     const activeStart = range ? Math.max(token.sourceStart, range.start) : token.sourceStart;
@@ -383,18 +391,25 @@ function renderTrackedText(text: string, range: AudioRange | null = null) {
         ].filter((piece) => piece.value)
       : [{ value: token.value, active: false }];
     return pieces.map((piece, pieceIndex) => {
-      const className = token.kind === 'bold'
-        ? `font-semibold ${piece.active ? 'text-amber-300' : 'text-slate-900'}`
-        : token.kind === 'italic'
-          ? `font-medium not-italic ${piece.active ? 'text-cyan-200 underline decoration-cyan-300/60 decoration-2 underline-offset-4' : 'text-blue-700'}`
-          : '';
+      // Active karaoke drops chunk colors so violet/emerald never sit on the blue/slate shell.
+      const className = piece.active
+        ? token.kind === 'bold'
+          ? karaokeActiveText.bold
+          : token.kind === 'italic'
+            ? karaokeActiveText.italic
+            : karaokeActiveText.plain
+        : token.kind === 'bold'
+          ? `font-semibold ${colorClass}`
+          : token.kind === 'italic'
+            ? `font-medium not-italic ${colorClass}`
+            : colorClass;
       const content = token.kind === 'bold'
         ? <strong className={className}>{piece.value}</strong>
         : token.kind === 'italic'
           ? <em className={className}>{piece.value}</em>
           : <span className={className}>{piece.value}</span>;
       return piece.active
-        ? <span key={`${tokenIndex}-${pieceIndex}`} data-karaoke-active="true" className="rounded bg-blue-700 px-1 font-semibold text-white shadow-sm ring-2 ring-blue-200/80">{content}</span>
+        ? <span key={`${tokenIndex}-${pieceIndex}`} data-karaoke-active="true" className={karaokeActiveShell}>{content}</span>
         : <span key={`${tokenIndex}-${pieceIndex}`}>{content}</span>;
     });
   });

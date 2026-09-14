@@ -14,7 +14,7 @@ Use this index to find the right project context before changing code.
 
 ## Feature and product documents
 
-- `interview.md` — Interview Practice UI, canonical answer rules, static sample audio, karaoke, Memory path, and dated implementation trace.
+- `interview.md` — Interview Practice UI, canonical answer rules, static sample audio (Edge TTS / ElevenLabs offline generators), karaoke, Memory path, and dated implementation trace.
 - `product/INTEGRATED_EXAM_PREP.md` — product direction and integrated exam-prep model.
 - `product/UI_UX_STUDY_FLOW.md` — learner study flow and UI/UX decisions.
 - `product/LEARNING_SCOPES.md` — learning scope definitions.

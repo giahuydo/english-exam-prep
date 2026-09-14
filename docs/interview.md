@@ -6,7 +6,7 @@ The public `/interview` route is a frontend-only learning tool for the Everfit A
 
 - Route: `apps/web/src/app/interview/page.tsx`
 - No login required.
-- Audio is optional static frontend content; there is no runtime AI generation or ElevenLabs API call.
+- Audio is optional static frontend content; there is no runtime TTS call (neither Edge TTS nor ElevenLabs) from the website.
 - Progress is stored in browser `localStorage`.
 - Canonical source content is hard-coded in `apps/web/src/app/interview/data.ts`.
 
@@ -14,13 +14,23 @@ The public `/interview` route is a frontend-only learning tool for the Everfit A
 
 ```text
 apps/web/src/app/interview/
-├── page.tsx         UI, modes, active-question flow
-├── data.ts          canonical questions, answers, Part 2 strategy content
-├── types.ts         question and connection types
-├── connections.ts   global contexts/clusters/stories/triggers + selectors
-├── storage.ts       localStorage progress and review scheduling
-├── utils.ts         inline formatting, keyword extraction, cloze helpers
-└── rich-text.tsx    renders `**bold**` and `*italic*` source markers
+├── page.tsx           UI, modes, active-question flow
+├── data.ts            canonical questions, answers, Part 2 strategy content
+├── types.ts           question and connection types
+├── connections.ts     global contexts/clusters/stories/triggers + selectors
+├── storage.ts         localStorage progress and review scheduling
+├── audio.ts           playback, karaoke, static MP3 + alignment seeking
+├── audio-mapping.ts   canonical → speech text + offset mapping
+├── utils.ts           inline formatting, keyword extraction, cloze helpers
+└── rich-text.tsx      renders `**bold**` and `*italic*` source markers
+
+scripts/
+├── generate-interview-audio.ts       ElevenLabs offline generator (paid / key required)
+└── generate-interview-audio-edge.ts  Edge TTS offline generator (free, preferred default)
+
+apps/web/public/audio/interview/qNN/
+├── full.mp3         static sample audio for question N
+└── alignment.json   word cues for karaoke / segment seek
 ```
 
 `Everfit_19_Questions_Speaking_Format.docx` at the repository root is the local reference document used to update the canonical script. Do not edit canonical wording from memory or invent replacement content.
@@ -99,25 +109,120 @@ getMemoryNodes(questionId)
 
 `page.tsx` consumes these selectors for Connections, context labels, question lists, stories, triggers, and memory paths.
 
-## One-time ElevenLabs audio generation
+## Static interview audio generation
 
-The local generator uses the canonical English answers and ElevenLabs' timestamp endpoint to create optional static assets. It never runs in the website. The generated sample voice/audio is the authoritative playback source for the interview route when its static files are present.
+Audio is generated **offline only**. The website never calls Edge TTS or ElevenLabs at runtime. Both generators read canonical English from `apps/web/src/app/interview/data.ts`, strip formatting via `buildSpeechMapping`, and write the same asset pair:
+
+```text
+apps/web/public/audio/interview/qNN/full.mp3
+apps/web/public/audio/interview/qNN/alignment.json
+```
+
+`alignment.json` shape:
+
+```ts
+{
+  version: 1,
+  questionId: 'q02',
+  speechText: string, // spoken text without *, **, /
+  words: Array<{
+    text: string;
+    canonicalStart: number; // offset into canonical Markdown source
+    canonicalEnd: number;
+    startMs: number;
+    endMs: number;
+  }>;
+}
+```
+
+### When to regenerate
+
+After changing **English answer wording** in `data.ts` for a question, regenerate that question’s MP3 + alignment. Karaoke and segment seek depend on `speechText` matching the current canonical answer. Do **not** regenerate merely for UI/highlight/karaoke styling changes.
+
+### Preferred generator: Edge TTS (free)
+
+Script: `scripts/generate-interview-audio-edge.ts`  
+Command: `pnpm generate:interview-audio:edge`  
+Dependency: workspace root `devDependency` `edge-tts-universal` (no API key).
+
+Uses Microsoft Edge online neural voices via an unofficial client. Suitable for **local offline generation only** — never wire this into the Next.js runtime. The endpoint can change or throttle; if generation fails, retry later or fall back to ElevenLabs.
+
+Defaults (calm male “senior interview” style):
+
+| Env | Default | Purpose |
+|---|---|---|
+| `EDGE_TTS_VOICE` | `en-US-ChristopherNeural` | Male US neural voice |
+| `EDGE_TTS_RATE` | `+0%` | Natural voice pace (override with e.g. `-15%` to slow down) |
+| `EDGE_TTS_PITCH` | `-2Hz` | Slightly lower, calmer tone |
 
 ```bash
-# Preview all questions without an API call
+# Preview without network synthesis
+pnpm generate:interview-audio:edge -- 2 --dry-run
+pnpm generate:interview-audio:edge -- all --dry-run
+
+# Generate / replace one question (required after English answer edits)
+pnpm generate:interview-audio:edge -- 2 --force
+
+# Several questions
+pnpm generate:interview-audio:edge -- 1 2 3 --force
+
+# All questions (skips complete pairs unless --force)
+pnpm generate:interview-audio:edge -- all
+pnpm generate:interview-audio:edge -- all --force
+
+# Different calm male voices
+EDGE_TTS_VOICE=en-US-EricNeural EDGE_TTS_RATE=-20% pnpm generate:interview-audio:edge -- 2 --force
+EDGE_TTS_VOICE=en-US-RogerNeural pnpm generate:interview-audio:edge -- 2 --force
+EDGE_TTS_VOICE=en-GB-RyanNeural pnpm generate:interview-audio:edge -- 2 --force
+```
+
+Useful male English voices for interview practice:
+
+| Voice | Notes |
+|---|---|
+| `en-US-ChristopherNeural` | Default — calm, clear, professional |
+| `en-US-EricNeural` | Slightly deeper |
+| `en-US-RogerNeural` | Mature / steady |
+| `en-GB-RyanNeural` | British, more formal |
+| `en-US-AndrewNeural` | Modern, easy to hear |
+| `en-US-GuyNeural` | Neutral default-style US male |
+
+List more voices at generation time with a small Node snippet importing `VoicesManager` from `edge-tts-universal` and filtering `Gender: 'Male', Language: 'en'`.
+
+### Alternate generator: ElevenLabs (paid key)
+
+Script: `scripts/generate-interview-audio.ts`  
+Command: `pnpm generate:interview-audio`  
+
+Uses ElevenLabs’ timestamp endpoint. Keep keys in the shell only; never commit API keys or put them in `.env` / docs.
+
+```bash
 pnpm generate:interview-audio -- all --dry-run
 
-# Generate one or selected questions
 export ELEVENLABS_API_KEY="..."
 export ELEVENLABS_VOICE_ID="..."
+# optional: ELEVENLABS_MODEL_ID (default eleven_multilingual_v2)
 pnpm generate:interview-audio -- 1
 pnpm generate:interview-audio -- 1 3 10
-
-# Regenerate existing assets explicitly
 pnpm generate:interview-audio -- 1 --force
 ```
 
-`ELEVENLABS_MODEL_ID` is optional and defaults to `eleven_multilingual_v2`. Outputs are written to `apps/web/public/audio/interview/qNN/full.mp3` and `alignment.json`. Existing complete pairs are skipped unless `--force` is supplied. The UI uses static full-answer audio and timestamp karaoke when both files exist. Section, phrase, and current-idea playback use the same full MP3 plus alignment JSON and seek to the matching canonical character range; they do not fall back to browser SpeechSynthesis when the static audio source is available. Browser SpeechSynthesis remains available only for requests that do not provide a static `src`. Keep API keys in the shell only; do not add them to source or `.env` files.
+### Playback behavior after generation
+
+- Existing complete `full.mp3` + `alignment.json` pairs are skipped unless `--force`.
+- UI uses static full-answer audio and timestamp karaoke when both files exist.
+- Section, phrase, and current-idea playback use the same full MP3 + alignment and seek by canonical character range.
+- Browser SpeechSynthesis remains available only for requests without a static `src`.
+- After regenerating, hard-refresh `/interview`, open the question, and press Listen to confirm voice + karaoke track the new wording.
+
+### Agent checklist (audio regen)
+
+1. Edit English in `apps/web/src/app/interview/data.ts` only when the task is content (not UI).
+2. Run `pnpm generate:interview-audio:edge -- <id> --force` (or ElevenLabs equivalent).
+3. Confirm `alignment.json` `speechText` starts with the new spoken opening.
+4. Confirm word cue count looks sane and `startMs`/`endMs` increase through the answer.
+5. Smoke-test Listen on `/interview` for that question.
+6. Do not commit secrets. Commit regenerated `qNN/full.mp3` + `alignment.json` only when the user asks to commit audio assets.
 
 ## Adding or editing a question
 
@@ -297,6 +402,7 @@ Listen answer
 - If the spoken text contains Markdown or sounds like it says pause markers, inspect `stripFormatting` and `buildSpeechMapping` rather than changing the canonical data.
 - If playback uses the browser voice, inspect whether the request contains `src` and `alignment`, then inspect `audio.ts` error handling. Do not hide missing static audio by adding a silent fallback.
 - If karaoke flashes too quickly, inspect `speakingBeatAtTime` and `buildSpeakingBeats`; do not restore word-by-word highlighting.
+- If karaoke text looks washed out (e.g. purple/green on blue), inspect `renderTrackedText`: active beats must use `karaokeActiveShell` / `karaokeActiveText` and must not keep phrase `chunkColors`.
 - If Memory path does not move when a phrase is clicked, inspect `onActivate` in `AnswerSectionView` and the `answerSectionId` mapping in `data.ts`.
 
 ### Verification commands used today
@@ -318,6 +424,28 @@ The production deployment was smoke-tested with an HTTP 200 request to `/intervi
 - `2760f20` — Memory path synchronization on phrase playback.
 
 When changing this feature later, update this log or add a new dated entry instead of replacing the historical behavior description.
+
+### 2026-09-14 — Full speaking polish Q1 + Q10–Q23 + Edge audio
+
+- Polished remaining questions for speakable connectors/`/` pauses (Q2–Q9 already done earlier).
+- Fixed Q12 EN/VI mismatch; removed Q13 coaching meta sections from spoken answer.
+- Regenerated Edge TTS for Q1 and Q10–Q23 with `en-US-ChristopherNeural` / `+0%` / `-2Hz`.
+- Hardened `generate-interview-audio-edge.ts` alignment for Edge splits/merges (`Node.js`, `46 seconds`).
+- All `q01`–`q23` now have `full.mp3` + `alignment.json`.
+
+### 2026-09-14 — Karaoke contrast vs phrase colors
+
+- Phrase chunk palette no longer uses violet (`text-violet-700` → `text-teal-700` / `text-sky-800`) to reduce clash with blue UI chrome.
+- Active karaoke now forces `bg-slate-900` + white/amber/cyan text and drops chunk `colorClass`, so any idle phrase color stays readable while speaking.
+- Change only `karaokeActiveShell` / `karaokeActiveText` / `chunkColors` in `page.tsx` for future palette tweaks; do not reintroduce chunk colors onto active beats.
+
+### 2026-09-14 — Edge TTS free offline generator + Q2 regen
+
+- Added `scripts/generate-interview-audio-edge.ts` and root script `pnpm generate:interview-audio:edge`.
+- Uses `edge-tts-universal` (workspace `devDependency`) to write the same `full.mp3` + `alignment.json` pair as ElevenLabs, with WordBoundary → canonical offset mapping.
+- Default voice profile for calm senior-style listening: `en-US-ChristopherNeural`, rate `+0%` (natural pace), pitch `-2Hz` (override via `EDGE_TTS_VOICE` / `EDGE_TTS_RATE` / `EDGE_TTS_PITCH`).
+- Regenerated Q2 assets after speaking-script connector edits in `data.ts`. Prefer Edge for free local regen; keep ElevenLabs as the paid alternate.
+- Still offline-only: do not call Edge TTS from the Next.js app at runtime.
 
 ## Local progress
 

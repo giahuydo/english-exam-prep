@@ -19,10 +19,12 @@
     "db:seed": "pnpm --filter @app/database db:seed",
     "db:reset": "pnpm --filter @app/database db:reset",
     "generate:interview-audio": "apps/web/node_modules/.bin/tsx scripts/generate-interview-audio.ts",
+    "generate:interview-audio:edge": "apps/web/node_modules/.bin/tsx scripts/generate-interview-audio-edge.ts",
     "export:interview-ai": "apps/web/node_modules/.bin/tsx scripts/export-interview-ai.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "devDependencies": {
+    "edge-tts-universal": "^1.4.0",
     "prettier": "^3.3.3",
     "turbo": "^2.3.3",
     "typescript": "^5.6.3"

@@ -1,539 +1,532 @@
 {
   "version": 1,
   "questionId": "q23",
-  "speechText": "At a high level, LangChain gives higher-level building blocks for models, prompts, tools, and middleware. LangGraph is more about lower-level, stateful orchestration for long-running workflows, with durable execution and human-in-the-loop support. StrangeLoop is broader. It includes Studio for configuration and control, an Engine for execution, and a clear boundary between the app and its domain tools. So my simple summary is: LangGraph is more an orchestration framework, while StrangeLoop is closer to a production agent platform.",
+  "speechText": "At a high level, LangChain gives higher-level building blocks for models, prompts, tools, and middleware. LangGraph is more about lower-level, stateful orchestration for long-running workflows, with durable execution and human-in-the-loop support. StrangeLoop is broader. It includes Studio for configuration and control, an Engine for execution, and a clear boundary between the app and its domain tools. So my simple summary is: LangGraph is more an orchestration framework. StrangeLoop is closer to a production agent platform.",
   "words": [
     {
       "text": "At",
       "canonicalStart": 1,
       "canonicalEnd": 3,
-      "startMs": 0,
-      "endMs": 116
+      "startMs": 100,
+      "endMs": 275
     },
     {
       "text": "a",
       "canonicalStart": 4,
       "canonicalEnd": 5,
-      "startMs": 151,
-      "endMs": 197
+      "startMs": 288,
+      "endMs": 325
     },
     {
       "text": "high",
       "canonicalStart": 6,
       "canonicalEnd": 10,
-      "startMs": 221,
-      "endMs": 430
+      "startMs": 338,
+      "endMs": 613
     },
     {
       "text": "level,",
       "canonicalStart": 11,
       "canonicalEnd": 17,
-      "startMs": 464,
-      "endMs": 813
+      "startMs": 625,
+      "endMs": 1063
     },
     {
       "text": "LangChain",
       "canonicalStart": 23,
       "canonicalEnd": 32,
-      "startMs": 964,
-      "endMs": 1660
+      "startMs": 1263,
+      "endMs": 1838
     },
     {
       "text": "gives",
       "canonicalStart": 35,
       "canonicalEnd": 40,
-      "startMs": 1707,
-      "endMs": 1974
+      "startMs": 1850,
+      "endMs": 2100
     },
     {
       "text": "higher-level",
       "canonicalStart": 41,
       "canonicalEnd": 53,
-      "startMs": 2009,
-      "endMs": 2589
+      "startMs": 2113,
+      "endMs": 2725
     },
     {
       "text": "building",
       "canonicalStart": 54,
       "canonicalEnd": 62,
-      "startMs": 2635,
-      "endMs": 2995
+      "startMs": 2738,
+      "endMs": 3113
     },
     {
       "text": "blocks",
       "canonicalStart": 63,
       "canonicalEnd": 69,
-      "startMs": 3019,
-      "endMs": 3355
+      "startMs": 3125,
+      "endMs": 3513
     },
     {
       "text": "for",
-      "canonicalStart": 70,
-      "canonicalEnd": 73,
-      "startMs": 3402,
-      "endMs": 3553
+      "canonicalStart": 72,
+      "canonicalEnd": 75,
+      "startMs": 3525,
+      "endMs": 3650
     },
     {
       "text": "models,",
-      "canonicalStart": 74,
-      "canonicalEnd": 81,
-      "startMs": 3587,
-      "endMs": 4087
+      "canonicalStart": 76,
+      "canonicalEnd": 83,
+      "startMs": 3663,
+      "endMs": 4200
     },
     {
       "text": "prompts,",
-      "canonicalStart": 82,
-      "canonicalEnd": 90,
-      "startMs": 4238,
-      "endMs": 4957
+      "canonicalStart": 84,
+      "canonicalEnd": 92,
+      "startMs": 4450,
+      "endMs": 4900
     },
     {
       "text": "tools,",
-      "canonicalStart": 91,
-      "canonicalEnd": 97,
-      "startMs": 5132,
-      "endMs": 5921
+      "canonicalStart": 93,
+      "canonicalEnd": 99,
+      "startMs": 5150,
+      "endMs": 5638
     },
     {
       "text": "and",
-      "canonicalStart": 98,
-      "canonicalEnd": 101,
-      "startMs": 6037,
-      "endMs": 6304
+      "canonicalStart": 102,
+      "canonicalEnd": 105,
+      "startMs": 5838,
+      "endMs": 5988
     },
     {
       "text": "middleware.",
-      "canonicalStart": 102,
-      "canonicalEnd": 113,
-      "startMs": 6339,
-      "endMs": 7094
+      "canonicalStart": 106,
+      "canonicalEnd": 117,
+      "startMs": 6000,
+      "endMs": 6613
     },
     {
       "text": "LangGraph",
-      "canonicalStart": 115,
-      "canonicalEnd": 124,
-      "startMs": 7152,
-      "endMs": 8348
+      "canonicalStart": 119,
+      "canonicalEnd": 128,
+      "startMs": 7475,
+      "endMs": 8150
     },
     {
       "text": "is",
-      "canonicalStart": 125,
-      "canonicalEnd": 127,
-      "startMs": 8417,
-      "endMs": 8545
+      "canonicalStart": 129,
+      "canonicalEnd": 131,
+      "startMs": 8163,
+      "endMs": 8300
     },
     {
       "text": "more",
-      "canonicalStart": 128,
-      "canonicalEnd": 132,
-      "startMs": 8591,
-      "endMs": 8858
+      "canonicalStart": 132,
+      "canonicalEnd": 136,
+      "startMs": 8313,
+      "endMs": 8563
     },
     {
       "text": "about",
-      "canonicalStart": 133,
-      "canonicalEnd": 138,
-      "startMs": 8893,
-      "endMs": 9172
+      "canonicalStart": 137,
+      "canonicalEnd": 142,
+      "startMs": 8575,
+      "endMs": 8863
     },
     {
       "text": "lower-level,",
-      "canonicalStart": 140,
-      "canonicalEnd": 152,
-      "startMs": 9218,
-      "endMs": 9903
+      "canonicalStart": 146,
+      "canonicalEnd": 158,
+      "startMs": 8875,
+      "endMs": 9500
     },
     {
       "text": "stateful",
-      "canonicalStart": 153,
-      "canonicalEnd": 161,
-      "startMs": 9950,
-      "endMs": 10414
+      "canonicalStart": 159,
+      "canonicalEnd": 167,
+      "startMs": 9750,
+      "endMs": 10225
     },
     {
       "text": "orchestration",
-      "canonicalStart": 162,
-      "canonicalEnd": 175,
-      "startMs": 10461,
-      "endMs": 11192
+      "canonicalStart": 168,
+      "canonicalEnd": 181,
+      "startMs": 10238,
+      "endMs": 10925
     },
     {
       "text": "for",
-      "canonicalStart": 178,
-      "canonicalEnd": 181,
-      "startMs": 11343,
-      "endMs": 11738
+      "canonicalStart": 184,
+      "canonicalEnd": 187,
+      "startMs": 10938,
+      "endMs": 11075
     },
     {
       "text": "long-running",
-      "canonicalStart": 182,
-      "canonicalEnd": 194,
-      "startMs": 11784,
-      "endMs": 12341
+      "canonicalStart": 188,
+      "canonicalEnd": 200,
+      "startMs": 11088,
+      "endMs": 11663
     },
     {
       "text": "workflows,",
-      "canonicalStart": 195,
-      "canonicalEnd": 205,
-      "startMs": 12365,
-      "endMs": 13224
+      "canonicalStart": 201,
+      "canonicalEnd": 211,
+      "startMs": 11675,
+      "endMs": 12338
     },
     {
       "text": "with",
-      "canonicalStart": 208,
-      "canonicalEnd": 212,
-      "startMs": 13398,
-      "endMs": 13862
+      "canonicalStart": 214,
+      "canonicalEnd": 218,
+      "startMs": 12588,
+      "endMs": 12775
     },
     {
       "text": "durable",
-      "canonicalStart": 213,
-      "canonicalEnd": 220,
-      "startMs": 13897,
-      "endMs": 14385
+      "canonicalStart": 219,
+      "canonicalEnd": 226,
+      "startMs": 12788,
+      "endMs": 13213
     },
     {
       "text": "execution",
-      "canonicalStart": 221,
-      "canonicalEnd": 230,
-      "startMs": 14431,
-      "endMs": 15128
+      "canonicalStart": 227,
+      "canonicalEnd": 236,
+      "startMs": 13225,
+      "endMs": 13925
     },
     {
       "text": "and",
-      "canonicalStart": 231,
-      "canonicalEnd": 234,
-      "startMs": 15244,
-      "endMs": 15732
+      "canonicalStart": 239,
+      "canonicalEnd": 242,
+      "startMs": 13938,
+      "endMs": 14050
     },
     {
       "text": "human-in-the-loop",
-      "canonicalStart": 235,
-      "canonicalEnd": 252,
-      "startMs": 15778,
-      "endMs": 16603
+      "canonicalStart": 243,
+      "canonicalEnd": 260,
+      "startMs": 14063,
+      "endMs": 14775
     },
     {
       "text": "support.",
-      "canonicalStart": 253,
-      "canonicalEnd": 261,
-      "startMs": 16672,
-      "endMs": 17299
+      "canonicalStart": 261,
+      "canonicalEnd": 269,
+      "startMs": 14788,
+      "endMs": 15338
     },
     {
       "text": "StrangeLoop",
-      "canonicalStart": 263,
-      "canonicalEnd": 274,
-      "startMs": 17450,
-      "endMs": 18843
+      "canonicalStart": 271,
+      "canonicalEnd": 282,
+      "startMs": 16200,
+      "endMs": 16988
     },
     {
       "text": "is",
-      "canonicalStart": 275,
-      "canonicalEnd": 277,
-      "startMs": 18925,
-      "endMs": 19354
+      "canonicalStart": 283,
+      "canonicalEnd": 285,
+      "startMs": 17000,
+      "endMs": 17138
     },
     {
       "text": "broader.",
-      "canonicalStart": 278,
-      "canonicalEnd": 286,
-      "startMs": 19401,
-      "endMs": 19923
+      "canonicalStart": 286,
+      "canonicalEnd": 294,
+      "startMs": 17150,
+      "endMs": 17675
     },
     {
       "text": "It",
-      "canonicalStart": 290,
-      "canonicalEnd": 292,
-      "startMs": 20074,
-      "endMs": 20550
+      "canonicalStart": 298,
+      "canonicalEnd": 300,
+      "startMs": 18538,
+      "endMs": 18675
     },
     {
       "text": "includes",
-      "canonicalStart": 293,
-      "canonicalEnd": 301,
-      "startMs": 20608,
-      "endMs": 21154
+      "canonicalStart": 301,
+      "canonicalEnd": 309,
+      "startMs": 18688,
+      "endMs": 19125
     },
     {
       "text": "Studio",
-      "canonicalStart": 304,
-      "canonicalEnd": 310,
-      "startMs": 21224,
-      "endMs": 21874
+      "canonicalStart": 312,
+      "canonicalEnd": 318,
+      "startMs": 19138,
+      "endMs": 19638
     },
     {
       "text": "for",
-      "canonicalStart": 313,
-      "canonicalEnd": 316,
-      "startMs": 22048,
-      "endMs": 22210
+      "canonicalStart": 321,
+      "canonicalEnd": 324,
+      "startMs": 19650,
+      "endMs": 19813
     },
     {
       "text": "configuration",
-      "canonicalStart": 317,
-      "canonicalEnd": 330,
-      "startMs": 22245,
-      "endMs": 23011
+      "canonicalStart": 325,
+      "canonicalEnd": 338,
+      "startMs": 19825,
+      "endMs": 20663
     },
     {
       "text": "and",
-      "canonicalStart": 331,
-      "canonicalEnd": 334,
-      "startMs": 23104,
-      "endMs": 23546
+      "canonicalStart": 339,
+      "canonicalEnd": 342,
+      "startMs": 20675,
+      "endMs": 20775
     },
     {
       "text": "control,",
-      "canonicalStart": 335,
-      "canonicalEnd": 343,
-      "startMs": 23580,
-      "endMs": 24184
+      "canonicalStart": 343,
+      "canonicalEnd": 351,
+      "startMs": 20788,
+      "endMs": 21313
     },
     {
       "text": "an",
-      "canonicalStart": 346,
-      "canonicalEnd": 348,
-      "startMs": 24393,
-      "endMs": 24799
+      "canonicalStart": 354,
+      "canonicalEnd": 356,
+      "startMs": 21563,
+      "endMs": 21688
     },
     {
       "text": "Engine",
-      "canonicalStart": 351,
-      "canonicalEnd": 357,
-      "startMs": 24834,
-      "endMs": 25136
+      "canonicalStart": 359,
+      "canonicalEnd": 365,
+      "startMs": 21700,
+      "endMs": 22050
     },
     {
       "text": "for",
-      "canonicalStart": 360,
-      "canonicalEnd": 363,
-      "startMs": 25171,
-      "endMs": 25287
+      "canonicalStart": 368,
+      "canonicalEnd": 371,
+      "startMs": 22063,
+      "endMs": 22250
     },
     {
       "text": "execution,",
-      "canonicalStart": 364,
-      "canonicalEnd": 374,
-      "startMs": 25322,
-      "endMs": 26100
+      "canonicalStart": 372,
+      "canonicalEnd": 382,
+      "startMs": 22263,
+      "endMs": 22963
     },
     {
       "text": "and",
-      "canonicalStart": 377,
-      "canonicalEnd": 380,
-      "startMs": 26251,
-      "endMs": 26738
+      "canonicalStart": 385,
+      "canonicalEnd": 388,
+      "startMs": 23213,
+      "endMs": 23325
     },
     {
       "text": "a",
-      "canonicalStart": 381,
-      "canonicalEnd": 382,
-      "startMs": 26773,
-      "endMs": 26831
+      "canonicalStart": 389,
+      "canonicalEnd": 390,
+      "startMs": 23338,
+      "endMs": 23400
     },
     {
       "text": "clear",
-      "canonicalStart": 383,
-      "canonicalEnd": 388,
-      "startMs": 26854,
-      "endMs": 27145
+      "canonicalStart": 391,
+      "canonicalEnd": 396,
+      "startMs": 23413,
+      "endMs": 23738
     },
     {
       "text": "boundary",
-      "canonicalStart": 389,
-      "canonicalEnd": 397,
-      "startMs": 27191,
-      "endMs": 27644
+      "canonicalStart": 397,
+      "canonicalEnd": 405,
+      "startMs": 23750,
+      "endMs": 24200
     },
     {
       "text": "between",
-      "canonicalStart": 398,
-      "canonicalEnd": 405,
-      "startMs": 27725,
-      "endMs": 28120
+      "canonicalStart": 406,
+      "canonicalEnd": 413,
+      "startMs": 24213,
+      "endMs": 24550
     },
     {
       "text": "the",
-      "canonicalStart": 406,
-      "canonicalEnd": 409,
-      "startMs": 28155,
-      "endMs": 28248
+      "canonicalStart": 414,
+      "canonicalEnd": 417,
+      "startMs": 24563,
+      "endMs": 24663
     },
     {
       "text": "app",
-      "canonicalStart": 410,
-      "canonicalEnd": 413,
-      "startMs": 28271,
-      "endMs": 28457
+      "canonicalStart": 418,
+      "canonicalEnd": 421,
+      "startMs": 24675,
+      "endMs": 25000
     },
     {
       "text": "and",
-      "canonicalStart": 414,
-      "canonicalEnd": 417,
-      "startMs": 28549,
-      "endMs": 29037
+      "canonicalStart": 422,
+      "canonicalEnd": 425,
+      "startMs": 25013,
+      "endMs": 25113
     },
     {
       "text": "its",
-      "canonicalStart": 418,
-      "canonicalEnd": 421,
-      "startMs": 29072,
-      "endMs": 29223
+      "canonicalStart": 426,
+      "canonicalEnd": 429,
+      "startMs": 25125,
+      "endMs": 25275
     },
     {
       "text": "domain",
-      "canonicalStart": 422,
-      "canonicalEnd": 428,
-      "startMs": 29258,
-      "endMs": 29699
+      "canonicalStart": 430,
+      "canonicalEnd": 436,
+      "startMs": 25288,
+      "endMs": 25688
     },
     {
       "text": "tools.",
-      "canonicalStart": 429,
-      "canonicalEnd": 435,
-      "startMs": 29745,
-      "endMs": 30349
+      "canonicalStart": 437,
+      "canonicalEnd": 443,
+      "startMs": 25700,
+      "endMs": 26275
     },
     {
       "text": "So",
-      "canonicalStart": 437,
-      "canonicalEnd": 439,
-      "startMs": 30523,
-      "endMs": 31289
+      "canonicalStart": 445,
+      "canonicalEnd": 447,
+      "startMs": 27138,
+      "endMs": 27388
     },
     {
       "text": "my",
-      "canonicalStart": 440,
-      "canonicalEnd": 442,
-      "startMs": 31405,
-      "endMs": 31533
+      "canonicalStart": 448,
+      "canonicalEnd": 450,
+      "startMs": 27400,
+      "endMs": 27563
     },
     {
       "text": "simple",
-      "canonicalStart": 443,
-      "canonicalEnd": 449,
-      "startMs": 31661,
-      "endMs": 32056
+      "canonicalStart": 451,
+      "canonicalEnd": 457,
+      "startMs": 27575,
+      "endMs": 27950
     },
     {
       "text": "summary",
-      "canonicalStart": 450,
-      "canonicalEnd": 457,
-      "startMs": 32102,
-      "endMs": 32462
+      "canonicalStart": 458,
+      "canonicalEnd": 465,
+      "startMs": 27963,
+      "endMs": 28438
     },
     {
       "text": "is:",
-      "canonicalStart": 458,
-      "canonicalEnd": 461,
-      "startMs": 32520,
-      "endMs": 32868
+      "canonicalStart": 466,
+      "canonicalEnd": 469,
+      "startMs": 28450,
+      "endMs": 28750
     },
     {
       "text": "LangGraph",
-      "canonicalStart": 467,
-      "canonicalEnd": 476,
-      "startMs": 33042,
-      "endMs": 34053
+      "canonicalStart": 475,
+      "canonicalEnd": 484,
+      "startMs": 28913,
+      "endMs": 29538
     },
     {
       "text": "is",
-      "canonicalStart": 477,
-      "canonicalEnd": 479,
-      "startMs": 34145,
-      "endMs": 34552
+      "canonicalStart": 485,
+      "canonicalEnd": 487,
+      "startMs": 29550,
+      "endMs": 29688
     },
     {
       "text": "more",
-      "canonicalStart": 480,
-      "canonicalEnd": 484,
-      "startMs": 34587,
-      "endMs": 34784
+      "canonicalStart": 488,
+      "canonicalEnd": 492,
+      "startMs": 29700,
+      "endMs": 29950
     },
     {
       "text": "an",
-      "canonicalStart": 485,
-      "canonicalEnd": 487,
-      "startMs": 34819,
-      "endMs": 34877
+      "canonicalStart": 493,
+      "canonicalEnd": 495,
+      "startMs": 29963,
+      "endMs": 30063
     },
     {
       "text": "orchestration",
-      "canonicalStart": 488,
-      "canonicalEnd": 501,
-      "startMs": 34912,
-      "endMs": 35643
+      "canonicalStart": 496,
+      "canonicalEnd": 509,
+      "startMs": 30075,
+      "endMs": 30750
     },
     {
-      "text": "framework,",
-      "canonicalStart": 502,
-      "canonicalEnd": 514,
-      "startMs": 35690,
-      "endMs": 36398
-    },
-    {
-      "text": "while",
-      "canonicalStart": 517,
+      "text": "framework.",
+      "canonicalStart": 510,
       "canonicalEnd": 522,
-      "startMs": 36525,
-      "endMs": 37002
+      "startMs": 30763,
+      "endMs": 31425
     },
     {
       "text": "StrangeLoop",
-      "canonicalStart": 525,
-      "canonicalEnd": 536,
-      "startMs": 37036,
-      "endMs": 37779
+      "canonicalStart": 527,
+      "canonicalEnd": 538,
+      "startMs": 32288,
+      "endMs": 33050
     },
     {
       "text": "is",
-      "canonicalStart": 537,
-      "canonicalEnd": 539,
-      "startMs": 37861,
-      "endMs": 38302
+      "canonicalStart": 539,
+      "canonicalEnd": 541,
+      "startMs": 33063,
+      "endMs": 33200
     },
     {
       "text": "closer",
-      "canonicalStart": 540,
-      "canonicalEnd": 546,
-      "startMs": 38348,
-      "endMs": 38778
+      "canonicalStart": 542,
+      "canonicalEnd": 548,
+      "startMs": 33213,
+      "endMs": 33650
     },
     {
       "text": "to",
-      "canonicalStart": 547,
-      "canonicalEnd": 549,
-      "startMs": 38859,
-      "endMs": 39149
+      "canonicalStart": 549,
+      "canonicalEnd": 551,
+      "startMs": 33663,
+      "endMs": 33788
     },
     {
       "text": "a",
-      "canonicalStart": 550,
-      "canonicalEnd": 551,
-      "startMs": 39196,
-      "endMs": 39277
+      "canonicalStart": 552,
+      "canonicalEnd": 553,
+      "startMs": 33800,
+      "endMs": 33888
     },
     {
       "text": "production",
-      "canonicalStart": 552,
-      "canonicalEnd": 562,
-      "startMs": 39300,
-      "endMs": 39800
+      "canonicalStart": 554,
+      "canonicalEnd": 564,
+      "startMs": 33900,
+      "endMs": 34438
     },
     {
       "text": "agent",
-      "canonicalStart": 563,
-      "canonicalEnd": 568,
-      "startMs": 39858,
-      "endMs": 40276
+      "canonicalStart": 565,
+      "canonicalEnd": 570,
+      "startMs": 34450,
+      "endMs": 34763
     },
     {
       "text": "platform.",
-      "canonicalStart": 569,
-      "canonicalEnd": 580,
-      "startMs": 40322,
-      "endMs": 40961
+      "canonicalStart": 571,
+      "canonicalEnd": 582,
+      "startMs": 34775,
+      "endMs": 35413
     }
   ]
 }

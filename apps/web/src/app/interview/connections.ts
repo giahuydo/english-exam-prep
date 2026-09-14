@@ -5,7 +5,7 @@ export type { Context, MacroTopic, MemoryNode } from './types';
 export const contexts: Context[] = [
   { id: 'K', title: 'AI Agent Workflow', path: ['Agent platform', 'Orchestration', 'Application / domain-tool boundary'] },
   { id: 'A', title: 'Backend → Applied AI → Production', path: ['Backend foundation', 'Applied AI', 'Production reliability'] },
-  { id: 'B', title: 'RAG / Hybrid Retrieval', path: ['Lexical search + semantic search', 'RRF', 'Fallback + access scope'] },
+  { id: 'B', title: 'Retrieval / Hybrid Search', path: ['Lexical search + semantic search', 'RRF', 'Fallback + access scope'] },
   { id: 'C', title: 'AI Reliability', path: ['Root cause', 'Error strategy', 'Observability'] },
   { id: 'D', title: 'OCR CPU → GPU', path: ['Memory problem', 'Trace bottleneck', 'Stabilize CPU', 'GPU-backed service'] },
   { id: 'E', title: 'Agent Architecture', path: ['Intent', 'Context', 'Tool decision', 'Backend control', 'Validation → result'] },
@@ -17,7 +17,7 @@ export const contexts: Context[] = [
 ];
 
 export const macroTopics: MacroTopic[] = [
-  { id: 'ai-quality', title: 'AI / RAG / Quality', sourceContextIds: ['B', 'G'], summary: 'Retrieval → ranking → groundedness → evals', keywords: ['RAG', 'retrieval', 'vector', 'ranking', 'hallucination', 'groundedness', 'eval'] },
+  { id: 'ai-quality', title: 'AI / Retrieval / Quality', sourceContextIds: ['B', 'G'], summary: 'Retrieval → ranking → groundedness → evals', keywords: ['retrieval', 'vector', 'ranking', 'hallucination', 'groundedness', 'eval'] },
   { id: 'reliability-production', title: 'Reliability / Production / OCR', sourceContextIds: ['C', 'D'], summary: 'Root cause → stabilize → observe → scale', keywords: ['error', 'retry', 'timeout', 'latency', 'cost', 'incident', 'OOM', 'performance'] },
   { id: 'agent-security', title: 'Agent / Tool Calling / Security', sourceContextIds: ['E', 'H'], summary: 'Intent → tools → permission → audit', keywords: ['agent', 'tool calling', 'function calling', 'permission', 'audit', 'tool safety'] },
   { id: 'ai-agent-workflow', title: 'AI Agent Workflow', sourceContextIds: ['K'], summary: 'Agent platform → orchestration → application boundary', keywords: ['StrangeLoop', 'LangChain', 'LangGraph', 'agent workflow', 'orchestration', 'workflow engine'] },
@@ -28,7 +28,7 @@ export const macroTopics: MacroTopic[] = [
 export const phraseClusters: PhraseCluster[] = [
   { id: 'error-handling', title: 'Error handling', path: ['Network error · timeout', 'Bounded retry', 'Fallback · fail fast'] },
   { id: 'observability', title: 'Observability', path: ['Request/job ID', 'Model · latency · retry count', 'Error type · token usage'] },
-  { id: 'rag', title: 'RAG / retrieval', path: ['Lexical + semantic search', 'RRF', 'Fallback · access scope'] },
+  { id: 'rag', title: 'Retrieval / hybrid search', path: ['Lexical + semantic search', 'RRF', 'Fallback · access scope'] },
   { id: 'workflow', title: 'Long-running workflow', path: ['Job state', 'Checkpoint · retry', 'Idempotency · recovery'] },
   { id: 'tool-calling', title: 'Tool calling', path: ['Tool schema', 'Validate arguments', 'Permission → execute → result'] },
   { id: 'tool-safety', title: 'Tool safety', path: ['Least privilege', 'Permission + validation', 'Audit · idempotency'] },
@@ -39,7 +39,7 @@ export const phraseClusters: PhraseCluster[] = [
 ];
 
 export const heroStories: HeroStory[] = [
-  { id: 'hybrid-rag', title: 'Hybrid RAG', path: ['Lexical + semantic search', 'RRF', 'Lexical fallback', 'Access scope'] },
+  { id: 'hybrid-rag', title: 'Hybrid retrieval', path: ['Lexical + semantic search', 'RRF', 'Lexical fallback', 'Access scope'] },
   { id: 'llm-reliability', title: 'LLM reliability', path: ['Inspect whole flow', 'Classify failure', 'Retry / fallback / fail-fast', 'Observability'] },
   { id: 'ocr-cpu-gpu', title: 'OCR CPU → GPU', path: ['Memory problem', 'Trace bottleneck', 'Stabilize CPU', 'Checkpoint / recovery', 'Remote GPU service'] },
 ];
@@ -51,7 +51,7 @@ export const triggers: Trigger[] = [
   { id: 'workflow', phrases: 'Temporal · long-running · recover', contextIds: ['F'] },
   { id: 'quality', phrases: 'groundedness · regression · eval', contextIds: ['G', 'C'] },
   { id: 'security', phrases: 'permission · audit · least privilege', contextIds: ['H'] },
-  { id: 'retrieval', phrases: 'RAG · vector · ranking · retrieval', contextIds: ['B', 'G'] },
+  { id: 'retrieval', phrases: 'retrieval · vector · ranking · search', contextIds: ['B', 'G'] },
 ];
 
 export function getQuestionRelations(questionId: QuestionId) { return interviewQuestions.find((item) => item.id === questionId); }
