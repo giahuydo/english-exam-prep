@@ -20,6 +20,7 @@
     "db:reset": "pnpm --filter @app/database db:reset",
     "generate:interview-audio": "apps/web/node_modules/.bin/tsx scripts/generate-interview-audio.ts",
     "generate:interview-audio:edge": "apps/web/node_modules/.bin/tsx scripts/generate-interview-audio-edge.ts",
+    "generate:backend-interview-audio:edge": "apps/web/node_modules/.bin/tsx scripts/generate-backend-interview-audio-edge.ts",
     "export:interview-ai": "apps/web/node_modules/.bin/tsx scripts/export-interview-ai.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
   },

@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "questionId": "t04-q01",
+  "speechText": "A queue lets the API move slow or background work outside the request. The API can respond faster, and workers can process jobs separately. It also gives us retry, better reliability, and easier scaling. The trade-off is more system complexity and sometimes higher processing latency.",
+  "words": [
+    {
+      "text": "A",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 284
+    },
+    {
+      "text": "queue",
+      "canonicalStart": 2,
+      "canonicalEnd": 7,
+      "startMs": 300,
+      "endMs": 706
+    },
+    {
+      "text": "lets",
+      "canonicalStart": 8,
+      "canonicalEnd": 12,
+      "startMs": 722,
+      "endMs": 1034
+    },
+    {
+      "text": "the",
+      "canonicalStart": 13,
+      "canonicalEnd": 16,
+      "startMs": 1050,
+      "endMs": 1222
+    },
+    {
+      "text": "API",
+      "canonicalStart": 17,
+      "canonicalEnd": 20,
+      "startMs": 1238,
+      "endMs": 1941
+    },
+    {
+      "text": "move",
+      "canonicalStart": 21,
+      "canonicalEnd": 25,
+      "startMs": 1956,
+      "endMs": 2331
+    },
+    {
+      "text": "slow",
+      "canonicalStart": 26,
+      "canonicalEnd": 30,
+      "startMs": 2347,
+      "endMs": 2863
+    },
+    {
+      "text": "or",
+      "canonicalStart": 31,
+      "canonicalEnd": 33,
+      "startMs": 2878,
+      "endMs": 3081
+    },
+    {
+      "text": "background",
+      "canonicalStart": 34,
+      "canonicalEnd": 44,
+      "startMs": 3097,
+      "endMs": 3769
+    },
+    {
+      "text": "work",
+      "canonicalStart": 45,
+      "canonicalEnd": 49,
+      "startMs": 3784,
+      "endMs": 4113
+    },
+    {
+      "text": "outside",
+      "canonicalStart": 50,
+      "canonicalEnd": 57,
+      "startMs": 4128,
+      "endMs": 4706
+    },
+    {
+      "text": "the",
+      "canonicalStart": 58,
+      "canonicalEnd": 61,
+      "startMs": 4722,
+      "endMs": 4800
+    },
+    {
+      "text": "request.",
+      "canonicalStart": 62,
+      "canonicalEnd": 70,
+      "startMs": 4816,
+      "endMs": 5628
+    },
+    {
+      "text": "The",
+      "canonicalStart": 71,
+      "canonicalEnd": 74,
+      "startMs": 6719,
+      "endMs": 6938
+    },
+    {
+      "text": "API",
+      "canonicalStart": 75,
+      "canonicalEnd": 78,
+      "startMs": 6953,
+      "endMs": 7719
+    },
+    {
+      "text": "can",
+      "canonicalStart": 79,
+      "canonicalEnd": 82,
+      "startMs": 7734,
+      "endMs": 7906
+    },
+    {
+      "text": "respond",
+      "canonicalStart": 83,
+      "canonicalEnd": 90,
+      "startMs": 7922,
+      "endMs": 8500
+    },
+    {
+      "text": "faster,",
+      "canonicalStart": 91,
+      "canonicalEnd": 98,
+      "startMs": 8516,
+      "endMs": 9188
+    },
+    {
+      "text": "and",
+      "canonicalStart": 99,
+      "canonicalEnd": 102,
+      "startMs": 9484,
+      "endMs": 9625
+    },
+    {
+      "text": "workers",
+      "canonicalStart": 103,
+      "canonicalEnd": 110,
+      "startMs": 9641,
+      "endMs": 10172
+    },
+    {
+      "text": "can",
+      "canonicalStart": 111,
+      "canonicalEnd": 114,
+      "startMs": 10188,
+      "endMs": 10359
+    },
+    {
+      "text": "process",
+      "canonicalStart": 115,
+      "canonicalEnd": 122,
+      "startMs": 10375,
+      "endMs": 11016
+    },
+    {
+      "text": "jobs",
+      "canonicalStart": 123,
+      "canonicalEnd": 127,
+      "startMs": 11031,
+      "endMs": 11484
+    },
+    {
+      "text": "separately.",
+      "canonicalStart": 128,
+      "canonicalEnd": 139,
+      "startMs": 11500,
+      "endMs": 12266
+    },
+    {
+      "text": "It",
+      "canonicalStart": 140,
+      "canonicalEnd": 142,
+      "startMs": 13344,
+      "endMs": 13531
+    },
+    {
+      "text": "also",
+      "canonicalStart": 143,
+      "canonicalEnd": 147,
+      "startMs": 13547,
+      "endMs": 14016
+    },
+    {
+      "text": "gives",
+      "canonicalStart": 148,
+      "canonicalEnd": 153,
+      "startMs": 14031,
+      "endMs": 14344
+    },
+    {
+      "text": "us",
+      "canonicalStart": 154,
+      "canonicalEnd": 156,
+      "startMs": 14359,
+      "endMs": 14578
+    },
+    {
+      "text": "retry,",
+      "canonicalStart": 157,
+      "canonicalEnd": 163,
+      "startMs": 14594,
+      "endMs": 15250
+    },
+    {
+      "text": "better",
+      "canonicalStart": 164,
+      "canonicalEnd": 170,
+      "startMs": 15609,
+      "endMs": 15938
+    },
+    {
+      "text": "reliability,",
+      "canonicalStart": 171,
+      "canonicalEnd": 183,
+      "startMs": 15953,
+      "endMs": 16953
+    },
+    {
+      "text": "and",
+      "canonicalStart": 184,
+      "canonicalEnd": 187,
+      "startMs": 17188,
+      "endMs": 17422
+    },
+    {
+      "text": "easier",
+      "canonicalStart": 188,
+      "canonicalEnd": 194,
+      "startMs": 17438,
+      "endMs": 17922
+    },
+    {
+      "text": "scaling.",
+      "canonicalStart": 195,
+      "canonicalEnd": 203,
+      "startMs": 17938,
+      "endMs": 18609
+    },
+    {
+      "text": "The",
+      "canonicalStart": 204,
+      "canonicalEnd": 207,
+      "startMs": 19688,
+      "endMs": 19844
+    },
+    {
+      "text": "trade-off",
+      "canonicalStart": 208,
+      "canonicalEnd": 217,
+      "startMs": 19859,
+      "endMs": 20531
+    },
+    {
+      "text": "is",
+      "canonicalStart": 218,
+      "canonicalEnd": 220,
+      "startMs": 20547,
+      "endMs": 20703
+    },
+    {
+      "text": "more",
+      "canonicalStart": 221,
+      "canonicalEnd": 225,
+      "startMs": 20719,
+      "endMs": 21000
+    },
+    {
+      "text": "system",
+      "canonicalStart": 226,
+      "canonicalEnd": 232,
+      "startMs": 21016,
+      "endMs": 21563
+    },
+    {
+      "text": "complexity",
+      "canonicalStart": 233,
+      "canonicalEnd": 243,
+      "startMs": 21578,
+      "endMs": 22469
+    },
+    {
+      "text": "and",
+      "canonicalStart": 244,
+      "canonicalEnd": 247,
+      "startMs": 22484,
+      "endMs": 22656
+    },
+    {
+      "text": "sometimes",
+      "canonicalStart": 248,
+      "canonicalEnd": 257,
+      "startMs": 22672,
+      "endMs": 23359
+    },
+    {
+      "text": "higher",
+      "canonicalStart": 258,
+      "canonicalEnd": 264,
+      "startMs": 23375,
+      "endMs": 23797
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 265,
+      "canonicalEnd": 275,
+      "startMs": 23813,
+      "endMs": 24563
+    },
+    {
+      "text": "latency.",
+      "canonicalStart": 276,
+      "canonicalEnd": 284,
+      "startMs": 24578,
+      "endMs": 25328
+    }
+  ]
+}

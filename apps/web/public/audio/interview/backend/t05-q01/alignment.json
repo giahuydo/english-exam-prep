@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "questionId": "t05-q01",
+  "speechText": "I use caching for data that is read often and does not need to be calculated or loaded from the database every time. A common approach is cache-aside. The application checks Redis first. If the data is missing, it loads the data from the database and stores it in Redis with a TTL.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 269
+    },
+    {
+      "text": "use",
+      "canonicalStart": 2,
+      "canonicalEnd": 5,
+      "startMs": 284,
+      "endMs": 613
+    },
+    {
+      "text": "caching",
+      "canonicalStart": 6,
+      "canonicalEnd": 13,
+      "startMs": 628,
+      "endMs": 1206
+    },
+    {
+      "text": "for",
+      "canonicalStart": 14,
+      "canonicalEnd": 17,
+      "startMs": 1222,
+      "endMs": 1409
+    },
+    {
+      "text": "data",
+      "canonicalStart": 18,
+      "canonicalEnd": 22,
+      "startMs": 1425,
+      "endMs": 1847
+    },
+    {
+      "text": "that",
+      "canonicalStart": 23,
+      "canonicalEnd": 27,
+      "startMs": 1863,
+      "endMs": 2050
+    },
+    {
+      "text": "is",
+      "canonicalStart": 28,
+      "canonicalEnd": 30,
+      "startMs": 2066,
+      "endMs": 2222
+    },
+    {
+      "text": "read",
+      "canonicalStart": 31,
+      "canonicalEnd": 35,
+      "startMs": 2238,
+      "endMs": 2534
+    },
+    {
+      "text": "often",
+      "canonicalStart": 36,
+      "canonicalEnd": 41,
+      "startMs": 2550,
+      "endMs": 3066
+    },
+    {
+      "text": "and",
+      "canonicalStart": 42,
+      "canonicalEnd": 45,
+      "startMs": 3081,
+      "endMs": 3191
+    },
+    {
+      "text": "does",
+      "canonicalStart": 46,
+      "canonicalEnd": 50,
+      "startMs": 3206,
+      "endMs": 3394
+    },
+    {
+      "text": "not",
+      "canonicalStart": 51,
+      "canonicalEnd": 54,
+      "startMs": 3409,
+      "endMs": 3691
+    },
+    {
+      "text": "need",
+      "canonicalStart": 55,
+      "canonicalEnd": 59,
+      "startMs": 3706,
+      "endMs": 3941
+    },
+    {
+      "text": "to",
+      "canonicalStart": 60,
+      "canonicalEnd": 62,
+      "startMs": 3956,
+      "endMs": 4019
+    },
+    {
+      "text": "be",
+      "canonicalStart": 63,
+      "canonicalEnd": 65,
+      "startMs": 4034,
+      "endMs": 4175
+    },
+    {
+      "text": "calculated",
+      "canonicalStart": 66,
+      "canonicalEnd": 76,
+      "startMs": 4191,
+      "endMs": 5034
+    },
+    {
+      "text": "or",
+      "canonicalStart": 77,
+      "canonicalEnd": 79,
+      "startMs": 5050,
+      "endMs": 5206
+    },
+    {
+      "text": "loaded",
+      "canonicalStart": 80,
+      "canonicalEnd": 86,
+      "startMs": 5222,
+      "endMs": 5628
+    },
+    {
+      "text": "from",
+      "canonicalStart": 87,
+      "canonicalEnd": 91,
+      "startMs": 5644,
+      "endMs": 5800
+    },
+    {
+      "text": "the",
+      "canonicalStart": 92,
+      "canonicalEnd": 95,
+      "startMs": 5816,
+      "endMs": 5909
+    },
+    {
+      "text": "database",
+      "canonicalStart": 96,
+      "canonicalEnd": 104,
+      "startMs": 5925,
+      "endMs": 6613
+    },
+    {
+      "text": "every",
+      "canonicalStart": 105,
+      "canonicalEnd": 110,
+      "startMs": 6628,
+      "endMs": 6925
+    },
+    {
+      "text": "time.",
+      "canonicalStart": 111,
+      "canonicalEnd": 116,
+      "startMs": 6941,
+      "endMs": 7488
+    },
+    {
+      "text": "A",
+      "canonicalStart": 117,
+      "canonicalEnd": 118,
+      "startMs": 8578,
+      "endMs": 8734
+    },
+    {
+      "text": "common",
+      "canonicalStart": 119,
+      "canonicalEnd": 125,
+      "startMs": 8750,
+      "endMs": 9219
+    },
+    {
+      "text": "approach",
+      "canonicalStart": 126,
+      "canonicalEnd": 134,
+      "startMs": 9234,
+      "endMs": 9766
+    },
+    {
+      "text": "is",
+      "canonicalStart": 135,
+      "canonicalEnd": 137,
+      "startMs": 9781,
+      "endMs": 9953
+    },
+    {
+      "text": "cache-aside.",
+      "canonicalStart": 138,
+      "canonicalEnd": 150,
+      "startMs": 9969,
+      "endMs": 11047
+    },
+    {
+      "text": "The",
+      "canonicalStart": 151,
+      "canonicalEnd": 154,
+      "startMs": 12125,
+      "endMs": 12297
+    },
+    {
+      "text": "application",
+      "canonicalStart": 155,
+      "canonicalEnd": 166,
+      "startMs": 12313,
+      "endMs": 13188
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 167,
+      "canonicalEnd": 173,
+      "startMs": 13203,
+      "endMs": 13625
+    },
+    {
+      "text": "Redis",
+      "canonicalStart": 174,
+      "canonicalEnd": 179,
+      "startMs": 13641,
+      "endMs": 14047
+    },
+    {
+      "text": "first.",
+      "canonicalStart": 180,
+      "canonicalEnd": 186,
+      "startMs": 14063,
+      "endMs": 14719
+    },
+    {
+      "text": "If",
+      "canonicalStart": 187,
+      "canonicalEnd": 189,
+      "startMs": 15797,
+      "endMs": 16031
+    },
+    {
+      "text": "the",
+      "canonicalStart": 190,
+      "canonicalEnd": 193,
+      "startMs": 16047,
+      "endMs": 16203
+    },
+    {
+      "text": "data",
+      "canonicalStart": 194,
+      "canonicalEnd": 198,
+      "startMs": 16219,
+      "endMs": 16641
+    },
+    {
+      "text": "is",
+      "canonicalStart": 199,
+      "canonicalEnd": 201,
+      "startMs": 16656,
+      "endMs": 16844
+    },
+    {
+      "text": "missing,",
+      "canonicalStart": 202,
+      "canonicalEnd": 210,
+      "startMs": 16859,
+      "endMs": 17406
+    },
+    {
+      "text": "it",
+      "canonicalStart": 211,
+      "canonicalEnd": 213,
+      "startMs": 17766,
+      "endMs": 17922
+    },
+    {
+      "text": "loads",
+      "canonicalStart": 214,
+      "canonicalEnd": 219,
+      "startMs": 17938,
+      "endMs": 18375
+    },
+    {
+      "text": "the",
+      "canonicalStart": 220,
+      "canonicalEnd": 223,
+      "startMs": 18391,
+      "endMs": 18547
+    },
+    {
+      "text": "data",
+      "canonicalStart": 224,
+      "canonicalEnd": 228,
+      "startMs": 18563,
+      "endMs": 18938
+    },
+    {
+      "text": "from",
+      "canonicalStart": 229,
+      "canonicalEnd": 233,
+      "startMs": 18953,
+      "endMs": 19125
+    },
+    {
+      "text": "the",
+      "canonicalStart": 234,
+      "canonicalEnd": 237,
+      "startMs": 19141,
+      "endMs": 19250
+    },
+    {
+      "text": "database",
+      "canonicalStart": 238,
+      "canonicalEnd": 246,
+      "startMs": 19266,
+      "endMs": 19938
+    },
+    {
+      "text": "and",
+      "canonicalStart": 247,
+      "canonicalEnd": 250,
+      "startMs": 19953,
+      "endMs": 20125
+    },
+    {
+      "text": "stores",
+      "canonicalStart": 251,
+      "canonicalEnd": 257,
+      "startMs": 20141,
+      "endMs": 20609
+    },
+    {
+      "text": "it",
+      "canonicalStart": 258,
+      "canonicalEnd": 260,
+      "startMs": 20625,
+      "endMs": 20734
+    },
+    {
+      "text": "in",
+      "canonicalStart": 261,
+      "canonicalEnd": 263,
+      "startMs": 20750,
+      "endMs": 20906
+    },
+    {
+      "text": "Redis",
+      "canonicalStart": 264,
+      "canonicalEnd": 269,
+      "startMs": 20922,
+      "endMs": 21344
+    },
+    {
+      "text": "with",
+      "canonicalStart": 270,
+      "canonicalEnd": 274,
+      "startMs": 21359,
+      "endMs": 21531
+    },
+    {
+      "text": "a",
+      "canonicalStart": 275,
+      "canonicalEnd": 276,
+      "startMs": 21547,
+      "endMs": 21625
+    },
+    {
+      "text": "TTL.",
+      "canonicalStart": 277,
+      "canonicalEnd": 281,
+      "startMs": 21641,
+      "endMs": 22563
+    }
+  ]
+}

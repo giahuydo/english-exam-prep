@@ -1,0 +1,322 @@
+{
+  "version": 1,
+  "questionId": "t08-q01",
+  "speechText": "Optimistic locking assumes conflicts are not very common. A record normally has a version number. When I update it, I also check the version. If another request already changed the record, the update fails and I can retry or return a conflict to the client.",
+  "words": [
+    {
+      "text": "Optimistic",
+      "canonicalStart": 0,
+      "canonicalEnd": 10,
+      "startMs": 113,
+      "endMs": 956
+    },
+    {
+      "text": "locking",
+      "canonicalStart": 11,
+      "canonicalEnd": 18,
+      "startMs": 972,
+      "endMs": 1409
+    },
+    {
+      "text": "assumes",
+      "canonicalStart": 19,
+      "canonicalEnd": 26,
+      "startMs": 1425,
+      "endMs": 1956
+    },
+    {
+      "text": "conflicts",
+      "canonicalStart": 27,
+      "canonicalEnd": 36,
+      "startMs": 1972,
+      "endMs": 2628
+    },
+    {
+      "text": "are",
+      "canonicalStart": 37,
+      "canonicalEnd": 40,
+      "startMs": 2644,
+      "endMs": 2769
+    },
+    {
+      "text": "not",
+      "canonicalStart": 41,
+      "canonicalEnd": 44,
+      "startMs": 2784,
+      "endMs": 3066
+    },
+    {
+      "text": "very",
+      "canonicalStart": 45,
+      "canonicalEnd": 49,
+      "startMs": 3081,
+      "endMs": 3409
+    },
+    {
+      "text": "common.",
+      "canonicalStart": 50,
+      "canonicalEnd": 57,
+      "startMs": 3425,
+      "endMs": 4034
+    },
+    {
+      "text": "A",
+      "canonicalStart": 58,
+      "canonicalEnd": 59,
+      "startMs": 5125,
+      "endMs": 5281
+    },
+    {
+      "text": "record",
+      "canonicalStart": 60,
+      "canonicalEnd": 66,
+      "startMs": 5297,
+      "endMs": 5797
+    },
+    {
+      "text": "normally",
+      "canonicalStart": 67,
+      "canonicalEnd": 75,
+      "startMs": 5813,
+      "endMs": 6359
+    },
+    {
+      "text": "has",
+      "canonicalStart": 76,
+      "canonicalEnd": 79,
+      "startMs": 6375,
+      "endMs": 6625
+    },
+    {
+      "text": "a",
+      "canonicalStart": 80,
+      "canonicalEnd": 81,
+      "startMs": 6641,
+      "endMs": 6703
+    },
+    {
+      "text": "version",
+      "canonicalStart": 82,
+      "canonicalEnd": 89,
+      "startMs": 6719,
+      "endMs": 7172
+    },
+    {
+      "text": "number.",
+      "canonicalStart": 90,
+      "canonicalEnd": 97,
+      "startMs": 7188,
+      "endMs": 7734
+    },
+    {
+      "text": "When",
+      "canonicalStart": 98,
+      "canonicalEnd": 102,
+      "startMs": 8813,
+      "endMs": 9031
+    },
+    {
+      "text": "I",
+      "canonicalStart": 103,
+      "canonicalEnd": 104,
+      "startMs": 9047,
+      "endMs": 9203
+    },
+    {
+      "text": "update",
+      "canonicalStart": 105,
+      "canonicalEnd": 111,
+      "startMs": 9219,
+      "endMs": 9734
+    },
+    {
+      "text": "it,",
+      "canonicalStart": 112,
+      "canonicalEnd": 115,
+      "startMs": 9750,
+      "endMs": 9969
+    },
+    {
+      "text": "I",
+      "canonicalStart": 116,
+      "canonicalEnd": 117,
+      "startMs": 10234,
+      "endMs": 10391
+    },
+    {
+      "text": "also",
+      "canonicalStart": 118,
+      "canonicalEnd": 122,
+      "startMs": 10406,
+      "endMs": 10813
+    },
+    {
+      "text": "check",
+      "canonicalStart": 123,
+      "canonicalEnd": 128,
+      "startMs": 10828,
+      "endMs": 11172
+    },
+    {
+      "text": "the",
+      "canonicalStart": 129,
+      "canonicalEnd": 132,
+      "startMs": 11188,
+      "endMs": 11281
+    },
+    {
+      "text": "version.",
+      "canonicalStart": 133,
+      "canonicalEnd": 141,
+      "startMs": 11297,
+      "endMs": 11922
+    },
+    {
+      "text": "If",
+      "canonicalStart": 142,
+      "canonicalEnd": 144,
+      "startMs": 13000,
+      "endMs": 13219
+    },
+    {
+      "text": "another",
+      "canonicalStart": 145,
+      "canonicalEnd": 152,
+      "startMs": 13234,
+      "endMs": 13672
+    },
+    {
+      "text": "request",
+      "canonicalStart": 153,
+      "canonicalEnd": 160,
+      "startMs": 13688,
+      "endMs": 14250
+    },
+    {
+      "text": "already",
+      "canonicalStart": 161,
+      "canonicalEnd": 168,
+      "startMs": 14266,
+      "endMs": 14719
+    },
+    {
+      "text": "changed",
+      "canonicalStart": 169,
+      "canonicalEnd": 176,
+      "startMs": 14734,
+      "endMs": 15234
+    },
+    {
+      "text": "the",
+      "canonicalStart": 177,
+      "canonicalEnd": 180,
+      "startMs": 15250,
+      "endMs": 15344
+    },
+    {
+      "text": "record,",
+      "canonicalStart": 181,
+      "canonicalEnd": 188,
+      "startMs": 15359,
+      "endMs": 15875
+    },
+    {
+      "text": "the",
+      "canonicalStart": 189,
+      "canonicalEnd": 192,
+      "startMs": 16188,
+      "endMs": 16328
+    },
+    {
+      "text": "update",
+      "canonicalStart": 193,
+      "canonicalEnd": 199,
+      "startMs": 16344,
+      "endMs": 16859
+    },
+    {
+      "text": "fails",
+      "canonicalStart": 200,
+      "canonicalEnd": 205,
+      "startMs": 16875,
+      "endMs": 17438
+    },
+    {
+      "text": "and",
+      "canonicalStart": 206,
+      "canonicalEnd": 209,
+      "startMs": 17453,
+      "endMs": 17578
+    },
+    {
+      "text": "I",
+      "canonicalStart": 210,
+      "canonicalEnd": 211,
+      "startMs": 17594,
+      "endMs": 17719
+    },
+    {
+      "text": "can",
+      "canonicalStart": 212,
+      "canonicalEnd": 215,
+      "startMs": 17734,
+      "endMs": 17938
+    },
+    {
+      "text": "retry",
+      "canonicalStart": 216,
+      "canonicalEnd": 221,
+      "startMs": 17953,
+      "endMs": 18594
+    },
+    {
+      "text": "or",
+      "canonicalStart": 222,
+      "canonicalEnd": 224,
+      "startMs": 18609,
+      "endMs": 18781
+    },
+    {
+      "text": "return",
+      "canonicalStart": 225,
+      "canonicalEnd": 231,
+      "startMs": 18797,
+      "endMs": 19203
+    },
+    {
+      "text": "a",
+      "canonicalStart": 232,
+      "canonicalEnd": 233,
+      "startMs": 19219,
+      "endMs": 19297
+    },
+    {
+      "text": "conflict",
+      "canonicalStart": 234,
+      "canonicalEnd": 242,
+      "startMs": 19313,
+      "endMs": 19953
+    },
+    {
+      "text": "to",
+      "canonicalStart": 243,
+      "canonicalEnd": 245,
+      "startMs": 19969,
+      "endMs": 20047
+    },
+    {
+      "text": "the",
+      "canonicalStart": 246,
+      "canonicalEnd": 249,
+      "startMs": 20063,
+      "endMs": 20188
+    },
+    {
+      "text": "client.",
+      "canonicalStart": 250,
+      "canonicalEnd": 257,
+      "startMs": 20203,
+      "endMs": 20875
+    }
+  ]
+}

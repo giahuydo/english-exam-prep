@@ -52,9 +52,10 @@ function speakingBeatAtTime(words: AlignmentWord[], beats: SpeakingBeat[], curre
 const SPEED_KEY = 'ee.interview.audio-speed.v1';
 const speeds: AudioSpeed[] = [0.5, 0.8, 1, 1.2];
 
-function readSpeed(): AudioSpeed {
-  const value = Number(window.localStorage.getItem(SPEED_KEY));
-  return speeds.includes(value as AudioSpeed) ? value as AudioSpeed : 1;
+function readSpeed(key: string, defaultSpeed: AudioSpeed): AudioSpeed {
+  const stored = window.localStorage.getItem(key);
+  const value = stored === null ? defaultSpeed : Number(stored);
+  return speeds.includes(value as AudioSpeed) ? value as AudioSpeed : defaultSpeed;
 }
 
 function preferredVoice(voices: SpeechSynthesisVoice[]) {
@@ -65,7 +66,7 @@ function preferredVoice(voices: SpeechSynthesisVoice[]) {
 
 type PlayRequest = { text: string; src?: string; alignment?: string; key: string; mapping?: SpeechMapping; segment?: AudioSegment; speed?: AudioSpeed };
 
-export function useInterviewAudio() {
+export function useInterviewAudio({ speedKey = SPEED_KEY, defaultSpeed = 1 }: { speedKey?: string; defaultSpeed?: AudioSpeed } = {}) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const speechRequestRef = useRef<PlayRequest | null>(null);
@@ -86,7 +87,7 @@ export function useInterviewAudio() {
   const frameCallbackRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
-    setSpeedState(readSpeed());
+    setSpeedState(readSpeed(speedKey, defaultSpeed));
     const available = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
     setSpeechAvailable(available);
     if (!available) return;
@@ -94,7 +95,7 @@ export function useInterviewAudio() {
     window.speechSynthesis.addEventListener('voiceschanged', refresh);
     refresh();
     return () => window.speechSynthesis.removeEventListener('voiceschanged', refresh);
-  }, []);
+  }, [speedKey, defaultSpeed]);
 
   const stop = useCallback(() => {
     playbackIdRef.current += 1;
@@ -268,7 +269,7 @@ export function useInterviewAudio() {
   }, []);
 
   const setSpeed = useCallback((value: AudioSpeed) => {
-    window.localStorage.setItem(SPEED_KEY, String(value));
+    window.localStorage.setItem(speedKey, String(value));
     setSpeedState(value);
     if (audioRef.current && sourceRef.current === 'audio') audioRef.current.playbackRate = value;
     if (utteranceRef.current && sourceRef.current === 'speech') {
@@ -277,7 +278,7 @@ export function useInterviewAudio() {
       window.speechSynthesis.cancel();
       speak(request);
     }
-  }, [speak]);
+  }, [speak, speedKey]);
 
   useEffect(() => stop, [stop]);
 

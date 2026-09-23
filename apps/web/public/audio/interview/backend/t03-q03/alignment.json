@@ -1,0 +1,336 @@
+{
+  "version": 1,
+  "questionId": "t03-q03",
+  "speechText": "New requests may need to wait for a free database connection. Because they are waiting for I O, Node.js CPU can still be low while API response time becomes very high. I would check active connections, long-running queries, pool size, timeouts, and whether connections are released correctly.",
+  "words": [
+    {
+      "text": "New",
+      "canonicalStart": 0,
+      "canonicalEnd": 3,
+      "startMs": 113,
+      "endMs": 456
+    },
+    {
+      "text": "requests",
+      "canonicalStart": 4,
+      "canonicalEnd": 12,
+      "startMs": 472,
+      "endMs": 1191
+    },
+    {
+      "text": "may",
+      "canonicalStart": 13,
+      "canonicalEnd": 16,
+      "startMs": 1206,
+      "endMs": 1409
+    },
+    {
+      "text": "need",
+      "canonicalStart": 17,
+      "canonicalEnd": 21,
+      "startMs": 1425,
+      "endMs": 1644
+    },
+    {
+      "text": "to",
+      "canonicalStart": 22,
+      "canonicalEnd": 24,
+      "startMs": 1659,
+      "endMs": 1769
+    },
+    {
+      "text": "wait",
+      "canonicalStart": 25,
+      "canonicalEnd": 29,
+      "startMs": 1784,
+      "endMs": 2159
+    },
+    {
+      "text": "for",
+      "canonicalStart": 30,
+      "canonicalEnd": 33,
+      "startMs": 2175,
+      "endMs": 2394
+    },
+    {
+      "text": "a",
+      "canonicalStart": 34,
+      "canonicalEnd": 35,
+      "startMs": 2409,
+      "endMs": 2472
+    },
+    {
+      "text": "free",
+      "canonicalStart": 36,
+      "canonicalEnd": 40,
+      "startMs": 2488,
+      "endMs": 2831
+    },
+    {
+      "text": "database",
+      "canonicalStart": 41,
+      "canonicalEnd": 49,
+      "startMs": 2847,
+      "endMs": 3488
+    },
+    {
+      "text": "connection.",
+      "canonicalStart": 50,
+      "canonicalEnd": 61,
+      "startMs": 3503,
+      "endMs": 4253
+    },
+    {
+      "text": "Because",
+      "canonicalStart": 62,
+      "canonicalEnd": 69,
+      "startMs": 5344,
+      "endMs": 5813
+    },
+    {
+      "text": "they",
+      "canonicalStart": 70,
+      "canonicalEnd": 74,
+      "startMs": 5828,
+      "endMs": 5969
+    },
+    {
+      "text": "are",
+      "canonicalStart": 75,
+      "canonicalEnd": 78,
+      "startMs": 5984,
+      "endMs": 6156
+    },
+    {
+      "text": "waiting",
+      "canonicalStart": 79,
+      "canonicalEnd": 86,
+      "startMs": 6172,
+      "endMs": 6578
+    },
+    {
+      "text": "for",
+      "canonicalStart": 87,
+      "canonicalEnd": 90,
+      "startMs": 6594,
+      "endMs": 6859
+    },
+    {
+      "text": "I",
+      "canonicalStart": 91,
+      "canonicalEnd": 92,
+      "startMs": 6875,
+      "endMs": 7063
+    },
+    {
+      "text": "O,",
+      "canonicalStart": 93,
+      "canonicalEnd": 95,
+      "startMs": 7078,
+      "endMs": 7406
+    },
+    {
+      "text": "Node.js",
+      "canonicalStart": 96,
+      "canonicalEnd": 103,
+      "startMs": 7719,
+      "endMs": 8813
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 104,
+      "canonicalEnd": 107,
+      "startMs": 8828,
+      "endMs": 9578
+    },
+    {
+      "text": "can",
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 9594,
+      "endMs": 9797
+    },
+    {
+      "text": "still",
+      "canonicalStart": 112,
+      "canonicalEnd": 117,
+      "startMs": 9813,
+      "endMs": 10141
+    },
+    {
+      "text": "be",
+      "canonicalStart": 118,
+      "canonicalEnd": 120,
+      "startMs": 10156,
+      "endMs": 10297
+    },
+    {
+      "text": "low",
+      "canonicalStart": 121,
+      "canonicalEnd": 124,
+      "startMs": 10313,
+      "endMs": 10766
+    },
+    {
+      "text": "while",
+      "canonicalStart": 125,
+      "canonicalEnd": 130,
+      "startMs": 10781,
+      "endMs": 11125
+    },
+    {
+      "text": "API",
+      "canonicalStart": 131,
+      "canonicalEnd": 134,
+      "startMs": 11141,
+      "endMs": 11766
+    },
+    {
+      "text": "response",
+      "canonicalStart": 135,
+      "canonicalEnd": 143,
+      "startMs": 11781,
+      "endMs": 12406
+    },
+    {
+      "text": "time",
+      "canonicalStart": 144,
+      "canonicalEnd": 148,
+      "startMs": 12422,
+      "endMs": 12750
+    },
+    {
+      "text": "becomes",
+      "canonicalStart": 149,
+      "canonicalEnd": 156,
+      "startMs": 12766,
+      "endMs": 13266
+    },
+    {
+      "text": "very",
+      "canonicalStart": 157,
+      "canonicalEnd": 161,
+      "startMs": 13281,
+      "endMs": 13625
+    },
+    {
+      "text": "high.",
+      "canonicalStart": 162,
+      "canonicalEnd": 167,
+      "startMs": 13641,
+      "endMs": 14141
+    },
+    {
+      "text": "I",
+      "canonicalStart": 168,
+      "canonicalEnd": 169,
+      "startMs": 15219,
+      "endMs": 15406
+    },
+    {
+      "text": "would",
+      "canonicalStart": 170,
+      "canonicalEnd": 175,
+      "startMs": 15422,
+      "endMs": 15641
+    },
+    {
+      "text": "check",
+      "canonicalStart": 176,
+      "canonicalEnd": 181,
+      "startMs": 15656,
+      "endMs": 16016
+    },
+    {
+      "text": "active",
+      "canonicalStart": 182,
+      "canonicalEnd": 188,
+      "startMs": 16031,
+      "endMs": 16469
+    },
+    {
+      "text": "connections,",
+      "canonicalStart": 189,
+      "canonicalEnd": 201,
+      "startMs": 16484,
+      "endMs": 17297
+    },
+    {
+      "text": "long-running",
+      "canonicalStart": 202,
+      "canonicalEnd": 214,
+      "startMs": 17469,
+      "endMs": 18172
+    },
+    {
+      "text": "queries,",
+      "canonicalStart": 215,
+      "canonicalEnd": 223,
+      "startMs": 18188,
+      "endMs": 18844
+    },
+    {
+      "text": "pool",
+      "canonicalStart": 224,
+      "canonicalEnd": 228,
+      "startMs": 19016,
+      "endMs": 19375
+    },
+    {
+      "text": "size,",
+      "canonicalStart": 229,
+      "canonicalEnd": 234,
+      "startMs": 19391,
+      "endMs": 20031
+    },
+    {
+      "text": "timeouts,",
+      "canonicalStart": 235,
+      "canonicalEnd": 244,
+      "startMs": 20313,
+      "endMs": 21078
+    },
+    {
+      "text": "and",
+      "canonicalStart": 245,
+      "canonicalEnd": 248,
+      "startMs": 21375,
+      "endMs": 21578
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 249,
+      "canonicalEnd": 256,
+      "startMs": 21594,
+      "endMs": 21938
+    },
+    {
+      "text": "connections",
+      "canonicalStart": 257,
+      "canonicalEnd": 268,
+      "startMs": 21953,
+      "endMs": 22609
+    },
+    {
+      "text": "are",
+      "canonicalStart": 269,
+      "canonicalEnd": 272,
+      "startMs": 22625,
+      "endMs": 22813
+    },
+    {
+      "text": "released",
+      "canonicalStart": 273,
+      "canonicalEnd": 281,
+      "startMs": 22828,
+      "endMs": 23344
+    },
+    {
+      "text": "correctly.",
+      "canonicalStart": 282,
+      "canonicalEnd": 292,
+      "startMs": 23359,
+      "endMs": 24141
+    }
+  ]
+}

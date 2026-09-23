@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "questionId": "t06-q02",
+  "speechText": "Horizontal scaling means adding more application instances instead of making one server bigger. A load balancer can distribute requests across the instances. The application should avoid keeping important session state only in local memory because the next request may go to another instance.",
+  "words": [
+    {
+      "text": "Horizontal",
+      "canonicalStart": 0,
+      "canonicalEnd": 10,
+      "startMs": 113,
+      "endMs": 941
+    },
+    {
+      "text": "scaling",
+      "canonicalStart": 11,
+      "canonicalEnd": 18,
+      "startMs": 956,
+      "endMs": 1550
+    },
+    {
+      "text": "means",
+      "canonicalStart": 19,
+      "canonicalEnd": 24,
+      "startMs": 1566,
+      "endMs": 1956
+    },
+    {
+      "text": "adding",
+      "canonicalStart": 25,
+      "canonicalEnd": 31,
+      "startMs": 1972,
+      "endMs": 2363
+    },
+    {
+      "text": "more",
+      "canonicalStart": 32,
+      "canonicalEnd": 36,
+      "startMs": 2378,
+      "endMs": 2691
+    },
+    {
+      "text": "application",
+      "canonicalStart": 37,
+      "canonicalEnd": 48,
+      "startMs": 2706,
+      "endMs": 3472
+    },
+    {
+      "text": "instances",
+      "canonicalStart": 49,
+      "canonicalEnd": 58,
+      "startMs": 3488,
+      "endMs": 4316
+    },
+    {
+      "text": "instead",
+      "canonicalStart": 59,
+      "canonicalEnd": 66,
+      "startMs": 4331,
+      "endMs": 4816
+    },
+    {
+      "text": "of",
+      "canonicalStart": 67,
+      "canonicalEnd": 69,
+      "startMs": 4831,
+      "endMs": 4925
+    },
+    {
+      "text": "making",
+      "canonicalStart": 70,
+      "canonicalEnd": 76,
+      "startMs": 4941,
+      "endMs": 5394
+    },
+    {
+      "text": "one",
+      "canonicalStart": 77,
+      "canonicalEnd": 80,
+      "startMs": 5409,
+      "endMs": 5691
+    },
+    {
+      "text": "server",
+      "canonicalStart": 81,
+      "canonicalEnd": 87,
+      "startMs": 5706,
+      "endMs": 6144
+    },
+    {
+      "text": "bigger.",
+      "canonicalStart": 88,
+      "canonicalEnd": 95,
+      "startMs": 6159,
+      "endMs": 6675
+    },
+    {
+      "text": "A",
+      "canonicalStart": 96,
+      "canonicalEnd": 97,
+      "startMs": 7766,
+      "endMs": 7922
+    },
+    {
+      "text": "load",
+      "canonicalStart": 98,
+      "canonicalEnd": 102,
+      "startMs": 7938,
+      "endMs": 8359
+    },
+    {
+      "text": "balancer",
+      "canonicalStart": 103,
+      "canonicalEnd": 111,
+      "startMs": 8375,
+      "endMs": 9047
+    },
+    {
+      "text": "can",
+      "canonicalStart": 112,
+      "canonicalEnd": 115,
+      "startMs": 9063,
+      "endMs": 9203
+    },
+    {
+      "text": "distribute",
+      "canonicalStart": 116,
+      "canonicalEnd": 126,
+      "startMs": 9219,
+      "endMs": 9828
+    },
+    {
+      "text": "requests",
+      "canonicalStart": 127,
+      "canonicalEnd": 135,
+      "startMs": 9844,
+      "endMs": 10484
+    },
+    {
+      "text": "across",
+      "canonicalStart": 136,
+      "canonicalEnd": 142,
+      "startMs": 10500,
+      "endMs": 10984
+    },
+    {
+      "text": "the",
+      "canonicalStart": 143,
+      "canonicalEnd": 146,
+      "startMs": 11000,
+      "endMs": 11109
+    },
+    {
+      "text": "instances.",
+      "canonicalStart": 147,
+      "canonicalEnd": 157,
+      "startMs": 11125,
+      "endMs": 12109
+    },
+    {
+      "text": "The",
+      "canonicalStart": 158,
+      "canonicalEnd": 161,
+      "startMs": 13188,
+      "endMs": 13344
+    },
+    {
+      "text": "application",
+      "canonicalStart": 162,
+      "canonicalEnd": 173,
+      "startMs": 13359,
+      "endMs": 14188
+    },
+    {
+      "text": "should",
+      "canonicalStart": 174,
+      "canonicalEnd": 180,
+      "startMs": 14203,
+      "endMs": 14391
+    },
+    {
+      "text": "avoid",
+      "canonicalStart": 181,
+      "canonicalEnd": 186,
+      "startMs": 14406,
+      "endMs": 14891
+    },
+    {
+      "text": "keeping",
+      "canonicalStart": 187,
+      "canonicalEnd": 194,
+      "startMs": 14906,
+      "endMs": 15328
+    },
+    {
+      "text": "important",
+      "canonicalStart": 195,
+      "canonicalEnd": 204,
+      "startMs": 15344,
+      "endMs": 15891
+    },
+    {
+      "text": "session",
+      "canonicalStart": 205,
+      "canonicalEnd": 212,
+      "startMs": 15906,
+      "endMs": 16422
+    },
+    {
+      "text": "state",
+      "canonicalStart": 213,
+      "canonicalEnd": 218,
+      "startMs": 16438,
+      "endMs": 16875
+    },
+    {
+      "text": "only",
+      "canonicalStart": 219,
+      "canonicalEnd": 223,
+      "startMs": 16891,
+      "endMs": 17250
+    },
+    {
+      "text": "in",
+      "canonicalStart": 224,
+      "canonicalEnd": 226,
+      "startMs": 17266,
+      "endMs": 17438
+    },
+    {
+      "text": "local",
+      "canonicalStart": 227,
+      "canonicalEnd": 232,
+      "startMs": 17453,
+      "endMs": 17797
+    },
+    {
+      "text": "memory",
+      "canonicalStart": 233,
+      "canonicalEnd": 239,
+      "startMs": 17813,
+      "endMs": 18266
+    },
+    {
+      "text": "because",
+      "canonicalStart": 240,
+      "canonicalEnd": 247,
+      "startMs": 18281,
+      "endMs": 18688
+    },
+    {
+      "text": "the",
+      "canonicalStart": 248,
+      "canonicalEnd": 251,
+      "startMs": 18703,
+      "endMs": 18797
+    },
+    {
+      "text": "next",
+      "canonicalStart": 252,
+      "canonicalEnd": 256,
+      "startMs": 18813,
+      "endMs": 19141
+    },
+    {
+      "text": "request",
+      "canonicalStart": 257,
+      "canonicalEnd": 264,
+      "startMs": 19156,
+      "endMs": 19719
+    },
+    {
+      "text": "may",
+      "canonicalStart": 265,
+      "canonicalEnd": 268,
+      "startMs": 19734,
+      "endMs": 19938
+    },
+    {
+      "text": "go",
+      "canonicalStart": 269,
+      "canonicalEnd": 271,
+      "startMs": 19953,
+      "endMs": 20141
+    },
+    {
+      "text": "to",
+      "canonicalStart": 272,
+      "canonicalEnd": 274,
+      "startMs": 20156,
+      "endMs": 20328
+    },
+    {
+      "text": "another",
+      "canonicalStart": 275,
+      "canonicalEnd": 282,
+      "startMs": 20344,
+      "endMs": 20750
+    },
+    {
+      "text": "instance.",
+      "canonicalStart": 283,
+      "canonicalEnd": 292,
+      "startMs": 20766,
+      "endMs": 21547
+    }
+  ]
+}

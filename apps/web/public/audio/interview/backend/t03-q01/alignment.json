@@ -1,0 +1,413 @@
+{
+  "version": 1,
+  "questionId": "t03-q01",
+  "speechText": "First, I check whether the database is really the bottleneck. I look at API timing, slow query logs, and database metrics. Then I check the query plan, indexes, the amount of data being returned, and possible N+1 queries. I also check the connection pool and locks. I try to fix the root cause before adding more database resources.",
+  "words": [
+    {
+      "text": "First,",
+      "canonicalStart": 0,
+      "canonicalEnd": 6,
+      "startMs": 113,
+      "endMs": 738
+    },
+    {
+      "text": "I",
+      "canonicalStart": 7,
+      "canonicalEnd": 8,
+      "startMs": 988,
+      "endMs": 1113
+    },
+    {
+      "text": "check",
+      "canonicalStart": 9,
+      "canonicalEnd": 14,
+      "startMs": 1128,
+      "endMs": 1488
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 15,
+      "canonicalEnd": 22,
+      "startMs": 1503,
+      "endMs": 1784
+    },
+    {
+      "text": "the",
+      "canonicalStart": 23,
+      "canonicalEnd": 26,
+      "startMs": 1800,
+      "endMs": 1941
+    },
+    {
+      "text": "database",
+      "canonicalStart": 27,
+      "canonicalEnd": 35,
+      "startMs": 1956,
+      "endMs": 2644
+    },
+    {
+      "text": "is",
+      "canonicalStart": 36,
+      "canonicalEnd": 38,
+      "startMs": 2659,
+      "endMs": 2847
+    },
+    {
+      "text": "really",
+      "canonicalStart": 39,
+      "canonicalEnd": 45,
+      "startMs": 2863,
+      "endMs": 3253
+    },
+    {
+      "text": "the",
+      "canonicalStart": 46,
+      "canonicalEnd": 49,
+      "startMs": 3269,
+      "endMs": 3409
+    },
+    {
+      "text": "bottleneck.",
+      "canonicalStart": 50,
+      "canonicalEnd": 61,
+      "startMs": 3425,
+      "endMs": 4269
+    },
+    {
+      "text": "I",
+      "canonicalStart": 62,
+      "canonicalEnd": 63,
+      "startMs": 5359,
+      "endMs": 5563
+    },
+    {
+      "text": "look",
+      "canonicalStart": 64,
+      "canonicalEnd": 68,
+      "startMs": 5578,
+      "endMs": 5859
+    },
+    {
+      "text": "at",
+      "canonicalStart": 69,
+      "canonicalEnd": 71,
+      "startMs": 5875,
+      "endMs": 6031
+    },
+    {
+      "text": "API",
+      "canonicalStart": 72,
+      "canonicalEnd": 75,
+      "startMs": 6047,
+      "endMs": 6625
+    },
+    {
+      "text": "timing,",
+      "canonicalStart": 76,
+      "canonicalEnd": 83,
+      "startMs": 6641,
+      "endMs": 7250
+    },
+    {
+      "text": "slow",
+      "canonicalStart": 84,
+      "canonicalEnd": 88,
+      "startMs": 7563,
+      "endMs": 7984
+    },
+    {
+      "text": "query",
+      "canonicalStart": 89,
+      "canonicalEnd": 94,
+      "startMs": 8000,
+      "endMs": 8422
+    },
+    {
+      "text": "logs,",
+      "canonicalStart": 95,
+      "canonicalEnd": 100,
+      "startMs": 8438,
+      "endMs": 9016
+    },
+    {
+      "text": "and",
+      "canonicalStart": 101,
+      "canonicalEnd": 104,
+      "startMs": 9203,
+      "endMs": 9422
+    },
+    {
+      "text": "database",
+      "canonicalStart": 105,
+      "canonicalEnd": 113,
+      "startMs": 9438,
+      "endMs": 10094
+    },
+    {
+      "text": "metrics.",
+      "canonicalStart": 114,
+      "canonicalEnd": 122,
+      "startMs": 10109,
+      "endMs": 10906
+    },
+    {
+      "text": "Then",
+      "canonicalStart": 123,
+      "canonicalEnd": 127,
+      "startMs": 11984,
+      "endMs": 12313
+    },
+    {
+      "text": "I",
+      "canonicalStart": 128,
+      "canonicalEnd": 129,
+      "startMs": 12328,
+      "endMs": 12453
+    },
+    {
+      "text": "check",
+      "canonicalStart": 130,
+      "canonicalEnd": 135,
+      "startMs": 12469,
+      "endMs": 12828
+    },
+    {
+      "text": "the",
+      "canonicalStart": 136,
+      "canonicalEnd": 139,
+      "startMs": 12844,
+      "endMs": 12953
+    },
+    {
+      "text": "query",
+      "canonicalStart": 140,
+      "canonicalEnd": 145,
+      "startMs": 12969,
+      "endMs": 13391
+    },
+    {
+      "text": "plan,",
+      "canonicalStart": 146,
+      "canonicalEnd": 151,
+      "startMs": 13406,
+      "endMs": 13938
+    },
+    {
+      "text": "indexes,",
+      "canonicalStart": 152,
+      "canonicalEnd": 160,
+      "startMs": 14234,
+      "endMs": 15078
+    },
+    {
+      "text": "the",
+      "canonicalStart": 161,
+      "canonicalEnd": 164,
+      "startMs": 15344,
+      "endMs": 15469
+    },
+    {
+      "text": "amount",
+      "canonicalStart": 165,
+      "canonicalEnd": 171,
+      "startMs": 15484,
+      "endMs": 15906
+    },
+    {
+      "text": "of",
+      "canonicalStart": 172,
+      "canonicalEnd": 174,
+      "startMs": 15922,
+      "endMs": 16031
+    },
+    {
+      "text": "data",
+      "canonicalStart": 175,
+      "canonicalEnd": 179,
+      "startMs": 16047,
+      "endMs": 16406
+    },
+    {
+      "text": "being",
+      "canonicalStart": 180,
+      "canonicalEnd": 185,
+      "startMs": 16422,
+      "endMs": 16750
+    },
+    {
+      "text": "returned,",
+      "canonicalStart": 186,
+      "canonicalEnd": 195,
+      "startMs": 16766,
+      "endMs": 17375
+    },
+    {
+      "text": "and",
+      "canonicalStart": 196,
+      "canonicalEnd": 199,
+      "startMs": 17703,
+      "endMs": 17906
+    },
+    {
+      "text": "possible",
+      "canonicalStart": 200,
+      "canonicalEnd": 208,
+      "startMs": 17922,
+      "endMs": 18641
+    },
+    {
+      "text": "N+1",
+      "canonicalStart": 209,
+      "canonicalEnd": 212,
+      "startMs": 18656,
+      "endMs": 19578
+    },
+    {
+      "text": "queries.",
+      "canonicalStart": 213,
+      "canonicalEnd": 221,
+      "startMs": 19594,
+      "endMs": 20344
+    },
+    {
+      "text": "I",
+      "canonicalStart": 222,
+      "canonicalEnd": 223,
+      "startMs": 21422,
+      "endMs": 21656
+    },
+    {
+      "text": "also",
+      "canonicalStart": 224,
+      "canonicalEnd": 228,
+      "startMs": 21672,
+      "endMs": 22094
+    },
+    {
+      "text": "check",
+      "canonicalStart": 229,
+      "canonicalEnd": 234,
+      "startMs": 22109,
+      "endMs": 22453
+    },
+    {
+      "text": "the",
+      "canonicalStart": 235,
+      "canonicalEnd": 238,
+      "startMs": 22469,
+      "endMs": 22578
+    },
+    {
+      "text": "connection",
+      "canonicalStart": 239,
+      "canonicalEnd": 249,
+      "startMs": 22594,
+      "endMs": 23203
+    },
+    {
+      "text": "pool",
+      "canonicalStart": 250,
+      "canonicalEnd": 254,
+      "startMs": 23219,
+      "endMs": 23625
+    },
+    {
+      "text": "and",
+      "canonicalStart": 255,
+      "canonicalEnd": 258,
+      "startMs": 23641,
+      "endMs": 23781
+    },
+    {
+      "text": "locks.",
+      "canonicalStart": 259,
+      "canonicalEnd": 265,
+      "startMs": 23797,
+      "endMs": 24500
+    },
+    {
+      "text": "I",
+      "canonicalStart": 266,
+      "canonicalEnd": 267,
+      "startMs": 25578,
+      "endMs": 25766
+    },
+    {
+      "text": "try",
+      "canonicalStart": 268,
+      "canonicalEnd": 271,
+      "startMs": 25781,
+      "endMs": 26094
+    },
+    {
+      "text": "to",
+      "canonicalStart": 272,
+      "canonicalEnd": 274,
+      "startMs": 26109,
+      "endMs": 26219
+    },
+    {
+      "text": "fix",
+      "canonicalStart": 275,
+      "canonicalEnd": 278,
+      "startMs": 26234,
+      "endMs": 26609
+    },
+    {
+      "text": "the",
+      "canonicalStart": 279,
+      "canonicalEnd": 282,
+      "startMs": 26625,
+      "endMs": 26750
+    },
+    {
+      "text": "root",
+      "canonicalStart": 283,
+      "canonicalEnd": 287,
+      "startMs": 26766,
+      "endMs": 27125
+    },
+    {
+      "text": "cause",
+      "canonicalStart": 288,
+      "canonicalEnd": 293,
+      "startMs": 27141,
+      "endMs": 27563
+    },
+    {
+      "text": "before",
+      "canonicalStart": 294,
+      "canonicalEnd": 300,
+      "startMs": 27578,
+      "endMs": 28141
+    },
+    {
+      "text": "adding",
+      "canonicalStart": 301,
+      "canonicalEnd": 307,
+      "startMs": 28156,
+      "endMs": 28500
+    },
+    {
+      "text": "more",
+      "canonicalStart": 308,
+      "canonicalEnd": 312,
+      "startMs": 28516,
+      "endMs": 28766
+    },
+    {
+      "text": "database",
+      "canonicalStart": 313,
+      "canonicalEnd": 321,
+      "startMs": 28781,
+      "endMs": 29438
+    },
+    {
+      "text": "resources.",
+      "canonicalStart": 322,
+      "canonicalEnd": 332,
+      "startMs": 29453,
+      "endMs": 30438
+    }
+  ]
+}

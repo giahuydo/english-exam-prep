@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "questionId": "t07-q02",
+  "speechText": "A circuit breaker stops calling a service for a short time when that service keeps failing. This helps protect our application from waiting for repeated timeouts and gives the failing service time to recover. After some time, we can allow a small number of requests to test whether it is healthy again.",
+  "words": [
+    {
+      "text": "A",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 253
+    },
+    {
+      "text": "circuit",
+      "canonicalStart": 2,
+      "canonicalEnd": 9,
+      "startMs": 269,
+      "endMs": 784
+    },
+    {
+      "text": "breaker",
+      "canonicalStart": 10,
+      "canonicalEnd": 17,
+      "startMs": 800,
+      "endMs": 1238
+    },
+    {
+      "text": "stops",
+      "canonicalStart": 18,
+      "canonicalEnd": 23,
+      "startMs": 1253,
+      "endMs": 1769
+    },
+    {
+      "text": "calling",
+      "canonicalStart": 24,
+      "canonicalEnd": 31,
+      "startMs": 1784,
+      "endMs": 2222
+    },
+    {
+      "text": "a",
+      "canonicalStart": 32,
+      "canonicalEnd": 33,
+      "startMs": 2238,
+      "endMs": 2300
+    },
+    {
+      "text": "service",
+      "canonicalStart": 34,
+      "canonicalEnd": 41,
+      "startMs": 2316,
+      "endMs": 2863
+    },
+    {
+      "text": "for",
+      "canonicalStart": 42,
+      "canonicalEnd": 45,
+      "startMs": 2878,
+      "endMs": 3097
+    },
+    {
+      "text": "a",
+      "canonicalStart": 46,
+      "canonicalEnd": 47,
+      "startMs": 3113,
+      "endMs": 3159
+    },
+    {
+      "text": "short",
+      "canonicalStart": 48,
+      "canonicalEnd": 53,
+      "startMs": 3175,
+      "endMs": 3581
+    },
+    {
+      "text": "time",
+      "canonicalStart": 54,
+      "canonicalEnd": 58,
+      "startMs": 3597,
+      "endMs": 4034
+    },
+    {
+      "text": "when",
+      "canonicalStart": 59,
+      "canonicalEnd": 63,
+      "startMs": 4050,
+      "endMs": 4191
+    },
+    {
+      "text": "that",
+      "canonicalStart": 64,
+      "canonicalEnd": 68,
+      "startMs": 4206,
+      "endMs": 4394
+    },
+    {
+      "text": "service",
+      "canonicalStart": 69,
+      "canonicalEnd": 76,
+      "startMs": 4409,
+      "endMs": 4925
+    },
+    {
+      "text": "keeps",
+      "canonicalStart": 77,
+      "canonicalEnd": 82,
+      "startMs": 4941,
+      "endMs": 5331
+    },
+    {
+      "text": "failing.",
+      "canonicalStart": 83,
+      "canonicalEnd": 91,
+      "startMs": 5347,
+      "endMs": 5956
+    },
+    {
+      "text": "This",
+      "canonicalStart": 92,
+      "canonicalEnd": 96,
+      "startMs": 7047,
+      "endMs": 7359
+    },
+    {
+      "text": "helps",
+      "canonicalStart": 97,
+      "canonicalEnd": 102,
+      "startMs": 7375,
+      "endMs": 7719
+    },
+    {
+      "text": "protect",
+      "canonicalStart": 103,
+      "canonicalEnd": 110,
+      "startMs": 7734,
+      "endMs": 8281
+    },
+    {
+      "text": "our",
+      "canonicalStart": 111,
+      "canonicalEnd": 114,
+      "startMs": 8297,
+      "endMs": 8469
+    },
+    {
+      "text": "application",
+      "canonicalStart": 115,
+      "canonicalEnd": 126,
+      "startMs": 8484,
+      "endMs": 9313
+    },
+    {
+      "text": "from",
+      "canonicalStart": 127,
+      "canonicalEnd": 131,
+      "startMs": 9328,
+      "endMs": 9547
+    },
+    {
+      "text": "waiting",
+      "canonicalStart": 132,
+      "canonicalEnd": 139,
+      "startMs": 9563,
+      "endMs": 9969
+    },
+    {
+      "text": "for",
+      "canonicalStart": 140,
+      "canonicalEnd": 143,
+      "startMs": 9984,
+      "endMs": 10156
+    },
+    {
+      "text": "repeated",
+      "canonicalStart": 144,
+      "canonicalEnd": 152,
+      "startMs": 10172,
+      "endMs": 10719
+    },
+    {
+      "text": "timeouts",
+      "canonicalStart": 153,
+      "canonicalEnd": 161,
+      "startMs": 10734,
+      "endMs": 11438
+    },
+    {
+      "text": "and",
+      "canonicalStart": 162,
+      "canonicalEnd": 165,
+      "startMs": 11453,
+      "endMs": 11625
+    },
+    {
+      "text": "gives",
+      "canonicalStart": 166,
+      "canonicalEnd": 171,
+      "startMs": 11641,
+      "endMs": 11969
+    },
+    {
+      "text": "the",
+      "canonicalStart": 172,
+      "canonicalEnd": 175,
+      "startMs": 11984,
+      "endMs": 12109
+    },
+    {
+      "text": "failing",
+      "canonicalStart": 176,
+      "canonicalEnd": 183,
+      "startMs": 12125,
+      "endMs": 12625
+    },
+    {
+      "text": "service",
+      "canonicalStart": 184,
+      "canonicalEnd": 191,
+      "startMs": 12641,
+      "endMs": 13109
+    },
+    {
+      "text": "time",
+      "canonicalStart": 192,
+      "canonicalEnd": 196,
+      "startMs": 13125,
+      "endMs": 13469
+    },
+    {
+      "text": "to",
+      "canonicalStart": 197,
+      "canonicalEnd": 199,
+      "startMs": 13484,
+      "endMs": 13594
+    },
+    {
+      "text": "recover.",
+      "canonicalStart": 200,
+      "canonicalEnd": 208,
+      "startMs": 13609,
+      "endMs": 14266
+    },
+    {
+      "text": "After",
+      "canonicalStart": 209,
+      "canonicalEnd": 214,
+      "startMs": 15344,
+      "endMs": 15781
+    },
+    {
+      "text": "some",
+      "canonicalStart": 215,
+      "canonicalEnd": 219,
+      "startMs": 15797,
+      "endMs": 16047
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 220,
+      "canonicalEnd": 225,
+      "startMs": 16063,
+      "endMs": 16531
+    },
+    {
+      "text": "we",
+      "canonicalStart": 226,
+      "canonicalEnd": 228,
+      "startMs": 16844,
+      "endMs": 16984
+    },
+    {
+      "text": "can",
+      "canonicalStart": 229,
+      "canonicalEnd": 232,
+      "startMs": 17000,
+      "endMs": 17141
+    },
+    {
+      "text": "allow",
+      "canonicalStart": 233,
+      "canonicalEnd": 238,
+      "startMs": 17156,
+      "endMs": 17563
+    },
+    {
+      "text": "a",
+      "canonicalStart": 239,
+      "canonicalEnd": 240,
+      "startMs": 17578,
+      "endMs": 17625
+    },
+    {
+      "text": "small",
+      "canonicalStart": 241,
+      "canonicalEnd": 246,
+      "startMs": 17641,
+      "endMs": 18094
+    },
+    {
+      "text": "number",
+      "canonicalStart": 247,
+      "canonicalEnd": 253,
+      "startMs": 18109,
+      "endMs": 18453
+    },
+    {
+      "text": "of",
+      "canonicalStart": 254,
+      "canonicalEnd": 256,
+      "startMs": 18469,
+      "endMs": 18578
+    },
+    {
+      "text": "requests",
+      "canonicalStart": 257,
+      "canonicalEnd": 265,
+      "startMs": 18594,
+      "endMs": 19281
+    },
+    {
+      "text": "to",
+      "canonicalStart": 266,
+      "canonicalEnd": 268,
+      "startMs": 19297,
+      "endMs": 19422
+    },
+    {
+      "text": "test",
+      "canonicalStart": 269,
+      "canonicalEnd": 273,
+      "startMs": 19438,
+      "endMs": 19906
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 274,
+      "canonicalEnd": 281,
+      "startMs": 19922,
+      "endMs": 20250
+    },
+    {
+      "text": "it",
+      "canonicalStart": 282,
+      "canonicalEnd": 284,
+      "startMs": 20266,
+      "endMs": 20391
+    },
+    {
+      "text": "is",
+      "canonicalStart": 285,
+      "canonicalEnd": 287,
+      "startMs": 20406,
+      "endMs": 20563
+    },
+    {
+      "text": "healthy",
+      "canonicalStart": 288,
+      "canonicalEnd": 295,
+      "startMs": 20578,
+      "endMs": 21000
+    },
+    {
+      "text": "again.",
+      "canonicalStart": 296,
+      "canonicalEnd": 302,
+      "startMs": 21016,
+      "endMs": 21594
+    }
+  ]
+}

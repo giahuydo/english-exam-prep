@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "questionId": "t08-q03",
+  "speechText": "There is no single database transaction across independent services in many systems. I normally design each local operation to be reliable and use events for communication. Patterns such as Outbox, idempotent consumers, retries, and compensating actions help us reach eventual consistency safely.",
+  "words": [
+    {
+      "text": "There",
+      "canonicalStart": 0,
+      "canonicalEnd": 5,
+      "startMs": 113,
+      "endMs": 347
+    },
+    {
+      "text": "is",
+      "canonicalStart": 6,
+      "canonicalEnd": 8,
+      "startMs": 363,
+      "endMs": 503
+    },
+    {
+      "text": "no",
+      "canonicalStart": 9,
+      "canonicalEnd": 11,
+      "startMs": 519,
+      "endMs": 769
+    },
+    {
+      "text": "single",
+      "canonicalStart": 12,
+      "canonicalEnd": 18,
+      "startMs": 784,
+      "endMs": 1284
+    },
+    {
+      "text": "database",
+      "canonicalStart": 19,
+      "canonicalEnd": 27,
+      "startMs": 1300,
+      "endMs": 1894
+    },
+    {
+      "text": "transaction",
+      "canonicalStart": 28,
+      "canonicalEnd": 39,
+      "startMs": 1909,
+      "endMs": 2738
+    },
+    {
+      "text": "across",
+      "canonicalStart": 40,
+      "canonicalEnd": 46,
+      "startMs": 2753,
+      "endMs": 3206
+    },
+    {
+      "text": "independent",
+      "canonicalStart": 47,
+      "canonicalEnd": 58,
+      "startMs": 3222,
+      "endMs": 3894
+    },
+    {
+      "text": "services",
+      "canonicalStart": 59,
+      "canonicalEnd": 67,
+      "startMs": 3909,
+      "endMs": 4613
+    },
+    {
+      "text": "in",
+      "canonicalStart": 68,
+      "canonicalEnd": 70,
+      "startMs": 4628,
+      "endMs": 4784
+    },
+    {
+      "text": "many",
+      "canonicalStart": 71,
+      "canonicalEnd": 75,
+      "startMs": 4800,
+      "endMs": 5113
+    },
+    {
+      "text": "systems.",
+      "canonicalStart": 76,
+      "canonicalEnd": 84,
+      "startMs": 5128,
+      "endMs": 5988
+    },
+    {
+      "text": "I",
+      "canonicalStart": 85,
+      "canonicalEnd": 86,
+      "startMs": 7078,
+      "endMs": 7250
+    },
+    {
+      "text": "normally",
+      "canonicalStart": 87,
+      "canonicalEnd": 95,
+      "startMs": 7266,
+      "endMs": 7859
+    },
+    {
+      "text": "design",
+      "canonicalStart": 96,
+      "canonicalEnd": 102,
+      "startMs": 7875,
+      "endMs": 8500
+    },
+    {
+      "text": "each",
+      "canonicalStart": 103,
+      "canonicalEnd": 107,
+      "startMs": 8516,
+      "endMs": 8750
+    },
+    {
+      "text": "local",
+      "canonicalStart": 108,
+      "canonicalEnd": 113,
+      "startMs": 8766,
+      "endMs": 9250
+    },
+    {
+      "text": "operation",
+      "canonicalStart": 114,
+      "canonicalEnd": 123,
+      "startMs": 9266,
+      "endMs": 9984
+    },
+    {
+      "text": "to",
+      "canonicalStart": 124,
+      "canonicalEnd": 126,
+      "startMs": 10000,
+      "endMs": 10109
+    },
+    {
+      "text": "be",
+      "canonicalStart": 127,
+      "canonicalEnd": 129,
+      "startMs": 10125,
+      "endMs": 10297
+    },
+    {
+      "text": "reliable",
+      "canonicalStart": 130,
+      "canonicalEnd": 138,
+      "startMs": 10313,
+      "endMs": 11094
+    },
+    {
+      "text": "and",
+      "canonicalStart": 139,
+      "canonicalEnd": 142,
+      "startMs": 11109,
+      "endMs": 11234
+    },
+    {
+      "text": "use",
+      "canonicalStart": 143,
+      "canonicalEnd": 146,
+      "startMs": 11250,
+      "endMs": 11531
+    },
+    {
+      "text": "events",
+      "canonicalStart": 147,
+      "canonicalEnd": 153,
+      "startMs": 11547,
+      "endMs": 12016
+    },
+    {
+      "text": "for",
+      "canonicalStart": 154,
+      "canonicalEnd": 157,
+      "startMs": 12031,
+      "endMs": 12203
+    },
+    {
+      "text": "communication.",
+      "canonicalStart": 158,
+      "canonicalEnd": 172,
+      "startMs": 12219,
+      "endMs": 13297
+    },
+    {
+      "text": "Patterns",
+      "canonicalStart": 173,
+      "canonicalEnd": 181,
+      "startMs": 14375,
+      "endMs": 14969
+    },
+    {
+      "text": "such",
+      "canonicalStart": 182,
+      "canonicalEnd": 186,
+      "startMs": 14984,
+      "endMs": 15266
+    },
+    {
+      "text": "as",
+      "canonicalStart": 187,
+      "canonicalEnd": 189,
+      "startMs": 15281,
+      "endMs": 15484
+    },
+    {
+      "text": "Outbox,",
+      "canonicalStart": 190,
+      "canonicalEnd": 197,
+      "startMs": 15500,
+      "endMs": 16266
+    },
+    {
+      "text": "idempotent",
+      "canonicalStart": 198,
+      "canonicalEnd": 208,
+      "startMs": 16531,
+      "endMs": 17328
+    },
+    {
+      "text": "consumers,",
+      "canonicalStart": 209,
+      "canonicalEnd": 219,
+      "startMs": 17344,
+      "endMs": 18125
+    },
+    {
+      "text": "retries,",
+      "canonicalStart": 220,
+      "canonicalEnd": 228,
+      "startMs": 18438,
+      "endMs": 19281
+    },
+    {
+      "text": "and",
+      "canonicalStart": 229,
+      "canonicalEnd": 232,
+      "startMs": 19625,
+      "endMs": 19844
+    },
+    {
+      "text": "compensating",
+      "canonicalStart": 233,
+      "canonicalEnd": 245,
+      "startMs": 19859,
+      "endMs": 20734
+    },
+    {
+      "text": "actions",
+      "canonicalStart": 246,
+      "canonicalEnd": 253,
+      "startMs": 20750,
+      "endMs": 21328
+    },
+    {
+      "text": "help",
+      "canonicalStart": 254,
+      "canonicalEnd": 258,
+      "startMs": 21344,
+      "endMs": 21594
+    },
+    {
+      "text": "us",
+      "canonicalStart": 259,
+      "canonicalEnd": 261,
+      "startMs": 21609,
+      "endMs": 21828
+    },
+    {
+      "text": "reach",
+      "canonicalStart": 262,
+      "canonicalEnd": 267,
+      "startMs": 21844,
+      "endMs": 22156
+    },
+    {
+      "text": "eventual",
+      "canonicalStart": 268,
+      "canonicalEnd": 276,
+      "startMs": 22172,
+      "endMs": 22781
+    },
+    {
+      "text": "consistency",
+      "canonicalStart": 277,
+      "canonicalEnd": 288,
+      "startMs": 22797,
+      "endMs": 23672
+    },
+    {
+      "text": "safely.",
+      "canonicalStart": 289,
+      "canonicalEnd": 296,
+      "startMs": 23688,
+      "endMs": 24406
+    }
+  ]
+}

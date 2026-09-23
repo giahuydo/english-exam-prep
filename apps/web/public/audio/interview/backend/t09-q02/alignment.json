@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "questionId": "t09-q02",
+  "speechText": "I validate all input, use authentication and authorization, protect secrets, use HTTPS, and avoid exposing sensitive information in errors or logs. I also use parameterized database queries, rate limiting where needed, dependency updates, and proper permission checks on every protected action.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 316
+    },
+    {
+      "text": "validate",
+      "canonicalStart": 2,
+      "canonicalEnd": 10,
+      "startMs": 331,
+      "endMs": 1019
+    },
+    {
+      "text": "all",
+      "canonicalStart": 11,
+      "canonicalEnd": 14,
+      "startMs": 1034,
+      "endMs": 1284
+    },
+    {
+      "text": "input,",
+      "canonicalStart": 15,
+      "canonicalEnd": 21,
+      "startMs": 1300,
+      "endMs": 1909
+    },
+    {
+      "text": "use",
+      "canonicalStart": 22,
+      "canonicalEnd": 25,
+      "startMs": 2222,
+      "endMs": 2534
+    },
+    {
+      "text": "authentication",
+      "canonicalStart": 26,
+      "canonicalEnd": 40,
+      "startMs": 2550,
+      "endMs": 3659
+    },
+    {
+      "text": "and",
+      "canonicalStart": 41,
+      "canonicalEnd": 44,
+      "startMs": 3800,
+      "endMs": 3909
+    },
+    {
+      "text": "authorization,",
+      "canonicalStart": 45,
+      "canonicalEnd": 59,
+      "startMs": 3925,
+      "endMs": 4988
+    },
+    {
+      "text": "protect",
+      "canonicalStart": 60,
+      "canonicalEnd": 67,
+      "startMs": 5269,
+      "endMs": 5784
+    },
+    {
+      "text": "secrets,",
+      "canonicalStart": 68,
+      "canonicalEnd": 76,
+      "startMs": 5800,
+      "endMs": 6519
+    },
+    {
+      "text": "use",
+      "canonicalStart": 77,
+      "canonicalEnd": 80,
+      "startMs": 6816,
+      "endMs": 7159
+    },
+    {
+      "text": "HTTPS,",
+      "canonicalStart": 81,
+      "canonicalEnd": 87,
+      "startMs": 7175,
+      "endMs": 8519
+    },
+    {
+      "text": "and",
+      "canonicalStart": 88,
+      "canonicalEnd": 91,
+      "startMs": 8863,
+      "endMs": 9050
+    },
+    {
+      "text": "avoid",
+      "canonicalStart": 92,
+      "canonicalEnd": 97,
+      "startMs": 9066,
+      "endMs": 9472
+    },
+    {
+      "text": "exposing",
+      "canonicalStart": 98,
+      "canonicalEnd": 106,
+      "startMs": 9488,
+      "endMs": 10206
+    },
+    {
+      "text": "sensitive",
+      "canonicalStart": 107,
+      "canonicalEnd": 116,
+      "startMs": 10222,
+      "endMs": 10800
+    },
+    {
+      "text": "information",
+      "canonicalStart": 117,
+      "canonicalEnd": 128,
+      "startMs": 10816,
+      "endMs": 11550
+    },
+    {
+      "text": "in",
+      "canonicalStart": 129,
+      "canonicalEnd": 131,
+      "startMs": 11566,
+      "endMs": 11784
+    },
+    {
+      "text": "errors",
+      "canonicalStart": 132,
+      "canonicalEnd": 138,
+      "startMs": 11800,
+      "endMs": 12222
+    },
+    {
+      "text": "or",
+      "canonicalStart": 139,
+      "canonicalEnd": 141,
+      "startMs": 12238,
+      "endMs": 12378
+    },
+    {
+      "text": "logs.",
+      "canonicalStart": 142,
+      "canonicalEnd": 147,
+      "startMs": 12394,
+      "endMs": 13097
+    },
+    {
+      "text": "I",
+      "canonicalStart": 148,
+      "canonicalEnd": 149,
+      "startMs": 14188,
+      "endMs": 14422
+    },
+    {
+      "text": "also",
+      "canonicalStart": 150,
+      "canonicalEnd": 154,
+      "startMs": 14438,
+      "endMs": 14813
+    },
+    {
+      "text": "use",
+      "canonicalStart": 155,
+      "canonicalEnd": 158,
+      "startMs": 14828,
+      "endMs": 15188
+    },
+    {
+      "text": "parameterized",
+      "canonicalStart": 159,
+      "canonicalEnd": 172,
+      "startMs": 15203,
+      "endMs": 16281
+    },
+    {
+      "text": "database",
+      "canonicalStart": 173,
+      "canonicalEnd": 181,
+      "startMs": 16297,
+      "endMs": 16859
+    },
+    {
+      "text": "queries,",
+      "canonicalStart": 182,
+      "canonicalEnd": 190,
+      "startMs": 16875,
+      "endMs": 17500
+    },
+    {
+      "text": "rate",
+      "canonicalStart": 191,
+      "canonicalEnd": 195,
+      "startMs": 17891,
+      "endMs": 18188
+    },
+    {
+      "text": "limiting",
+      "canonicalStart": 196,
+      "canonicalEnd": 204,
+      "startMs": 18203,
+      "endMs": 18656
+    },
+    {
+      "text": "where",
+      "canonicalStart": 205,
+      "canonicalEnd": 210,
+      "startMs": 18672,
+      "endMs": 18844
+    },
+    {
+      "text": "needed,",
+      "canonicalStart": 211,
+      "canonicalEnd": 218,
+      "startMs": 18859,
+      "endMs": 19297
+    },
+    {
+      "text": "dependency",
+      "canonicalStart": 219,
+      "canonicalEnd": 229,
+      "startMs": 19594,
+      "endMs": 20359
+    },
+    {
+      "text": "updates,",
+      "canonicalStart": 230,
+      "canonicalEnd": 238,
+      "startMs": 20375,
+      "endMs": 21031
+    },
+    {
+      "text": "and",
+      "canonicalStart": 239,
+      "canonicalEnd": 242,
+      "startMs": 21313,
+      "endMs": 21500
+    },
+    {
+      "text": "proper",
+      "canonicalStart": 243,
+      "canonicalEnd": 249,
+      "startMs": 21516,
+      "endMs": 21969
+    },
+    {
+      "text": "permission",
+      "canonicalStart": 250,
+      "canonicalEnd": 260,
+      "startMs": 21984,
+      "endMs": 22563
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 261,
+      "canonicalEnd": 267,
+      "startMs": 22578,
+      "endMs": 23000
+    },
+    {
+      "text": "on",
+      "canonicalStart": 268,
+      "canonicalEnd": 270,
+      "startMs": 23016,
+      "endMs": 23250
+    },
+    {
+      "text": "every",
+      "canonicalStart": 271,
+      "canonicalEnd": 276,
+      "startMs": 23266,
+      "endMs": 23531
+    },
+    {
+      "text": "protected",
+      "canonicalStart": 277,
+      "canonicalEnd": 286,
+      "startMs": 23547,
+      "endMs": 24141
+    },
+    {
+      "text": "action.",
+      "canonicalStart": 287,
+      "canonicalEnd": 294,
+      "startMs": 24156,
+      "endMs": 24797
+    }
+  ]
+}

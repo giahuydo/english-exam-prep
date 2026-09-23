@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "questionId": "t03-q04",
+  "speechText": "The solution depends on the business case. I can use a database transaction, a unique constraint, optimistic locking, or pessimistic locking. I prefer database constraints when possible because they protect the data even if two application requests run at the same time.",
+  "words": [
+    {
+      "text": "The",
+      "canonicalStart": 0,
+      "canonicalEnd": 3,
+      "startMs": 113,
+      "endMs": 269
+    },
+    {
+      "text": "solution",
+      "canonicalStart": 4,
+      "canonicalEnd": 12,
+      "startMs": 284,
+      "endMs": 925
+    },
+    {
+      "text": "depends",
+      "canonicalStart": 13,
+      "canonicalEnd": 20,
+      "startMs": 941,
+      "endMs": 1472
+    },
+    {
+      "text": "on",
+      "canonicalStart": 21,
+      "canonicalEnd": 23,
+      "startMs": 1488,
+      "endMs": 1597
+    },
+    {
+      "text": "the",
+      "canonicalStart": 24,
+      "canonicalEnd": 27,
+      "startMs": 1613,
+      "endMs": 1706
+    },
+    {
+      "text": "business",
+      "canonicalStart": 28,
+      "canonicalEnd": 36,
+      "startMs": 1722,
+      "endMs": 2222
+    },
+    {
+      "text": "case.",
+      "canonicalStart": 37,
+      "canonicalEnd": 42,
+      "startMs": 2238,
+      "endMs": 2909
+    },
+    {
+      "text": "I",
+      "canonicalStart": 43,
+      "canonicalEnd": 44,
+      "startMs": 4000,
+      "endMs": 4219
+    },
+    {
+      "text": "can",
+      "canonicalStart": 45,
+      "canonicalEnd": 48,
+      "startMs": 4234,
+      "endMs": 4438
+    },
+    {
+      "text": "use",
+      "canonicalStart": 49,
+      "canonicalEnd": 52,
+      "startMs": 4453,
+      "endMs": 4719
+    },
+    {
+      "text": "a",
+      "canonicalStart": 53,
+      "canonicalEnd": 54,
+      "startMs": 4734,
+      "endMs": 4844
+    },
+    {
+      "text": "database",
+      "canonicalStart": 55,
+      "canonicalEnd": 63,
+      "startMs": 4859,
+      "endMs": 5469
+    },
+    {
+      "text": "transaction,",
+      "canonicalStart": 64,
+      "canonicalEnd": 76,
+      "startMs": 5484,
+      "endMs": 6391
+    },
+    {
+      "text": "a",
+      "canonicalStart": 77,
+      "canonicalEnd": 78,
+      "startMs": 6672,
+      "endMs": 6688
+    },
+    {
+      "text": "unique",
+      "canonicalStart": 79,
+      "canonicalEnd": 85,
+      "startMs": 6703,
+      "endMs": 7234
+    },
+    {
+      "text": "constraint,",
+      "canonicalStart": 86,
+      "canonicalEnd": 97,
+      "startMs": 7250,
+      "endMs": 7953
+    },
+    {
+      "text": "optimistic",
+      "canonicalStart": 98,
+      "canonicalEnd": 108,
+      "startMs": 8266,
+      "endMs": 9031
+    },
+    {
+      "text": "locking,",
+      "canonicalStart": 109,
+      "canonicalEnd": 117,
+      "startMs": 9047,
+      "endMs": 9625
+    },
+    {
+      "text": "or",
+      "canonicalStart": 118,
+      "canonicalEnd": 120,
+      "startMs": 9844,
+      "endMs": 9969
+    },
+    {
+      "text": "pessimistic",
+      "canonicalStart": 121,
+      "canonicalEnd": 132,
+      "startMs": 9984,
+      "endMs": 10766
+    },
+    {
+      "text": "locking.",
+      "canonicalStart": 133,
+      "canonicalEnd": 141,
+      "startMs": 10781,
+      "endMs": 11406
+    },
+    {
+      "text": "I",
+      "canonicalStart": 142,
+      "canonicalEnd": 143,
+      "startMs": 12484,
+      "endMs": 12672
+    },
+    {
+      "text": "prefer",
+      "canonicalStart": 144,
+      "canonicalEnd": 150,
+      "startMs": 12688,
+      "endMs": 13141
+    },
+    {
+      "text": "database",
+      "canonicalStart": 151,
+      "canonicalEnd": 159,
+      "startMs": 13156,
+      "endMs": 13781
+    },
+    {
+      "text": "constraints",
+      "canonicalStart": 160,
+      "canonicalEnd": 171,
+      "startMs": 13797,
+      "endMs": 14500
+    },
+    {
+      "text": "when",
+      "canonicalStart": 172,
+      "canonicalEnd": 176,
+      "startMs": 14516,
+      "endMs": 14688
+    },
+    {
+      "text": "possible",
+      "canonicalStart": 177,
+      "canonicalEnd": 185,
+      "startMs": 14703,
+      "endMs": 15359
+    },
+    {
+      "text": "because",
+      "canonicalStart": 186,
+      "canonicalEnd": 193,
+      "startMs": 15375,
+      "endMs": 15750
+    },
+    {
+      "text": "they",
+      "canonicalStart": 194,
+      "canonicalEnd": 198,
+      "startMs": 15766,
+      "endMs": 15906
+    },
+    {
+      "text": "protect",
+      "canonicalStart": 199,
+      "canonicalEnd": 206,
+      "startMs": 15922,
+      "endMs": 16406
+    },
+    {
+      "text": "the",
+      "canonicalStart": 207,
+      "canonicalEnd": 210,
+      "startMs": 16422,
+      "endMs": 16547
+    },
+    {
+      "text": "data",
+      "canonicalStart": 211,
+      "canonicalEnd": 215,
+      "startMs": 16563,
+      "endMs": 17031
+    },
+    {
+      "text": "even",
+      "canonicalStart": 216,
+      "canonicalEnd": 220,
+      "startMs": 17047,
+      "endMs": 17359
+    },
+    {
+      "text": "if",
+      "canonicalStart": 221,
+      "canonicalEnd": 223,
+      "startMs": 17375,
+      "endMs": 17531
+    },
+    {
+      "text": "two",
+      "canonicalStart": 224,
+      "canonicalEnd": 227,
+      "startMs": 17547,
+      "endMs": 17813
+    },
+    {
+      "text": "application",
+      "canonicalStart": 228,
+      "canonicalEnd": 239,
+      "startMs": 17828,
+      "endMs": 18609
+    },
+    {
+      "text": "requests",
+      "canonicalStart": 240,
+      "canonicalEnd": 248,
+      "startMs": 18625,
+      "endMs": 19219
+    },
+    {
+      "text": "run",
+      "canonicalStart": 249,
+      "canonicalEnd": 252,
+      "startMs": 19234,
+      "endMs": 19547
+    },
+    {
+      "text": "at",
+      "canonicalStart": 253,
+      "canonicalEnd": 255,
+      "startMs": 19563,
+      "endMs": 19641
+    },
+    {
+      "text": "the",
+      "canonicalStart": 256,
+      "canonicalEnd": 259,
+      "startMs": 19656,
+      "endMs": 19750
+    },
+    {
+      "text": "same",
+      "canonicalStart": 260,
+      "canonicalEnd": 264,
+      "startMs": 19766,
+      "endMs": 20109
+    },
+    {
+      "text": "time.",
+      "canonicalStart": 265,
+      "canonicalEnd": 270,
+      "startMs": 20125,
+      "endMs": 20656
+    }
+  ]
+}

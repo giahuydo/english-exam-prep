@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "questionId": "t04-q04",
+  "speechText": "This can create inconsistent state because the data is saved but the event is missing. A common solution is the Outbox Pattern. I save the business data and an outbox record in the same database transaction. A separate worker reads the outbox table and publishes the message. If publishing fails, it can retry safely.",
+  "words": [
+    {
+      "text": "This",
+      "canonicalStart": 0,
+      "canonicalEnd": 4,
+      "startMs": 113,
+      "endMs": 425
+    },
+    {
+      "text": "can",
+      "canonicalStart": 5,
+      "canonicalEnd": 8,
+      "startMs": 441,
+      "endMs": 628
+    },
+    {
+      "text": "create",
+      "canonicalStart": 9,
+      "canonicalEnd": 15,
+      "startMs": 644,
+      "endMs": 1097
+    },
+    {
+      "text": "inconsistent",
+      "canonicalStart": 16,
+      "canonicalEnd": 28,
+      "startMs": 1113,
+      "endMs": 1988
+    },
+    {
+      "text": "state",
+      "canonicalStart": 29,
+      "canonicalEnd": 34,
+      "startMs": 2003,
+      "endMs": 2456
+    },
+    {
+      "text": "because",
+      "canonicalStart": 35,
+      "canonicalEnd": 42,
+      "startMs": 2472,
+      "endMs": 2847
+    },
+    {
+      "text": "the",
+      "canonicalStart": 43,
+      "canonicalEnd": 46,
+      "startMs": 2863,
+      "endMs": 3003
+    },
+    {
+      "text": "data",
+      "canonicalStart": 47,
+      "canonicalEnd": 51,
+      "startMs": 3019,
+      "endMs": 3456
+    },
+    {
+      "text": "is",
+      "canonicalStart": 52,
+      "canonicalEnd": 54,
+      "startMs": 3472,
+      "endMs": 3659
+    },
+    {
+      "text": "saved",
+      "canonicalStart": 55,
+      "canonicalEnd": 60,
+      "startMs": 3675,
+      "endMs": 4238
+    },
+    {
+      "text": "but",
+      "canonicalStart": 61,
+      "canonicalEnd": 64,
+      "startMs": 4253,
+      "endMs": 4409
+    },
+    {
+      "text": "the",
+      "canonicalStart": 65,
+      "canonicalEnd": 68,
+      "startMs": 4425,
+      "endMs": 4503
+    },
+    {
+      "text": "event",
+      "canonicalStart": 69,
+      "canonicalEnd": 74,
+      "startMs": 4519,
+      "endMs": 4956
+    },
+    {
+      "text": "is",
+      "canonicalStart": 75,
+      "canonicalEnd": 77,
+      "startMs": 4972,
+      "endMs": 5128
+    },
+    {
+      "text": "missing.",
+      "canonicalStart": 78,
+      "canonicalEnd": 86,
+      "startMs": 5144,
+      "endMs": 5738
+    },
+    {
+      "text": "A",
+      "canonicalStart": 87,
+      "canonicalEnd": 88,
+      "startMs": 6828,
+      "endMs": 6984
+    },
+    {
+      "text": "common",
+      "canonicalStart": 89,
+      "canonicalEnd": 95,
+      "startMs": 7000,
+      "endMs": 7500
+    },
+    {
+      "text": "solution",
+      "canonicalStart": 96,
+      "canonicalEnd": 104,
+      "startMs": 7516,
+      "endMs": 8203
+    },
+    {
+      "text": "is",
+      "canonicalStart": 105,
+      "canonicalEnd": 107,
+      "startMs": 8219,
+      "endMs": 8391
+    },
+    {
+      "text": "the",
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 8406,
+      "endMs": 8547
+    },
+    {
+      "text": "Outbox",
+      "canonicalStart": 112,
+      "canonicalEnd": 118,
+      "startMs": 8563,
+      "endMs": 9203
+    },
+    {
+      "text": "Pattern.",
+      "canonicalStart": 119,
+      "canonicalEnd": 127,
+      "startMs": 9219,
+      "endMs": 9828
+    },
+    {
+      "text": "I",
+      "canonicalStart": 128,
+      "canonicalEnd": 129,
+      "startMs": 10906,
+      "endMs": 11141
+    },
+    {
+      "text": "save",
+      "canonicalStart": 130,
+      "canonicalEnd": 134,
+      "startMs": 11156,
+      "endMs": 11563
+    },
+    {
+      "text": "the",
+      "canonicalStart": 135,
+      "canonicalEnd": 138,
+      "startMs": 11578,
+      "endMs": 11688
+    },
+    {
+      "text": "business",
+      "canonicalStart": 139,
+      "canonicalEnd": 147,
+      "startMs": 11703,
+      "endMs": 12203
+    },
+    {
+      "text": "data",
+      "canonicalStart": 148,
+      "canonicalEnd": 152,
+      "startMs": 12219,
+      "endMs": 12734
+    },
+    {
+      "text": "and",
+      "canonicalStart": 153,
+      "canonicalEnd": 156,
+      "startMs": 12750,
+      "endMs": 12922
+    },
+    {
+      "text": "an",
+      "canonicalStart": 157,
+      "canonicalEnd": 159,
+      "startMs": 12938,
+      "endMs": 13078
+    },
+    {
+      "text": "outbox",
+      "canonicalStart": 160,
+      "canonicalEnd": 166,
+      "startMs": 13094,
+      "endMs": 13719
+    },
+    {
+      "text": "record",
+      "canonicalStart": 167,
+      "canonicalEnd": 173,
+      "startMs": 13734,
+      "endMs": 14172
+    },
+    {
+      "text": "in",
+      "canonicalStart": 174,
+      "canonicalEnd": 176,
+      "startMs": 14188,
+      "endMs": 14266
+    },
+    {
+      "text": "the",
+      "canonicalStart": 177,
+      "canonicalEnd": 180,
+      "startMs": 14281,
+      "endMs": 14375
+    },
+    {
+      "text": "same",
+      "canonicalStart": 181,
+      "canonicalEnd": 185,
+      "startMs": 14391,
+      "endMs": 14766
+    },
+    {
+      "text": "database",
+      "canonicalStart": 186,
+      "canonicalEnd": 194,
+      "startMs": 14781,
+      "endMs": 15375
+    },
+    {
+      "text": "transaction.",
+      "canonicalStart": 195,
+      "canonicalEnd": 207,
+      "startMs": 15391,
+      "endMs": 16375
+    },
+    {
+      "text": "A",
+      "canonicalStart": 208,
+      "canonicalEnd": 209,
+      "startMs": 17453,
+      "endMs": 17594
+    },
+    {
+      "text": "separate",
+      "canonicalStart": 210,
+      "canonicalEnd": 218,
+      "startMs": 17609,
+      "endMs": 18109
+    },
+    {
+      "text": "worker",
+      "canonicalStart": 219,
+      "canonicalEnd": 225,
+      "startMs": 18125,
+      "endMs": 18641
+    },
+    {
+      "text": "reads",
+      "canonicalStart": 226,
+      "canonicalEnd": 231,
+      "startMs": 18656,
+      "endMs": 19000
+    },
+    {
+      "text": "the",
+      "canonicalStart": 232,
+      "canonicalEnd": 235,
+      "startMs": 19016,
+      "endMs": 19141
+    },
+    {
+      "text": "outbox",
+      "canonicalStart": 236,
+      "canonicalEnd": 242,
+      "startMs": 19156,
+      "endMs": 19828
+    },
+    {
+      "text": "table",
+      "canonicalStart": 243,
+      "canonicalEnd": 248,
+      "startMs": 19844,
+      "endMs": 20344
+    },
+    {
+      "text": "and",
+      "canonicalStart": 249,
+      "canonicalEnd": 252,
+      "startMs": 20359,
+      "endMs": 20484
+    },
+    {
+      "text": "publishes",
+      "canonicalStart": 253,
+      "canonicalEnd": 262,
+      "startMs": 20500,
+      "endMs": 21172
+    },
+    {
+      "text": "the",
+      "canonicalStart": 263,
+      "canonicalEnd": 266,
+      "startMs": 21188,
+      "endMs": 21281
+    },
+    {
+      "text": "message.",
+      "canonicalStart": 267,
+      "canonicalEnd": 275,
+      "startMs": 21297,
+      "endMs": 22016
+    },
+    {
+      "text": "If",
+      "canonicalStart": 276,
+      "canonicalEnd": 278,
+      "startMs": 23094,
+      "endMs": 23344
+    },
+    {
+      "text": "publishing",
+      "canonicalStart": 279,
+      "canonicalEnd": 289,
+      "startMs": 23359,
+      "endMs": 24031
+    },
+    {
+      "text": "fails,",
+      "canonicalStart": 290,
+      "canonicalEnd": 296,
+      "startMs": 24047,
+      "endMs": 24688
+    },
+    {
+      "text": "it",
+      "canonicalStart": 297,
+      "canonicalEnd": 299,
+      "startMs": 25031,
+      "endMs": 25188
+    },
+    {
+      "text": "can",
+      "canonicalStart": 300,
+      "canonicalEnd": 303,
+      "startMs": 25203,
+      "endMs": 25438
+    },
+    {
+      "text": "retry",
+      "canonicalStart": 304,
+      "canonicalEnd": 309,
+      "startMs": 25453,
+      "endMs": 25953
+    },
+    {
+      "text": "safely.",
+      "canonicalStart": 310,
+      "canonicalEnd": 317,
+      "startMs": 25969,
+      "endMs": 26734
+    }
+  ]
+}

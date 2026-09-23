@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "questionId": "t03-q02",
+  "speechText": "An index helps the database find data faster without scanning the whole table. It is useful for columns that are often used in WHERE, JOIN, or ORDER BY conditions. However, indexes use extra storage and make insert and update operations more expensive, so I do not add indexes everywhere.",
+  "words": [
+    {
+      "text": "An",
+      "canonicalStart": 0,
+      "canonicalEnd": 2,
+      "startMs": 113,
+      "endMs": 316
+    },
+    {
+      "text": "index",
+      "canonicalStart": 3,
+      "canonicalEnd": 8,
+      "startMs": 331,
+      "endMs": 909
+    },
+    {
+      "text": "helps",
+      "canonicalStart": 9,
+      "canonicalEnd": 14,
+      "startMs": 925,
+      "endMs": 1253
+    },
+    {
+      "text": "the",
+      "canonicalStart": 15,
+      "canonicalEnd": 18,
+      "startMs": 1269,
+      "endMs": 1425
+    },
+    {
+      "text": "database",
+      "canonicalStart": 19,
+      "canonicalEnd": 27,
+      "startMs": 1441,
+      "endMs": 2113
+    },
+    {
+      "text": "find",
+      "canonicalStart": 28,
+      "canonicalEnd": 32,
+      "startMs": 2128,
+      "endMs": 2534
+    },
+    {
+      "text": "data",
+      "canonicalStart": 33,
+      "canonicalEnd": 37,
+      "startMs": 2550,
+      "endMs": 2878
+    },
+    {
+      "text": "faster",
+      "canonicalStart": 38,
+      "canonicalEnd": 44,
+      "startMs": 2894,
+      "endMs": 3534
+    },
+    {
+      "text": "without",
+      "canonicalStart": 45,
+      "canonicalEnd": 52,
+      "startMs": 3550,
+      "endMs": 3956
+    },
+    {
+      "text": "scanning",
+      "canonicalStart": 53,
+      "canonicalEnd": 61,
+      "startMs": 3972,
+      "endMs": 4519
+    },
+    {
+      "text": "the",
+      "canonicalStart": 62,
+      "canonicalEnd": 65,
+      "startMs": 4534,
+      "endMs": 4628
+    },
+    {
+      "text": "whole",
+      "canonicalStart": 66,
+      "canonicalEnd": 71,
+      "startMs": 4644,
+      "endMs": 4925
+    },
+    {
+      "text": "table.",
+      "canonicalStart": 72,
+      "canonicalEnd": 78,
+      "startMs": 4941,
+      "endMs": 5519
+    },
+    {
+      "text": "It",
+      "canonicalStart": 79,
+      "canonicalEnd": 81,
+      "startMs": 6609,
+      "endMs": 6781
+    },
+    {
+      "text": "is",
+      "canonicalStart": 82,
+      "canonicalEnd": 84,
+      "startMs": 6797,
+      "endMs": 6969
+    },
+    {
+      "text": "useful",
+      "canonicalStart": 85,
+      "canonicalEnd": 91,
+      "startMs": 6984,
+      "endMs": 7484
+    },
+    {
+      "text": "for",
+      "canonicalStart": 92,
+      "canonicalEnd": 95,
+      "startMs": 7500,
+      "endMs": 7688
+    },
+    {
+      "text": "columns",
+      "canonicalStart": 96,
+      "canonicalEnd": 103,
+      "startMs": 7703,
+      "endMs": 8250
+    },
+    {
+      "text": "that",
+      "canonicalStart": 104,
+      "canonicalEnd": 108,
+      "startMs": 8266,
+      "endMs": 8406
+    },
+    {
+      "text": "are",
+      "canonicalStart": 109,
+      "canonicalEnd": 112,
+      "startMs": 8422,
+      "endMs": 8594
+    },
+    {
+      "text": "often",
+      "canonicalStart": 113,
+      "canonicalEnd": 118,
+      "startMs": 8609,
+      "endMs": 9016
+    },
+    {
+      "text": "used",
+      "canonicalStart": 119,
+      "canonicalEnd": 123,
+      "startMs": 9031,
+      "endMs": 9359
+    },
+    {
+      "text": "in",
+      "canonicalStart": 124,
+      "canonicalEnd": 126,
+      "startMs": 9375,
+      "endMs": 9500
+    },
+    {
+      "text": "WHERE,",
+      "canonicalStart": 127,
+      "canonicalEnd": 133,
+      "startMs": 9516,
+      "endMs": 9922
+    },
+    {
+      "text": "JOIN,",
+      "canonicalStart": 134,
+      "canonicalEnd": 139,
+      "startMs": 10203,
+      "endMs": 10734
+    },
+    {
+      "text": "or",
+      "canonicalStart": 140,
+      "canonicalEnd": 142,
+      "startMs": 11078,
+      "endMs": 11281
+    },
+    {
+      "text": "ORDER",
+      "canonicalStart": 143,
+      "canonicalEnd": 148,
+      "startMs": 11297,
+      "endMs": 11594
+    },
+    {
+      "text": "BY",
+      "canonicalStart": 149,
+      "canonicalEnd": 151,
+      "startMs": 11609,
+      "endMs": 11813
+    },
+    {
+      "text": "conditions.",
+      "canonicalStart": 152,
+      "canonicalEnd": 163,
+      "startMs": 11828,
+      "endMs": 12781
+    },
+    {
+      "text": "However,",
+      "canonicalStart": 164,
+      "canonicalEnd": 172,
+      "startMs": 13859,
+      "endMs": 14500
+    },
+    {
+      "text": "indexes",
+      "canonicalStart": 173,
+      "canonicalEnd": 180,
+      "startMs": 14734,
+      "endMs": 15469
+    },
+    {
+      "text": "use",
+      "canonicalStart": 181,
+      "canonicalEnd": 184,
+      "startMs": 15484,
+      "endMs": 15797
+    },
+    {
+      "text": "extra",
+      "canonicalStart": 185,
+      "canonicalEnd": 190,
+      "startMs": 15813,
+      "endMs": 16250
+    },
+    {
+      "text": "storage",
+      "canonicalStart": 191,
+      "canonicalEnd": 198,
+      "startMs": 16266,
+      "endMs": 16859
+    },
+    {
+      "text": "and",
+      "canonicalStart": 199,
+      "canonicalEnd": 202,
+      "startMs": 16875,
+      "endMs": 16984
+    },
+    {
+      "text": "make",
+      "canonicalStart": 203,
+      "canonicalEnd": 207,
+      "startMs": 17000,
+      "endMs": 17250
+    },
+    {
+      "text": "insert",
+      "canonicalStart": 208,
+      "canonicalEnd": 214,
+      "startMs": 17266,
+      "endMs": 17859
+    },
+    {
+      "text": "and",
+      "canonicalStart": 215,
+      "canonicalEnd": 218,
+      "startMs": 17875,
+      "endMs": 18031
+    },
+    {
+      "text": "update",
+      "canonicalStart": 219,
+      "canonicalEnd": 225,
+      "startMs": 18047,
+      "endMs": 18547
+    },
+    {
+      "text": "operations",
+      "canonicalStart": 226,
+      "canonicalEnd": 236,
+      "startMs": 18563,
+      "endMs": 19359
+    },
+    {
+      "text": "more",
+      "canonicalStart": 237,
+      "canonicalEnd": 241,
+      "startMs": 19375,
+      "endMs": 19625
+    },
+    {
+      "text": "expensive,",
+      "canonicalStart": 242,
+      "canonicalEnd": 252,
+      "startMs": 19641,
+      "endMs": 20453
+    },
+    {
+      "text": "so",
+      "canonicalStart": 253,
+      "canonicalEnd": 255,
+      "startMs": 20844,
+      "endMs": 21031
+    },
+    {
+      "text": "I",
+      "canonicalStart": 256,
+      "canonicalEnd": 257,
+      "startMs": 21047,
+      "endMs": 21125
+    },
+    {
+      "text": "do",
+      "canonicalStart": 258,
+      "canonicalEnd": 260,
+      "startMs": 21141,
+      "endMs": 21328
+    },
+    {
+      "text": "not",
+      "canonicalStart": 261,
+      "canonicalEnd": 264,
+      "startMs": 21344,
+      "endMs": 21688
+    },
+    {
+      "text": "add",
+      "canonicalStart": 265,
+      "canonicalEnd": 268,
+      "startMs": 21703,
+      "endMs": 21969
+    },
+    {
+      "text": "indexes",
+      "canonicalStart": 269,
+      "canonicalEnd": 276,
+      "startMs": 21984,
+      "endMs": 22750
+    },
+    {
+      "text": "everywhere.",
+      "canonicalStart": 277,
+      "canonicalEnd": 288,
+      "startMs": 22766,
+      "endMs": 23516
+    }
+  ]
+}

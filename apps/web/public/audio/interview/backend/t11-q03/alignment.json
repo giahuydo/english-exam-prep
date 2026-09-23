@@ -1,0 +1,357 @@
+{
+  "version": 1,
+  "questionId": "t11-q03",
+  "speechText": "A liveness check tells the platform whether the application process is alive. If it is unhealthy, the platform can restart it. A readiness check tells whether the application is ready to receive traffic. For example, an instance may be alive but still starting, so it should not receive requests yet.",
+  "words": [
+    {
+      "text": "A",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 269
+    },
+    {
+      "text": "liveness",
+      "canonicalStart": 2,
+      "canonicalEnd": 10,
+      "startMs": 284,
+      "endMs": 909
+    },
+    {
+      "text": "check",
+      "canonicalStart": 11,
+      "canonicalEnd": 16,
+      "startMs": 925,
+      "endMs": 1316
+    },
+    {
+      "text": "tells",
+      "canonicalStart": 17,
+      "canonicalEnd": 22,
+      "startMs": 1331,
+      "endMs": 1675
+    },
+    {
+      "text": "the",
+      "canonicalStart": 23,
+      "canonicalEnd": 26,
+      "startMs": 1691,
+      "endMs": 1800
+    },
+    {
+      "text": "platform",
+      "canonicalStart": 27,
+      "canonicalEnd": 35,
+      "startMs": 1816,
+      "endMs": 2534
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 36,
+      "canonicalEnd": 43,
+      "startMs": 2550,
+      "endMs": 2847
+    },
+    {
+      "text": "the",
+      "canonicalStart": 44,
+      "canonicalEnd": 47,
+      "startMs": 2863,
+      "endMs": 2988
+    },
+    {
+      "text": "application",
+      "canonicalStart": 48,
+      "canonicalEnd": 59,
+      "startMs": 3003,
+      "endMs": 3800
+    },
+    {
+      "text": "process",
+      "canonicalStart": 60,
+      "canonicalEnd": 67,
+      "startMs": 3816,
+      "endMs": 4441
+    },
+    {
+      "text": "is",
+      "canonicalStart": 68,
+      "canonicalEnd": 70,
+      "startMs": 4456,
+      "endMs": 4597
+    },
+    {
+      "text": "alive.",
+      "canonicalStart": 71,
+      "canonicalEnd": 77,
+      "startMs": 4613,
+      "endMs": 5363
+    },
+    {
+      "text": "If",
+      "canonicalStart": 78,
+      "canonicalEnd": 80,
+      "startMs": 6453,
+      "endMs": 6672
+    },
+    {
+      "text": "it",
+      "canonicalStart": 81,
+      "canonicalEnd": 83,
+      "startMs": 6688,
+      "endMs": 6813
+    },
+    {
+      "text": "is",
+      "canonicalStart": 84,
+      "canonicalEnd": 86,
+      "startMs": 6828,
+      "endMs": 7016
+    },
+    {
+      "text": "unhealthy,",
+      "canonicalStart": 87,
+      "canonicalEnd": 97,
+      "startMs": 7031,
+      "endMs": 7797
+    },
+    {
+      "text": "the",
+      "canonicalStart": 98,
+      "canonicalEnd": 101,
+      "startMs": 8094,
+      "endMs": 8219
+    },
+    {
+      "text": "platform",
+      "canonicalStart": 102,
+      "canonicalEnd": 110,
+      "startMs": 8234,
+      "endMs": 8922
+    },
+    {
+      "text": "can",
+      "canonicalStart": 111,
+      "canonicalEnd": 114,
+      "startMs": 8938,
+      "endMs": 9172
+    },
+    {
+      "text": "restart",
+      "canonicalStart": 115,
+      "canonicalEnd": 122,
+      "startMs": 9188,
+      "endMs": 9766
+    },
+    {
+      "text": "it.",
+      "canonicalStart": 123,
+      "canonicalEnd": 126,
+      "startMs": 9781,
+      "endMs": 10031
+    },
+    {
+      "text": "A",
+      "canonicalStart": 127,
+      "canonicalEnd": 128,
+      "startMs": 11109,
+      "endMs": 11266
+    },
+    {
+      "text": "readiness",
+      "canonicalStart": 129,
+      "canonicalEnd": 138,
+      "startMs": 11281,
+      "endMs": 11891
+    },
+    {
+      "text": "check",
+      "canonicalStart": 139,
+      "canonicalEnd": 144,
+      "startMs": 11906,
+      "endMs": 12281
+    },
+    {
+      "text": "tells",
+      "canonicalStart": 145,
+      "canonicalEnd": 150,
+      "startMs": 12297,
+      "endMs": 12734
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 151,
+      "canonicalEnd": 158,
+      "startMs": 12750,
+      "endMs": 13047
+    },
+    {
+      "text": "the",
+      "canonicalStart": 159,
+      "canonicalEnd": 162,
+      "startMs": 13063,
+      "endMs": 13172
+    },
+    {
+      "text": "application",
+      "canonicalStart": 163,
+      "canonicalEnd": 174,
+      "startMs": 13188,
+      "endMs": 14047
+    },
+    {
+      "text": "is",
+      "canonicalStart": 175,
+      "canonicalEnd": 177,
+      "startMs": 14063,
+      "endMs": 14250
+    },
+    {
+      "text": "ready",
+      "canonicalStart": 178,
+      "canonicalEnd": 183,
+      "startMs": 14266,
+      "endMs": 14563
+    },
+    {
+      "text": "to",
+      "canonicalStart": 184,
+      "canonicalEnd": 186,
+      "startMs": 14578,
+      "endMs": 14734
+    },
+    {
+      "text": "receive",
+      "canonicalStart": 187,
+      "canonicalEnd": 194,
+      "startMs": 14750,
+      "endMs": 15203
+    },
+    {
+      "text": "traffic.",
+      "canonicalStart": 195,
+      "canonicalEnd": 203,
+      "startMs": 15219,
+      "endMs": 15984
+    },
+    {
+      "text": "For",
+      "canonicalStart": 204,
+      "canonicalEnd": 207,
+      "startMs": 17063,
+      "endMs": 17344
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 208,
+      "canonicalEnd": 216,
+      "startMs": 17359,
+      "endMs": 18031
+    },
+    {
+      "text": "an",
+      "canonicalStart": 217,
+      "canonicalEnd": 219,
+      "startMs": 18313,
+      "endMs": 18438
+    },
+    {
+      "text": "instance",
+      "canonicalStart": 220,
+      "canonicalEnd": 228,
+      "startMs": 18453,
+      "endMs": 19031
+    },
+    {
+      "text": "may",
+      "canonicalStart": 229,
+      "canonicalEnd": 232,
+      "startMs": 19047,
+      "endMs": 19234
+    },
+    {
+      "text": "be",
+      "canonicalStart": 233,
+      "canonicalEnd": 235,
+      "startMs": 19250,
+      "endMs": 19406
+    },
+    {
+      "text": "alive",
+      "canonicalStart": 236,
+      "canonicalEnd": 241,
+      "startMs": 19422,
+      "endMs": 20000
+    },
+    {
+      "text": "but",
+      "canonicalStart": 242,
+      "canonicalEnd": 245,
+      "startMs": 20016,
+      "endMs": 20188
+    },
+    {
+      "text": "still",
+      "canonicalStart": 246,
+      "canonicalEnd": 251,
+      "startMs": 20203,
+      "endMs": 20578
+    },
+    {
+      "text": "starting,",
+      "canonicalStart": 252,
+      "canonicalEnd": 261,
+      "startMs": 20594,
+      "endMs": 21156
+    },
+    {
+      "text": "so",
+      "canonicalStart": 262,
+      "canonicalEnd": 264,
+      "startMs": 21563,
+      "endMs": 21766
+    },
+    {
+      "text": "it",
+      "canonicalStart": 265,
+      "canonicalEnd": 267,
+      "startMs": 21781,
+      "endMs": 21875
+    },
+    {
+      "text": "should",
+      "canonicalStart": 268,
+      "canonicalEnd": 274,
+      "startMs": 21891,
+      "endMs": 22125
+    },
+    {
+      "text": "not",
+      "canonicalStart": 275,
+      "canonicalEnd": 278,
+      "startMs": 22141,
+      "endMs": 22375
+    },
+    {
+      "text": "receive",
+      "canonicalStart": 279,
+      "canonicalEnd": 286,
+      "startMs": 22391,
+      "endMs": 22859
+    },
+    {
+      "text": "requests",
+      "canonicalStart": 287,
+      "canonicalEnd": 295,
+      "startMs": 22875,
+      "endMs": 23516
+    },
+    {
+      "text": "yet.",
+      "canonicalStart": 296,
+      "canonicalEnd": 300,
+      "startMs": 23531,
+      "endMs": 23922
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "questionId": "t04-q02",
+  "speechText": "ACK tells RabbitMQ that the consumer processed the message successfully, so the message can be removed. NACK means processing failed. Depending on our configuration, the message can be retried, requeued, or sent to a dead-letter queue.",
+  "words": [
+    {
+      "text": "ACK",
+      "canonicalStart": 0,
+      "canonicalEnd": 3,
+      "startMs": 113,
+      "endMs": 894
+    },
+    {
+      "text": "tells",
+      "canonicalStart": 4,
+      "canonicalEnd": 9,
+      "startMs": 909,
+      "endMs": 1316
+    },
+    {
+      "text": "RabbitMQ",
+      "canonicalStart": 10,
+      "canonicalEnd": 18,
+      "startMs": 1331,
+      "endMs": 2253
+    },
+    {
+      "text": "that",
+      "canonicalStart": 19,
+      "canonicalEnd": 23,
+      "startMs": 2269,
+      "endMs": 2441
+    },
+    {
+      "text": "the",
+      "canonicalStart": 24,
+      "canonicalEnd": 27,
+      "startMs": 2456,
+      "endMs": 2581
+    },
+    {
+      "text": "consumer",
+      "canonicalStart": 28,
+      "canonicalEnd": 36,
+      "startMs": 2597,
+      "endMs": 3206
+    },
+    {
+      "text": "processed",
+      "canonicalStart": 37,
+      "canonicalEnd": 46,
+      "startMs": 3222,
+      "endMs": 3894
+    },
+    {
+      "text": "the",
+      "canonicalStart": 47,
+      "canonicalEnd": 50,
+      "startMs": 3909,
+      "endMs": 3988
+    },
+    {
+      "text": "message",
+      "canonicalStart": 51,
+      "canonicalEnd": 58,
+      "startMs": 4003,
+      "endMs": 4488
+    },
+    {
+      "text": "successfully,",
+      "canonicalStart": 59,
+      "canonicalEnd": 72,
+      "startMs": 4503,
+      "endMs": 5378
+    },
+    {
+      "text": "so",
+      "canonicalStart": 73,
+      "canonicalEnd": 75,
+      "startMs": 5722,
+      "endMs": 5894
+    },
+    {
+      "text": "the",
+      "canonicalStart": 76,
+      "canonicalEnd": 79,
+      "startMs": 5909,
+      "endMs": 6019
+    },
+    {
+      "text": "message",
+      "canonicalStart": 80,
+      "canonicalEnd": 87,
+      "startMs": 6034,
+      "endMs": 6566
+    },
+    {
+      "text": "can",
+      "canonicalStart": 88,
+      "canonicalEnd": 91,
+      "startMs": 6581,
+      "endMs": 6753
+    },
+    {
+      "text": "be",
+      "canonicalStart": 92,
+      "canonicalEnd": 94,
+      "startMs": 6769,
+      "endMs": 6925
+    },
+    {
+      "text": "removed.",
+      "canonicalStart": 95,
+      "canonicalEnd": 103,
+      "startMs": 6941,
+      "endMs": 7706
+    },
+    {
+      "text": "NACK",
+      "canonicalStart": 104,
+      "canonicalEnd": 108,
+      "startMs": 8797,
+      "endMs": 9734
+    },
+    {
+      "text": "means",
+      "canonicalStart": 109,
+      "canonicalEnd": 114,
+      "startMs": 9750,
+      "endMs": 10141
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 115,
+      "canonicalEnd": 125,
+      "startMs": 10156,
+      "endMs": 10953
+    },
+    {
+      "text": "failed.",
+      "canonicalStart": 126,
+      "canonicalEnd": 133,
+      "startMs": 10969,
+      "endMs": 11672
+    },
+    {
+      "text": "Depending",
+      "canonicalStart": 134,
+      "canonicalEnd": 143,
+      "startMs": 12750,
+      "endMs": 13406
+    },
+    {
+      "text": "on",
+      "canonicalStart": 144,
+      "canonicalEnd": 146,
+      "startMs": 13422,
+      "endMs": 13578
+    },
+    {
+      "text": "our",
+      "canonicalStart": 147,
+      "canonicalEnd": 150,
+      "startMs": 13594,
+      "endMs": 13750
+    },
+    {
+      "text": "configuration,",
+      "canonicalStart": 151,
+      "canonicalEnd": 165,
+      "startMs": 13766,
+      "endMs": 14859
+    },
+    {
+      "text": "the",
+      "canonicalStart": 166,
+      "canonicalEnd": 169,
+      "startMs": 15156,
+      "endMs": 15266
+    },
+    {
+      "text": "message",
+      "canonicalStart": 170,
+      "canonicalEnd": 177,
+      "startMs": 15281,
+      "endMs": 15813
+    },
+    {
+      "text": "can",
+      "canonicalStart": 178,
+      "canonicalEnd": 181,
+      "startMs": 15828,
+      "endMs": 16016
+    },
+    {
+      "text": "be",
+      "canonicalStart": 182,
+      "canonicalEnd": 184,
+      "startMs": 16031,
+      "endMs": 16203
+    },
+    {
+      "text": "retried,",
+      "canonicalStart": 185,
+      "canonicalEnd": 193,
+      "startMs": 16219,
+      "endMs": 16984
+    },
+    {
+      "text": "requeued,",
+      "canonicalStart": 194,
+      "canonicalEnd": 203,
+      "startMs": 17375,
+      "endMs": 17984
+    },
+    {
+      "text": "or",
+      "canonicalStart": 204,
+      "canonicalEnd": 206,
+      "startMs": 18281,
+      "endMs": 18469
+    },
+    {
+      "text": "sent",
+      "canonicalStart": 207,
+      "canonicalEnd": 211,
+      "startMs": 18484,
+      "endMs": 18813
+    },
+    {
+      "text": "to",
+      "canonicalStart": 212,
+      "canonicalEnd": 214,
+      "startMs": 18828,
+      "endMs": 18969
+    },
+    {
+      "text": "a",
+      "canonicalStart": 215,
+      "canonicalEnd": 216,
+      "startMs": 18984,
+      "endMs": 19109
+    },
+    {
+      "text": "dead-letter",
+      "canonicalStart": 217,
+      "canonicalEnd": 228,
+      "startMs": 19125,
+      "endMs": 19734
+    },
+    {
+      "text": "queue.",
+      "canonicalStart": 229,
+      "canonicalEnd": 235,
+      "startMs": 19750,
+      "endMs": 20250
+    }
+  ]
+}

@@ -507,7 +507,7 @@ Do not move this state to the API/database without an explicit product decision.
 
 ## 2026-09-14 — Backend Interview category
 
-`/interview/backend` displays **Senior Backend Node.js Interview** / **B1–B2 Speaking Pack** using the existing interview visual language with a topic → questions → Answer (B1–B2) → Key idea flow. It lists 12 fixed topics and renders questions and answers from `source-questions.ts` without rewriting their wording; key ideas are answer-grounded recall paths. All 12 supplied topic chunks (39 questions) are present; the empty state remains for any future topic without supplied questions. A compact, collapsible Quick Interview Framework displays the supplied five steps and speaking connectors. The recommended route is 1 → 3 → 4 → 6 → 7 → 8 → 10; all other topics remain directly selectable. It does not use the AI Interview progress store, audio assets, or backend APIs. The `/interview` question content, modes, and audio remain unchanged.
+`/interview/backend` displays **Senior Backend Node.js Interview** / **B1–B2 Speaking Pack** using the existing interview visual language with a topic → questions → Answer (B1–B2) → Key idea flow. It lists 12 fixed topics and renders questions and answers from `source-questions.ts` without rewriting their wording; key ideas are answer-grounded recall paths. All 12 supplied topic chunks (39 questions) are present; the empty state remains for any future topic without supplied questions. A compact, collapsible Quick Interview Framework displays the supplied five steps and speaking connectors. The recommended route is 1 → 3 → 4 → 6 → 7 → 8 → 10; all other topics remain directly selectable. It does not use the AI Interview progress store or backend APIs. Its optional static answer audio is separate from the AI Interview audio assets. The `/interview` question content, modes, and audio remain unchanged.
 
 ### Vietnamese study translations
 
@@ -515,11 +515,15 @@ The Backend Interview page has one **Show Vietnamese / Hide Vietnamese** control
 
 ### Speaking chunk display
 
-The Backend Interview answer view splits English answers at natural punctuation boundaries into short, subtly color-accented beats, with visual pause separators. `backend/speaking-chunks.ts` slices the display text without changing the source: concatenating the chunks reproduces each English answer exactly. Pause marks are decorative, not spoken/source text. Vietnamese remains plain beneath the answer; the existing answer/key-idea visibility and Vietnamese toggle still apply. This display-only change does not regenerate audio.
+The Backend Interview answer view splits English answers at natural punctuation boundaries into short, subtly color-accented beats, with visual pause separators. `backend/speaking-chunks.ts` slices the display text without changing the source: concatenating the chunks reproduces each English answer exactly. Pause marks are decorative, not spoken/source text. Vietnamese remains plain beneath the answer; the existing answer/key-idea visibility and Vietnamese toggle still apply. Speaking chunks preserve source offsets for static karaoke highlighting; visual pause marks are not part of the spoken text.
 
 ### 2026-09-23 — Backend key-idea recall paths
 
 The 39 Backend Interview `keyIdea` / `keyIdeaVi` lines now give compact, question-specific speaking paths with `→` stages instead of repeating the answer opening. Each Vietnamese path mirrors its English stages. This is a study cue only: the English/Vietnamese questions and B1–B2 answers, topic order, visibility controls, and static audio remain unchanged. No audio regeneration is needed.
+
+### Backend static Edge TTS audio
+
+`pnpm generate:backend-interview-audio:edge -- all` generates the 39 English answers sequentially from `backend/source-questions.ts` (not the translations or key ideas). Select one or more with `t01-q01`, etc.; `--dry-run` previews and `--force` replaces existing pairs. Default voice is `en-US-ChristopherNeural`, rate `-20%`, pitch `-2Hz` (override with `EDGE_TTS_VOICE`, `EDGE_TTS_RATE`, `EDGE_TTS_PITCH`). The offline generator writes `apps/web/public/audio/interview/backend/tXX-qYY/{full.mp3,alignment.json}` with canonical offsets and timed word cues. The page reuses `useInterviewAudio` to play these files, pause/resume, repeat, choose 0.5×/0.8×/1× (backend default 0.8×, separate localStorage key), and highlight the current spoken range. Changing the topic or question stops playback. No runtime TTS requests, API endpoints, or changes to the AI Interview generator are involved.
 
 ## Validation
 

@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "questionId": "t05-q03",
+  "speechText": "For normal caching, I try to let the application fall back to the database instead of failing completely. I also use timeouts and monitoring so Redis problems do not make every request wait for a long time. However, if Redis is used for critical state, the design needs a stronger recovery plan.",
+  "words": [
+    {
+      "text": "For",
+      "canonicalStart": 0,
+      "canonicalEnd": 3,
+      "startMs": 113,
+      "endMs": 378
+    },
+    {
+      "text": "normal",
+      "canonicalStart": 4,
+      "canonicalEnd": 10,
+      "startMs": 394,
+      "endMs": 831
+    },
+    {
+      "text": "caching,",
+      "canonicalStart": 11,
+      "canonicalEnd": 19,
+      "startMs": 847,
+      "endMs": 1472
+    },
+    {
+      "text": "I",
+      "canonicalStart": 20,
+      "canonicalEnd": 21,
+      "startMs": 1816,
+      "endMs": 1925
+    },
+    {
+      "text": "try",
+      "canonicalStart": 22,
+      "canonicalEnd": 25,
+      "startMs": 1941,
+      "endMs": 2238
+    },
+    {
+      "text": "to",
+      "canonicalStart": 26,
+      "canonicalEnd": 28,
+      "startMs": 2253,
+      "endMs": 2363
+    },
+    {
+      "text": "let",
+      "canonicalStart": 29,
+      "canonicalEnd": 32,
+      "startMs": 2378,
+      "endMs": 2581
+    },
+    {
+      "text": "the",
+      "canonicalStart": 33,
+      "canonicalEnd": 36,
+      "startMs": 2597,
+      "endMs": 2706
+    },
+    {
+      "text": "application",
+      "canonicalStart": 37,
+      "canonicalEnd": 48,
+      "startMs": 2722,
+      "endMs": 3566
+    },
+    {
+      "text": "fall",
+      "canonicalStart": 49,
+      "canonicalEnd": 53,
+      "startMs": 3581,
+      "endMs": 3909
+    },
+    {
+      "text": "back",
+      "canonicalStart": 54,
+      "canonicalEnd": 58,
+      "startMs": 3925,
+      "endMs": 4222
+    },
+    {
+      "text": "to",
+      "canonicalStart": 59,
+      "canonicalEnd": 61,
+      "startMs": 4238,
+      "endMs": 4347
+    },
+    {
+      "text": "the",
+      "canonicalStart": 62,
+      "canonicalEnd": 65,
+      "startMs": 4363,
+      "endMs": 4503
+    },
+    {
+      "text": "database",
+      "canonicalStart": 66,
+      "canonicalEnd": 74,
+      "startMs": 4519,
+      "endMs": 5206
+    },
+    {
+      "text": "instead",
+      "canonicalStart": 75,
+      "canonicalEnd": 82,
+      "startMs": 5222,
+      "endMs": 5691
+    },
+    {
+      "text": "of",
+      "canonicalStart": 83,
+      "canonicalEnd": 85,
+      "startMs": 5706,
+      "endMs": 5831
+    },
+    {
+      "text": "failing",
+      "canonicalStart": 86,
+      "canonicalEnd": 93,
+      "startMs": 5847,
+      "endMs": 6316
+    },
+    {
+      "text": "completely.",
+      "canonicalStart": 94,
+      "canonicalEnd": 105,
+      "startMs": 6331,
+      "endMs": 7175
+    },
+    {
+      "text": "I",
+      "canonicalStart": 106,
+      "canonicalEnd": 107,
+      "startMs": 8266,
+      "endMs": 8516
+    },
+    {
+      "text": "also",
+      "canonicalStart": 108,
+      "canonicalEnd": 112,
+      "startMs": 8531,
+      "endMs": 8891
+    },
+    {
+      "text": "use",
+      "canonicalStart": 113,
+      "canonicalEnd": 116,
+      "startMs": 8906,
+      "endMs": 9281
+    },
+    {
+      "text": "timeouts",
+      "canonicalStart": 117,
+      "canonicalEnd": 125,
+      "startMs": 9297,
+      "endMs": 9984
+    },
+    {
+      "text": "and",
+      "canonicalStart": 126,
+      "canonicalEnd": 129,
+      "startMs": 10000,
+      "endMs": 10109
+    },
+    {
+      "text": "monitoring",
+      "canonicalStart": 130,
+      "canonicalEnd": 140,
+      "startMs": 10125,
+      "endMs": 10813
+    },
+    {
+      "text": "so",
+      "canonicalStart": 141,
+      "canonicalEnd": 143,
+      "startMs": 10828,
+      "endMs": 11156
+    },
+    {
+      "text": "Redis",
+      "canonicalStart": 144,
+      "canonicalEnd": 149,
+      "startMs": 11172,
+      "endMs": 11531
+    },
+    {
+      "text": "problems",
+      "canonicalStart": 150,
+      "canonicalEnd": 158,
+      "startMs": 11547,
+      "endMs": 12156
+    },
+    {
+      "text": "do",
+      "canonicalStart": 159,
+      "canonicalEnd": 161,
+      "startMs": 12172,
+      "endMs": 12297
+    },
+    {
+      "text": "not",
+      "canonicalStart": 162,
+      "canonicalEnd": 165,
+      "startMs": 12313,
+      "endMs": 12594
+    },
+    {
+      "text": "make",
+      "canonicalStart": 166,
+      "canonicalEnd": 170,
+      "startMs": 12609,
+      "endMs": 12906
+    },
+    {
+      "text": "every",
+      "canonicalStart": 171,
+      "canonicalEnd": 176,
+      "startMs": 12922,
+      "endMs": 13203
+    },
+    {
+      "text": "request",
+      "canonicalStart": 177,
+      "canonicalEnd": 184,
+      "startMs": 13219,
+      "endMs": 13797
+    },
+    {
+      "text": "wait",
+      "canonicalStart": 185,
+      "canonicalEnd": 189,
+      "startMs": 13813,
+      "endMs": 14094
+    },
+    {
+      "text": "for",
+      "canonicalStart": 190,
+      "canonicalEnd": 193,
+      "startMs": 14109,
+      "endMs": 14281
+    },
+    {
+      "text": "a",
+      "canonicalStart": 194,
+      "canonicalEnd": 195,
+      "startMs": 14297,
+      "endMs": 14359
+    },
+    {
+      "text": "long",
+      "canonicalStart": 196,
+      "canonicalEnd": 200,
+      "startMs": 14375,
+      "endMs": 14703
+    },
+    {
+      "text": "time.",
+      "canonicalStart": 201,
+      "canonicalEnd": 206,
+      "startMs": 14719,
+      "endMs": 15281
+    },
+    {
+      "text": "However,",
+      "canonicalStart": 207,
+      "canonicalEnd": 215,
+      "startMs": 16359,
+      "endMs": 17031
+    },
+    {
+      "text": "if",
+      "canonicalStart": 216,
+      "canonicalEnd": 218,
+      "startMs": 17266,
+      "endMs": 17469
+    },
+    {
+      "text": "Redis",
+      "canonicalStart": 219,
+      "canonicalEnd": 224,
+      "startMs": 17484,
+      "endMs": 17953
+    },
+    {
+      "text": "is",
+      "canonicalStart": 225,
+      "canonicalEnd": 227,
+      "startMs": 17969,
+      "endMs": 18156
+    },
+    {
+      "text": "used",
+      "canonicalStart": 228,
+      "canonicalEnd": 232,
+      "startMs": 18172,
+      "endMs": 18563
+    },
+    {
+      "text": "for",
+      "canonicalStart": 233,
+      "canonicalEnd": 236,
+      "startMs": 18578,
+      "endMs": 18750
+    },
+    {
+      "text": "critical",
+      "canonicalStart": 237,
+      "canonicalEnd": 245,
+      "startMs": 18766,
+      "endMs": 19266
+    },
+    {
+      "text": "state,",
+      "canonicalStart": 246,
+      "canonicalEnd": 252,
+      "startMs": 19281,
+      "endMs": 19781
+    },
+    {
+      "text": "the",
+      "canonicalStart": 253,
+      "canonicalEnd": 256,
+      "startMs": 20078,
+      "endMs": 20203
+    },
+    {
+      "text": "design",
+      "canonicalStart": 257,
+      "canonicalEnd": 263,
+      "startMs": 20219,
+      "endMs": 20813
+    },
+    {
+      "text": "needs",
+      "canonicalStart": 264,
+      "canonicalEnd": 269,
+      "startMs": 20828,
+      "endMs": 21094
+    },
+    {
+      "text": "a",
+      "canonicalStart": 270,
+      "canonicalEnd": 271,
+      "startMs": 21109,
+      "endMs": 21188
+    },
+    {
+      "text": "stronger",
+      "canonicalStart": 272,
+      "canonicalEnd": 280,
+      "startMs": 21203,
+      "endMs": 21766
+    },
+    {
+      "text": "recovery",
+      "canonicalStart": 281,
+      "canonicalEnd": 289,
+      "startMs": 21781,
+      "endMs": 22375
+    },
+    {
+      "text": "plan.",
+      "canonicalStart": 290,
+      "canonicalEnd": 295,
+      "startMs": 22391,
+      "endMs": 23000
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+{
+  "version": 1,
+  "questionId": "t08-q02",
+  "speechText": "I use pessimistic locking when a conflict would be expensive and I need to stop other transactions from changing the same data while my transaction is running. It gives stronger control, but it can reduce concurrency and may cause lock waits or deadlocks, so I use it carefully.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 269
+    },
+    {
+      "text": "use",
+      "canonicalStart": 2,
+      "canonicalEnd": 5,
+      "startMs": 284,
+      "endMs": 613
+    },
+    {
+      "text": "pessimistic",
+      "canonicalStart": 6,
+      "canonicalEnd": 17,
+      "startMs": 628,
+      "endMs": 1441
+    },
+    {
+      "text": "locking",
+      "canonicalStart": 18,
+      "canonicalEnd": 25,
+      "startMs": 1456,
+      "endMs": 1972
+    },
+    {
+      "text": "when",
+      "canonicalStart": 26,
+      "canonicalEnd": 30,
+      "startMs": 1988,
+      "endMs": 2113
+    },
+    {
+      "text": "a",
+      "canonicalStart": 31,
+      "canonicalEnd": 32,
+      "startMs": 2128,
+      "endMs": 2206
+    },
+    {
+      "text": "conflict",
+      "canonicalStart": 33,
+      "canonicalEnd": 41,
+      "startMs": 2222,
+      "endMs": 2925
+    },
+    {
+      "text": "would",
+      "canonicalStart": 42,
+      "canonicalEnd": 47,
+      "startMs": 2941,
+      "endMs": 3050
+    },
+    {
+      "text": "be",
+      "canonicalStart": 48,
+      "canonicalEnd": 50,
+      "startMs": 3066,
+      "endMs": 3191
+    },
+    {
+      "text": "expensive",
+      "canonicalStart": 51,
+      "canonicalEnd": 60,
+      "startMs": 3206,
+      "endMs": 4003
+    },
+    {
+      "text": "and",
+      "canonicalStart": 61,
+      "canonicalEnd": 64,
+      "startMs": 4019,
+      "endMs": 4159
+    },
+    {
+      "text": "I",
+      "canonicalStart": 65,
+      "canonicalEnd": 66,
+      "startMs": 4175,
+      "endMs": 4222
+    },
+    {
+      "text": "need",
+      "canonicalStart": 67,
+      "canonicalEnd": 71,
+      "startMs": 4238,
+      "endMs": 4519
+    },
+    {
+      "text": "to",
+      "canonicalStart": 72,
+      "canonicalEnd": 74,
+      "startMs": 4534,
+      "endMs": 4613
+    },
+    {
+      "text": "stop",
+      "canonicalStart": 75,
+      "canonicalEnd": 79,
+      "startMs": 4628,
+      "endMs": 5050
+    },
+    {
+      "text": "other",
+      "canonicalStart": 80,
+      "canonicalEnd": 85,
+      "startMs": 5066,
+      "endMs": 5331
+    },
+    {
+      "text": "transactions",
+      "canonicalStart": 86,
+      "canonicalEnd": 98,
+      "startMs": 5347,
+      "endMs": 6253
+    },
+    {
+      "text": "from",
+      "canonicalStart": 99,
+      "canonicalEnd": 103,
+      "startMs": 6269,
+      "endMs": 6472
+    },
+    {
+      "text": "changing",
+      "canonicalStart": 104,
+      "canonicalEnd": 112,
+      "startMs": 6488,
+      "endMs": 6972
+    },
+    {
+      "text": "the",
+      "canonicalStart": 113,
+      "canonicalEnd": 116,
+      "startMs": 6988,
+      "endMs": 7081
+    },
+    {
+      "text": "same",
+      "canonicalStart": 117,
+      "canonicalEnd": 121,
+      "startMs": 7097,
+      "endMs": 7472
+    },
+    {
+      "text": "data",
+      "canonicalStart": 122,
+      "canonicalEnd": 126,
+      "startMs": 7488,
+      "endMs": 7909
+    },
+    {
+      "text": "while",
+      "canonicalStart": 127,
+      "canonicalEnd": 132,
+      "startMs": 7925,
+      "endMs": 8159
+    },
+    {
+      "text": "my",
+      "canonicalStart": 133,
+      "canonicalEnd": 135,
+      "startMs": 8175,
+      "endMs": 8300
+    },
+    {
+      "text": "transaction",
+      "canonicalStart": 136,
+      "canonicalEnd": 147,
+      "startMs": 8316,
+      "endMs": 9175
+    },
+    {
+      "text": "is",
+      "canonicalStart": 148,
+      "canonicalEnd": 150,
+      "startMs": 9191,
+      "endMs": 9378
+    },
+    {
+      "text": "running.",
+      "canonicalStart": 151,
+      "canonicalEnd": 159,
+      "startMs": 9394,
+      "endMs": 9925
+    },
+    {
+      "text": "It",
+      "canonicalStart": 160,
+      "canonicalEnd": 162,
+      "startMs": 11016,
+      "endMs": 11234
+    },
+    {
+      "text": "gives",
+      "canonicalStart": 163,
+      "canonicalEnd": 168,
+      "startMs": 11250,
+      "endMs": 11531
+    },
+    {
+      "text": "stronger",
+      "canonicalStart": 169,
+      "canonicalEnd": 177,
+      "startMs": 11547,
+      "endMs": 12047
+    },
+    {
+      "text": "control,",
+      "canonicalStart": 178,
+      "canonicalEnd": 186,
+      "startMs": 12063,
+      "endMs": 12703
+    },
+    {
+      "text": "but",
+      "canonicalStart": 187,
+      "canonicalEnd": 190,
+      "startMs": 13078,
+      "endMs": 13219
+    },
+    {
+      "text": "it",
+      "canonicalStart": 191,
+      "canonicalEnd": 193,
+      "startMs": 13234,
+      "endMs": 13344
+    },
+    {
+      "text": "can",
+      "canonicalStart": 194,
+      "canonicalEnd": 197,
+      "startMs": 13359,
+      "endMs": 13563
+    },
+    {
+      "text": "reduce",
+      "canonicalStart": 198,
+      "canonicalEnd": 204,
+      "startMs": 13578,
+      "endMs": 14063
+    },
+    {
+      "text": "concurrency",
+      "canonicalStart": 205,
+      "canonicalEnd": 216,
+      "startMs": 14078,
+      "endMs": 15016
+    },
+    {
+      "text": "and",
+      "canonicalStart": 217,
+      "canonicalEnd": 220,
+      "startMs": 15031,
+      "endMs": 15188
+    },
+    {
+      "text": "may",
+      "canonicalStart": 221,
+      "canonicalEnd": 224,
+      "startMs": 15203,
+      "endMs": 15422
+    },
+    {
+      "text": "cause",
+      "canonicalStart": 225,
+      "canonicalEnd": 230,
+      "startMs": 15438,
+      "endMs": 15891
+    },
+    {
+      "text": "lock",
+      "canonicalStart": 231,
+      "canonicalEnd": 235,
+      "startMs": 15906,
+      "endMs": 16219
+    },
+    {
+      "text": "waits",
+      "canonicalStart": 236,
+      "canonicalEnd": 241,
+      "startMs": 16234,
+      "endMs": 16641
+    },
+    {
+      "text": "or",
+      "canonicalStart": 242,
+      "canonicalEnd": 244,
+      "startMs": 16656,
+      "endMs": 16828
+    },
+    {
+      "text": "deadlocks,",
+      "canonicalStart": 245,
+      "canonicalEnd": 255,
+      "startMs": 16844,
+      "endMs": 17609
+    },
+    {
+      "text": "so",
+      "canonicalStart": 256,
+      "canonicalEnd": 258,
+      "startMs": 17984,
+      "endMs": 18188
+    },
+    {
+      "text": "I",
+      "canonicalStart": 259,
+      "canonicalEnd": 260,
+      "startMs": 18203,
+      "endMs": 18297
+    },
+    {
+      "text": "use",
+      "canonicalStart": 261,
+      "canonicalEnd": 264,
+      "startMs": 18313,
+      "endMs": 18641
+    },
+    {
+      "text": "it",
+      "canonicalStart": 265,
+      "canonicalEnd": 267,
+      "startMs": 18656,
+      "endMs": 18797
+    },
+    {
+      "text": "carefully.",
+      "canonicalStart": 268,
+      "canonicalEnd": 278,
+      "startMs": 18813,
+      "endMs": 19547
+    }
+  ]
+}

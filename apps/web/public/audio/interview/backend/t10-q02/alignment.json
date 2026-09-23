@@ -1,0 +1,336 @@
+{
+  "version": 1,
+  "questionId": "t10-q02",
+  "speechText": "I would separate creating the notification from sending it. The main service creates a notification event or job and sends it to a queue. Workers can send email, push, or other notification types. I would include retry, idempotency, status tracking, and a dead-letter process for failed jobs.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 300
+    },
+    {
+      "text": "would",
+      "canonicalStart": 2,
+      "canonicalEnd": 7,
+      "startMs": 316,
+      "endMs": 519
+    },
+    {
+      "text": "separate",
+      "canonicalStart": 8,
+      "canonicalEnd": 16,
+      "startMs": 534,
+      "endMs": 1159
+    },
+    {
+      "text": "creating",
+      "canonicalStart": 17,
+      "canonicalEnd": 25,
+      "startMs": 1175,
+      "endMs": 1753
+    },
+    {
+      "text": "the",
+      "canonicalStart": 26,
+      "canonicalEnd": 29,
+      "startMs": 1769,
+      "endMs": 1863
+    },
+    {
+      "text": "notification",
+      "canonicalStart": 30,
+      "canonicalEnd": 42,
+      "startMs": 1878,
+      "endMs": 2831
+    },
+    {
+      "text": "from",
+      "canonicalStart": 43,
+      "canonicalEnd": 47,
+      "startMs": 2847,
+      "endMs": 3050
+    },
+    {
+      "text": "sending",
+      "canonicalStart": 48,
+      "canonicalEnd": 55,
+      "startMs": 3066,
+      "endMs": 3566
+    },
+    {
+      "text": "it.",
+      "canonicalStart": 56,
+      "canonicalEnd": 59,
+      "startMs": 3581,
+      "endMs": 3831
+    },
+    {
+      "text": "The",
+      "canonicalStart": 60,
+      "canonicalEnd": 63,
+      "startMs": 4922,
+      "endMs": 5094
+    },
+    {
+      "text": "main",
+      "canonicalStart": 64,
+      "canonicalEnd": 68,
+      "startMs": 5109,
+      "endMs": 5469
+    },
+    {
+      "text": "service",
+      "canonicalStart": 69,
+      "canonicalEnd": 76,
+      "startMs": 5484,
+      "endMs": 5969
+    },
+    {
+      "text": "creates",
+      "canonicalStart": 77,
+      "canonicalEnd": 84,
+      "startMs": 5984,
+      "endMs": 6469
+    },
+    {
+      "text": "a",
+      "canonicalStart": 85,
+      "canonicalEnd": 86,
+      "startMs": 6484,
+      "endMs": 6547
+    },
+    {
+      "text": "notification",
+      "canonicalStart": 87,
+      "canonicalEnd": 99,
+      "startMs": 6563,
+      "endMs": 7516
+    },
+    {
+      "text": "event",
+      "canonicalStart": 100,
+      "canonicalEnd": 105,
+      "startMs": 7531,
+      "endMs": 8000
+    },
+    {
+      "text": "or",
+      "canonicalStart": 106,
+      "canonicalEnd": 108,
+      "startMs": 8016,
+      "endMs": 8188
+    },
+    {
+      "text": "job",
+      "canonicalStart": 109,
+      "canonicalEnd": 112,
+      "startMs": 8203,
+      "endMs": 8672
+    },
+    {
+      "text": "and",
+      "canonicalStart": 113,
+      "canonicalEnd": 116,
+      "startMs": 8688,
+      "endMs": 8828
+    },
+    {
+      "text": "sends",
+      "canonicalStart": 117,
+      "canonicalEnd": 122,
+      "startMs": 8844,
+      "endMs": 9188
+    },
+    {
+      "text": "it",
+      "canonicalStart": 123,
+      "canonicalEnd": 125,
+      "startMs": 9203,
+      "endMs": 9328
+    },
+    {
+      "text": "to",
+      "canonicalStart": 126,
+      "canonicalEnd": 128,
+      "startMs": 9344,
+      "endMs": 9516
+    },
+    {
+      "text": "a",
+      "canonicalStart": 129,
+      "canonicalEnd": 130,
+      "startMs": 9531,
+      "endMs": 9641
+    },
+    {
+      "text": "queue.",
+      "canonicalStart": 131,
+      "canonicalEnd": 137,
+      "startMs": 9656,
+      "endMs": 10188
+    },
+    {
+      "text": "Workers",
+      "canonicalStart": 138,
+      "canonicalEnd": 145,
+      "startMs": 11266,
+      "endMs": 11875
+    },
+    {
+      "text": "can",
+      "canonicalStart": 146,
+      "canonicalEnd": 149,
+      "startMs": 11891,
+      "endMs": 12094
+    },
+    {
+      "text": "send",
+      "canonicalStart": 150,
+      "canonicalEnd": 154,
+      "startMs": 12109,
+      "endMs": 12406
+    },
+    {
+      "text": "email,",
+      "canonicalStart": 155,
+      "canonicalEnd": 161,
+      "startMs": 12422,
+      "endMs": 13031
+    },
+    {
+      "text": "push,",
+      "canonicalStart": 162,
+      "canonicalEnd": 167,
+      "startMs": 13344,
+      "endMs": 13859
+    },
+    {
+      "text": "or",
+      "canonicalStart": 168,
+      "canonicalEnd": 170,
+      "startMs": 14109,
+      "endMs": 14313
+    },
+    {
+      "text": "other",
+      "canonicalStart": 171,
+      "canonicalEnd": 176,
+      "startMs": 14328,
+      "endMs": 14578
+    },
+    {
+      "text": "notification",
+      "canonicalStart": 177,
+      "canonicalEnd": 189,
+      "startMs": 14594,
+      "endMs": 15484
+    },
+    {
+      "text": "types.",
+      "canonicalStart": 190,
+      "canonicalEnd": 196,
+      "startMs": 15500,
+      "endMs": 16188
+    },
+    {
+      "text": "I",
+      "canonicalStart": 197,
+      "canonicalEnd": 198,
+      "startMs": 17266,
+      "endMs": 17469
+    },
+    {
+      "text": "would",
+      "canonicalStart": 199,
+      "canonicalEnd": 204,
+      "startMs": 17484,
+      "endMs": 17688
+    },
+    {
+      "text": "include",
+      "canonicalStart": 205,
+      "canonicalEnd": 212,
+      "startMs": 17703,
+      "endMs": 18203
+    },
+    {
+      "text": "retry,",
+      "canonicalStart": 213,
+      "canonicalEnd": 219,
+      "startMs": 18219,
+      "endMs": 18922
+    },
+    {
+      "text": "idempotency,",
+      "canonicalStart": 220,
+      "canonicalEnd": 232,
+      "startMs": 19203,
+      "endMs": 20297
+    },
+    {
+      "text": "status",
+      "canonicalStart": 233,
+      "canonicalEnd": 239,
+      "startMs": 20641,
+      "endMs": 21188
+    },
+    {
+      "text": "tracking,",
+      "canonicalStart": 240,
+      "canonicalEnd": 249,
+      "startMs": 21203,
+      "endMs": 21859
+    },
+    {
+      "text": "and",
+      "canonicalStart": 250,
+      "canonicalEnd": 253,
+      "startMs": 22141,
+      "endMs": 22297
+    },
+    {
+      "text": "a",
+      "canonicalStart": 254,
+      "canonicalEnd": 255,
+      "startMs": 22313,
+      "endMs": 22422
+    },
+    {
+      "text": "dead-letter",
+      "canonicalStart": 256,
+      "canonicalEnd": 267,
+      "startMs": 22438,
+      "endMs": 23031
+    },
+    {
+      "text": "process",
+      "canonicalStart": 268,
+      "canonicalEnd": 275,
+      "startMs": 23047,
+      "endMs": 23703
+    },
+    {
+      "text": "for",
+      "canonicalStart": 276,
+      "canonicalEnd": 279,
+      "startMs": 23719,
+      "endMs": 23906
+    },
+    {
+      "text": "failed",
+      "canonicalStart": 280,
+      "canonicalEnd": 286,
+      "startMs": 23922,
+      "endMs": 24344
+    },
+    {
+      "text": "jobs.",
+      "canonicalStart": 287,
+      "canonicalEnd": 292,
+      "startMs": 24359,
+      "endMs": 25078
+    }
+  ]
+}

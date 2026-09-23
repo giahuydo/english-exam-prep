@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "questionId": "t05-q02",
+  "speechText": "The difficult part is keeping cached data correct. When the database changes, old cached data may still exist. I normally use a clear invalidation strategy and a reasonable TTL. For important data, I prefer correctness over keeping data cached for too long.",
+  "words": [
+    {
+      "text": "The",
+      "canonicalStart": 0,
+      "canonicalEnd": 3,
+      "startMs": 113,
+      "endMs": 300
+    },
+    {
+      "text": "difficult",
+      "canonicalStart": 4,
+      "canonicalEnd": 13,
+      "startMs": 316,
+      "endMs": 878
+    },
+    {
+      "text": "part",
+      "canonicalStart": 14,
+      "canonicalEnd": 18,
+      "startMs": 894,
+      "endMs": 1253
+    },
+    {
+      "text": "is",
+      "canonicalStart": 19,
+      "canonicalEnd": 21,
+      "startMs": 1269,
+      "endMs": 1425
+    },
+    {
+      "text": "keeping",
+      "canonicalStart": 22,
+      "canonicalEnd": 29,
+      "startMs": 1441,
+      "endMs": 1909
+    },
+    {
+      "text": "cached",
+      "canonicalStart": 30,
+      "canonicalEnd": 36,
+      "startMs": 1925,
+      "endMs": 2456
+    },
+    {
+      "text": "data",
+      "canonicalStart": 37,
+      "canonicalEnd": 41,
+      "startMs": 2472,
+      "endMs": 2800
+    },
+    {
+      "text": "correct.",
+      "canonicalStart": 42,
+      "canonicalEnd": 50,
+      "startMs": 2816,
+      "endMs": 3503
+    },
+    {
+      "text": "When",
+      "canonicalStart": 51,
+      "canonicalEnd": 55,
+      "startMs": 4594,
+      "endMs": 4813
+    },
+    {
+      "text": "the",
+      "canonicalStart": 56,
+      "canonicalEnd": 59,
+      "startMs": 4828,
+      "endMs": 4969
+    },
+    {
+      "text": "database",
+      "canonicalStart": 60,
+      "canonicalEnd": 68,
+      "startMs": 4984,
+      "endMs": 5641
+    },
+    {
+      "text": "changes,",
+      "canonicalStart": 69,
+      "canonicalEnd": 77,
+      "startMs": 5656,
+      "endMs": 6391
+    },
+    {
+      "text": "old",
+      "canonicalStart": 78,
+      "canonicalEnd": 81,
+      "startMs": 6656,
+      "endMs": 6938
+    },
+    {
+      "text": "cached",
+      "canonicalStart": 82,
+      "canonicalEnd": 88,
+      "startMs": 6953,
+      "endMs": 7531
+    },
+    {
+      "text": "data",
+      "canonicalStart": 89,
+      "canonicalEnd": 93,
+      "startMs": 7547,
+      "endMs": 7875
+    },
+    {
+      "text": "may",
+      "canonicalStart": 94,
+      "canonicalEnd": 97,
+      "startMs": 7891,
+      "endMs": 8125
+    },
+    {
+      "text": "still",
+      "canonicalStart": 98,
+      "canonicalEnd": 103,
+      "startMs": 8141,
+      "endMs": 8531
+    },
+    {
+      "text": "exist.",
+      "canonicalStart": 104,
+      "canonicalEnd": 110,
+      "startMs": 8547,
+      "endMs": 9344
+    },
+    {
+      "text": "I",
+      "canonicalStart": 111,
+      "canonicalEnd": 112,
+      "startMs": 10422,
+      "endMs": 10594
+    },
+    {
+      "text": "normally",
+      "canonicalStart": 113,
+      "canonicalEnd": 121,
+      "startMs": 10609,
+      "endMs": 11234
+    },
+    {
+      "text": "use",
+      "canonicalStart": 122,
+      "canonicalEnd": 125,
+      "startMs": 11250,
+      "endMs": 11531
+    },
+    {
+      "text": "a",
+      "canonicalStart": 126,
+      "canonicalEnd": 127,
+      "startMs": 11547,
+      "endMs": 11641
+    },
+    {
+      "text": "clear",
+      "canonicalStart": 128,
+      "canonicalEnd": 133,
+      "startMs": 11656,
+      "endMs": 12031
+    },
+    {
+      "text": "invalidation",
+      "canonicalStart": 134,
+      "canonicalEnd": 146,
+      "startMs": 12047,
+      "endMs": 12969
+    },
+    {
+      "text": "strategy",
+      "canonicalStart": 147,
+      "canonicalEnd": 155,
+      "startMs": 12984,
+      "endMs": 13766
+    },
+    {
+      "text": "and",
+      "canonicalStart": 156,
+      "canonicalEnd": 159,
+      "startMs": 13781,
+      "endMs": 13938
+    },
+    {
+      "text": "a",
+      "canonicalStart": 160,
+      "canonicalEnd": 161,
+      "startMs": 13953,
+      "endMs": 14000
+    },
+    {
+      "text": "reasonable",
+      "canonicalStart": 162,
+      "canonicalEnd": 172,
+      "startMs": 14016,
+      "endMs": 14641
+    },
+    {
+      "text": "TTL.",
+      "canonicalStart": 173,
+      "canonicalEnd": 177,
+      "startMs": 14656,
+      "endMs": 15531
+    },
+    {
+      "text": "For",
+      "canonicalStart": 178,
+      "canonicalEnd": 181,
+      "startMs": 16609,
+      "endMs": 16891
+    },
+    {
+      "text": "important",
+      "canonicalStart": 182,
+      "canonicalEnd": 191,
+      "startMs": 16906,
+      "endMs": 17469
+    },
+    {
+      "text": "data,",
+      "canonicalStart": 192,
+      "canonicalEnd": 197,
+      "startMs": 17484,
+      "endMs": 17922
+    },
+    {
+      "text": "I",
+      "canonicalStart": 198,
+      "canonicalEnd": 199,
+      "startMs": 18250,
+      "endMs": 18406
+    },
+    {
+      "text": "prefer",
+      "canonicalStart": 200,
+      "canonicalEnd": 206,
+      "startMs": 18422,
+      "endMs": 18891
+    },
+    {
+      "text": "correctness",
+      "canonicalStart": 207,
+      "canonicalEnd": 218,
+      "startMs": 18906,
+      "endMs": 19594
+    },
+    {
+      "text": "over",
+      "canonicalStart": 219,
+      "canonicalEnd": 223,
+      "startMs": 19609,
+      "endMs": 19891
+    },
+    {
+      "text": "keeping",
+      "canonicalStart": 224,
+      "canonicalEnd": 231,
+      "startMs": 19906,
+      "endMs": 20359
+    },
+    {
+      "text": "data",
+      "canonicalStart": 232,
+      "canonicalEnd": 236,
+      "startMs": 20375,
+      "endMs": 20734
+    },
+    {
+      "text": "cached",
+      "canonicalStart": 237,
+      "canonicalEnd": 243,
+      "startMs": 20750,
+      "endMs": 21219
+    },
+    {
+      "text": "for",
+      "canonicalStart": 244,
+      "canonicalEnd": 247,
+      "startMs": 21234,
+      "endMs": 21391
+    },
+    {
+      "text": "too",
+      "canonicalStart": 248,
+      "canonicalEnd": 251,
+      "startMs": 21406,
+      "endMs": 21688
+    },
+    {
+      "text": "long.",
+      "canonicalStart": 252,
+      "canonicalEnd": 257,
+      "startMs": 21703,
+      "endMs": 22234
+    }
+  ]
+}

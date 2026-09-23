@@ -1,0 +1,392 @@
+{
+  "version": 1,
+  "questionId": "t06-q03",
+  "speechText": "I start with measurements instead of guessing. I check request latency, throughput, error rate, CPU, memory, database timing, external API timing, and queue metrics. Then I trace a slow request through the system to see where most of the time is spent. I optimize the slowest important part first and measure again after the change.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 331
+    },
+    {
+      "text": "start",
+      "canonicalStart": 2,
+      "canonicalEnd": 7,
+      "startMs": 347,
+      "endMs": 769
+    },
+    {
+      "text": "with",
+      "canonicalStart": 8,
+      "canonicalEnd": 12,
+      "startMs": 784,
+      "endMs": 941
+    },
+    {
+      "text": "measurements",
+      "canonicalStart": 13,
+      "canonicalEnd": 25,
+      "startMs": 956,
+      "endMs": 1566
+    },
+    {
+      "text": "instead",
+      "canonicalStart": 26,
+      "canonicalEnd": 33,
+      "startMs": 1581,
+      "endMs": 2034
+    },
+    {
+      "text": "of",
+      "canonicalStart": 34,
+      "canonicalEnd": 36,
+      "startMs": 2050,
+      "endMs": 2159
+    },
+    {
+      "text": "guessing.",
+      "canonicalStart": 37,
+      "canonicalEnd": 46,
+      "startMs": 2175,
+      "endMs": 2831
+    },
+    {
+      "text": "I",
+      "canonicalStart": 47,
+      "canonicalEnd": 48,
+      "startMs": 3922,
+      "endMs": 4172
+    },
+    {
+      "text": "check",
+      "canonicalStart": 49,
+      "canonicalEnd": 54,
+      "startMs": 4188,
+      "endMs": 4563
+    },
+    {
+      "text": "request",
+      "canonicalStart": 55,
+      "canonicalEnd": 62,
+      "startMs": 4578,
+      "endMs": 5172
+    },
+    {
+      "text": "latency,",
+      "canonicalStart": 63,
+      "canonicalEnd": 71,
+      "startMs": 5188,
+      "endMs": 5875
+    },
+    {
+      "text": "throughput,",
+      "canonicalStart": 72,
+      "canonicalEnd": 83,
+      "startMs": 6203,
+      "endMs": 6859
+    },
+    {
+      "text": "error",
+      "canonicalStart": 84,
+      "canonicalEnd": 89,
+      "startMs": 7172,
+      "endMs": 7547
+    },
+    {
+      "text": "rate,",
+      "canonicalStart": 90,
+      "canonicalEnd": 95,
+      "startMs": 7563,
+      "endMs": 7906
+    },
+    {
+      "text": "CPU,",
+      "canonicalStart": 96,
+      "canonicalEnd": 100,
+      "startMs": 8250,
+      "endMs": 9094
+    },
+    {
+      "text": "memory,",
+      "canonicalStart": 101,
+      "canonicalEnd": 108,
+      "startMs": 9422,
+      "endMs": 9922
+    },
+    {
+      "text": "database",
+      "canonicalStart": 109,
+      "canonicalEnd": 117,
+      "startMs": 10250,
+      "endMs": 10875
+    },
+    {
+      "text": "timing,",
+      "canonicalStart": 118,
+      "canonicalEnd": 125,
+      "startMs": 10891,
+      "endMs": 11469
+    },
+    {
+      "text": "external",
+      "canonicalStart": 126,
+      "canonicalEnd": 134,
+      "startMs": 11813,
+      "endMs": 12453
+    },
+    {
+      "text": "API",
+      "canonicalStart": 135,
+      "canonicalEnd": 138,
+      "startMs": 12469,
+      "endMs": 13125
+    },
+    {
+      "text": "timing,",
+      "canonicalStart": 139,
+      "canonicalEnd": 146,
+      "startMs": 13141,
+      "endMs": 13828
+    },
+    {
+      "text": "and",
+      "canonicalStart": 147,
+      "canonicalEnd": 150,
+      "startMs": 14094,
+      "endMs": 14281
+    },
+    {
+      "text": "queue",
+      "canonicalStart": 151,
+      "canonicalEnd": 156,
+      "startMs": 14297,
+      "endMs": 14578
+    },
+    {
+      "text": "metrics.",
+      "canonicalStart": 157,
+      "canonicalEnd": 165,
+      "startMs": 14594,
+      "endMs": 15422
+    },
+    {
+      "text": "Then",
+      "canonicalStart": 166,
+      "canonicalEnd": 170,
+      "startMs": 16500,
+      "endMs": 16781
+    },
+    {
+      "text": "I",
+      "canonicalStart": 171,
+      "canonicalEnd": 172,
+      "startMs": 16797,
+      "endMs": 16906
+    },
+    {
+      "text": "trace",
+      "canonicalStart": 173,
+      "canonicalEnd": 178,
+      "startMs": 16922,
+      "endMs": 17344
+    },
+    {
+      "text": "a",
+      "canonicalStart": 179,
+      "canonicalEnd": 180,
+      "startMs": 17359,
+      "endMs": 17453
+    },
+    {
+      "text": "slow",
+      "canonicalStart": 181,
+      "canonicalEnd": 185,
+      "startMs": 17469,
+      "endMs": 17891
+    },
+    {
+      "text": "request",
+      "canonicalStart": 186,
+      "canonicalEnd": 193,
+      "startMs": 17906,
+      "endMs": 18453
+    },
+    {
+      "text": "through",
+      "canonicalStart": 194,
+      "canonicalEnd": 201,
+      "startMs": 18469,
+      "endMs": 18641
+    },
+    {
+      "text": "the",
+      "canonicalStart": 202,
+      "canonicalEnd": 205,
+      "startMs": 18656,
+      "endMs": 18781
+    },
+    {
+      "text": "system",
+      "canonicalStart": 206,
+      "canonicalEnd": 212,
+      "startMs": 18797,
+      "endMs": 19344
+    },
+    {
+      "text": "to",
+      "canonicalStart": 213,
+      "canonicalEnd": 215,
+      "startMs": 19359,
+      "endMs": 19469
+    },
+    {
+      "text": "see",
+      "canonicalStart": 216,
+      "canonicalEnd": 219,
+      "startMs": 19484,
+      "endMs": 19797
+    },
+    {
+      "text": "where",
+      "canonicalStart": 220,
+      "canonicalEnd": 225,
+      "startMs": 19813,
+      "endMs": 19984
+    },
+    {
+      "text": "most",
+      "canonicalStart": 226,
+      "canonicalEnd": 230,
+      "startMs": 20000,
+      "endMs": 20406
+    },
+    {
+      "text": "of",
+      "canonicalStart": 231,
+      "canonicalEnd": 233,
+      "startMs": 20422,
+      "endMs": 20484
+    },
+    {
+      "text": "the",
+      "canonicalStart": 234,
+      "canonicalEnd": 237,
+      "startMs": 20500,
+      "endMs": 20594
+    },
+    {
+      "text": "time",
+      "canonicalStart": 238,
+      "canonicalEnd": 242,
+      "startMs": 20609,
+      "endMs": 21031
+    },
+    {
+      "text": "is",
+      "canonicalStart": 243,
+      "canonicalEnd": 245,
+      "startMs": 21047,
+      "endMs": 21172
+    },
+    {
+      "text": "spent.",
+      "canonicalStart": 246,
+      "canonicalEnd": 252,
+      "startMs": 21188,
+      "endMs": 21750
+    },
+    {
+      "text": "I",
+      "canonicalStart": 253,
+      "canonicalEnd": 254,
+      "startMs": 22828,
+      "endMs": 23094
+    },
+    {
+      "text": "optimize",
+      "canonicalStart": 255,
+      "canonicalEnd": 263,
+      "startMs": 23109,
+      "endMs": 23813
+    },
+    {
+      "text": "the",
+      "canonicalStart": 264,
+      "canonicalEnd": 267,
+      "startMs": 23828,
+      "endMs": 23953
+    },
+    {
+      "text": "slowest",
+      "canonicalStart": 268,
+      "canonicalEnd": 275,
+      "startMs": 23969,
+      "endMs": 24578
+    },
+    {
+      "text": "important",
+      "canonicalStart": 276,
+      "canonicalEnd": 285,
+      "startMs": 24594,
+      "endMs": 25094
+    },
+    {
+      "text": "part",
+      "canonicalStart": 286,
+      "canonicalEnd": 290,
+      "startMs": 25109,
+      "endMs": 25422
+    },
+    {
+      "text": "first",
+      "canonicalStart": 291,
+      "canonicalEnd": 296,
+      "startMs": 25438,
+      "endMs": 25953
+    },
+    {
+      "text": "and",
+      "canonicalStart": 297,
+      "canonicalEnd": 300,
+      "startMs": 25969,
+      "endMs": 26078
+    },
+    {
+      "text": "measure",
+      "canonicalStart": 301,
+      "canonicalEnd": 308,
+      "startMs": 26094,
+      "endMs": 26531
+    },
+    {
+      "text": "again",
+      "canonicalStart": 309,
+      "canonicalEnd": 314,
+      "startMs": 26547,
+      "endMs": 27000
+    },
+    {
+      "text": "after",
+      "canonicalStart": 315,
+      "canonicalEnd": 320,
+      "startMs": 27016,
+      "endMs": 27313
+    },
+    {
+      "text": "the",
+      "canonicalStart": 321,
+      "canonicalEnd": 324,
+      "startMs": 27328,
+      "endMs": 27422
+    },
+    {
+      "text": "change.",
+      "canonicalStart": 325,
+      "canonicalEnd": 332,
+      "startMs": 27438,
+      "endMs": 28156
+    }
+  ]
+}

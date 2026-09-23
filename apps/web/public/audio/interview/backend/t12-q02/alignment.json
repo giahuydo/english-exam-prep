@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "questionId": "t12-q02",
+  "speechText": "I check correctness first: business logic, edge cases, error handling, security, and possible data problems. Then I check readability, maintainability, test coverage, performance when relevant, and whether the change follows the existing architecture. I try to keep comments specific and explain why a change is important.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 347
+    },
+    {
+      "text": "check",
+      "canonicalStart": 2,
+      "canonicalEnd": 7,
+      "startMs": 363,
+      "endMs": 738
+    },
+    {
+      "text": "correctness",
+      "canonicalStart": 8,
+      "canonicalEnd": 19,
+      "startMs": 753,
+      "endMs": 1425
+    },
+    {
+      "text": "first:",
+      "canonicalStart": 20,
+      "canonicalEnd": 26,
+      "startMs": 1441,
+      "endMs": 2019
+    },
+    {
+      "text": "business",
+      "canonicalStart": 27,
+      "canonicalEnd": 35,
+      "startMs": 2316,
+      "endMs": 2800
+    },
+    {
+      "text": "logic,",
+      "canonicalStart": 36,
+      "canonicalEnd": 42,
+      "startMs": 2816,
+      "endMs": 3456
+    },
+    {
+      "text": "edge",
+      "canonicalStart": 43,
+      "canonicalEnd": 47,
+      "startMs": 3738,
+      "endMs": 4003
+    },
+    {
+      "text": "cases,",
+      "canonicalStart": 48,
+      "canonicalEnd": 54,
+      "startMs": 4019,
+      "endMs": 4722
+    },
+    {
+      "text": "error",
+      "canonicalStart": 55,
+      "canonicalEnd": 60,
+      "startMs": 5019,
+      "endMs": 5363
+    },
+    {
+      "text": "handling,",
+      "canonicalStart": 61,
+      "canonicalEnd": 70,
+      "startMs": 5378,
+      "endMs": 6019
+    },
+    {
+      "text": "security,",
+      "canonicalStart": 71,
+      "canonicalEnd": 80,
+      "startMs": 6363,
+      "endMs": 7128
+    },
+    {
+      "text": "and",
+      "canonicalStart": 81,
+      "canonicalEnd": 84,
+      "startMs": 7425,
+      "endMs": 7644
+    },
+    {
+      "text": "possible",
+      "canonicalStart": 85,
+      "canonicalEnd": 93,
+      "startMs": 7659,
+      "endMs": 8269
+    },
+    {
+      "text": "data",
+      "canonicalStart": 94,
+      "canonicalEnd": 98,
+      "startMs": 8284,
+      "endMs": 8644
+    },
+    {
+      "text": "problems.",
+      "canonicalStart": 99,
+      "canonicalEnd": 108,
+      "startMs": 8659,
+      "endMs": 9503
+    },
+    {
+      "text": "Then",
+      "canonicalStart": 109,
+      "canonicalEnd": 113,
+      "startMs": 10594,
+      "endMs": 10938
+    },
+    {
+      "text": "I",
+      "canonicalStart": 114,
+      "canonicalEnd": 115,
+      "startMs": 10953,
+      "endMs": 11094
+    },
+    {
+      "text": "check",
+      "canonicalStart": 116,
+      "canonicalEnd": 121,
+      "startMs": 11109,
+      "endMs": 11516
+    },
+    {
+      "text": "readability,",
+      "canonicalStart": 122,
+      "canonicalEnd": 134,
+      "startMs": 11531,
+      "endMs": 12344
+    },
+    {
+      "text": "maintainability,",
+      "canonicalStart": 135,
+      "canonicalEnd": 151,
+      "startMs": 12641,
+      "endMs": 13750
+    },
+    {
+      "text": "test",
+      "canonicalStart": 152,
+      "canonicalEnd": 156,
+      "startMs": 14031,
+      "endMs": 14406
+    },
+    {
+      "text": "coverage,",
+      "canonicalStart": 157,
+      "canonicalEnd": 166,
+      "startMs": 14422,
+      "endMs": 15031
+    },
+    {
+      "text": "performance",
+      "canonicalStart": 167,
+      "canonicalEnd": 178,
+      "startMs": 15266,
+      "endMs": 15984
+    },
+    {
+      "text": "when",
+      "canonicalStart": 179,
+      "canonicalEnd": 183,
+      "startMs": 16000,
+      "endMs": 16203
+    },
+    {
+      "text": "relevant,",
+      "canonicalStart": 184,
+      "canonicalEnd": 193,
+      "startMs": 16219,
+      "endMs": 16813
+    },
+    {
+      "text": "and",
+      "canonicalStart": 194,
+      "canonicalEnd": 197,
+      "startMs": 17188,
+      "endMs": 17344
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 198,
+      "canonicalEnd": 205,
+      "startMs": 17359,
+      "endMs": 17672
+    },
+    {
+      "text": "the",
+      "canonicalStart": 206,
+      "canonicalEnd": 209,
+      "startMs": 17688,
+      "endMs": 17813
+    },
+    {
+      "text": "change",
+      "canonicalStart": 210,
+      "canonicalEnd": 216,
+      "startMs": 17828,
+      "endMs": 18344
+    },
+    {
+      "text": "follows",
+      "canonicalStart": 217,
+      "canonicalEnd": 224,
+      "startMs": 18359,
+      "endMs": 18906
+    },
+    {
+      "text": "the",
+      "canonicalStart": 225,
+      "canonicalEnd": 228,
+      "startMs": 18922,
+      "endMs": 19016
+    },
+    {
+      "text": "existing",
+      "canonicalStart": 229,
+      "canonicalEnd": 237,
+      "startMs": 19031,
+      "endMs": 19734
+    },
+    {
+      "text": "architecture.",
+      "canonicalStart": 238,
+      "canonicalEnd": 251,
+      "startMs": 19750,
+      "endMs": 20719
+    },
+    {
+      "text": "I",
+      "canonicalStart": 252,
+      "canonicalEnd": 253,
+      "startMs": 21797,
+      "endMs": 22000
+    },
+    {
+      "text": "try",
+      "canonicalStart": 254,
+      "canonicalEnd": 257,
+      "startMs": 22016,
+      "endMs": 22328
+    },
+    {
+      "text": "to",
+      "canonicalStart": 258,
+      "canonicalEnd": 260,
+      "startMs": 22344,
+      "endMs": 22469
+    },
+    {
+      "text": "keep",
+      "canonicalStart": 261,
+      "canonicalEnd": 265,
+      "startMs": 22484,
+      "endMs": 22797
+    },
+    {
+      "text": "comments",
+      "canonicalStart": 266,
+      "canonicalEnd": 274,
+      "startMs": 22813,
+      "endMs": 23359
+    },
+    {
+      "text": "specific",
+      "canonicalStart": 275,
+      "canonicalEnd": 283,
+      "startMs": 23375,
+      "endMs": 24109
+    },
+    {
+      "text": "and",
+      "canonicalStart": 284,
+      "canonicalEnd": 287,
+      "startMs": 24125,
+      "endMs": 24234
+    },
+    {
+      "text": "explain",
+      "canonicalStart": 288,
+      "canonicalEnd": 295,
+      "startMs": 24250,
+      "endMs": 24891
+    },
+    {
+      "text": "why",
+      "canonicalStart": 296,
+      "canonicalEnd": 299,
+      "startMs": 24906,
+      "endMs": 25125
+    },
+    {
+      "text": "a",
+      "canonicalStart": 300,
+      "canonicalEnd": 301,
+      "startMs": 25141,
+      "endMs": 25219
+    },
+    {
+      "text": "change",
+      "canonicalStart": 302,
+      "canonicalEnd": 308,
+      "startMs": 25234,
+      "endMs": 25750
+    },
+    {
+      "text": "is",
+      "canonicalStart": 309,
+      "canonicalEnd": 311,
+      "startMs": 25766,
+      "endMs": 25891
+    },
+    {
+      "text": "important.",
+      "canonicalStart": 312,
+      "canonicalEnd": 322,
+      "startMs": 25906,
+      "endMs": 26703
+    }
+  ]
+}

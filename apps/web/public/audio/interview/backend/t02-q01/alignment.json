@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "questionId": "t02-q01",
+  "speechText": "I start with clear resources and endpoints. I validate input data, return consistent HTTP status codes, and use a standard error response. For list APIs, I normally support pagination and filtering. For important write operations, I also think about authentication, authorization, idempotency, logging, and rate limiting.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 331
+    },
+    {
+      "text": "start",
+      "canonicalStart": 2,
+      "canonicalEnd": 7,
+      "startMs": 347,
+      "endMs": 769
+    },
+    {
+      "text": "with",
+      "canonicalStart": 8,
+      "canonicalEnd": 12,
+      "startMs": 784,
+      "endMs": 956
+    },
+    {
+      "text": "clear",
+      "canonicalStart": 13,
+      "canonicalEnd": 18,
+      "startMs": 972,
+      "endMs": 1363
+    },
+    {
+      "text": "resources",
+      "canonicalStart": 19,
+      "canonicalEnd": 28,
+      "startMs": 1378,
+      "endMs": 2206
+    },
+    {
+      "text": "and",
+      "canonicalStart": 29,
+      "canonicalEnd": 32,
+      "startMs": 2222,
+      "endMs": 2425
+    },
+    {
+      "text": "endpoints.",
+      "canonicalStart": 33,
+      "canonicalEnd": 43,
+      "startMs": 2441,
+      "endMs": 3363
+    },
+    {
+      "text": "I",
+      "canonicalStart": 44,
+      "canonicalEnd": 45,
+      "startMs": 4453,
+      "endMs": 4656
+    },
+    {
+      "text": "validate",
+      "canonicalStart": 46,
+      "canonicalEnd": 54,
+      "startMs": 4672,
+      "endMs": 5328
+    },
+    {
+      "text": "input",
+      "canonicalStart": 55,
+      "canonicalEnd": 60,
+      "startMs": 5344,
+      "endMs": 5859
+    },
+    {
+      "text": "data,",
+      "canonicalStart": 61,
+      "canonicalEnd": 66,
+      "startMs": 5875,
+      "endMs": 6234
+    },
+    {
+      "text": "return",
+      "canonicalStart": 67,
+      "canonicalEnd": 73,
+      "startMs": 6641,
+      "endMs": 7109
+    },
+    {
+      "text": "consistent",
+      "canonicalStart": 74,
+      "canonicalEnd": 84,
+      "startMs": 7125,
+      "endMs": 7891
+    },
+    {
+      "text": "HTTP",
+      "canonicalStart": 85,
+      "canonicalEnd": 89,
+      "startMs": 7906,
+      "endMs": 9047
+    },
+    {
+      "text": "status",
+      "canonicalStart": 90,
+      "canonicalEnd": 96,
+      "startMs": 9063,
+      "endMs": 9641
+    },
+    {
+      "text": "codes,",
+      "canonicalStart": 97,
+      "canonicalEnd": 103,
+      "startMs": 9656,
+      "endMs": 10234
+    },
+    {
+      "text": "and",
+      "canonicalStart": 104,
+      "canonicalEnd": 107,
+      "startMs": 10563,
+      "endMs": 10766
+    },
+    {
+      "text": "use",
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 10781,
+      "endMs": 11047
+    },
+    {
+      "text": "a",
+      "canonicalStart": 112,
+      "canonicalEnd": 113,
+      "startMs": 11063,
+      "endMs": 11141
+    },
+    {
+      "text": "standard",
+      "canonicalStart": 114,
+      "canonicalEnd": 122,
+      "startMs": 11156,
+      "endMs": 11719
+    },
+    {
+      "text": "error",
+      "canonicalStart": 123,
+      "canonicalEnd": 128,
+      "startMs": 11734,
+      "endMs": 12063
+    },
+    {
+      "text": "response.",
+      "canonicalStart": 129,
+      "canonicalEnd": 138,
+      "startMs": 12078,
+      "endMs": 12953
+    },
+    {
+      "text": "For",
+      "canonicalStart": 139,
+      "canonicalEnd": 142,
+      "startMs": 14031,
+      "endMs": 14297
+    },
+    {
+      "text": "list",
+      "canonicalStart": 143,
+      "canonicalEnd": 147,
+      "startMs": 14313,
+      "endMs": 14688
+    },
+    {
+      "text": "APIs,",
+      "canonicalStart": 148,
+      "canonicalEnd": 153,
+      "startMs": 14703,
+      "endMs": 15594
+    },
+    {
+      "text": "I",
+      "canonicalStart": 154,
+      "canonicalEnd": 155,
+      "startMs": 15891,
+      "endMs": 16000
+    },
+    {
+      "text": "normally",
+      "canonicalStart": 156,
+      "canonicalEnd": 164,
+      "startMs": 16016,
+      "endMs": 16609
+    },
+    {
+      "text": "support",
+      "canonicalStart": 165,
+      "canonicalEnd": 172,
+      "startMs": 16625,
+      "endMs": 17203
+    },
+    {
+      "text": "pagination",
+      "canonicalStart": 173,
+      "canonicalEnd": 183,
+      "startMs": 17219,
+      "endMs": 18125
+    },
+    {
+      "text": "and",
+      "canonicalStart": 184,
+      "canonicalEnd": 187,
+      "startMs": 18141,
+      "endMs": 18281
+    },
+    {
+      "text": "filtering.",
+      "canonicalStart": 188,
+      "canonicalEnd": 198,
+      "startMs": 18297,
+      "endMs": 19078
+    },
+    {
+      "text": "For",
+      "canonicalStart": 199,
+      "canonicalEnd": 202,
+      "startMs": 20156,
+      "endMs": 20453
+    },
+    {
+      "text": "important",
+      "canonicalStart": 203,
+      "canonicalEnd": 212,
+      "startMs": 20469,
+      "endMs": 21047
+    },
+    {
+      "text": "write",
+      "canonicalStart": 213,
+      "canonicalEnd": 218,
+      "startMs": 21063,
+      "endMs": 21359
+    },
+    {
+      "text": "operations,",
+      "canonicalStart": 219,
+      "canonicalEnd": 230,
+      "startMs": 21375,
+      "endMs": 22391
+    },
+    {
+      "text": "I",
+      "canonicalStart": 231,
+      "canonicalEnd": 232,
+      "startMs": 22688,
+      "endMs": 22859
+    },
+    {
+      "text": "also",
+      "canonicalStart": 233,
+      "canonicalEnd": 237,
+      "startMs": 22875,
+      "endMs": 23297
+    },
+    {
+      "text": "think",
+      "canonicalStart": 238,
+      "canonicalEnd": 243,
+      "startMs": 23313,
+      "endMs": 23609
+    },
+    {
+      "text": "about",
+      "canonicalStart": 244,
+      "canonicalEnd": 249,
+      "startMs": 23625,
+      "endMs": 23938
+    },
+    {
+      "text": "authentication,",
+      "canonicalStart": 250,
+      "canonicalEnd": 265,
+      "startMs": 23953,
+      "endMs": 25063
+    },
+    {
+      "text": "authorization,",
+      "canonicalStart": 266,
+      "canonicalEnd": 280,
+      "startMs": 25313,
+      "endMs": 26375
+    },
+    {
+      "text": "idempotency,",
+      "canonicalStart": 281,
+      "canonicalEnd": 293,
+      "startMs": 26641,
+      "endMs": 27703
+    },
+    {
+      "text": "logging,",
+      "canonicalStart": 294,
+      "canonicalEnd": 302,
+      "startMs": 28000,
+      "endMs": 28563
+    },
+    {
+      "text": "and",
+      "canonicalStart": 303,
+      "canonicalEnd": 306,
+      "startMs": 28797,
+      "endMs": 29000
+    },
+    {
+      "text": "rate",
+      "canonicalStart": 307,
+      "canonicalEnd": 311,
+      "startMs": 29016,
+      "endMs": 29313
+    },
+    {
+      "text": "limiting.",
+      "canonicalStart": 312,
+      "canonicalEnd": 321,
+      "startMs": 29328,
+      "endMs": 29891
+    }
+  ]
+}

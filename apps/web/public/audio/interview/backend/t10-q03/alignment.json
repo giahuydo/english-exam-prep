@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "questionId": "t10-q03",
+  "speechText": "I start with stateless API instances behind a load balancer. I use database indexes and connection pooling, and cache frequently read data when it is safe. Slow background work can go to a queue. I also add rate limiting, timeouts, monitoring, and horizontal scaling. The exact design depends on where the real bottleneck is.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 331
+    },
+    {
+      "text": "start",
+      "canonicalStart": 2,
+      "canonicalEnd": 7,
+      "startMs": 347,
+      "endMs": 753
+    },
+    {
+      "text": "with",
+      "canonicalStart": 8,
+      "canonicalEnd": 12,
+      "startMs": 769,
+      "endMs": 925
+    },
+    {
+      "text": "stateless",
+      "canonicalStart": 13,
+      "canonicalEnd": 22,
+      "startMs": 941,
+      "endMs": 1581
+    },
+    {
+      "text": "API",
+      "canonicalStart": 23,
+      "canonicalEnd": 26,
+      "startMs": 1597,
+      "endMs": 2300
+    },
+    {
+      "text": "instances",
+      "canonicalStart": 27,
+      "canonicalEnd": 36,
+      "startMs": 2316,
+      "endMs": 3113
+    },
+    {
+      "text": "behind",
+      "canonicalStart": 37,
+      "canonicalEnd": 43,
+      "startMs": 3128,
+      "endMs": 3550
+    },
+    {
+      "text": "a",
+      "canonicalStart": 44,
+      "canonicalEnd": 45,
+      "startMs": 3566,
+      "endMs": 3628
+    },
+    {
+      "text": "load",
+      "canonicalStart": 46,
+      "canonicalEnd": 50,
+      "startMs": 3644,
+      "endMs": 4019
+    },
+    {
+      "text": "balancer.",
+      "canonicalStart": 51,
+      "canonicalEnd": 60,
+      "startMs": 4034,
+      "endMs": 4847
+    },
+    {
+      "text": "I",
+      "canonicalStart": 61,
+      "canonicalEnd": 62,
+      "startMs": 5938,
+      "endMs": 6109
+    },
+    {
+      "text": "use",
+      "canonicalStart": 63,
+      "canonicalEnd": 66,
+      "startMs": 6125,
+      "endMs": 6484
+    },
+    {
+      "text": "database",
+      "canonicalStart": 67,
+      "canonicalEnd": 75,
+      "startMs": 6500,
+      "endMs": 7125
+    },
+    {
+      "text": "indexes",
+      "canonicalStart": 76,
+      "canonicalEnd": 83,
+      "startMs": 7141,
+      "endMs": 7906
+    },
+    {
+      "text": "and",
+      "canonicalStart": 84,
+      "canonicalEnd": 87,
+      "startMs": 7922,
+      "endMs": 8078
+    },
+    {
+      "text": "connection",
+      "canonicalStart": 88,
+      "canonicalEnd": 98,
+      "startMs": 8094,
+      "endMs": 8672
+    },
+    {
+      "text": "pooling,",
+      "canonicalStart": 99,
+      "canonicalEnd": 107,
+      "startMs": 8688,
+      "endMs": 9203
+    },
+    {
+      "text": "and",
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 9531,
+      "endMs": 9719
+    },
+    {
+      "text": "cache",
+      "canonicalStart": 112,
+      "canonicalEnd": 117,
+      "startMs": 9734,
+      "endMs": 10156
+    },
+    {
+      "text": "frequently",
+      "canonicalStart": 118,
+      "canonicalEnd": 128,
+      "startMs": 10172,
+      "endMs": 10750
+    },
+    {
+      "text": "read",
+      "canonicalStart": 129,
+      "canonicalEnd": 133,
+      "startMs": 10766,
+      "endMs": 11094
+    },
+    {
+      "text": "data",
+      "canonicalStart": 134,
+      "canonicalEnd": 138,
+      "startMs": 11109,
+      "endMs": 11531
+    },
+    {
+      "text": "when",
+      "canonicalStart": 139,
+      "canonicalEnd": 143,
+      "startMs": 11547,
+      "endMs": 11750
+    },
+    {
+      "text": "it",
+      "canonicalStart": 144,
+      "canonicalEnd": 146,
+      "startMs": 11766,
+      "endMs": 11875
+    },
+    {
+      "text": "is",
+      "canonicalStart": 147,
+      "canonicalEnd": 149,
+      "startMs": 11891,
+      "endMs": 12031
+    },
+    {
+      "text": "safe.",
+      "canonicalStart": 150,
+      "canonicalEnd": 155,
+      "startMs": 12047,
+      "endMs": 12703
+    },
+    {
+      "text": "Slow",
+      "canonicalStart": 156,
+      "canonicalEnd": 160,
+      "startMs": 13781,
+      "endMs": 14297
+    },
+    {
+      "text": "background",
+      "canonicalStart": 161,
+      "canonicalEnd": 171,
+      "startMs": 14313,
+      "endMs": 14984
+    },
+    {
+      "text": "work",
+      "canonicalStart": 172,
+      "canonicalEnd": 176,
+      "startMs": 15000,
+      "endMs": 15328
+    },
+    {
+      "text": "can",
+      "canonicalStart": 177,
+      "canonicalEnd": 180,
+      "startMs": 15344,
+      "endMs": 15531
+    },
+    {
+      "text": "go",
+      "canonicalStart": 181,
+      "canonicalEnd": 183,
+      "startMs": 15547,
+      "endMs": 15750
+    },
+    {
+      "text": "to",
+      "canonicalStart": 184,
+      "canonicalEnd": 186,
+      "startMs": 15766,
+      "endMs": 15922
+    },
+    {
+      "text": "a",
+      "canonicalStart": 187,
+      "canonicalEnd": 188,
+      "startMs": 15938,
+      "endMs": 16047
+    },
+    {
+      "text": "queue.",
+      "canonicalStart": 189,
+      "canonicalEnd": 195,
+      "startMs": 16063,
+      "endMs": 16609
+    },
+    {
+      "text": "I",
+      "canonicalStart": 196,
+      "canonicalEnd": 197,
+      "startMs": 17703,
+      "endMs": 17938
+    },
+    {
+      "text": "also",
+      "canonicalStart": 198,
+      "canonicalEnd": 202,
+      "startMs": 17953,
+      "endMs": 18406
+    },
+    {
+      "text": "add",
+      "canonicalStart": 203,
+      "canonicalEnd": 206,
+      "startMs": 18422,
+      "endMs": 18688
+    },
+    {
+      "text": "rate",
+      "canonicalStart": 207,
+      "canonicalEnd": 211,
+      "startMs": 18703,
+      "endMs": 19031
+    },
+    {
+      "text": "limiting,",
+      "canonicalStart": 212,
+      "canonicalEnd": 221,
+      "startMs": 19047,
+      "endMs": 19594
+    },
+    {
+      "text": "timeouts,",
+      "canonicalStart": 222,
+      "canonicalEnd": 231,
+      "startMs": 19891,
+      "endMs": 20672
+    },
+    {
+      "text": "monitoring,",
+      "canonicalStart": 232,
+      "canonicalEnd": 243,
+      "startMs": 20828,
+      "endMs": 21594
+    },
+    {
+      "text": "and",
+      "canonicalStart": 244,
+      "canonicalEnd": 247,
+      "startMs": 21891,
+      "endMs": 22047
+    },
+    {
+      "text": "horizontal",
+      "canonicalStart": 248,
+      "canonicalEnd": 258,
+      "startMs": 22063,
+      "endMs": 22875
+    },
+    {
+      "text": "scaling.",
+      "canonicalStart": 259,
+      "canonicalEnd": 267,
+      "startMs": 22891,
+      "endMs": 23594
+    },
+    {
+      "text": "The",
+      "canonicalStart": 268,
+      "canonicalEnd": 271,
+      "startMs": 24672,
+      "endMs": 24813
+    },
+    {
+      "text": "exact",
+      "canonicalStart": 272,
+      "canonicalEnd": 277,
+      "startMs": 24828,
+      "endMs": 25438
+    },
+    {
+      "text": "design",
+      "canonicalStart": 278,
+      "canonicalEnd": 284,
+      "startMs": 25453,
+      "endMs": 25984
+    },
+    {
+      "text": "depends",
+      "canonicalStart": 285,
+      "canonicalEnd": 292,
+      "startMs": 26000,
+      "endMs": 26516
+    },
+    {
+      "text": "on",
+      "canonicalStart": 293,
+      "canonicalEnd": 295,
+      "startMs": 26531,
+      "endMs": 26703
+    },
+    {
+      "text": "where",
+      "canonicalStart": 296,
+      "canonicalEnd": 301,
+      "startMs": 26719,
+      "endMs": 26859
+    },
+    {
+      "text": "the",
+      "canonicalStart": 302,
+      "canonicalEnd": 305,
+      "startMs": 26875,
+      "endMs": 27000
+    },
+    {
+      "text": "real",
+      "canonicalStart": 306,
+      "canonicalEnd": 310,
+      "startMs": 27016,
+      "endMs": 27344
+    },
+    {
+      "text": "bottleneck",
+      "canonicalStart": 311,
+      "canonicalEnd": 321,
+      "startMs": 27359,
+      "endMs": 28000
+    },
+    {
+      "text": "is.",
+      "canonicalStart": 322,
+      "canonicalEnd": 325,
+      "startMs": 28016,
+      "endMs": 28609
+    }
+  ]
+}

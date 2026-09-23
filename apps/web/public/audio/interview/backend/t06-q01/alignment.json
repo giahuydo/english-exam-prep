@@ -1,0 +1,672 @@
+{
+  "version": 1,
+  "questionId": "t06-q01",
+  "speechText": "If the response time is slow but CPU usage is still low, I would first think about an I O problem, not a CPU problem. The system may be waiting for a database query, an external API, Redis, or a database connection. First, I check logs and metrics to find which API is slow. Then I check the database, connection pool, external services, event-loop lag, memory, and pending requests. If traffic is too high, we can scale more instances, but I would find the bottleneck first because adding servers may not solve the real problem.",
+  "words": [
+    {
+      "text": "If",
+      "canonicalStart": 0,
+      "canonicalEnd": 2,
+      "startMs": 113,
+      "endMs": 347
+    },
+    {
+      "text": "the",
+      "canonicalStart": 3,
+      "canonicalEnd": 6,
+      "startMs": 363,
+      "endMs": 472
+    },
+    {
+      "text": "response",
+      "canonicalStart": 7,
+      "canonicalEnd": 15,
+      "startMs": 488,
+      "endMs": 1113
+    },
+    {
+      "text": "time",
+      "canonicalStart": 16,
+      "canonicalEnd": 20,
+      "startMs": 1128,
+      "endMs": 1488
+    },
+    {
+      "text": "is",
+      "canonicalStart": 21,
+      "canonicalEnd": 23,
+      "startMs": 1503,
+      "endMs": 1644
+    },
+    {
+      "text": "slow",
+      "canonicalStart": 24,
+      "canonicalEnd": 28,
+      "startMs": 1659,
+      "endMs": 2175
+    },
+    {
+      "text": "but",
+      "canonicalStart": 29,
+      "canonicalEnd": 32,
+      "startMs": 2191,
+      "endMs": 2409
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 33,
+      "canonicalEnd": 36,
+      "startMs": 2425,
+      "endMs": 3128
+    },
+    {
+      "text": "usage",
+      "canonicalStart": 37,
+      "canonicalEnd": 42,
+      "startMs": 3144,
+      "endMs": 3675
+    },
+    {
+      "text": "is",
+      "canonicalStart": 43,
+      "canonicalEnd": 45,
+      "startMs": 3691,
+      "endMs": 3831
+    },
+    {
+      "text": "still",
+      "canonicalStart": 46,
+      "canonicalEnd": 51,
+      "startMs": 3847,
+      "endMs": 4238
+    },
+    {
+      "text": "low,",
+      "canonicalStart": 52,
+      "canonicalEnd": 56,
+      "startMs": 4253,
+      "endMs": 4659
+    },
+    {
+      "text": "I",
+      "canonicalStart": 57,
+      "canonicalEnd": 58,
+      "startMs": 4925,
+      "endMs": 5066
+    },
+    {
+      "text": "would",
+      "canonicalStart": 59,
+      "canonicalEnd": 64,
+      "startMs": 5081,
+      "endMs": 5269
+    },
+    {
+      "text": "first",
+      "canonicalStart": 65,
+      "canonicalEnd": 70,
+      "startMs": 5284,
+      "endMs": 5675
+    },
+    {
+      "text": "think",
+      "canonicalStart": 71,
+      "canonicalEnd": 76,
+      "startMs": 5691,
+      "endMs": 5909
+    },
+    {
+      "text": "about",
+      "canonicalStart": 77,
+      "canonicalEnd": 82,
+      "startMs": 5925,
+      "endMs": 6222
+    },
+    {
+      "text": "an",
+      "canonicalStart": 83,
+      "canonicalEnd": 85,
+      "startMs": 6238,
+      "endMs": 6425
+    },
+    {
+      "text": "I",
+      "canonicalStart": 86,
+      "canonicalEnd": 87,
+      "startMs": 6441,
+      "endMs": 6659
+    },
+    {
+      "text": "O",
+      "canonicalStart": 88,
+      "canonicalEnd": 89,
+      "startMs": 6675,
+      "endMs": 6784
+    },
+    {
+      "text": "problem,",
+      "canonicalStart": 90,
+      "canonicalEnd": 98,
+      "startMs": 6800,
+      "endMs": 7363
+    },
+    {
+      "text": "not",
+      "canonicalStart": 99,
+      "canonicalEnd": 102,
+      "startMs": 7691,
+      "endMs": 7956
+    },
+    {
+      "text": "a",
+      "canonicalStart": 103,
+      "canonicalEnd": 104,
+      "startMs": 7972,
+      "endMs": 8034
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 105,
+      "canonicalEnd": 108,
+      "startMs": 8050,
+      "endMs": 8722
+    },
+    {
+      "text": "problem.",
+      "canonicalStart": 109,
+      "canonicalEnd": 117,
+      "startMs": 8738,
+      "endMs": 9409
+    },
+    {
+      "text": "The",
+      "canonicalStart": 118,
+      "canonicalEnd": 121,
+      "startMs": 10500,
+      "endMs": 10688
+    },
+    {
+      "text": "system",
+      "canonicalStart": 122,
+      "canonicalEnd": 128,
+      "startMs": 10703,
+      "endMs": 11234
+    },
+    {
+      "text": "may",
+      "canonicalStart": 129,
+      "canonicalEnd": 132,
+      "startMs": 11250,
+      "endMs": 11453
+    },
+    {
+      "text": "be",
+      "canonicalStart": 133,
+      "canonicalEnd": 135,
+      "startMs": 11469,
+      "endMs": 11625
+    },
+    {
+      "text": "waiting",
+      "canonicalStart": 136,
+      "canonicalEnd": 143,
+      "startMs": 11641,
+      "endMs": 12109
+    },
+    {
+      "text": "for",
+      "canonicalStart": 144,
+      "canonicalEnd": 147,
+      "startMs": 12125,
+      "endMs": 12359
+    },
+    {
+      "text": "a",
+      "canonicalStart": 148,
+      "canonicalEnd": 149,
+      "startMs": 12375,
+      "endMs": 12469
+    },
+    {
+      "text": "database",
+      "canonicalStart": 150,
+      "canonicalEnd": 158,
+      "startMs": 12484,
+      "endMs": 13094
+    },
+    {
+      "text": "query,",
+      "canonicalStart": 159,
+      "canonicalEnd": 165,
+      "startMs": 13109,
+      "endMs": 13609
+    },
+    {
+      "text": "an",
+      "canonicalStart": 166,
+      "canonicalEnd": 168,
+      "startMs": 13891,
+      "endMs": 13969
+    },
+    {
+      "text": "external",
+      "canonicalStart": 169,
+      "canonicalEnd": 177,
+      "startMs": 13984,
+      "endMs": 14609
+    },
+    {
+      "text": "API,",
+      "canonicalStart": 178,
+      "canonicalEnd": 182,
+      "startMs": 14625,
+      "endMs": 15406
+    },
+    {
+      "text": "Redis,",
+      "canonicalStart": 183,
+      "canonicalEnd": 189,
+      "startMs": 15781,
+      "endMs": 16313
+    },
+    {
+      "text": "or",
+      "canonicalStart": 190,
+      "canonicalEnd": 192,
+      "startMs": 16594,
+      "endMs": 16797
+    },
+    {
+      "text": "a",
+      "canonicalStart": 193,
+      "canonicalEnd": 194,
+      "startMs": 16813,
+      "endMs": 16906
+    },
+    {
+      "text": "database",
+      "canonicalStart": 195,
+      "canonicalEnd": 203,
+      "startMs": 16922,
+      "endMs": 17531
+    },
+    {
+      "text": "connection.",
+      "canonicalStart": 204,
+      "canonicalEnd": 215,
+      "startMs": 17547,
+      "endMs": 18328
+    },
+    {
+      "text": "First,",
+      "canonicalStart": 216,
+      "canonicalEnd": 222,
+      "startMs": 19406,
+      "endMs": 20063
+    },
+    {
+      "text": "I",
+      "canonicalStart": 223,
+      "canonicalEnd": 224,
+      "startMs": 20328,
+      "endMs": 20453
+    },
+    {
+      "text": "check",
+      "canonicalStart": 225,
+      "canonicalEnd": 230,
+      "startMs": 20469,
+      "endMs": 20828
+    },
+    {
+      "text": "logs",
+      "canonicalStart": 231,
+      "canonicalEnd": 235,
+      "startMs": 20844,
+      "endMs": 21359
+    },
+    {
+      "text": "and",
+      "canonicalStart": 236,
+      "canonicalEnd": 239,
+      "startMs": 21375,
+      "endMs": 21500
+    },
+    {
+      "text": "metrics",
+      "canonicalStart": 240,
+      "canonicalEnd": 247,
+      "startMs": 21516,
+      "endMs": 22078
+    },
+    {
+      "text": "to",
+      "canonicalStart": 248,
+      "canonicalEnd": 250,
+      "startMs": 22094,
+      "endMs": 22219
+    },
+    {
+      "text": "find",
+      "canonicalStart": 251,
+      "canonicalEnd": 255,
+      "startMs": 22234,
+      "endMs": 22641
+    },
+    {
+      "text": "which",
+      "canonicalStart": 256,
+      "canonicalEnd": 261,
+      "startMs": 22656,
+      "endMs": 22906
+    },
+    {
+      "text": "API",
+      "canonicalStart": 262,
+      "canonicalEnd": 265,
+      "startMs": 22922,
+      "endMs": 23656
+    },
+    {
+      "text": "is",
+      "canonicalStart": 266,
+      "canonicalEnd": 268,
+      "startMs": 23672,
+      "endMs": 23875
+    },
+    {
+      "text": "slow.",
+      "canonicalStart": 269,
+      "canonicalEnd": 274,
+      "startMs": 23891,
+      "endMs": 24484
+    },
+    {
+      "text": "Then",
+      "canonicalStart": 275,
+      "canonicalEnd": 279,
+      "startMs": 25563,
+      "endMs": 25891
+    },
+    {
+      "text": "I",
+      "canonicalStart": 280,
+      "canonicalEnd": 281,
+      "startMs": 25906,
+      "endMs": 26047
+    },
+    {
+      "text": "check",
+      "canonicalStart": 282,
+      "canonicalEnd": 287,
+      "startMs": 26063,
+      "endMs": 26422
+    },
+    {
+      "text": "the",
+      "canonicalStart": 288,
+      "canonicalEnd": 291,
+      "startMs": 26438,
+      "endMs": 26578
+    },
+    {
+      "text": "database,",
+      "canonicalStart": 292,
+      "canonicalEnd": 301,
+      "startMs": 26594,
+      "endMs": 27422
+    },
+    {
+      "text": "connection",
+      "canonicalStart": 302,
+      "canonicalEnd": 312,
+      "startMs": 27656,
+      "endMs": 28266
+    },
+    {
+      "text": "pool,",
+      "canonicalStart": 313,
+      "canonicalEnd": 318,
+      "startMs": 28281,
+      "endMs": 28719
+    },
+    {
+      "text": "external",
+      "canonicalStart": 319,
+      "canonicalEnd": 327,
+      "startMs": 29047,
+      "endMs": 29609
+    },
+    {
+      "text": "services,",
+      "canonicalStart": 328,
+      "canonicalEnd": 337,
+      "startMs": 29625,
+      "endMs": 30453
+    },
+    {
+      "text": "event-loop",
+      "canonicalStart": 338,
+      "canonicalEnd": 348,
+      "startMs": 30781,
+      "endMs": 31438
+    },
+    {
+      "text": "lag,",
+      "canonicalStart": 349,
+      "canonicalEnd": 353,
+      "startMs": 31453,
+      "endMs": 31938
+    },
+    {
+      "text": "memory,",
+      "canonicalStart": 354,
+      "canonicalEnd": 361,
+      "startMs": 32297,
+      "endMs": 32906
+    },
+    {
+      "text": "and",
+      "canonicalStart": 362,
+      "canonicalEnd": 365,
+      "startMs": 33188,
+      "endMs": 33391
+    },
+    {
+      "text": "pending",
+      "canonicalStart": 366,
+      "canonicalEnd": 373,
+      "startMs": 33406,
+      "endMs": 33891
+    },
+    {
+      "text": "requests.",
+      "canonicalStart": 374,
+      "canonicalEnd": 383,
+      "startMs": 33906,
+      "endMs": 34844
+    },
+    {
+      "text": "If",
+      "canonicalStart": 384,
+      "canonicalEnd": 386,
+      "startMs": 35922,
+      "endMs": 36141
+    },
+    {
+      "text": "traffic",
+      "canonicalStart": 387,
+      "canonicalEnd": 394,
+      "startMs": 36156,
+      "endMs": 36734
+    },
+    {
+      "text": "is",
+      "canonicalStart": 395,
+      "canonicalEnd": 397,
+      "startMs": 36750,
+      "endMs": 36938
+    },
+    {
+      "text": "too",
+      "canonicalStart": 398,
+      "canonicalEnd": 401,
+      "startMs": 36953,
+      "endMs": 37250
+    },
+    {
+      "text": "high,",
+      "canonicalStart": 402,
+      "canonicalEnd": 407,
+      "startMs": 37266,
+      "endMs": 37672
+    },
+    {
+      "text": "we",
+      "canonicalStart": 408,
+      "canonicalEnd": 410,
+      "startMs": 38031,
+      "endMs": 38172
+    },
+    {
+      "text": "can",
+      "canonicalStart": 411,
+      "canonicalEnd": 414,
+      "startMs": 38188,
+      "endMs": 38391
+    },
+    {
+      "text": "scale",
+      "canonicalStart": 415,
+      "canonicalEnd": 420,
+      "startMs": 38406,
+      "endMs": 38828
+    },
+    {
+      "text": "more",
+      "canonicalStart": 421,
+      "canonicalEnd": 425,
+      "startMs": 38844,
+      "endMs": 39078
+    },
+    {
+      "text": "instances,",
+      "canonicalStart": 426,
+      "canonicalEnd": 436,
+      "startMs": 39094,
+      "endMs": 39984
+    },
+    {
+      "text": "but",
+      "canonicalStart": 437,
+      "canonicalEnd": 440,
+      "startMs": 40313,
+      "endMs": 40453
+    },
+    {
+      "text": "I",
+      "canonicalStart": 441,
+      "canonicalEnd": 442,
+      "startMs": 40469,
+      "endMs": 40547
+    },
+    {
+      "text": "would",
+      "canonicalStart": 443,
+      "canonicalEnd": 448,
+      "startMs": 40563,
+      "endMs": 40750
+    },
+    {
+      "text": "find",
+      "canonicalStart": 449,
+      "canonicalEnd": 453,
+      "startMs": 40766,
+      "endMs": 41094
+    },
+    {
+      "text": "the",
+      "canonicalStart": 454,
+      "canonicalEnd": 457,
+      "startMs": 41109,
+      "endMs": 41188
+    },
+    {
+      "text": "bottleneck",
+      "canonicalStart": 458,
+      "canonicalEnd": 468,
+      "startMs": 41203,
+      "endMs": 41797
+    },
+    {
+      "text": "first",
+      "canonicalStart": 469,
+      "canonicalEnd": 474,
+      "startMs": 41813,
+      "endMs": 42234
+    },
+    {
+      "text": "because",
+      "canonicalStart": 475,
+      "canonicalEnd": 482,
+      "startMs": 42250,
+      "endMs": 42656
+    },
+    {
+      "text": "adding",
+      "canonicalStart": 483,
+      "canonicalEnd": 489,
+      "startMs": 42672,
+      "endMs": 43016
+    },
+    {
+      "text": "servers",
+      "canonicalStart": 490,
+      "canonicalEnd": 497,
+      "startMs": 43031,
+      "endMs": 43609
+    },
+    {
+      "text": "may",
+      "canonicalStart": 498,
+      "canonicalEnd": 501,
+      "startMs": 43625,
+      "endMs": 43813
+    },
+    {
+      "text": "not",
+      "canonicalStart": 502,
+      "canonicalEnd": 505,
+      "startMs": 43828,
+      "endMs": 44141
+    },
+    {
+      "text": "solve",
+      "canonicalStart": 506,
+      "canonicalEnd": 511,
+      "startMs": 44156,
+      "endMs": 44547
+    },
+    {
+      "text": "the",
+      "canonicalStart": 512,
+      "canonicalEnd": 515,
+      "startMs": 44563,
+      "endMs": 44672
+    },
+    {
+      "text": "real",
+      "canonicalStart": 516,
+      "canonicalEnd": 520,
+      "startMs": 44688,
+      "endMs": 44969
+    },
+    {
+      "text": "problem.",
+      "canonicalStart": 521,
+      "canonicalEnd": 529,
+      "startMs": 44984,
+      "endMs": 45641
+    }
+  ]
+}

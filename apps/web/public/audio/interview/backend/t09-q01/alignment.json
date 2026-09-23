@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "questionId": "t09-q01",
+  "speechText": "Authentication checks who the user is. Authorization checks what that user is allowed to do. For example, a JWT can help authenticate a user, but the backend still needs to check roles or permissions before performing an action.",
+  "words": [
+    {
+      "text": "Authentication",
+      "canonicalStart": 0,
+      "canonicalEnd": 14,
+      "startMs": 113,
+      "endMs": 1191
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 15,
+      "canonicalEnd": 21,
+      "startMs": 1206,
+      "endMs": 1628
+    },
+    {
+      "text": "who",
+      "canonicalStart": 22,
+      "canonicalEnd": 25,
+      "startMs": 1644,
+      "endMs": 1769
+    },
+    {
+      "text": "the",
+      "canonicalStart": 26,
+      "canonicalEnd": 29,
+      "startMs": 1784,
+      "endMs": 1863
+    },
+    {
+      "text": "user",
+      "canonicalStart": 30,
+      "canonicalEnd": 34,
+      "startMs": 1878,
+      "endMs": 2394
+    },
+    {
+      "text": "is.",
+      "canonicalStart": 35,
+      "canonicalEnd": 38,
+      "startMs": 2409,
+      "endMs": 2956
+    },
+    {
+      "text": "Authorization",
+      "canonicalStart": 39,
+      "canonicalEnd": 52,
+      "startMs": 4047,
+      "endMs": 5125
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 53,
+      "canonicalEnd": 59,
+      "startMs": 5141,
+      "endMs": 5563
+    },
+    {
+      "text": "what",
+      "canonicalStart": 60,
+      "canonicalEnd": 64,
+      "startMs": 5578,
+      "endMs": 5719
+    },
+    {
+      "text": "that",
+      "canonicalStart": 65,
+      "canonicalEnd": 69,
+      "startMs": 5734,
+      "endMs": 5906
+    },
+    {
+      "text": "user",
+      "canonicalStart": 70,
+      "canonicalEnd": 74,
+      "startMs": 5922,
+      "endMs": 6391
+    },
+    {
+      "text": "is",
+      "canonicalStart": 75,
+      "canonicalEnd": 77,
+      "startMs": 6406,
+      "endMs": 6547
+    },
+    {
+      "text": "allowed",
+      "canonicalStart": 78,
+      "canonicalEnd": 85,
+      "startMs": 6563,
+      "endMs": 7031
+    },
+    {
+      "text": "to",
+      "canonicalStart": 86,
+      "canonicalEnd": 88,
+      "startMs": 7047,
+      "endMs": 7156
+    },
+    {
+      "text": "do.",
+      "canonicalStart": 89,
+      "canonicalEnd": 92,
+      "startMs": 7172,
+      "endMs": 7641
+    },
+    {
+      "text": "For",
+      "canonicalStart": 93,
+      "canonicalEnd": 96,
+      "startMs": 8719,
+      "endMs": 9000
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 97,
+      "canonicalEnd": 105,
+      "startMs": 9016,
+      "endMs": 9734
+    },
+    {
+      "text": "a",
+      "canonicalStart": 106,
+      "canonicalEnd": 107,
+      "startMs": 10016,
+      "endMs": 10109
+    },
+    {
+      "text": "JWT",
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 10125,
+      "endMs": 11281
+    },
+    {
+      "text": "can",
+      "canonicalStart": 112,
+      "canonicalEnd": 115,
+      "startMs": 11297,
+      "endMs": 11469
+    },
+    {
+      "text": "help",
+      "canonicalStart": 116,
+      "canonicalEnd": 120,
+      "startMs": 11484,
+      "endMs": 11766
+    },
+    {
+      "text": "authenticate",
+      "canonicalStart": 121,
+      "canonicalEnd": 133,
+      "startMs": 11781,
+      "endMs": 12547
+    },
+    {
+      "text": "a",
+      "canonicalStart": 134,
+      "canonicalEnd": 135,
+      "startMs": 12563,
+      "endMs": 12594
+    },
+    {
+      "text": "user,",
+      "canonicalStart": 136,
+      "canonicalEnd": 141,
+      "startMs": 12609,
+      "endMs": 13156
+    },
+    {
+      "text": "but",
+      "canonicalStart": 142,
+      "canonicalEnd": 145,
+      "startMs": 13484,
+      "endMs": 13641
+    },
+    {
+      "text": "the",
+      "canonicalStart": 146,
+      "canonicalEnd": 149,
+      "startMs": 13656,
+      "endMs": 13766
+    },
+    {
+      "text": "backend",
+      "canonicalStart": 150,
+      "canonicalEnd": 157,
+      "startMs": 13781,
+      "endMs": 14344
+    },
+    {
+      "text": "still",
+      "canonicalStart": 158,
+      "canonicalEnd": 163,
+      "startMs": 14359,
+      "endMs": 14719
+    },
+    {
+      "text": "needs",
+      "canonicalStart": 164,
+      "canonicalEnd": 169,
+      "startMs": 14734,
+      "endMs": 15016
+    },
+    {
+      "text": "to",
+      "canonicalStart": 170,
+      "canonicalEnd": 172,
+      "startMs": 15031,
+      "endMs": 15141
+    },
+    {
+      "text": "check",
+      "canonicalStart": 173,
+      "canonicalEnd": 178,
+      "startMs": 15156,
+      "endMs": 15547
+    },
+    {
+      "text": "roles",
+      "canonicalStart": 179,
+      "canonicalEnd": 184,
+      "startMs": 15563,
+      "endMs": 16016
+    },
+    {
+      "text": "or",
+      "canonicalStart": 185,
+      "canonicalEnd": 187,
+      "startMs": 16031,
+      "endMs": 16172
+    },
+    {
+      "text": "permissions",
+      "canonicalStart": 188,
+      "canonicalEnd": 199,
+      "startMs": 16188,
+      "endMs": 16844
+    },
+    {
+      "text": "before",
+      "canonicalStart": 200,
+      "canonicalEnd": 206,
+      "startMs": 16859,
+      "endMs": 17281
+    },
+    {
+      "text": "performing",
+      "canonicalStart": 207,
+      "canonicalEnd": 217,
+      "startMs": 17297,
+      "endMs": 17906
+    },
+    {
+      "text": "an",
+      "canonicalStart": 218,
+      "canonicalEnd": 220,
+      "startMs": 17922,
+      "endMs": 18016
+    },
+    {
+      "text": "action.",
+      "canonicalStart": 221,
+      "canonicalEnd": 228,
+      "startMs": 18031,
+      "endMs": 18656
+    }
+  ]
+}

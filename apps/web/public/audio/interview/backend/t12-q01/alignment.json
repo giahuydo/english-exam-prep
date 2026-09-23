@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "questionId": "t12-q01",
+  "speechText": "A unit test checks a small piece of logic in isolation. An integration test checks how multiple parts work together, for example the service and database. An end-to-end test checks a complete flow from the API request to the final result. I use different test levels because they catch different types of problems.",
+  "words": [
+    {
+      "text": "A",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 238
+    },
+    {
+      "text": "unit",
+      "canonicalStart": 2,
+      "canonicalEnd": 6,
+      "startMs": 253,
+      "endMs": 722
+    },
+    {
+      "text": "test",
+      "canonicalStart": 7,
+      "canonicalEnd": 11,
+      "startMs": 738,
+      "endMs": 1113
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 12,
+      "canonicalEnd": 18,
+      "startMs": 1128,
+      "endMs": 1488
+    },
+    {
+      "text": "a",
+      "canonicalStart": 19,
+      "canonicalEnd": 20,
+      "startMs": 1503,
+      "endMs": 1597
+    },
+    {
+      "text": "small",
+      "canonicalStart": 21,
+      "canonicalEnd": 26,
+      "startMs": 1613,
+      "endMs": 2066
+    },
+    {
+      "text": "piece",
+      "canonicalStart": 27,
+      "canonicalEnd": 32,
+      "startMs": 2081,
+      "endMs": 2456
+    },
+    {
+      "text": "of",
+      "canonicalStart": 33,
+      "canonicalEnd": 35,
+      "startMs": 2472,
+      "endMs": 2613
+    },
+    {
+      "text": "logic",
+      "canonicalStart": 36,
+      "canonicalEnd": 41,
+      "startMs": 2628,
+      "endMs": 3222
+    },
+    {
+      "text": "in",
+      "canonicalStart": 42,
+      "canonicalEnd": 44,
+      "startMs": 3238,
+      "endMs": 3409
+    },
+    {
+      "text": "isolation.",
+      "canonicalStart": 45,
+      "canonicalEnd": 55,
+      "startMs": 3425,
+      "endMs": 4409
+    },
+    {
+      "text": "An",
+      "canonicalStart": 56,
+      "canonicalEnd": 58,
+      "startMs": 5500,
+      "endMs": 5703
+    },
+    {
+      "text": "integration",
+      "canonicalStart": 59,
+      "canonicalEnd": 70,
+      "startMs": 5719,
+      "endMs": 6516
+    },
+    {
+      "text": "test",
+      "canonicalStart": 71,
+      "canonicalEnd": 75,
+      "startMs": 6531,
+      "endMs": 6922
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 76,
+      "canonicalEnd": 82,
+      "startMs": 6938,
+      "endMs": 7359
+    },
+    {
+      "text": "how",
+      "canonicalStart": 83,
+      "canonicalEnd": 86,
+      "startMs": 7375,
+      "endMs": 7578
+    },
+    {
+      "text": "multiple",
+      "canonicalStart": 87,
+      "canonicalEnd": 95,
+      "startMs": 7594,
+      "endMs": 8156
+    },
+    {
+      "text": "parts",
+      "canonicalStart": 96,
+      "canonicalEnd": 101,
+      "startMs": 8172,
+      "endMs": 8594
+    },
+    {
+      "text": "work",
+      "canonicalStart": 102,
+      "canonicalEnd": 106,
+      "startMs": 8609,
+      "endMs": 8906
+    },
+    {
+      "text": "together,",
+      "canonicalStart": 107,
+      "canonicalEnd": 116,
+      "startMs": 8922,
+      "endMs": 9500
+    },
+    {
+      "text": "for",
+      "canonicalStart": 117,
+      "canonicalEnd": 120,
+      "startMs": 9813,
+      "endMs": 9984
+    },
+    {
+      "text": "example",
+      "canonicalStart": 121,
+      "canonicalEnd": 128,
+      "startMs": 10000,
+      "endMs": 10531
+    },
+    {
+      "text": "the",
+      "canonicalStart": 129,
+      "canonicalEnd": 132,
+      "startMs": 10547,
+      "endMs": 10672
+    },
+    {
+      "text": "service",
+      "canonicalStart": 133,
+      "canonicalEnd": 140,
+      "startMs": 10688,
+      "endMs": 11250
+    },
+    {
+      "text": "and",
+      "canonicalStart": 141,
+      "canonicalEnd": 144,
+      "startMs": 11266,
+      "endMs": 11453
+    },
+    {
+      "text": "database.",
+      "canonicalStart": 145,
+      "canonicalEnd": 154,
+      "startMs": 11469,
+      "endMs": 12375
+    },
+    {
+      "text": "An",
+      "canonicalStart": 155,
+      "canonicalEnd": 157,
+      "startMs": 13453,
+      "endMs": 13719
+    },
+    {
+      "text": "end-to-end",
+      "canonicalStart": 158,
+      "canonicalEnd": 168,
+      "startMs": 13734,
+      "endMs": 14406
+    },
+    {
+      "text": "test",
+      "canonicalStart": 169,
+      "canonicalEnd": 173,
+      "startMs": 14422,
+      "endMs": 14781
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 174,
+      "canonicalEnd": 180,
+      "startMs": 14797,
+      "endMs": 15156
+    },
+    {
+      "text": "a",
+      "canonicalStart": 181,
+      "canonicalEnd": 182,
+      "startMs": 15172,
+      "endMs": 15281
+    },
+    {
+      "text": "complete",
+      "canonicalStart": 183,
+      "canonicalEnd": 191,
+      "startMs": 15297,
+      "endMs": 15844
+    },
+    {
+      "text": "flow",
+      "canonicalStart": 192,
+      "canonicalEnd": 196,
+      "startMs": 15859,
+      "endMs": 16297
+    },
+    {
+      "text": "from",
+      "canonicalStart": 197,
+      "canonicalEnd": 201,
+      "startMs": 16313,
+      "endMs": 16484
+    },
+    {
+      "text": "the",
+      "canonicalStart": 202,
+      "canonicalEnd": 205,
+      "startMs": 16500,
+      "endMs": 16625
+    },
+    {
+      "text": "API",
+      "canonicalStart": 206,
+      "canonicalEnd": 209,
+      "startMs": 16641,
+      "endMs": 17313
+    },
+    {
+      "text": "request",
+      "canonicalStart": 210,
+      "canonicalEnd": 217,
+      "startMs": 17328,
+      "endMs": 18000
+    },
+    {
+      "text": "to",
+      "canonicalStart": 218,
+      "canonicalEnd": 220,
+      "startMs": 18016,
+      "endMs": 18109
+    },
+    {
+      "text": "the",
+      "canonicalStart": 221,
+      "canonicalEnd": 224,
+      "startMs": 18125,
+      "endMs": 18250
+    },
+    {
+      "text": "final",
+      "canonicalStart": 225,
+      "canonicalEnd": 230,
+      "startMs": 18266,
+      "endMs": 18734
+    },
+    {
+      "text": "result.",
+      "canonicalStart": 231,
+      "canonicalEnd": 238,
+      "startMs": 18750,
+      "endMs": 19406
+    },
+    {
+      "text": "I",
+      "canonicalStart": 239,
+      "canonicalEnd": 240,
+      "startMs": 20484,
+      "endMs": 20656
+    },
+    {
+      "text": "use",
+      "canonicalStart": 241,
+      "canonicalEnd": 244,
+      "startMs": 20672,
+      "endMs": 21047
+    },
+    {
+      "text": "different",
+      "canonicalStart": 245,
+      "canonicalEnd": 254,
+      "startMs": 21063,
+      "endMs": 21500
+    },
+    {
+      "text": "test",
+      "canonicalStart": 255,
+      "canonicalEnd": 259,
+      "startMs": 21516,
+      "endMs": 21906
+    },
+    {
+      "text": "levels",
+      "canonicalStart": 260,
+      "canonicalEnd": 266,
+      "startMs": 21922,
+      "endMs": 22391
+    },
+    {
+      "text": "because",
+      "canonicalStart": 267,
+      "canonicalEnd": 274,
+      "startMs": 22406,
+      "endMs": 22797
+    },
+    {
+      "text": "they",
+      "canonicalStart": 275,
+      "canonicalEnd": 279,
+      "startMs": 22813,
+      "endMs": 22953
+    },
+    {
+      "text": "catch",
+      "canonicalStart": 280,
+      "canonicalEnd": 285,
+      "startMs": 22969,
+      "endMs": 23391
+    },
+    {
+      "text": "different",
+      "canonicalStart": 286,
+      "canonicalEnd": 295,
+      "startMs": 23406,
+      "endMs": 23797
+    },
+    {
+      "text": "types",
+      "canonicalStart": 296,
+      "canonicalEnd": 301,
+      "startMs": 23813,
+      "endMs": 24219
+    },
+    {
+      "text": "of",
+      "canonicalStart": 302,
+      "canonicalEnd": 304,
+      "startMs": 24234,
+      "endMs": 24328
+    },
+    {
+      "text": "problems.",
+      "canonicalStart": 305,
+      "canonicalEnd": 314,
+      "startMs": 24344,
+      "endMs": 25172
+    }
+  ]
+}

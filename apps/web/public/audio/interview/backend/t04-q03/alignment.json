@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "questionId": "t04-q03",
+  "speechText": "I assume that a message can be delivered more than once. The consumer should be idempotent. For example, I can use a job ID or business ID and store it in the database with a unique constraint. Before performing the action, I check whether it has already been processed.",
+  "words": [
+    {
+      "text": "I",
+      "canonicalStart": 0,
+      "canonicalEnd": 1,
+      "startMs": 113,
+      "endMs": 331
+    },
+    {
+      "text": "assume",
+      "canonicalStart": 2,
+      "canonicalEnd": 8,
+      "startMs": 347,
+      "endMs": 909
+    },
+    {
+      "text": "that",
+      "canonicalStart": 9,
+      "canonicalEnd": 13,
+      "startMs": 925,
+      "endMs": 1081
+    },
+    {
+      "text": "a",
+      "canonicalStart": 14,
+      "canonicalEnd": 15,
+      "startMs": 1097,
+      "endMs": 1144
+    },
+    {
+      "text": "message",
+      "canonicalStart": 16,
+      "canonicalEnd": 23,
+      "startMs": 1159,
+      "endMs": 1722
+    },
+    {
+      "text": "can",
+      "canonicalStart": 24,
+      "canonicalEnd": 27,
+      "startMs": 1738,
+      "endMs": 1909
+    },
+    {
+      "text": "be",
+      "canonicalStart": 28,
+      "canonicalEnd": 30,
+      "startMs": 1925,
+      "endMs": 2034
+    },
+    {
+      "text": "delivered",
+      "canonicalStart": 31,
+      "canonicalEnd": 40,
+      "startMs": 2050,
+      "endMs": 2566
+    },
+    {
+      "text": "more",
+      "canonicalStart": 41,
+      "canonicalEnd": 45,
+      "startMs": 2581,
+      "endMs": 2831
+    },
+    {
+      "text": "than",
+      "canonicalStart": 46,
+      "canonicalEnd": 50,
+      "startMs": 2847,
+      "endMs": 3019
+    },
+    {
+      "text": "once.",
+      "canonicalStart": 51,
+      "canonicalEnd": 56,
+      "startMs": 3034,
+      "endMs": 3644
+    },
+    {
+      "text": "The",
+      "canonicalStart": 57,
+      "canonicalEnd": 60,
+      "startMs": 4734,
+      "endMs": 4891
+    },
+    {
+      "text": "consumer",
+      "canonicalStart": 61,
+      "canonicalEnd": 69,
+      "startMs": 4906,
+      "endMs": 5578
+    },
+    {
+      "text": "should",
+      "canonicalStart": 70,
+      "canonicalEnd": 76,
+      "startMs": 5594,
+      "endMs": 5797
+    },
+    {
+      "text": "be",
+      "canonicalStart": 77,
+      "canonicalEnd": 79,
+      "startMs": 5813,
+      "endMs": 6000
+    },
+    {
+      "text": "idempotent.",
+      "canonicalStart": 80,
+      "canonicalEnd": 91,
+      "startMs": 6016,
+      "endMs": 7141
+    },
+    {
+      "text": "For",
+      "canonicalStart": 92,
+      "canonicalEnd": 95,
+      "startMs": 8219,
+      "endMs": 8484
+    },
+    {
+      "text": "example,",
+      "canonicalStart": 96,
+      "canonicalEnd": 104,
+      "startMs": 8500,
+      "endMs": 9188
+    },
+    {
+      "text": "I",
+      "canonicalStart": 105,
+      "canonicalEnd": 106,
+      "startMs": 9516,
+      "endMs": 9609
+    },
+    {
+      "text": "can",
+      "canonicalStart": 107,
+      "canonicalEnd": 110,
+      "startMs": 9625,
+      "endMs": 9797
+    },
+    {
+      "text": "use",
+      "canonicalStart": 111,
+      "canonicalEnd": 114,
+      "startMs": 9813,
+      "endMs": 10063
+    },
+    {
+      "text": "a",
+      "canonicalStart": 115,
+      "canonicalEnd": 116,
+      "startMs": 10078,
+      "endMs": 10172
+    },
+    {
+      "text": "job",
+      "canonicalStart": 117,
+      "canonicalEnd": 120,
+      "startMs": 10188,
+      "endMs": 10609
+    },
+    {
+      "text": "ID",
+      "canonicalStart": 121,
+      "canonicalEnd": 123,
+      "startMs": 10625,
+      "endMs": 11188
+    },
+    {
+      "text": "or",
+      "canonicalStart": 124,
+      "canonicalEnd": 126,
+      "startMs": 11203,
+      "endMs": 11422
+    },
+    {
+      "text": "business",
+      "canonicalStart": 127,
+      "canonicalEnd": 135,
+      "startMs": 11438,
+      "endMs": 11953
+    },
+    {
+      "text": "ID",
+      "canonicalStart": 136,
+      "canonicalEnd": 138,
+      "startMs": 11969,
+      "endMs": 12516
+    },
+    {
+      "text": "and",
+      "canonicalStart": 139,
+      "canonicalEnd": 142,
+      "startMs": 12531,
+      "endMs": 12688
+    },
+    {
+      "text": "store",
+      "canonicalStart": 143,
+      "canonicalEnd": 148,
+      "startMs": 12703,
+      "endMs": 13109
+    },
+    {
+      "text": "it",
+      "canonicalStart": 149,
+      "canonicalEnd": 151,
+      "startMs": 13125,
+      "endMs": 13219
+    },
+    {
+      "text": "in",
+      "canonicalStart": 152,
+      "canonicalEnd": 154,
+      "startMs": 13234,
+      "endMs": 13313
+    },
+    {
+      "text": "the",
+      "canonicalStart": 155,
+      "canonicalEnd": 158,
+      "startMs": 13328,
+      "endMs": 13453
+    },
+    {
+      "text": "database",
+      "canonicalStart": 159,
+      "canonicalEnd": 167,
+      "startMs": 13469,
+      "endMs": 14141
+    },
+    {
+      "text": "with",
+      "canonicalStart": 168,
+      "canonicalEnd": 172,
+      "startMs": 14156,
+      "endMs": 14313
+    },
+    {
+      "text": "a",
+      "canonicalStart": 173,
+      "canonicalEnd": 174,
+      "startMs": 14328,
+      "endMs": 14359
+    },
+    {
+      "text": "unique",
+      "canonicalStart": 175,
+      "canonicalEnd": 181,
+      "startMs": 14375,
+      "endMs": 14891
+    },
+    {
+      "text": "constraint.",
+      "canonicalStart": 182,
+      "canonicalEnd": 193,
+      "startMs": 14906,
+      "endMs": 15703
+    },
+    {
+      "text": "Before",
+      "canonicalStart": 194,
+      "canonicalEnd": 200,
+      "startMs": 16781,
+      "endMs": 17250
+    },
+    {
+      "text": "performing",
+      "canonicalStart": 201,
+      "canonicalEnd": 211,
+      "startMs": 17266,
+      "endMs": 17891
+    },
+    {
+      "text": "the",
+      "canonicalStart": 212,
+      "canonicalEnd": 215,
+      "startMs": 17906,
+      "endMs": 18031
+    },
+    {
+      "text": "action,",
+      "canonicalStart": 216,
+      "canonicalEnd": 223,
+      "startMs": 18047,
+      "endMs": 18609
+    },
+    {
+      "text": "I",
+      "canonicalStart": 224,
+      "canonicalEnd": 225,
+      "startMs": 18922,
+      "endMs": 19031
+    },
+    {
+      "text": "check",
+      "canonicalStart": 226,
+      "canonicalEnd": 231,
+      "startMs": 19047,
+      "endMs": 19391
+    },
+    {
+      "text": "whether",
+      "canonicalStart": 232,
+      "canonicalEnd": 239,
+      "startMs": 19406,
+      "endMs": 19750
+    },
+    {
+      "text": "it",
+      "canonicalStart": 240,
+      "canonicalEnd": 242,
+      "startMs": 19766,
+      "endMs": 19844
+    },
+    {
+      "text": "has",
+      "canonicalStart": 243,
+      "canonicalEnd": 246,
+      "startMs": 19859,
+      "endMs": 20078
+    },
+    {
+      "text": "already",
+      "canonicalStart": 247,
+      "canonicalEnd": 254,
+      "startMs": 20094,
+      "endMs": 20547
+    },
+    {
+      "text": "been",
+      "canonicalStart": 255,
+      "canonicalEnd": 259,
+      "startMs": 20563,
+      "endMs": 20750
+    },
+    {
+      "text": "processed.",
+      "canonicalStart": 260,
+      "canonicalEnd": 270,
+      "startMs": 20766,
+      "endMs": 21688
+    }
+  ]
+}

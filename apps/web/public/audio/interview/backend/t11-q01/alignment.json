@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "questionId": "t11-q01",
+  "speechText": "Docker gives the application a consistent runtime environment. The same image can run in development, testing, and production. It also makes deployment easier because the application and its dependencies are packaged together.",
+  "words": [
+    {
+      "text": "Docker",
+      "canonicalStart": 0,
+      "canonicalEnd": 6,
+      "startMs": 113,
+      "endMs": 644
+    },
+    {
+      "text": "gives",
+      "canonicalStart": 7,
+      "canonicalEnd": 12,
+      "startMs": 659,
+      "endMs": 956
+    },
+    {
+      "text": "the",
+      "canonicalStart": 13,
+      "canonicalEnd": 16,
+      "startMs": 972,
+      "endMs": 1097
+    },
+    {
+      "text": "application",
+      "canonicalStart": 17,
+      "canonicalEnd": 28,
+      "startMs": 1113,
+      "endMs": 1956
+    },
+    {
+      "text": "a",
+      "canonicalStart": 29,
+      "canonicalEnd": 30,
+      "startMs": 1972,
+      "endMs": 2050
+    },
+    {
+      "text": "consistent",
+      "canonicalStart": 31,
+      "canonicalEnd": 41,
+      "startMs": 2066,
+      "endMs": 2800
+    },
+    {
+      "text": "runtime",
+      "canonicalStart": 42,
+      "canonicalEnd": 49,
+      "startMs": 2816,
+      "endMs": 3394
+    },
+    {
+      "text": "environment.",
+      "canonicalStart": 50,
+      "canonicalEnd": 62,
+      "startMs": 3409,
+      "endMs": 4253
+    },
+    {
+      "text": "The",
+      "canonicalStart": 63,
+      "canonicalEnd": 66,
+      "startMs": 5344,
+      "endMs": 5531
+    },
+    {
+      "text": "same",
+      "canonicalStart": 67,
+      "canonicalEnd": 71,
+      "startMs": 5547,
+      "endMs": 5922
+    },
+    {
+      "text": "image",
+      "canonicalStart": 72,
+      "canonicalEnd": 77,
+      "startMs": 5938,
+      "endMs": 6422
+    },
+    {
+      "text": "can",
+      "canonicalStart": 78,
+      "canonicalEnd": 81,
+      "startMs": 6438,
+      "endMs": 6688
+    },
+    {
+      "text": "run",
+      "canonicalStart": 82,
+      "canonicalEnd": 85,
+      "startMs": 6703,
+      "endMs": 6938
+    },
+    {
+      "text": "in",
+      "canonicalStart": 86,
+      "canonicalEnd": 88,
+      "startMs": 6953,
+      "endMs": 7047
+    },
+    {
+      "text": "development,",
+      "canonicalStart": 89,
+      "canonicalEnd": 101,
+      "startMs": 7063,
+      "endMs": 7813
+    },
+    {
+      "text": "testing,",
+      "canonicalStart": 102,
+      "canonicalEnd": 110,
+      "startMs": 8063,
+      "endMs": 8688
+    },
+    {
+      "text": "and",
+      "canonicalStart": 111,
+      "canonicalEnd": 114,
+      "startMs": 8938,
+      "endMs": 9078
+    },
+    {
+      "text": "production.",
+      "canonicalStart": 115,
+      "canonicalEnd": 126,
+      "startMs": 9094,
+      "endMs": 9891
+    },
+    {
+      "text": "It",
+      "canonicalStart": 127,
+      "canonicalEnd": 129,
+      "startMs": 10969,
+      "endMs": 11156
+    },
+    {
+      "text": "also",
+      "canonicalStart": 130,
+      "canonicalEnd": 134,
+      "startMs": 11172,
+      "endMs": 11578
+    },
+    {
+      "text": "makes",
+      "canonicalStart": 135,
+      "canonicalEnd": 140,
+      "startMs": 11594,
+      "endMs": 11906
+    },
+    {
+      "text": "deployment",
+      "canonicalStart": 141,
+      "canonicalEnd": 151,
+      "startMs": 11922,
+      "endMs": 12547
+    },
+    {
+      "text": "easier",
+      "canonicalStart": 152,
+      "canonicalEnd": 158,
+      "startMs": 12563,
+      "endMs": 13078
+    },
+    {
+      "text": "because",
+      "canonicalStart": 159,
+      "canonicalEnd": 166,
+      "startMs": 13094,
+      "endMs": 13484
+    },
+    {
+      "text": "the",
+      "canonicalStart": 167,
+      "canonicalEnd": 170,
+      "startMs": 13500,
+      "endMs": 13625
+    },
+    {
+      "text": "application",
+      "canonicalStart": 171,
+      "canonicalEnd": 182,
+      "startMs": 13641,
+      "endMs": 14578
+    },
+    {
+      "text": "and",
+      "canonicalStart": 183,
+      "canonicalEnd": 186,
+      "startMs": 14594,
+      "endMs": 14734
+    },
+    {
+      "text": "its",
+      "canonicalStart": 187,
+      "canonicalEnd": 190,
+      "startMs": 14750,
+      "endMs": 14906
+    },
+    {
+      "text": "dependencies",
+      "canonicalStart": 191,
+      "canonicalEnd": 203,
+      "startMs": 14922,
+      "endMs": 15813
+    },
+    {
+      "text": "are",
+      "canonicalStart": 204,
+      "canonicalEnd": 207,
+      "startMs": 15828,
+      "endMs": 15969
+    },
+    {
+      "text": "packaged",
+      "canonicalStart": 208,
+      "canonicalEnd": 216,
+      "startMs": 15984,
+      "endMs": 16594
+    },
+    {
+      "text": "together.",
+      "canonicalStart": 217,
+      "canonicalEnd": 226,
+      "startMs": 16609,
+      "endMs": 17266
+    }
+  ]
+}
