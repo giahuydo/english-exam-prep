@@ -4,21 +4,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { backendTopics, recommendedPath } from './topics';
 
-const framework = [
-  'Identify the likely problem.',
-  'Explain why it can happen.',
-  'Say what you would check first.',
-  'Give the solution or options.',
-  'Mention one trade-off when relevant.',
-];
-const connectors = 'Basically • First • Then • For example • In this case • The main reason is • Depending on the use case • Finally • So overall';
-
 export default function BackendInterviewPage() {
   const [topicId, setTopicId] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(true);
   const [showKey, setShowKey] = useState(true);
-  const [showFramework, setShowFramework] = useState(false);
   const topic = backendTopics.find((item) => item.id === topicId) ?? backendTopics[0];
   const questions = topic.questions;
   const question = questions[questionIndex] ?? questions[0];
@@ -39,7 +29,6 @@ export default function BackendInterviewPage() {
           {question ? <div className="space-y-5 border-t border-slate-100 pt-5"><div><p className="text-[11px] font-bold uppercase tracking-[0.16em] text-blue-700">Question {questionIndex + 1} of {questions.length}</p><h3 className="mt-2 text-xl font-bold leading-7 text-slate-950">{question.question}</h3></div><section><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Answer (B1–B2)</h4><button type="button" onClick={() => setShowAnswer((value) => !value)} aria-expanded={showAnswer} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-blue-700">{showAnswer ? 'Hide answer' : 'Show answer'}</button></div>{showAnswer && <p className="mt-2 whitespace-pre-wrap border-l-2 border-blue-100 pl-4 text-[15px] leading-8 text-slate-800">{question.answer}</p>}</section><section className="border-t border-slate-100 pt-5"><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Key idea</h4><button type="button" onClick={() => setShowKey((value) => !value)} aria-expanded={showKey} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-blue-700">{showKey ? 'Hide key idea' : 'Show key idea'}</button></div>{showKey && <p className="mt-2 rounded-xl bg-blue-50 p-4 text-sm leading-7 text-blue-950">{question.keyIdea}</p>}</section>{questionIndex < questions.length - 1 && <button type="button" onClick={() => selectQuestion(questionIndex + 1)} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white hover:bg-blue-800">Next question →</button>}</div> : <p className="border-t border-slate-100 pt-5 text-sm text-slate-500">Questions for this topic have not been provided yet.</p>}
         </div></div>{pathIndex >= 0 && pathIndex < recommendedPath.length - 1 && <button type="button" onClick={() => selectTopic(recommendedPath[pathIndex + 1])} className="mt-4 min-h-10 rounded-lg border border-blue-200 bg-white px-3 text-xs font-semibold text-blue-700 hover:bg-blue-50">Next recommended topic →</button>}</section>
       </div>
-      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-5"><button type="button" onClick={() => setShowFramework((value) => !value)} aria-expanded={showFramework} className="flex w-full items-center justify-between gap-3 text-left text-sm font-bold text-slate-800"><span>Quick Interview Framework</span><span className="text-xs text-blue-700">{showFramework ? 'Hide' : 'Show'}</span></button>{showFramework && <div className="mt-4 border-t border-slate-100 pt-4"><p className="text-sm text-slate-600">For technical scenario questions, use this simple flow:</p><ol className="mt-2 list-inside list-decimal space-y-1 text-sm leading-7 text-slate-700">{framework.map((step) => <li key={step}>{step}</li>)}</ol><p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Useful speaking connectors:</p><p className="mt-1 text-sm leading-7 text-slate-700">{connectors}</p></div>}</section>
     </main>
   </div>;
 }

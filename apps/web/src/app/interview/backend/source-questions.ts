@@ -1,6 +1,6 @@
 export type BackendQuestion = { question: string; answer: string; keyIdea: string };
 
-/** Transcribed verbatim from user-provided B1–B2 pack. Topics without a source chunk have no questions yet. */
+/** Transcribed verbatim from the 12 user-provided B1–B2 source chunks. */
 export const sourceQuestions: Partial<Record<number, BackendQuestion[]>> = {
   1: [
     {
