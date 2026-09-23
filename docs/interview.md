@@ -19,7 +19,7 @@ apps/web/src/app/interview/
 │   ├── page.tsx       Backend Interview topic/question selector, answer and key idea
 │   ├── topics.ts      fixed topic labels and recommended path
 │   ├── speaking-chunks.ts display-only English answer segmentation
-│   ├── source-questions.ts  verbatim user-provided English B1–B2 questions, answers, key ideas
+│   ├── source-questions.ts  verbatim English B1–B2 questions and answers; derived key-idea paths
 │   └── translations.ts     Vietnamese study translations paired by topic/question order
 ├── data.ts            canonical questions, answers, Part 2 strategy content
 ├── types.ts           question and connection types
@@ -507,7 +507,7 @@ Do not move this state to the API/database without an explicit product decision.
 
 ## 2026-09-14 — Backend Interview category
 
-`/interview/backend` displays **Senior Backend Node.js Interview** / **B1–B2 Speaking Pack** using the existing interview visual language with a topic → questions → Answer (B1–B2) → Key idea flow. It lists 12 fixed topics and renders questions from `source-questions.ts` without rewriting answer or key-idea wording. All 12 supplied topic chunks (39 questions) are present; the empty state remains for any future topic without supplied questions. A compact, collapsible Quick Interview Framework displays the supplied five steps and speaking connectors. The recommended route is 1 → 3 → 4 → 6 → 7 → 8 → 10; all other topics remain directly selectable. It does not use the AI Interview progress store, audio assets, or backend APIs. The `/interview` question content, modes, and audio remain unchanged.
+`/interview/backend` displays **Senior Backend Node.js Interview** / **B1–B2 Speaking Pack** using the existing interview visual language with a topic → questions → Answer (B1–B2) → Key idea flow. It lists 12 fixed topics and renders questions and answers from `source-questions.ts` without rewriting their wording; key ideas are answer-grounded recall paths. All 12 supplied topic chunks (39 questions) are present; the empty state remains for any future topic without supplied questions. A compact, collapsible Quick Interview Framework displays the supplied five steps and speaking connectors. The recommended route is 1 → 3 → 4 → 6 → 7 → 8 → 10; all other topics remain directly selectable. It does not use the AI Interview progress store, audio assets, or backend APIs. The `/interview` question content, modes, and audio remain unchanged.
 
 ### Vietnamese study translations
 
