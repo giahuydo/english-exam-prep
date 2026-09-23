@@ -6,8 +6,8 @@ export const translations: Record<number, BackendTranslation[]> = {
   1: [
     {
       questionVi: 'Event loop trong Node.js là gì và tại sao nó quan trọng?',
-      answerVi: 'Node.js dùng một luồng chính để chạy JavaScript. Event loop giúp Node.js xử lý nhiều yêu cầu mà không phải đợi từng tác vụ I/O hoàn thành. Khi Node.js bắt đầu một tác vụ I/O, như đọc tệp hoặc gọi cơ sở dữ liệu, nó vẫn có thể tiếp tục xử lý công việc khác. Khi tác vụ I/O hoàn tất, callback của nó được đưa trở lại event loop. Vì vậy Node.js phù hợp với ứng dụng có nhiều tác vụ I/O, nhưng chúng ta nên tránh xử lý tác vụ nặng về CPU trên luồng chính.',
-      keyIdeaVi: 'Một luồng chính chạy JavaScript → bắt đầu I/O mà không cần chờ → xử lý việc khác → tiếp tục callback khi I/O hoàn tất → tránh tác vụ nặng CPU trên luồng chính.',
+      answerVi: 'Node.js chạy các callback JavaScript trên event loop. Với yêu cầu tới cơ sở dữ liệu, Node.js có thể chờ phản hồi qua mạng mà không chặn event loop, rồi chạy callback khi có kết quả. Việc đọc tệp và một số lệnh DNS có thể dùng nhóm luồng libuv. Tôi theo dõi độ trễ event loop vì JavaScript tính toán nặng trên luồng chính vẫn làm các yêu cầu khác bị chậm.',
+      keyIdeaVi: 'Callback JavaScript chạy trên event loop → I/O mạng có thể chờ mà không chặn; một số việc với tệp và DNS dùng nhóm luồng → theo dõi độ trễ do JavaScript nặng.',
     },
     {
       questionVi: 'Tác vụ nặng về I/O khác tác vụ nặng về CPU như thế nào?',
@@ -16,8 +16,8 @@ export const translations: Record<number, BackendTranslation[]> = {
     },
     {
       questionVi: 'Async/await khác mã chạy đồng bộ như thế nào?',
-      answerVi: 'Mã chạy đồng bộ chờ một tác vụ hoàn tất rồi mới chuyển sang tác vụ tiếp theo. Với async/await, Node.js có thể bắt đầu một thao tác bất đồng bộ và tiếp tục công việc khác trong lúc chờ. Async/await cũng giúp mã bất đồng bộ dễ đọc và bảo trì hơn. Tuy nhiên, dùng await không tự động biến tác vụ nặng về CPU thành không chặn luồng.',
-      keyIdeaVi: 'Mã đồng bộ phải chờ → async/await bắt đầu thao tác bất đồng bộ → công việc khác vẫn tiếp tục → await không làm tác vụ nặng CPU trở nên không chặn luồng.',
+      answerVi: 'Mã đồng bộ chặn luồng JavaScript cho đến khi chạy xong. Khi await một lệnh gọi cơ sở dữ liệu, hàm async hiện tại tạm dừng, nhưng event loop vẫn xử lý được các callback khác trong lúc chờ I/O. Khi có kết quả, hàm tiếp tục chạy. Await không chuyển phép tính nặng CPU ra khỏi luồng chính; với trường hợp đó tôi sẽ dùng worker thread.',
+      keyIdeaVi: 'Mã đồng bộ chặn luồng → await chỉ tạm dừng hàm async hiện tại khi chờ I/O → callback khác vẫn chạy → JavaScript nặng CPU cần worker thread.',
     },
     {
       questionVi: 'Điều gì xảy ra nếu một yêu cầu thực hiện phép tính nặng về CPU?',
@@ -28,8 +28,8 @@ export const translations: Record<number, BackendTranslation[]> = {
   2: [
     {
       questionVi: 'Bạn thiết kế một REST API đáng tin cậy như thế nào?',
-      answerVi: 'Tôi bắt đầu bằng cách xác định rõ tài nguyên và endpoint. Tôi kiểm tra dữ liệu đầu vào, trả về mã trạng thái HTTP nhất quán và dùng cấu trúc phản hồi lỗi chuẩn. Với API danh sách, tôi thường hỗ trợ phân trang và lọc. Với các thao tác ghi quan trọng, tôi cũng cân nhắc xác thực, phân quyền, tính idempotent, ghi log và giới hạn tần suất.',
-      keyIdeaVi: 'Xác định tài nguyên và endpoint rõ ràng → kiểm tra đầu vào → trả mã trạng thái và lỗi nhất quán → thêm phân trang, lọc → bảo vệ thao tác ghi quan trọng.',
+      answerVi: 'Tôi bắt đầu với một tài nguyên rõ ràng, chẳng hạn đơn hàng, và xác định kết quả trả về của từng endpoint. Với yêu cầu tạo mới, tôi kiểm tra đầu vào, quyền của người dùng và trả lỗi theo cấu trúc nhất quán nếu thất bại. Nếu client thử tạo lại, khóa idempotency giúp tránh tạo trùng đơn hàng. Tôi phân trang danh sách và ghi mã yêu cầu vào log để truy vết lỗi.',
+      keyIdeaVi: 'Định nghĩa endpoint đơn hàng → kiểm tra đầu vào và quyền ghi → dùng khóa idempotency khi thử lại → phân trang dữ liệu đọc và truy lỗi bằng mã yêu cầu.',
     },
     {
       questionVi: 'Tính idempotent là gì và khi nào cần đến nó?',
@@ -60,25 +60,25 @@ export const translations: Record<number, BackendTranslation[]> = {
     },
     {
       questionVi: 'Bạn ngăn race condition khi hai yêu cầu cập nhật cùng một dữ liệu như thế nào?',
-      answerVi: 'Giải pháp tùy thuộc vào tình huống nghiệp vụ. Tôi có thể dùng transaction của cơ sở dữ liệu, ràng buộc duy nhất, khóa lạc quan hoặc khóa bi quan. Tôi ưu tiên ràng buộc cơ sở dữ liệu khi có thể, vì chúng bảo vệ dữ liệu ngay cả khi hai yêu cầu ứng dụng chạy cùng lúc.',
-      keyIdeaVi: 'Hai yêu cầu cập nhật cùng dữ liệu → chọn transaction, ràng buộc hoặc khóa theo nghiệp vụ → ưu tiên ràng buộc cơ sở dữ liệu khi có thể → bảo vệ cập nhật đồng thời.',
+      answerVi: 'Nếu hai yêu cầu cùng thay đổi số dư, thao tác đọc rồi ghi riêng có thể làm mất một lần cập nhật. Tôi sẽ cập nhật nguyên tử trong một transaction, kèm điều kiện số dư vẫn hợp lệ. Khi sửa hồ sơ, tôi kiểm tra số phiên bản và trả lỗi xung đột nếu hồ sơ đã thay đổi. Ràng buộc duy nhất bảo vệ quy tắc như mỗi mã đơn hàng ngoài chỉ có một bản ghi, nhưng không ngăn được mọi race condition.',
+      keyIdeaVi: 'Cập nhật số dư đồng thời có thể mất dữ liệu → cập nhật nguyên tử có điều kiện trong transaction → kiểm tra phiên bản khi sửa → ràng buộc duy nhất chỉ bảo vệ quy tắc không trùng cụ thể.',
     },
   ],
   4: [
     {
       questionVi: 'Tại sao bạn dùng RabbitMQ thay vì xử lý mọi thứ trong yêu cầu API?',
-      answerVi: 'Hàng đợi cho phép API chuyển công việc chậm hoặc công việc nền ra ngoài yêu cầu. API có thể phản hồi nhanh hơn và các worker có thể xử lý công việc riêng. Nó cũng hỗ trợ thử lại, tăng độ tin cậy và giúp mở rộng dễ hơn. Đánh đổi là hệ thống phức tạp hơn và đôi khi thời gian xử lý dài hơn.',
-      keyIdeaVi: 'Công việc chậm trong yêu cầu API → chuyển vào hàng đợi → API phản hồi nhanh, worker xử lý riêng → có thử lại và mở rộng, đổi lại hệ thống phức tạp và có thể trễ hơn.',
+      answerVi: 'Nếu gửi email mất nhiều thời gian, tôi lưu job cùng thay đổi nghiệp vụ, phát job qua outbox rồi để API phản hồi trước khi giao email. Consumer RabbitMQ xử lý job và chỉ ACK sau khi thành công. Tôi giới hạn số lần thử lại và xử lý trường hợp thông điệp được giao trùng, vì hàng đợi không tự bảo đảm công việc chỉ chạy đúng một lần. Yêu cầu API nhanh hơn, nhưng cần thêm broker và email có thể đến trễ.',
+      keyIdeaVi: 'Gửi email chậm → lưu job cùng thay đổi nghiệp vụ và phát qua outbox → consumer ACK sau khi thành công → giới hạn thử lại và xử lý trùng → đánh đổi bằng độ phức tạp và độ trễ giao email.',
     },
     {
       questionVi: 'ACK và NACK trong RabbitMQ là gì?',
-      answerVi: 'ACK báo cho RabbitMQ rằng consumer đã xử lý thông điệp thành công, nên thông điệp có thể được xóa. NACK nghĩa là xử lý thất bại. Tùy cấu hình, thông điệp có thể được thử lại, đưa lại vào hàng đợi hoặc gửi đến hàng đợi lỗi.',
-      keyIdeaVi: 'Xử lý thành công → ACK để xóa thông điệp → xử lý thất bại → NACK → thử lại, đưa lại hàng đợi hoặc gửi hàng đợi lỗi theo cấu hình.',
+      answerVi: 'Sau khi xử lý thành công, consumer gửi ACK để RabbitMQ xóa thông điệp. Nếu không xử lý được, consumer có thể NACK với requeue=true để đưa thông điệp về hàng đợi, hoặc requeue=false để chuyển sang hàng đợi lỗi nếu đã cấu hình dead-letter exchange; nếu không, thông điệp bị loại bỏ. Tôi tránh đưa lỗi cố định vào hàng đợi mãi và dùng cơ chế thử lại có giới hạn.',
+      keyIdeaVi: 'Thành công → ACK xóa thông điệp → thất bại → NACK requeue=true đưa lại hàng đợi; false chuyển sang hàng đợi lỗi nếu có cấu hình hoặc loại bỏ → giới hạn thử lại.',
     },
     {
       questionVi: 'Bạn xử lý thông điệp trùng lặp như thế nào?',
-      answerVi: 'Tôi giả định một thông điệp có thể được gửi đến nhiều lần. Consumer cần có tính idempotent. Ví dụ, tôi có thể dùng mã công việc hoặc mã nghiệp vụ và lưu vào cơ sở dữ liệu với ràng buộc duy nhất. Trước khi thực hiện hành động, tôi kiểm tra xem nó đã được xử lý hay chưa.',
-      keyIdeaVi: 'Thông điệp có thể đến hai lần → consumer cần idempotent → lưu mã công việc hoặc mã nghiệp vụ duy nhất → kiểm tra trước khi xử lý lại.',
+      answerVi: 'Worker có thể xử lý xong job nhưng mất ACK, khiến RabbitMQ giao thông điệp thêm lần nữa. Tôi lưu mã job với ràng buộc duy nhất trong cùng transaction với thay đổi nghiệp vụ. Nếu mã đó đã tồn tại, tôi bỏ qua thay đổi và ACK thông điệp trùng. Với lệnh gọi thanh toán ra bên ngoài, tôi cũng gửi khóa idempotency ổn định cho nhà cung cấp.',
+      keyIdeaVi: 'Mất ACK → giao thông điệp trùng → lưu mã job và thay đổi nghiệp vụ cùng transaction → bỏ qua và ACK bản trùng → dùng khóa idempotency với dịch vụ ngoài.',
     },
     {
       questionVi: 'Transaction cơ sở dữ liệu thành công nhưng gửi thông điệp lên RabbitMQ thất bại. Bạn sẽ làm gì?',
@@ -94,20 +94,20 @@ export const translations: Record<number, BackendTranslation[]> = {
     },
     {
       questionVi: 'Phần khó của việc dùng bộ nhớ đệm là gì?',
-      answerVi: 'Phần khó là giữ cho dữ liệu trong bộ nhớ đệm chính xác. Khi cơ sở dữ liệu thay đổi, dữ liệu cũ vẫn có thể còn trong bộ nhớ đệm. Tôi thường dùng chiến lược vô hiệu hóa rõ ràng và TTL hợp lý. Với dữ liệu quan trọng, tôi ưu tiên tính chính xác hơn là giữ dữ liệu trong bộ nhớ đệm quá lâu.',
-      keyIdeaVi: 'Cơ sở dữ liệu thay đổi → cache có thể cũ → vô hiệu hóa rõ ràng và đặt TTL hợp lý → ưu tiên tính đúng đắn với dữ liệu quan trọng.',
+      answerVi: 'Phần khó là dữ liệu cache bị cũ sau khi ghi vào cơ sở dữ liệu. Với cache-aside, tôi đọc Redis trước, nếu không có thì đọc cơ sở dữ liệu và lưu kết quả kèm TTL. Sau khi cập nhật thành công, tôi xóa khóa cache liên quan để lần đọc sau tải lại dữ liệu. Vẫn có thể xảy ra race condition ngắn giữa đọc và ghi, nên tôi đọc trực tiếp cơ sở dữ liệu khi cần dữ liệu mới nhất.',
+      keyIdeaVi: 'Cache-aside đọc Redis rồi tới cơ sở dữ liệu nếu thiếu → lưu với TTL → xóa cache sau khi ghi thành công → đọc trực tiếp cơ sở dữ liệu khi không chấp nhận dữ liệu cũ.',
     },
     {
       questionVi: 'Điều gì xảy ra nếu Redis ngừng hoạt động?',
-      answerVi: 'Với bộ nhớ đệm thông thường, tôi cố gắng để ứng dụng chuyển sang đọc cơ sở dữ liệu thay vì lỗi hoàn toàn. Tôi cũng đặt thời gian chờ và giám sát để sự cố Redis không khiến mọi yêu cầu phải đợi quá lâu. Tuy nhiên, nếu Redis lưu trạng thái quan trọng, thiết kế cần kế hoạch khôi phục chặt chẽ hơn.',
-      keyIdeaVi: 'Redis ngừng hoạt động → cache thông thường đọc lại từ cơ sở dữ liệu → dùng thời gian chờ và giám sát → cần kế hoạch phục hồi chặt hơn nếu Redis giữ trạng thái quan trọng.',
+      answerVi: 'Nếu Redis chỉ là cache, tôi đặt timeout ngắn và đọc từ cơ sở dữ liệu khi Redis không hoạt động. Tôi theo dõi tải cơ sở dữ liệu và giới hạn lưu lượng nếu phương án dự phòng làm quá tải nó. Tôi không xem dữ liệu chỉ lưu trong cache là trạng thái bền vững. Nếu Redis lưu trạng thái quan trọng, trước tiên tôi xác định cách lưu bền, chuyển đổi khi lỗi và khôi phục các lần ghi bị mất.',
+      keyIdeaVi: 'Cache tùy chọn lỗi → timeout ngắn và đọc cơ sở dữ liệu → theo dõi tải → trạng thái quan trọng cần phương án lưu bền, chuyển đổi khi lỗi và khôi phục ghi.',
     },
   ],
   6: [
     {
       questionVi: 'Lưu lượng tăng gấp 10 lần, thời gian phản hồi chậm nhưng CPU thấp. Nguyên nhân có thể là gì?',
-      answerVi: 'Nếu thời gian phản hồi chậm nhưng CPU vẫn thấp, trước tiên tôi sẽ nghĩ đến vấn đề I/O chứ không phải CPU. Hệ thống có thể đang chờ truy vấn cơ sở dữ liệu, API bên ngoài, Redis hoặc kết nối cơ sở dữ liệu. Đầu tiên, tôi kiểm tra log và các chỉ số để tìm API bị chậm. Sau đó tôi kiểm tra cơ sở dữ liệu, pool kết nối, dịch vụ bên ngoài, độ trễ event loop, bộ nhớ và các yêu cầu đang chờ. Nếu lưu lượng quá cao, chúng ta có thể tăng số instance, nhưng tôi sẽ tìm nút thắt trước vì thêm máy chủ có thể không giải quyết được vấn đề thực sự.',
-      keyIdeaVi: 'API chậm + CPU thấp → nghi I/O trước → kiểm tra log, cơ sở dữ liệu, pool và dịch vụ bên ngoài → tìm nút thắt → chỉ mở rộng khi cần.',
+      answerVi: 'Phản hồi chậm khi CPU thấp thường nghĩa là yêu cầu đang chờ chứ không phải đang tính toán. Tôi sẽ theo dõi một yêu cầu chậm và kiểm tra thời gian truy vấn cơ sở dữ liệu, thời gian chờ pool kết nối và timeout của API bên ngoài trước. Nếu pool đầy, tôi sửa truy vấn chạy lâu hoặc lỗi không trả kết nối trước khi thêm instance API, vì thêm instance có thể tăng áp lực lên cơ sở dữ liệu. Sau đó tôi đo lại độ trễ.',
+      keyIdeaVi: 'CPU thấp + độ trễ cao → truy vết chỗ yêu cầu phải chờ → kiểm tra truy vấn, pool và timeout bên ngoài → sửa nút thắt trước khi mở rộng → đo lại.',
     },
     {
       questionVi: 'Mở rộng theo chiều ngang là gì?',
@@ -150,8 +150,8 @@ export const translations: Record<number, BackendTranslation[]> = {
     },
     {
       questionVi: 'Bạn giữ dữ liệu nhất quán giữa nhiều dịch vụ như thế nào?',
-      answerVi: 'Trong nhiều hệ thống, không có một transaction cơ sở dữ liệu chung cho các dịch vụ độc lập. Tôi thường thiết kế từng thao tác cục bộ sao cho đáng tin cậy và dùng sự kiện để giao tiếp. Các mẫu như Outbox, consumer idempotent, thử lại và hành động bù trừ giúp đạt được nhất quán cuối cùng một cách an toàn.',
-      keyIdeaVi: 'Dịch vụ độc lập không có transaction chung → làm thao tác cục bộ đáng tin cậy → giao tiếp bằng sự kiện → dùng Outbox, idempotency, thử lại và bù trừ để đạt nhất quán cuối cùng.',
+      answerVi: 'Ví dụ, dịch vụ đơn hàng có thể lưu đơn trước khi dịch vụ thanh toán xác nhận đã trả tiền. Tôi lưu đơn hàng cùng sự kiện outbox trong một transaction, rồi phát sự kiện cho dịch vụ thanh toán. Consumer thanh toán xử lý thông điệp trùng và báo thành công hoặc thất bại; nếu thất bại, tôi đánh dấu hủy đơn hoặc bắt đầu hoàn tiền khi cần. Các dịch vụ sẽ nhất quán sau một thời gian, nên trạng thái đơn hàng phải cho thấy thanh toán vẫn đang chờ.',
+      keyIdeaVi: 'Lưu đơn trước khi thanh toán → ghi đơn và outbox cùng transaction → consumer thanh toán xử lý trùng → xác nhận hoặc bù trừ → hiển thị chờ đến khi nhất quán.',
     },
   ],
   9: [
@@ -162,8 +162,8 @@ export const translations: Record<number, BackendTranslation[]> = {
     },
     {
       questionVi: 'Bạn bảo vệ một backend API như thế nào?',
-      answerVi: 'Tôi kiểm tra mọi dữ liệu đầu vào, dùng xác thực và phân quyền, bảo vệ các bí mật, dùng HTTPS và tránh để lộ thông tin nhạy cảm trong lỗi hoặc log. Tôi cũng dùng truy vấn cơ sở dữ liệu có tham số, giới hạn tần suất khi cần, cập nhật các thư viện phụ thuộc và kiểm tra quyền đúng cách cho mọi hành động được bảo vệ.',
-      keyIdeaVi: 'Kiểm tra đầu vào, danh tính và quyền → bảo vệ bí mật, dùng HTTPS → không lộ dữ liệu nhạy cảm trong lỗi hoặc log → dùng truy vấn an toàn và giới hạn tần suất khi cần.',
+      answerVi: 'Với API đơn hàng được bảo vệ, trước tiên tôi xác thực người dùng và kiểm tra đơn hàng có thuộc về họ không, thay vì chỉ xem token hợp lệ. Tôi kiểm tra đầu vào và dùng truy vấn có tham số để tránh truy cập cơ sở dữ liệu thiếu an toàn. Tôi dùng HTTPS, không ghi bí mật vào log và giới hạn tần suất các endpoint nhạy cảm như đăng nhập. Tôi cũng rà soát thư viện phụ thuộc và ghi mã yêu cầu an toàn để truy vết sự cố.',
+      keyIdeaVi: 'Đơn hàng được bảo vệ → kiểm tra danh tính và quyền sở hữu → kiểm tra đầu vào và tham số hóa truy vấn → dùng HTTPS và log an toàn → giới hạn endpoint nhạy cảm.',
     },
     {
       questionVi: 'Tại sao backend vẫn phải kiểm tra quyền dù frontend đã ẩn nút?',
@@ -174,18 +174,18 @@ export const translations: Record<number, BackendTranslation[]> = {
   10: [
     {
       questionVi: 'Bạn sẽ thiết kế hệ thống xử lý tệp lớn như thế nào?',
-      answerVi: 'Tôi sẽ không xử lý toàn bộ tệp lớn bên trong yêu cầu API. API tải tệp lên kho lưu trữ đối tượng và tạo một công việc. Hàng đợi gửi công việc đến worker. Worker xử lý tệp theo các bước nhỏ hơn và cập nhật trạng thái công việc, ví dụ: đang chờ, đang chạy, hoàn tất hoặc thất bại. Với công việc lớn, tôi cũng dùng checkpoint để worker có thể tiếp tục từ bước thành công gần nhất sau khi gặp lỗi.',
-      keyIdeaVi: 'Tệp lớn → tải lên kho đối tượng và tạo job → đưa vào hàng đợi cho worker → cập nhật trạng thái theo bước → dùng checkpoint để phục hồi.',
+      answerVi: 'Tôi sẽ tải tệp lên kho lưu trữ đối tượng, rồi tạo job trỏ đến vị trí tệp thay vì xử lý ngay trong yêu cầu API. Worker đọc tệp theo từng phần, lưu tiến độ và cập nhật trạng thái để client kiểm tra. Nếu worker dừng, nó có thể tiếp tục từ checkpoint mà không lặp lại những phần đã hoàn tất. Tôi giới hạn kích thước tệp và thiết kế từng bước để thử lại an toàn, tránh tệp lỗi làm kẹt hàng đợi.',
+      keyIdeaVi: 'Tải tệp lớn lên kho đối tượng → xếp job chứa vị trí tệp vào hàng đợi → xử lý từng phần và hiển thị trạng thái → dùng checkpoint, thử lại an toàn → hạn chế tệp lỗi.',
     },
     {
       questionVi: 'Bạn sẽ thiết kế hệ thống thông báo như thế nào?',
-      answerVi: 'Tôi sẽ tách việc tạo thông báo khỏi việc gửi thông báo. Dịch vụ chính tạo sự kiện hoặc công việc thông báo và gửi vào hàng đợi. Các worker có thể gửi email, thông báo đẩy hoặc loại thông báo khác. Tôi sẽ thêm cơ chế thử lại, tính idempotent, theo dõi trạng thái và quy trình xử lý công việc lỗi trong hàng đợi lỗi.',
-      keyIdeaVi: 'Tách tạo thông báo khỏi gửi → đưa job vào hàng đợi → worker gửi email hoặc thông báo đẩy → theo dõi trạng thái, thử lại an toàn và xử lý job lỗi.',
+      answerVi: 'Khi đơn hàng được xác nhận, tôi lưu job thông báo cùng thay đổi đơn hàng và đưa qua outbox vào hàng đợi cho worker gửi email. Worker lưu mã giao gửi, thử lại lỗi tạm thời từ nhà cung cấp với số lần giới hạn và đánh dấu lỗi cố định để kiểm tra. Nó kiểm tra mã job trước khi gửi lại, dù nhà cung cấp bên ngoài vẫn có thể gửi trùng nếu không hỗ trợ idempotency. Người dùng có thể thấy trạng thái đang chờ hoặc thất bại thay vì mặc định email đã đến.',
+      keyIdeaVi: 'Xác nhận đơn → lưu job và xếp thông báo qua outbox → worker theo dõi giao gửi và giới hạn thử lại → chống trùng kể cả phía nhà cung cấp → hiển thị trạng thái chờ hoặc lỗi.',
     },
     {
       questionVi: 'Bạn sẽ thiết kế API chịu được lưu lượng truy cập cao như thế nào?',
-      answerVi: 'Tôi bắt đầu với các instance API không lưu trạng thái ở sau load balancer. Tôi dùng chỉ mục cơ sở dữ liệu và pool kết nối, đồng thời lưu đệm dữ liệu thường được đọc khi an toàn. Công việc nền chậm có thể đưa vào hàng đợi. Tôi cũng thêm giới hạn tần suất, thời gian chờ, giám sát và mở rộng theo chiều ngang. Thiết kế cụ thể tùy thuộc vào vị trí nút thắt thực sự.',
-      keyIdeaVi: 'Lưu lượng cao → API không lưu trạng thái sau load balancer → tối ưu cơ sở dữ liệu và cache an toàn → đưa việc chậm vào hàng đợi → giám sát và mở rộng theo nút thắt thật.',
+      answerVi: 'Trước tiên tôi đo endpoint nào chậm khi tải cao, thay vì vội thêm máy chủ. Nếu việc đọc cơ sở dữ liệu là nút thắt, tôi xem kế hoạch truy vấn, thêm chỉ mục phù hợp và cache dữ liệu chỉ đọc an toàn với TTL. Các instance API không lưu trạng thái sau load balancer có thể mở rộng, nhưng mỗi instance cũng dùng kết nối cơ sở dữ liệu nên tôi giới hạn kích thước pool. Tôi dùng timeout và giới hạn tần suất để bảo vệ hệ thống, rồi kiểm thử tải lại.',
+      keyIdeaVi: 'Đo endpoint chậm → sửa truy vấn và cache dữ liệu đọc an toàn → mở rộng API không lưu trạng thái nhưng giới hạn kết nối DB → bảo vệ bằng timeout và giới hạn tần suất → kiểm thử lại.',
     },
   ],
   11: [

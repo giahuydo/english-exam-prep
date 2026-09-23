@@ -1,336 +1,553 @@
 {
   "version": 1,
   "questionId": "t10-q02",
-  "speechText": "I would separate creating the notification from sending it. The main service creates a notification event or job and sends it to a queue. Workers can send email, push, or other notification types. I would include retry, idempotency, status tracking, and a dead-letter process for failed jobs.",
+  "speechText": "When an order is confirmed, I save a notification job with the order change and queue it through an outbox for an email worker. The worker stores a delivery ID, retries temporary provider errors with a limit, and marks permanent failures for review. It checks the job ID before sending again, though an external provider may still send twice unless it supports idempotency. The user can see a pending or failed status instead of assuming the email arrived.",
   "words": [
     {
-      "text": "I",
+      "text": "When",
       "canonicalStart": 0,
-      "canonicalEnd": 1,
+      "canonicalEnd": 4,
       "startMs": 113,
-      "endMs": 300
+      "endMs": 347
     },
     {
-      "text": "would",
-      "canonicalStart": 2,
+      "text": "an",
+      "canonicalStart": 5,
       "canonicalEnd": 7,
-      "startMs": 316,
-      "endMs": 519
+      "startMs": 363,
+      "endMs": 488
     },
     {
-      "text": "separate",
+      "text": "order",
       "canonicalStart": 8,
-      "canonicalEnd": 16,
-      "startMs": 534,
-      "endMs": 1159
+      "canonicalEnd": 13,
+      "startMs": 503,
+      "endMs": 831
     },
     {
-      "text": "creating",
+      "text": "is",
+      "canonicalStart": 14,
+      "canonicalEnd": 16,
+      "startMs": 847,
+      "endMs": 1019
+    },
+    {
+      "text": "confirmed,",
       "canonicalStart": 17,
-      "canonicalEnd": 25,
-      "startMs": 1175,
+      "canonicalEnd": 27,
+      "startMs": 1034,
       "endMs": 1753
     },
     {
-      "text": "the",
-      "canonicalStart": 26,
+      "text": "I",
+      "canonicalStart": 28,
       "canonicalEnd": 29,
-      "startMs": 1769,
-      "endMs": 1863
+      "startMs": 2097,
+      "endMs": 2269
     },
     {
-      "text": "notification",
+      "text": "save",
       "canonicalStart": 30,
-      "canonicalEnd": 42,
-      "startMs": 1878,
-      "endMs": 2831
-    },
-    {
-      "text": "from",
-      "canonicalStart": 43,
-      "canonicalEnd": 47,
-      "startMs": 2847,
-      "endMs": 3050
-    },
-    {
-      "text": "sending",
-      "canonicalStart": 48,
-      "canonicalEnd": 55,
-      "startMs": 3066,
-      "endMs": 3566
-    },
-    {
-      "text": "it.",
-      "canonicalStart": 56,
-      "canonicalEnd": 59,
-      "startMs": 3581,
-      "endMs": 3831
-    },
-    {
-      "text": "The",
-      "canonicalStart": 60,
-      "canonicalEnd": 63,
-      "startMs": 4922,
-      "endMs": 5094
-    },
-    {
-      "text": "main",
-      "canonicalStart": 64,
-      "canonicalEnd": 68,
-      "startMs": 5109,
-      "endMs": 5469
-    },
-    {
-      "text": "service",
-      "canonicalStart": 69,
-      "canonicalEnd": 76,
-      "startMs": 5484,
-      "endMs": 5969
-    },
-    {
-      "text": "creates",
-      "canonicalStart": 77,
-      "canonicalEnd": 84,
-      "startMs": 5984,
-      "endMs": 6469
+      "canonicalEnd": 34,
+      "startMs": 2284,
+      "endMs": 2613
     },
     {
       "text": "a",
-      "canonicalStart": 85,
-      "canonicalEnd": 86,
-      "startMs": 6484,
-      "endMs": 6547
+      "canonicalStart": 35,
+      "canonicalEnd": 36,
+      "startMs": 2628,
+      "endMs": 2675
     },
     {
       "text": "notification",
-      "canonicalStart": 87,
-      "canonicalEnd": 99,
-      "startMs": 6563,
-      "endMs": 7516
-    },
-    {
-      "text": "event",
-      "canonicalStart": 100,
-      "canonicalEnd": 105,
-      "startMs": 7531,
-      "endMs": 8000
-    },
-    {
-      "text": "or",
-      "canonicalStart": 106,
-      "canonicalEnd": 108,
-      "startMs": 8016,
-      "endMs": 8188
+      "canonicalStart": 37,
+      "canonicalEnd": 49,
+      "startMs": 2691,
+      "endMs": 3628
     },
     {
       "text": "job",
-      "canonicalStart": 109,
-      "canonicalEnd": 112,
-      "startMs": 8203,
-      "endMs": 8672
+      "canonicalStart": 50,
+      "canonicalEnd": 53,
+      "startMs": 3644,
+      "endMs": 4019
+    },
+    {
+      "text": "with",
+      "canonicalStart": 54,
+      "canonicalEnd": 58,
+      "startMs": 4034,
+      "endMs": 4175
+    },
+    {
+      "text": "the",
+      "canonicalStart": 59,
+      "canonicalEnd": 62,
+      "startMs": 4191,
+      "endMs": 4284
+    },
+    {
+      "text": "order",
+      "canonicalStart": 63,
+      "canonicalEnd": 68,
+      "startMs": 4300,
+      "endMs": 4659
+    },
+    {
+      "text": "change",
+      "canonicalStart": 69,
+      "canonicalEnd": 75,
+      "startMs": 4675,
+      "endMs": 5206
     },
     {
       "text": "and",
-      "canonicalStart": 113,
-      "canonicalEnd": 116,
-      "startMs": 8688,
-      "endMs": 8828
+      "canonicalStart": 76,
+      "canonicalEnd": 79,
+      "startMs": 5222,
+      "endMs": 5394
     },
     {
-      "text": "sends",
-      "canonicalStart": 117,
-      "canonicalEnd": 122,
-      "startMs": 8844,
-      "endMs": 9188
+      "text": "queue",
+      "canonicalStart": 80,
+      "canonicalEnd": 85,
+      "startMs": 5409,
+      "endMs": 5753
     },
     {
       "text": "it",
-      "canonicalStart": 123,
-      "canonicalEnd": 125,
-      "startMs": 9203,
-      "endMs": 9328
+      "canonicalStart": 86,
+      "canonicalEnd": 88,
+      "startMs": 5769,
+      "endMs": 5909
     },
     {
-      "text": "to",
-      "canonicalStart": 126,
-      "canonicalEnd": 128,
-      "startMs": 9344,
-      "endMs": 9516
+      "text": "through",
+      "canonicalStart": 89,
+      "canonicalEnd": 96,
+      "startMs": 5925,
+      "endMs": 6159
     },
     {
-      "text": "a",
-      "canonicalStart": 129,
-      "canonicalEnd": 130,
-      "startMs": 9531,
-      "endMs": 9641
+      "text": "an",
+      "canonicalStart": 97,
+      "canonicalEnd": 99,
+      "startMs": 6175,
+      "endMs": 6300
     },
     {
-      "text": "queue.",
-      "canonicalStart": 131,
-      "canonicalEnd": 137,
-      "startMs": 9656,
-      "endMs": 10188
-    },
-    {
-      "text": "Workers",
-      "canonicalStart": 138,
-      "canonicalEnd": 145,
-      "startMs": 11266,
-      "endMs": 11875
-    },
-    {
-      "text": "can",
-      "canonicalStart": 146,
-      "canonicalEnd": 149,
-      "startMs": 11891,
-      "endMs": 12094
-    },
-    {
-      "text": "send",
-      "canonicalStart": 150,
-      "canonicalEnd": 154,
-      "startMs": 12109,
-      "endMs": 12406
-    },
-    {
-      "text": "email,",
-      "canonicalStart": 155,
-      "canonicalEnd": 161,
-      "startMs": 12422,
-      "endMs": 13031
-    },
-    {
-      "text": "push,",
-      "canonicalStart": 162,
-      "canonicalEnd": 167,
-      "startMs": 13344,
-      "endMs": 13859
-    },
-    {
-      "text": "or",
-      "canonicalStart": 168,
-      "canonicalEnd": 170,
-      "startMs": 14109,
-      "endMs": 14313
-    },
-    {
-      "text": "other",
-      "canonicalStart": 171,
-      "canonicalEnd": 176,
-      "startMs": 14328,
-      "endMs": 14578
-    },
-    {
-      "text": "notification",
-      "canonicalStart": 177,
-      "canonicalEnd": 189,
-      "startMs": 14594,
-      "endMs": 15484
-    },
-    {
-      "text": "types.",
-      "canonicalStart": 190,
-      "canonicalEnd": 196,
-      "startMs": 15500,
-      "endMs": 16188
-    },
-    {
-      "text": "I",
-      "canonicalStart": 197,
-      "canonicalEnd": 198,
-      "startMs": 17266,
-      "endMs": 17469
-    },
-    {
-      "text": "would",
-      "canonicalStart": 199,
-      "canonicalEnd": 204,
-      "startMs": 17484,
-      "endMs": 17688
-    },
-    {
-      "text": "include",
-      "canonicalStart": 205,
-      "canonicalEnd": 212,
-      "startMs": 17703,
-      "endMs": 18203
-    },
-    {
-      "text": "retry,",
-      "canonicalStart": 213,
-      "canonicalEnd": 219,
-      "startMs": 18219,
-      "endMs": 18922
-    },
-    {
-      "text": "idempotency,",
-      "canonicalStart": 220,
-      "canonicalEnd": 232,
-      "startMs": 19203,
-      "endMs": 20297
-    },
-    {
-      "text": "status",
-      "canonicalStart": 233,
-      "canonicalEnd": 239,
-      "startMs": 20641,
-      "endMs": 21188
-    },
-    {
-      "text": "tracking,",
-      "canonicalStart": 240,
-      "canonicalEnd": 249,
-      "startMs": 21203,
-      "endMs": 21859
-    },
-    {
-      "text": "and",
-      "canonicalStart": 250,
-      "canonicalEnd": 253,
-      "startMs": 22141,
-      "endMs": 22297
-    },
-    {
-      "text": "a",
-      "canonicalStart": 254,
-      "canonicalEnd": 255,
-      "startMs": 22313,
-      "endMs": 22422
-    },
-    {
-      "text": "dead-letter",
-      "canonicalStart": 256,
-      "canonicalEnd": 267,
-      "startMs": 22438,
-      "endMs": 23031
-    },
-    {
-      "text": "process",
-      "canonicalStart": 268,
-      "canonicalEnd": 275,
-      "startMs": 23047,
-      "endMs": 23703
+      "text": "outbox",
+      "canonicalStart": 100,
+      "canonicalEnd": 106,
+      "startMs": 6316,
+      "endMs": 6988
     },
     {
       "text": "for",
-      "canonicalStart": 276,
-      "canonicalEnd": 279,
-      "startMs": 23719,
-      "endMs": 23906
+      "canonicalStart": 107,
+      "canonicalEnd": 110,
+      "startMs": 7003,
+      "endMs": 7159
+    },
+    {
+      "text": "an",
+      "canonicalStart": 111,
+      "canonicalEnd": 113,
+      "startMs": 7175,
+      "endMs": 7284
+    },
+    {
+      "text": "email",
+      "canonicalStart": 114,
+      "canonicalEnd": 119,
+      "startMs": 7300,
+      "endMs": 7784
+    },
+    {
+      "text": "worker.",
+      "canonicalStart": 120,
+      "canonicalEnd": 127,
+      "startMs": 7800,
+      "endMs": 8394
+    },
+    {
+      "text": "The",
+      "canonicalStart": 128,
+      "canonicalEnd": 131,
+      "startMs": 9484,
+      "endMs": 9656
+    },
+    {
+      "text": "worker",
+      "canonicalStart": 132,
+      "canonicalEnd": 138,
+      "startMs": 9672,
+      "endMs": 10109
+    },
+    {
+      "text": "stores",
+      "canonicalStart": 139,
+      "canonicalEnd": 145,
+      "startMs": 10125,
+      "endMs": 10578
+    },
+    {
+      "text": "a",
+      "canonicalStart": 146,
+      "canonicalEnd": 147,
+      "startMs": 10594,
+      "endMs": 10672
+    },
+    {
+      "text": "delivery",
+      "canonicalStart": 148,
+      "canonicalEnd": 156,
+      "startMs": 10688,
+      "endMs": 11297
+    },
+    {
+      "text": "ID,",
+      "canonicalStart": 157,
+      "canonicalEnd": 160,
+      "startMs": 11313,
+      "endMs": 11922
+    },
+    {
+      "text": "retries",
+      "canonicalStart": 161,
+      "canonicalEnd": 168,
+      "startMs": 12297,
+      "endMs": 12938
+    },
+    {
+      "text": "temporary",
+      "canonicalStart": 169,
+      "canonicalEnd": 178,
+      "startMs": 12953,
+      "endMs": 13594
+    },
+    {
+      "text": "provider",
+      "canonicalStart": 179,
+      "canonicalEnd": 187,
+      "startMs": 13609,
+      "endMs": 14266
+    },
+    {
+      "text": "errors",
+      "canonicalStart": 188,
+      "canonicalEnd": 194,
+      "startMs": 14281,
+      "endMs": 14719
+    },
+    {
+      "text": "with",
+      "canonicalStart": 195,
+      "canonicalEnd": 199,
+      "startMs": 14734,
+      "endMs": 14875
+    },
+    {
+      "text": "a",
+      "canonicalStart": 200,
+      "canonicalEnd": 201,
+      "startMs": 14891,
+      "endMs": 14953
+    },
+    {
+      "text": "limit,",
+      "canonicalStart": 202,
+      "canonicalEnd": 208,
+      "startMs": 14969,
+      "endMs": 15422
+    },
+    {
+      "text": "and",
+      "canonicalStart": 209,
+      "canonicalEnd": 212,
+      "startMs": 15766,
+      "endMs": 15891
+    },
+    {
+      "text": "marks",
+      "canonicalStart": 213,
+      "canonicalEnd": 218,
+      "startMs": 15906,
+      "endMs": 16297
+    },
+    {
+      "text": "permanent",
+      "canonicalStart": 219,
+      "canonicalEnd": 228,
+      "startMs": 16313,
+      "endMs": 16828
+    },
+    {
+      "text": "failures",
+      "canonicalStart": 229,
+      "canonicalEnd": 237,
+      "startMs": 16844,
+      "endMs": 17484
+    },
+    {
+      "text": "for",
+      "canonicalStart": 238,
+      "canonicalEnd": 241,
+      "startMs": 17500,
+      "endMs": 17703
+    },
+    {
+      "text": "review.",
+      "canonicalStart": 242,
+      "canonicalEnd": 249,
+      "startMs": 17719,
+      "endMs": 18313
+    },
+    {
+      "text": "It",
+      "canonicalStart": 250,
+      "canonicalEnd": 252,
+      "startMs": 19406,
+      "endMs": 19609
+    },
+    {
+      "text": "checks",
+      "canonicalStart": 253,
+      "canonicalEnd": 259,
+      "startMs": 19625,
+      "endMs": 20031
+    },
+    {
+      "text": "the",
+      "canonicalStart": 260,
+      "canonicalEnd": 263,
+      "startMs": 20047,
+      "endMs": 20172
+    },
+    {
+      "text": "job",
+      "canonicalStart": 264,
+      "canonicalEnd": 267,
+      "startMs": 20188,
+      "endMs": 20578
+    },
+    {
+      "text": "ID",
+      "canonicalStart": 268,
+      "canonicalEnd": 270,
+      "startMs": 20594,
+      "endMs": 21125
+    },
+    {
+      "text": "before",
+      "canonicalStart": 271,
+      "canonicalEnd": 277,
+      "startMs": 21141,
+      "endMs": 21609
+    },
+    {
+      "text": "sending",
+      "canonicalStart": 278,
+      "canonicalEnd": 285,
+      "startMs": 21625,
+      "endMs": 22078
+    },
+    {
+      "text": "again,",
+      "canonicalStart": 286,
+      "canonicalEnd": 292,
+      "startMs": 22094,
+      "endMs": 22578
+    },
+    {
+      "text": "though",
+      "canonicalStart": 293,
+      "canonicalEnd": 299,
+      "startMs": 22938,
+      "endMs": 23156
+    },
+    {
+      "text": "an",
+      "canonicalStart": 300,
+      "canonicalEnd": 302,
+      "startMs": 23172,
+      "endMs": 23281
+    },
+    {
+      "text": "external",
+      "canonicalStart": 303,
+      "canonicalEnd": 311,
+      "startMs": 23297,
+      "endMs": 23859
+    },
+    {
+      "text": "provider",
+      "canonicalStart": 312,
+      "canonicalEnd": 320,
+      "startMs": 23875,
+      "endMs": 24453
+    },
+    {
+      "text": "may",
+      "canonicalStart": 321,
+      "canonicalEnd": 324,
+      "startMs": 24469,
+      "endMs": 24672
+    },
+    {
+      "text": "still",
+      "canonicalStart": 325,
+      "canonicalEnd": 330,
+      "startMs": 24688,
+      "endMs": 25063
+    },
+    {
+      "text": "send",
+      "canonicalStart": 331,
+      "canonicalEnd": 335,
+      "startMs": 25078,
+      "endMs": 25438
+    },
+    {
+      "text": "twice",
+      "canonicalStart": 336,
+      "canonicalEnd": 341,
+      "startMs": 25453,
+      "endMs": 25875
+    },
+    {
+      "text": "unless",
+      "canonicalStart": 342,
+      "canonicalEnd": 348,
+      "startMs": 25891,
+      "endMs": 26266
+    },
+    {
+      "text": "it",
+      "canonicalStart": 349,
+      "canonicalEnd": 351,
+      "startMs": 26281,
+      "endMs": 26391
+    },
+    {
+      "text": "supports",
+      "canonicalStart": 352,
+      "canonicalEnd": 360,
+      "startMs": 26406,
+      "endMs": 26953
+    },
+    {
+      "text": "idempotency.",
+      "canonicalStart": 361,
+      "canonicalEnd": 373,
+      "startMs": 26969,
+      "endMs": 28063
+    },
+    {
+      "text": "The",
+      "canonicalStart": 374,
+      "canonicalEnd": 377,
+      "startMs": 29141,
+      "endMs": 29250
+    },
+    {
+      "text": "user",
+      "canonicalStart": 378,
+      "canonicalEnd": 382,
+      "startMs": 29266,
+      "endMs": 29781
+    },
+    {
+      "text": "can",
+      "canonicalStart": 383,
+      "canonicalEnd": 386,
+      "startMs": 29797,
+      "endMs": 30016
+    },
+    {
+      "text": "see",
+      "canonicalStart": 387,
+      "canonicalEnd": 390,
+      "startMs": 30031,
+      "endMs": 30297
+    },
+    {
+      "text": "a",
+      "canonicalStart": 391,
+      "canonicalEnd": 392,
+      "startMs": 30313,
+      "endMs": 30406
+    },
+    {
+      "text": "pending",
+      "canonicalStart": 393,
+      "canonicalEnd": 400,
+      "startMs": 30422,
+      "endMs": 30969
+    },
+    {
+      "text": "or",
+      "canonicalStart": 401,
+      "canonicalEnd": 403,
+      "startMs": 30984,
+      "endMs": 31125
     },
     {
       "text": "failed",
-      "canonicalStart": 280,
-      "canonicalEnd": 286,
-      "startMs": 23922,
-      "endMs": 24344
+      "canonicalStart": 404,
+      "canonicalEnd": 410,
+      "startMs": 31141,
+      "endMs": 31563
     },
     {
-      "text": "jobs.",
-      "canonicalStart": 287,
-      "canonicalEnd": 292,
-      "startMs": 24359,
-      "endMs": 25078
+      "text": "status",
+      "canonicalStart": 411,
+      "canonicalEnd": 417,
+      "startMs": 31578,
+      "endMs": 32234
+    },
+    {
+      "text": "instead",
+      "canonicalStart": 418,
+      "canonicalEnd": 425,
+      "startMs": 32250,
+      "endMs": 32719
+    },
+    {
+      "text": "of",
+      "canonicalStart": 426,
+      "canonicalEnd": 428,
+      "startMs": 32734,
+      "endMs": 32813
+    },
+    {
+      "text": "assuming",
+      "canonicalStart": 429,
+      "canonicalEnd": 437,
+      "startMs": 32828,
+      "endMs": 33391
+    },
+    {
+      "text": "the",
+      "canonicalStart": 438,
+      "canonicalEnd": 441,
+      "startMs": 33406,
+      "endMs": 33484
+    },
+    {
+      "text": "email",
+      "canonicalStart": 442,
+      "canonicalEnd": 447,
+      "startMs": 33500,
+      "endMs": 34047
+    },
+    {
+      "text": "arrived.",
+      "canonicalStart": 448,
+      "canonicalEnd": 456,
+      "startMs": 34063,
+      "endMs": 34797
     }
   ]
 }

@@ -8,8 +8,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
   1: [
     {
       question: 'What is the Node.js event loop, and why is it important?',
-      answer: 'Node.js uses a single main thread to run JavaScript. The event loop helps Node.js handle many requests without waiting for every I/O task to finish. When Node.js starts an I/O task, such as reading a file or calling a database, it can continue handling other work. When the I/O task finishes, its callback is added back to the event loop. This is why Node.js works well for I/O-heavy applications, but we should avoid heavy CPU work on the main thread.',
-      keyIdea: 'One JavaScript main thread → start I/O without waiting → handle other work → resume callbacks when I/O finishes → keep CPU-heavy work off the main thread.',
+      answer: 'Node.js runs JavaScript callbacks on the event loop. For a database request, it can wait for the network without blocking that loop, then run the callback when the result is ready. File work and some DNS calls may use the libuv worker pool instead. I watch event-loop lag because heavy JavaScript on the main thread still delays other requests.',
+      keyIdea: 'JavaScript callbacks run on the event loop → network I/O can wait without blocking it; some file and DNS work uses the worker pool → watch event-loop lag from heavy JavaScript.',
     },
     {
       question: 'What is the difference between I/O-heavy and CPU-heavy tasks?',
@@ -18,8 +18,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
     },
     {
       question: 'What is the difference between async/await and synchronous code?',
-      answer: 'Synchronous code waits for one task to finish before moving to the next task. With async/await, Node.js can start an asynchronous operation and continue other work while it is waiting. Async/await also makes asynchronous code easier to read and maintain. However, using await does not automatically make CPU-heavy work non-blocking.',
-      keyIdea: 'Synchronous code waits → async/await starts an asynchronous operation → other work can continue → await does not make CPU-heavy work non-blocking.',
+      answer: 'Synchronous code blocks the JavaScript thread until it finishes. With await on a database call, the current async function pauses, but the event loop can handle other callbacks while the I/O is pending. When the result is ready, the function continues. Await does not move a CPU-heavy calculation off the main thread; I would use a worker thread for that.',
+      keyIdea: 'Synchronous code blocks the thread → await pauses only the current async function during I/O → other callbacks run → CPU-heavy JavaScript still needs a worker thread.',
     },
     {
       question: 'What happens if one request performs a heavy CPU calculation?',
@@ -30,8 +30,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
   2: [
     {
       question: 'How do you design a reliable REST API?',
-      answer: 'I start with clear resources and endpoints. I validate input data, return consistent HTTP status codes, and use a standard error response. For list APIs, I normally support pagination and filtering. For important write operations, I also think about authentication, authorization, idempotency, logging, and rate limiting.',
-      keyIdea: 'Define clear resources and endpoints → validate input → return consistent status codes and errors → add pagination and filtering → protect important writes.',
+      answer: 'I start with one clear resource, such as orders, and define what each endpoint returns. For a create request, I validate input, check the user’s permission, and return a consistent error if it fails. If a client retries creation, an idempotency key helps prevent duplicate orders. I paginate list results and log a request ID so we can trace failures.',
+      keyIdea: 'Define an orders endpoint → validate and authorize writes → use an idempotency key for retries → paginate reads and trace errors with a request ID.',
     },
     {
       question: 'What is idempotency, and when do you need it?',
@@ -62,25 +62,25 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
     },
     {
       question: 'How do you prevent race conditions when two requests update the same data?',
-      answer: 'The solution depends on the business case. I can use a database transaction, a unique constraint, optimistic locking, or pessimistic locking. I prefer database constraints when possible because they protect the data even if two application requests run at the same time.',
-      keyIdea: 'Two requests update the same data → choose a transaction, constraint, or lock for the business case → prefer database constraints when possible → protect concurrent updates.',
+      answer: 'If two requests change the same balance, a read followed by a separate write can lose one update. I would use an atomic database update inside a transaction, with a condition that the balance stays valid. For editing a profile, I would check a version number and return a conflict if it changed. A unique constraint protects rules such as one order per external ID, but it does not prevent every kind of race.',
+      keyIdea: 'Concurrent balance changes can lose updates → use a conditional atomic update in a transaction → use a version check for edits → unique constraints protect specific uniqueness rules.',
     },
   ],
   4: [
     {
       question: 'Why would you use RabbitMQ instead of processing everything inside the API request?',
-      answer: 'A queue lets the API move slow or background work outside the request. The API can respond faster, and workers can process jobs separately. It also gives us retry, better reliability, and easier scaling. The trade-off is more system complexity and sometimes higher processing latency.',
-      keyIdea: 'Slow work in an API request → move it to a queue → respond faster while workers process jobs → gain retries and scaling at the cost of complexity and latency.',
+      answer: 'If sending an email is slow, I would save a job with the business change, then publish it through an outbox and let the API return before delivery. A RabbitMQ consumer processes the job and acknowledges it only after success. I set retry limits and handle duplicate deliveries, because a queue alone does not guarantee the work happens exactly once. This makes the request faster but adds a broker and delay before delivery.',
+      keyIdea: 'Slow email → save a job with the business change and publish via outbox → consumer ACKs after success → limit retries and handle duplicates → trade simpler requests for broker complexity and delivery delay.',
     },
     {
       question: 'What are ACK and NACK in RabbitMQ?',
-      answer: 'ACK tells RabbitMQ that the consumer processed the message successfully, so the message can be removed. NACK means processing failed. Depending on our configuration, the message can be retried, requeued, or sent to a dead-letter queue.',
-      keyIdea: 'Message succeeds → ACK removes it → processing fails → NACK → retry, requeue, or dead-letter according to configuration.',
+      answer: 'After successful processing, a consumer sends ACK so RabbitMQ removes the message. If it cannot process the message, it can NACK with requeue true to put it back, or requeue false to dead-letter it if a dead-letter exchange is configured; otherwise it is discarded. I avoid requeueing a permanent error forever and use a limited retry path instead.',
+      keyIdea: 'Success → ACK removes the message → failure → NACK with requeue true returns it; false dead-letters if configured or discards → limit retries for permanent errors.',
     },
     {
       question: 'How do you handle duplicate messages?',
-      answer: 'I assume that a message can be delivered more than once. The consumer should be idempotent. For example, I can use a job ID or business ID and store it in the database with a unique constraint. Before performing the action, I check whether it has already been processed.',
-      keyIdea: 'Message may arrive twice → make the consumer idempotent → store a unique job or business ID → check before acting again.',
+      answer: 'A worker can finish a job but lose its ACK, so RabbitMQ may deliver it again. I save the job ID with a unique constraint in the same database transaction as the business change. If that ID already exists, I skip the change and ACK the duplicate. For an external payment call, I also pass a stable idempotency key to the provider.',
+      keyIdea: 'Lost ACK → duplicate delivery → record job ID and business change atomically → skip and ACK duplicates → use a provider idempotency key for external calls.',
     },
     {
       question: 'The database transaction succeeds, but publishing to RabbitMQ fails. What would you do?',
@@ -96,20 +96,20 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
     },
     {
       question: 'What is the difficult part of caching?',
-      answer: 'The difficult part is keeping cached data correct. When the database changes, old cached data may still exist. I normally use a clear invalidation strategy and a reasonable TTL. For important data, I prefer correctness over keeping data cached for too long.',
-      keyIdea: 'Database changes → cached data may become stale → invalidate clearly and set a reasonable TTL → prioritize correctness for important data.',
+      answer: 'The hard part is stale data after a database write. With cache-aside, I read Redis first, load the database on a miss, and cache the result with a TTL. After a successful update, I delete the related cache key so the next read reloads it. There is still a short race between a read and a write, so I would read the database directly when fresh data is required.',
+      keyIdea: 'Cache-aside reads Redis then DB on a miss → store with TTL → invalidate after a successful write → use the DB directly when stale reads are unacceptable.',
     },
     {
       question: 'What happens if Redis goes down?',
-      answer: 'For normal caching, I try to let the application fall back to the database instead of failing completely. I also use timeouts and monitoring so Redis problems do not make every request wait for a long time. However, if Redis is used for critical state, the design needs a stronger recovery plan.',
-      keyIdea: 'Redis unavailable → normal cache falls back to the database → use timeouts and monitoring → plan stronger recovery if Redis holds critical state.',
+      answer: 'If Redis is only a cache, I use a short timeout and read from the database when it is unavailable. I monitor database load and limit traffic if the fallback overloads it. I would not treat cache-only data as durable state. If Redis stores critical state, I first define persistence, failover, and how to recover lost writes.',
+      keyIdea: 'Optional cache fails → short timeout and DB fallback → watch DB load → critical state needs explicit persistence, failover, and lost-write recovery.',
     },
   ],
   6: [
     {
       question: 'Traffic increases 10 times. Response time is slow, but CPU usage is low. What could be wrong?',
-      answer: 'If the response time is slow but CPU usage is still low, I would first think about an I/O problem, not a CPU problem. The system may be waiting for a database query, an external API, Redis, or a database connection. First, I check logs and metrics to find which API is slow. Then I check the database, connection pool, external services, event-loop lag, memory, and pending requests. If traffic is too high, we can scale more instances, but I would find the bottleneck first because adding servers may not solve the real problem.',
-      keyIdea: 'Slow API + low CPU → suspect I/O first → check logs, database, pool, and external services → find the bottleneck → scale only if needed.',
+      answer: 'Slow responses with low CPU often mean requests are waiting, not computing. I would trace a slow request and check database time, connection-pool waits, and external API timeouts first. If the pool is full, I would fix long queries or connection leaks before adding API instances, which could put even more pressure on the database. Then I would measure latency again.',
+      keyIdea: 'Low CPU + high latency → trace where requests wait → check DB queries, pool, and external timeouts → fix the bottleneck before scaling → measure again.',
     },
     {
       question: 'What is horizontal scaling?',
@@ -152,8 +152,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
     },
     {
       question: 'How do you keep data consistent across multiple services?',
-      answer: 'There is no single database transaction across independent services in many systems. I normally design each local operation to be reliable and use events for communication. Patterns such as Outbox, idempotent consumers, retries, and compensating actions help us reach eventual consistency safely.',
-      keyIdea: 'Independent services lack one shared transaction → make local operations reliable → communicate with events → use Outbox, idempotency, retries, and compensation for eventual consistency.',
+      answer: 'For example, an order service may save an order before a payment service confirms payment. I save the order and an outbox event in one transaction, then publish the event for the payment service. The payment consumer handles duplicates and reports success or failure; on failure, I mark the order canceled or start a refund if needed. The services become consistent over time, so the order status must show that payment is still pending.',
+      keyIdea: 'Order saved before payment → commit order and outbox event together → payment consumer handles duplicates → confirm or compensate → show pending status until consistent.',
     },
   ],
   9: [
@@ -164,8 +164,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
     },
     {
       question: 'How do you secure a backend API?',
-      answer: 'I validate all input, use authentication and authorization, protect secrets, use HTTPS, and avoid exposing sensitive information in errors or logs. I also use parameterized database queries, rate limiting where needed, dependency updates, and proper permission checks on every protected action.',
-      keyIdea: 'Validate input and check identity and permissions → protect secrets and use HTTPS → avoid sensitive errors or logs → add safe queries and rate limits where needed.',
+      answer: 'For a protected order API, I first verify the user and check that this order belongs to them, not just that they have a valid token. I validate input and use parameterized queries to prevent unsafe database access. I use HTTPS, keep secrets out of logs, and rate-limit sensitive endpoints such as login. I also review dependencies and log safe request IDs for incident tracing.',
+      keyIdea: 'Protected order → verify identity and ownership → validate input and parameterize queries → use HTTPS and safe logs → rate-limit sensitive endpoints.',
     },
     {
       question: 'Why should the backend check permissions even if the frontend hides a button?',
@@ -176,18 +176,18 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
   10: [
     {
       question: 'How would you design a large file processing system?',
-      answer: 'I would not process a large file completely inside the API request. The API uploads the file to object storage and creates a job. A queue sends the job to a worker. The worker processes the file in smaller steps and updates the job status, for example queued, running, completed, or failed. For large jobs, I also use checkpoints so the worker can continue from the last successful step after a failure.',
-      keyIdea: 'Large file → upload to object storage and create a job → queue work for a worker → update status in steps → checkpoint for recovery.',
+      answer: 'I would upload the file to object storage, then create a job that points to its location instead of processing it in the API request. A worker reads the file in chunks, saves progress, and updates a status the client can check. If the worker stops, it can resume from a checkpoint without repeating completed chunks. I set file size limits and make each step safe to retry so a bad file does not block the queue.',
+      keyIdea: 'Upload large file to object storage → queue a job with its location → process chunks and expose status → checkpoint and retry safely → limit bad files.',
     },
     {
       question: 'How would you design a notification system?',
-      answer: 'I would separate creating the notification from sending it. The main service creates a notification event or job and sends it to a queue. Workers can send email, push, or other notification types. I would include retry, idempotency, status tracking, and a dead-letter process for failed jobs.',
-      keyIdea: 'Create notification separately from delivery → queue a job → workers send email or push → track status, retry safely, and handle failed jobs.',
+      answer: 'When an order is confirmed, I save a notification job with the order change and queue it through an outbox for an email worker. The worker stores a delivery ID, retries temporary provider errors with a limit, and marks permanent failures for review. It checks the job ID before sending again, though an external provider may still send twice unless it supports idempotency. The user can see a pending or failed status instead of assuming the email arrived.',
+      keyIdea: 'Order confirmed → save and queue notification via outbox → worker tracks delivery and limits retries → guard duplicates, including provider behavior → expose pending or failed status.',
     },
     {
       question: 'How would you design an API that must handle high traffic?',
-      answer: 'I start with stateless API instances behind a load balancer. I use database indexes and connection pooling, and cache frequently read data when it is safe. Slow background work can go to a queue. I also add rate limiting, timeouts, monitoring, and horizontal scaling. The exact design depends on where the real bottleneck is.',
-      keyIdea: 'High traffic → stateless APIs behind a load balancer → tune database and safe caching → queue slow work → monitor and scale around the real bottleneck.',
+      answer: 'I start by measuring which endpoint slows down under load, not by adding servers first. If database reads are the bottleneck, I check the query plan, add a useful index, and cache safe read-only data with a TTL. Stateless API instances behind a load balancer can then scale, but each instance also uses database connections, so I cap the pool. I use timeouts and rate limits to protect the system, then load-test again.',
+      keyIdea: 'Measure the slow endpoint → fix query and safe read cache → scale stateless APIs while limiting DB connections → protect with timeouts and rate limits → retest.',
     },
   ],
   11: [

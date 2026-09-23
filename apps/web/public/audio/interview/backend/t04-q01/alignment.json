@@ -1,322 +1,518 @@
 {
   "version": 1,
   "questionId": "t04-q01",
-  "speechText": "A queue lets the API move slow or background work outside the request. The API can respond faster, and workers can process jobs separately. It also gives us retry, better reliability, and easier scaling. The trade-off is more system complexity and sometimes higher processing latency.",
+  "speechText": "If sending an email is slow, I would save a job with the business change, then publish it through an outbox and let the API return before delivery. A RabbitMQ consumer processes the job and acknowledges it only after success. I set retry limits and handle duplicate deliveries, because a queue alone does not guarantee the work happens exactly once. This makes the request faster but adds a broker and delay before delivery.",
   "words": [
     {
-      "text": "A",
+      "text": "If",
       "canonicalStart": 0,
-      "canonicalEnd": 1,
+      "canonicalEnd": 2,
       "startMs": 113,
-      "endMs": 284
+      "endMs": 316
     },
     {
-      "text": "queue",
-      "canonicalStart": 2,
-      "canonicalEnd": 7,
-      "startMs": 300,
-      "endMs": 706
+      "text": "sending",
+      "canonicalStart": 3,
+      "canonicalEnd": 10,
+      "startMs": 331,
+      "endMs": 800
     },
     {
-      "text": "lets",
-      "canonicalStart": 8,
-      "canonicalEnd": 12,
-      "startMs": 722,
-      "endMs": 1034
+      "text": "an",
+      "canonicalStart": 11,
+      "canonicalEnd": 13,
+      "startMs": 816,
+      "endMs": 909
     },
     {
-      "text": "the",
-      "canonicalStart": 13,
-      "canonicalEnd": 16,
-      "startMs": 1050,
-      "endMs": 1222
-    },
-    {
-      "text": "API",
-      "canonicalStart": 17,
-      "canonicalEnd": 20,
-      "startMs": 1238,
-      "endMs": 1941
-    },
-    {
-      "text": "move",
-      "canonicalStart": 21,
-      "canonicalEnd": 25,
-      "startMs": 1956,
-      "endMs": 2331
-    },
-    {
-      "text": "slow",
-      "canonicalStart": 26,
-      "canonicalEnd": 30,
-      "startMs": 2347,
-      "endMs": 2863
-    },
-    {
-      "text": "or",
-      "canonicalStart": 31,
-      "canonicalEnd": 33,
-      "startMs": 2878,
-      "endMs": 3081
-    },
-    {
-      "text": "background",
-      "canonicalStart": 34,
-      "canonicalEnd": 44,
-      "startMs": 3097,
-      "endMs": 3769
-    },
-    {
-      "text": "work",
-      "canonicalStart": 45,
-      "canonicalEnd": 49,
-      "startMs": 3784,
-      "endMs": 4113
-    },
-    {
-      "text": "outside",
-      "canonicalStart": 50,
-      "canonicalEnd": 57,
-      "startMs": 4128,
-      "endMs": 4706
-    },
-    {
-      "text": "the",
-      "canonicalStart": 58,
-      "canonicalEnd": 61,
-      "startMs": 4722,
-      "endMs": 4800
-    },
-    {
-      "text": "request.",
-      "canonicalStart": 62,
-      "canonicalEnd": 70,
-      "startMs": 4816,
-      "endMs": 5628
-    },
-    {
-      "text": "The",
-      "canonicalStart": 71,
-      "canonicalEnd": 74,
-      "startMs": 6719,
-      "endMs": 6938
-    },
-    {
-      "text": "API",
-      "canonicalStart": 75,
-      "canonicalEnd": 78,
-      "startMs": 6953,
-      "endMs": 7719
-    },
-    {
-      "text": "can",
-      "canonicalStart": 79,
-      "canonicalEnd": 82,
-      "startMs": 7734,
-      "endMs": 7906
-    },
-    {
-      "text": "respond",
-      "canonicalStart": 83,
-      "canonicalEnd": 90,
-      "startMs": 7922,
-      "endMs": 8500
-    },
-    {
-      "text": "faster,",
-      "canonicalStart": 91,
-      "canonicalEnd": 98,
-      "startMs": 8516,
-      "endMs": 9188
-    },
-    {
-      "text": "and",
-      "canonicalStart": 99,
-      "canonicalEnd": 102,
-      "startMs": 9484,
-      "endMs": 9625
-    },
-    {
-      "text": "workers",
-      "canonicalStart": 103,
-      "canonicalEnd": 110,
-      "startMs": 9641,
-      "endMs": 10172
-    },
-    {
-      "text": "can",
-      "canonicalStart": 111,
-      "canonicalEnd": 114,
-      "startMs": 10188,
-      "endMs": 10359
-    },
-    {
-      "text": "process",
-      "canonicalStart": 115,
-      "canonicalEnd": 122,
-      "startMs": 10375,
-      "endMs": 11016
-    },
-    {
-      "text": "jobs",
-      "canonicalStart": 123,
-      "canonicalEnd": 127,
-      "startMs": 11031,
-      "endMs": 11484
-    },
-    {
-      "text": "separately.",
-      "canonicalStart": 128,
-      "canonicalEnd": 139,
-      "startMs": 11500,
-      "endMs": 12266
-    },
-    {
-      "text": "It",
-      "canonicalStart": 140,
-      "canonicalEnd": 142,
-      "startMs": 13344,
-      "endMs": 13531
-    },
-    {
-      "text": "also",
-      "canonicalStart": 143,
-      "canonicalEnd": 147,
-      "startMs": 13547,
-      "endMs": 14016
-    },
-    {
-      "text": "gives",
-      "canonicalStart": 148,
-      "canonicalEnd": 153,
-      "startMs": 14031,
-      "endMs": 14344
-    },
-    {
-      "text": "us",
-      "canonicalStart": 154,
-      "canonicalEnd": 156,
-      "startMs": 14359,
-      "endMs": 14578
-    },
-    {
-      "text": "retry,",
-      "canonicalStart": 157,
-      "canonicalEnd": 163,
-      "startMs": 14594,
-      "endMs": 15250
-    },
-    {
-      "text": "better",
-      "canonicalStart": 164,
-      "canonicalEnd": 170,
-      "startMs": 15609,
-      "endMs": 15938
-    },
-    {
-      "text": "reliability,",
-      "canonicalStart": 171,
-      "canonicalEnd": 183,
-      "startMs": 15953,
-      "endMs": 16953
-    },
-    {
-      "text": "and",
-      "canonicalStart": 184,
-      "canonicalEnd": 187,
-      "startMs": 17188,
-      "endMs": 17422
-    },
-    {
-      "text": "easier",
-      "canonicalStart": 188,
-      "canonicalEnd": 194,
-      "startMs": 17438,
-      "endMs": 17922
-    },
-    {
-      "text": "scaling.",
-      "canonicalStart": 195,
-      "canonicalEnd": 203,
-      "startMs": 17938,
-      "endMs": 18609
-    },
-    {
-      "text": "The",
-      "canonicalStart": 204,
-      "canonicalEnd": 207,
-      "startMs": 19688,
-      "endMs": 19844
-    },
-    {
-      "text": "trade-off",
-      "canonicalStart": 208,
-      "canonicalEnd": 217,
-      "startMs": 19859,
-      "endMs": 20531
+      "text": "email",
+      "canonicalStart": 14,
+      "canonicalEnd": 19,
+      "startMs": 925,
+      "endMs": 1425
     },
     {
       "text": "is",
-      "canonicalStart": 218,
-      "canonicalEnd": 220,
-      "startMs": 20547,
-      "endMs": 20703
+      "canonicalStart": 20,
+      "canonicalEnd": 22,
+      "startMs": 1441,
+      "endMs": 1581
     },
     {
-      "text": "more",
-      "canonicalStart": 221,
-      "canonicalEnd": 225,
-      "startMs": 20719,
-      "endMs": 21000
+      "text": "slow,",
+      "canonicalStart": 23,
+      "canonicalEnd": 28,
+      "startMs": 1597,
+      "endMs": 2175
     },
     {
-      "text": "system",
-      "canonicalStart": 226,
-      "canonicalEnd": 232,
-      "startMs": 21016,
-      "endMs": 21563
+      "text": "I",
+      "canonicalStart": 29,
+      "canonicalEnd": 30,
+      "startMs": 2456,
+      "endMs": 2597
     },
     {
-      "text": "complexity",
-      "canonicalStart": 233,
-      "canonicalEnd": 243,
-      "startMs": 21578,
-      "endMs": 22469
+      "text": "would",
+      "canonicalStart": 31,
+      "canonicalEnd": 36,
+      "startMs": 2613,
+      "endMs": 2800
+    },
+    {
+      "text": "save",
+      "canonicalStart": 37,
+      "canonicalEnd": 41,
+      "startMs": 2816,
+      "endMs": 3144
+    },
+    {
+      "text": "a",
+      "canonicalStart": 42,
+      "canonicalEnd": 43,
+      "startMs": 3159,
+      "endMs": 3253
+    },
+    {
+      "text": "job",
+      "canonicalStart": 44,
+      "canonicalEnd": 47,
+      "startMs": 3269,
+      "endMs": 3706
+    },
+    {
+      "text": "with",
+      "canonicalStart": 48,
+      "canonicalEnd": 52,
+      "startMs": 3722,
+      "endMs": 3863
+    },
+    {
+      "text": "the",
+      "canonicalStart": 53,
+      "canonicalEnd": 56,
+      "startMs": 3878,
+      "endMs": 3988
+    },
+    {
+      "text": "business",
+      "canonicalStart": 57,
+      "canonicalEnd": 65,
+      "startMs": 4003,
+      "endMs": 4488
+    },
+    {
+      "text": "change,",
+      "canonicalStart": 66,
+      "canonicalEnd": 73,
+      "startMs": 4503,
+      "endMs": 5113
+    },
+    {
+      "text": "then",
+      "canonicalStart": 74,
+      "canonicalEnd": 78,
+      "startMs": 5472,
+      "endMs": 5722
+    },
+    {
+      "text": "publish",
+      "canonicalStart": 79,
+      "canonicalEnd": 86,
+      "startMs": 5738,
+      "endMs": 6269
+    },
+    {
+      "text": "it",
+      "canonicalStart": 87,
+      "canonicalEnd": 89,
+      "startMs": 6284,
+      "endMs": 6409
+    },
+    {
+      "text": "through",
+      "canonicalStart": 90,
+      "canonicalEnd": 97,
+      "startMs": 6425,
+      "endMs": 6659
+    },
+    {
+      "text": "an",
+      "canonicalStart": 98,
+      "canonicalEnd": 100,
+      "startMs": 6675,
+      "endMs": 6816
+    },
+    {
+      "text": "outbox",
+      "canonicalStart": 101,
+      "canonicalEnd": 107,
+      "startMs": 6831,
+      "endMs": 7534
     },
     {
       "text": "and",
-      "canonicalStart": 244,
-      "canonicalEnd": 247,
-      "startMs": 22484,
-      "endMs": 22656
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 7550,
+      "endMs": 7706
     },
     {
-      "text": "sometimes",
-      "canonicalStart": 248,
-      "canonicalEnd": 257,
-      "startMs": 22672,
-      "endMs": 23359
+      "text": "let",
+      "canonicalStart": 112,
+      "canonicalEnd": 115,
+      "startMs": 7722,
+      "endMs": 7909
     },
     {
-      "text": "higher",
-      "canonicalStart": 258,
-      "canonicalEnd": 264,
-      "startMs": 23375,
-      "endMs": 23797
+      "text": "the",
+      "canonicalStart": 116,
+      "canonicalEnd": 119,
+      "startMs": 7925,
+      "endMs": 8050
     },
     {
-      "text": "processing",
-      "canonicalStart": 265,
-      "canonicalEnd": 275,
-      "startMs": 23813,
-      "endMs": 24563
+      "text": "API",
+      "canonicalStart": 120,
+      "canonicalEnd": 123,
+      "startMs": 8066,
+      "endMs": 8784
     },
     {
-      "text": "latency.",
-      "canonicalStart": 276,
-      "canonicalEnd": 284,
-      "startMs": 24578,
-      "endMs": 25328
+      "text": "return",
+      "canonicalStart": 124,
+      "canonicalEnd": 130,
+      "startMs": 8800,
+      "endMs": 9363
+    },
+    {
+      "text": "before",
+      "canonicalStart": 131,
+      "canonicalEnd": 137,
+      "startMs": 9378,
+      "endMs": 9738
+    },
+    {
+      "text": "delivery.",
+      "canonicalStart": 138,
+      "canonicalEnd": 147,
+      "startMs": 9753,
+      "endMs": 10425
+    },
+    {
+      "text": "A",
+      "canonicalStart": 148,
+      "canonicalEnd": 149,
+      "startMs": 11516,
+      "endMs": 11672
+    },
+    {
+      "text": "RabbitMQ",
+      "canonicalStart": 150,
+      "canonicalEnd": 158,
+      "startMs": 11688,
+      "endMs": 12594
+    },
+    {
+      "text": "consumer",
+      "canonicalStart": 159,
+      "canonicalEnd": 167,
+      "startMs": 12609,
+      "endMs": 13250
+    },
+    {
+      "text": "processes",
+      "canonicalStart": 168,
+      "canonicalEnd": 177,
+      "startMs": 13266,
+      "endMs": 14063
+    },
+    {
+      "text": "the",
+      "canonicalStart": 178,
+      "canonicalEnd": 181,
+      "startMs": 14078,
+      "endMs": 14203
+    },
+    {
+      "text": "job",
+      "canonicalStart": 182,
+      "canonicalEnd": 185,
+      "startMs": 14219,
+      "endMs": 14688
+    },
+    {
+      "text": "and",
+      "canonicalStart": 186,
+      "canonicalEnd": 189,
+      "startMs": 14703,
+      "endMs": 14828
+    },
+    {
+      "text": "acknowledges",
+      "canonicalStart": 190,
+      "canonicalEnd": 202,
+      "startMs": 14844,
+      "endMs": 15594
+    },
+    {
+      "text": "it",
+      "canonicalStart": 203,
+      "canonicalEnd": 205,
+      "startMs": 15609,
+      "endMs": 15766
+    },
+    {
+      "text": "only",
+      "canonicalStart": 206,
+      "canonicalEnd": 210,
+      "startMs": 15781,
+      "endMs": 16141
+    },
+    {
+      "text": "after",
+      "canonicalStart": 211,
+      "canonicalEnd": 216,
+      "startMs": 16156,
+      "endMs": 16500
+    },
+    {
+      "text": "success.",
+      "canonicalStart": 217,
+      "canonicalEnd": 225,
+      "startMs": 16516,
+      "endMs": 17406
+    },
+    {
+      "text": "I",
+      "canonicalStart": 226,
+      "canonicalEnd": 227,
+      "startMs": 18484,
+      "endMs": 18703
+    },
+    {
+      "text": "set",
+      "canonicalStart": 228,
+      "canonicalEnd": 231,
+      "startMs": 18719,
+      "endMs": 19094
+    },
+    {
+      "text": "retry",
+      "canonicalStart": 232,
+      "canonicalEnd": 237,
+      "startMs": 19109,
+      "endMs": 19625
+    },
+    {
+      "text": "limits",
+      "canonicalStart": 238,
+      "canonicalEnd": 244,
+      "startMs": 19641,
+      "endMs": 20141
+    },
+    {
+      "text": "and",
+      "canonicalStart": 245,
+      "canonicalEnd": 248,
+      "startMs": 20156,
+      "endMs": 20281
+    },
+    {
+      "text": "handle",
+      "canonicalStart": 249,
+      "canonicalEnd": 255,
+      "startMs": 20297,
+      "endMs": 20750
+    },
+    {
+      "text": "duplicate",
+      "canonicalStart": 256,
+      "canonicalEnd": 265,
+      "startMs": 20766,
+      "endMs": 21359
+    },
+    {
+      "text": "deliveries,",
+      "canonicalStart": 266,
+      "canonicalEnd": 277,
+      "startMs": 21375,
+      "endMs": 22141
+    },
+    {
+      "text": "because",
+      "canonicalStart": 278,
+      "canonicalEnd": 285,
+      "startMs": 22469,
+      "endMs": 22859
+    },
+    {
+      "text": "a",
+      "canonicalStart": 286,
+      "canonicalEnd": 287,
+      "startMs": 22875,
+      "endMs": 22969
+    },
+    {
+      "text": "queue",
+      "canonicalStart": 288,
+      "canonicalEnd": 293,
+      "startMs": 22984,
+      "endMs": 23313
+    },
+    {
+      "text": "alone",
+      "canonicalStart": 294,
+      "canonicalEnd": 299,
+      "startMs": 23328,
+      "endMs": 23828
+    },
+    {
+      "text": "does",
+      "canonicalStart": 300,
+      "canonicalEnd": 304,
+      "startMs": 23844,
+      "endMs": 24031
+    },
+    {
+      "text": "not",
+      "canonicalStart": 305,
+      "canonicalEnd": 308,
+      "startMs": 24047,
+      "endMs": 24359
+    },
+    {
+      "text": "guarantee",
+      "canonicalStart": 309,
+      "canonicalEnd": 318,
+      "startMs": 24375,
+      "endMs": 25031
+    },
+    {
+      "text": "the",
+      "canonicalStart": 319,
+      "canonicalEnd": 322,
+      "startMs": 25047,
+      "endMs": 25188
+    },
+    {
+      "text": "work",
+      "canonicalStart": 323,
+      "canonicalEnd": 327,
+      "startMs": 25203,
+      "endMs": 25516
+    },
+    {
+      "text": "happens",
+      "canonicalStart": 328,
+      "canonicalEnd": 335,
+      "startMs": 25531,
+      "endMs": 26000
+    },
+    {
+      "text": "exactly",
+      "canonicalStart": 336,
+      "canonicalEnd": 343,
+      "startMs": 26016,
+      "endMs": 26672
+    },
+    {
+      "text": "once.",
+      "canonicalStart": 344,
+      "canonicalEnd": 349,
+      "startMs": 26688,
+      "endMs": 27344
+    },
+    {
+      "text": "This",
+      "canonicalStart": 350,
+      "canonicalEnd": 354,
+      "startMs": 28422,
+      "endMs": 28766
+    },
+    {
+      "text": "makes",
+      "canonicalStart": 355,
+      "canonicalEnd": 360,
+      "startMs": 28781,
+      "endMs": 29125
+    },
+    {
+      "text": "the",
+      "canonicalStart": 361,
+      "canonicalEnd": 364,
+      "startMs": 29141,
+      "endMs": 29250
+    },
+    {
+      "text": "request",
+      "canonicalStart": 365,
+      "canonicalEnd": 372,
+      "startMs": 29266,
+      "endMs": 29844
+    },
+    {
+      "text": "faster",
+      "canonicalStart": 373,
+      "canonicalEnd": 379,
+      "startMs": 29859,
+      "endMs": 30484
+    },
+    {
+      "text": "but",
+      "canonicalStart": 380,
+      "canonicalEnd": 383,
+      "startMs": 30500,
+      "endMs": 30719
+    },
+    {
+      "text": "adds",
+      "canonicalStart": 384,
+      "canonicalEnd": 388,
+      "startMs": 30734,
+      "endMs": 31031
+    },
+    {
+      "text": "a",
+      "canonicalStart": 389,
+      "canonicalEnd": 390,
+      "startMs": 31047,
+      "endMs": 31125
+    },
+    {
+      "text": "broker",
+      "canonicalStart": 391,
+      "canonicalEnd": 397,
+      "startMs": 31141,
+      "endMs": 31734
+    },
+    {
+      "text": "and",
+      "canonicalStart": 398,
+      "canonicalEnd": 401,
+      "startMs": 31750,
+      "endMs": 31859
+    },
+    {
+      "text": "delay",
+      "canonicalStart": 402,
+      "canonicalEnd": 407,
+      "startMs": 31875,
+      "endMs": 32297
+    },
+    {
+      "text": "before",
+      "canonicalStart": 408,
+      "canonicalEnd": 414,
+      "startMs": 32313,
+      "endMs": 32734
+    },
+    {
+      "text": "delivery.",
+      "canonicalStart": 415,
+      "canonicalEnd": 424,
+      "startMs": 32750,
+      "endMs": 33484
     }
   ]
 }
