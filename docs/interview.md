@@ -2,7 +2,7 @@
 
 ## Scope
 
-The public `/interview` route is a frontend-only learning tool for the Everfit Applied AI Backend Engineer interview script.
+The public `/interview` route is a frontend-only learning tool for the Everfit Applied AI Backend Engineer interview script. A top-level category switch links it to `/interview/backend`, a separate frontend-only backend topic study guide; the AI script and its modes remain unchanged.
 
 - Route: `apps/web/src/app/interview/page.tsx`
 - No login required.
@@ -14,7 +14,11 @@ The public `/interview` route is a frontend-only learning tool for the Everfit A
 
 ```text
 apps/web/src/app/interview/
-├── page.tsx           UI, modes, active-question flow
+├── page.tsx           AI Interview UI, modes, active-question flow
+├── backend/
+│   ├── page.tsx       Backend Interview topic/question selector, answer and key idea
+│   ├── topics.ts      fixed topic labels and recommended path
+│   └── source-questions.ts  verbatim user-provided B1–B2 questions, answers, key ideas
 ├── data.ts            canonical questions, answers, Part 2 strategy content
 ├── types.ts           question and connection types
 ├── connections.ts     global contexts/clusters/stories/triggers + selectors
@@ -498,6 +502,10 @@ Do not move this state to the API/database without an explicit product decision.
 - Do not invent experience, claims, or alternate answers.
 - Derived labels and memory hints must remain faithful to the canonical guide.
 - UI transformations such as reveal, cloze, grouping, and highlighting are allowed; they must not mutate source text.
+
+## 2026-09-14 — Backend Interview category
+
+`/interview/backend` displays **Senior Backend Node.js Interview** / **B1–B2 Speaking Pack** using the existing interview visual language with a topic → questions → Answer (B1–B2) → Key idea flow. It lists 12 fixed topics and renders questions from `source-questions.ts` without rewriting answer or key-idea wording. All 12 supplied topic chunks are present; the empty state remains for any future topic without supplied questions. The recommended route is 1 → 3 → 4 → 6 → 7 → 8 → 10; all other topics remain directly selectable. It does not use the AI Interview progress store, audio assets, or backend APIs. The `/interview` question content, modes, and audio remain unchanged.
 
 ## Validation
 

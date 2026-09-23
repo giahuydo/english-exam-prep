@@ -1,0 +1,30 @@
+import { sourceQuestions, type BackendQuestion } from './source-questions';
+
+export type BackendTopic = {
+  id: number;
+  title: string;
+  questions: BackendQuestion[];
+};
+
+const titles = [
+  'Node.js Core & Event Loop',
+  'API & Backend Design',
+  'Database',
+  'Queue & Messaging',
+  'Caching & Redis',
+  'Performance & Scaling',
+  'Reliability & Production Issues',
+  'Concurrency & Data Consistency',
+  'Security',
+  'System Design',
+  'Docker / Cloud / DevOps',
+  'Testing & Code Quality',
+] as const;
+
+export const backendTopics: BackendTopic[] = titles.map((title, index) => ({
+  id: index + 1,
+  title,
+  questions: sourceQuestions[index + 1] ?? [],
+}));
+
+export const recommendedPath = [1, 3, 4, 6, 7, 8, 10] as const;

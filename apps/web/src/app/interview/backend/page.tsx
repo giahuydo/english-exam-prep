@@ -1,29 +1,45 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+import { backendTopics, recommendedPath } from './topics';
+
+const framework = [
+  'Identify the likely problem.',
+  'Explain why it can happen.',
+  'Say what you would check first.',
+  'Give the solution or options.',
+  'Mention one trade-off when relevant.',
+];
+const connectors = 'Basically • First • Then • For example • In this case • The main reason is • Depending on the use case • Finally • So overall';
 
 export default function BackendInterviewPage() {
-  return (
-    <div className="min-h-screen bg-[#f7f9fc] text-slate-800">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-3 py-3 sm:px-6">
-          <Link href="/" className="text-sm font-semibold text-slate-500 hover:text-slate-900">← Home</Link>
-          <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Interview practice</span>
-        </div>
-      </header>
+  const [topicId, setTopicId] = useState(1);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(true);
+  const [showKey, setShowKey] = useState(true);
+  const [showFramework, setShowFramework] = useState(false);
+  const topic = backendTopics.find((item) => item.id === topicId) ?? backendTopics[0];
+  const questions = topic.questions;
+  const question = questions[questionIndex] ?? questions[0];
+  const pathIndex = recommendedPath.findIndex((id) => id === topic.id);
+  const selectTopic = (id: number) => { setTopicId(id); setQuestionIndex(0); setShowAnswer(true); setShowKey(true); };
+  const selectQuestion = (index: number) => { setQuestionIndex(index); setShowAnswer(true); setShowKey(true); };
 
-      <nav className="border-b border-slate-200 bg-white" aria-label="Interview category">
-        <div className="mx-auto flex max-w-6xl gap-1 px-3 sm:px-6">
-          <Link href="/interview" className="border-b-2 border-transparent px-3 py-3 text-sm font-semibold text-slate-500 hover:border-slate-300 hover:text-slate-900">AI Interview</Link>
-          <Link href="/interview/backend" aria-current="page" className="border-b-2 border-blue-700 px-3 py-3 text-sm font-bold text-blue-700">Backend Interview</Link>
-        </div>
-      </nav>
-
-      <main className="mx-auto max-w-6xl px-3 py-8 sm:px-6">
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Technical interview</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Backend Interview</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-500">Backend and Node.js interview questions will be organized here for focused practice.</p>
-        </section>
-      </main>
-    </div>
-  );
+  return <div className="min-h-screen bg-[#f7f9fc] text-slate-800">
+    <header className="border-b border-slate-200 bg-white"><div className="mx-auto flex max-w-6xl items-center justify-between px-3 py-3 sm:px-6"><Link href="/" className="text-sm font-semibold text-slate-500 hover:text-slate-900">← Home</Link><span className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Interview practice</span></div></header>
+    <nav className="border-b border-slate-200 bg-white" aria-label="Interview category"><div className="mx-auto flex max-w-6xl gap-1 px-3 sm:px-6"><Link href="/interview" className="border-b-2 border-transparent px-3 py-3 text-sm font-semibold text-slate-500 hover:border-slate-300 hover:text-slate-900">AI Interview</Link><Link href="/interview/backend" aria-current="page" className="border-b-2 border-blue-700 px-3 py-3 text-sm font-bold text-blue-700">Backend Interview</Link></div></nav>
+    <main className="mx-auto max-w-6xl px-3 py-4 sm:px-6 sm:py-8">
+      <section className="mb-5"><p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">B1–B2 Speaking Pack</p><h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Senior Backend Node.js Interview</h1><p className="mt-2 max-w-xl text-sm leading-6 text-slate-500">Choose a topic and question. Read the B1–B2 answer, then recall its key idea.</p></section>
+      <section aria-label="Recommended learning path" className="mb-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-4"><p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Recommended path · 7 stops</p><div className="mt-3 flex flex-wrap items-center gap-1.5">{recommendedPath.map((id, index) => <div key={id} className="flex items-center gap-1.5">{index > 0 && <span aria-hidden="true" className="text-blue-300">→</span>}<button type="button" onClick={() => selectTopic(id)} aria-current={topicId === id ? 'step' : undefined} className={`min-h-10 rounded-lg border px-2.5 py-1 text-left text-xs font-semibold transition ${topicId === id ? 'border-blue-700 bg-blue-700 text-white' : 'border-blue-100 bg-white text-blue-800 hover:border-blue-400'}`}>{id}. {backendTopics[id - 1].title}</button></div>)}</div></section>
+      <div className="grid gap-4 lg:grid-cols-[240px_minmax(0,680px)] lg:items-start lg:justify-center">
+        <aside className="order-2 lg:order-1"><p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">12 topics</p><div className="mt-2 grid gap-1.5 sm:grid-cols-2 lg:grid-cols-1">{backendTopics.map((item) => <button key={item.id} type="button" onClick={() => selectTopic(item.id)} aria-current={topicId === item.id ? 'true' : undefined} className={`flex min-h-11 items-center gap-2 rounded-lg border px-3 py-2 text-left text-xs font-semibold transition ${topicId === item.id ? 'border-blue-700 bg-blue-700 text-white' : 'border-slate-200 bg-white text-slate-700 hover:border-blue-300'}`}><span className="shrink-0 font-bold">{String(item.id).padStart(2, '0')}</span>{item.title}</button>)}</div></aside>
+        <section className="order-1 min-w-0 lg:order-2"><div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.05)]"><div className="border-b border-slate-100 px-5 py-5 sm:px-8 sm:py-7"><p className="text-[11px] font-bold uppercase tracking-[0.16em] text-blue-700">Topic {topic.id} of {backendTopics.length}</p><h2 className="mt-2 text-[1.35rem] font-bold text-slate-950 sm:text-[2rem]">{topic.title}</h2></div><div className="space-y-6 px-5 py-5 sm:px-8 sm:py-7">
+          <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Questions</p><div className="mt-3 flex flex-wrap gap-2">{questions.map((item, index) => <button key={item.question} type="button" onClick={() => selectQuestion(index)} aria-current={questionIndex === index ? 'true' : undefined} aria-label={`Question ${index + 1}: ${item.question}`} className={`min-h-10 min-w-10 rounded-lg border px-3 text-xs font-bold ${questionIndex === index ? 'border-blue-700 bg-blue-700 text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-blue-300'}`}>Q{index + 1}</button>)}</div></div>
+          {question ? <div className="space-y-5 border-t border-slate-100 pt-5"><div><p className="text-[11px] font-bold uppercase tracking-[0.16em] text-blue-700">Question {questionIndex + 1} of {questions.length}</p><h3 className="mt-2 text-xl font-bold leading-7 text-slate-950">{question.question}</h3></div><section><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Answer (B1–B2)</h4><button type="button" onClick={() => setShowAnswer((value) => !value)} aria-expanded={showAnswer} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-blue-700">{showAnswer ? 'Hide answer' : 'Show answer'}</button></div>{showAnswer && <p className="mt-2 whitespace-pre-wrap border-l-2 border-blue-100 pl-4 text-[15px] leading-8 text-slate-800">{question.answer}</p>}</section><section className="border-t border-slate-100 pt-5"><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Key idea</h4><button type="button" onClick={() => setShowKey((value) => !value)} aria-expanded={showKey} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-blue-700">{showKey ? 'Hide key idea' : 'Show key idea'}</button></div>{showKey && <p className="mt-2 rounded-xl bg-blue-50 p-4 text-sm leading-7 text-blue-950">{question.keyIdea}</p>}</section>{questionIndex < questions.length - 1 && <button type="button" onClick={() => selectQuestion(questionIndex + 1)} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white hover:bg-blue-800">Next question →</button>}</div> : <p className="border-t border-slate-100 pt-5 text-sm text-slate-500">Questions for this topic have not been provided yet.</p>}
+        </div></div>{pathIndex >= 0 && pathIndex < recommendedPath.length - 1 && <button type="button" onClick={() => selectTopic(recommendedPath[pathIndex + 1])} className="mt-4 min-h-10 rounded-lg border border-blue-200 bg-white px-3 text-xs font-semibold text-blue-700 hover:bg-blue-50">Next recommended topic →</button>}</section>
+      </div>
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-5"><button type="button" onClick={() => setShowFramework((value) => !value)} aria-expanded={showFramework} className="flex w-full items-center justify-between gap-3 text-left text-sm font-bold text-slate-800"><span>Quick Interview Framework</span><span className="text-xs text-blue-700">{showFramework ? 'Hide' : 'Show'}</span></button>{showFramework && <div className="mt-4 border-t border-slate-100 pt-4"><p className="text-sm text-slate-600">For technical scenario questions, use this simple flow:</p><ol className="mt-2 list-inside list-decimal space-y-1 text-sm leading-7 text-slate-700">{framework.map((step) => <li key={step}>{step}</li>)}</ol><p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Useful speaking connectors:</p><p className="mt-1 text-sm leading-7 text-slate-700">{connectors}</p></div>}</section>
+    </main>
+  </div>;
 }
