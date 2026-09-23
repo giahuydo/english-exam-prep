@@ -1,4 +1,5 @@
 import { sourceQuestions, type BackendQuestion } from './source-questions';
+import { withVietnamese } from './translations';
 
 export type BackendTopic = {
   id: number;
@@ -24,7 +25,7 @@ const titles = [
 export const backendTopics: BackendTopic[] = titles.map((title, index) => ({
   id: index + 1,
   title,
-  questions: sourceQuestions[index + 1] ?? [],
+  questions: withVietnamese(index + 1, sourceQuestions[index + 1] ?? []),
 }));
 
 export const recommendedPath = [1, 3, 4, 6, 7, 8, 10] as const;

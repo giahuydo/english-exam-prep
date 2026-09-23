@@ -1,7 +1,10 @@
-export type BackendQuestion = { question: string; answer: string; keyIdea: string };
+import type { BackendTranslation } from './translations';
+
+export type EnglishBackendQuestion = { question: string; answer: string; keyIdea: string };
+export type BackendQuestion = EnglishBackendQuestion & BackendTranslation;
 
 /** Transcribed verbatim from the 12 user-provided B1–B2 source chunks. */
-export const sourceQuestions: Partial<Record<number, BackendQuestion[]>> = {
+export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> = {
   1: [
     {
       question: 'What is the Node.js event loop, and why is it important?',

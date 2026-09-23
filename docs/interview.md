@@ -18,7 +18,8 @@ apps/web/src/app/interview/
 ├── backend/
 │   ├── page.tsx       Backend Interview topic/question selector, answer and key idea
 │   ├── topics.ts      fixed topic labels and recommended path
-│   └── source-questions.ts  verbatim user-provided B1–B2 questions, answers, key ideas
+│   ├── source-questions.ts  verbatim user-provided English B1–B2 questions, answers, key ideas
+│   └── translations.ts     Vietnamese study translations paired by topic/question order
 ├── data.ts            canonical questions, answers, Part 2 strategy content
 ├── types.ts           question and connection types
 ├── connections.ts     global contexts/clusters/stories/triggers + selectors
@@ -506,6 +507,10 @@ Do not move this state to the API/database without an explicit product decision.
 ## 2026-09-14 — Backend Interview category
 
 `/interview/backend` displays **Senior Backend Node.js Interview** / **B1–B2 Speaking Pack** using the existing interview visual language with a topic → questions → Answer (B1–B2) → Key idea flow. It lists 12 fixed topics and renders questions from `source-questions.ts` without rewriting answer or key-idea wording. All 12 supplied topic chunks (39 questions) are present; the empty state remains for any future topic without supplied questions. A compact, collapsible Quick Interview Framework displays the supplied five steps and speaking connectors. The recommended route is 1 → 3 → 4 → 6 → 7 → 8 → 10; all other topics remain directly selectable. It does not use the AI Interview progress store, audio assets, or backend APIs. The `/interview` question content, modes, and audio remain unchanged.
+
+### Vietnamese study translations
+
+The Backend Interview page has one **Show Vietnamese / Hide Vietnamese** control, matching the AI Interview's optional translation pattern. When enabled, it shows the translated question below the English prompt and the Vietnamese answer and key idea under their English counterparts; hiding an English answer or key idea also hides its translation. `backend/translations.ts` pairs translations by topic number and question order with the unchanged English source in `backend/source-questions.ts`. All 39 entries have `questionVi`, `answerVi`, and `keyIdeaVi`; no audio or API calls are involved.
 
 ## Validation
 
