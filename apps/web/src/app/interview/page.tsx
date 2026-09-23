@@ -15,9 +15,9 @@ import {
 } from './data';
 import { RichText } from './rich-text';
 import { clozeText, extractKeywords, parseInlineRanges, questionStarters, stripFormatting } from './utils';
-import { getContextsForQuestion } from './connections';
+import { getContextsForQuestion, getRoutesForQuestion } from './connections';
 import { useProgress, type LearningLevel, type ReviewDifficulty } from './storage';
-import { macroTopics, phraseClusters, heroStories, triggers, getQuestionsForMacroTopic, getQuestionsForCluster, getQuestionsForStory, getMacroTopicsForTrigger, getMemoryNodes, questionLabel, searchQuestions, type MacroTopic, type MemoryNode } from './connections';
+import { macroTopics, phraseClusters, heroStories, triggers, getQuestionsForMacroTopic, getQuestionsForCluster, getQuestionsForStory, getMacroTopicsForTrigger, getMemoryNodes, questionLabel, searchQuestions, type AnswerRoute, type MacroTopic, type MemoryNode } from './connections';
 
 type Mode = 'recall' | 'learn' | 'quick' | 'connections';
 type Filter = 'all' | 'practiced' | 'difficult' | 'due';
@@ -68,6 +68,13 @@ export default function InterviewPage() {
         </div>
       </header>
 
+      <nav className="border-b border-slate-200 bg-white" aria-label="Interview category">
+        <div className="mx-auto flex max-w-6xl gap-1 px-3 sm:px-6">
+          <Link href="/interview" aria-current="page" className="border-b-2 border-blue-700 px-3 py-3 text-sm font-bold text-blue-700">AI Interview</Link>
+          <Link href="/interview/backend" className="border-b-2 border-transparent px-3 py-3 text-sm font-semibold text-slate-500 hover:border-slate-300 hover:text-slate-900">Backend Interview</Link>
+        </div>
+      </nav>
+
       <main className="mx-auto max-w-6xl px-3 py-4 sm:px-6 sm:py-8">
         <section className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -97,7 +104,7 @@ export default function InterviewPage() {
               {(['connections', 'learn', 'recall', 'quick'] as const).map((value) => <button key={value} type="button" onClick={() => setMode(value)} className={`min-h-10 flex-1 rounded-lg px-2 text-xs font-bold sm:flex-none sm:px-3 ${mode === value ? 'bg-slate-900 text-white' : 'bg-white text-slate-500 hover:text-slate-900'}`}>{value === 'quick' ? 'Quick practice' : value === 'connections' ? 'Connections' : value[0].toUpperCase() + value.slice(1)}</button>)}
               {mode !== 'connections' && <select aria-label="Question filter" value={filter} onChange={(e) => setFilter(e.target.value as Filter)} className="min-h-10 w-full rounded-lg border border-slate-200 bg-white px-2 text-xs font-semibold text-slate-600 sm:ml-auto sm:w-auto"><option value="all">All questions</option><option value="practiced">Practiced</option><option value="difficult">Difficult</option><option value="due">Due today ({dueCount})</option></select>}
             </div>
-            {mode === 'connections' ? <ConnectionsView selected={selectedTopic} setSelected={setSelectedTopic} onQuestion={(id) => { setActiveId(id); setMode('learn'); }} /> : filter !== 'all' && available.length === 0 ? <div className="rounded-2xl bg-white p-8 text-center text-sm text-slate-500">No questions match this filter.</div> : <PracticeSurface q={active} mode={mode} progress={progress} quickPosition={mode === 'quick' ? quickIndex + 1 : undefined} quickTotal={mode === 'quick' ? quickOrder.length : undefined} onNextQuick={nextQuick} />}
+            {mode === 'connections' ? <ConnectionsView selected={selectedTopic} setSelected={setSelectedTopic} onQuestion={(id) => { setActiveId(id); setMode('learn'); }} /> : filter !== 'all' && available.length === 0 ? <div className="rounded-2xl bg-white p-8 text-center text-sm text-slate-500">No questions match this filter.</div> : <PracticeSurface q={active} mode={mode} progress={progress} quickPosition={mode === 'quick' ? quickIndex + 1 : undefined} quickTotal={mode === 'quick' ? quickOrder.length : undefined} onNextQuick={nextQuick} onOpenQuestion={selectQuestion} />}
           </section>
         </div>
 
@@ -132,7 +139,7 @@ function PageJumpButtons() {
   return <div className="fixed bottom-4 right-3 z-20 flex flex-col gap-2 sm:bottom-6 sm:right-6"><button type="button" onClick={() => jump(true)} aria-label="Scroll to top" className="min-h-10 rounded-full border border-slate-200 bg-white/95 px-3 text-xs font-bold text-slate-600 shadow-lg backdrop-blur hover:border-blue-300 hover:text-blue-700">↑ Top</button><button type="button" onClick={() => jump(false)} aria-label="Scroll to bottom" className="min-h-10 rounded-full border border-slate-200 bg-white/95 px-3 text-xs font-bold text-slate-600 shadow-lg backdrop-blur hover:border-blue-300 hover:text-blue-700">↓ End</button></div>;
 }
 
-function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQuick }: { q: InterviewQuestion; mode: Mode; progress: ReturnType<typeof useProgress>; quickPosition?: number; quickTotal?: number; onNextQuick: () => void }) {
+function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQuick, onOpenQuestion }: { q: InterviewQuestion; mode: Mode; progress: ReturnType<typeof useProgress>; quickPosition?: number; quickTotal?: number; onNextQuick: () => void; onOpenQuestion: (id: number) => void }) {
   const audio = useInterviewAudio();
   const [revealed, setRevealed] = useState(mode === 'learn');
   const [hint, setHint] = useState(false);
@@ -150,6 +157,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
   const userScrolledRef = useRef(false);
   const level = progress.levels[q.id] ?? 1;
   const contextsForQuestion = useMemo(() => getContextsForQuestion(q.id), [q.id]);
+  const answerRoutesForQuestion = useMemo(() => getRoutesForQuestion(q.id), [q.id]);
   const starters = useMemo(() => questionStarters(q), [q]);
   const memoryNodes = useMemo(() => getMemoryNodes(q.id), [q.id]);
   const shouldShowMap = mode === 'recall' ? mapRequested || revealed || hint : level <= 4 || revealed || hint;
@@ -210,6 +218,7 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
       {mode === 'quick' && <p className="mt-4 text-xs font-semibold text-slate-400">Quick practice · Think first</p>}
       <h2 className="mt-2 max-w-3xl text-[1.35rem] font-bold leading-[1.35] tracking-tight text-slate-950 sm:text-[2rem]">{q.question.en}</h2>
       {(mode === 'learn' || revealed || showVi) && <p className="mt-3 text-sm leading-6 text-slate-500">{stripFormatting(q.question.vi)}</p>}
+      {answerRoutesForQuestion.length > 0 && <AnswerRoutePanel routes={answerRoutesForQuestion} currentQuestionId={q.id} onOpenQuestion={onOpenQuestion} />}
       <div className="mt-5 flex flex-wrap items-center gap-2"><button type="button" onClick={() => progress.togglePracticed(q.id)} className={`min-h-9 rounded-lg px-2 text-xs font-semibold ${progress.practiced.has(q.id) ? 'bg-emerald-50 text-emerald-700' : 'text-slate-400 hover:text-slate-700'}`}>{progress.practiced.has(q.id) ? '✓ Practiced' : 'Mark practiced'}</button><button type="button" onClick={() => progress.toggleDifficult(q.id)} className={`min-h-9 rounded-lg px-2 text-xs font-semibold ${progress.difficult.has(q.id) ? 'bg-amber-50 text-amber-700' : 'text-slate-400 hover:text-slate-700'}`}>{progress.difficult.has(q.id) ? '★ Difficult' : 'Mark difficult'}</button></div>
     </div>
 
@@ -231,6 +240,45 @@ function PracticeSurface({ q, mode, progress, quickPosition, quickTotal, onNextQ
 
 function MemoryPlaybackOverlay({ node, sectionLabel, phrase }: { node: MemoryNode; sectionLabel: string; phrase?: string }) {
   return <div className="mb-3 rounded-xl border border-blue-200 bg-gradient-to-r from-slate-950 to-blue-950 px-4 py-3 text-white shadow-[0_8px_24px_rgba(30,64,175,0.16)]"><div className="flex items-start gap-3"><span aria-hidden="true" className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-400/20 text-blue-200"><svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" stroke="currentColor" strokeWidth="1.8"><path d="M9 18h6M10 21h4M8.3 14.5A6 6 0 1 1 15.7 14.5c-.8.7-1.2 1.4-1.4 2.5h-4.6c-.2-1.1-.6-1.8-1.4-2.5h-4.6c-.2-1.1-.6-1.8-1.4-2.5Z" /><path d="M12 3V1.5M4.9 4.9 3.8 3.8M19.1 4.9l1.1-1.1" /></svg></span><div className="min-w-0 flex-1"><p className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-300">Now speaking · {sectionLabel}</p><div className="mt-1 flex flex-wrap items-center gap-2"><span className="rounded-full bg-blue-400/20 px-2.5 py-1 text-xs font-black tracking-wide text-blue-50">{node.label}</span><span className="text-xs font-medium text-blue-200">Memory anchor</span></div></div></div>{phrase && <div className="mt-3 ml-10 rounded-lg border border-blue-300/20 bg-white/[0.08] px-3 py-2"><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-300">Speaking cue</p><p className="mt-1 text-sm font-semibold italic leading-6 text-white">“{phrase}”</p></div>}<div className="mt-2 flex flex-wrap gap-1.5 pl-10">{node.triggers.slice(0, 4).map((trigger) => <span key={trigger} className="rounded-full bg-white/10 px-2 py-1 text-[11px] font-medium text-blue-100">{trigger}</span>)}</div></div>;
+}
+
+function AnswerRoutePanel({ routes, currentQuestionId, onOpenQuestion }: { routes: AnswerRoute[]; currentQuestionId: number; onOpenQuestion: (id: number) => void }) {
+  return <div className="mt-4 space-y-3">
+    {routes.map((route) => {
+      const linked = Array.from(new Set([route.primaryQuestionId, ...route.relatedQuestionIds])).filter((id) => id !== currentQuestionId);
+      const isPrimary = route.primaryQuestionId === currentQuestionId;
+      return <section key={route.id} className="rounded-xl border border-blue-100 bg-blue-50/60 p-3">
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-700">Shared answer route</p>
+            <h3 className="mt-1 text-sm font-bold text-slate-900">{route.title}</h3>
+          </div>
+          {!isPrimary && (
+            <button type="button" onClick={() => onOpenQuestion(route.primaryQuestionId)} className="min-h-9 rounded-lg bg-slate-900 px-3 text-xs font-bold text-white">
+              Deep answer → Q{route.primaryQuestionId}
+            </button>
+          )}
+        </div>
+        <p className="mt-2 text-xs leading-5 text-slate-600">{route.job}</p>
+        <p className="mt-2 text-xs font-semibold text-slate-700">Path: {route.sharedPath.join(' → ')}</p>
+        <div className="mt-3">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">Similar phrasings</p>
+          <div className="mt-1.5 flex flex-wrap gap-1.5">
+            {route.similarPhrases.map((phrase) => <span key={phrase} className="rounded-md bg-white px-2 py-1 text-[11px] font-medium text-slate-600 ring-1 ring-slate-200">{phrase}</span>)}
+          </div>
+        </div>
+        {linked.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {linked.map((id) => (
+              <button key={id} type="button" onClick={() => onOpenQuestion(id)} className="rounded-lg bg-white px-2.5 py-1.5 text-[11px] font-semibold text-blue-700 ring-1 ring-blue-100 hover:ring-blue-300">
+                {id === route.primaryQuestionId ? `Primary Q${id}` : `Related Q${id}`}
+              </button>
+            ))}
+          </div>
+        )}
+      </section>;
+    })}
+  </div>;
 }
 
 function FollowUpPanel({ followUps }: { followUps?: InterviewQuestion['followUps'] }) {

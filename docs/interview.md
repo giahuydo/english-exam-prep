@@ -82,6 +82,7 @@ Per-question relationships live in each question object in `data.ts`:
 - `contextIds`
 - `clusterIds`
 - `storyIds`
+- `routeIds` — optional shared answer routes for similar interviewer phrasings
 
 Global display definitions live in `connections.ts`:
 
@@ -89,6 +90,7 @@ Global display definitions live in `connections.ts`:
 - `phraseClusters`
 - `heroStories`
 - `triggers`
+- `answerRoutes` — similar question phrasings that share one speaking skeleton
 
 Reverse relationships are derived. Do not add a second manually maintained `questions` list to contexts, clusters, or stories.
 
@@ -99,6 +101,8 @@ getQuestionRelations(questionId)
 getContextsForQuestion(questionId)
 getClustersForQuestion(questionId)
 getStoriesForQuestion(questionId)
+getRoutesForQuestion(questionId)
+getAnswerRoute(routeId)
 getQuestionsForContext(contextId)
 getQuestionsForCluster(clusterId)
 getQuestionsForStory(storyId)
@@ -107,7 +111,22 @@ getRelatedQuestions(questionId)
 getMemoryNodes(questionId)
 ```
 
-`page.tsx` consumes these selectors for Connections, context labels, question lists, stories, triggers, and memory paths.
+`page.tsx` consumes these selectors for Connections, context labels, question lists, stories, triggers, memory paths, and the **Shared answer route** panel under each question title.
+
+### Answer routes (similar phrasings → one path)
+
+Use `answerRoutes` when interviewers rephrase the same job:
+
+| Route | Primary deep answer | Related angles |
+| --- | --- | --- |
+| `strangeloop-agent` | Q4 project deep-dive | Q7 experience gap, Q5/Q12/Q23/Q10 |
+| `hybrid-retrieval` | Q2 | Q15 / Q14 / Q8 |
+| `llm-reliability` | Q3 | Q13 / Q18 |
+| `gap-transfer` | Q9 hire / proof | Q6 / Q7 / Q11 |
+| `tool-control` | Q10 | Q16 / Q5 / Q12 |
+| `ocr-incident` | Q17 | Q22 / Q1 |
+
+**Q4 vs Q7:** keep both. Q4 is the StrangeLoop architecture deep-dive. Q7 calibrates agent experience + honest gap (full answer kept); both share the `strangeloop-agent` route.
 
 ## Static interview audio generation
 

@@ -45,6 +45,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['A'],
     clusterIds: ['observability', 'production-ai'],
+    routeIds: ['ocr-incident'],
     memory: { nodes: [
       { id: 'backend-foundation', label: 'BACKEND FOUNDATION', triggers: ['Node.js / NestJS', 'PostgreSQL', 'workers / queues'], answerSectionId: 'point' },
       { id: 'applied-ai', label: 'APPLIED AI', triggers: ['OCR', 'embeddings', 'hybrid retrieval', 'LLM integration'], answerSectionId: 'example' },
@@ -92,6 +93,7 @@ const rawInterviewQuestions = [
     contextIds: ['B'],
     clusterIds: ['rag'],
     storyIds: ['hybrid-rag'],
+    routeIds: ['hybrid-retrieval'],
     memory: { nodes: [{'id': 'retrieval', 'label': 'RETRIEVAL', 'triggers': ['lexical search', 'semantic search'], 'answerSectionId': 'point'}, {'id': 'ranking', 'label': 'RANKING', 'triggers': ['RRF', 'cosine similarity'], 'answerSectionId': 'result'}, {'id': 'safety', 'label': 'FALLBACK + ACCESS', 'triggers': ['lexical fallback', 'user access'], 'answerSectionId': 'close'}] }
   },
   {
@@ -123,8 +125,13 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*I also track* / the **request or job ID**, / the **model**, / **latency**, / **retry count**, / **error type**, / **token usage**, / and which workflow step failed.",
-        vi: "Mình cũng log request/job ID, model, latency, số lần retry, loại lỗi, token, và bước nào của workflow đã fail.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'details',
+        en: "*For LLM workflows,* / I also record the **model**, **retry count**, **token usage**, / and the workflow step that failed.",
+        vi: "Với workflow LLM, mình cũng ghi lại model, số lần retry, token usage và bước workflow bị lỗi.",
       },
       {
         id: 'extra',
@@ -135,13 +142,14 @@ const rawInterviewQuestions = [
     contextIds: ['C'],
     clusterIds: ['error-handling', 'observability', 'production-ai'],
     storyIds: ['llm-reliability'],
-    memory: { nodes: [{'id': 'root-cause', 'label': 'ROOT CAUSE', 'triggers': ['bad input', 'wrong retrieval', 'backend logic', 'provider / model'], 'answerSectionId': 'point'}, {'id': 'error-strategy', 'label': 'ERROR STRATEGY', 'triggers': ['temporary vs permanent', 'retry', 'fallback', 'fail fast'], 'answerSectionId': 'result'}, {'id': 'observability', 'label': 'OBSERVABILITY', 'triggers': ['request / job ID', 'latency', 'token usage', 'error type'], 'answerSectionId': 'close'}] }
+    routeIds: ['llm-reliability'],
+    memory: { nodes: [{'id': 'root-cause', 'label': 'ROOT CAUSE', 'triggers': ['bad input', 'wrong retrieval', 'backend logic', 'provider / model'], 'answerSectionId': 'point'}, {'id': 'error-strategy', 'label': 'ERROR STRATEGY', 'triggers': ['temporary vs permanent', 'retry', 'fallback', 'fail fast'], 'answerSectionId': 'result'}, {'id': 'observability', 'label': 'OBSERVABILITY', 'triggers': ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], 'answerSectionId': 'close'}, {'id': 'llm-details', 'label': 'LLM DETAILS', 'triggers': ['model', 'retry count', 'token usage', 'failed workflow step'], 'answerSectionId': 'details'}] }
   },
   {
     id: 4,
     question: {
-      en: "Can you explain a recent project involving an agent platform or workflow engine?",
-      vi: 'Bạn có thể giải thích một dự án gần đây có liên quan đến nền tảng agent hoặc workflow engine không?',
+      en: "Walk me through a recent agent-platform or workflow-engine project you owned — architecture, control points, and what you learned.",
+      vi: 'Hãy kể một dự án agent platform / workflow engine gần đây bạn sở hữu — kiến trúc, điểm kiểm soát, và bài học chính.',
     },
     answer: { sections: [
       {
@@ -166,8 +174,13 @@ const rawInterviewQuestions = [
       },
       {
         id: 'tracking',
-        en: "*For tracking,* / every step is recorded. / So we can see what went wrong / and improve the **workflow, prompts, or tools** over time.",
-        vi: "Về tracking: mọi bước đều được ghi lại. Nhờ đó thấy chỗ sai và cải thiện workflow, prompt hoặc tool theo thời gian.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'improve',
+        en: "*Then,* / we use those insights / to improve the **workflow, prompts, or tools** over time.",
+        vi: "Sau đó, tụi mình dùng các insight đó để cải thiện workflow, prompt hoặc tool theo thời gian.",
       },
       {
         id: 'close',
@@ -177,7 +190,8 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['K'],
     clusterIds: ['tool-calling', 'workflow'],
-    memory: { nodes: [{'id': 'strangeloop-platform', 'label': 'AGENT PLATFORM', 'triggers': ['Studio control plane', 'Engine runtime', 'AI agents'], 'answerSectionId': 'point'}, {'id': 'unified-flow', 'label': 'UNIFIED FLOW', 'triggers': ['LLM calls', 'tool calls', 'decisions', 'debuggable steps'], 'answerSectionId': 'reason'}, {'id': 'approval-gate', 'label': 'APPROVAL GATE', 'triggers': ['tool approval', 'pause and wait', 'user confirmation'], 'answerSectionId': 'approval'}, {'id': 'DATA SCOPE', 'label': 'DATA SCOPE', 'triggers': ['needed data only', 'scope check', 'no data returned'], 'answerSectionId': 'scope'}, {'id': 'observability', 'label': 'TRACEABLE RUN', 'triggers': ['every step recorded', 'workflow / prompts / tools', 'find what went wrong'], 'answerSectionId': 'tracking'}, {'id': 'boundary', 'label': 'SYSTEM BOUNDARY', 'triggers': ['platform rules', 'application data', 'backend actions'], 'answerSectionId': 'close'}] }
+    routeIds: ['strangeloop-agent'],
+    memory: { nodes: [{'id': 'strangeloop-platform', 'label': 'AGENT PLATFORM', 'triggers': ['Studio control plane', 'Engine runtime', 'AI agents'], 'answerSectionId': 'point'}, {'id': 'unified-flow', 'label': 'UNIFIED FLOW', 'triggers': ['LLM calls', 'tool calls', 'decisions', 'debuggable steps'], 'answerSectionId': 'reason'}, {'id': 'approval-gate', 'label': 'APPROVAL GATE', 'triggers': ['tool approval', 'pause and wait', 'user confirmation'], 'answerSectionId': 'approval'}, {'id': 'DATA SCOPE', 'label': 'DATA SCOPE', 'triggers': ['needed data only', 'scope check', 'no data returned'], 'answerSectionId': 'scope'}, {'id': 'observability', 'label': 'TRACEABLE RUN', 'triggers': ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], 'answerSectionId': 'tracking'}, {'id': 'improve', 'label': 'IMPROVE', 'triggers': ['workflow', 'prompts', 'tools'], 'answerSectionId': 'improve'}, {'id': 'boundary', 'label': 'SYSTEM BOUNDARY', 'triggers': ['platform rules', 'application data', 'backend actions'], 'answerSectionId': 'close'}] }
   },
   {
     id: 5,
@@ -208,8 +222,13 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*For reliability,* / I would save important **state**, / use **timeout** and bounded **retry**, / keep external actions **idempotent**, / and track **latency**, **tool errors**, **token usage**, **cost**, / and **output quality**.",
-        vi: "Về độ tin cậy: mình lưu state quan trọng, dùng timeout + retry có giới hạn, giữ action ngoài idempotent, và theo dõi latency, lỗi tool, token, chi phí, chất lượng output.",
+        en: "*For reliability,* / I would save important **state**, / use **timeout** and bounded **retry**, / and keep external actions **idempotent**.",
+        vi: "Về độ tin cậy: mình lưu state quan trọng, dùng timeout + retry có giới hạn, và giữ action ngoài idempotent.",
+      },
+      {
+        id: 'tracking',
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking: mình giữ log rõ ràng với các ID, trạng thái, lỗi, và chỉ số hiệu năng như độ trễ, thời gian xử lý, và mức dùng bộ nhớ. Điều này giúp mình theo dõi hệ thống, tìm chỗ sai, và debug dễ hơn.",
       },
       {
         id: 'extra',
@@ -219,10 +238,12 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['E', 'H'],
     clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'tool-safety', 'production-ai'],
+    routeIds: ['strangeloop-agent', 'tool-control'],
     memory: { nodes: [
       { id: 'agent-context', label: 'CLEAR STEPS', triggers: ['not one LLM call', 'clear steps', 'debug / retry / recover'], answerSectionId: 'point' },
       { id: 'tool-control', label: 'TOOL CONTROL', triggers: ['tool contract', 'validate arguments', 'permission check', 'structured result'], answerSectionId: 'result' },
-      { id: 'reliability', label: 'RELIABILITY', triggers: ['state', 'timeout / retry', 'idempotent', 'latency / cost'], answerSectionId: 'close' },
+      { id: 'reliability', label: 'RELIABILITY', triggers: ['state', 'timeout / retry', 'idempotent'], answerSectionId: 'close' },
+      { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'tracking' },
     ] }
   },
   {
@@ -260,6 +281,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['F', 'I'],
     clusterIds: ['error-handling', 'observability', 'workflow', 'gap'],
+    routeIds: ['gap-transfer'],
     memory: { nodes: [
       { id: 'tool-gap', label: 'HONEST GAP', triggers: ['not in production', 'two similar systems', 'core ideas'], answerSectionId: 'point' },
       { id: 'document-pipeline', label: 'DOCUMENT PIPELINE', triggers: ['build / publish / ingest', 'job state', 'heartbeat', 'outbox'], answerSectionId: 'pipeline' },
@@ -297,8 +319,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*The real gap* / is not the core ideas. / It is more about **breadth and time** on fully autonomous agent products. / The **production engineering foundation** is already familiar.",
-        vi: "Gap thật không phải ý tưởng cốt lõi. Nó nghiêng về bề rộng và thời gian trên các sản phẩm agent tự động hoàn toàn. Nền production engineering thì mình đã quen.",
+        en: "*The real gap* / is not the core ideas. / It is more about **having more experience with fully autonomous agent products**. / The **production engineering foundation** is already familiar to me.",
+        vi: "Gap thật không phải ý tưởng cốt lõi. Nó nghiêng về việc cần thêm kinh nghiệm với các sản phẩm agent tự động hoàn toàn. Nền production engineering thì mình đã quen.",
       },
       {
         id: 'extra',
@@ -309,11 +331,12 @@ const rawInterviewQuestions = [
     contextIds: ['E', 'I'],
     clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'rag', 'production-ai', 'gap'],
     storyIds: ['hybrid-rag'],
+    routeIds: ['strangeloop-agent', 'gap-transfer'],
     memory: { nodes: [
       { id: 'agent-gap', label: 'NARROW GAP', triggers: ['not years of autonomous agents', 'recent agent workflows'], answerSectionId: 'point' },
       { id: 'building-blocks', label: 'STRANGELOOP + RAG', triggers: ['StrangeLoop', 'tools / approval', 'hybrid retrieval'], answerSectionId: 'example' },
       { id: 'controlled-workflow', label: 'CONTROLLED WORKFLOW', triggers: ['intent / context', 'backend controls', 'validate'], answerSectionId: 'result' },
-      { id: 'foundation', label: 'PRODUCTION FOUNDATION', triggers: ['breadth / time gap', 'core ideas familiar'], answerSectionId: 'close' },
+      { id: 'foundation', label: 'PRODUCTION FOUNDATION', triggers: ['more experience with autonomous agents', 'core ideas familiar'], answerSectionId: 'close' },
     ] }
   },
   {
@@ -340,8 +363,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'result',
-        en: "*My direct work* / was more on **retrieval and grounding quality**. / I worked on hybrid retrieval with **BM25**, **vector search**, / and **RRF**, / plus regression tests for **ranking**, **fallback**, / and **permission isolation**.",
-        vi: "Phần mình làm trực tiếp nhiều hơn là chất lượng retrieval và grounding. Mình làm hybrid retrieval với BM25, vector search và RRF, kèm regression test cho ranking, fallback và permission isolation.",
+        en: "*For retrieval,* / I worked on **hybrid retrieval** with **BM25**, **vector search**, and **RRF**. / I also added **regression tests** for **ranking**, **fallback**, / and **permission isolation**.",
+        vi: "Về retrieval, mình làm hybrid retrieval với BM25, vector search và RRF. Mình cũng thêm regression test cho ranking, fallback và permission isolation.",
       },
       {
         id: 'close',
@@ -362,10 +385,11 @@ const rawInterviewQuestions = [
     contextIds: ['B', 'G'],
     clusterIds: ['rag', 'quality', 'gap'],
     storyIds: ['hybrid-rag'],
+    routeIds: ['hybrid-retrieval'],
     memory: { nodes: [
       { id: 'hands-on-eval', label: 'AI EVAL HANDS-ON', triggers: ['hands-on eval', 'quality regression', 'not platform owner'], answerSectionId: 'point' },
       { id: 'benchmark-phi', label: 'BENCHMARK + PHI', triggers: ['offline benchmark', 'OCR / document AI', 'PHI leakage'], answerSectionId: 'example' },
-      { id: 'retrieval-grounding', label: 'RETRIEVAL + GROUNDING', triggers: ['BM25 / vector / RRF', 'ranking / fallback', 'citation / provenance'], answerSectionId: 'result' },
+      { id: 'retrieval-grounding', label: 'HYBRID RETRIEVAL', triggers: ['BM25 / vector / RRF', 'regression tests', 'ranking / fallback / permission'], answerSectionId: 'result' },
       { id: 'test-bench', label: 'TEST BENCH', triggers: ['expected outputs', 'LLM judge', 'rubric', 'not built from scratch'], answerSectionId: 'extra' },
       { id: 'eval-summary', label: 'HONEST SUMMARY', triggers: ['AI evaluation', 'retrieval / grounding', 'formal LLM and agent eval'], answerSectionId: 'final' },
     ] }
@@ -379,43 +403,34 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*Yes,* / that is true. / My strongest foundation is **backend engineering**.",
-        vi: "Đúng vậy. Nền tảng mạnh nhất của mình là backend engineering.",
+        en: "*Yes,* / my years are stronger on **backend**. / But for this role, / I would not sell years of an AI title. / I would sell **applied AI I have already shipped**.",
+        vi: "Đúng, số năm mình mạnh hơn ở backend. Nhưng với role này, mình không bán năm tháng mang title AI. Mình bán applied AI mình đã ship được.",
       },
       {
         id: 'reason',
-        en: "*That's because* / in production, an AI feature is not only the model. / It still needs **data pipelines**, **retrieval**, **APIs**, **queues**, **state**, **retries**, **monitoring**, **security**, / and **infrastructure**.",
-        vi: "Vì trong production, tính năng AI không chỉ là model. Nó vẫn cần data pipeline, retrieval, API, queue, state, retry, monitoring, security và infrastructure.",
+        en: "*Because* a **70% AI role** still needs someone who can make AI work in production: / **retrieval**, **tool control**, **reliability**, **evals**, / and **cost / latency**. / That is where my proof is.",
+        vi: "Vì role 70% AI vẫn cần người làm AI chạy được trong production: retrieval, tool control, reliability, eval, và cost / latency. Đó là chỗ mình có bằng chứng.",
       },
       {
         id: 'example',
-        en: "*Those are areas* / where I already have strong hands-on experience / from building and running production backend systems.",
-        vi: "Đó là những mảng mình đã có kinh nghiệm thực chiến từ việc xây và vận hành backend production.",
-      },
-      {
-        id: 'result',
-        en: "*So* / I can grow deeper in AI / without starting from zero on the production engineering side.",
-        vi: "Vậy mình có thể đi sâu hơn về AI mà không phải bắt đầu lại từ zero ở phía production engineering.",
+        en: "*For proof,* / I shipped **hybrid retrieval** with ranking, fallback, and permission checks. / I built **StrangeLoop** agent workflows with LLM, tools, approval, and data scope. / I also owned an **OCR production issue** / and moved heavy inference to **GPU**.",
+        vi: "Bằng chứng: mình ship hybrid retrieval với ranking, fallback và permission. Mình xây StrangeLoop agent workflow với LLM, tool, approval và data scope. Mình cũng sở hữu sự cố OCR production và chuyển inference nặng sang GPU.",
       },
       {
         id: 'close',
-        en: "*Recently,* / I have also worked with **OCR**, **embeddings**, **hybrid retrieval**, **LLM integration**, **model reliability**, / and **GPU inference**. / That includes systems like **StrangeLoop** / and **RAG**.",
-        vi: "Gần đây mình cũng làm với OCR, embeddings, hybrid retrieval, tích hợp LLM, độ tin cậy model và GPU inference. Trong đó có StrangeLoop và RAG.",
-      },
-      {
-        id: 'extra',
-        en: "*So overall,* / I am building stronger **AI capability** / on top of a solid **production backend foundation**.",
-        vi: "Tóm lại, mình đang xây AI capability mạnh hơn trên nền production backend vững.",
+        en: "*So* / the gap is not “no AI.” / The gap is fewer years under an AI-only title. / The **production AI work is already real**, / so I can grow the deeper AI side quickly on that foundation.",
+        vi: "Vậy gap không phải “không có AI.” Gap là ít năm dưới title AI-only. Việc production AI đã thật, nên mình có thể đào sâu phần AI nhanh trên nền đó.",
       },
     ] },
-    contextIds: ['A', 'B', 'D'],
-    clusterIds: ['rag', 'ocr', 'production-ai'],
-    storyIds: ['hybrid-rag'],
+    contextIds: ['A', 'B', 'D', 'I'],
+    clusterIds: ['rag', 'ocr', 'production-ai', 'gap'],
+    storyIds: ['hybrid-rag', 'ocr-cpu-gpu'],
+    routeIds: ['gap-transfer', 'hybrid-retrieval', 'strangeloop-agent', 'ocr-incident'],
     memory: { nodes: [
-      { id: 'backend-foundation', label: 'BACKEND FOUNDATION', triggers: ['backend engineering', 'production systems'], answerSectionId: 'point' },
-      { id: 'production-ai', label: 'PRODUCTION AI', triggers: ['data pipelines', 'retrieval / APIs', 'security'], answerSectionId: 'reason' },
-      { id: 'ai-growth', label: 'AI GROWTH', triggers: ['OCR', 'embeddings', 'StrangeLoop / RAG', 'GPU inference'], answerSectionId: 'close' },
-      { id: 'stronger-ai', label: 'STRONGER AI', triggers: ['AI capability', 'backend foundation'], answerSectionId: 'extra' },
+      { id: 'hire-frame', label: 'SELL SHIPPED AI', triggers: ['backend years', 'not AI title years', 'applied AI shipped'], answerSectionId: 'point' },
+      { id: 'role-needs', label: '70% AI = PRODUCTION', triggers: ['retrieval', 'tool control', 'reliability / evals'], answerSectionId: 'reason' },
+      { id: 'proof-trio', label: 'PROOF TRIO', triggers: ['hybrid retrieval', 'StrangeLoop', 'OCR → GPU'], answerSectionId: 'example' },
+      { id: 'gap-reframe', label: 'GAP REFRAME', triggers: ['not no AI', 'fewer AI-title years', 'grow on foundation'], answerSectionId: 'close' },
     ] }
   },
   {
@@ -437,8 +452,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*Then* / I would expose a small set of **backend tools**. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / checks **permission**, / executes the action, / and returns a **structured result**.",
-        vi: "*Sau đó* / mình expose một tập nhỏ **backend tool**. / Model quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / check **permission**, / thực thi action, / và trả **structured result**.",
+        en: "*Then* / I would expose a small set of **backend tools**. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / and checks **permission** before doing it.",
+        vi: "*Sau đó* / mình expose một tập nhỏ **backend tool**. / Model có thể quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / và check **permission** trước khi thực hiện.",
       },
       {
         id: 'result',
@@ -447,8 +462,13 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*For tracking,* / I also worked on **tool safety**, / such as **audit logs**, **tracing**, **citations**, / and **final-response validation**.",
-        vi: "*Về tracking,* / mình cũng làm **tool safety**, / như **audit logs**, **tracing**, **citations**, / và **final-response validation**.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'tool-safety',
+        en: "*For tool safety,* / I also worked on **audit logs**, **tracing**, **citations**, / and **final-response validation**.",
+        vi: "Về tool safety, mình cũng làm audit log, tracing, citation, và final-response validation.",
       },
       {
         id: 'extra',
@@ -458,56 +478,60 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['E', 'H'],
     clusterIds: ['tool-calling', 'tool-safety'],
+    routeIds: ['tool-control', 'strangeloop-agent'],
     memory: { nodes: [
       { id: 'hands-on', label: 'HANDS-ON TOOLING', triggers: ['tool calling', 'backend control'], answerSectionId: 'point' },
       { id: 'search-read', label: 'SEARCH + READ', triggers: ['Clincove', 'read-only tools', 'search / document read'], answerSectionId: 'reason' },
       { id: 'BACKEND-CONTROL', label: 'BACKEND CONTROL', triggers: ['choose tool', 'tool contract', 'permission', 'structured result'], answerSectionId: 'example' },
       { id: 'FAMILIAR-INTERFACE', label: 'FAMILIAR INTERFACE', triggers: ['LLM-friendly', 'file system', 'search and read'], answerSectionId: 'result' },
-      { id: 'SAFETY-TRACKING', label: 'SAFETY + TRACKING', triggers: ['audit logs', 'tracing', 'citations', 'final validation'], answerSectionId: 'close' },
+      { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'close' },
+      { id: 'tool-safety', label: 'TOOL SAFETY', triggers: ['audit logs', 'tracing', 'citations', 'final validation'], answerSectionId: 'tool-safety' },
       { id: 'ENGINE', label: 'UNDERSTAND ENGINE', triggers: ['Clincove flow', 'StrangeLoop engine', 'modify when needed'], answerSectionId: 'extra' },
     ] }
   },
   {
     id: 11,
     question: {
-      en: "You haven't used our exact AI stack. How quickly can you adapt?",
-      vi: 'Bạn chưa dùng đúng stack AI của tụi mình. Bạn thích nghi nhanh cỡ nào?',
+      en: "You haven't used our exact AI stack. How do you learn a new language or stack quickly?",
+      vi: 'Bạn chưa dùng đúng stack AI của tụi mình. Bạn học ngôn ngữ hoặc stack mới nhanh như thế nào?',
     },
     answer: { sections: [
       {
         id: 'point',
-        en: "*For me,* / I normally learn a **new technology** / by connecting it to **engineering problems** / I already understand.",
-        vi: "*Với mình,* / mình học **công nghệ mới** / bằng cách nối nó với **vấn đề engineering** / mình đã hiểu.",
+        en: "*For me,* / I learn a **new language or stack** / by connecting it to **problems I already know**.",
+        vi: "Với mình, học ngôn ngữ hoặc stack mới là nối nó với các vấn đề mình đã hiểu.",
       },
       {
         id: 'reason',
-        en: "*That's because* / the **framework may change**, / but many of the **underlying problems stay the same**.",
-        vi: "*Vì* / **framework có thể đổi**, / nhưng nhiều **vấn đề nền tảng bên dưới vẫn giống**.",
+        en: "*That's because* / the **tool may change**, / but many **core problems stay the same**.",
+        vi: "Vì tool có thể đổi, nhưng nhiều vấn đề cốt lõi vẫn giống.",
       },
       {
         id: 'example',
-        en: "*For example,* / when I study **Temporal**, / I connect it to **retries**, **checkpoints**, **durable state**, / and **long-running workflows** that I have already worked with.",
-        vi: "*Ví dụ,* / khi học **Temporal**, / mình liên hệ với **retry**, **checkpoint**, **state bền vững**, / và **workflow chạy lâu** mà mình đã làm.",
+        en: "*For example,* / when I learn **Temporal**, / I map it to **retries**, **checkpoints**, **state**, / and **long-running workflows**.",
+        vi: "Ví dụ, khi học Temporal, mình map sang retry, checkpoint, state, và workflow chạy lâu.",
       },
       {
         id: 'result',
-        en: "*So* / this is also how I moved from traditional backend work / into **OCR**, **embeddings**, **retrieval**, **LLM integration**, / and **GPU-based inference**.",
-        vi: "*Vậy* / đây cũng là cách mình chuyển từ backend truyền thống / sang **OCR**, **embeddings**, **retrieval**, **tích hợp LLM**, / và **GPU inference**.",
+        en: "*The same way,* / I moved from backend work / into **OCR**, **retrieval**, **LLM**, / and **GPU inference**.",
+        vi: "Cùng cách đó, mình chuyển từ backend sang OCR, retrieval, LLM và GPU inference.",
       },
       {
         id: 'close',
-        en: "*Still,* / every new stack has its own **abstractions**, **APIs**, / and **best practices** / that I need to learn.",
-        vi: "*Dù vậy,* / mỗi stack mới vẫn có **abstraction**, **API**, / và **best practice** riêng / mình cần học.",
-      },
-      {
-        id: 'extra',
-        en: "*So overall,* / I usually do not need to relearn the **engineering fundamentals**. / I mainly need to learn the **new tool**, / so I am confident I can adapt relatively quickly.",
-        vi: "*Tóm lại,* / mình thường không phải học lại **kiến thức engineering nền**. / Chủ yếu cần học **tool mới**, / nên mình tự tin thích nghi khá nhanh.",
+        en: "*So* / I still need to learn the **new APIs**. / But I do not relearn the **fundamentals**, / so I can adapt fairly quickly.",
+        vi: "Vậy mình vẫn phải học API mới. Nhưng không phải học lại nền tảng, nên thích nghi khá nhanh.",
       },
     ] },
     contextIds: ['A', 'F', 'I'],
     clusterIds: ['workflow', 'gap'],
-    memory: { nodes: [{ id: 'learn-by-problems', label: 'LEARN BY PROBLEMS', triggers: ['engineering problems', 'underlying problems'], answerSectionId: 'point' }, { id: 'temporal-bridge', label: 'TEMPORAL BRIDGE', triggers: ['retries', 'checkpoints', 'durable state'], answerSectionId: 'example' }, { id: 'ai-transition', label: 'AI TRANSITION', triggers: ['OCR', 'retrieval', 'LLM integration'], answerSectionId: 'result' }, { id: 'adapt', label: 'ADAPT QUICKLY', triggers: ['new abstractions', 'learn the tool'], answerSectionId: 'extra' }] }
+    routeIds: ['gap-transfer'],
+    memory: { nodes: [
+      { id: 'learn-by-problems', label: 'LEARN BY PROBLEMS', triggers: ['new language / stack', 'problems I know'], answerSectionId: 'point' },
+      { id: 'core-same', label: 'CORE STAYS', triggers: ['tool may change', 'core problems same'], answerSectionId: 'reason' },
+      { id: 'temporal-bridge', label: 'TEMPORAL BRIDGE', triggers: ['retries', 'checkpoints', 'state / workflows'], answerSectionId: 'example' },
+      { id: 'ai-transition', label: 'SAME PATH', triggers: ['OCR', 'retrieval', 'LLM / GPU'], answerSectionId: 'result' },
+      { id: 'adapt', label: 'ADAPT FAST', triggers: ['new APIs', 'fundamentals transfer'], answerSectionId: 'close' },
+    ] }
   },
   {
     id: 12,
@@ -533,8 +557,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'result',
-        en: "*Then* / I would expose a small set of **backend tools**. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / checks **permission**, / executes the action, / and returns a **structured result**.",
-        vi: "*Sau đó* / mình expose một tập nhỏ **backend tool**. / Model quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / check **permission**, / thực thi action, / và trả **structured result**.",
+        en: "*Then* / I would expose a small set of **backend tools**. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / and checks **permission** before doing it.",
+        vi: "*Sau đó* / mình expose một tập nhỏ **backend tool**. / Model có thể quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / và check **permission** trước khi thực hiện.",
       },
       {
         id: 'close',
@@ -543,18 +567,24 @@ const rawInterviewQuestions = [
       },
       {
         id: 'extra',
-        en: "*For tracking,* / I would track **run IDs**, **tool calls**, **latency**, / and **errors**, / and use **retry and recovery** where needed. / I would also add **regression and eval cases** / for important workflows.",
-        vi: "*Về tracking,* / mình theo dõi **run ID**, **tool call**, **latency**, / và **lỗi**, / rồi dùng **retry và recovery** khi cần. / Mình cũng thêm **regression và eval case** / cho các workflow quan trọng.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'reliability-evals',
+        en: "*I would also* / use **retry and recovery** where needed / and add **regression and eval cases** / for important workflows.",
+        vi: "Mình cũng dùng retry và recovery khi cần, rồi thêm regression và eval case cho các workflow quan trọng.",
       },
       {
         id: 'section-7',
-        en: "*So overall,* / the model can make **decisions**, / but the backend stays in control of **data**, **permissions**, **execution**, / and **reliability**.",
-        vi: "*Tóm lại,* / model có thể **quyết định**, / nhưng backend vẫn kiểm soát **data**, **permission**, **thực thi**, / và **độ tin cậy**.",
+        en: "*So overall,* / the model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / and checks **permission** before doing it.",
+        vi: "*Tóm lại,* / model có thể quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / và check **permission** trước khi thực hiện.",
       },
     ] },
     contextIds: ['C', 'E', 'F', 'G', 'H'],
     clusterIds: ['error-handling', 'observability', 'workflow', 'tool-calling', 'tool-safety', 'quality'],
-    memory: { nodes: [{ id: 'goal-context', label: 'GOAL → CONTEXT', triggers: ['user goal', 'authorized context', 'clear workflow'], answerSectionId: 'point' }, { id: 'backend-tools', label: 'BACKEND TOOLS', triggers: ['tool contract', 'permission', 'structured result'], answerSectionId: 'result' }, { id: 'reliability', label: 'RELIABILITY', triggers: ['run IDs', 'retry / recovery', 'regression'], answerSectionId: 'extra' }, { id: 'backend-control', label: 'BACKEND CONTROL', triggers: ['data', 'permissions', 'execution', 'reliability'], answerSectionId: 'section-7' }] }
+    routeIds: ['strangeloop-agent', 'tool-control'],
+    memory: { nodes: [{ id: 'goal-context', label: 'GOAL → CONTEXT', triggers: ['user goal', 'authorized context', 'clear workflow'], answerSectionId: 'point' }, { id: 'backend-tools', label: 'BACKEND TOOLS', triggers: ['tool contract', 'permission', 'structured result'], answerSectionId: 'result' }, { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'extra' }, { id: 'reliability-evals', label: 'RETRY + EVALS', triggers: ['retry / recovery', 'regression', 'eval cases'], answerSectionId: 'reliability-evals' }, { id: 'backend-control', label: 'BACKEND CONTROL', triggers: ['data', 'permissions', 'execution', 'reliability'], answerSectionId: 'section-7' }] }
   },
   {
     id: 13,
@@ -595,18 +625,25 @@ const rawInterviewQuestions = [
       },
       {
         id: 'section-7',
-        en: "*So overall,* / I track the **model used**, **token usage**, **retry attempts**, **latency**, / and **estimated cost**, / and use that real data / to decide what to optimize next.",
-        vi: "*Tóm lại,* / mình theo dõi **model**, **token**, **số lần retry**, **latency**, / và **chi phí ước tính**, / rồi dùng dữ liệu thật / để quyết định tối ưu phần nào tiếp theo.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'optimization',
+        en: "*For optimization,* / I also compare the **model used**, **token usage**, **retry attempts**, / and **estimated cost** / to decide what to optimize next.",
+        vi: "Về tối ưu, mình cũng so sánh model, token usage, số lần retry và chi phí ước tính để quyết định tối ưu phần nào tiếp theo.",
       },
     ] },
     contextIds: ['C', 'F'],
     clusterIds: ['error-handling', 'observability', 'production-ai', 'workflow'],
     storyIds: ['llm-reliability'],
+    routeIds: ['llm-reliability'],
     memory: { nodes: [
       { id: 'reduce-work', label: 'REDUCE AI WORK', triggers: ['backend logic', 'filtering', 'retrieval', 'prompt cache'], answerSectionId: 'example' },
       { id: 'cache-context', label: 'CACHE + CONTEXT', triggers: ['smaller context', 'authorized data', 'reuse stable context'], answerSectionId: 'result' },
       { id: 'measure-recover', label: 'RECOVER + MEASURE', triggers: ['timeout / retry', 'rate limits', 'temporary errors'], answerSectionId: 'close' },
-      { id: 'measure', label: 'MEASURE', triggers: ['model used', 'token usage', 'retry attempts', 'estimated cost'], answerSectionId: 'section-7' },
+      { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'section-7' },
+      { id: 'measure', label: 'OPTIMIZE', triggers: ['model used', 'token usage', 'retry attempts', 'estimated cost'], answerSectionId: 'optimization' },
     ] }
   },
   {
@@ -628,32 +665,33 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*For example,* / for knowledge-based questions, / I use good **retrieval** / and **relevant evidence** / instead of depending only on the model's own knowledge.",
+        en: "*For example,* / for knowledge-based questions, / I use **retrieval** / to get the **right evidence** / instead of only using the model's own knowledge.",
         vi: "*Ví dụ,* / với câu hỏi dựa trên kiến thức, / mình dùng **retrieval tốt** / và **evidence liên quan** / thay vì chỉ dựa kiến thức sẵn của model.",
       },
       {
         id: 'result',
-        en: "*Then* / I use **structured output** / and **backend validation** / when the result is used by the system. / If the model suggests an action, / the backend still checks the **business rules** / and **permissions**.",
-        vi: "*Sau đó* / mình dùng **structured output** / và **backend validation** / khi hệ thống dùng kết quả. / Nếu model đề xuất action, / backend vẫn check **business rules** / và **permission**.",
+        en: "*Then* / I use **structured output** and **backend checks** / when the system uses the result. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / and checks **permission** before doing it.",
+        vi: "*Sau đó* / mình dùng **structured output** / và **backend validation** / khi hệ thống dùng kết quả. / Model có thể quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / và check **permission** trước khi thực hiện.",
       },
       {
         id: 'settings',
-        en: "*I also adjust the model settings* / based on the task. / For factual tasks, / I usually prefer a **lower temperature** / to make the output more consistent / and less random.",
-        vi: "*Mình cũng chỉnh model setting* / theo từng task. / Với task cần factual, / mình thường chọn **temperature thấp hơn** / để output ổn định hơn / và ít random hơn.",
+        en: "*For model settings,* / I adjust them based on the task. / *For example,* / for factual tasks, / I use a **lower temperature** / so the answer is more consistent / and less random.",
+        vi: "*Về model settings,* / mình điều chỉnh theo từng task. / *Ví dụ,* / với các task factual, / mình dùng **temperature thấp hơn** / để câu trả lời ổn định hơn / và ít random hơn.",
       },
       {
         id: 'close',
-        en: "*For important cases,* / I use **eval cases**. / If the model is not sure, / I prefer to **ask for clarification**, / **require confirmation**, / or use a **safe fallback** / instead of letting it guess.",
-        vi: "*Với case quan trọng,* / mình dùng **eval cases**. / Nếu model không chắc, / mình ưu tiên **hỏi lại**, / **yêu cầu confirmation**, / hoặc dùng **safe fallback** / thay vì để model đoán.",
+        en: "*For important cases,* / I use **eval cases**. / If the model is uncertain, / I **ask the user**. / For important or risky actions, / I require the user to **confirm**. / Otherwise, / I use a **safe fallback** / instead of guessing.",
+        vi: "*Với case quan trọng,* / mình dùng **eval cases**. / Nếu model không chắc, / mình **hỏi người dùng**. / Với action quan trọng hoặc có rủi ro, / mình yêu cầu người dùng **xác nhận**. / Nếu không, / mình dùng **safe fallback** / thay vì để model đoán.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / hallucination cannot be completely removed, / but we can **reduce the risk** / with better context, / retrieval, / validation, / proper model settings, / evals, / and **safe fallback**.",
+        en: "*So overall,* / we cannot completely remove **hallucination**, / but we can reduce it / with good **context**, **backend checks**, **model settings**, / and **safe fallback**.",
         vi: "*Tóm lại,* / hallucination không thể bỏ hết, / nhưng tụi mình có thể **giảm rủi ro** / bằng context tốt hơn, / retrieval, / validation, / model setting phù hợp, / eval, / và **safe fallback**.",
       },
     ] },
     contextIds: ['B', 'C', 'G', 'H'],
     clusterIds: ['rag', 'quality', 'tool-safety'],
+    routeIds: ['hybrid-retrieval'],
     memory: { nodes: [
       { id: 'right-context', label: 'RIGHT CONTEXT', triggers: ['right and limited context'], answerSectionId: 'point' },
       { id: 'retrieval-evidence', label: 'RETRIEVAL + EVIDENCE', triggers: ['knowledge-based questions', 'good retrieval', 'relevant evidence'], answerSectionId: 'example' },
@@ -692,8 +730,13 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*For runtime,* / I check **latency**, **failures**, / and **fallback behavior** / to make sure the system is stable.",
-        vi: "*Về runtime,* / mình kiểm **latency**, **failures**, / và **fallback behavior** / để chắc hệ thống ổn định.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'runtime-stability',
+        en: "*For runtime stability,* / I also check **failures** / and **fallback behavior**.",
+        vi: "Về độ ổn định runtime, mình cũng kiểm failures và fallback behavior.",
       },
       {
         id: 'extra',
@@ -704,12 +747,14 @@ const rawInterviewQuestions = [
     contextIds: ['B', 'C', 'G'],
     clusterIds: ['rag', 'quality', 'observability', 'production-ai'],
     storyIds: ['hybrid-rag'],
+    routeIds: ['hybrid-retrieval'],
     memory: { nodes: [
       { id: 'three-levels', label: 'THREE LEVELS', triggers: ['retrieval', 'answer quality', 'runtime'], answerSectionId: 'point' },
       { id: 'right-information', label: 'RIGHT INFORMATION', triggers: ['right information', 'retrieval wrong', 'final answer wrong'], answerSectionId: 'reason' },
       { id: 'hybrid-retrieval', label: 'HYBRID RETRIEVAL', triggers: ['Clincove', 'PostgreSQL / pgvector / RRF', 'ranking / fallback'], answerSectionId: 'example' },
       { id: 'grounded-answer', label: 'GROUNDED ANSWER', triggers: ['real source', 'citations', 'provenance'], answerSectionId: 'result' },
-      { id: 'runtime-stability', label: 'RUNTIME STABILITY', triggers: ['latency', 'failures', 'fallback behavior'], answerSectionId: 'close' },
+      { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'close' },
+      { id: 'runtime-stability', label: 'RUNTIME STABILITY', triggers: ['failures', 'fallback behavior'], answerSectionId: 'runtime-stability' },
       { id: 'formal-evaluation', label: 'FORMAL EVALUATION', triggers: ['labeled dataset', 'Recall@K', 'MRR'], answerSectionId: 'extra' },
     ] }
   },
@@ -732,8 +777,8 @@ const rawInterviewQuestions = [
       },
       {
         id: 'example',
-        en: "*Then* / I would expose a small set of **backend tools**. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / checks **permission**, / executes the action, / and returns a **structured result**.",
-        vi: "*Sau đó* / mình expose một tập nhỏ **backend tool**. / Model quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / check **permission**, / thực thi action, / và trả **structured result**.",
+        en: "*Then* / I would expose a small set of **backend tools**. / The model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / and checks **permission** before doing it.",
+        vi: "*Sau đó* / mình expose một tập nhỏ **backend tool**. / Model có thể quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / và check **permission** trước khi thực hiện.",
       },
       {
         id: 'result',
@@ -742,18 +787,24 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*For tracking,* / I keep **safe logs** with **IDs** / and avoid **sensitive data**. / For write actions, / I use **idempotency** / so retries do not create **duplicates**.",
-        vi: "*Về tracking,* / mình giữ **log an toàn** với các **ID**, / và tránh **data nhạy cảm**. / Với thao tác ghi, / mình dùng **idempotency** / để retry không tạo **bản trùng**.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'safe-writes',
+        en: "*For safe logging,* / I avoid **sensitive data**. / For write actions, / I use **idempotency** / so retries do not create **duplicates**.",
+        vi: "Với log an toàn, mình tránh data nhạy cảm. Với thao tác ghi, mình dùng idempotency để retry không tạo bản trùng.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / the **LLM can suggest**, / but the **backend controls** **access**, **execution**, / and **safety**.",
-        vi: "*Tóm lại,* / **LLM có thể đề xuất**, / nhưng **backend kiểm soát** **quyền truy cập**, **thực thi**, / và **độ an toàn**.",
+        en: "*So overall,* / the model can decide which tool it needs. / But the backend still defines the **tool contract**, / validates the **arguments**, / and checks **permission** before doing it.",
+        vi: "*Tóm lại,* / model có thể quyết định tool nào cần. / Nhưng backend vẫn định nghĩa **tool contract**, / validate **arguments**, / và check **permission** trước khi thực hiện.",
       },
     ] },
     contextIds: ['H'],
     clusterIds: ['tool-calling', 'tool-safety'],
-    memory: { nodes: [{ id: 'least-privilege', label: 'LEAST PRIVILEGE', triggers: ['only needed tools', 'limited access'], answerSectionId: 'point' }, { id: 'backend-check', label: 'BACKEND CHECK', triggers: ['arguments', 'permission', 'access scope', 'final decision'], answerSectionId: 'example' }, { id: 'confirm-sensitive', label: 'USER CONFIRMATION', triggers: ['sensitive actions', 'user confirmation'], answerSectionId: 'result' }, { id: 'safe-logs', label: 'SAFE LOGS', triggers: ['safe logs', 'IDs', 'avoid sensitive data'], answerSectionId: 'close' }, { id: 'idempotency', label: 'IDEMPOTENCY', triggers: ['write actions', 'safe retry', 'no duplicates'], answerSectionId: 'close' }, { id: 'backend-controls', label: 'LLM SUGGESTS', triggers: ['LLM can suggest', 'backend controls', 'access / execution / safety'], answerSectionId: 'extra' }] }
+    routeIds: ['tool-control'],
+    memory: { nodes: [{ id: 'least-privilege', label: 'LEAST PRIVILEGE', triggers: ['only needed tools', 'limited access'], answerSectionId: 'point' }, { id: 'backend-check', label: 'BACKEND CHECK', triggers: ['arguments', 'permission', 'access scope', 'final decision'], answerSectionId: 'example' }, { id: 'confirm-sensitive', label: 'USER CONFIRMATION', triggers: ['sensitive actions', 'user confirmation'], answerSectionId: 'result' }, { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'close' }, { id: 'safe-writes', label: 'SAFE WRITES', triggers: ['avoid sensitive data', 'idempotency', 'no duplicates'], answerSectionId: 'safe-writes' }, { id: 'backend-controls', label: 'LLM SUGGESTS', triggers: ['LLM can suggest', 'backend controls', 'access / execution / safety'], answerSectionId: 'extra' }] }
   },
   {
     id: 17,
@@ -764,38 +815,49 @@ const rawInterviewQuestions = [
     answer: { sections: [
       {
         id: 'point',
-        en: "*One example was* / a production issue with **large PDF processing jobs**. / During **OCR**, / the **memory usage** kept increasing, / and eventually the worker crashed.",
+        en: 'In one case, / we had a problem / with **large PDF processing jobs**. / During **OCR**, / the **memory usage** kept increasing, / and eventually the worker crashed.',
         vi: "*Một ví dụ là* / sự cố production với **job xử lý PDF lớn**. / Trong lúc **OCR**, / **memory** tăng liên tục, / và cuối cùng worker crash.",
       },
       {
         id: 'reason',
-        en: "*That's because* / I did not want to assume the **worker itself** was the real problem. / I wanted to find the **root cause** first.",
+        en: 'The first thing I wanted to do / was to find the **root cause**. / I did not want to assume / that the worker itself was the real problem.',
         vi: "*Vì* / mình không muốn giả định **worker** là nguyên nhân. / Mình muốn tìm **root cause** trước.",
       },
       {
         id: 'example',
-        en: "*For example,* / I traced the **processing flow**, / added **targeted logging**, / checked the memory usage at important steps, / and tested different **batch sizes**. / From that, / I found that the main bottleneck was the **OCR CPU inference**.",
-        vi: "*Ví dụ,* / mình trace **luồng xử lý**, / thêm **log có mục tiêu**, / đo memory ở các bước quan trọng, / và thử nhiều **batch size**. / Từ đó, / bottleneck chính là **OCR CPU inference**.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'investigation',
+        en: 'Then, / I traced the whole **processing flow**. / This helped me see / which **batch** or **page** was slow, / and when the **memory usage became too high**. / From that, / I found that the main bottleneck / was the **OCR CPU inference**.',
+        vi: "Sau đó, mình trace luồng xử lý. Điều này giúp mình thấy batch hoặc page nào chậm, khi memory quá cao, và bottleneck chính là OCR CPU inference.",
       },
       {
         id: 'result',
-        en: "*So first,* / I made the current flow more stable / with **smaller batches** / and **checkpoint and recovery logic**, / so if one step failed, / we did not need to restart the whole job.",
+        en: 'Based on that, / I reduced the **batch size** / and **adjusted the settings** / for the **CPU path**. / I also used separate settings / for the **CPU path** and the **GPU path**, / so the system could still run reliably on CPU / before the GPU service was deployed.',
         vi: "*Vậy trước hết,* / mình làm luồng hiện tại ổn định hơn / bằng **batch nhỏ hơn** / và **checkpoint cùng recovery**, / nên nếu một bước lỗi / thì không phải chạy lại cả job.",
       },
       {
         id: 'close',
-        en: "*Then* / I handled the **backend and workflow side** / and worked with **DevOps** / to move the heavy OCR inference / to a **remote GPU service**.",
+        en: 'For recovery, / I added **checkpoint and recovery logic**. / So if one step failed, / we could continue from the last checkpoint / instead of restarting the whole job.',
         vi: "*Sau đó* / mình xử lý phần **backend và workflow** / và phối hợp **DevOps** / để đưa OCR nặng / sang một **GPU service** tách riêng.",
       },
       {
         id: 'extra',
-        en: "*So overall,* / I did not only focus on stopping the crash. / I also checked **worker stability**, **memory usage**, **job completion**, / and **processing time** / to make sure the new solution was **stable**, **observable**, / and **safe to roll out**.",
+        en: 'Then, / I also worked on the **infrastructure side** / together with **DevOps** / to move the heavy OCR inference / to a **remote GPU service**.',
         vi: "*Tóm lại,* / mình không chỉ dừng crash. / Mình còn kiểm **ổn định worker**, **memory**, **tỉ lệ job hoàn tất**, / và **thời gian xử lý** / để chắc giải pháp mới **ổn định**, **quan sát được**, / và **an toàn khi roll out**.",
+      },
+      {
+        id: 'rollout',
+        en: 'So overall, / I did not only focus on stopping the crash. / I also checked **worker stability**, **memory usage**, **job completion**, / and **processing time** / to make sure the new solution was **stable** / and safe to roll out.',
+        vi: '',
       },
     ] },
     contextIds: ['D'],
     clusterIds: ['ocr', 'workflow', 'observability'],
-    memory: { nodes: [{ id: 'incident', label: 'OCR INCIDENT', triggers: ['large PDFs', 'memory growth', 'worker crash'], answerSectionId: 'point' }, { id: 'root-cause', label: 'ROOT CAUSE', triggers: ['trace flow', 'targeted logging', 'batch sizes'], answerSectionId: 'example' }, { id: 'stabilize', label: 'STABILIZE', triggers: ['smaller batches', 'checkpoint', 'recovery'], answerSectionId: 'result' }, { id: 'gpu-service', label: 'GPU SERVICE', triggers: ['DevOps', 'remote GPU', 'backend workflow'], answerSectionId: 'close' }, { id: 'safe-rollout', label: 'SAFE ROLLOUT', triggers: ['worker stability', 'job completion', 'processing time'], answerSectionId: 'extra' }] }
+    routeIds: ['ocr-incident'],
+    memory: { nodes: [{ id: 'incident', label: 'OCR INCIDENT', triggers: ['large PDF processing jobs', 'memory usage', 'worker crashed'], answerSectionId: 'point' }, { id: 'root-cause', label: 'ROOT CAUSE', triggers: ['do not assume', 'worker itself', 'root cause'], answerSectionId: 'reason' }, { id: 'tracking', label: 'TRACKING', triggers: ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], answerSectionId: 'example' }, { id: 'investigation', label: 'PROCESSING FLOW', triggers: ['batch or page', 'memory too high', 'OCR CPU inference'], answerSectionId: 'investigation' }, { id: 'stabilize', label: 'CPU PATH', triggers: ['batch size', 'adjusted settings', 'CPU and GPU paths'], answerSectionId: 'result' }, { id: 'recovery', label: 'CHECKPOINT + RECOVERY', triggers: ['last checkpoint', 'restart the whole job'], answerSectionId: 'close' }, { id: 'gpu-service', label: 'GPU SERVICE', triggers: ['infrastructure side', 'DevOps', 'remote GPU service'], answerSectionId: 'extra' }, { id: 'safe-rollout', label: 'SAFE ROLLOUT', triggers: ['worker stability', 'memory usage', 'job completion', 'processing time'], answerSectionId: 'rollout' }] }
   },
   {
     id: 18,
@@ -826,8 +888,13 @@ const rawInterviewQuestions = [
       },
       {
         id: 'close',
-        en: "*For tracking,* / I also keep the **job status** clear, / for example **queued**, **running**, **completed**, / or **failed**, / so it is easier to monitor and debug.",
-        vi: "*Về tracking,* / mình cũng giữ **trạng thái job** rõ, / ví dụ **queued**, **running**, **completed**, / hoặc **failed**, / để dễ monitor và debug.",
+        en: "*For tracking,* / I keep clear **logs** / with the important **IDs**, **status**, **errors**, / and **performance metrics**, / such as **latency**, **processing time**, / and **memory usage**. / This helps me **monitor the system**, / find what went wrong, / and **debug problems more easily**.",
+        vi: "Về tracking, mình giữ log rõ ràng với ID, trạng thái, lỗi và các chỉ số hiệu năng như latency, thời gian xử lý và memory usage. Điều này giúp mình theo dõi hệ thống, tìm lỗi và debug dễ hơn.",
+      },
+      {
+        id: 'job-status',
+        en: "*For the job itself,* / I keep the **job status** clear, / for example **queued**, **running**, **completed**, / or **failed**.",
+        vi: "Với chính job đó, mình giữ trạng thái rõ ràng, ví dụ queued, running, completed hoặc failed.",
       },
       {
         id: 'extra',
@@ -837,7 +904,8 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['F'],
     clusterIds: ['error-handling', 'workflow', 'observability'],
-    memory: { nodes: [{'id': 'async-job', 'label': 'ASYNC JOB', 'triggers': ['job ID', 'queue', 'worker'], 'answerSectionId': 'point'}, {'id': 'durable-state', 'label': 'STATE + CHECKPOINT', 'triggers': ['job state', 'result of each step', 'checkpoint'], 'answerSectionId': 'example'}, {'id': 'recovery', 'label': 'RECOVERY', 'triggers': ['retry', 'idempotent', 'Temporal'], 'answerSectionId': 'result'}] }
+    routeIds: ['llm-reliability'],
+    memory: { nodes: [{'id': 'async-job', 'label': 'ASYNC JOB', 'triggers': ['job ID', 'queue', 'worker'], 'answerSectionId': 'point'}, {'id': 'durable-state', 'label': 'STATE + CHECKPOINT', 'triggers': ['job state', 'result of each step', 'checkpoint'], 'answerSectionId': 'example'}, {'id': 'recovery', 'label': 'RECOVERY', 'triggers': ['retry', 'idempotent', 'Temporal'], 'answerSectionId': 'result'}, {'id': 'tracking', 'label': 'TRACKING', 'triggers': ['clear logs', 'IDs / status / errors', 'latency / processing time / memory'], 'answerSectionId': 'close'}, {'id': 'job-status', 'label': 'JOB STATUS', 'triggers': ['queued / running', 'completed / failed'], 'answerSectionId': 'job-status'}] }
   },
   {
     id: 19,
@@ -1009,6 +1077,7 @@ const rawInterviewQuestions = [
     contextIds: ['A', 'D', 'E'],
     clusterIds: ['production-ai', 'ocr', 'workflow', 'tool-calling'],
     storyIds: ['ocr-cpu-gpu'],
+    routeIds: ['ocr-incident'],
     memory: { nodes: [
       { id: 'clinical-system', label: 'CLINICAL SYSTEM', triggers: ['clinical trial management', 'US-based company'], answerSectionId: 'point' },
       { id: 'backend-role', label: 'BACKEND ROLE', triggers: ['NestJS', 'PostgreSQL', 'AI features'], answerSectionId: 'reason' },
@@ -1035,6 +1104,7 @@ const rawInterviewQuestions = [
     ] },
     contextIds: ['K'],
     clusterIds: ['workflow'],
+    routeIds: ['strangeloop-agent'],
     memory: { nodes: [
       { id: 'langchain', label: 'LANGCHAIN', triggers: ['models', 'prompts', 'tools', 'middleware'], answerSectionId: 'point' },
       { id: 'langgraph', label: 'LANGGRAPH', triggers: ['stateful orchestration', 'durable execution', 'human-in-the-loop'], answerSectionId: 'reason' },
@@ -1116,7 +1186,7 @@ const followUpPrompts: Record<number, InterviewFollowUp[]> = {
   ],
   7: [{ id: 'agent-boundary', question: { en: 'Which parts should an agent decide, and which parts must stay deterministic?', vi: 'Phần nào để agent quyết định, phần nào phải deterministic?' } }],
   8: [{ id: 'eval-signal', question: { en: 'Which evaluation signal would you trust most and why?', vi: 'Bạn tin evaluation signal nào nhất và vì sao?' } }],
-  9: [{ id: 'backend-transfer', question: { en: 'Which backend skill transfers most directly to an AI role?', vi: 'Kỹ năng backend nào chuyển sang vai trò AI trực tiếp nhất?' } }],
+  9: [{ id: 'ai-proof', question: { en: 'What is your strongest proof that you can already ship applied AI?', vi: 'Bằng chứng mạnh nhất cho thấy bạn đã ship được applied AI là gì?' } }],
   10: [{ id: 'tool-permission', question: { en: 'How would you prevent an unsafe tool call?', vi: 'Bạn ngăn một tool call không an toàn như thế nào?' } }],
   11: [{ id: 'learning-plan', question: { en: 'How would you learn an unfamiliar AI stack quickly?', vi: 'Bạn sẽ học một AI stack chưa quen thật nhanh như thế nào?' } }],
   12: [{ id: 'everfit-tradeoff', question: { en: 'What would you build first for this system and why?', vi: 'Bạn sẽ xây phần nào trước cho hệ thống này và vì sao?' } }],
@@ -1136,22 +1206,22 @@ const followUpPrompts: Record<number, InterviewFollowUp[]> = {
 const speakingCueOverrides: Record<number, Record<string, string>> = {
   1: { point: 'My main background is', reason: 'In production, an AI feature is not only about', example: 'In my recent project, I have worked more with', result: 'I have experience with both', close: 'I would describe my strength as' },
   2: { point: 'I prefer not to rely on only one type of search', reason: 'Lexical search is good for', example: 'The lexical side uses', result: 'We combine the two rankings with', close: 'We also think about failure and security', extra: 'The goal is to make retrieval more' },
-  3: { point: 'I check the whole workflow to find', reason: 'A bad result can come from', example: 'For temporary failures like', result: 'I first separate temporary errors from', close: 'I normally track the' },
-  4: { point: 'Recently, I worked with', reason: 'Basically, the Engine runs the workflow step by step', approval: 'Another important point is approval', scope: 'Also, each run only gets access to the data it needs', tracking: 'Also, every step is recorded and easy to track', close: 'So overall, through this project' },
-  5: { point: 'I would not put everything into one large LLM call', reason: 'Clear step boundaries make the system easier to', example: 'The flow can be', result: 'The backend should control tool execution', close: 'For longer workflows, I would persist' },
+  3: { point: 'I check the whole workflow to find', reason: 'A bad result can come from', example: 'For temporary failures like', result: 'I first separate temporary errors from', close: 'For tracking, I keep clear logs', details: 'For LLM workflows, I also record' },
+  4: { point: 'Recently, I worked on', reason: 'The Engine runs the workflow step by step', approval: 'For approval,', scope: 'For data,', tracking: 'For tracking, I keep clear logs', improve: 'Then, we use those insights', close: 'So overall, a good agent system needs' },
+  5: { point: 'I would not put everything into one large LLM call', reason: 'Clear step boundaries make the system easier to', example: 'The flow can be', result: 'The backend should control tool execution', close: 'For reliability, I would save important state', tracking: 'For tracking, I keep clear logs' },
   6: { point: 'I have not used Temporal in production', pipeline: 'The first one is a document pipeline', 'agent-engine': 'The second one is an AI agent engine', concepts: 'So I know the main ideas', gap: 'What I need to learn is the Temporal library itself' },
-  7: { point: 'I have not spent several years building fully autonomous AI agents', reason: 'Many important agent building blocks are already familiar', example: 'I have worked with', result: 'I think of an agent as a controlled workflow', close: 'My direct agent experience is still growing' },
-  8: { point: 'I have hands-on experience with AI evaluation', reason: 'In production AI, I want to know whether', example: 'In our document AI work, we used', result: 'My direct work was more on', close: 'I also worked on citation and provenance', extra: 'The wider StrangeLoop platform also has' },
-  9: { point: 'My strongest foundation is backend engineering', reason: 'In production, an AI feature is not only the model', example: 'Those are areas where I already have', result: 'I can focus on growing deeper in AI', close: 'Recently I have been working more with' },
-  10: { point: 'I have hands-on experience with tool calling', reason: 'In Clincove, the model can use', example: 'I would expose a small set of backend tools', result: 'We design the tool interface in a familiar way', close: 'I also worked on tool safety', extra: 'I directly worked on the Clincove tool-calling flow' },
-  11: { point: 'I normally learn a new technology by connecting it to', reason: 'The framework may change', example: 'When I study Temporal, I connect it to', result: 'This is also how I moved from traditional backend work into', close: 'Every new stack has its own', extra: 'I usually do not need to relearn the engineering fundamentals' },
-  12: { point: 'I would start with the user goal', reason: 'I would not send the whole database to the model', example: 'If a user asks about training progress', result: 'I would expose a small set of backend tools', close: 'This is similar to what I worked with in Clincove', extra: 'I would track run IDs, tool calls, latency, and errors', 'section-7': 'The model can make decisions' },
-  13: { point: 'I try to control latency and cost in several layers', reason: 'Every extra model call or extra token can', example: 'I use normal backend logic, filtering, and retrieval', result: 'I try to keep the context small', close: 'I use timeouts and bounded retries', extra: 'I also use checkpoint and recovery', 'section-7': 'I track the model used, token usage, retry attempts' },
+  7: { point: 'I have not spent several years building fully autonomous AI agents', reason: 'Many important agent building blocks are already familiar', example: 'I have worked with', result: 'I think of an agent as a controlled workflow', close: 'The real gap is not the core ideas' },
+  8: { point: 'I have hands-on experience with AI evaluation', reason: 'In production AI, I want to know whether', example: 'In our document AI work, we used', result: 'For retrieval, I worked on hybrid retrieval', close: 'I also worked on citation and provenance', extra: 'The wider StrangeLoop platform also has' },
+  9: { point: 'Yes, my years are stronger on backend', reason: 'Because a 70% AI role still needs', example: 'For proof, I shipped hybrid retrieval', close: 'So the gap is not no AI' },
+  10: { point: 'I have hands-on experience with tool calling', reason: 'In Clincove, the model can use', example: 'I would expose a small set of backend tools', result: 'We design the tool interface in a familiar way', close: 'For tracking, I keep clear logs', 'tool-safety': 'For tool safety, I also worked on', extra: 'I directly worked on the Clincove tool-calling flow' },
+  11: { point: 'For me, I learn a new language or stack', reason: 'That is because the tool may change', example: 'For example, when I learn Temporal', result: 'The same way, I moved from backend work', close: 'So I still need to learn the new APIs' },
+  12: { point: 'I would start with the user goal', reason: 'I would not send the whole database to the model', example: 'If a user asks about training progress', result: 'I would expose a small set of backend tools', close: 'This is similar to what I worked with in Clincove', extra: 'For tracking, I keep clear logs', 'reliability-evals': 'I would also use retry and recovery', 'section-7': 'The model can decide which tool it needs' },
+  13: { point: 'I try to control latency and cost in several layers', reason: 'Every extra model call or extra token can', example: 'I use normal backend logic, filtering, and retrieval', result: 'I try to keep the context small', close: 'I use timeouts and bounded retries', extra: 'I also use checkpoint and recovery', 'section-7': 'For tracking, I keep clear logs', optimization: 'For optimization, I also compare the model used' },
   14: { point: 'The first step is to give the model', reason: 'A good answer depends on getting the right information', example: 'For knowledge-based questions, I use good retrieval', result: 'I use structured output and backend validation', settings: 'I also adjust the model settings based on the task', close: 'I use eval cases for important cases', extra: 'Hallucination cannot be completely removed' },
-  15: { point: 'I check a RAG system at three levels', reason: 'A good answer depends on getting the right information', example: 'In Clincove, I worked on hybrid retrieval', result: 'For the final answer, I check whether it is grounded', close: 'For runtime, I check latency, failures, and fallback behavior', extra: 'For a more formal evaluation, I would also use' },
-  16: { point: 'I start with least privilege', reason: 'The model should not have direct access to', example: 'I would expose a small set of backend tools', result: 'For sensitive actions, I would also require', close: 'I keep safe logs with IDs', extra: 'The LLM can suggest, but the backend controls' },
-  17: { point: 'One example was a production issue with', reason: 'I did not want to assume the worker itself was', example: 'I traced the processing flow', result: 'I first made the current flow more stable', close: 'I handled the backend and workflow side', extra: 'I did not only focus on stopping the crash' },
-  18: { point: 'I would not keep an HTTP request open', reason: 'Long-running work can take time or fail', example: 'A worker can process the job in the background', result: 'I can clearly separate temporary errors from', close: 'I also keep the job status clear', extra: 'For a more complex workflow, I may use something like Temporal' },
+  15: { point: 'I check a RAG system at three levels', reason: 'A good answer depends on getting the right information', example: 'In Clincove, I worked on hybrid retrieval', result: 'For the final answer, I check whether it is grounded', close: 'For tracking, I keep clear logs', 'runtime-stability': 'For runtime stability, I also check failures', extra: 'For a more formal evaluation, I would also use' },
+  16: { point: 'I start with least privilege', reason: 'The model should not have direct access to', example: 'I would expose a small set of backend tools', result: 'For sensitive actions, I would also require', close: 'For tracking, I keep clear logs', 'safe-writes': 'For safe logging, I avoid sensitive data', extra: 'The LLM can suggest, but the backend controls' },
+  17: { point: 'In one case, we had a problem', reason: 'The first thing I wanted to do was to find the root cause', example: 'For tracking, I keep clear logs', investigation: 'Then, I traced the whole processing flow', result: 'Based on that, I reduced the batch size', close: 'For recovery, I added checkpoint and recovery logic', extra: 'Then, I also worked on the infrastructure side', rollout: 'So overall, I did not only focus on stopping the crash' },
+  18: { point: 'I would not keep an HTTP request open', reason: 'Long-running work can take time or fail', example: 'A worker can process the job in the background', result: 'I can clearly separate temporary errors from', close: 'For tracking, I keep clear logs', 'job-status': 'For the job itself, I keep the job status clear', extra: 'For a more complex workflow, I may use something like Temporal' },
   19: { point: 'When I disagree with a technical decision', reason: 'Sometimes the decision is not only about technology', example: 'I bring evidence like', result: 'I can explain the trade-offs more clearly', close: 'Once the team makes a decision', extra: 'A good technical disagreement is not about' },
   20: { point: 'My name is Huy', foundation: 'My main background is', recent: 'Recently, I’ve been working more with', ownership: 'In my current project, I mainly work on', direction: 'I want to keep growing in', close: 'I think this position at Everfit is' },
   21: { direction: 'I want to keep growing in', reason: 'This position combines backend work with AI', recent: 'Recently I’ve had some chances to work on', everfit: 'I also like Everfit because', challenge: 'I feel this is a good place for me to', contribution: 'I believe my backend experience can help me', close: 'I think this position is a good match' },

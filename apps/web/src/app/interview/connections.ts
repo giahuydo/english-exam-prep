@@ -1,6 +1,6 @@
 import { interviewQuestions } from './data';
-import type { ClusterId, ContextId, HeroStory, PhraseCluster, QuestionId, StoryId, Trigger, TriggerId, Context, MemoryNode, MacroTopic } from './types';
-export type { Context, MacroTopic, MemoryNode } from './types';
+import type { AnswerRoute, AnswerRouteId, ClusterId, ContextId, HeroStory, PhraseCluster, QuestionId, StoryId, Trigger, TriggerId, Context, MemoryNode, MacroTopic } from './types';
+export type { AnswerRoute, AnswerRouteId, Context, MacroTopic, MemoryNode } from './types';
 
 export const contexts: Context[] = [
   { id: 'K', title: 'AI Agent Workflow', path: ['Agent platform', 'Orchestration', 'Application / domain-tool boundary'] },
@@ -44,6 +44,95 @@ export const heroStories: HeroStory[] = [
   { id: 'ocr-cpu-gpu', title: 'OCR CPU → GPU', path: ['Memory problem', 'Trace bottleneck', 'Stabilize CPU', 'Checkpoint / recovery', 'Remote GPU service'] },
 ];
 
+/**
+ * Shared answer routes: similar interviewer phrasings → one speaking skeleton.
+ * Open the primary question for the deep answer; use related questions for angle shifts.
+ */
+export const answerRoutes: AnswerRoute[] = [
+  {
+    id: 'strangeloop-agent',
+    title: 'StrangeLoop / agent platform',
+    job: 'Any question about agent platforms, agent experience, or StrangeLoop vs LangChain/LangGraph.',
+    sharedPath: ['StrangeLoop Studio + Engine', 'LLM / tools / decisions', 'Approval + data scope', 'Clear app vs platform boundary'],
+    similarPhrases: [
+      'agent platform / workflow engine project',
+      'how much AI agent experience',
+      'StrangeLoop vs LangChain / LangGraph',
+      'design an AI agent workflow',
+      'recent agent system you built',
+    ],
+    primaryQuestionId: 4,
+    relatedQuestionIds: [7, 5, 12, 23, 10],
+  },
+  {
+    id: 'hybrid-retrieval',
+    title: 'Hybrid retrieval / RAG',
+    job: 'Any question about retrieval, ranking, groundedness, or RAG quality.',
+    sharedPath: ['Lexical + semantic', 'RRF ranking', 'Fallback + access', 'Grounding / citations / eval'],
+    similarPhrases: [
+      'describe a retrieval system',
+      'is your RAG system good',
+      'how do you prevent hallucination',
+      'LLM evals / grounding quality',
+    ],
+    primaryQuestionId: 2,
+    relatedQuestionIds: [15, 14, 8],
+  },
+  {
+    id: 'llm-reliability',
+    title: 'LLM reliability',
+    job: 'Errors, retries, latency/cost, or whole-workflow failure handling.',
+    sharedPath: ['Inspect whole workflow', 'Temporary vs permanent', 'Retry / fallback / fail fast', 'Observe + measure'],
+    similarPhrases: [
+      'handle errors in an LLM workflow',
+      'control latency and cost',
+      'what if the model / provider fails',
+    ],
+    primaryQuestionId: 3,
+    relatedQuestionIds: [13, 18],
+  },
+  {
+    id: 'gap-transfer',
+    title: 'Honest gap + transfer',
+    job: 'Questions about missing stack experience, Temporal, hire objections, or backend-vs-AI concerns.',
+    sharedPath: ['Honest gap', 'Proof already shipped', 'Core ideas transfer', 'Learn the specific API fast'],
+    similarPhrases: [
+      'have you used Temporal',
+      'how much agent experience / honest gap',
+      'more backend than AI — why hire you for 70% AI',
+      "haven't used our exact AI stack",
+    ],
+    primaryQuestionId: 9,
+    relatedQuestionIds: [6, 7, 11],
+  },
+  {
+    id: 'tool-control',
+    title: 'Tool calling + safety',
+    job: 'Tool calling, permissions, and agent tool security.',
+    sharedPath: ['Small tool set', 'Backend contract / validate / permission', 'Execute + structured result', 'Audit / confirmation'],
+    similarPhrases: [
+      'experience with tool calling',
+      'secure an agent that can call tools',
+      'prevent unsafe tool calls',
+    ],
+    primaryQuestionId: 10,
+    relatedQuestionIds: [16, 5, 12],
+  },
+  {
+    id: 'ocr-incident',
+    title: 'OCR CPU → GPU incident',
+    job: 'Production incidents, OCR performance, or recent project storytelling.',
+    sharedPath: ['Memory / crash symptom', 'Trace bottleneck', 'Stabilize CPU', 'Move heavy OCR to GPU'],
+    similarPhrases: [
+      'production incident you owned',
+      'describe your recent project',
+      'OCR performance / GPU',
+    ],
+    primaryQuestionId: 17,
+    relatedQuestionIds: [22, 1],
+  },
+];
+
 export const triggers: Trigger[] = [
   { id: 'reliability', phrases: 'timeout · retry · latency · cost', contextIds: ['C'] },
   { id: 'agent-tools', phrases: 'agent · tool calling · function calling', contextIds: ['E'] },
@@ -58,6 +147,12 @@ export function getQuestionRelations(questionId: QuestionId) { return interviewQ
 export function getContextsForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.contextIds ?? []; return contexts.filter((item) => ids.includes(item.id)); }
 export function getClustersForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.clusterIds ?? []; return phraseClusters.filter((item) => ids.includes(item.id)); }
 export function getStoriesForQuestion(questionId: QuestionId) { const ids = getQuestionRelations(questionId)?.storyIds ?? []; return heroStories.filter((item) => ids.includes(item.id)); }
+export function getRoutesForQuestion(questionId: QuestionId) {
+  const ids = getQuestionRelations(questionId)?.routeIds ?? [];
+  if (ids.length) return answerRoutes.filter((route) => ids.includes(route.id));
+  return answerRoutes.filter((route) => route.primaryQuestionId === questionId || route.relatedQuestionIds.includes(questionId));
+}
+export function getAnswerRoute(routeId: AnswerRouteId) { return answerRoutes.find((route) => route.id === routeId); }
 export function getQuestionsForContext(contextId: ContextId) { return interviewQuestions.filter((item) => item.contextIds.includes(contextId)).map((item) => item.id); }
 export function getQuestionsForMacroTopic(topicId: MacroTopic['id']) {
   const topic = macroTopics.find((item) => item.id === topicId);
@@ -78,7 +173,9 @@ export function getMacroTopicsForTrigger(triggerId: TriggerId) {
 export function getRelatedQuestions(questionId: QuestionId) {
   const question = getQuestionRelations(questionId);
   if (!question) return [];
+  const routeRelated = getRoutesForQuestion(questionId).flatMap((route) => [route.primaryQuestionId, ...route.relatedQuestionIds]);
   return interviewQuestions.filter((item) => item.id !== questionId && (
+    routeRelated.includes(item.id) ||
     item.contextIds.some((id) => question.contextIds.includes(id)) ||
     item.clusterIds.some((id) => question.clusterIds.includes(id)) ||
     item.storyIds?.some((id) => question.storyIds?.includes(id))
@@ -97,6 +194,7 @@ export function searchQuestions(query: string) {
     const questionContexts = contexts.filter((context) => question.contextIds.includes(context.id));
     const questionClusters = phraseClusters.filter((cluster) => question.clusterIds.includes(cluster.id));
     const questionStories = heroStories.filter((story) => question.storyIds?.includes(story.id));
+    const questionRoutes = getRoutesForQuestion(question.id);
     const searchable = [
       question.question.en,
       question.question.vi,
@@ -105,6 +203,7 @@ export function searchQuestions(query: string) {
       ...macroTopics.filter((topic) => topic.sourceContextIds.some((id) => question.contextIds.includes(id))).flatMap((topic) => [topic.title, topic.summary, ...topic.keywords]),
       ...questionClusters.flatMap((cluster) => [cluster.title, ...cluster.path]),
       ...questionStories.flatMap((story) => [story.title, ...story.path]),
+      ...questionRoutes.flatMap((route) => [route.title, route.job, ...route.sharedPath, ...route.similarPhrases]),
       ...question.memory.nodes.flatMap((node) => [node.label, ...node.triggers]),
     ].join(' ').toLowerCase();
     const score = terms.reduce((total, term) => total + (searchable.includes(term) ? 1 : 0), 0);
