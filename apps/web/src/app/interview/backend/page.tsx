@@ -37,6 +37,29 @@ function SpeakingAnswer({ answer, activeRange }: { answer: string; activeRange: 
   </div>;
 }
 
+function VietnameseAnswer({ answer, englishAnswer, activeRange }: { answer: string; englishAnswer: string; activeRange: AudioRange | null }) {
+  const englishChunks = speakingChunks(englishAnswer);
+  const chunks = speakingChunks(answer);
+  let offset = 0;
+  const activeEnglishIndex = activeRange ? englishChunks.findIndex((chunk) => {
+    const start = offset;
+    offset += chunk.length;
+    return activeRange.end > start && activeRange.start < offset;
+  }) : -1;
+  // Vietnamese has no audio timestamps; follow the English chunk's relative position.
+  const activeIndex = activeEnglishIndex < 0 ? -1 : Math.min(chunks.length - 1, Math.floor((activeEnglishIndex + 0.5) * chunks.length / englishChunks.length));
+
+  return <div lang="vi" className="mt-3 border-l-2 border-violet-200 pl-3">
+    <p className="sr-only">{answer}</p>
+    <div aria-hidden="true" className="text-sm leading-8">
+      {chunks.map((chunk, index) => <span key={index}>
+        <span className={`box-decoration-clone rounded-md border-l-2 px-2 py-1 ${index === activeIndex ? 'border-violet-700 bg-violet-700 font-semibold text-white' : 'border-violet-200 bg-violet-50/70 text-violet-900'}`}>{chunk.trimEnd()}</span>
+        {index < chunks.length - 1 && <span className="mx-1.5 select-none text-xs text-violet-300">/</span>}
+      </span>)}
+    </div>
+  </div>;
+}
+
 function KeyIdeaPath({ text, lang }: { text: string; lang?: 'vi' }) {
   return <div lang={lang} className="flex flex-wrap items-center gap-1.5">
     {text.split('→').map((clause, index) => <span key={index} className="inline-flex max-w-full items-center gap-1.5">
@@ -81,7 +104,7 @@ export default function BackendInterviewPage() {
                   {playingThisAnswer && <button type="button" onClick={() => audio.stop()} className="min-h-10 px-2 text-xs font-semibold text-slate-500">Stop</button>}
                   <button type="button" onClick={() => audio.setRepeat(!audio.repeat)} aria-pressed={audio.repeat} className={`min-h-10 rounded-lg border px-2 text-xs font-semibold ${audio.repeat ? 'border-blue-400 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500'}`}>↻ Repeat</button>
                   <div className="flex rounded-lg border border-slate-200 p-0.5" aria-label="Playback speed">{([0.5, 0.8, 1] as AudioSpeed[]).map((speed) => <button key={speed} type="button" onClick={() => audio.setSpeed(speed)} aria-pressed={audio.speed === speed} className={`min-h-9 rounded-md px-2 text-xs font-bold ${audio.speed === speed ? 'bg-slate-900 text-white' : 'text-slate-500'}`}>{speed}×</button>)}</div>
-                </div><SpeakingAnswer answer={question.answer} activeRange={playingThisAnswer ? audio.activeRange : null} />{showVi && <p lang="vi" className="mt-2 text-sm leading-6 text-slate-500">{question.answerVi}</p>}</div>}</section><section className="border-t border-slate-100 pt-5"><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Key idea</h4><button type="button" onClick={() => setShowKey((value) => !value)} aria-expanded={showKey} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-blue-700">{showKey ? 'Hide key idea' : 'Show key idea'}</button></div>{showKey && <div className="mt-2 rounded-xl border border-blue-200 bg-blue-50/90 p-4 shadow-sm"><KeyIdeaPath text={question.keyIdea} />{showVi && <div className="mt-3 border-t border-blue-100 pt-3"><KeyIdeaPath text={question.keyIdeaVi} lang="vi" /></div>}</div>}</section>{questionIndex < questions.length - 1 && <button type="button" onClick={() => selectQuestion(questionIndex + 1)} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white hover:bg-blue-800">Next question →</button>}</div> : <p className="border-t border-slate-100 pt-5 text-sm text-slate-500">Questions for this topic have not been provided yet.</p>}
+                </div><SpeakingAnswer answer={question.answer} activeRange={playingThisAnswer ? audio.activeRange : null} />{showVi && <VietnameseAnswer answer={question.answerVi} englishAnswer={question.answer} activeRange={playingThisAnswer ? audio.activeRange : null} />}</div>}</section><section className="border-t border-slate-100 pt-5"><div className="flex flex-wrap items-center justify-between gap-2"><h4 className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Key idea</h4><button type="button" onClick={() => setShowKey((value) => !value)} aria-expanded={showKey} className="min-h-10 rounded-lg border border-slate-200 px-3 text-xs font-semibold text-blue-700">{showKey ? 'Hide key idea' : 'Show key idea'}</button></div>{showKey && <div className="mt-2 rounded-xl border border-blue-200 bg-blue-50/90 p-4 shadow-sm"><KeyIdeaPath text={question.keyIdea} />{showVi && <div className="mt-3 border-t border-blue-100 pt-3"><KeyIdeaPath text={question.keyIdeaVi} lang="vi" /></div>}</div>}</section>{questionIndex < questions.length - 1 && <button type="button" onClick={() => selectQuestion(questionIndex + 1)} className="min-h-11 rounded-xl bg-blue-700 px-4 text-sm font-bold text-white hover:bg-blue-800">Next question →</button>}</div> : <p className="border-t border-slate-100 pt-5 text-sm text-slate-500">Questions for this topic have not been provided yet.</p>}
         </div></div>{pathIndex >= 0 && pathIndex < recommendedPath.length - 1 && <button type="button" onClick={() => selectTopic(recommendedPath[pathIndex + 1])} className="mt-4 min-h-10 rounded-lg border border-blue-200 bg-white px-3 text-xs font-semibold text-blue-700 hover:bg-blue-50">Next recommended topic →</button>}</section>
       </div>
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-5">
