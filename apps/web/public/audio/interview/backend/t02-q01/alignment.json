@@ -1,427 +1,245 @@
 {
   "version": 1,
   "questionId": "t02-q01",
-  "speechText": "I start with one clear resource, such as orders, and define what each endpoint returns. For a create request, I validate input, check the user’s permission, and return a consistent error if it fails. If a client retries creation, an idempotency key helps prevent duplicate orders. I paginate list results and log a request ID so we can trace failures.",
+  "speechText": "Idempotency means the same request or message can be processed more than once without creating the same business action twice. A common way is to use a request ID, job ID, or unique key.",
   "words": [
     {
-      "text": "I",
+      "text": "Idempotency",
       "canonicalStart": 0,
-      "canonicalEnd": 1,
+      "canonicalEnd": 11,
       "startMs": 113,
-      "endMs": 331
+      "endMs": 1113
     },
     {
-      "text": "start",
-      "canonicalStart": 2,
-      "canonicalEnd": 7,
-      "startMs": 347,
-      "endMs": 753
-    },
-    {
-      "text": "with",
-      "canonicalStart": 8,
-      "canonicalEnd": 12,
-      "startMs": 769,
-      "endMs": 925
-    },
-    {
-      "text": "one",
-      "canonicalStart": 13,
-      "canonicalEnd": 16,
-      "startMs": 941,
-      "endMs": 1300
-    },
-    {
-      "text": "clear",
-      "canonicalStart": 17,
-      "canonicalEnd": 22,
-      "startMs": 1316,
-      "endMs": 1691
-    },
-    {
-      "text": "resource,",
-      "canonicalStart": 23,
-      "canonicalEnd": 32,
-      "startMs": 1706,
-      "endMs": 2394
-    },
-    {
-      "text": "such",
-      "canonicalStart": 33,
-      "canonicalEnd": 37,
-      "startMs": 2675,
-      "endMs": 2972
-    },
-    {
-      "text": "as",
-      "canonicalStart": 38,
-      "canonicalEnd": 40,
-      "startMs": 2988,
-      "endMs": 3159
-    },
-    {
-      "text": "orders,",
-      "canonicalStart": 41,
-      "canonicalEnd": 48,
-      "startMs": 3175,
-      "endMs": 3769
-    },
-    {
-      "text": "and",
-      "canonicalStart": 49,
-      "canonicalEnd": 52,
-      "startMs": 3956,
-      "endMs": 4128
-    },
-    {
-      "text": "define",
-      "canonicalStart": 53,
-      "canonicalEnd": 59,
-      "startMs": 4144,
-      "endMs": 4738
-    },
-    {
-      "text": "what",
-      "canonicalStart": 60,
-      "canonicalEnd": 64,
-      "startMs": 4753,
-      "endMs": 4941
-    },
-    {
-      "text": "each",
-      "canonicalStart": 65,
-      "canonicalEnd": 69,
-      "startMs": 4956,
-      "endMs": 5238
-    },
-    {
-      "text": "endpoint",
-      "canonicalStart": 70,
-      "canonicalEnd": 78,
-      "startMs": 5253,
-      "endMs": 5847
-    },
-    {
-      "text": "returns.",
-      "canonicalStart": 79,
-      "canonicalEnd": 87,
-      "startMs": 5863,
-      "endMs": 6722
-    },
-    {
-      "text": "For",
-      "canonicalStart": 88,
-      "canonicalEnd": 91,
-      "startMs": 7813,
-      "endMs": 8094
-    },
-    {
-      "text": "a",
-      "canonicalStart": 92,
-      "canonicalEnd": 93,
-      "startMs": 8109,
-      "endMs": 8188
-    },
-    {
-      "text": "create",
-      "canonicalStart": 94,
-      "canonicalEnd": 100,
-      "startMs": 8203,
-      "endMs": 8656
-    },
-    {
-      "text": "request,",
-      "canonicalStart": 101,
-      "canonicalEnd": 109,
-      "startMs": 8672,
-      "endMs": 9406
-    },
-    {
-      "text": "I",
-      "canonicalStart": 110,
-      "canonicalEnd": 111,
-      "startMs": 9672,
-      "endMs": 9797
-    },
-    {
-      "text": "validate",
-      "canonicalStart": 112,
-      "canonicalEnd": 120,
-      "startMs": 9813,
-      "endMs": 10469
-    },
-    {
-      "text": "input,",
-      "canonicalStart": 121,
-      "canonicalEnd": 127,
-      "startMs": 10484,
-      "endMs": 11078
-    },
-    {
-      "text": "check",
-      "canonicalStart": 128,
-      "canonicalEnd": 133,
-      "startMs": 11375,
-      "endMs": 11703
+      "text": "means",
+      "canonicalStart": 12,
+      "canonicalEnd": 17,
+      "startMs": 1128,
+      "endMs": 1519
     },
     {
       "text": "the",
-      "canonicalStart": 134,
-      "canonicalEnd": 137,
-      "startMs": 11719,
-      "endMs": 11781
+      "canonicalStart": 18,
+      "canonicalEnd": 21,
+      "startMs": 1534,
+      "endMs": 1659
     },
     {
-      "text": "user’s",
-      "canonicalStart": 138,
-      "canonicalEnd": 144,
-      "startMs": 11797,
-      "endMs": 12313
-    },
-    {
-      "text": "permission,",
-      "canonicalStart": 145,
-      "canonicalEnd": 156,
-      "startMs": 12328,
-      "endMs": 12984
-    },
-    {
-      "text": "and",
-      "canonicalStart": 157,
-      "canonicalEnd": 160,
-      "startMs": 13328,
-      "endMs": 13469
-    },
-    {
-      "text": "return",
-      "canonicalStart": 161,
-      "canonicalEnd": 167,
-      "startMs": 13484,
-      "endMs": 13906
-    },
-    {
-      "text": "a",
-      "canonicalStart": 168,
-      "canonicalEnd": 169,
-      "startMs": 13922,
-      "endMs": 13984
-    },
-    {
-      "text": "consistent",
-      "canonicalStart": 170,
-      "canonicalEnd": 180,
-      "startMs": 14000,
-      "endMs": 14750
-    },
-    {
-      "text": "error",
-      "canonicalStart": 181,
-      "canonicalEnd": 186,
-      "startMs": 14766,
-      "endMs": 15109
-    },
-    {
-      "text": "if",
-      "canonicalStart": 187,
-      "canonicalEnd": 189,
-      "startMs": 15125,
-      "endMs": 15281
-    },
-    {
-      "text": "it",
-      "canonicalStart": 190,
-      "canonicalEnd": 192,
-      "startMs": 15297,
-      "endMs": 15422
-    },
-    {
-      "text": "fails.",
-      "canonicalStart": 193,
-      "canonicalEnd": 199,
-      "startMs": 15438,
-      "endMs": 16203
-    },
-    {
-      "text": "If",
-      "canonicalStart": 200,
-      "canonicalEnd": 202,
-      "startMs": 17281,
-      "endMs": 17484
-    },
-    {
-      "text": "a",
-      "canonicalStart": 203,
-      "canonicalEnd": 204,
-      "startMs": 17500,
-      "endMs": 17594
-    },
-    {
-      "text": "client",
-      "canonicalStart": 205,
-      "canonicalEnd": 211,
-      "startMs": 17609,
-      "endMs": 18141
-    },
-    {
-      "text": "retries",
-      "canonicalStart": 212,
-      "canonicalEnd": 219,
-      "startMs": 18156,
-      "endMs": 18813
-    },
-    {
-      "text": "creation,",
-      "canonicalStart": 220,
-      "canonicalEnd": 229,
-      "startMs": 18828,
-      "endMs": 19563
-    },
-    {
-      "text": "an",
-      "canonicalStart": 230,
-      "canonicalEnd": 232,
-      "startMs": 19828,
-      "endMs": 19953
-    },
-    {
-      "text": "idempotency",
-      "canonicalStart": 233,
-      "canonicalEnd": 244,
-      "startMs": 19969,
-      "endMs": 20922
-    },
-    {
-      "text": "key",
-      "canonicalStart": 245,
-      "canonicalEnd": 248,
-      "startMs": 20938,
-      "endMs": 21313
-    },
-    {
-      "text": "helps",
-      "canonicalStart": 249,
-      "canonicalEnd": 254,
-      "startMs": 21328,
-      "endMs": 21672
-    },
-    {
-      "text": "prevent",
-      "canonicalStart": 255,
-      "canonicalEnd": 262,
-      "startMs": 21688,
-      "endMs": 22188
-    },
-    {
-      "text": "duplicate",
-      "canonicalStart": 263,
-      "canonicalEnd": 272,
-      "startMs": 22203,
-      "endMs": 22781
-    },
-    {
-      "text": "orders.",
-      "canonicalStart": 273,
-      "canonicalEnd": 280,
-      "startMs": 22797,
-      "endMs": 23438
-    },
-    {
-      "text": "I",
-      "canonicalStart": 281,
-      "canonicalEnd": 282,
-      "startMs": 24516,
-      "endMs": 24719
-    },
-    {
-      "text": "paginate",
-      "canonicalStart": 283,
-      "canonicalEnd": 291,
-      "startMs": 24734,
-      "endMs": 25453
-    },
-    {
-      "text": "list",
-      "canonicalStart": 292,
-      "canonicalEnd": 296,
-      "startMs": 25469,
-      "endMs": 25750
-    },
-    {
-      "text": "results",
-      "canonicalStart": 297,
-      "canonicalEnd": 304,
-      "startMs": 25766,
-      "endMs": 26344
-    },
-    {
-      "text": "and",
-      "canonicalStart": 305,
-      "canonicalEnd": 308,
-      "startMs": 26359,
-      "endMs": 26500
-    },
-    {
-      "text": "log",
-      "canonicalStart": 309,
-      "canonicalEnd": 312,
-      "startMs": 26516,
-      "endMs": 26844
-    },
-    {
-      "text": "a",
-      "canonicalStart": 313,
-      "canonicalEnd": 314,
-      "startMs": 26859,
-      "endMs": 26891
+      "text": "same",
+      "canonicalStart": 22,
+      "canonicalEnd": 26,
+      "startMs": 1675,
+      "endMs": 2066
     },
     {
       "text": "request",
-      "canonicalStart": 315,
-      "canonicalEnd": 322,
-      "startMs": 26906,
-      "endMs": 27531
+      "canonicalStart": 27,
+      "canonicalEnd": 34,
+      "startMs": 2081,
+      "endMs": 2706
     },
     {
-      "text": "ID",
-      "canonicalStart": 323,
-      "canonicalEnd": 325,
-      "startMs": 27547,
-      "endMs": 28109
+      "text": "or",
+      "canonicalStart": 35,
+      "canonicalEnd": 37,
+      "startMs": 2722,
+      "endMs": 2816
     },
     {
-      "text": "so",
-      "canonicalStart": 326,
-      "canonicalEnd": 328,
-      "startMs": 28125,
-      "endMs": 28328
-    },
-    {
-      "text": "we",
-      "canonicalStart": 329,
-      "canonicalEnd": 331,
-      "startMs": 28344,
-      "endMs": 28469
+      "text": "message",
+      "canonicalStart": 38,
+      "canonicalEnd": 45,
+      "startMs": 2831,
+      "endMs": 3378
     },
     {
       "text": "can",
-      "canonicalStart": 332,
-      "canonicalEnd": 335,
-      "startMs": 28484,
-      "endMs": 28625
+      "canonicalStart": 46,
+      "canonicalEnd": 49,
+      "startMs": 3394,
+      "endMs": 3566
     },
     {
-      "text": "trace",
-      "canonicalStart": 336,
-      "canonicalEnd": 341,
-      "startMs": 28641,
-      "endMs": 29047
+      "text": "be",
+      "canonicalStart": 50,
+      "canonicalEnd": 52,
+      "startMs": 3581,
+      "endMs": 3706
     },
     {
-      "text": "failures.",
-      "canonicalStart": 342,
-      "canonicalEnd": 351,
-      "startMs": 29063,
-      "endMs": 29859
+      "text": "processed",
+      "canonicalStart": 53,
+      "canonicalEnd": 62,
+      "startMs": 3722,
+      "endMs": 4441
+    },
+    {
+      "text": "more",
+      "canonicalStart": 63,
+      "canonicalEnd": 67,
+      "startMs": 4456,
+      "endMs": 4738
+    },
+    {
+      "text": "than",
+      "canonicalStart": 68,
+      "canonicalEnd": 72,
+      "startMs": 4753,
+      "endMs": 4925
+    },
+    {
+      "text": "once",
+      "canonicalStart": 73,
+      "canonicalEnd": 77,
+      "startMs": 4941,
+      "endMs": 5316
+    },
+    {
+      "text": "without",
+      "canonicalStart": 78,
+      "canonicalEnd": 85,
+      "startMs": 5331,
+      "endMs": 5738
+    },
+    {
+      "text": "creating",
+      "canonicalStart": 86,
+      "canonicalEnd": 94,
+      "startMs": 5753,
+      "endMs": 6316
+    },
+    {
+      "text": "the",
+      "canonicalStart": 95,
+      "canonicalEnd": 98,
+      "startMs": 6331,
+      "endMs": 6425
+    },
+    {
+      "text": "same",
+      "canonicalStart": 99,
+      "canonicalEnd": 103,
+      "startMs": 6441,
+      "endMs": 6800
+    },
+    {
+      "text": "business",
+      "canonicalStart": 104,
+      "canonicalEnd": 112,
+      "startMs": 6816,
+      "endMs": 7284
+    },
+    {
+      "text": "action",
+      "canonicalStart": 113,
+      "canonicalEnd": 119,
+      "startMs": 7300,
+      "endMs": 7769
+    },
+    {
+      "text": "twice.",
+      "canonicalStart": 120,
+      "canonicalEnd": 126,
+      "startMs": 7784,
+      "endMs": 8488
+    },
+    {
+      "text": "A",
+      "canonicalStart": 127,
+      "canonicalEnd": 128,
+      "startMs": 9578,
+      "endMs": 9734
+    },
+    {
+      "text": "common",
+      "canonicalStart": 129,
+      "canonicalEnd": 135,
+      "startMs": 9750,
+      "endMs": 10234
+    },
+    {
+      "text": "way",
+      "canonicalStart": 136,
+      "canonicalEnd": 139,
+      "startMs": 10250,
+      "endMs": 10563
+    },
+    {
+      "text": "is",
+      "canonicalStart": 140,
+      "canonicalEnd": 142,
+      "startMs": 10578,
+      "endMs": 10781
+    },
+    {
+      "text": "to",
+      "canonicalStart": 143,
+      "canonicalEnd": 145,
+      "startMs": 10797,
+      "endMs": 10906
+    },
+    {
+      "text": "use",
+      "canonicalStart": 146,
+      "canonicalEnd": 149,
+      "startMs": 10922,
+      "endMs": 11219
+    },
+    {
+      "text": "a",
+      "canonicalStart": 150,
+      "canonicalEnd": 151,
+      "startMs": 11234,
+      "endMs": 11313
+    },
+    {
+      "text": "request",
+      "canonicalStart": 152,
+      "canonicalEnd": 159,
+      "startMs": 11328,
+      "endMs": 11953
+    },
+    {
+      "text": "ID,",
+      "canonicalStart": 160,
+      "canonicalEnd": 163,
+      "startMs": 11969,
+      "endMs": 12500
+    },
+    {
+      "text": "job",
+      "canonicalStart": 164,
+      "canonicalEnd": 167,
+      "startMs": 12797,
+      "endMs": 13172
+    },
+    {
+      "text": "ID,",
+      "canonicalStart": 168,
+      "canonicalEnd": 171,
+      "startMs": 13188,
+      "endMs": 13750
+    },
+    {
+      "text": "or",
+      "canonicalStart": 172,
+      "canonicalEnd": 174,
+      "startMs": 13969,
+      "endMs": 14188
+    },
+    {
+      "text": "unique",
+      "canonicalStart": 175,
+      "canonicalEnd": 181,
+      "startMs": 14203,
+      "endMs": 14719
+    },
+    {
+      "text": "key.",
+      "canonicalStart": 182,
+      "canonicalEnd": 186,
+      "startMs": 14734,
+      "endMs": 15250
     }
   ]
 }

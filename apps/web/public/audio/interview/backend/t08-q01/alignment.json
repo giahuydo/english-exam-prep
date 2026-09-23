@@ -1,322 +1,525 @@
 {
   "version": 1,
   "questionId": "t08-q01",
-  "speechText": "Optimistic locking assumes conflicts are not very common. A record normally has a version number. When I update it, I also check the version. If another request already changed the record, the update fails and I can retry or return a conflict to the client.",
+  "speechText": "For example, an order service may save an order before a payment service confirms payment. I save the order and an outbox event in one transaction, then publish the event for the payment service. The payment consumer handles duplicates and reports success or failure; on failure, I mark the order canceled or start a refund if needed. The services become consistent over time, so the order status must show that payment is still pending.",
   "words": [
     {
-      "text": "Optimistic",
+      "text": "For",
       "canonicalStart": 0,
-      "canonicalEnd": 10,
+      "canonicalEnd": 3,
       "startMs": 113,
-      "endMs": 956
+      "endMs": 378
     },
     {
-      "text": "locking",
-      "canonicalStart": 11,
-      "canonicalEnd": 18,
-      "startMs": 972,
-      "endMs": 1409
+      "text": "example,",
+      "canonicalStart": 4,
+      "canonicalEnd": 12,
+      "startMs": 394,
+      "endMs": 1097
     },
     {
-      "text": "assumes",
-      "canonicalStart": 19,
-      "canonicalEnd": 26,
-      "startMs": 1425,
-      "endMs": 1956
+      "text": "an",
+      "canonicalStart": 13,
+      "canonicalEnd": 15,
+      "startMs": 1409,
+      "endMs": 1550
     },
     {
-      "text": "conflicts",
-      "canonicalStart": 27,
-      "canonicalEnd": 36,
-      "startMs": 1972,
-      "endMs": 2628
+      "text": "order",
+      "canonicalStart": 16,
+      "canonicalEnd": 21,
+      "startMs": 1566,
+      "endMs": 1894
     },
     {
-      "text": "are",
-      "canonicalStart": 37,
-      "canonicalEnd": 40,
-      "startMs": 2644,
-      "endMs": 2769
+      "text": "service",
+      "canonicalStart": 22,
+      "canonicalEnd": 29,
+      "startMs": 1909,
+      "endMs": 2441
     },
     {
-      "text": "not",
-      "canonicalStart": 41,
-      "canonicalEnd": 44,
-      "startMs": 2784,
-      "endMs": 3066
+      "text": "may",
+      "canonicalStart": 30,
+      "canonicalEnd": 33,
+      "startMs": 2456,
+      "endMs": 2675
     },
     {
-      "text": "very",
-      "canonicalStart": 45,
-      "canonicalEnd": 49,
-      "startMs": 3081,
-      "endMs": 3409
+      "text": "save",
+      "canonicalStart": 34,
+      "canonicalEnd": 38,
+      "startMs": 2691,
+      "endMs": 3050
     },
     {
-      "text": "common.",
-      "canonicalStart": 50,
-      "canonicalEnd": 57,
-      "startMs": 3425,
-      "endMs": 4034
+      "text": "an",
+      "canonicalStart": 39,
+      "canonicalEnd": 41,
+      "startMs": 3066,
+      "endMs": 3206
     },
     {
-      "text": "A",
-      "canonicalStart": 58,
-      "canonicalEnd": 59,
-      "startMs": 5125,
-      "endMs": 5281
+      "text": "order",
+      "canonicalStart": 42,
+      "canonicalEnd": 47,
+      "startMs": 3222,
+      "endMs": 3534
     },
     {
-      "text": "record",
-      "canonicalStart": 60,
-      "canonicalEnd": 66,
-      "startMs": 5297,
-      "endMs": 5797
-    },
-    {
-      "text": "normally",
-      "canonicalStart": 67,
-      "canonicalEnd": 75,
-      "startMs": 5813,
-      "endMs": 6359
-    },
-    {
-      "text": "has",
-      "canonicalStart": 76,
-      "canonicalEnd": 79,
-      "startMs": 6375,
-      "endMs": 6625
+      "text": "before",
+      "canonicalStart": 48,
+      "canonicalEnd": 54,
+      "startMs": 3550,
+      "endMs": 3956
     },
     {
       "text": "a",
-      "canonicalStart": 80,
+      "canonicalStart": 55,
+      "canonicalEnd": 56,
+      "startMs": 3972,
+      "endMs": 4050
+    },
+    {
+      "text": "payment",
+      "canonicalStart": 57,
+      "canonicalEnd": 64,
+      "startMs": 4066,
+      "endMs": 4519
+    },
+    {
+      "text": "service",
+      "canonicalStart": 65,
+      "canonicalEnd": 72,
+      "startMs": 4534,
+      "endMs": 5034
+    },
+    {
+      "text": "confirms",
+      "canonicalStart": 73,
       "canonicalEnd": 81,
-      "startMs": 6641,
-      "endMs": 6703
+      "startMs": 5050,
+      "endMs": 5722
     },
     {
-      "text": "version",
+      "text": "payment.",
       "canonicalStart": 82,
-      "canonicalEnd": 89,
-      "startMs": 6719,
-      "endMs": 7172
+      "canonicalEnd": 90,
+      "startMs": 5738,
+      "endMs": 6363
     },
     {
-      "text": "number.",
-      "canonicalStart": 90,
+      "text": "I",
+      "canonicalStart": 91,
+      "canonicalEnd": 92,
+      "startMs": 7453,
+      "endMs": 7688
+    },
+    {
+      "text": "save",
+      "canonicalStart": 93,
       "canonicalEnd": 97,
-      "startMs": 7188,
-      "endMs": 7734
+      "startMs": 7703,
+      "endMs": 8125
     },
     {
-      "text": "When",
+      "text": "the",
       "canonicalStart": 98,
-      "canonicalEnd": 102,
-      "startMs": 8813,
-      "endMs": 9031
+      "canonicalEnd": 101,
+      "startMs": 8141,
+      "endMs": 8234
     },
     {
-      "text": "I",
-      "canonicalStart": 103,
-      "canonicalEnd": 104,
-      "startMs": 9047,
-      "endMs": 9203
-    },
-    {
-      "text": "update",
-      "canonicalStart": 105,
-      "canonicalEnd": 111,
-      "startMs": 9219,
-      "endMs": 9734
-    },
-    {
-      "text": "it,",
-      "canonicalStart": 112,
-      "canonicalEnd": 115,
-      "startMs": 9750,
-      "endMs": 9969
-    },
-    {
-      "text": "I",
-      "canonicalStart": 116,
-      "canonicalEnd": 117,
-      "startMs": 10234,
-      "endMs": 10391
-    },
-    {
-      "text": "also",
-      "canonicalStart": 118,
-      "canonicalEnd": 122,
-      "startMs": 10406,
-      "endMs": 10813
-    },
-    {
-      "text": "check",
-      "canonicalStart": 123,
-      "canonicalEnd": 128,
-      "startMs": 10828,
-      "endMs": 11172
-    },
-    {
-      "text": "the",
-      "canonicalStart": 129,
-      "canonicalEnd": 132,
-      "startMs": 11188,
-      "endMs": 11281
-    },
-    {
-      "text": "version.",
-      "canonicalStart": 133,
-      "canonicalEnd": 141,
-      "startMs": 11297,
-      "endMs": 11922
-    },
-    {
-      "text": "If",
-      "canonicalStart": 142,
-      "canonicalEnd": 144,
-      "startMs": 13000,
-      "endMs": 13219
-    },
-    {
-      "text": "another",
-      "canonicalStart": 145,
-      "canonicalEnd": 152,
-      "startMs": 13234,
-      "endMs": 13672
-    },
-    {
-      "text": "request",
-      "canonicalStart": 153,
-      "canonicalEnd": 160,
-      "startMs": 13688,
-      "endMs": 14250
-    },
-    {
-      "text": "already",
-      "canonicalStart": 161,
-      "canonicalEnd": 168,
-      "startMs": 14266,
-      "endMs": 14719
-    },
-    {
-      "text": "changed",
-      "canonicalStart": 169,
-      "canonicalEnd": 176,
-      "startMs": 14734,
-      "endMs": 15234
-    },
-    {
-      "text": "the",
-      "canonicalStart": 177,
-      "canonicalEnd": 180,
-      "startMs": 15250,
-      "endMs": 15344
-    },
-    {
-      "text": "record,",
-      "canonicalStart": 181,
-      "canonicalEnd": 188,
-      "startMs": 15359,
-      "endMs": 15875
-    },
-    {
-      "text": "the",
-      "canonicalStart": 189,
-      "canonicalEnd": 192,
-      "startMs": 16188,
-      "endMs": 16328
-    },
-    {
-      "text": "update",
-      "canonicalStart": 193,
-      "canonicalEnd": 199,
-      "startMs": 16344,
-      "endMs": 16859
-    },
-    {
-      "text": "fails",
-      "canonicalStart": 200,
-      "canonicalEnd": 205,
-      "startMs": 16875,
-      "endMs": 17438
+      "text": "order",
+      "canonicalStart": 102,
+      "canonicalEnd": 107,
+      "startMs": 8250,
+      "endMs": 8734
     },
     {
       "text": "and",
-      "canonicalStart": 206,
-      "canonicalEnd": 209,
-      "startMs": 17453,
-      "endMs": 17578
+      "canonicalStart": 108,
+      "canonicalEnd": 111,
+      "startMs": 8750,
+      "endMs": 8875
     },
     {
-      "text": "I",
-      "canonicalStart": 210,
-      "canonicalEnd": 211,
-      "startMs": 17594,
-      "endMs": 17719
+      "text": "an",
+      "canonicalStart": 112,
+      "canonicalEnd": 114,
+      "startMs": 8891,
+      "endMs": 9031
     },
     {
-      "text": "can",
-      "canonicalStart": 212,
-      "canonicalEnd": 215,
-      "startMs": 17734,
-      "endMs": 17938
+      "text": "outbox",
+      "canonicalStart": 115,
+      "canonicalEnd": 121,
+      "startMs": 9047,
+      "endMs": 9656
     },
     {
-      "text": "retry",
-      "canonicalStart": 216,
-      "canonicalEnd": 221,
-      "startMs": 17953,
-      "endMs": 18594
+      "text": "event",
+      "canonicalStart": 122,
+      "canonicalEnd": 127,
+      "startMs": 9672,
+      "endMs": 10094
     },
     {
-      "text": "or",
-      "canonicalStart": 222,
-      "canonicalEnd": 224,
-      "startMs": 18609,
-      "endMs": 18781
+      "text": "in",
+      "canonicalStart": 128,
+      "canonicalEnd": 130,
+      "startMs": 10109,
+      "endMs": 10281
     },
     {
-      "text": "return",
-      "canonicalStart": 225,
-      "canonicalEnd": 231,
-      "startMs": 18797,
-      "endMs": 19203
+      "text": "one",
+      "canonicalStart": 131,
+      "canonicalEnd": 134,
+      "startMs": 10297,
+      "endMs": 10531
     },
     {
-      "text": "a",
-      "canonicalStart": 232,
-      "canonicalEnd": 233,
-      "startMs": 19219,
-      "endMs": 19297
+      "text": "transaction,",
+      "canonicalStart": 135,
+      "canonicalEnd": 147,
+      "startMs": 10547,
+      "endMs": 11453
     },
     {
-      "text": "conflict",
-      "canonicalStart": 234,
-      "canonicalEnd": 242,
-      "startMs": 19313,
-      "endMs": 19953
+      "text": "then",
+      "canonicalStart": 148,
+      "canonicalEnd": 152,
+      "startMs": 11813,
+      "endMs": 12063
     },
     {
-      "text": "to",
-      "canonicalStart": 243,
-      "canonicalEnd": 245,
-      "startMs": 19969,
-      "endMs": 20047
+      "text": "publish",
+      "canonicalStart": 153,
+      "canonicalEnd": 160,
+      "startMs": 12078,
+      "endMs": 12594
     },
     {
       "text": "the",
-      "canonicalStart": 246,
-      "canonicalEnd": 249,
-      "startMs": 20063,
-      "endMs": 20188
+      "canonicalStart": 161,
+      "canonicalEnd": 164,
+      "startMs": 12609,
+      "endMs": 12703
     },
     {
-      "text": "client.",
-      "canonicalStart": 250,
-      "canonicalEnd": 257,
-      "startMs": 20203,
-      "endMs": 20875
+      "text": "event",
+      "canonicalStart": 165,
+      "canonicalEnd": 170,
+      "startMs": 12719,
+      "endMs": 13172
+    },
+    {
+      "text": "for",
+      "canonicalStart": 171,
+      "canonicalEnd": 174,
+      "startMs": 13188,
+      "endMs": 13344
+    },
+    {
+      "text": "the",
+      "canonicalStart": 175,
+      "canonicalEnd": 178,
+      "startMs": 13359,
+      "endMs": 13469
+    },
+    {
+      "text": "payment",
+      "canonicalStart": 179,
+      "canonicalEnd": 186,
+      "startMs": 13484,
+      "endMs": 13922
+    },
+    {
+      "text": "service.",
+      "canonicalStart": 187,
+      "canonicalEnd": 195,
+      "startMs": 13938,
+      "endMs": 14688
+    },
+    {
+      "text": "The",
+      "canonicalStart": 196,
+      "canonicalEnd": 199,
+      "startMs": 15766,
+      "endMs": 15953
+    },
+    {
+      "text": "payment",
+      "canonicalStart": 200,
+      "canonicalEnd": 207,
+      "startMs": 15969,
+      "endMs": 16422
+    },
+    {
+      "text": "consumer",
+      "canonicalStart": 208,
+      "canonicalEnd": 216,
+      "startMs": 16438,
+      "endMs": 17078
+    },
+    {
+      "text": "handles",
+      "canonicalStart": 217,
+      "canonicalEnd": 224,
+      "startMs": 17094,
+      "endMs": 17578
+    },
+    {
+      "text": "duplicates",
+      "canonicalStart": 225,
+      "canonicalEnd": 235,
+      "startMs": 17594,
+      "endMs": 18297
+    },
+    {
+      "text": "and",
+      "canonicalStart": 236,
+      "canonicalEnd": 239,
+      "startMs": 18313,
+      "endMs": 18438
+    },
+    {
+      "text": "reports",
+      "canonicalStart": 240,
+      "canonicalEnd": 247,
+      "startMs": 18453,
+      "endMs": 18969
+    },
+    {
+      "text": "success",
+      "canonicalStart": 248,
+      "canonicalEnd": 255,
+      "startMs": 18984,
+      "endMs": 19563
+    },
+    {
+      "text": "or",
+      "canonicalStart": 256,
+      "canonicalEnd": 258,
+      "startMs": 19578,
+      "endMs": 19766
+    },
+    {
+      "text": "failure;",
+      "canonicalStart": 259,
+      "canonicalEnd": 267,
+      "startMs": 19781,
+      "endMs": 20359
+    },
+    {
+      "text": "on",
+      "canonicalStart": 268,
+      "canonicalEnd": 270,
+      "startMs": 20750,
+      "endMs": 20953
+    },
+    {
+      "text": "failure,",
+      "canonicalStart": 271,
+      "canonicalEnd": 279,
+      "startMs": 20969,
+      "endMs": 21578
+    },
+    {
+      "text": "I",
+      "canonicalStart": 280,
+      "canonicalEnd": 281,
+      "startMs": 22016,
+      "endMs": 22094
+    },
+    {
+      "text": "mark",
+      "canonicalStart": 282,
+      "canonicalEnd": 286,
+      "startMs": 22109,
+      "endMs": 22500
+    },
+    {
+      "text": "the",
+      "canonicalStart": 287,
+      "canonicalEnd": 290,
+      "startMs": 22516,
+      "endMs": 22625
+    },
+    {
+      "text": "order",
+      "canonicalStart": 291,
+      "canonicalEnd": 296,
+      "startMs": 22641,
+      "endMs": 23016
+    },
+    {
+      "text": "canceled",
+      "canonicalStart": 297,
+      "canonicalEnd": 305,
+      "startMs": 23031,
+      "endMs": 23609
+    },
+    {
+      "text": "or",
+      "canonicalStart": 306,
+      "canonicalEnd": 308,
+      "startMs": 23625,
+      "endMs": 23766
+    },
+    {
+      "text": "start",
+      "canonicalStart": 309,
+      "canonicalEnd": 314,
+      "startMs": 23781,
+      "endMs": 24125
+    },
+    {
+      "text": "a",
+      "canonicalStart": 315,
+      "canonicalEnd": 316,
+      "startMs": 24141,
+      "endMs": 24172
+    },
+    {
+      "text": "refund",
+      "canonicalStart": 317,
+      "canonicalEnd": 323,
+      "startMs": 24188,
+      "endMs": 24813
+    },
+    {
+      "text": "if",
+      "canonicalStart": 324,
+      "canonicalEnd": 326,
+      "startMs": 24828,
+      "endMs": 24969
+    },
+    {
+      "text": "needed.",
+      "canonicalStart": 327,
+      "canonicalEnd": 334,
+      "startMs": 24984,
+      "endMs": 25531
+    },
+    {
+      "text": "The",
+      "canonicalStart": 335,
+      "canonicalEnd": 338,
+      "startMs": 26609,
+      "endMs": 26797
+    },
+    {
+      "text": "services",
+      "canonicalStart": 339,
+      "canonicalEnd": 347,
+      "startMs": 26813,
+      "endMs": 27531
+    },
+    {
+      "text": "become",
+      "canonicalStart": 348,
+      "canonicalEnd": 354,
+      "startMs": 27547,
+      "endMs": 27953
+    },
+    {
+      "text": "consistent",
+      "canonicalStart": 355,
+      "canonicalEnd": 365,
+      "startMs": 27969,
+      "endMs": 28672
+    },
+    {
+      "text": "over",
+      "canonicalStart": 366,
+      "canonicalEnd": 370,
+      "startMs": 28688,
+      "endMs": 28953
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 371,
+      "canonicalEnd": 376,
+      "startMs": 28969,
+      "endMs": 29453
+    },
+    {
+      "text": "so",
+      "canonicalStart": 377,
+      "canonicalEnd": 379,
+      "startMs": 29813,
+      "endMs": 29953
+    },
+    {
+      "text": "the",
+      "canonicalStart": 380,
+      "canonicalEnd": 383,
+      "startMs": 29969,
+      "endMs": 30094
+    },
+    {
+      "text": "order",
+      "canonicalStart": 384,
+      "canonicalEnd": 389,
+      "startMs": 30109,
+      "endMs": 30453
+    },
+    {
+      "text": "status",
+      "canonicalStart": 390,
+      "canonicalEnd": 396,
+      "startMs": 30469,
+      "endMs": 31031
+    },
+    {
+      "text": "must",
+      "canonicalStart": 397,
+      "canonicalEnd": 401,
+      "startMs": 31047,
+      "endMs": 31328
+    },
+    {
+      "text": "show",
+      "canonicalStart": 402,
+      "canonicalEnd": 406,
+      "startMs": 31344,
+      "endMs": 31719
+    },
+    {
+      "text": "that",
+      "canonicalStart": 407,
+      "canonicalEnd": 411,
+      "startMs": 31734,
+      "endMs": 31969
+    },
+    {
+      "text": "payment",
+      "canonicalStart": 412,
+      "canonicalEnd": 419,
+      "startMs": 31984,
+      "endMs": 32438
+    },
+    {
+      "text": "is",
+      "canonicalStart": 420,
+      "canonicalEnd": 422,
+      "startMs": 32453,
+      "endMs": 32594
+    },
+    {
+      "text": "still",
+      "canonicalStart": 423,
+      "canonicalEnd": 428,
+      "startMs": 32609,
+      "endMs": 32922
+    },
+    {
+      "text": "pending.",
+      "canonicalStart": 429,
+      "canonicalEnd": 437,
+      "startMs": 32938,
+      "endMs": 33563
     }
   ]
 }

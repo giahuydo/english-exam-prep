@@ -1,7 +1,7 @@
 {
   "version": 1,
   "questionId": "t07-q01",
-  "speechText": "I retry only temporary failures, such as a network timeout or temporary service error. I do not retry invalid input or authentication errors. I use a retry limit and exponential backoff, and sometimes jitter. The operation should also be idempotent because a retry may execute the same action again.",
+  "speechText": "I retry only temporary failures, and only a few times. For invalid input, permission errors, or bad configuration, I do not retry.",
   "words": [
     {
       "text": "I",
@@ -15,336 +15,147 @@
       "canonicalStart": 2,
       "canonicalEnd": 7,
       "startMs": 331,
-      "endMs": 956
+      "endMs": 972
     },
     {
       "text": "only",
       "canonicalStart": 8,
       "canonicalEnd": 12,
-      "startMs": 972,
-      "endMs": 1300
+      "startMs": 988,
+      "endMs": 1316
     },
     {
       "text": "temporary",
       "canonicalStart": 13,
       "canonicalEnd": 22,
-      "startMs": 1316,
-      "endMs": 1988
+      "startMs": 1331,
+      "endMs": 2019
     },
     {
       "text": "failures,",
       "canonicalStart": 23,
       "canonicalEnd": 32,
-      "startMs": 2003,
-      "endMs": 2706
+      "startMs": 2034,
+      "endMs": 2847
     },
     {
-      "text": "such",
+      "text": "and",
       "canonicalStart": 33,
-      "canonicalEnd": 37,
-      "startMs": 3003,
+      "canonicalEnd": 36,
+      "startMs": 3050,
       "endMs": 3284
     },
     {
-      "text": "as",
-      "canonicalStart": 38,
-      "canonicalEnd": 40,
+      "text": "only",
+      "canonicalStart": 37,
+      "canonicalEnd": 41,
       "startMs": 3300,
-      "endMs": 3425
+      "endMs": 3644
     },
     {
       "text": "a",
-      "canonicalStart": 41,
-      "canonicalEnd": 42,
-      "startMs": 3441,
-      "endMs": 3488
+      "canonicalStart": 42,
+      "canonicalEnd": 43,
+      "startMs": 3659,
+      "endMs": 3738
     },
     {
-      "text": "network",
-      "canonicalStart": 43,
-      "canonicalEnd": 50,
-      "startMs": 3503,
-      "endMs": 4034
+      "text": "few",
+      "canonicalStart": 44,
+      "canonicalEnd": 47,
+      "startMs": 3753,
+      "endMs": 4003
     },
     {
-      "text": "timeout",
-      "canonicalStart": 51,
+      "text": "times.",
+      "canonicalStart": 48,
+      "canonicalEnd": 54,
+      "startMs": 4019,
+      "endMs": 4769
+    },
+    {
+      "text": "For",
+      "canonicalStart": 55,
       "canonicalEnd": 58,
-      "startMs": 4050,
-      "endMs": 4659
-    },
-    {
-      "text": "or",
-      "canonicalStart": 59,
-      "canonicalEnd": 61,
-      "startMs": 4675,
-      "endMs": 4784
-    },
-    {
-      "text": "temporary",
-      "canonicalStart": 62,
-      "canonicalEnd": 71,
-      "startMs": 4800,
-      "endMs": 5472
-    },
-    {
-      "text": "service",
-      "canonicalStart": 72,
-      "canonicalEnd": 79,
-      "startMs": 5488,
-      "endMs": 6019
-    },
-    {
-      "text": "error.",
-      "canonicalStart": 80,
-      "canonicalEnd": 86,
-      "startMs": 6034,
-      "endMs": 6534
-    },
-    {
-      "text": "I",
-      "canonicalStart": 87,
-      "canonicalEnd": 88,
-      "startMs": 7625,
-      "endMs": 7813
-    },
-    {
-      "text": "do",
-      "canonicalStart": 89,
-      "canonicalEnd": 91,
-      "startMs": 7828,
-      "endMs": 7984
-    },
-    {
-      "text": "not",
-      "canonicalStart": 92,
-      "canonicalEnd": 95,
-      "startMs": 8000,
-      "endMs": 8328
-    },
-    {
-      "text": "retry",
-      "canonicalStart": 96,
-      "canonicalEnd": 101,
-      "startMs": 8344,
-      "endMs": 8906
+      "startMs": 5859,
+      "endMs": 6109
     },
     {
       "text": "invalid",
-      "canonicalStart": 102,
-      "canonicalEnd": 109,
-      "startMs": 8922,
-      "endMs": 9609
+      "canonicalStart": 59,
+      "canonicalEnd": 66,
+      "startMs": 6125,
+      "endMs": 6813
     },
     {
-      "text": "input",
-      "canonicalStart": 110,
-      "canonicalEnd": 115,
-      "startMs": 9625,
-      "endMs": 10297
+      "text": "input,",
+      "canonicalStart": 67,
+      "canonicalEnd": 73,
+      "startMs": 6828,
+      "endMs": 7469
+    },
+    {
+      "text": "permission",
+      "canonicalStart": 74,
+      "canonicalEnd": 84,
+      "startMs": 7766,
+      "endMs": 8359
+    },
+    {
+      "text": "errors,",
+      "canonicalStart": 85,
+      "canonicalEnd": 92,
+      "startMs": 8375,
+      "endMs": 8953
     },
     {
       "text": "or",
-      "canonicalStart": 116,
-      "canonicalEnd": 118,
-      "startMs": 10313,
-      "endMs": 10563
+      "canonicalStart": 93,
+      "canonicalEnd": 95,
+      "startMs": 9219,
+      "endMs": 9438
     },
     {
-      "text": "authentication",
-      "canonicalStart": 119,
-      "canonicalEnd": 133,
-      "startMs": 10578,
-      "endMs": 11531
+      "text": "bad",
+      "canonicalStart": 96,
+      "canonicalEnd": 99,
+      "startMs": 9453,
+      "endMs": 9828
     },
     {
-      "text": "errors.",
-      "canonicalStart": 134,
-      "canonicalEnd": 141,
-      "startMs": 11547,
-      "endMs": 12219
+      "text": "configuration,",
+      "canonicalStart": 100,
+      "canonicalEnd": 114,
+      "startMs": 9844,
+      "endMs": 10922
     },
     {
       "text": "I",
-      "canonicalStart": 142,
-      "canonicalEnd": 143,
-      "startMs": 13297,
-      "endMs": 13453
+      "canonicalStart": 115,
+      "canonicalEnd": 116,
+      "startMs": 11297,
+      "endMs": 11391
     },
     {
-      "text": "use",
-      "canonicalStart": 144,
-      "canonicalEnd": 147,
-      "startMs": 13469,
-      "endMs": 13797
+      "text": "do",
+      "canonicalStart": 117,
+      "canonicalEnd": 119,
+      "startMs": 11406,
+      "endMs": 11594
     },
     {
-      "text": "a",
-      "canonicalStart": 148,
-      "canonicalEnd": 149,
-      "startMs": 13813,
-      "endMs": 13906
+      "text": "not",
+      "canonicalStart": 120,
+      "canonicalEnd": 123,
+      "startMs": 11609,
+      "endMs": 11922
     },
     {
-      "text": "retry",
-      "canonicalStart": 150,
-      "canonicalEnd": 155,
-      "startMs": 13922,
-      "endMs": 14484
-    },
-    {
-      "text": "limit",
-      "canonicalStart": 156,
-      "canonicalEnd": 161,
-      "startMs": 14500,
-      "endMs": 14922
-    },
-    {
-      "text": "and",
-      "canonicalStart": 162,
-      "canonicalEnd": 165,
-      "startMs": 14938,
-      "endMs": 15109
-    },
-    {
-      "text": "exponential",
-      "canonicalStart": 166,
-      "canonicalEnd": 177,
-      "startMs": 15125,
-      "endMs": 15922
-    },
-    {
-      "text": "backoff,",
-      "canonicalStart": 178,
-      "canonicalEnd": 186,
-      "startMs": 15938,
-      "endMs": 16641
-    },
-    {
-      "text": "and",
-      "canonicalStart": 187,
-      "canonicalEnd": 190,
-      "startMs": 16922,
-      "endMs": 17078
-    },
-    {
-      "text": "sometimes",
-      "canonicalStart": 191,
-      "canonicalEnd": 200,
-      "startMs": 17094,
-      "endMs": 17781
-    },
-    {
-      "text": "jitter.",
-      "canonicalStart": 201,
-      "canonicalEnd": 208,
-      "startMs": 17797,
-      "endMs": 18281
-    },
-    {
-      "text": "The",
-      "canonicalStart": 209,
-      "canonicalEnd": 212,
-      "startMs": 19359,
-      "endMs": 19547
-    },
-    {
-      "text": "operation",
-      "canonicalStart": 213,
-      "canonicalEnd": 222,
-      "startMs": 19563,
-      "endMs": 20344
-    },
-    {
-      "text": "should",
-      "canonicalStart": 223,
-      "canonicalEnd": 229,
-      "startMs": 20359,
-      "endMs": 20578
-    },
-    {
-      "text": "also",
-      "canonicalStart": 230,
-      "canonicalEnd": 234,
-      "startMs": 20594,
-      "endMs": 20969
-    },
-    {
-      "text": "be",
-      "canonicalStart": 235,
-      "canonicalEnd": 237,
-      "startMs": 20984,
-      "endMs": 21203
-    },
-    {
-      "text": "idempotent",
-      "canonicalStart": 238,
-      "canonicalEnd": 248,
-      "startMs": 21219,
-      "endMs": 22172
-    },
-    {
-      "text": "because",
-      "canonicalStart": 249,
-      "canonicalEnd": 256,
-      "startMs": 22188,
-      "endMs": 22563
-    },
-    {
-      "text": "a",
-      "canonicalStart": 257,
-      "canonicalEnd": 258,
-      "startMs": 22578,
-      "endMs": 22672
-    },
-    {
-      "text": "retry",
-      "canonicalStart": 259,
-      "canonicalEnd": 264,
-      "startMs": 22688,
-      "endMs": 23313
-    },
-    {
-      "text": "may",
-      "canonicalStart": 265,
-      "canonicalEnd": 268,
-      "startMs": 23328,
-      "endMs": 23578
-    },
-    {
-      "text": "execute",
-      "canonicalStart": 269,
-      "canonicalEnd": 276,
-      "startMs": 23594,
-      "endMs": 24266
-    },
-    {
-      "text": "the",
-      "canonicalStart": 277,
-      "canonicalEnd": 280,
-      "startMs": 24281,
-      "endMs": 24391
-    },
-    {
-      "text": "same",
-      "canonicalStart": 281,
-      "canonicalEnd": 285,
-      "startMs": 24406,
-      "endMs": 24750
-    },
-    {
-      "text": "action",
-      "canonicalStart": 286,
-      "canonicalEnd": 292,
-      "startMs": 24766,
-      "endMs": 25203
-    },
-    {
-      "text": "again.",
-      "canonicalStart": 293,
-      "canonicalEnd": 299,
-      "startMs": 25219,
-      "endMs": 25766
+      "text": "retry.",
+      "canonicalStart": 124,
+      "canonicalEnd": 130,
+      "startMs": 11938,
+      "endMs": 12641
     }
   ]
 }

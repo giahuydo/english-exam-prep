@@ -1,413 +1,196 @@
 {
   "version": 1,
   "questionId": "t04-q02",
-  "speechText": "After successful processing, a consumer sends ACK so RabbitMQ removes the message. If it cannot process the message, it can NACK with requeue true to put it back, or requeue false to dead-letter it if a dead-letter exchange is configured; otherwise it is discarded. I avoid requeueing a permanent error forever and use a limited retry path instead.",
+  "speechText": "I ACK after the message is processed successfully. If processing fails, I can NACK and retry or send it to a dead-letter queue, depending on the error.",
   "words": [
     {
-      "text": "After",
+      "text": "I",
       "canonicalStart": 0,
-      "canonicalEnd": 5,
+      "canonicalEnd": 1,
       "startMs": 113,
-      "endMs": 550
-    },
-    {
-      "text": "successful",
-      "canonicalStart": 6,
-      "canonicalEnd": 16,
-      "startMs": 566,
-      "endMs": 1284
-    },
-    {
-      "text": "processing,",
-      "canonicalStart": 17,
-      "canonicalEnd": 28,
-      "startMs": 1300,
-      "endMs": 2191
-    },
-    {
-      "text": "a",
-      "canonicalStart": 29,
-      "canonicalEnd": 30,
-      "startMs": 2519,
-      "endMs": 2597
-    },
-    {
-      "text": "consumer",
-      "canonicalStart": 31,
-      "canonicalEnd": 39,
-      "startMs": 2613,
-      "endMs": 3253
-    },
-    {
-      "text": "sends",
-      "canonicalStart": 40,
-      "canonicalEnd": 45,
-      "startMs": 3269,
-      "endMs": 3753
+      "endMs": 394
     },
     {
       "text": "ACK",
-      "canonicalStart": 46,
-      "canonicalEnd": 49,
-      "startMs": 3769,
-      "endMs": 4566
+      "canonicalStart": 2,
+      "canonicalEnd": 5,
+      "startMs": 409,
+      "endMs": 1253
     },
     {
-      "text": "so",
-      "canonicalStart": 50,
-      "canonicalEnd": 52,
-      "startMs": 4581,
-      "endMs": 4941
-    },
-    {
-      "text": "RabbitMQ",
-      "canonicalStart": 53,
-      "canonicalEnd": 61,
-      "startMs": 4956,
-      "endMs": 5816
-    },
-    {
-      "text": "removes",
-      "canonicalStart": 62,
-      "canonicalEnd": 69,
-      "startMs": 5831,
-      "endMs": 6425
+      "text": "after",
+      "canonicalStart": 6,
+      "canonicalEnd": 11,
+      "startMs": 1269,
+      "endMs": 1644
     },
     {
       "text": "the",
-      "canonicalStart": 70,
-      "canonicalEnd": 73,
-      "startMs": 6441,
-      "endMs": 6534
+      "canonicalStart": 12,
+      "canonicalEnd": 15,
+      "startMs": 1659,
+      "endMs": 1753
     },
     {
-      "text": "message.",
-      "canonicalStart": 74,
-      "canonicalEnd": 82,
-      "startMs": 6550,
-      "endMs": 7253
+      "text": "message",
+      "canonicalStart": 16,
+      "canonicalEnd": 23,
+      "startMs": 1769,
+      "endMs": 2253
+    },
+    {
+      "text": "is",
+      "canonicalStart": 24,
+      "canonicalEnd": 26,
+      "startMs": 2269,
+      "endMs": 2409
+    },
+    {
+      "text": "processed",
+      "canonicalStart": 27,
+      "canonicalEnd": 36,
+      "startMs": 2425,
+      "endMs": 3081
+    },
+    {
+      "text": "successfully.",
+      "canonicalStart": 37,
+      "canonicalEnd": 50,
+      "startMs": 3097,
+      "endMs": 4097
     },
     {
       "text": "If",
-      "canonicalStart": 83,
-      "canonicalEnd": 85,
-      "startMs": 8344,
-      "endMs": 8563
+      "canonicalStart": 51,
+      "canonicalEnd": 53,
+      "startMs": 5188,
+      "endMs": 5422
     },
     {
-      "text": "it",
-      "canonicalStart": 86,
-      "canonicalEnd": 88,
-      "startMs": 8578,
-      "endMs": 8719
+      "text": "processing",
+      "canonicalStart": 54,
+      "canonicalEnd": 64,
+      "startMs": 5438,
+      "endMs": 6234
     },
     {
-      "text": "cannot",
-      "canonicalStart": 89,
-      "canonicalEnd": 95,
-      "startMs": 8734,
-      "endMs": 9156
-    },
-    {
-      "text": "process",
-      "canonicalStart": 96,
-      "canonicalEnd": 103,
-      "startMs": 9172,
-      "endMs": 9797
-    },
-    {
-      "text": "the",
-      "canonicalStart": 104,
-      "canonicalEnd": 107,
-      "startMs": 9813,
-      "endMs": 9922
-    },
-    {
-      "text": "message,",
-      "canonicalStart": 108,
-      "canonicalEnd": 116,
-      "startMs": 9938,
-      "endMs": 10547
-    },
-    {
-      "text": "it",
-      "canonicalStart": 117,
-      "canonicalEnd": 119,
-      "startMs": 10859,
-      "endMs": 10969
-    },
-    {
-      "text": "can",
-      "canonicalStart": 120,
-      "canonicalEnd": 123,
-      "startMs": 10984,
-      "endMs": 11203
-    },
-    {
-      "text": "NACK",
-      "canonicalStart": 124,
-      "canonicalEnd": 128,
-      "startMs": 11219,
-      "endMs": 12000
-    },
-    {
-      "text": "with",
-      "canonicalStart": 129,
-      "canonicalEnd": 133,
-      "startMs": 12016,
-      "endMs": 12250
-    },
-    {
-      "text": "requeue",
-      "canonicalStart": 134,
-      "canonicalEnd": 141,
-      "startMs": 12266,
-      "endMs": 12703
-    },
-    {
-      "text": "true",
-      "canonicalStart": 142,
-      "canonicalEnd": 146,
-      "startMs": 12719,
-      "endMs": 13047
-    },
-    {
-      "text": "to",
-      "canonicalStart": 147,
-      "canonicalEnd": 149,
-      "startMs": 13063,
-      "endMs": 13172
-    },
-    {
-      "text": "put",
-      "canonicalStart": 150,
-      "canonicalEnd": 153,
-      "startMs": 13188,
-      "endMs": 13406
-    },
-    {
-      "text": "it",
-      "canonicalStart": 154,
-      "canonicalEnd": 156,
-      "startMs": 13422,
-      "endMs": 13547
-    },
-    {
-      "text": "back,",
-      "canonicalStart": 157,
-      "canonicalEnd": 162,
-      "startMs": 13563,
-      "endMs": 14016
-    },
-    {
-      "text": "or",
-      "canonicalStart": 163,
-      "canonicalEnd": 165,
-      "startMs": 14344,
-      "endMs": 14547
-    },
-    {
-      "text": "requeue",
-      "canonicalStart": 166,
-      "canonicalEnd": 173,
-      "startMs": 14563,
-      "endMs": 14984
-    },
-    {
-      "text": "false",
-      "canonicalStart": 174,
-      "canonicalEnd": 179,
-      "startMs": 15000,
-      "endMs": 15422
-    },
-    {
-      "text": "to",
-      "canonicalStart": 180,
-      "canonicalEnd": 182,
-      "startMs": 15438,
-      "endMs": 15563
-    },
-    {
-      "text": "dead-letter",
-      "canonicalStart": 183,
-      "canonicalEnd": 194,
-      "startMs": 15578,
-      "endMs": 16203
-    },
-    {
-      "text": "it",
-      "canonicalStart": 195,
-      "canonicalEnd": 197,
-      "startMs": 16219,
-      "endMs": 16328
-    },
-    {
-      "text": "if",
-      "canonicalStart": 198,
-      "canonicalEnd": 200,
-      "startMs": 16344,
-      "endMs": 16453
-    },
-    {
-      "text": "a",
-      "canonicalStart": 201,
-      "canonicalEnd": 202,
-      "startMs": 16469,
-      "endMs": 16594
-    },
-    {
-      "text": "dead-letter",
-      "canonicalStart": 203,
-      "canonicalEnd": 214,
-      "startMs": 16609,
-      "endMs": 17188
-    },
-    {
-      "text": "exchange",
-      "canonicalStart": 215,
-      "canonicalEnd": 223,
-      "startMs": 17203,
-      "endMs": 17797
-    },
-    {
-      "text": "is",
-      "canonicalStart": 224,
-      "canonicalEnd": 226,
-      "startMs": 17813,
-      "endMs": 17938
-    },
-    {
-      "text": "configured;",
-      "canonicalStart": 227,
-      "canonicalEnd": 238,
-      "startMs": 17953,
-      "endMs": 18656
-    },
-    {
-      "text": "otherwise",
-      "canonicalStart": 239,
-      "canonicalEnd": 248,
-      "startMs": 19047,
-      "endMs": 19703
-    },
-    {
-      "text": "it",
-      "canonicalStart": 249,
-      "canonicalEnd": 251,
-      "startMs": 19719,
-      "endMs": 19828
-    },
-    {
-      "text": "is",
-      "canonicalStart": 252,
-      "canonicalEnd": 254,
-      "startMs": 19844,
-      "endMs": 19984
-    },
-    {
-      "text": "discarded.",
-      "canonicalStart": 255,
-      "canonicalEnd": 265,
-      "startMs": 20000,
-      "endMs": 20813
+      "text": "fails,",
+      "canonicalStart": 65,
+      "canonicalEnd": 71,
+      "startMs": 6250,
+      "endMs": 6922
     },
     {
       "text": "I",
-      "canonicalStart": 266,
-      "canonicalEnd": 267,
-      "startMs": 21891,
-      "endMs": 22125
+      "canonicalStart": 72,
+      "canonicalEnd": 73,
+      "startMs": 7219,
+      "endMs": 7344
     },
     {
-      "text": "avoid",
-      "canonicalStart": 268,
-      "canonicalEnd": 273,
-      "startMs": 22141,
-      "endMs": 22594
+      "text": "can",
+      "canonicalStart": 74,
+      "canonicalEnd": 77,
+      "startMs": 7359,
+      "endMs": 7594
     },
     {
-      "text": "requeueing",
-      "canonicalStart": 274,
-      "canonicalEnd": 284,
-      "startMs": 22609,
-      "endMs": 23172
-    },
-    {
-      "text": "a",
-      "canonicalStart": 285,
-      "canonicalEnd": 286,
-      "startMs": 23188,
-      "endMs": 23266
-    },
-    {
-      "text": "permanent",
-      "canonicalStart": 287,
-      "canonicalEnd": 296,
-      "startMs": 23281,
-      "endMs": 23875
-    },
-    {
-      "text": "error",
-      "canonicalStart": 297,
-      "canonicalEnd": 302,
-      "startMs": 23891,
-      "endMs": 24219
-    },
-    {
-      "text": "forever",
-      "canonicalStart": 303,
-      "canonicalEnd": 310,
-      "startMs": 24234,
-      "endMs": 24938
+      "text": "NACK",
+      "canonicalStart": 78,
+      "canonicalEnd": 82,
+      "startMs": 7609,
+      "endMs": 8516
     },
     {
       "text": "and",
-      "canonicalStart": 311,
-      "canonicalEnd": 314,
-      "startMs": 24953,
-      "endMs": 25078
-    },
-    {
-      "text": "use",
-      "canonicalStart": 315,
-      "canonicalEnd": 318,
-      "startMs": 25094,
-      "endMs": 25359
-    },
-    {
-      "text": "a",
-      "canonicalStart": 319,
-      "canonicalEnd": 320,
-      "startMs": 25375,
-      "endMs": 25453
-    },
-    {
-      "text": "limited",
-      "canonicalStart": 321,
-      "canonicalEnd": 328,
-      "startMs": 25469,
-      "endMs": 25953
+      "canonicalStart": 83,
+      "canonicalEnd": 86,
+      "startMs": 8531,
+      "endMs": 8766
     },
     {
       "text": "retry",
-      "canonicalStart": 329,
-      "canonicalEnd": 334,
-      "startMs": 25969,
-      "endMs": 26516
+      "canonicalStart": 87,
+      "canonicalEnd": 92,
+      "startMs": 8781,
+      "endMs": 9375
     },
     {
-      "text": "path",
-      "canonicalStart": 335,
-      "canonicalEnd": 339,
-      "startMs": 26531,
-      "endMs": 27016
+      "text": "or",
+      "canonicalStart": 93,
+      "canonicalEnd": 95,
+      "startMs": 9391,
+      "endMs": 9547
     },
     {
-      "text": "instead.",
-      "canonicalStart": 340,
-      "canonicalEnd": 348,
-      "startMs": 27031,
-      "endMs": 27750
+      "text": "send",
+      "canonicalStart": 96,
+      "canonicalEnd": 100,
+      "startMs": 9563,
+      "endMs": 9875
+    },
+    {
+      "text": "it",
+      "canonicalStart": 101,
+      "canonicalEnd": 103,
+      "startMs": 9891,
+      "endMs": 9984
+    },
+    {
+      "text": "to",
+      "canonicalStart": 104,
+      "canonicalEnd": 106,
+      "startMs": 10000,
+      "endMs": 10156
+    },
+    {
+      "text": "a",
+      "canonicalStart": 107,
+      "canonicalEnd": 108,
+      "startMs": 10172,
+      "endMs": 10297
+    },
+    {
+      "text": "dead-letter",
+      "canonicalStart": 109,
+      "canonicalEnd": 120,
+      "startMs": 10313,
+      "endMs": 10922
+    },
+    {
+      "text": "queue,",
+      "canonicalStart": 121,
+      "canonicalEnd": 127,
+      "startMs": 10938,
+      "endMs": 11281
+    },
+    {
+      "text": "depending",
+      "canonicalStart": 128,
+      "canonicalEnd": 137,
+      "startMs": 11641,
+      "endMs": 12188
+    },
+    {
+      "text": "on",
+      "canonicalStart": 138,
+      "canonicalEnd": 140,
+      "startMs": 12203,
+      "endMs": 12328
+    },
+    {
+      "text": "the",
+      "canonicalStart": 141,
+      "canonicalEnd": 144,
+      "startMs": 12344,
+      "endMs": 12422
+    },
+    {
+      "text": "error.",
+      "canonicalStart": 145,
+      "canonicalEnd": 151,
+      "startMs": 12438,
+      "endMs": 13000
     }
   ]
 }
