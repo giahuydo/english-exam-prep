@@ -517,6 +517,10 @@ The Backend Interview page has one **Show Vietnamese / Hide Vietnamese** control
 
 The Backend Interview answer view splits English answers at natural punctuation boundaries into short, subtly color-accented beats, with visual pause separators. `backend/speaking-chunks.ts` slices the display text without changing the source: concatenating the chunks reproduces each English answer exactly. Pause marks are decorative, not spoken/source text. Vietnamese remains plain beneath the answer; the existing answer/key-idea visibility and Vietnamese toggle still apply. This display-only change does not regenerate audio.
 
+### 2026-09-23 — Backend key-idea recall paths
+
+The 39 Backend Interview `keyIdea` / `keyIdeaVi` lines now give compact, question-specific speaking paths with `→` stages instead of repeating the answer opening. Each Vietnamese path mirrors its English stages. This is a study cue only: the English/Vietnamese questions and B1–B2 answers, topic order, visibility controls, and static audio remain unchanged. No audio regeneration is needed.
+
 ## Validation
 
 From the repository root:
