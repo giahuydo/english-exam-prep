@@ -8,8 +8,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
   1: [
     {
       question: 'How does Node.js handle I/O and CPU-heavy work, and what can block the event loop?',
-      answer: 'Basically, Node.js runs JavaScript on the main event loop. For I/O work, such as a database or network request, Node.js can wait for the result without blocking the main thread. When the result is ready, the callback continues. With async and await, the current function pauses while waiting, but the server can still handle other work. Some file and DNS operations can also use the libuv worker pool. CPU-heavy work is different. If I run a heavy calculation on the main thread, it can block the event loop, so other requests have to wait. For CPU-heavy work, I can use worker threads, a background queue, or a separate service, depending on the use case. So overall, Node.js works very well for I/O-heavy systems, but I avoid running heavy CPU work directly on the main thread.',
-      keyIdea: 'I/O waits → event loop handles other work → await does not block the whole server → CPU-heavy JavaScript blocks the event loop → move heavy work away from the main thread',
+      answer: 'Basically, Node.js runs JavaScript on the main event loop. With I/O, like database or network requests, Node.js can wait without blocking the main thread. When I use async and await, only the current function pauses, while the event loop can continue handling other work. Some file and DNS operations can also use the libuv worker pool. CPU-heavy work is different. If I run a heavy calculation on the main thread, it can block the event loop, so other requests have to wait. For CPU-heavy work, I can use worker threads, a background queue, or a separate service, depending on the use case. So overall, Node.js works very well for I/O-heavy systems, but I avoid running heavy CPU work directly on the main thread.',
+      keyIdea: 'I/O starts → await pauses current function → event loop stays free → I/O completes → function continues → CPU-heavy JavaScript blocks the event loop → move heavy work away from the main thread',
     },
   ],
   2: [
@@ -80,8 +80,8 @@ export const sourceQuestions: Partial<Record<number, EnglishBackendQuestion[]>> 
   7: [
     {
       question: 'How do you design retry logic?',
-      answer: 'I retry only temporary failures, and only a few times. For invalid input, permission errors, or bad configuration, I do not retry.',
-      keyIdea: 'Temporary failure → retry a few times → invalid input, permission error, or bad configuration → do not retry.',
+      answer: 'Basically, I retry only temporary failures, such as a timeout or a temporary network error. I set a retry limit and use exponential backoff, so each retry waits a little longer. For invalid input, permission errors, or bad configuration, I fail fast and do not retry. If the operation can create duplicate data, I also make it idempotent.',
+      keyIdea: 'Temporary failure → retry limit → exponential backoff → permanent error = fail fast → idempotency protects duplicates',
     },
     {
       question: 'What is a circuit breaker?',

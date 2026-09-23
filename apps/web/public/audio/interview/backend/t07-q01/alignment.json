@@ -1,161 +1,413 @@
 {
   "version": 1,
   "questionId": "t07-q01",
-  "speechText": "I retry only temporary failures, and only a few times. For invalid input, permission errors, or bad configuration, I do not retry.",
+  "speechText": "Basically, I retry only temporary failures, such as a timeout or a temporary network error. I set a retry limit and use exponential backoff, so each retry waits a little longer. For invalid input, permission errors, or bad configuration, I fail fast and do not retry. If the operation can create duplicate data, I also make it idempotent.",
   "words": [
     {
-      "text": "I",
+      "text": "Basically,",
       "canonicalStart": 0,
-      "canonicalEnd": 1,
+      "canonicalEnd": 10,
       "startMs": 113,
-      "endMs": 316
+      "endMs": 878
+    },
+    {
+      "text": "I",
+      "canonicalStart": 11,
+      "canonicalEnd": 12,
+      "startMs": 1128,
+      "endMs": 1300
     },
     {
       "text": "retry",
-      "canonicalStart": 2,
-      "canonicalEnd": 7,
-      "startMs": 331,
-      "endMs": 972
+      "canonicalStart": 13,
+      "canonicalEnd": 18,
+      "startMs": 1316,
+      "endMs": 1909
     },
     {
       "text": "only",
-      "canonicalStart": 8,
-      "canonicalEnd": 12,
-      "startMs": 988,
-      "endMs": 1316
+      "canonicalStart": 19,
+      "canonicalEnd": 23,
+      "startMs": 1925,
+      "endMs": 2269
     },
     {
       "text": "temporary",
-      "canonicalStart": 13,
-      "canonicalEnd": 22,
-      "startMs": 1331,
-      "endMs": 2019
+      "canonicalStart": 24,
+      "canonicalEnd": 33,
+      "startMs": 2284,
+      "endMs": 2972
     },
     {
       "text": "failures,",
-      "canonicalStart": 23,
-      "canonicalEnd": 32,
-      "startMs": 2034,
-      "endMs": 2847
+      "canonicalStart": 34,
+      "canonicalEnd": 43,
+      "startMs": 2988,
+      "endMs": 3722
     },
     {
-      "text": "and",
-      "canonicalStart": 33,
-      "canonicalEnd": 36,
-      "startMs": 3050,
-      "endMs": 3284
+      "text": "such",
+      "canonicalStart": 44,
+      "canonicalEnd": 48,
+      "startMs": 4019,
+      "endMs": 4316
     },
     {
-      "text": "only",
-      "canonicalStart": 37,
-      "canonicalEnd": 41,
-      "startMs": 3300,
-      "endMs": 3644
+      "text": "as",
+      "canonicalStart": 49,
+      "canonicalEnd": 51,
+      "startMs": 4331,
+      "endMs": 4456
     },
     {
       "text": "a",
-      "canonicalStart": 42,
-      "canonicalEnd": 43,
-      "startMs": 3659,
-      "endMs": 3738
+      "canonicalStart": 52,
+      "canonicalEnd": 53,
+      "startMs": 4472,
+      "endMs": 4566
     },
     {
-      "text": "few",
-      "canonicalStart": 44,
-      "canonicalEnd": 47,
-      "startMs": 3753,
-      "endMs": 4003
-    },
-    {
-      "text": "times.",
-      "canonicalStart": 48,
-      "canonicalEnd": 54,
-      "startMs": 4019,
-      "endMs": 4769
-    },
-    {
-      "text": "For",
-      "canonicalStart": 55,
-      "canonicalEnd": 58,
-      "startMs": 5859,
-      "endMs": 6109
-    },
-    {
-      "text": "invalid",
-      "canonicalStart": 59,
-      "canonicalEnd": 66,
-      "startMs": 6125,
-      "endMs": 6813
-    },
-    {
-      "text": "input,",
-      "canonicalStart": 67,
-      "canonicalEnd": 73,
-      "startMs": 6828,
-      "endMs": 7469
-    },
-    {
-      "text": "permission",
-      "canonicalStart": 74,
-      "canonicalEnd": 84,
-      "startMs": 7766,
-      "endMs": 8359
-    },
-    {
-      "text": "errors,",
-      "canonicalStart": 85,
-      "canonicalEnd": 92,
-      "startMs": 8375,
-      "endMs": 8953
+      "text": "timeout",
+      "canonicalStart": 54,
+      "canonicalEnd": 61,
+      "startMs": 4581,
+      "endMs": 5331
     },
     {
       "text": "or",
-      "canonicalStart": 93,
-      "canonicalEnd": 95,
-      "startMs": 9219,
-      "endMs": 9438
+      "canonicalStart": 62,
+      "canonicalEnd": 64,
+      "startMs": 5347,
+      "endMs": 5519
     },
     {
-      "text": "bad",
-      "canonicalStart": 96,
-      "canonicalEnd": 99,
-      "startMs": 9453,
-      "endMs": 9828
+      "text": "a",
+      "canonicalStart": 65,
+      "canonicalEnd": 66,
+      "startMs": 5534,
+      "endMs": 5597
     },
     {
-      "text": "configuration,",
-      "canonicalStart": 100,
-      "canonicalEnd": 114,
-      "startMs": 9844,
-      "endMs": 10922
+      "text": "temporary",
+      "canonicalStart": 67,
+      "canonicalEnd": 76,
+      "startMs": 5613,
+      "endMs": 6284
+    },
+    {
+      "text": "network",
+      "canonicalStart": 77,
+      "canonicalEnd": 84,
+      "startMs": 6300,
+      "endMs": 6831
+    },
+    {
+      "text": "error.",
+      "canonicalStart": 85,
+      "canonicalEnd": 91,
+      "startMs": 6847,
+      "endMs": 7316
     },
     {
       "text": "I",
-      "canonicalStart": 115,
-      "canonicalEnd": 116,
-      "startMs": 11297,
-      "endMs": 11391
+      "canonicalStart": 92,
+      "canonicalEnd": 93,
+      "startMs": 8406,
+      "endMs": 8625
+    },
+    {
+      "text": "set",
+      "canonicalStart": 94,
+      "canonicalEnd": 97,
+      "startMs": 8641,
+      "endMs": 8953
+    },
+    {
+      "text": "a",
+      "canonicalStart": 98,
+      "canonicalEnd": 99,
+      "startMs": 8969,
+      "endMs": 9000
+    },
+    {
+      "text": "retry",
+      "canonicalStart": 100,
+      "canonicalEnd": 105,
+      "startMs": 9016,
+      "endMs": 9563
+    },
+    {
+      "text": "limit",
+      "canonicalStart": 106,
+      "canonicalEnd": 111,
+      "startMs": 9578,
+      "endMs": 10000
+    },
+    {
+      "text": "and",
+      "canonicalStart": 112,
+      "canonicalEnd": 115,
+      "startMs": 10016,
+      "endMs": 10141
+    },
+    {
+      "text": "use",
+      "canonicalStart": 116,
+      "canonicalEnd": 119,
+      "startMs": 10156,
+      "endMs": 10484
+    },
+    {
+      "text": "exponential",
+      "canonicalStart": 120,
+      "canonicalEnd": 131,
+      "startMs": 10500,
+      "endMs": 11266
+    },
+    {
+      "text": "backoff,",
+      "canonicalStart": 132,
+      "canonicalEnd": 140,
+      "startMs": 11281,
+      "endMs": 11953
+    },
+    {
+      "text": "so",
+      "canonicalStart": 141,
+      "canonicalEnd": 143,
+      "startMs": 12281,
+      "endMs": 12484
+    },
+    {
+      "text": "each",
+      "canonicalStart": 144,
+      "canonicalEnd": 148,
+      "startMs": 12500,
+      "endMs": 12813
+    },
+    {
+      "text": "retry",
+      "canonicalStart": 149,
+      "canonicalEnd": 154,
+      "startMs": 12828,
+      "endMs": 13375
+    },
+    {
+      "text": "waits",
+      "canonicalStart": 155,
+      "canonicalEnd": 160,
+      "startMs": 13391,
+      "endMs": 13750
+    },
+    {
+      "text": "a",
+      "canonicalStart": 161,
+      "canonicalEnd": 162,
+      "startMs": 13766,
+      "endMs": 13844
+    },
+    {
+      "text": "little",
+      "canonicalStart": 163,
+      "canonicalEnd": 169,
+      "startMs": 13859,
+      "endMs": 14156
+    },
+    {
+      "text": "longer.",
+      "canonicalStart": 170,
+      "canonicalEnd": 177,
+      "startMs": 14172,
+      "endMs": 14766
+    },
+    {
+      "text": "For",
+      "canonicalStart": 178,
+      "canonicalEnd": 181,
+      "startMs": 15844,
+      "endMs": 16094
+    },
+    {
+      "text": "invalid",
+      "canonicalStart": 182,
+      "canonicalEnd": 189,
+      "startMs": 16109,
+      "endMs": 16797
+    },
+    {
+      "text": "input,",
+      "canonicalStart": 190,
+      "canonicalEnd": 196,
+      "startMs": 16813,
+      "endMs": 17469
+    },
+    {
+      "text": "permission",
+      "canonicalStart": 197,
+      "canonicalEnd": 207,
+      "startMs": 17766,
+      "endMs": 18359
+    },
+    {
+      "text": "errors,",
+      "canonicalStart": 208,
+      "canonicalEnd": 215,
+      "startMs": 18375,
+      "endMs": 18953
+    },
+    {
+      "text": "or",
+      "canonicalStart": 216,
+      "canonicalEnd": 218,
+      "startMs": 19234,
+      "endMs": 19453
+    },
+    {
+      "text": "bad",
+      "canonicalStart": 219,
+      "canonicalEnd": 222,
+      "startMs": 19469,
+      "endMs": 19844
+    },
+    {
+      "text": "configuration,",
+      "canonicalStart": 223,
+      "canonicalEnd": 237,
+      "startMs": 19859,
+      "endMs": 20938
+    },
+    {
+      "text": "I",
+      "canonicalStart": 238,
+      "canonicalEnd": 239,
+      "startMs": 21313,
+      "endMs": 21438
+    },
+    {
+      "text": "fail",
+      "canonicalStart": 240,
+      "canonicalEnd": 244,
+      "startMs": 21453,
+      "endMs": 21859
+    },
+    {
+      "text": "fast",
+      "canonicalStart": 245,
+      "canonicalEnd": 249,
+      "startMs": 21875,
+      "endMs": 22438
+    },
+    {
+      "text": "and",
+      "canonicalStart": 250,
+      "canonicalEnd": 253,
+      "startMs": 22453,
+      "endMs": 22531
     },
     {
       "text": "do",
-      "canonicalStart": 117,
-      "canonicalEnd": 119,
-      "startMs": 11406,
-      "endMs": 11594
+      "canonicalStart": 254,
+      "canonicalEnd": 256,
+      "startMs": 22547,
+      "endMs": 22703
     },
     {
       "text": "not",
-      "canonicalStart": 120,
-      "canonicalEnd": 123,
-      "startMs": 11609,
-      "endMs": 11922
+      "canonicalStart": 257,
+      "canonicalEnd": 260,
+      "startMs": 22719,
+      "endMs": 23031
     },
     {
       "text": "retry.",
-      "canonicalStart": 124,
-      "canonicalEnd": 130,
-      "startMs": 11938,
-      "endMs": 12641
+      "canonicalStart": 261,
+      "canonicalEnd": 267,
+      "startMs": 23047,
+      "endMs": 23750
+    },
+    {
+      "text": "If",
+      "canonicalStart": 268,
+      "canonicalEnd": 270,
+      "startMs": 24828,
+      "endMs": 25063
+    },
+    {
+      "text": "the",
+      "canonicalStart": 271,
+      "canonicalEnd": 274,
+      "startMs": 25078,
+      "endMs": 25219
+    },
+    {
+      "text": "operation",
+      "canonicalStart": 275,
+      "canonicalEnd": 284,
+      "startMs": 25234,
+      "endMs": 26016
+    },
+    {
+      "text": "can",
+      "canonicalStart": 285,
+      "canonicalEnd": 288,
+      "startMs": 26031,
+      "endMs": 26219
+    },
+    {
+      "text": "create",
+      "canonicalStart": 289,
+      "canonicalEnd": 295,
+      "startMs": 26234,
+      "endMs": 26672
+    },
+    {
+      "text": "duplicate",
+      "canonicalStart": 296,
+      "canonicalEnd": 305,
+      "startMs": 26688,
+      "endMs": 27281
+    },
+    {
+      "text": "data,",
+      "canonicalStart": 306,
+      "canonicalEnd": 311,
+      "startMs": 27297,
+      "endMs": 27750
+    },
+    {
+      "text": "I",
+      "canonicalStart": 312,
+      "canonicalEnd": 313,
+      "startMs": 28078,
+      "endMs": 28250
+    },
+    {
+      "text": "also",
+      "canonicalStart": 314,
+      "canonicalEnd": 318,
+      "startMs": 28266,
+      "endMs": 28672
+    },
+    {
+      "text": "make",
+      "canonicalStart": 319,
+      "canonicalEnd": 323,
+      "startMs": 28688,
+      "endMs": 28953
+    },
+    {
+      "text": "it",
+      "canonicalStart": 324,
+      "canonicalEnd": 326,
+      "startMs": 28969,
+      "endMs": 29094
+    },
+    {
+      "text": "idempotent.",
+      "canonicalStart": 327,
+      "canonicalEnd": 338,
+      "startMs": 29109,
+      "endMs": 30141
     }
   ]
 }

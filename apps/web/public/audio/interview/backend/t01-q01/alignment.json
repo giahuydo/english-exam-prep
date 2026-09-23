@@ -1,7 +1,7 @@
 {
   "version": 1,
   "questionId": "t01-q01",
-  "speechText": "Basically, Node.js runs JavaScript on the main event loop. For I O work, such as a database or network request, Node.js can wait for the result without blocking the main thread. When the result is ready, the callback continues. With async and await, the current function pauses while waiting, but the server can still handle other work. Some file and DNS operations can also use the libuv worker pool. CPU-heavy work is different. If I run a heavy calculation on the main thread, it can block the event loop, so other requests have to wait. For CPU-heavy work, I can use worker threads, a background queue, or a separate service, depending on the use case. So overall, Node.js works very well for I O-heavy systems, but I avoid running heavy CPU work directly on the main thread.",
+  "speechText": "Basically, Node.js runs JavaScript on the main event loop. With I O, like database or network requests, Node.js can wait without blocking the main thread. When I use async and await, only the current function pauses, while the event loop can continue handling other work. Some file and DNS operations can also use the libuv worker pool. CPU-heavy work is different. If I run a heavy calculation on the main thread, it can block the event loop, so other requests have to wait. For CPU-heavy work, I can use worker threads, a background queue, or a separate service, depending on the use case. So overall, Node.js works very well for I O-heavy systems, but I avoid running heavy CPU work directly on the main thread.",
   "words": [
     {
       "text": "Basically,",
@@ -67,900 +67,816 @@
       "endMs": 5003
     },
     {
-      "text": "For",
+      "text": "With",
       "canonicalStart": 59,
-      "canonicalEnd": 62,
+      "canonicalEnd": 63,
       "startMs": 6094,
-      "endMs": 6453
+      "endMs": 6375
     },
     {
       "text": "I",
-      "canonicalStart": 63,
-      "canonicalEnd": 64,
-      "startMs": 6469,
-      "endMs": 6719
+      "canonicalStart": 64,
+      "canonicalEnd": 65,
+      "startMs": 6391,
+      "endMs": 6641
     },
     {
-      "text": "O",
-      "canonicalStart": 65,
-      "canonicalEnd": 66,
-      "startMs": 6734,
-      "endMs": 6938
+      "text": "O,",
+      "canonicalStart": 66,
+      "canonicalEnd": 68,
+      "startMs": 6656,
+      "endMs": 7047
     },
     {
-      "text": "work,",
-      "canonicalStart": 67,
-      "canonicalEnd": 72,
-      "startMs": 6953,
-      "endMs": 7406
-    },
-    {
-      "text": "such",
-      "canonicalStart": 73,
-      "canonicalEnd": 77,
-      "startMs": 7703,
-      "endMs": 8016
-    },
-    {
-      "text": "as",
-      "canonicalStart": 78,
-      "canonicalEnd": 80,
-      "startMs": 8031,
-      "endMs": 8156
-    },
-    {
-      "text": "a",
-      "canonicalStart": 81,
-      "canonicalEnd": 82,
-      "startMs": 8172,
-      "endMs": 8281
+      "text": "like",
+      "canonicalStart": 69,
+      "canonicalEnd": 73,
+      "startMs": 7375,
+      "endMs": 7656
     },
     {
       "text": "database",
-      "canonicalStart": 83,
-      "canonicalEnd": 91,
-      "startMs": 8297,
-      "endMs": 8938
+      "canonicalStart": 74,
+      "canonicalEnd": 82,
+      "startMs": 7672,
+      "endMs": 8297
     },
     {
       "text": "or",
-      "canonicalStart": 92,
-      "canonicalEnd": 94,
-      "startMs": 8953,
-      "endMs": 9109
+      "canonicalStart": 83,
+      "canonicalEnd": 85,
+      "startMs": 8313,
+      "endMs": 8469
     },
     {
       "text": "network",
-      "canonicalStart": 95,
-      "canonicalEnd": 102,
-      "startMs": 9125,
-      "endMs": 9641
+      "canonicalStart": 86,
+      "canonicalEnd": 93,
+      "startMs": 8484,
+      "endMs": 9000
     },
     {
-      "text": "request,",
-      "canonicalStart": 103,
-      "canonicalEnd": 111,
-      "startMs": 9656,
-      "endMs": 10375
+      "text": "requests,",
+      "canonicalStart": 94,
+      "canonicalEnd": 103,
+      "startMs": 9016,
+      "endMs": 9813
     },
     {
       "text": "Node.js",
-      "canonicalStart": 112,
-      "canonicalEnd": 119,
-      "startMs": 10703,
-      "endMs": 11953
+      "canonicalStart": 104,
+      "canonicalEnd": 111,
+      "startMs": 10125,
+      "endMs": 11406
     },
     {
       "text": "can",
-      "canonicalStart": 120,
-      "canonicalEnd": 123,
-      "startMs": 11969,
-      "endMs": 12172
+      "canonicalStart": 112,
+      "canonicalEnd": 115,
+      "startMs": 11422,
+      "endMs": 11641
     },
     {
       "text": "wait",
-      "canonicalStart": 124,
-      "canonicalEnd": 128,
-      "startMs": 12188,
-      "endMs": 12484
-    },
-    {
-      "text": "for",
-      "canonicalStart": 129,
-      "canonicalEnd": 132,
-      "startMs": 12500,
-      "endMs": 12625
-    },
-    {
-      "text": "the",
-      "canonicalStart": 133,
-      "canonicalEnd": 136,
-      "startMs": 12641,
-      "endMs": 12734
-    },
-    {
-      "text": "result",
-      "canonicalStart": 137,
-      "canonicalEnd": 143,
-      "startMs": 12750,
-      "endMs": 13266
+      "canonicalStart": 116,
+      "canonicalEnd": 120,
+      "startMs": 11656,
+      "endMs": 12000
     },
     {
       "text": "without",
-      "canonicalStart": 144,
-      "canonicalEnd": 151,
-      "startMs": 13281,
-      "endMs": 13703
+      "canonicalStart": 121,
+      "canonicalEnd": 128,
+      "startMs": 12016,
+      "endMs": 12453
     },
     {
       "text": "blocking",
-      "canonicalStart": 152,
-      "canonicalEnd": 160,
-      "startMs": 13719,
-      "endMs": 14219
+      "canonicalStart": 129,
+      "canonicalEnd": 137,
+      "startMs": 12469,
+      "endMs": 12969
     },
     {
       "text": "the",
-      "canonicalStart": 161,
-      "canonicalEnd": 164,
-      "startMs": 14234,
-      "endMs": 14328
+      "canonicalStart": 138,
+      "canonicalEnd": 141,
+      "startMs": 12984,
+      "endMs": 13078
     },
     {
       "text": "main",
-      "canonicalStart": 165,
-      "canonicalEnd": 169,
-      "startMs": 14344,
-      "endMs": 14672
+      "canonicalStart": 142,
+      "canonicalEnd": 146,
+      "startMs": 13094,
+      "endMs": 13422
     },
     {
       "text": "thread.",
-      "canonicalStart": 170,
-      "canonicalEnd": 177,
-      "startMs": 14688,
-      "endMs": 15234
+      "canonicalStart": 147,
+      "canonicalEnd": 154,
+      "startMs": 13438,
+      "endMs": 14031
     },
     {
       "text": "When",
-      "canonicalStart": 178,
-      "canonicalEnd": 182,
-      "startMs": 16313,
-      "endMs": 16547
+      "canonicalStart": 155,
+      "canonicalEnd": 159,
+      "startMs": 15109,
+      "endMs": 15328
     },
     {
-      "text": "the",
-      "canonicalStart": 183,
-      "canonicalEnd": 186,
-      "startMs": 16563,
-      "endMs": 16656
+      "text": "I",
+      "canonicalStart": 160,
+      "canonicalEnd": 161,
+      "startMs": 15344,
+      "endMs": 15422
     },
     {
-      "text": "result",
-      "canonicalStart": 187,
-      "canonicalEnd": 193,
-      "startMs": 16672,
-      "endMs": 17234
-    },
-    {
-      "text": "is",
-      "canonicalStart": 194,
-      "canonicalEnd": 196,
-      "startMs": 17250,
-      "endMs": 17422
-    },
-    {
-      "text": "ready,",
-      "canonicalStart": 197,
-      "canonicalEnd": 203,
-      "startMs": 17438,
-      "endMs": 17859
-    },
-    {
-      "text": "the",
-      "canonicalStart": 204,
-      "canonicalEnd": 207,
-      "startMs": 18094,
-      "endMs": 18219
-    },
-    {
-      "text": "callback",
-      "canonicalStart": 208,
-      "canonicalEnd": 216,
-      "startMs": 18234,
-      "endMs": 18844
-    },
-    {
-      "text": "continues.",
-      "canonicalStart": 217,
-      "canonicalEnd": 227,
-      "startMs": 18859,
-      "endMs": 19828
-    },
-    {
-      "text": "With",
-      "canonicalStart": 228,
-      "canonicalEnd": 232,
-      "startMs": 20906,
-      "endMs": 21188
+      "text": "use",
+      "canonicalStart": 162,
+      "canonicalEnd": 165,
+      "startMs": 15438,
+      "endMs": 15875
     },
     {
       "text": "async",
-      "canonicalStart": 233,
-      "canonicalEnd": 238,
-      "startMs": 21203,
-      "endMs": 21797
+      "canonicalStart": 166,
+      "canonicalEnd": 171,
+      "startMs": 15891,
+      "endMs": 16453
     },
     {
       "text": "and",
-      "canonicalStart": 239,
-      "canonicalEnd": 242,
-      "startMs": 21813,
-      "endMs": 21938
+      "canonicalStart": 172,
+      "canonicalEnd": 175,
+      "startMs": 16469,
+      "endMs": 16578
     },
     {
       "text": "await,",
-      "canonicalStart": 243,
-      "canonicalEnd": 249,
-      "startMs": 21953,
-      "endMs": 22438
+      "canonicalStart": 176,
+      "canonicalEnd": 182,
+      "startMs": 16594,
+      "endMs": 17094
+    },
+    {
+      "text": "only",
+      "canonicalStart": 183,
+      "canonicalEnd": 187,
+      "startMs": 17375,
+      "endMs": 17703
     },
     {
       "text": "the",
-      "canonicalStart": 250,
-      "canonicalEnd": 253,
-      "startMs": 22703,
-      "endMs": 22844
+      "canonicalStart": 188,
+      "canonicalEnd": 191,
+      "startMs": 17719,
+      "endMs": 17875
     },
     {
       "text": "current",
-      "canonicalStart": 254,
-      "canonicalEnd": 261,
-      "startMs": 22859,
-      "endMs": 23250
+      "canonicalStart": 192,
+      "canonicalEnd": 199,
+      "startMs": 17891,
+      "endMs": 18250
     },
     {
       "text": "function",
-      "canonicalStart": 262,
-      "canonicalEnd": 270,
-      "startMs": 23266,
-      "endMs": 23813
+      "canonicalStart": 200,
+      "canonicalEnd": 208,
+      "startMs": 18266,
+      "endMs": 18781
     },
     {
-      "text": "pauses",
-      "canonicalStart": 271,
-      "canonicalEnd": 277,
-      "startMs": 23828,
-      "endMs": 24422
+      "text": "pauses,",
+      "canonicalStart": 209,
+      "canonicalEnd": 216,
+      "startMs": 18797,
+      "endMs": 19469
     },
     {
       "text": "while",
-      "canonicalStart": 278,
-      "canonicalEnd": 283,
-      "startMs": 24438,
-      "endMs": 24719
-    },
-    {
-      "text": "waiting,",
-      "canonicalStart": 284,
-      "canonicalEnd": 292,
-      "startMs": 24734,
-      "endMs": 25188
-    },
-    {
-      "text": "but",
-      "canonicalStart": 293,
-      "canonicalEnd": 296,
-      "startMs": 25563,
-      "endMs": 25719
+      "canonicalStart": 217,
+      "canonicalEnd": 222,
+      "startMs": 19766,
+      "endMs": 19984
     },
     {
       "text": "the",
-      "canonicalStart": 297,
-      "canonicalEnd": 300,
-      "startMs": 25734,
-      "endMs": 25844
-    },
-    {
-      "text": "server",
-      "canonicalStart": 301,
-      "canonicalEnd": 307,
-      "startMs": 25859,
-      "endMs": 26344
-    },
-    {
-      "text": "can",
-      "canonicalStart": 308,
-      "canonicalEnd": 311,
-      "startMs": 26359,
-      "endMs": 26547
-    },
-    {
-      "text": "still",
-      "canonicalStart": 312,
-      "canonicalEnd": 317,
-      "startMs": 26563,
-      "endMs": 26938
-    },
-    {
-      "text": "handle",
-      "canonicalStart": 318,
-      "canonicalEnd": 324,
-      "startMs": 26953,
-      "endMs": 27438
-    },
-    {
-      "text": "other",
-      "canonicalStart": 325,
-      "canonicalEnd": 330,
-      "startMs": 27453,
-      "endMs": 27719
-    },
-    {
-      "text": "work.",
-      "canonicalStart": 331,
-      "canonicalEnd": 336,
-      "startMs": 27734,
-      "endMs": 28234
-    },
-    {
-      "text": "Some",
-      "canonicalStart": 337,
-      "canonicalEnd": 341,
-      "startMs": 29313,
-      "endMs": 29750
-    },
-    {
-      "text": "file",
-      "canonicalStart": 342,
-      "canonicalEnd": 346,
-      "startMs": 29766,
-      "endMs": 30281
-    },
-    {
-      "text": "and",
-      "canonicalStart": 347,
-      "canonicalEnd": 350,
-      "startMs": 30297,
-      "endMs": 30453
-    },
-    {
-      "text": "DNS",
-      "canonicalStart": 351,
-      "canonicalEnd": 354,
-      "startMs": 30469,
-      "endMs": 31141
-    },
-    {
-      "text": "operations",
-      "canonicalStart": 355,
-      "canonicalEnd": 365,
-      "startMs": 31156,
-      "endMs": 32016
-    },
-    {
-      "text": "can",
-      "canonicalStart": 366,
-      "canonicalEnd": 369,
-      "startMs": 32031,
-      "endMs": 32266
-    },
-    {
-      "text": "also",
-      "canonicalStart": 370,
-      "canonicalEnd": 374,
-      "startMs": 32281,
-      "endMs": 32672
-    },
-    {
-      "text": "use",
-      "canonicalStart": 375,
-      "canonicalEnd": 378,
-      "startMs": 32688,
-      "endMs": 33047
-    },
-    {
-      "text": "the",
-      "canonicalStart": 379,
-      "canonicalEnd": 382,
-      "startMs": 33063,
-      "endMs": 33203
-    },
-    {
-      "text": "libuv",
-      "canonicalStart": 383,
-      "canonicalEnd": 388,
-      "startMs": 33219,
-      "endMs": 33578
-    },
-    {
-      "text": "worker",
-      "canonicalStart": 389,
-      "canonicalEnd": 395,
-      "startMs": 33594,
-      "endMs": 34000
-    },
-    {
-      "text": "pool.",
-      "canonicalStart": 396,
-      "canonicalEnd": 401,
-      "startMs": 34016,
-      "endMs": 34547
-    },
-    {
-      "text": "CPU-heavy",
-      "canonicalStart": 402,
-      "canonicalEnd": 411,
-      "startMs": 35625,
-      "endMs": 36719
-    },
-    {
-      "text": "work",
-      "canonicalStart": 412,
-      "canonicalEnd": 416,
-      "startMs": 36734,
-      "endMs": 37078
-    },
-    {
-      "text": "is",
-      "canonicalStart": 417,
-      "canonicalEnd": 419,
-      "startMs": 37094,
-      "endMs": 37281
-    },
-    {
-      "text": "different.",
-      "canonicalStart": 420,
-      "canonicalEnd": 430,
-      "startMs": 37297,
-      "endMs": 37969
-    },
-    {
-      "text": "If",
-      "canonicalStart": 431,
-      "canonicalEnd": 433,
-      "startMs": 39047,
-      "endMs": 39281
-    },
-    {
-      "text": "I",
-      "canonicalStart": 434,
-      "canonicalEnd": 435,
-      "startMs": 39297,
-      "endMs": 39469
-    },
-    {
-      "text": "run",
-      "canonicalStart": 436,
-      "canonicalEnd": 439,
-      "startMs": 39484,
-      "endMs": 39750
-    },
-    {
-      "text": "a",
-      "canonicalStart": 440,
-      "canonicalEnd": 441,
-      "startMs": 39766,
-      "endMs": 39813
-    },
-    {
-      "text": "heavy",
-      "canonicalStart": 442,
-      "canonicalEnd": 447,
-      "startMs": 39828,
-      "endMs": 40234
-    },
-    {
-      "text": "calculation",
-      "canonicalStart": 448,
-      "canonicalEnd": 459,
-      "startMs": 40250,
-      "endMs": 41141
-    },
-    {
-      "text": "on",
-      "canonicalStart": 460,
-      "canonicalEnd": 462,
-      "startMs": 41156,
-      "endMs": 41281
-    },
-    {
-      "text": "the",
-      "canonicalStart": 463,
-      "canonicalEnd": 466,
-      "startMs": 41297,
-      "endMs": 41375
-    },
-    {
-      "text": "main",
-      "canonicalStart": 467,
-      "canonicalEnd": 471,
-      "startMs": 41391,
-      "endMs": 41703
-    },
-    {
-      "text": "thread,",
-      "canonicalStart": 472,
-      "canonicalEnd": 479,
-      "startMs": 41719,
-      "endMs": 42203
-    },
-    {
-      "text": "it",
-      "canonicalStart": 480,
-      "canonicalEnd": 482,
-      "startMs": 42609,
-      "endMs": 42750
-    },
-    {
-      "text": "can",
-      "canonicalStart": 483,
-      "canonicalEnd": 486,
-      "startMs": 42766,
-      "endMs": 43000
-    },
-    {
-      "text": "block",
-      "canonicalStart": 487,
-      "canonicalEnd": 492,
-      "startMs": 43016,
-      "endMs": 43391
-    },
-    {
-      "text": "the",
-      "canonicalStart": 493,
-      "canonicalEnd": 496,
-      "startMs": 43406,
-      "endMs": 43484
+      "canonicalStart": 223,
+      "canonicalEnd": 226,
+      "startMs": 20000,
+      "endMs": 20078
     },
     {
       "text": "event",
-      "canonicalStart": 497,
-      "canonicalEnd": 502,
-      "startMs": 43500,
-      "endMs": 43938
+      "canonicalStart": 227,
+      "canonicalEnd": 232,
+      "startMs": 20094,
+      "endMs": 20547
     },
     {
-      "text": "loop,",
-      "canonicalStart": 503,
-      "canonicalEnd": 508,
-      "startMs": 43953,
-      "endMs": 44281
-    },
-    {
-      "text": "so",
-      "canonicalStart": 509,
-      "canonicalEnd": 511,
-      "startMs": 44656,
-      "endMs": 45000
-    },
-    {
-      "text": "other",
-      "canonicalStart": 512,
-      "canonicalEnd": 517,
-      "startMs": 45016,
-      "endMs": 45313
-    },
-    {
-      "text": "requests",
-      "canonicalStart": 518,
-      "canonicalEnd": 526,
-      "startMs": 45328,
-      "endMs": 45922
-    },
-    {
-      "text": "have",
-      "canonicalStart": 527,
-      "canonicalEnd": 531,
-      "startMs": 45938,
-      "endMs": 46172
-    },
-    {
-      "text": "to",
-      "canonicalStart": 532,
-      "canonicalEnd": 534,
-      "startMs": 46188,
-      "endMs": 46297
-    },
-    {
-      "text": "wait.",
-      "canonicalStart": 535,
-      "canonicalEnd": 540,
-      "startMs": 46313,
-      "endMs": 46813
-    },
-    {
-      "text": "For",
-      "canonicalStart": 541,
-      "canonicalEnd": 544,
-      "startMs": 47891,
-      "endMs": 48141
-    },
-    {
-      "text": "CPU-heavy",
-      "canonicalStart": 545,
-      "canonicalEnd": 554,
-      "startMs": 48156,
-      "endMs": 49156
-    },
-    {
-      "text": "work,",
-      "canonicalStart": 555,
-      "canonicalEnd": 560,
-      "startMs": 49172,
-      "endMs": 49625
-    },
-    {
-      "text": "I",
-      "canonicalStart": 561,
-      "canonicalEnd": 562,
-      "startMs": 49938,
-      "endMs": 50063
+      "text": "loop",
+      "canonicalStart": 233,
+      "canonicalEnd": 237,
+      "startMs": 20563,
+      "endMs": 20859
     },
     {
       "text": "can",
-      "canonicalStart": 563,
-      "canonicalEnd": 566,
-      "startMs": 50078,
-      "endMs": 50266
+      "canonicalStart": 238,
+      "canonicalEnd": 241,
+      "startMs": 20875,
+      "endMs": 21078
+    },
+    {
+      "text": "continue",
+      "canonicalStart": 242,
+      "canonicalEnd": 250,
+      "startMs": 21094,
+      "endMs": 21672
+    },
+    {
+      "text": "handling",
+      "canonicalStart": 251,
+      "canonicalEnd": 259,
+      "startMs": 21688,
+      "endMs": 22297
+    },
+    {
+      "text": "other",
+      "canonicalStart": 260,
+      "canonicalEnd": 265,
+      "startMs": 22313,
+      "endMs": 22578
+    },
+    {
+      "text": "work.",
+      "canonicalStart": 266,
+      "canonicalEnd": 271,
+      "startMs": 22594,
+      "endMs": 23078
+    },
+    {
+      "text": "Some",
+      "canonicalStart": 272,
+      "canonicalEnd": 276,
+      "startMs": 24156,
+      "endMs": 24594
+    },
+    {
+      "text": "file",
+      "canonicalStart": 277,
+      "canonicalEnd": 281,
+      "startMs": 24609,
+      "endMs": 25125
+    },
+    {
+      "text": "and",
+      "canonicalStart": 282,
+      "canonicalEnd": 285,
+      "startMs": 25141,
+      "endMs": 25297
+    },
+    {
+      "text": "DNS",
+      "canonicalStart": 286,
+      "canonicalEnd": 289,
+      "startMs": 25313,
+      "endMs": 25984
+    },
+    {
+      "text": "operations",
+      "canonicalStart": 290,
+      "canonicalEnd": 300,
+      "startMs": 26000,
+      "endMs": 26859
+    },
+    {
+      "text": "can",
+      "canonicalStart": 301,
+      "canonicalEnd": 304,
+      "startMs": 26875,
+      "endMs": 27109
+    },
+    {
+      "text": "also",
+      "canonicalStart": 305,
+      "canonicalEnd": 309,
+      "startMs": 27125,
+      "endMs": 27516
     },
     {
       "text": "use",
-      "canonicalStart": 567,
-      "canonicalEnd": 570,
-      "startMs": 50281,
-      "endMs": 50563
+      "canonicalStart": 310,
+      "canonicalEnd": 313,
+      "startMs": 27531,
+      "endMs": 27891
+    },
+    {
+      "text": "the",
+      "canonicalStart": 314,
+      "canonicalEnd": 317,
+      "startMs": 27906,
+      "endMs": 28047
+    },
+    {
+      "text": "libuv",
+      "canonicalStart": 318,
+      "canonicalEnd": 323,
+      "startMs": 28063,
+      "endMs": 28422
     },
     {
       "text": "worker",
-      "canonicalStart": 571,
-      "canonicalEnd": 577,
-      "startMs": 50578,
-      "endMs": 51016
+      "canonicalStart": 324,
+      "canonicalEnd": 330,
+      "startMs": 28438,
+      "endMs": 28844
     },
     {
-      "text": "threads,",
-      "canonicalStart": 578,
-      "canonicalEnd": 586,
-      "startMs": 51031,
-      "endMs": 51656
+      "text": "pool.",
+      "canonicalStart": 331,
+      "canonicalEnd": 336,
+      "startMs": 28859,
+      "endMs": 29391
     },
     {
-      "text": "a",
-      "canonicalStart": 587,
-      "canonicalEnd": 588,
-      "startMs": 51906,
-      "endMs": 52016
-    },
-    {
-      "text": "background",
-      "canonicalStart": 589,
-      "canonicalEnd": 599,
-      "startMs": 52031,
-      "endMs": 52703
-    },
-    {
-      "text": "queue,",
-      "canonicalStart": 600,
-      "canonicalEnd": 606,
-      "startMs": 52719,
-      "endMs": 53188
-    },
-    {
-      "text": "or",
-      "canonicalStart": 607,
-      "canonicalEnd": 609,
-      "startMs": 53500,
-      "endMs": 53734
-    },
-    {
-      "text": "a",
-      "canonicalStart": 610,
-      "canonicalEnd": 611,
-      "startMs": 53750,
-      "endMs": 53828
-    },
-    {
-      "text": "separate",
-      "canonicalStart": 612,
-      "canonicalEnd": 620,
-      "startMs": 53844,
-      "endMs": 54328
-    },
-    {
-      "text": "service,",
-      "canonicalStart": 621,
-      "canonicalEnd": 629,
-      "startMs": 54344,
-      "endMs": 54969
-    },
-    {
-      "text": "depending",
-      "canonicalStart": 630,
-      "canonicalEnd": 639,
-      "startMs": 55266,
-      "endMs": 55828
-    },
-    {
-      "text": "on",
-      "canonicalStart": 640,
-      "canonicalEnd": 642,
-      "startMs": 55844,
-      "endMs": 55969
-    },
-    {
-      "text": "the",
-      "canonicalStart": 643,
-      "canonicalEnd": 646,
-      "startMs": 55984,
-      "endMs": 56031
-    },
-    {
-      "text": "use",
-      "canonicalStart": 647,
-      "canonicalEnd": 650,
-      "startMs": 56047,
-      "endMs": 56375
-    },
-    {
-      "text": "case.",
-      "canonicalStart": 651,
-      "canonicalEnd": 656,
-      "startMs": 56391,
-      "endMs": 57063
-    },
-    {
-      "text": "So",
-      "canonicalStart": 657,
-      "canonicalEnd": 659,
-      "startMs": 58141,
-      "endMs": 58563
-    },
-    {
-      "text": "overall,",
-      "canonicalStart": 660,
-      "canonicalEnd": 668,
-      "startMs": 58578,
-      "endMs": 59328
-    },
-    {
-      "text": "Node.js",
-      "canonicalStart": 669,
-      "canonicalEnd": 676,
-      "startMs": 59594,
-      "endMs": 60750
-    },
-    {
-      "text": "works",
-      "canonicalStart": 677,
-      "canonicalEnd": 682,
-      "startMs": 60766,
-      "endMs": 61125
-    },
-    {
-      "text": "very",
-      "canonicalStart": 683,
-      "canonicalEnd": 687,
-      "startMs": 61141,
-      "endMs": 61500
-    },
-    {
-      "text": "well",
-      "canonicalStart": 688,
-      "canonicalEnd": 692,
-      "startMs": 61516,
-      "endMs": 61844
-    },
-    {
-      "text": "for",
-      "canonicalStart": 693,
-      "canonicalEnd": 696,
-      "startMs": 61859,
-      "endMs": 62094
-    },
-    {
-      "text": "I",
-      "canonicalStart": 697,
-      "canonicalEnd": 698,
-      "startMs": 62109,
-      "endMs": 62266
-    },
-    {
-      "text": "O-heavy",
-      "canonicalStart": 699,
-      "canonicalEnd": 706,
-      "startMs": 62281,
-      "endMs": 62813
-    },
-    {
-      "text": "systems,",
-      "canonicalStart": 707,
-      "canonicalEnd": 715,
-      "startMs": 62828,
-      "endMs": 63594
-    },
-    {
-      "text": "but",
-      "canonicalStart": 716,
-      "canonicalEnd": 719,
-      "startMs": 63938,
-      "endMs": 64109
-    },
-    {
-      "text": "I",
-      "canonicalStart": 720,
-      "canonicalEnd": 721,
-      "startMs": 64125,
-      "endMs": 64234
-    },
-    {
-      "text": "avoid",
-      "canonicalStart": 722,
-      "canonicalEnd": 727,
-      "startMs": 64250,
-      "endMs": 64734
-    },
-    {
-      "text": "running",
-      "canonicalStart": 728,
-      "canonicalEnd": 735,
-      "startMs": 64750,
-      "endMs": 65094
-    },
-    {
-      "text": "heavy",
-      "canonicalStart": 736,
-      "canonicalEnd": 741,
-      "startMs": 65109,
-      "endMs": 65469
-    },
-    {
-      "text": "CPU",
-      "canonicalStart": 742,
-      "canonicalEnd": 745,
-      "startMs": 65484,
-      "endMs": 66234
+      "text": "CPU-heavy",
+      "canonicalStart": 337,
+      "canonicalEnd": 346,
+      "startMs": 30469,
+      "endMs": 31563
     },
     {
       "text": "work",
-      "canonicalStart": 746,
-      "canonicalEnd": 750,
-      "startMs": 66250,
-      "endMs": 66547
+      "canonicalStart": 347,
+      "canonicalEnd": 351,
+      "startMs": 31578,
+      "endMs": 31922
     },
     {
-      "text": "directly",
-      "canonicalStart": 751,
-      "canonicalEnd": 759,
-      "startMs": 66563,
-      "endMs": 67141
+      "text": "is",
+      "canonicalStart": 352,
+      "canonicalEnd": 354,
+      "startMs": 31938,
+      "endMs": 32125
+    },
+    {
+      "text": "different.",
+      "canonicalStart": 355,
+      "canonicalEnd": 365,
+      "startMs": 32141,
+      "endMs": 32813
+    },
+    {
+      "text": "If",
+      "canonicalStart": 366,
+      "canonicalEnd": 368,
+      "startMs": 33891,
+      "endMs": 34125
+    },
+    {
+      "text": "I",
+      "canonicalStart": 369,
+      "canonicalEnd": 370,
+      "startMs": 34141,
+      "endMs": 34313
+    },
+    {
+      "text": "run",
+      "canonicalStart": 371,
+      "canonicalEnd": 374,
+      "startMs": 34328,
+      "endMs": 34594
+    },
+    {
+      "text": "a",
+      "canonicalStart": 375,
+      "canonicalEnd": 376,
+      "startMs": 34609,
+      "endMs": 34656
+    },
+    {
+      "text": "heavy",
+      "canonicalStart": 377,
+      "canonicalEnd": 382,
+      "startMs": 34672,
+      "endMs": 35078
+    },
+    {
+      "text": "calculation",
+      "canonicalStart": 383,
+      "canonicalEnd": 394,
+      "startMs": 35094,
+      "endMs": 35984
     },
     {
       "text": "on",
-      "canonicalStart": 760,
-      "canonicalEnd": 762,
-      "startMs": 67156,
-      "endMs": 67297
+      "canonicalStart": 395,
+      "canonicalEnd": 397,
+      "startMs": 36000,
+      "endMs": 36125
     },
     {
       "text": "the",
-      "canonicalStart": 763,
-      "canonicalEnd": 766,
-      "startMs": 67313,
-      "endMs": 67391
+      "canonicalStart": 398,
+      "canonicalEnd": 401,
+      "startMs": 36141,
+      "endMs": 36219
     },
     {
       "text": "main",
-      "canonicalStart": 767,
-      "canonicalEnd": 771,
-      "startMs": 67406,
-      "endMs": 67719
+      "canonicalStart": 402,
+      "canonicalEnd": 406,
+      "startMs": 36234,
+      "endMs": 36547
+    },
+    {
+      "text": "thread,",
+      "canonicalStart": 407,
+      "canonicalEnd": 414,
+      "startMs": 36563,
+      "endMs": 37047
+    },
+    {
+      "text": "it",
+      "canonicalStart": 415,
+      "canonicalEnd": 417,
+      "startMs": 37453,
+      "endMs": 37594
+    },
+    {
+      "text": "can",
+      "canonicalStart": 418,
+      "canonicalEnd": 421,
+      "startMs": 37609,
+      "endMs": 37844
+    },
+    {
+      "text": "block",
+      "canonicalStart": 422,
+      "canonicalEnd": 427,
+      "startMs": 37859,
+      "endMs": 38234
+    },
+    {
+      "text": "the",
+      "canonicalStart": 428,
+      "canonicalEnd": 431,
+      "startMs": 38250,
+      "endMs": 38328
+    },
+    {
+      "text": "event",
+      "canonicalStart": 432,
+      "canonicalEnd": 437,
+      "startMs": 38344,
+      "endMs": 38781
+    },
+    {
+      "text": "loop,",
+      "canonicalStart": 438,
+      "canonicalEnd": 443,
+      "startMs": 38797,
+      "endMs": 39125
+    },
+    {
+      "text": "so",
+      "canonicalStart": 444,
+      "canonicalEnd": 446,
+      "startMs": 39500,
+      "endMs": 39844
+    },
+    {
+      "text": "other",
+      "canonicalStart": 447,
+      "canonicalEnd": 452,
+      "startMs": 39859,
+      "endMs": 40156
+    },
+    {
+      "text": "requests",
+      "canonicalStart": 453,
+      "canonicalEnd": 461,
+      "startMs": 40172,
+      "endMs": 40766
+    },
+    {
+      "text": "have",
+      "canonicalStart": 462,
+      "canonicalEnd": 466,
+      "startMs": 40781,
+      "endMs": 41016
+    },
+    {
+      "text": "to",
+      "canonicalStart": 467,
+      "canonicalEnd": 469,
+      "startMs": 41031,
+      "endMs": 41141
+    },
+    {
+      "text": "wait.",
+      "canonicalStart": 470,
+      "canonicalEnd": 475,
+      "startMs": 41156,
+      "endMs": 41656
+    },
+    {
+      "text": "For",
+      "canonicalStart": 476,
+      "canonicalEnd": 479,
+      "startMs": 42734,
+      "endMs": 42984
+    },
+    {
+      "text": "CPU-heavy",
+      "canonicalStart": 480,
+      "canonicalEnd": 489,
+      "startMs": 43000,
+      "endMs": 44000
+    },
+    {
+      "text": "work,",
+      "canonicalStart": 490,
+      "canonicalEnd": 495,
+      "startMs": 44016,
+      "endMs": 44469
+    },
+    {
+      "text": "I",
+      "canonicalStart": 496,
+      "canonicalEnd": 497,
+      "startMs": 44781,
+      "endMs": 44906
+    },
+    {
+      "text": "can",
+      "canonicalStart": 498,
+      "canonicalEnd": 501,
+      "startMs": 44922,
+      "endMs": 45109
+    },
+    {
+      "text": "use",
+      "canonicalStart": 502,
+      "canonicalEnd": 505,
+      "startMs": 45125,
+      "endMs": 45406
+    },
+    {
+      "text": "worker",
+      "canonicalStart": 506,
+      "canonicalEnd": 512,
+      "startMs": 45422,
+      "endMs": 45859
+    },
+    {
+      "text": "threads,",
+      "canonicalStart": 513,
+      "canonicalEnd": 521,
+      "startMs": 45875,
+      "endMs": 46500
+    },
+    {
+      "text": "a",
+      "canonicalStart": 522,
+      "canonicalEnd": 523,
+      "startMs": 46750,
+      "endMs": 46859
+    },
+    {
+      "text": "background",
+      "canonicalStart": 524,
+      "canonicalEnd": 534,
+      "startMs": 46875,
+      "endMs": 47547
+    },
+    {
+      "text": "queue,",
+      "canonicalStart": 535,
+      "canonicalEnd": 541,
+      "startMs": 47563,
+      "endMs": 48031
+    },
+    {
+      "text": "or",
+      "canonicalStart": 542,
+      "canonicalEnd": 544,
+      "startMs": 48344,
+      "endMs": 48578
+    },
+    {
+      "text": "a",
+      "canonicalStart": 545,
+      "canonicalEnd": 546,
+      "startMs": 48594,
+      "endMs": 48672
+    },
+    {
+      "text": "separate",
+      "canonicalStart": 547,
+      "canonicalEnd": 555,
+      "startMs": 48688,
+      "endMs": 49172
+    },
+    {
+      "text": "service,",
+      "canonicalStart": 556,
+      "canonicalEnd": 564,
+      "startMs": 49188,
+      "endMs": 49813
+    },
+    {
+      "text": "depending",
+      "canonicalStart": 565,
+      "canonicalEnd": 574,
+      "startMs": 50109,
+      "endMs": 50672
+    },
+    {
+      "text": "on",
+      "canonicalStart": 575,
+      "canonicalEnd": 577,
+      "startMs": 50688,
+      "endMs": 50813
+    },
+    {
+      "text": "the",
+      "canonicalStart": 578,
+      "canonicalEnd": 581,
+      "startMs": 50828,
+      "endMs": 50875
+    },
+    {
+      "text": "use",
+      "canonicalStart": 582,
+      "canonicalEnd": 585,
+      "startMs": 50891,
+      "endMs": 51219
+    },
+    {
+      "text": "case.",
+      "canonicalStart": 586,
+      "canonicalEnd": 591,
+      "startMs": 51234,
+      "endMs": 51906
+    },
+    {
+      "text": "So",
+      "canonicalStart": 592,
+      "canonicalEnd": 594,
+      "startMs": 52984,
+      "endMs": 53406
+    },
+    {
+      "text": "overall,",
+      "canonicalStart": 595,
+      "canonicalEnd": 603,
+      "startMs": 53422,
+      "endMs": 54172
+    },
+    {
+      "text": "Node.js",
+      "canonicalStart": 604,
+      "canonicalEnd": 611,
+      "startMs": 54438,
+      "endMs": 55594
+    },
+    {
+      "text": "works",
+      "canonicalStart": 612,
+      "canonicalEnd": 617,
+      "startMs": 55609,
+      "endMs": 55969
+    },
+    {
+      "text": "very",
+      "canonicalStart": 618,
+      "canonicalEnd": 622,
+      "startMs": 55984,
+      "endMs": 56344
+    },
+    {
+      "text": "well",
+      "canonicalStart": 623,
+      "canonicalEnd": 627,
+      "startMs": 56359,
+      "endMs": 56688
+    },
+    {
+      "text": "for",
+      "canonicalStart": 628,
+      "canonicalEnd": 631,
+      "startMs": 56703,
+      "endMs": 56938
+    },
+    {
+      "text": "I",
+      "canonicalStart": 632,
+      "canonicalEnd": 633,
+      "startMs": 56953,
+      "endMs": 57109
+    },
+    {
+      "text": "O-heavy",
+      "canonicalStart": 634,
+      "canonicalEnd": 641,
+      "startMs": 57125,
+      "endMs": 57656
+    },
+    {
+      "text": "systems,",
+      "canonicalStart": 642,
+      "canonicalEnd": 650,
+      "startMs": 57672,
+      "endMs": 58438
+    },
+    {
+      "text": "but",
+      "canonicalStart": 651,
+      "canonicalEnd": 654,
+      "startMs": 58781,
+      "endMs": 58953
+    },
+    {
+      "text": "I",
+      "canonicalStart": 655,
+      "canonicalEnd": 656,
+      "startMs": 58969,
+      "endMs": 59078
+    },
+    {
+      "text": "avoid",
+      "canonicalStart": 657,
+      "canonicalEnd": 662,
+      "startMs": 59094,
+      "endMs": 59578
+    },
+    {
+      "text": "running",
+      "canonicalStart": 663,
+      "canonicalEnd": 670,
+      "startMs": 59594,
+      "endMs": 59938
+    },
+    {
+      "text": "heavy",
+      "canonicalStart": 671,
+      "canonicalEnd": 676,
+      "startMs": 59953,
+      "endMs": 60313
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 677,
+      "canonicalEnd": 680,
+      "startMs": 60328,
+      "endMs": 61078
+    },
+    {
+      "text": "work",
+      "canonicalStart": 681,
+      "canonicalEnd": 685,
+      "startMs": 61094,
+      "endMs": 61391
+    },
+    {
+      "text": "directly",
+      "canonicalStart": 686,
+      "canonicalEnd": 694,
+      "startMs": 61406,
+      "endMs": 61984
+    },
+    {
+      "text": "on",
+      "canonicalStart": 695,
+      "canonicalEnd": 697,
+      "startMs": 62000,
+      "endMs": 62141
+    },
+    {
+      "text": "the",
+      "canonicalStart": 698,
+      "canonicalEnd": 701,
+      "startMs": 62156,
+      "endMs": 62234
+    },
+    {
+      "text": "main",
+      "canonicalStart": 702,
+      "canonicalEnd": 706,
+      "startMs": 62250,
+      "endMs": 62563
     },
     {
       "text": "thread.",
-      "canonicalStart": 772,
-      "canonicalEnd": 779,
-      "startMs": 67734,
-      "endMs": 68297
+      "canonicalStart": 707,
+      "canonicalEnd": 714,
+      "startMs": 62578,
+      "endMs": 63141
     }
   ]
 }

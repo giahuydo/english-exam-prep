@@ -6,8 +6,8 @@ export const translations: Record<number, BackendTranslation[]> = {
   1: [
     {
       questionVi: 'Node.js xử lý công việc I/O và CPU-heavy như thế nào, và điều gì có thể chặn event loop?',
-      answerVi: 'Về cơ bản, Node.js chạy JavaScript trên main event loop. Với công việc I/O, như truy vấn database hoặc network request, Node.js có thể chờ kết quả mà không chặn main thread. Khi kết quả sẵn sàng, callback tiếp tục chạy. Với async và await, function hiện tại tạm dừng trong lúc chờ, nhưng server vẫn có thể xử lý công việc khác. Một số thao tác file và DNS cũng có thể dùng libuv worker pool. CPU-heavy thì khác. Nếu tôi chạy một phép tính nặng trên main thread, nó có thể chặn event loop, nên các request khác phải chờ. Với CPU-heavy work, tôi có thể dùng worker threads, background queue, hoặc separate service, tùy use case. Tóm lại, Node.js hoạt động rất tốt với hệ thống I/O-heavy, nhưng tôi tránh chạy CPU-heavy work trực tiếp trên main thread.',
-      keyIdeaVi: 'I/O chờ → event loop xử lý công việc khác → await không chặn toàn bộ server → JavaScript CPU-heavy chặn event loop → chuyển công việc nặng ra khỏi main thread',
+      answerVi: 'Về cơ bản, Node.js chạy JavaScript trên main event loop. Với công việc I/O, như truy vấn database hoặc network request, Node.js có thể chờ mà không chặn main thread. Khi tôi dùng async và await, chỉ function hiện tại tạm dừng, trong khi event loop vẫn có thể tiếp tục xử lý công việc khác. Một số thao tác file và DNS cũng có thể dùng libuv worker pool. CPU-heavy thì khác. Nếu tôi chạy một phép tính nặng trên main thread, nó có thể chặn event loop, nên các request khác phải chờ. Với CPU-heavy work, tôi có thể dùng worker threads, background queue, hoặc separate service, tùy use case. Tóm lại, Node.js hoạt động rất tốt với hệ thống I/O-heavy, nhưng tôi tránh chạy CPU-heavy work trực tiếp trên main thread.',
+      keyIdeaVi: 'I/O bắt đầu → await tạm dừng function hiện tại → event loop vẫn rảnh → I/O hoàn thành → function tiếp tục → JavaScript CPU-heavy chặn event loop → chuyển công việc nặng ra khỏi main thread',
     },
   ],
   2: [
@@ -78,8 +78,8 @@ export const translations: Record<number, BackendTranslation[]> = {
   7: [
     {
       questionVi: 'Bạn thiết kế cơ chế thử lại như thế nào?',
-      answerVi: 'Tôi chỉ retry lỗi tạm thời, và chỉ một vài lần. Với dữ liệu đầu vào sai, lỗi quyền hoặc cấu hình sai, tôi không retry.',
-      keyIdeaVi: 'Lỗi tạm thời → retry vài lần → dữ liệu sai, lỗi quyền hoặc cấu hình sai → không retry.',
+      answerVi: 'Về cơ bản, tôi chỉ retry các lỗi tạm thời, chẳng hạn như timeout hoặc lỗi network tạm thời. Tôi đặt giới hạn số lần retry và dùng exponential backoff, để mỗi lần retry sẽ chờ lâu hơn một chút. Với input không hợp lệ, lỗi permission hoặc cấu hình sai, tôi fail fast và không retry. Nếu operation có thể tạo dữ liệu trùng lặp, tôi cũng làm cho nó idempotent.',
+      keyIdeaVi: 'Lỗi tạm thời → giới hạn retry → exponential backoff → lỗi permanent = fail fast → idempotency chống duplicate',
     },
     {
       questionVi: 'Circuit breaker là gì?',
