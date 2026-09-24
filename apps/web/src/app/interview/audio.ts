@@ -226,8 +226,8 @@ export function useInterviewAudio({ speedKey = SPEED_KEY, defaultSpeed = 1 }: { 
             segmentStartMs = segmentWords[0].startMs;
             segmentEndMs = segmentWords[segmentWords.length - 1].endMs;
             audio.currentTime = segmentStartMs / 1000;
-          }
-        }
+          } else { stop(); return; }
+        } else if (request.segment) { stop(); return; } // Never play the full answer when segment alignment is unavailable.
         setActiveKey(request.key);
         setActiveSpeed(request.speed ?? speed);
         setActiveRange(null);
