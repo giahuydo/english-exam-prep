@@ -515,11 +515,31 @@ The Backend Interview page has one **Show Vietnamese / Hide Vietnamese** control
 
 ### Speaking chunk display
 
-The Backend Interview answer view splits English answers at natural punctuation boundaries into short, subtly color-accented beats, with visual pause separators. `backend/speaking-chunks.ts` slices the display text without changing the source: concatenating the chunks reproduces each English answer exactly. Pause marks are decorative, not spoken/source text. Vietnamese remains plain beneath the answer; the existing answer/key-idea visibility and Vietnamese toggle still apply. Speaking chunks preserve source offsets for static karaoke highlighting; visual pause marks are not part of the spoken text.
+The Backend Interview answer view splits English answers at natural punctuation boundaries into short, subtly color-accented beats, with visual pause separators. `backend/speaking-chunks.ts` slices the display text without changing the source: concatenating the chunks reproduces each English answer exactly. Pause marks are decorative, not spoken/source text. Vietnamese remains plain beneath the answer; the existing answer/key-idea visibility and Vietnamese toggle still apply. Speaking chunks preserve source offsets for static karaoke highlighting; visual pause marks are not part of the spoken text. Hover or keyboard focus reveals each chunk's Vietnamese translation on desktop; tap reveals a dismissible, viewport-bound translation on touch devices. Tapping another chunk switches the translation; tapping elsewhere, closing it, changing question, or pressing Escape dismisses it. The tooltip's play control plays only that chunk's existing static audio.
 
 ### 2026-09-23 — Backend key-idea recall paths
 
 The 39 Backend Interview `keyIdea` / `keyIdeaVi` lines now give compact, question-specific speaking paths with `→` stages instead of repeating the answer opening. Each Vietnamese path mirrors its English stages. This is a study cue only: the English/Vietnamese questions and B1–B2 answers, topic order, visibility controls, and static audio remain unchanged. No audio regeneration is needed.
+
+### 2026-09-25 — Backend Interview introduction
+
+- Topic 1 / Q1 now asks for a brief self-introduction and uses the supplied English answer and Vietnamese translation verbatim. The topic label and bilingual key-idea path match the new content; all other topic questions remain unchanged.
+- Regenerated only `backend/t01-q01` static Edge audio and alignment for the new answer (`en-US-ChristopherNeural`, `-20%`, `-2Hz`). AI Interview content and audio remain unchanged.
+
+### 2026-09-25 — Reliability and failure handling answer
+
+- Added Topic 7 / Q2 with the supplied reliability/failure-handling English answer and sentence-paired Vietnamese translation. Completed the truncated question ending as “handling?” and added a bilingual key-idea path.
+- Generated `backend/t07-q02/{full.mp3,alignment.json}` with the default Edge TTS voice. The existing Topic 7 / Q1 retry/circuit-breaker consolidation and its regenerated audio are included so the new answer occupies Q2 consistently.
+
+### 2026-09-25 — Protocol AI end-to-end example
+
+- Added Topic 1 / Q2 with the supplied Protocol AI answer and Vietnamese translation. Both supplied English question phrasings and their Vietnamese translations appear above the same answer; the alternative phrasing does not create another numbered question.
+- Added a bilingual recall path and generated `backend/t01-q02/{full.mp3,alignment.json}` with the default offline Edge voice. Other question audio remains untouched by this addition.
+
+### 2026-09-25 — OCR CPU/GPU technical trade-off
+
+- Added Topic 10 / Q4 with the supplied OCR performance/cost/complexity decision and Vietnamese translation. Both question phrasings share one answer and a bilingual Context → trade-off → test/decision → risk reduction → result recall path.
+- Generated only `backend/t10-q04/{full.mp3,alignment.json}` with the default offline Edge voice; the existing questions and audio stay in place.
 
 ### Backend static Edge TTS audio
 

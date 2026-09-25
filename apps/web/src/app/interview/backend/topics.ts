@@ -8,7 +8,7 @@ export type BackendTopic = {
 };
 
 const titles = [
-  'Node.js Core & Event Loop',
+  'Introduction & Experience',
   'API & Backend Design',
   'Database',
   'Queue & Messaging',

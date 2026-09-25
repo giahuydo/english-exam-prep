@@ -1,0 +1,1225 @@
+{
+  "version": 1,
+  "questionId": "t10-q04",
+  "speechText": "One example was our OCR processing. At first, the OCR model was running on CPU inside the application. The main advantage was that the setup was simple and we didn’t depend on another service, but the processing was quite slow and it also used a lot of CPU resources. We considered moving the OCR workload to GPU. The trade-off was that GPU processing was much faster, but it added infrastructure cost, network dependency, and more operational complexity because the OCR became a remote service. I tested both approaches and compared the processing time and stability. The GPU version was significantly faster, so we decided to move OCR to a remote GPU service. At the same time, I didn’t want the whole document-processing flow to fail when the GPU service was unavailable or when an environment didn’t have GPU support. So we added configuration guards and kept the flow safe for those environments. As a result, we improved OCR performance a lot while still keeping the system reliable and easier to operate across different environments.",
+  "words": [
+    {
+      "text": "One",
+      "canonicalStart": 0,
+      "canonicalEnd": 3,
+      "startMs": 113,
+      "endMs": 456
+    },
+    {
+      "text": "example",
+      "canonicalStart": 4,
+      "canonicalEnd": 11,
+      "startMs": 472,
+      "endMs": 1128
+    },
+    {
+      "text": "was",
+      "canonicalStart": 12,
+      "canonicalEnd": 15,
+      "startMs": 1144,
+      "endMs": 1347
+    },
+    {
+      "text": "our",
+      "canonicalStart": 16,
+      "canonicalEnd": 19,
+      "startMs": 1363,
+      "endMs": 1581
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 20,
+      "canonicalEnd": 23,
+      "startMs": 1597,
+      "endMs": 2253
+    },
+    {
+      "text": "processing.",
+      "canonicalStart": 24,
+      "canonicalEnd": 35,
+      "startMs": 2269,
+      "endMs": 3206
+    },
+    {
+      "text": "At",
+      "canonicalStart": 36,
+      "canonicalEnd": 38,
+      "startMs": 4297,
+      "endMs": 4531
+    },
+    {
+      "text": "first,",
+      "canonicalStart": 39,
+      "canonicalEnd": 45,
+      "startMs": 4547,
+      "endMs": 5156
+    },
+    {
+      "text": "the",
+      "canonicalStart": 46,
+      "canonicalEnd": 49,
+      "startMs": 5328,
+      "endMs": 5484
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 50,
+      "canonicalEnd": 53,
+      "startMs": 5500,
+      "endMs": 6250
+    },
+    {
+      "text": "model",
+      "canonicalStart": 54,
+      "canonicalEnd": 59,
+      "startMs": 6266,
+      "endMs": 6750
+    },
+    {
+      "text": "was",
+      "canonicalStart": 60,
+      "canonicalEnd": 63,
+      "startMs": 6766,
+      "endMs": 6984
+    },
+    {
+      "text": "running",
+      "canonicalStart": 64,
+      "canonicalEnd": 71,
+      "startMs": 7000,
+      "endMs": 7406
+    },
+    {
+      "text": "on",
+      "canonicalStart": 72,
+      "canonicalEnd": 74,
+      "startMs": 7422,
+      "endMs": 7594
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 75,
+      "canonicalEnd": 78,
+      "startMs": 7609,
+      "endMs": 8375
+    },
+    {
+      "text": "inside",
+      "canonicalStart": 79,
+      "canonicalEnd": 85,
+      "startMs": 8391,
+      "endMs": 8984
+    },
+    {
+      "text": "the",
+      "canonicalStart": 86,
+      "canonicalEnd": 89,
+      "startMs": 9000,
+      "endMs": 9094
+    },
+    {
+      "text": "application.",
+      "canonicalStart": 90,
+      "canonicalEnd": 102,
+      "startMs": 9109,
+      "endMs": 10078
+    },
+    {
+      "text": "The",
+      "canonicalStart": 103,
+      "canonicalEnd": 106,
+      "startMs": 11156,
+      "endMs": 11328
+    },
+    {
+      "text": "main",
+      "canonicalStart": 107,
+      "canonicalEnd": 111,
+      "startMs": 11344,
+      "endMs": 11641
+    },
+    {
+      "text": "advantage",
+      "canonicalStart": 112,
+      "canonicalEnd": 121,
+      "startMs": 11656,
+      "endMs": 12297
+    },
+    {
+      "text": "was",
+      "canonicalStart": 122,
+      "canonicalEnd": 125,
+      "startMs": 12313,
+      "endMs": 12531
+    },
+    {
+      "text": "that",
+      "canonicalStart": 126,
+      "canonicalEnd": 130,
+      "startMs": 12547,
+      "endMs": 12703
+    },
+    {
+      "text": "the",
+      "canonicalStart": 131,
+      "canonicalEnd": 134,
+      "startMs": 12719,
+      "endMs": 12844
+    },
+    {
+      "text": "setup",
+      "canonicalStart": 135,
+      "canonicalEnd": 140,
+      "startMs": 12859,
+      "endMs": 13375
+    },
+    {
+      "text": "was",
+      "canonicalStart": 141,
+      "canonicalEnd": 144,
+      "startMs": 13391,
+      "endMs": 13578
+    },
+    {
+      "text": "simple",
+      "canonicalStart": 145,
+      "canonicalEnd": 151,
+      "startMs": 13594,
+      "endMs": 14109
+    },
+    {
+      "text": "and",
+      "canonicalStart": 152,
+      "canonicalEnd": 155,
+      "startMs": 14125,
+      "endMs": 14234
+    },
+    {
+      "text": "we",
+      "canonicalStart": 156,
+      "canonicalEnd": 158,
+      "startMs": 14250,
+      "endMs": 14359
+    },
+    {
+      "text": "didn’t",
+      "canonicalStart": 159,
+      "canonicalEnd": 165,
+      "startMs": 14375,
+      "endMs": 14641
+    },
+    {
+      "text": "depend",
+      "canonicalStart": 166,
+      "canonicalEnd": 172,
+      "startMs": 14656,
+      "endMs": 15141
+    },
+    {
+      "text": "on",
+      "canonicalStart": 173,
+      "canonicalEnd": 175,
+      "startMs": 15156,
+      "endMs": 15281
+    },
+    {
+      "text": "another",
+      "canonicalStart": 176,
+      "canonicalEnd": 183,
+      "startMs": 15297,
+      "endMs": 15688
+    },
+    {
+      "text": "service,",
+      "canonicalStart": 184,
+      "canonicalEnd": 192,
+      "startMs": 15703,
+      "endMs": 16297
+    },
+    {
+      "text": "but",
+      "canonicalStart": 193,
+      "canonicalEnd": 196,
+      "startMs": 16641,
+      "endMs": 16781
+    },
+    {
+      "text": "the",
+      "canonicalStart": 197,
+      "canonicalEnd": 200,
+      "startMs": 16797,
+      "endMs": 16906
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 201,
+      "canonicalEnd": 211,
+      "startMs": 16922,
+      "endMs": 17719
+    },
+    {
+      "text": "was",
+      "canonicalStart": 212,
+      "canonicalEnd": 215,
+      "startMs": 17734,
+      "endMs": 17906
+    },
+    {
+      "text": "quite",
+      "canonicalStart": 216,
+      "canonicalEnd": 221,
+      "startMs": 17922,
+      "endMs": 18297
+    },
+    {
+      "text": "slow",
+      "canonicalStart": 222,
+      "canonicalEnd": 226,
+      "startMs": 18313,
+      "endMs": 18844
+    },
+    {
+      "text": "and",
+      "canonicalStart": 227,
+      "canonicalEnd": 230,
+      "startMs": 18859,
+      "endMs": 18953
+    },
+    {
+      "text": "it",
+      "canonicalStart": 231,
+      "canonicalEnd": 233,
+      "startMs": 18969,
+      "endMs": 19078
+    },
+    {
+      "text": "also",
+      "canonicalStart": 234,
+      "canonicalEnd": 238,
+      "startMs": 19094,
+      "endMs": 19469
+    },
+    {
+      "text": "used",
+      "canonicalStart": 239,
+      "canonicalEnd": 243,
+      "startMs": 19484,
+      "endMs": 19844
+    },
+    {
+      "text": "a",
+      "canonicalStart": 244,
+      "canonicalEnd": 245,
+      "startMs": 19859,
+      "endMs": 19922
+    },
+    {
+      "text": "lot",
+      "canonicalStart": 246,
+      "canonicalEnd": 249,
+      "startMs": 19938,
+      "endMs": 20203
+    },
+    {
+      "text": "of",
+      "canonicalStart": 250,
+      "canonicalEnd": 252,
+      "startMs": 20219,
+      "endMs": 20313
+    },
+    {
+      "text": "CPU",
+      "canonicalStart": 253,
+      "canonicalEnd": 256,
+      "startMs": 20328,
+      "endMs": 21031
+    },
+    {
+      "text": "resources.",
+      "canonicalStart": 257,
+      "canonicalEnd": 267,
+      "startMs": 21047,
+      "endMs": 22063
+    },
+    {
+      "text": "We",
+      "canonicalStart": 268,
+      "canonicalEnd": 270,
+      "startMs": 23141,
+      "endMs": 23375
+    },
+    {
+      "text": "considered",
+      "canonicalStart": 271,
+      "canonicalEnd": 281,
+      "startMs": 23391,
+      "endMs": 24016
+    },
+    {
+      "text": "moving",
+      "canonicalStart": 282,
+      "canonicalEnd": 288,
+      "startMs": 24031,
+      "endMs": 24406
+    },
+    {
+      "text": "the",
+      "canonicalStart": 289,
+      "canonicalEnd": 292,
+      "startMs": 24422,
+      "endMs": 24563
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 293,
+      "canonicalEnd": 296,
+      "startMs": 24578,
+      "endMs": 25453
+    },
+    {
+      "text": "workload",
+      "canonicalStart": 297,
+      "canonicalEnd": 305,
+      "startMs": 25469,
+      "endMs": 26031
+    },
+    {
+      "text": "to",
+      "canonicalStart": 306,
+      "canonicalEnd": 308,
+      "startMs": 26047,
+      "endMs": 26156
+    },
+    {
+      "text": "GPU.",
+      "canonicalStart": 309,
+      "canonicalEnd": 313,
+      "startMs": 26172,
+      "endMs": 27125
+    },
+    {
+      "text": "The",
+      "canonicalStart": 314,
+      "canonicalEnd": 317,
+      "startMs": 28219,
+      "endMs": 28375
+    },
+    {
+      "text": "trade-off",
+      "canonicalStart": 318,
+      "canonicalEnd": 327,
+      "startMs": 28391,
+      "endMs": 29047
+    },
+    {
+      "text": "was",
+      "canonicalStart": 328,
+      "canonicalEnd": 331,
+      "startMs": 29063,
+      "endMs": 29266
+    },
+    {
+      "text": "that",
+      "canonicalStart": 332,
+      "canonicalEnd": 336,
+      "startMs": 29281,
+      "endMs": 29500
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 337,
+      "canonicalEnd": 340,
+      "startMs": 29516,
+      "endMs": 30234
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 341,
+      "canonicalEnd": 351,
+      "startMs": 30250,
+      "endMs": 31063
+    },
+    {
+      "text": "was",
+      "canonicalStart": 352,
+      "canonicalEnd": 355,
+      "startMs": 31078,
+      "endMs": 31266
+    },
+    {
+      "text": "much",
+      "canonicalStart": 356,
+      "canonicalEnd": 360,
+      "startMs": 31281,
+      "endMs": 31609
+    },
+    {
+      "text": "faster,",
+      "canonicalStart": 361,
+      "canonicalEnd": 368,
+      "startMs": 31625,
+      "endMs": 32281
+    },
+    {
+      "text": "but",
+      "canonicalStart": 369,
+      "canonicalEnd": 372,
+      "startMs": 32656,
+      "endMs": 32797
+    },
+    {
+      "text": "it",
+      "canonicalStart": 373,
+      "canonicalEnd": 375,
+      "startMs": 32813,
+      "endMs": 32953
+    },
+    {
+      "text": "added",
+      "canonicalStart": 376,
+      "canonicalEnd": 381,
+      "startMs": 32969,
+      "endMs": 33313
+    },
+    {
+      "text": "infrastructure",
+      "canonicalStart": 382,
+      "canonicalEnd": 396,
+      "startMs": 33328,
+      "endMs": 34188
+    },
+    {
+      "text": "cost,",
+      "canonicalStart": 397,
+      "canonicalEnd": 402,
+      "startMs": 34203,
+      "endMs": 34813
+    },
+    {
+      "text": "network",
+      "canonicalStart": 403,
+      "canonicalEnd": 410,
+      "startMs": 35141,
+      "endMs": 35625
+    },
+    {
+      "text": "dependency,",
+      "canonicalStart": 411,
+      "canonicalEnd": 422,
+      "startMs": 35641,
+      "endMs": 36469
+    },
+    {
+      "text": "and",
+      "canonicalStart": 423,
+      "canonicalEnd": 426,
+      "startMs": 36781,
+      "endMs": 36953
+    },
+    {
+      "text": "more",
+      "canonicalStart": 427,
+      "canonicalEnd": 431,
+      "startMs": 36969,
+      "endMs": 37313
+    },
+    {
+      "text": "operational",
+      "canonicalStart": 432,
+      "canonicalEnd": 443,
+      "startMs": 37328,
+      "endMs": 38078
+    },
+    {
+      "text": "complexity",
+      "canonicalStart": 444,
+      "canonicalEnd": 454,
+      "startMs": 38094,
+      "endMs": 38906
+    },
+    {
+      "text": "because",
+      "canonicalStart": 455,
+      "canonicalEnd": 462,
+      "startMs": 38922,
+      "endMs": 39328
+    },
+    {
+      "text": "the",
+      "canonicalStart": 463,
+      "canonicalEnd": 466,
+      "startMs": 39344,
+      "endMs": 39500
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 467,
+      "canonicalEnd": 470,
+      "startMs": 39516,
+      "endMs": 40297
+    },
+    {
+      "text": "became",
+      "canonicalStart": 471,
+      "canonicalEnd": 477,
+      "startMs": 40313,
+      "endMs": 40719
+    },
+    {
+      "text": "a",
+      "canonicalStart": 478,
+      "canonicalEnd": 479,
+      "startMs": 40734,
+      "endMs": 40797
+    },
+    {
+      "text": "remote",
+      "canonicalStart": 480,
+      "canonicalEnd": 486,
+      "startMs": 40813,
+      "endMs": 41250
+    },
+    {
+      "text": "service.",
+      "canonicalStart": 487,
+      "canonicalEnd": 495,
+      "startMs": 41266,
+      "endMs": 42016
+    },
+    {
+      "text": "I",
+      "canonicalStart": 496,
+      "canonicalEnd": 497,
+      "startMs": 43094,
+      "endMs": 43281
+    },
+    {
+      "text": "tested",
+      "canonicalStart": 498,
+      "canonicalEnd": 504,
+      "startMs": 43297,
+      "endMs": 43891
+    },
+    {
+      "text": "both",
+      "canonicalStart": 505,
+      "canonicalEnd": 509,
+      "startMs": 43906,
+      "endMs": 44172
+    },
+    {
+      "text": "approaches",
+      "canonicalStart": 510,
+      "canonicalEnd": 520,
+      "startMs": 44188,
+      "endMs": 44938
+    },
+    {
+      "text": "and",
+      "canonicalStart": 521,
+      "canonicalEnd": 524,
+      "startMs": 44953,
+      "endMs": 45109
+    },
+    {
+      "text": "compared",
+      "canonicalStart": 525,
+      "canonicalEnd": 533,
+      "startMs": 45125,
+      "endMs": 45625
+    },
+    {
+      "text": "the",
+      "canonicalStart": 534,
+      "canonicalEnd": 537,
+      "startMs": 45641,
+      "endMs": 45734
+    },
+    {
+      "text": "processing",
+      "canonicalStart": 538,
+      "canonicalEnd": 548,
+      "startMs": 45750,
+      "endMs": 46516
+    },
+    {
+      "text": "time",
+      "canonicalStart": 549,
+      "canonicalEnd": 553,
+      "startMs": 46531,
+      "endMs": 46938
+    },
+    {
+      "text": "and",
+      "canonicalStart": 554,
+      "canonicalEnd": 557,
+      "startMs": 46953,
+      "endMs": 47078
+    },
+    {
+      "text": "stability.",
+      "canonicalStart": 558,
+      "canonicalEnd": 568,
+      "startMs": 47094,
+      "endMs": 47922
+    },
+    {
+      "text": "The",
+      "canonicalStart": 569,
+      "canonicalEnd": 572,
+      "startMs": 49000,
+      "endMs": 49188
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 573,
+      "canonicalEnd": 576,
+      "startMs": 49203,
+      "endMs": 49984
+    },
+    {
+      "text": "version",
+      "canonicalStart": 577,
+      "canonicalEnd": 584,
+      "startMs": 50000,
+      "endMs": 50500
+    },
+    {
+      "text": "was",
+      "canonicalStart": 585,
+      "canonicalEnd": 588,
+      "startMs": 50516,
+      "endMs": 50688
+    },
+    {
+      "text": "significantly",
+      "canonicalStart": 589,
+      "canonicalEnd": 602,
+      "startMs": 50703,
+      "endMs": 51500
+    },
+    {
+      "text": "faster,",
+      "canonicalStart": 603,
+      "canonicalEnd": 610,
+      "startMs": 51516,
+      "endMs": 52188
+    },
+    {
+      "text": "so",
+      "canonicalStart": 611,
+      "canonicalEnd": 613,
+      "startMs": 52531,
+      "endMs": 52688
+    },
+    {
+      "text": "we",
+      "canonicalStart": 614,
+      "canonicalEnd": 616,
+      "startMs": 52703,
+      "endMs": 52844
+    },
+    {
+      "text": "decided",
+      "canonicalStart": 617,
+      "canonicalEnd": 624,
+      "startMs": 52859,
+      "endMs": 53438
+    },
+    {
+      "text": "to",
+      "canonicalStart": 625,
+      "canonicalEnd": 627,
+      "startMs": 53453,
+      "endMs": 53563
+    },
+    {
+      "text": "move",
+      "canonicalStart": 628,
+      "canonicalEnd": 632,
+      "startMs": 53578,
+      "endMs": 53953
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 633,
+      "canonicalEnd": 636,
+      "startMs": 53969,
+      "endMs": 54766
+    },
+    {
+      "text": "to",
+      "canonicalStart": 637,
+      "canonicalEnd": 639,
+      "startMs": 54781,
+      "endMs": 54938
+    },
+    {
+      "text": "a",
+      "canonicalStart": 640,
+      "canonicalEnd": 641,
+      "startMs": 54953,
+      "endMs": 55047
+    },
+    {
+      "text": "remote",
+      "canonicalStart": 642,
+      "canonicalEnd": 648,
+      "startMs": 55063,
+      "endMs": 55531
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 649,
+      "canonicalEnd": 652,
+      "startMs": 55547,
+      "endMs": 56281
+    },
+    {
+      "text": "service.",
+      "canonicalStart": 653,
+      "canonicalEnd": 661,
+      "startMs": 56297,
+      "endMs": 57078
+    },
+    {
+      "text": "At",
+      "canonicalStart": 662,
+      "canonicalEnd": 664,
+      "startMs": 58156,
+      "endMs": 58359
+    },
+    {
+      "text": "the",
+      "canonicalStart": 665,
+      "canonicalEnd": 668,
+      "startMs": 58375,
+      "endMs": 58484
+    },
+    {
+      "text": "same",
+      "canonicalStart": 669,
+      "canonicalEnd": 673,
+      "startMs": 58500,
+      "endMs": 58875
+    },
+    {
+      "text": "time,",
+      "canonicalStart": 674,
+      "canonicalEnd": 679,
+      "startMs": 58891,
+      "endMs": 59375
+    },
+    {
+      "text": "I",
+      "canonicalStart": 680,
+      "canonicalEnd": 681,
+      "startMs": 59734,
+      "endMs": 59813
+    },
+    {
+      "text": "didn’t",
+      "canonicalStart": 682,
+      "canonicalEnd": 688,
+      "startMs": 59828,
+      "endMs": 60125
+    },
+    {
+      "text": "want",
+      "canonicalStart": 689,
+      "canonicalEnd": 693,
+      "startMs": 60141,
+      "endMs": 60344
+    },
+    {
+      "text": "the",
+      "canonicalStart": 694,
+      "canonicalEnd": 697,
+      "startMs": 60359,
+      "endMs": 60453
+    },
+    {
+      "text": "whole",
+      "canonicalStart": 698,
+      "canonicalEnd": 703,
+      "startMs": 60469,
+      "endMs": 60734
+    },
+    {
+      "text": "document-processing",
+      "canonicalStart": 704,
+      "canonicalEnd": 723,
+      "startMs": 60750,
+      "endMs": 62016
+    },
+    {
+      "text": "flow",
+      "canonicalStart": 724,
+      "canonicalEnd": 728,
+      "startMs": 62031,
+      "endMs": 62422
+    },
+    {
+      "text": "to",
+      "canonicalStart": 729,
+      "canonicalEnd": 731,
+      "startMs": 62438,
+      "endMs": 62578
+    },
+    {
+      "text": "fail",
+      "canonicalStart": 732,
+      "canonicalEnd": 736,
+      "startMs": 62594,
+      "endMs": 63094
+    },
+    {
+      "text": "when",
+      "canonicalStart": 737,
+      "canonicalEnd": 741,
+      "startMs": 63109,
+      "endMs": 63250
+    },
+    {
+      "text": "the",
+      "canonicalStart": 742,
+      "canonicalEnd": 745,
+      "startMs": 63266,
+      "endMs": 63391
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 746,
+      "canonicalEnd": 749,
+      "startMs": 63406,
+      "endMs": 64172
+    },
+    {
+      "text": "service",
+      "canonicalStart": 750,
+      "canonicalEnd": 757,
+      "startMs": 64188,
+      "endMs": 64781
+    },
+    {
+      "text": "was",
+      "canonicalStart": 758,
+      "canonicalEnd": 761,
+      "startMs": 64797,
+      "endMs": 65031
+    },
+    {
+      "text": "unavailable",
+      "canonicalStart": 762,
+      "canonicalEnd": 773,
+      "startMs": 65047,
+      "endMs": 65875
+    },
+    {
+      "text": "or",
+      "canonicalStart": 774,
+      "canonicalEnd": 776,
+      "startMs": 65891,
+      "endMs": 66094
+    },
+    {
+      "text": "when",
+      "canonicalStart": 777,
+      "canonicalEnd": 781,
+      "startMs": 66109,
+      "endMs": 66266
+    },
+    {
+      "text": "an",
+      "canonicalStart": 782,
+      "canonicalEnd": 784,
+      "startMs": 66281,
+      "endMs": 66375
+    },
+    {
+      "text": "environment",
+      "canonicalStart": 785,
+      "canonicalEnd": 796,
+      "startMs": 66391,
+      "endMs": 67078
+    },
+    {
+      "text": "didn’t",
+      "canonicalStart": 797,
+      "canonicalEnd": 803,
+      "startMs": 67094,
+      "endMs": 67344
+    },
+    {
+      "text": "have",
+      "canonicalStart": 804,
+      "canonicalEnd": 808,
+      "startMs": 67359,
+      "endMs": 67609
+    },
+    {
+      "text": "GPU",
+      "canonicalStart": 809,
+      "canonicalEnd": 812,
+      "startMs": 67625,
+      "endMs": 68344
+    },
+    {
+      "text": "support.",
+      "canonicalStart": 813,
+      "canonicalEnd": 821,
+      "startMs": 68359,
+      "endMs": 69094
+    },
+    {
+      "text": "So",
+      "canonicalStart": 822,
+      "canonicalEnd": 824,
+      "startMs": 70172,
+      "endMs": 70469
+    },
+    {
+      "text": "we",
+      "canonicalStart": 825,
+      "canonicalEnd": 827,
+      "startMs": 70484,
+      "endMs": 70703
+    },
+    {
+      "text": "added",
+      "canonicalStart": 828,
+      "canonicalEnd": 833,
+      "startMs": 70719,
+      "endMs": 71109
+    },
+    {
+      "text": "configuration",
+      "canonicalStart": 834,
+      "canonicalEnd": 847,
+      "startMs": 71125,
+      "endMs": 72125
+    },
+    {
+      "text": "guards",
+      "canonicalStart": 848,
+      "canonicalEnd": 854,
+      "startMs": 72141,
+      "endMs": 72641
+    },
+    {
+      "text": "and",
+      "canonicalStart": 855,
+      "canonicalEnd": 858,
+      "startMs": 72656,
+      "endMs": 72813
+    },
+    {
+      "text": "kept",
+      "canonicalStart": 859,
+      "canonicalEnd": 863,
+      "startMs": 72828,
+      "endMs": 73141
+    },
+    {
+      "text": "the",
+      "canonicalStart": 864,
+      "canonicalEnd": 867,
+      "startMs": 73156,
+      "endMs": 73266
+    },
+    {
+      "text": "flow",
+      "canonicalStart": 868,
+      "canonicalEnd": 872,
+      "startMs": 73281,
+      "endMs": 73672
+    },
+    {
+      "text": "safe",
+      "canonicalStart": 873,
+      "canonicalEnd": 877,
+      "startMs": 73688,
+      "endMs": 74094
+    },
+    {
+      "text": "for",
+      "canonicalStart": 878,
+      "canonicalEnd": 881,
+      "startMs": 74109,
+      "endMs": 74266
+    },
+    {
+      "text": "those",
+      "canonicalStart": 882,
+      "canonicalEnd": 887,
+      "startMs": 74281,
+      "endMs": 74547
+    },
+    {
+      "text": "environments.",
+      "canonicalStart": 888,
+      "canonicalEnd": 901,
+      "startMs": 74563,
+      "endMs": 75547
+    },
+    {
+      "text": "As",
+      "canonicalStart": 902,
+      "canonicalEnd": 904,
+      "startMs": 76625,
+      "endMs": 76891
+    },
+    {
+      "text": "a",
+      "canonicalStart": 905,
+      "canonicalEnd": 906,
+      "startMs": 76906,
+      "endMs": 76969
+    },
+    {
+      "text": "result,",
+      "canonicalStart": 907,
+      "canonicalEnd": 914,
+      "startMs": 76984,
+      "endMs": 77594
+    },
+    {
+      "text": "we",
+      "canonicalStart": 915,
+      "canonicalEnd": 917,
+      "startMs": 77891,
+      "endMs": 78078
+    },
+    {
+      "text": "improved",
+      "canonicalStart": 918,
+      "canonicalEnd": 926,
+      "startMs": 78094,
+      "endMs": 78703
+    },
+    {
+      "text": "OCR",
+      "canonicalStart": 927,
+      "canonicalEnd": 930,
+      "startMs": 78719,
+      "endMs": 79422
+    },
+    {
+      "text": "performance",
+      "canonicalStart": 931,
+      "canonicalEnd": 942,
+      "startMs": 79438,
+      "endMs": 80094
+    },
+    {
+      "text": "a",
+      "canonicalStart": 943,
+      "canonicalEnd": 944,
+      "startMs": 80109,
+      "endMs": 80188
+    },
+    {
+      "text": "lot",
+      "canonicalStart": 945,
+      "canonicalEnd": 948,
+      "startMs": 80203,
+      "endMs": 80594
+    },
+    {
+      "text": "while",
+      "canonicalStart": 949,
+      "canonicalEnd": 954,
+      "startMs": 80609,
+      "endMs": 80844
+    },
+    {
+      "text": "still",
+      "canonicalStart": 955,
+      "canonicalEnd": 960,
+      "startMs": 80859,
+      "endMs": 81203
+    },
+    {
+      "text": "keeping",
+      "canonicalStart": 961,
+      "canonicalEnd": 968,
+      "startMs": 81219,
+      "endMs": 81641
+    },
+    {
+      "text": "the",
+      "canonicalStart": 969,
+      "canonicalEnd": 972,
+      "startMs": 81656,
+      "endMs": 81750
+    },
+    {
+      "text": "system",
+      "canonicalStart": 973,
+      "canonicalEnd": 979,
+      "startMs": 81766,
+      "endMs": 82281
+    },
+    {
+      "text": "reliable",
+      "canonicalStart": 980,
+      "canonicalEnd": 988,
+      "startMs": 82297,
+      "endMs": 83000
+    },
+    {
+      "text": "and",
+      "canonicalStart": 989,
+      "canonicalEnd": 992,
+      "startMs": 83016,
+      "endMs": 83188
+    },
+    {
+      "text": "easier",
+      "canonicalStart": 993,
+      "canonicalEnd": 999,
+      "startMs": 83203,
+      "endMs": 83719
+    },
+    {
+      "text": "to",
+      "canonicalStart": 1000,
+      "canonicalEnd": 1002,
+      "startMs": 83734,
+      "endMs": 83906
+    },
+    {
+      "text": "operate",
+      "canonicalStart": 1003,
+      "canonicalEnd": 1010,
+      "startMs": 83922,
+      "endMs": 84469
+    },
+    {
+      "text": "across",
+      "canonicalStart": 1011,
+      "canonicalEnd": 1017,
+      "startMs": 84484,
+      "endMs": 84953
+    },
+    {
+      "text": "different",
+      "canonicalStart": 1018,
+      "canonicalEnd": 1027,
+      "startMs": 84969,
+      "endMs": 85344
+    },
+    {
+      "text": "environments.",
+      "canonicalStart": 1028,
+      "canonicalEnd": 1041,
+      "startMs": 85359,
+      "endMs": 86297
+    }
+  ]
+}
