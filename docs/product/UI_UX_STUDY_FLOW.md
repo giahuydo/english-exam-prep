@@ -26,6 +26,8 @@ Practice is instructional: one question at a time, large keyboard-focusable answ
 
 Mock mode uses a dark visual treatment, persistent countdown, answered count, navigator, Previous/Next, and final submission. No hints, explanations, or correctness are shown before submission. `Pause & exit` returns to the mock list; when the API exposes an in-progress session through dashboard data, Today offers resume.
 
+2026-09-28: Interview mock now has its own `/interview-mock` page, linked from the landing page and student navigation. It uses only the user-provided frontend interview questions and long-form sample answers. All 12 tiles appear together in one panel without internal grid scrolling, showing only recall keywords (not the full question); tapping a tile opens a dialog with the full question and answer. The English answer is displayed as short speaking chunks on subtle chips inside a pale-yellow panel; the dialog can scroll if the answer exceeds the device viewport. This sample flow does not create a session, call the API, or persist answers; `/mock-exams` retains the existing blueprint-backed flow.
+
 ### Result/review (`/review`)
 
 The result screen shows score, correct/total, review count, and answer review. It links to mistake review or learning without inventing section/topic weakness values. Detailed evidence is intentionally not shown because the current API has no evidence contract.
