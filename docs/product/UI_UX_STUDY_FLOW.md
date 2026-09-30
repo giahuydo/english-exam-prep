@@ -48,7 +48,13 @@ Mock mode uses a dark visual treatment, persistent countdown, answered count, na
 
 2026-09-30: Added Node.js Sync vs Async before the JavaScript Thread question in `/interview-mock`, with a bilingual STAR document-processing example (OCR/extraction → API enqueues job → worker processes it → responsive API) and short synchronous/asynchronous recall cues. The pasted chat content-reference marker is not part of the answer.
 
-2026-09-30: Added Document Chunking after AI Ownership in `/interview-mock`, with bilingual explanation of embedding per chunk, fifty-page clinical protocol/dosage retrieval example, chunk-size trade-off, and a short recall line. Omitted the pasted chat content-reference marker.
+2026-09-30: Added Document AI Full Flow after AI Ownership in `/interview-mock`, with paired English/Vietnamese speaking answers covering upload, AI service gateway, RabbitMQ, DocCard consumer/Drydock, OCR, DocCard, VFS, PostgreSQL retrieval data, BM25 + vector search, reranking, and grounded LLM generation. This is user-supplied interview content about an external document-processing system, not a description of this exam-prep app's implemented pipeline; pasted content-reference markers were omitted.
+
+2026-09-30: Added DocCard after Document AI Full Flow in `/interview-mock`, with a bilingual explanation of the structured document output (text, positions, PII-related information) between OCR/processing and VFS ingestion, and the short path through chunks, embeddings and retrieval. Omitted pasted content-reference markers.
+
+2026-09-30: Added VFS after DocCard in `/interview-mock`, with a bilingual explanation of the searchable document layer, DocCard ingestion, nodes, chunks, embeddings, and search/read tools for AI agents. BM25, vector search, and reranking are framed as possible search-layer methods, not a verified deployed combination; pasted content-reference markers were omitted.
+
+2026-09-30: Added Document Chunking after VFS in `/interview-mock`, with bilingual explanation of embedding per chunk, fifty-page clinical protocol/dosage retrieval example, chunk-size trade-off, and a short recall line. Omitted the pasted chat content-reference marker.
 
 2026-09-30: Added Chunk Size / Overlap after Document Chunking, with bilingual small-versus-large trade-off, a Drug A dosage sentence split at a chunk boundary, overlap for boundary context, and a test-and-adjust approach using Recall and Precision. This is an interview explanation, not a claim about a deployed chunking configuration.
 
