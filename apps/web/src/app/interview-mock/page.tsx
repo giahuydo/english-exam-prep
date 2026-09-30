@@ -129,25 +129,34 @@ export default function InterviewMockPage() {
               <div className="space-y-3 text-[18px] font-bold leading-[1.55]">
                 {(showTranslation ? active.translate : active.answer)
                   .split('\n\n')
-                  .map((paragraph, paragraphIndex) => (
-                    <div key={paragraphIndex} className="flex flex-wrap gap-2">
-                      {speakingChunks(paragraph)
-                        .flatMap((sentence) =>
-                          sentence.split(
-                            /(?=\s(?:because|with|but|so|while|where|which|when|instead of)\b)/i,
-                          ),
-                        )
-                        .filter((chunk) => chunk.trim())
-                        .map((chunk, chunkIndex) => (
-                          <span
-                            key={chunkIndex}
-                            className="rounded-md border border-amber-200 bg-white/70 px-2.5 py-1 text-[#111827]"
-                          >
-                            {chunk.trim()}
-                          </span>
-                        ))}
-                    </div>
-                  ))}
+                  .map((paragraph, paragraphIndex) =>
+                    paragraph.startsWith('```python\n') && paragraph.endsWith('\n```') ? (
+                      <pre
+                        key={paragraphIndex}
+                        className="overflow-x-auto rounded-md bg-slate-900 p-3 font-mono text-sm font-medium text-white"
+                      >
+                        <code>{paragraph.slice(10, -4)}</code>
+                      </pre>
+                    ) : (
+                      <div key={paragraphIndex} className="flex flex-wrap gap-2">
+                        {speakingChunks(paragraph)
+                          .flatMap((sentence) =>
+                            sentence.split(
+                              /(?=\s(?:because|with|but|so|while|where|which|when|instead of)\b)/i,
+                            ),
+                          )
+                          .filter((chunk) => chunk.trim())
+                          .map((chunk, chunkIndex) => (
+                            <span
+                              key={chunkIndex}
+                              className="rounded-md border border-amber-200 bg-white/70 px-2.5 py-1 text-[#111827]"
+                            >
+                              {chunk.trim()}
+                            </span>
+                          ))}
+                      </div>
+                    ),
+                  )}
               </div>
             </div>
           </div>
